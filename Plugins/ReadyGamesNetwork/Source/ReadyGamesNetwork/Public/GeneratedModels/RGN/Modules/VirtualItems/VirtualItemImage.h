@@ -5,6 +5,6 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {
-struct VirtualItemImage : public RGN::Model::ImageUrl {
-};
+    struct VirtualItemImage : public RGN::Model::ImageUrl {
+    };
 }}}

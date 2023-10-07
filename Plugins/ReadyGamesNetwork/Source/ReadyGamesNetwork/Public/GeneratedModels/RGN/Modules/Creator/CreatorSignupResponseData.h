@@ -4,9 +4,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Creator {
-struct CreatorSignupResponseData {
-    string message;
-    bool success = false;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreatorSignupResponseData, message, success)
-};
+    struct CreatorSignupResponseData {
+        string message;
+        bool success = false;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreatorSignupResponseData, message, success)
+    };
 }}}

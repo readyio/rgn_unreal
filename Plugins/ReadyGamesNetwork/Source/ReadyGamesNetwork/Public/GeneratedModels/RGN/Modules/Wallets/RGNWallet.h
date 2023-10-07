@@ -4,8 +4,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Wallets {
-struct RGNWallet {
-    string address;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(RGNWallet, address)
-};
+    struct RGNWallet {
+        string address;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(RGNWallet, address)
+    };
 }}}

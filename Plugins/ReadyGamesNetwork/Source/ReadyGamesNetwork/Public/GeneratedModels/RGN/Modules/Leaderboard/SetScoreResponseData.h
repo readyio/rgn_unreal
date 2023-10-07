@@ -4,8 +4,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Leaderboard {
-struct SetScoreResponseData {
-    int32_t place = 0;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(SetScoreResponseData, place)
-};
+    struct SetScoreResponseData {
+        int32_t place = 0;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(SetScoreResponseData, place)
+    };
 }}}

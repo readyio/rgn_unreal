@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
-struct ImportStoreOffersFromCSVResponse {
-    vector<RGN::Modules::Store::StoreOffer> offers;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ImportStoreOffersFromCSVResponse, offers)
-};
+    struct ImportStoreOffersFromCSVResponse {
+        vector<RGN::Modules::Store::StoreOffer> offers;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ImportStoreOffersFromCSVResponse, offers)
+    };
 }}}

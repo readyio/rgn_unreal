@@ -6,8 +6,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Wallets {
-struct GetUserWalletsResponseData : public RGN::Model::Response::BaseResponseData {
-    vector<RGN::Modules::Wallets::RGNWallet> wallets;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetUserWalletsResponseData, wallets)
-};
+    struct GetUserWalletsResponseData : public RGN::Model::Response::BaseResponseData {
+        vector<RGN::Modules::Wallets::RGNWallet> wallets;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetUserWalletsResponseData, wallets)
+    };
 }}}

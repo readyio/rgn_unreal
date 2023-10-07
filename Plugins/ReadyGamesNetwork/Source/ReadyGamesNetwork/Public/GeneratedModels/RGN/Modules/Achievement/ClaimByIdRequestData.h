@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Achievement {
-struct ClaimByIdRequestData : public RGN::Utility::BaseMigrationRequestData {
-    string id;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ClaimByIdRequestData, id)
-};
+    struct ClaimByIdRequestData : public RGN::Utility::BaseMigrationRequestData {
+        string id;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ClaimByIdRequestData, id)
+    };
 }}}

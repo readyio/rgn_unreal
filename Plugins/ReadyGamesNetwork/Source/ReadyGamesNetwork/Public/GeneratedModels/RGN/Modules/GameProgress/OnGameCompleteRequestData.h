@@ -6,8 +6,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace GameProgress {
-struct OnGameCompleteRequestData : public RGN::Utility::BaseMigrationRequestData {
-    vector<RGN::Modules::Currency::Currency> reward;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(OnGameCompleteRequestData, reward)
-};
+    struct OnGameCompleteRequestData : public RGN::Utility::BaseMigrationRequestData {
+        vector<RGN::Modules::Currency::Currency> reward;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(OnGameCompleteRequestData, reward)
+    };
 }}}

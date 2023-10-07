@@ -6,8 +6,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Inventory {
-struct ChangeVirtualItemsQuantityResponseData : public RGN::Model::Request::BaseRequestData {
-    vector<RGN::Modules::VirtualItems::VirtualItem> updatedItems;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ChangeVirtualItemsQuantityResponseData, updatedItems)
-};
+    struct ChangeVirtualItemsQuantityResponseData : public RGN::Model::Request::BaseRequestData {
+        vector<RGN::Modules::VirtualItems::VirtualItem> updatedItems;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ChangeVirtualItemsQuantityResponseData, updatedItems)
+    };
 }}}

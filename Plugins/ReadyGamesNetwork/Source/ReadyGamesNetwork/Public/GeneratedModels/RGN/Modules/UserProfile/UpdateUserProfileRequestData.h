@@ -5,9 +5,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace UserProfile {
-struct UpdateUserProfileRequestData : public RGN::Utility::BaseMigrationRequestData {
-    string displayName;
-    string bio;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(UpdateUserProfileRequestData, displayName, bio)
-};
+    struct UpdateUserProfileRequestData : public RGN::Utility::BaseMigrationRequestData {
+        string displayName;
+        string bio;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(UpdateUserProfileRequestData, displayName, bio)
+    };
 }}}

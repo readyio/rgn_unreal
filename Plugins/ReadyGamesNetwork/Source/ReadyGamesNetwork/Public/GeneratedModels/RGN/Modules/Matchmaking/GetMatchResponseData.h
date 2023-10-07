@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Matchmaking {
-struct GetMatchResponseData {
-    RGN::Modules::Matchmaking::MatchmakingData match;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetMatchResponseData, match)
-};
+    struct GetMatchResponseData {
+        RGN::Modules::Matchmaking::MatchmakingData match;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetMatchResponseData, match)
+    };
 }}}

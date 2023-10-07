@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Currency {
-struct UserCurrencyData {
-    vector<RGN::Modules::Currency::Currency> currencies;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserCurrencyData, currencies)
-};
+    struct UserCurrencyData {
+        vector<RGN::Modules::Currency::Currency> currencies;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserCurrencyData, currencies)
+    };
 }}}

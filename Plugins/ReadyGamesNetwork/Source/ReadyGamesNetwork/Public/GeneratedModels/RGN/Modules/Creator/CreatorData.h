@@ -6,9 +6,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Creator {
-struct CreatorData {
-    vector<RGN::Modules::Currency::Currency> unclaimedCurrencies;
-    vector<RGN::Modules::Creator::CreatorSaleItem> creatorSaleItems;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreatorData, unclaimedCurrencies, creatorSaleItems)
-};
+    struct CreatorData {
+        vector<RGN::Modules::Currency::Currency> unclaimedCurrencies;
+        vector<RGN::Modules::Creator::CreatorSaleItem> creatorSaleItems;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreatorData, unclaimedCurrencies, creatorSaleItems)
+    };
 }}}

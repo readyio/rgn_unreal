@@ -4,13 +4,13 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {
-struct PriceInfo {
-    vector<string> appIds;
-    string itemId;
-    string name;
-    int32_t quantity = 0;
-    int32_t quantityWithoutDiscount = 0;
-    string group;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(PriceInfo, appIds, itemId, name, quantity, quantityWithoutDiscount, group)
-};
+    struct PriceInfo {
+        vector<string> appIds;
+        string itemId;
+        string name;
+        int32_t quantity = 0;
+        int32_t quantityWithoutDiscount = 0;
+        string group;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PriceInfo, appIds, itemId, name, quantity, quantityWithoutDiscount, group)
+    };
 }}}

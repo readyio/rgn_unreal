@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
-struct GetLootBoxesResponse {
-    vector<RGN::Modules::Store::LootBox> lootBoxes;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetLootBoxesResponse, lootBoxes)
-};
+    struct GetLootBoxesResponse {
+        vector<RGN::Modules::Store::LootBox> lootBoxes;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetLootBoxesResponse, lootBoxes)
+    };
 }}}

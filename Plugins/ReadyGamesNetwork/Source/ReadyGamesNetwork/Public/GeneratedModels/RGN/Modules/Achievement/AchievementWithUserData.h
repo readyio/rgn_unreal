@@ -5,6 +5,6 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Achievement {
-struct AchievementWithUserData : public RGN::Modules::Achievement::AchievementData {
-};
+    struct AchievementWithUserData : public RGN::Modules::Achievement::AchievementData {
+    };
 }}}

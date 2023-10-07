@@ -4,10 +4,10 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {
-struct MaterialInfo {
-    string materialToReplace;
-    string baseColor;
-    string baseTextureId;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(MaterialInfo, materialToReplace, baseColor, baseTextureId)
-};
+    struct MaterialInfo {
+        string materialToReplace;
+        string baseColor;
+        string baseTextureId;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(MaterialInfo, materialToReplace, baseColor, baseTextureId)
+    };
 }}}

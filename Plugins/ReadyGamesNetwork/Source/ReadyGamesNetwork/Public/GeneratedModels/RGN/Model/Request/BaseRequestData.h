@@ -4,8 +4,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Model { namespace Request {
-struct BaseRequestData {
-    string appPackageName;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseRequestData, appPackageName)
-};
+    struct BaseRequestData {
+        string appPackageName;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseRequestData, appPackageName)
+    };
 }}}

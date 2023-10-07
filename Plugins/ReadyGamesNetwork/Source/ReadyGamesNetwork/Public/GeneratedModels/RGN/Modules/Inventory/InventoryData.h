@@ -4,9 +4,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Inventory {
-    struct RemoveByVirtualItemIdResponseData {
-        string virtualItemId;
-        int32_t newQuantity = 0;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(RemoveByVirtualItemIdResponseData, virtualItemId, newQuantity)
+    struct InventoryData {
+        string id;
+        int32_t quantity = 0;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(InventoryData, id, quantity)
     };
 }}}

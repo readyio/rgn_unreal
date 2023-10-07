@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Leaderboard {
-struct GetLeaderboardEntriesResponseData {
-    vector<RGN::Modules::Leaderboard::LeaderboardEntry> entries;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetLeaderboardEntriesResponseData, entries)
-};
+    struct GetLeaderboardEntriesResponseData {
+        vector<RGN::Modules::Leaderboard::LeaderboardEntry> entries;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetLeaderboardEntriesResponseData, entries)
+    };
 }}}

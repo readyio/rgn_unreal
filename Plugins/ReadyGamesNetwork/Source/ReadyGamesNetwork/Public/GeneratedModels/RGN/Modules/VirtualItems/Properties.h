@@ -4,9 +4,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {
-struct Properties {
-    vector<string> appIds;
-    string json;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Properties, appIds, json)
-};
+    struct Properties {
+        vector<string> appIds;
+        string json;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Properties, appIds, json)
+    };
 }}}

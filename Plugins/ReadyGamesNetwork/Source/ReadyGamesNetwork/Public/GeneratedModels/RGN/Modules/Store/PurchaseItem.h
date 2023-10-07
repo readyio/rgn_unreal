@@ -6,9 +6,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
-struct PurchaseItem {
-    RGN::Modules::VirtualItems::VirtualItem virtualItem;
-    RGN::Modules::Inventory::InventoryItemData inventoryItem;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(PurchaseItem, virtualItem, inventoryItem)
-};
+    struct PurchaseItem {
+        RGN::Modules::VirtualItems::VirtualItem virtualItem;
+        RGN::Modules::Inventory::InventoryItemData inventoryItem;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PurchaseItem, virtualItem, inventoryItem)
+    };
 }}}

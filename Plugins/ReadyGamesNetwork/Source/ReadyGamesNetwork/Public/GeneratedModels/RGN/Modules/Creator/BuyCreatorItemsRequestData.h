@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Creator {
-struct BuyCreatorItemsRequestData : public RGN::Model::Request::BaseRequestData {
-    vector<string> itemIds;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(BuyCreatorItemsRequestData, itemIds)
-};
+    struct BuyCreatorItemsRequestData : public RGN::Model::Request::BaseRequestData {
+        vector<string> itemIds;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(BuyCreatorItemsRequestData, itemIds)
+    };
 }}}

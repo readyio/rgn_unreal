@@ -5,10 +5,10 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Currency {
-struct ClaimCurrencyResponseData {
-    bool isSuccess = false;
-    vector<RGN::Modules::Currency::Currency> unclaimedCurrencies;
-    vector<RGN::Modules::Currency::Currency> currencies;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ClaimCurrencyResponseData, isSuccess, unclaimedCurrencies, currencies)
-};
+    struct ClaimCurrencyResponseData {
+        bool isSuccess = false;
+        vector<RGN::Modules::Currency::Currency> unclaimedCurrencies;
+        vector<RGN::Modules::Currency::Currency> currencies;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ClaimCurrencyResponseData, isSuccess, unclaimedCurrencies, currencies)
+    };
 }}}

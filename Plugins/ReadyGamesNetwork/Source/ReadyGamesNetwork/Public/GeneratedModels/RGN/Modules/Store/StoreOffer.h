@@ -7,21 +7,21 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
-struct StoreOffer {
-    string id;
-    string name;
-    string description;
-    vector<string> appIds;
-    vector<string> tags;
-    string imageUrl;
-    int64_t createdAt = 0;
-    int64_t updatedAt = 0;
-    string createdBy;
-    string updatedBy;
-    RGN::Modules::Store::TimeInfo time;
-    vector<RGN::Modules::VirtualItems::Properties> properties;
-    vector<string> itemIds;
-    vector<RGN::Modules::VirtualItems::PriceInfo> prices;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(StoreOffer, id, name, description, appIds, tags, imageUrl, createdAt, updatedAt, createdBy, updatedBy, time, properties, itemIds, prices)
-};
+    struct StoreOffer {
+        string id;
+        string name;
+        string description;
+        vector<string> appIds;
+        vector<string> tags;
+        string imageUrl;
+        int64_t createdAt = 0;
+        int64_t updatedAt = 0;
+        string createdBy;
+        string updatedBy;
+        RGN::Modules::Store::TimeInfo time;
+        vector<RGN::Modules::VirtualItems::Properties> properties;
+        vector<string> itemIds;
+        vector<RGN::Modules::VirtualItems::PriceInfo> prices;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(StoreOffer, id, name, description, appIds, tags, imageUrl, createdAt, updatedAt, createdBy, updatedBy, time, properties, itemIds, prices)
+    };
 }}}

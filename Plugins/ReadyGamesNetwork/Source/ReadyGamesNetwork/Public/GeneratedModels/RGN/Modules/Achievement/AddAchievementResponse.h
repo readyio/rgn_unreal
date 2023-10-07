@@ -4,8 +4,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Achievement {
-struct AddAchievementResponse {
-    string id;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddAchievementResponse, id)
-};
+    struct AddAchievementResponse {
+        string id;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddAchievementResponse, id)
+    };
 }}}

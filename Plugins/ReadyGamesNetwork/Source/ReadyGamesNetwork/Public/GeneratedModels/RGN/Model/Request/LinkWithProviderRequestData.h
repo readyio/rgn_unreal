@@ -5,9 +5,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Model { namespace Request {
-struct LinkWithProviderRequestData : public RGN::Model::Request::BaseRequestData {
-    bool useMaster = false;
-    string idToken;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(LinkWithProviderRequestData, useMaster, idToken)
-};
+    struct LinkWithProviderRequestData : public RGN::Model::Request::BaseRequestData {
+        bool useMaster = false;
+        string idToken;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(LinkWithProviderRequestData, useMaster, idToken)
+    };
 }}}

@@ -6,10 +6,10 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
-struct PurchaseResult {
-    string offerId;
-    vector<RGN::Modules::Inventory::InventoryItemData> items;
-    vector<RGN::Modules::Currency::Currency> updatedCurrencies;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(PurchaseResult, offerId, items, updatedCurrencies)
-};
+    struct PurchaseResult {
+        string offerId;
+        vector<RGN::Modules::Inventory::InventoryItemData> items;
+        vector<RGN::Modules::Currency::Currency> updatedCurrencies;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PurchaseResult, offerId, items, updatedCurrencies)
+    };
 }}}

@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace UserProfile {
-struct SearchUsersRequestData : public RGN::Utility::BaseMigrationRequestData {
-    string nicknameQuery;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(SearchUsersRequestData, nicknameQuery)
-};
+    struct SearchUsersRequestData : public RGN::Utility::BaseMigrationRequestData {
+        string nicknameQuery;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(SearchUsersRequestData, nicknameQuery)
+    };
 }}}

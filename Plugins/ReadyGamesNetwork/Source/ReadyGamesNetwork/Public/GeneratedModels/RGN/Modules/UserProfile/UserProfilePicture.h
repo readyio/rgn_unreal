@@ -5,6 +5,6 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace UserProfile {
-struct UserProfilePicture : public RGN::Model::ImageUrl {
-};
+    struct UserProfilePicture : public RGN::Model::ImageUrl {
+    };
 }}}

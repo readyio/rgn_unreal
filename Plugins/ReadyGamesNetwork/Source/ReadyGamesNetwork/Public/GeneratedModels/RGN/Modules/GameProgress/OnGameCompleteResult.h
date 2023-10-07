@@ -6,9 +6,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace GameProgress {
-struct OnGameCompleteResult {
-    RGN::Modules::GameProgress::GameProgress gameProgress;
-    RGN::Modules::Currency::UserCurrencyData userCurrencies;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(OnGameCompleteResult, gameProgress, userCurrencies)
-};
+    struct OnGameCompleteResult {
+        RGN::Modules::GameProgress::GameProgress gameProgress;
+        RGN::Modules::Currency::UserCurrencyData userCurrencies;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(OnGameCompleteResult, gameProgress, userCurrencies)
+    };
 }}}

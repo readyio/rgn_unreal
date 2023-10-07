@@ -4,8 +4,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
-struct GetStoreOfferTagsResponse {
-    vector<string> tags;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetStoreOfferTagsResponse, tags)
-};
+    struct GetStoreOfferTagsResponse {
+        vector<string> tags;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetStoreOfferTagsResponse, tags)
+    };
 }}}

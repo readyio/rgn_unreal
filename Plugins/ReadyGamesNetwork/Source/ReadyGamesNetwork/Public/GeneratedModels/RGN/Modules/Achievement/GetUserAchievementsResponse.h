@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Achievement {
-struct GetUserAchievementsResponse {
-    vector<RGN::Modules::Achievement::UserAchievement> userAchievements;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetUserAchievementsResponse, userAchievements)
-};
+    struct GetUserAchievementsResponse {
+        vector<RGN::Modules::Achievement::UserAchievement> userAchievements;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetUserAchievementsResponse, userAchievements)
+    };
 }}}

@@ -4,9 +4,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {
-struct AddressableInfo {
-    vector<string> appIds;
-    string addressableId;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddressableInfo, appIds, addressableId)
-};
+    struct AddressableInfo {
+        vector<string> appIds;
+        string addressableId;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddressableInfo, appIds, addressableId)
+    };
 }}}

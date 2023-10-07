@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace UserProfile {
-struct SetInvisibleStatusRequestData : public RGN::Model::Request::BaseRequestData {
-    bool invisibleStatus = false;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(SetInvisibleStatusRequestData, invisibleStatus)
-};
+    struct SetInvisibleStatusRequestData : public RGN::Model::Request::BaseRequestData {
+        bool invisibleStatus = false;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(SetInvisibleStatusRequestData, invisibleStatus)
+    };
 }}}

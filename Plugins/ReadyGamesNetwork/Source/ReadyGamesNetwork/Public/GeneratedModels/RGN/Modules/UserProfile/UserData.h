@@ -5,12 +5,12 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace UserProfile {
-struct UserData {
-    string userId;
-    string email;
-    string displayName;
-    RGN::Modules::UserProfile::UserProfilePicture profilePicture;
-    string bio;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserData, userId, email, displayName, profilePicture, bio)
-};
+    struct UserData {
+        string userId;
+        string email;
+        string displayName;
+        RGN::Modules::UserProfile::UserProfilePicture profilePicture;
+        string bio;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserData, userId, email, displayName, profilePicture, bio)
+    };
 }}}

@@ -5,8 +5,8 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Model { namespace Request {
-struct TokenRequestData : public RGN::Model::Request::BaseRequestData {
-    string idToken;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TokenRequestData, idToken)
-};
+    struct TokenRequestData : public RGN::Model::Request::BaseRequestData {
+        string idToken;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(TokenRequestData, idToken)
+    };
 }}}

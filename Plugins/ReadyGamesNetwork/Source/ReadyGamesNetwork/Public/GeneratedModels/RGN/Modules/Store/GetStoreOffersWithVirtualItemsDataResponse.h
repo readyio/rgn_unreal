@@ -6,9 +6,9 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
-struct GetStoreOffersWithVirtualItemsDataResponse {
-    vector<RGN::Modules::Store::StoreOffer> offers;
-    vector<RGN::Modules::VirtualItems::VirtualItem> virtualItems;
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetStoreOffersWithVirtualItemsDataResponse, offers, virtualItems)
-};
+    struct GetStoreOffersWithVirtualItemsDataResponse {
+        vector<RGN::Modules::Store::StoreOffer> offers;
+        vector<RGN::Modules::VirtualItems::VirtualItem> virtualItems;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetStoreOffersWithVirtualItemsDataResponse, offers, virtualItems)
+    };
 }}}
