@@ -4,8 +4,10 @@ using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace UserProfile {
-    struct UserStatus {
-        int32_t value__ = 0;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserStatus, value__)
+    enum UserStatus
+    {
+        None = 0,
+        Online = 1,
+        Offline = 2,
     };
 }}}

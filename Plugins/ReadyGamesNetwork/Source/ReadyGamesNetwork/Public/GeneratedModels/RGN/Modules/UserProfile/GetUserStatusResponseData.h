@@ -1,5 +1,6 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
+#include "UserStatus.h"
 #include "../../Model/Response/BaseResponseData.h"
 using json = nlohmann::json;
 using namespace std;

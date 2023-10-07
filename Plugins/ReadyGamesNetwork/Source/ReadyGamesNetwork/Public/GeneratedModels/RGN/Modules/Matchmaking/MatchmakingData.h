@@ -21,8 +21,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
         int64_t updatedAt = 0;
         vector<string> participants;
         vector<RGN::Modules::Matchmaking::Vote> votes;
-        System::Collections::Generic<string, int64_t> participantsScore;
-        System::Collections::Generic<string, json> participantsPayload;
+        std::unordered_map<string, int64_t> participantsScore;
+        std::unordered_map<string, json> participantsPayload;
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(MatchmakingData, id, appId, type, finishType, startType, maxUsers, isStarted, votingEnabled, oncePerUserVoting, createdBy, updatedBy, createdAt, updatedAt, participants, votes, participantsScore, participantsPayload)
     };
 }}}
