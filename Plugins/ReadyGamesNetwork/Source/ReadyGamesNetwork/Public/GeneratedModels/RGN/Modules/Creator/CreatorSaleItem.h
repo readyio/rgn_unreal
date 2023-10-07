@@ -8,7 +8,7 @@ namespace RGN { namespace Modules { namespace Creator {
 struct CreatorSaleItem {
     string id;
     string name;
-    int32_t totalUnit;
+    int32_t totalUnit = 0;
     vector<RGN::Modules::Currency::Currency> totalCurrencies;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreatorSaleItem, id, name, totalUnit, totalCurrencies)
 };

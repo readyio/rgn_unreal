@@ -6,7 +6,7 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace Wallets {
 struct IsUserHavePrimaryWalletResponseData : public RGN::Model::Response::BaseResponseData {
-    bool isUserHavePrimaryWallet;
+    bool isUserHavePrimaryWallet = false;
     string address;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(IsUserHavePrimaryWalletResponseData, isUserHavePrimaryWallet, address)
 };

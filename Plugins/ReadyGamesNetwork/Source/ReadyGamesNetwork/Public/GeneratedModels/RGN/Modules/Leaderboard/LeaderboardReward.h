@@ -5,8 +5,8 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace Leaderboard {
 struct LeaderboardReward {
-    int32_t placeFrom;
-    int32_t placeTo;
+    int32_t placeFrom = 0;
+    int32_t placeTo = 0;
     string achievementId;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(LeaderboardReward, placeFrom, placeTo, achievementId)
 };

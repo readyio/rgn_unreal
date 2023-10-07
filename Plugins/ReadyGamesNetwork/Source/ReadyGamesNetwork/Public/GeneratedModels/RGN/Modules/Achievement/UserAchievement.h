@@ -7,11 +7,11 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Achievement {
 struct UserAchievement {
     string id;
-    int32_t value;
-    int32_t valueToReach;
-    bool isCompleted;
-    bool isClaimed;
-    int64_t lastCompleteTime;
+    int32_t value = 0;
+    int32_t valueToReach = 0;
+    bool isCompleted = false;
+    bool isClaimed = false;
+    int64_t lastCompleteTime = 0;
     vector<RGN::Modules::Achievement::CompletedAchievementHistoryEntry> history;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserAchievement, id, value, valueToReach, isCompleted, isClaimed, lastCompleteTime, history)
 };

@@ -9,9 +9,9 @@ struct LeaderboardEntry {
     string userId;
     string displayName;
     RGN::Modules::UserProfile::UserProfilePicture profilePicture;
-    int32_t score;
+    int32_t score = 0;
     string formattedScore;
-    int32_t place;
+    int32_t place = 0;
     string extraData;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(LeaderboardEntry, userId, displayName, profilePicture, score, formattedScore, place, extraData)
 };

@@ -6,6 +6,5 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace Achievement {
 struct AchievementWithUserData : public RGN::Modules::Achievement::AchievementData {
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(AchievementWithUserData, )
 };
 }}}

@@ -6,6 +6,5 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {
 struct VirtualItemImage : public RGN::Model::ImageUrl {
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(VirtualItemImage, )
 };
 }}}

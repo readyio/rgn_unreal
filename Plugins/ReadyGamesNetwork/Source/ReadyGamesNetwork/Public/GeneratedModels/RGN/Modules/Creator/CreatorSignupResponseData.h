@@ -6,7 +6,7 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Creator {
 struct CreatorSignupResponseData {
     string message;
-    bool success;
+    bool success = false;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreatorSignupResponseData, message, success)
 };
 }}}

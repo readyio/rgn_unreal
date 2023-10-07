@@ -14,8 +14,8 @@ struct StoreOffer {
     vector<string> appIds;
     vector<string> tags;
     string imageUrl;
-    int64_t createdAt;
-    int64_t updatedAt;
+    int64_t createdAt = 0;
+    int64_t updatedAt = 0;
     string createdBy;
     string updatedBy;
     RGN::Modules::Store::TimeInfo time;

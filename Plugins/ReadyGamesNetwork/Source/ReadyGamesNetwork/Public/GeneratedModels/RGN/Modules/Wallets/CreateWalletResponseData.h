@@ -6,8 +6,8 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Wallets {
 struct CreateWalletResponseData {
     string address;
-    bool wallet_created;
-    bool success;
+    bool wallet_created = false;
+    bool success = false;
     string error;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreateWalletResponseData, address, wallet_created, success, error)
 };

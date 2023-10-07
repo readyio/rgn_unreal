@@ -8,7 +8,7 @@ using namespace std;
 namespace RGN { namespace Modules { namespace UserProfile {
 struct UserProfileData : public RGN::Modules::UserProfile::UserData {
     string lastAppPackageName;
-    bool invisibleStatus;
+    bool invisibleStatus = false;
     vector<RGN::Modules::Currency::Currency> currencies;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserProfileData, lastAppPackageName, invisibleStatus, currencies)
 };

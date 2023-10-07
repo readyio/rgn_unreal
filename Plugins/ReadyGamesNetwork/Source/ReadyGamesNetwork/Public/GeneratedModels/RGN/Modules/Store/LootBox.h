@@ -9,11 +9,11 @@ struct LootBox {
     string id;
     string name;
     string appId;
-    int64_t totalQuantity;
-    int64_t purchasedQuantity;
-    int64_t availableQuantity;
-    int64_t createdAt;
-    int64_t updatedAt;
+    int64_t totalQuantity = 0;
+    int64_t purchasedQuantity = 0;
+    int64_t availableQuantity = 0;
+    int64_t createdAt = 0;
+    int64_t updatedAt = 0;
     string createdBy;
     string updatedBy;
     vector<RGN::Modules::VirtualItems::PriceInfo> prices;

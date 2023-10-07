@@ -8,8 +8,8 @@ struct PriceInfo {
     vector<string> appIds;
     string itemId;
     string name;
-    int32_t quantity;
-    int32_t quantityWithoutDiscount;
+    int32_t quantity = 0;
+    int32_t quantityWithoutDiscount = 0;
     string group;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(PriceInfo, appIds, itemId, name, quantity, quantityWithoutDiscount, group)
 };

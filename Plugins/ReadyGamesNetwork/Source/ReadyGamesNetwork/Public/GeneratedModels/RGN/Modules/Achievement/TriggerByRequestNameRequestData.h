@@ -7,7 +7,7 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Achievement {
 struct TriggerByRequestNameRequestData : public RGN::Utility::BaseMigrationRequestData {
     string requestName;
-    int32_t progress;
+    int32_t progress = 0;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(TriggerByRequestNameRequestData, requestName, progress)
 };
 }}}

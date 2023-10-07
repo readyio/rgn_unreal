@@ -6,7 +6,7 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Inventory {
 struct AddToInventoryResponseData {
     string id;
-    int32_t quantity;
+    int32_t quantity = 0;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddToInventoryResponseData, id, quantity)
 };
 }}}

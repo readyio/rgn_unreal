@@ -11,10 +11,10 @@ struct InventoryItemData {
     string virtualItemId;
     vector<string> appIds;
     vector<string> tags;
-    int32_t quantity;
+    int32_t quantity = 0;
     string status;
-    int64_t createdAt;
-    int64_t updatedAt;
+    int64_t createdAt = 0;
+    int64_t updatedAt = 0;
     vector<RGN::Modules::Inventory::VirtualItemUpgrade> itemUpgrades;
     vector<RGN::Modules::VirtualItems::Properties> properties;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(InventoryItemData, id, virtualItemId, appIds, tags, quantity, status, createdAt, updatedAt, itemUpgrades, properties)

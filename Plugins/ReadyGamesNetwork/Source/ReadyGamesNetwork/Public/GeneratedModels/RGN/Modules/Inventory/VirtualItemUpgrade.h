@@ -6,7 +6,7 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Inventory {
 struct VirtualItemUpgrade {
     string upgradeId;
-    int32_t upgradeLevel;
+    int32_t upgradeLevel = 0;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(VirtualItemUpgrade, upgradeId, upgradeLevel)
 };
 }}}

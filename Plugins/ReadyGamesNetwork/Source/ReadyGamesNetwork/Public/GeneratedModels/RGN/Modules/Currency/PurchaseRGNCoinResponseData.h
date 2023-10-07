@@ -6,7 +6,7 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace Currency {
 struct PurchaseRGNCoinResponseData {
-    bool success;
+    bool success = false;
     vector<RGN::Modules::Currency::Currency> currencies;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(PurchaseRGNCoinResponseData, success, currencies)
 };

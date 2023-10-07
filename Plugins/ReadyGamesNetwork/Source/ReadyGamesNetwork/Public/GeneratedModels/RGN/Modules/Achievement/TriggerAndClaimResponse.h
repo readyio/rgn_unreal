@@ -6,7 +6,7 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace Achievement {
 struct TriggerAndClaimResponse {
-    bool rewardsHaveBeenGivenOut;
+    bool rewardsHaveBeenGivenOut = false;
     vector<RGN::Modules::Achievement::AchievementReward> rewards;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(TriggerAndClaimResponse, rewardsHaveBeenGivenOut, rewards)
 };

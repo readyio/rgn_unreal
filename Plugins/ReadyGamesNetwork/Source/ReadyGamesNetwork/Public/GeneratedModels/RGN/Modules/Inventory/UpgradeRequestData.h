@@ -8,7 +8,7 @@ namespace RGN { namespace Modules { namespace Inventory {
 struct UpgradeRequestData : public RGN::Model::Request::BaseRequestData {
     string ownedItemId;
     string upgradeId;
-    int32_t newUpgradeLevel;
+    int32_t newUpgradeLevel = 0;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(UpgradeRequestData, ownedItemId, upgradeId, newUpgradeLevel)
 };
 }}}

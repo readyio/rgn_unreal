@@ -6,6 +6,5 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace UserProfile {
 struct UserProfilePicture : public RGN::Model::ImageUrl {
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserProfilePicture, )
 };
 }}}

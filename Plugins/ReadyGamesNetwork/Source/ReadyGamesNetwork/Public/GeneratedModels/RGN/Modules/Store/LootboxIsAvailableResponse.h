@@ -5,8 +5,8 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
 struct LootboxIsAvailableResponse {
-    bool isAvailable;
-    int64_t count;
+    bool isAvailable = false;
+    int64_t count = 0;
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(LootboxIsAvailableResponse, isAvailable, count)
 };
 }}}
