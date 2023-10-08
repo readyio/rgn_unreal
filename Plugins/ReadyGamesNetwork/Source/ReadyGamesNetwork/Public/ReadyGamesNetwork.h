@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
-#include "RGNCoreModule.h"
 
 class FReadyGamesNetworkModule : public IModuleInterface
 {
