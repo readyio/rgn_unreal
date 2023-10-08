@@ -1,6 +1,9 @@
 #pragma once
 
+#include "../../../json.hpp"
 #include <string>
+
+using json = nlohmann::json;
 
 struct CreateWalletResponse
 {
@@ -9,5 +12,5 @@ struct CreateWalletResponse
     bool success;
     std::string error;
 
-    CreateWalletResponse(std::string json);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreateWalletResponse, address, wallet_created, success, error);
 };

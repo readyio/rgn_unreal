@@ -1,10 +1,11 @@
 #include "Core/CoreModule/CoreModule.h"
 #include "Os/Os.h"
-#include "json.hpp"
+#include "Blueprints/WalletsModule/Responses/BP_CreateWalletResponse.h"
+#include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
 
 using json = nlohmann::json;
 
-DeepLinkCallback* CoreModule::_deepLinkCallback = nullptr;
+std::vector<SignInCallback*> CoreModule::_signInCallbacks = std::vector<SignInCallback*>();
 
 std::string CoreModule::_appId = "";
 EnvironmentTarget CoreModule::_environmentTarget = EnvironmentTarget::NONE;
@@ -26,12 +27,15 @@ void CoreModule::Configure(ConfigureData configureData) {
     _environmentTarget = configureData.environmentTarget;
 }
 
-void CoreModule::SubscribeToOnSignIn() {
-
+void CoreModule::SubscribeToOnSignIn(SignInCallback* callback) {
+    _signInCallbacks.push_back(callback);
 }
 
-void CoreModule::UnsubscribeFromOnSignIn() {
-
+void CoreModule::UnsubscribeFromOnSignIn(SignInCallback* callback) {
+    auto it = std::find(_signInCallbacks.begin(), _signInCallbacks.end(), callback);
+    if (it != _signInCallbacks.end()) {
+        _signInCallbacks.erase(it);
+    }
 }
 
 void CoreModule::DevSignIn(std::string email, std::string password) {
@@ -54,26 +58,26 @@ void CoreModule::DevSignIn(std::string email, std::string password) {
             if (httpResponseCode == 200) {
                 json responseJson = json::parse(httpResponseBody);
                 _idToken = responseJson.at("idToken");
+                _refreshToken = responseJson.at("refreshToken");
+            }
+
+            for (auto callback : _signInCallbacks) {
+                callback->raise(httpResponseCode == 200);
             }
         }
     );
 }
 
 void CoreModule::SignIn() {
-    if (_deepLinkCallback != nullptr) {
-        delete _deepLinkCallback;
-    }
-
     std::string redirectUrl = _appId + "://";
     std::string url = GetOAuthUrl() + "?url_redirect=" + redirectUrl + "%2F&returnSecureToken=true&appId=" + _appId;
     Os::OpenURL(url);
 
-    _deepLinkCallback = new DeepLinkCallback([](std::string payload) {
+    DeepLinkCallback* deepLinkCallback = new DeepLinkCallback([&](std::string payload) {
         OnDeepLink(payload);
-        DeepLink::Subscribe(_deepLinkCallback);
-        delete _deepLinkCallback;
+        DeepLink::Subscribe(deepLinkCallback);
     });
-    DeepLink::Unsubscribe(_deepLinkCallback);
+    DeepLink::Unsubscribe(deepLinkCallback);
 }
 
 void CoreModule::SignOut() {
@@ -108,7 +112,12 @@ std::string CoreModule::GetOAuthUrl() {
 
 void CoreModule::OnDeepLink(std::string payload) {
     std::unordered_map<std::string, std::string> payloadArgs = HttpUtility::ParseURL(payload);
-    if (payloadArgs.find("token") != payloadArgs.end()) {
+    bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
+    if (tokenExists) {
         _idToken = payloadArgs.at("token");
+        // TODO: grab refreshToken too (if there is course)
+    }
+    for (auto callback : _signInCallbacks) {
+        callback->raise(false);
     }
 }

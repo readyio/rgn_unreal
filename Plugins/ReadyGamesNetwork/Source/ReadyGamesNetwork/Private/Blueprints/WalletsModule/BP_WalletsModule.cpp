@@ -1,16 +1,19 @@
 #include "Blueprints/WalletsModule/BP_WalletsModule.h"
 #include "Core/WalletsModule/WalletsModule.h"
 #include "Http/Http.h"
+#include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 void UBP_WalletsModule::CreateWallet(const FString& password,
     FCreateWalletSuccessResponse successEvent, FWalletsFailResponse failEvent) {
         WalletsModule::CreateWallet(std::string(TCHAR_TO_UTF8(*password)),
             [successEvent](CreateWalletResponse response) {
+                json responseJson = response;
+                FString responseJsonString = FString(responseJson.dump().c_str());
                 FBP_CreateWalletResponse bpResponse;
-                bpResponse.address = FString(response.address.c_str());
-                bpResponse.walletCreated = response.wallet_created;
-                bpResponse.success = response.success;
-                bpResponse.error = FString(response.error.c_str());
+                FJsonObjectConverter::JsonObjectStringToUStruct<FBP_CreateWalletResponse>(responseJsonString, &bpResponse, 0, 0);
                 successEvent.ExecuteIfBound(bpResponse);
             },
             [failEvent](int code, std::string message) {
@@ -23,12 +26,10 @@ void UBP_WalletsModule::GetUserWallets(
     FGetUserWalletsSuccessResponse successEvent, FWalletsFailResponse failEvent) {
         WalletsModule::GetUserWallets(
             [successEvent](GetUserWalletsResponse response) {
+                json responseJson = response;
+                FString responseJsonString = FString(responseJson.dump().c_str());
                 FBP_GetUserWalletsResponse bpResponse;
-                for (Wallet& wallet : response.wallets) {
-                    FBP_Wallet bWallet;
-                    bWallet.address = FString(wallet.address.c_str());
-                    bpResponse.wallets.Add(bWallet);
-                }
+                FJsonObjectConverter::JsonObjectStringToUStruct<FBP_GetUserWalletsResponse>(responseJsonString, &bpResponse, 0, 0);
                 successEvent.ExecuteIfBound(bpResponse);
             },
             [failEvent](int code, std::string message) {
