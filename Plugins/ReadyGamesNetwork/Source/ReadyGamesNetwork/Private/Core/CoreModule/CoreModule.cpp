@@ -68,7 +68,7 @@ void CoreModule::DevSignIn(std::string email, std::string password) {
 
 void CoreModule::SignIn() {
     std::string redirectUrl = _appId + "://";
-    std::string url = GetOAuthUrl() + "?url_redirect=" + redirectUrl + "%2F&returnSecureToken=true&appId=" + _appId;
+    std::string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&appId=" + _appId;
     Os::OpenURL(url);
 
     DeepLinkCallback* deepLinkCallback = new DeepLinkCallback([&](std::string payload) {
@@ -97,9 +97,9 @@ std::string CoreModule::GetApiUrl() {
         case EnvironmentTarget::DEVELOPMENT:
             return "https://us-central1-readymaster-development.cloudfunctions.net/";
         case EnvironmentTarget::STAGING:
-            return "https://us-central1-readymaster-development.cloudfunctions.net/"; // TODO: Change api url to staging api url
+            return "https://us-central1-readysandbox.cloudfunctions.net/";
         case EnvironmentTarget::PRODUCTION:
-            return "https://us-central1-readymaster-development.cloudfunctions.net/"; // TODO: Change api url to production api url
+            return "https://us-central1-readymaster-2b268.cloudfunctions.net/";
     }
     return "";
 }
@@ -107,11 +107,11 @@ std::string CoreModule::GetApiUrl() {
 std::string CoreModule::GetOAuthUrl() {
     switch (_environmentTarget) {
         case EnvironmentTarget::DEVELOPMENT:
-            return "https://development-oauth.ready.gg/";
+            return "https://development-oauth.ready.gg/?url_redirect=";
         case EnvironmentTarget::STAGING:
-            return "https://development-oauth.ready.gg/"; // TODO: Change oauth url to staging oauth url
+            return "https://staging-oauth.ready.gg/?url_redirect=";
         case EnvironmentTarget::PRODUCTION:
-            return "https://development-oauth.ready.gg/"; // TODO: Change oauth url to production oauth url
+            return "https://oauth.ready.gg/?url_redirect=";
     }
     return "";
 }
