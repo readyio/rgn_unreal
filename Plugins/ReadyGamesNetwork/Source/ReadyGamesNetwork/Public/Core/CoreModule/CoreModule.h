@@ -39,6 +39,9 @@ public:
     static void SignIn();
     static void SignOut();
 
+    static bool IsLoggedIn();
+    static std::string GetUserToken();
+
     template <class TRequestBody, class TResponse>
     static void CallAPI(std::string name, TRequestBody body, const std::function<void(TResponse)>& complete, const std::function<void(int, std::string)> fail) {
         HttpHeaders headers;

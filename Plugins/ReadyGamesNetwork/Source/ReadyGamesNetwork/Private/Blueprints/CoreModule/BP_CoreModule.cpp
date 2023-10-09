@@ -40,3 +40,11 @@ void UBP_CoreModuleFunctions::SignIn() {
 void UBP_CoreModuleFunctions::SignOut() {
     CoreModule::SignOut();
 }
+
+bool UBP_CoreModuleFunctions::IsLoggedIn() {
+    return CoreModule::IsLoggedIn();
+}
+
+FString UBP_CoreModuleFunctions::GetUserToken() {
+    return FString(CoreModule::GetUserToken().c_str());
+}

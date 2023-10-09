@@ -28,6 +28,10 @@ public:
     static void SignIn();
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void SignOut();
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
+    static bool IsLoggedIn();
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
+    static FString GetUserToken();
 
 private:
     static std::vector<FSignInCallback> _signInCallbacks;

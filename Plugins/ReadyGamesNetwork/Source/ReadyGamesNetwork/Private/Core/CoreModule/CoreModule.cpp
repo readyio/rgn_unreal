@@ -86,6 +86,14 @@ void CoreModule::SignOut() {
     // TODO: Clean stored at disk auth session
 }
 
+bool CoreModule::IsLoggedIn() {
+    return !_idToken.empty();
+}
+
+std::string CoreModule::GetUserToken() {
+    return _idToken;
+}
+
 std::string CoreModule::GetApiUrl() {
     switch (_environmentTarget) {
         case EnvironmentTarget::DEVELOPMENT:
