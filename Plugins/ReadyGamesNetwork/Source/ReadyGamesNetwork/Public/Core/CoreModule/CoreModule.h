@@ -5,7 +5,7 @@
 #include "../../Http/Http.h"
 #include "../ConfigureData.h"
 #include "../EnvironmentTarget.h"
-#include "SignInCallback.h"
+#include "AuthChangeCallback.h"
 #include <vector>
 #include <string>
 #include <functional>
@@ -14,7 +14,7 @@ using json = nlohmann::json;
 
 class CoreModule {
 private:
-    static std::vector<SignInCallback*> _signInCallbacks;
+    static std::vector<AuthChangeCallback*> _authChangeCallbacks;
 
     static std::string _appId;
     static EnvironmentTarget _environmentTarget;
@@ -24,6 +24,11 @@ private:
     static std::string GetApiUrl();
     static std::string GetOAuthUrl();
 
+    static void LoadAuthSession();
+    static void SaveAuthSession();
+
+    static void NotifyAuthChange();
+
     static void OnDeepLink(std::string payload);
 
 public:
@@ -32,8 +37,8 @@ public:
 
     static void Configure(ConfigureData configureData);
 
-    static void SubscribeToOnSignIn(SignInCallback* callback);
-    static void UnsubscribeFromOnSignIn(SignInCallback* callback);
+    static void SubscribeToAuthChange(AuthChangeCallback* callback);
+    static void UnsubscribeFromAuthChange(AuthChangeCallback* callback);
 
     static void DevSignIn(std::string email, std::string password);
     static void SignIn();

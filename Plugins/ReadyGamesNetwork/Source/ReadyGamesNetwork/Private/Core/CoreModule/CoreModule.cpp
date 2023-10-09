@@ -1,11 +1,10 @@
 #include "Core/CoreModule/CoreModule.h"
 #include "Os/Os.h"
-#include "Blueprints/WalletsModule/Responses/BP_CreateWalletResponse.h"
-#include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
+#include "SharedPrefs/SharedPrefs.h"
 
 using json = nlohmann::json;
 
-std::vector<SignInCallback*> CoreModule::_signInCallbacks = std::vector<SignInCallback*>();
+std::vector<AuthChangeCallback*> CoreModule::_authChangeCallbacks = std::vector<AuthChangeCallback*>();
 
 std::string CoreModule::_appId = "";
 EnvironmentTarget CoreModule::_environmentTarget = EnvironmentTarget::NONE;
@@ -15,7 +14,6 @@ std::string CoreModule::_refreshToken = "";
 void CoreModule::Initialize() {
     DeepLink::Initialize();
     DeepLink::Start();
-    // TODO: Read auth session from disk
 }
 
 void CoreModule::Deinitialize() {
@@ -25,16 +23,18 @@ void CoreModule::Deinitialize() {
 void CoreModule::Configure(ConfigureData configureData) {
     _appId = configureData.appId;
     _environmentTarget = configureData.environmentTarget;
+
+    LoadAuthSession();
 }
 
-void CoreModule::SubscribeToOnSignIn(SignInCallback* callback) {
-    _signInCallbacks.push_back(callback);
+void CoreModule::SubscribeToAuthChange(AuthChangeCallback* callback) {
+    _authChangeCallbacks.push_back(callback);
 }
 
-void CoreModule::UnsubscribeFromOnSignIn(SignInCallback* callback) {
-    auto it = std::find(_signInCallbacks.begin(), _signInCallbacks.end(), callback);
-    if (it != _signInCallbacks.end()) {
-        _signInCallbacks.erase(it);
+void CoreModule::UnsubscribeFromAuthChange(AuthChangeCallback* callback) {
+    auto it = std::find(_authChangeCallbacks.begin(), _authChangeCallbacks.end(), callback);
+    if (it != _authChangeCallbacks.end()) {
+        _authChangeCallbacks.erase(it);
     }
 }
 
@@ -59,10 +59,8 @@ void CoreModule::DevSignIn(std::string email, std::string password) {
                 json responseJson = json::parse(httpResponseBody);
                 _idToken = responseJson.at("idToken");
                 _refreshToken = responseJson.at("refreshToken");
-            }
-
-            for (auto callback : _signInCallbacks) {
-                callback->raise(httpResponseCode == 200);
+                SaveAuthSession();
+                NotifyAuthChange();
             }
         }
     );
@@ -75,15 +73,15 @@ void CoreModule::SignIn() {
 
     DeepLinkCallback* deepLinkCallback = new DeepLinkCallback([&](std::string payload) {
         OnDeepLink(payload);
-        DeepLink::Subscribe(deepLinkCallback);
+        DeepLink::Unsubscribe(deepLinkCallback);
     });
-    DeepLink::Unsubscribe(deepLinkCallback);
+    DeepLink::Subscribe(deepLinkCallback);
 }
 
 void CoreModule::SignOut() {
     _idToken = "";
     _refreshToken = "";
-    // TODO: Clean stored at disk auth session
+    SaveAuthSession();
 }
 
 bool CoreModule::IsLoggedIn() {
@@ -118,14 +116,45 @@ std::string CoreModule::GetOAuthUrl() {
     return "";
 }
 
+void CoreModule::LoadAuthSession() {
+    bool wasNotLoggedIn = !IsLoggedIn();
+
+    std::string authDataString;
+    if (SharedPrefs::Load("AuthSession", authDataString)) {
+        json authDataJson = json::parse(authDataString);
+        bool authIsValid = authDataJson.contains("idToken") && authDataJson.contains("refreshToken");
+        if (authIsValid) {
+            _idToken = authDataJson["idToken"].get<std::string>();
+            _refreshToken = authDataJson["refreshToken"].get<std::string>();
+        }
+    }
+
+    if (wasNotLoggedIn && IsLoggedIn()) {
+        NotifyAuthChange();
+    }
+}
+
+void CoreModule::SaveAuthSession() {
+    json authDataJson;
+    authDataJson["idToken"] = _idToken;
+    authDataJson["refreshToken"] = _refreshToken;
+    SharedPrefs::Save("AuthSession", authDataJson.dump());
+}
+
 void CoreModule::OnDeepLink(std::string payload) {
     std::unordered_map<std::string, std::string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
         _idToken = payloadArgs.at("token");
         // TODO: grab refreshToken too (if there is course)
+        SaveAuthSession();
+        NotifyAuthChange();
     }
-    for (auto callback : _signInCallbacks) {
-        callback->raise(false);
+}
+
+void CoreModule::NotifyAuthChange() {
+    bool isLoggedIn = IsLoggedIn();
+    for (auto callback : _authChangeCallbacks) {
+        callback->raise(isLoggedIn);
     }
 }
