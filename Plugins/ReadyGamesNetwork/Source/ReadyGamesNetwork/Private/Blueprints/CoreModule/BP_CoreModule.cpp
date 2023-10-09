@@ -11,8 +11,7 @@ void UBP_CoreModuleFunctions::Configure(FBP_ConfigureData configureData) {
     CoreModule::Configure(coreConfigureData);
 
     AuthChangeCallback* _authChangeCallback = new AuthChangeCallback([&](bool isLoggedIn) {
-        AsyncTask(ENamedThreads::GameThread, [=]()
-        {
+        AsyncTask(ENamedThreads::GameThread, [=]() {
             for (auto callback : _authChangeCallbacks) {
                 callback.ExecuteIfBound(isLoggedIn);
             }

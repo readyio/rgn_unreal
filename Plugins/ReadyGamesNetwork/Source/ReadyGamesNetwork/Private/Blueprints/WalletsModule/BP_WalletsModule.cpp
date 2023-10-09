@@ -14,16 +14,12 @@ void UBP_WalletsModule::CreateWallet(const FString& password,
                 FString responseJsonString = FString(responseJson.dump().c_str());
                 FBP_CreateWalletResponse bpResponse;
                 FJsonObjectConverter::JsonObjectStringToUStruct<FBP_CreateWalletResponse>(responseJsonString, &bpResponse, 0, 0);
-
-                AsyncTask(ENamedThreads::GameThread, [=]()
-                {
+                AsyncTask(ENamedThreads::GameThread, [=]() {
                     successEvent.ExecuteIfBound(bpResponse);
                 });
             },
             [failEvent](int code, std::string message) {
-
-                AsyncTask(ENamedThreads::GameThread, [=]()
-                {
+                AsyncTask(ENamedThreads::GameThread, [=]() {
                     failEvent.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
                 });
             }
@@ -38,15 +34,12 @@ void UBP_WalletsModule::GetUserWallets(
                 FString responseJsonString = FString(responseJson.dump().c_str());
                 FBP_GetUserWalletsResponse bpResponse;
                 FJsonObjectConverter::JsonObjectStringToUStruct<FBP_GetUserWalletsResponse>(responseJsonString, &bpResponse, 0, 0);
-
-                AsyncTask(ENamedThreads::GameThread, [=]()
-                {
+                AsyncTask(ENamedThreads::GameThread, [=]() {
                     successEvent.ExecuteIfBound(bpResponse);
                 });
             },
             [failEvent](int code, std::string message) {
-                AsyncTask(ENamedThreads::GameThread, [=]()
-                {
+                AsyncTask(ENamedThreads::GameThread, [=]() {
                     failEvent.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
                 });
             }
