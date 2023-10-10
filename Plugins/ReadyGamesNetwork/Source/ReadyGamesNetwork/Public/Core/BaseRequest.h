@@ -3,11 +3,11 @@
 #include "../json.hpp"
 #include <string>
 
+using namespace std;
 using json = nlohmann::json;
 
-struct BaseRequestBody {
-	std::string appId;
+struct BaseRequest {
+	string appId;
 	int version;
-
-	NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseRequestBody, appId, version);
+	NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseRequest, appId, version);
 };

@@ -4,12 +4,12 @@
 
 using json = nlohmann::json;
 
-std::vector<AuthChangeCallback*> CoreModule::_authChangeCallbacks = std::vector<AuthChangeCallback*>();
+vector<AuthChangeCallback*> CoreModule::_authChangeCallbacks = vector<AuthChangeCallback*>();
 
-std::string CoreModule::_appId = "";
+string CoreModule::_appId = "";
 EnvironmentTarget CoreModule::_environmentTarget = EnvironmentTarget::NONE;
-std::string CoreModule::_idToken = "";
-std::string CoreModule::_refreshToken = "";
+string CoreModule::_idToken = "";
+string CoreModule::_refreshToken = "";
 
 void CoreModule::Initialize() {
     DeepLink::Initialize();
@@ -32,14 +32,14 @@ void CoreModule::SubscribeToAuthChange(AuthChangeCallback* callback) {
 }
 
 void CoreModule::UnsubscribeFromAuthChange(AuthChangeCallback* callback) {
-    auto it = std::find(_authChangeCallbacks.begin(), _authChangeCallbacks.end(), callback);
+    auto it = find(_authChangeCallbacks.begin(), _authChangeCallbacks.end(), callback);
     if (it != _authChangeCallbacks.end()) {
         _authChangeCallbacks.erase(it);
     }
 }
 
-void CoreModule::DevSignIn(std::string email, std::string password) {
-    std::string url = GetApiUrl() + "user-signInWithEmailPassword";
+void CoreModule::DevSignIn(string email, string password) {
+    string url = GetApiUrl() + "user-signInWithEmailPassword";
 
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
@@ -53,7 +53,7 @@ void CoreModule::DevSignIn(std::string email, std::string password) {
     Http::Request(url, HttpMethod::POST, headers, requestJson.dump(),
         [](HttpResponse httpResponse) {
             int httpResponseCode = httpResponse.getResponseCode();
-            std::string httpResponseBody = httpResponse.getResponseBody();
+            string httpResponseBody = httpResponse.getResponseBody();
 
             if (httpResponseCode == 200) {
                 json responseJson = json::parse(httpResponseBody);
@@ -67,11 +67,11 @@ void CoreModule::DevSignIn(std::string email, std::string password) {
 }
 
 void CoreModule::SignIn() {
-    std::string redirectUrl = _appId + "://";
-    std::string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&appId=" + _appId;
+    string redirectUrl = _appId + "://";
+    string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&appId=" + _appId;
     Os::OpenURL(url);
 
-    DeepLinkCallback* deepLinkCallback = new DeepLinkCallback([&](std::string payload) {
+    DeepLinkCallback* deepLinkCallback = new DeepLinkCallback([&](string payload) {
         OnDeepLink(payload);
         DeepLink::Unsubscribe(deepLinkCallback);
     });
@@ -88,11 +88,11 @@ bool CoreModule::IsLoggedIn() {
     return !_idToken.empty();
 }
 
-std::string CoreModule::GetUserToken() {
+string CoreModule::GetUserToken() {
     return _idToken;
 }
 
-std::string CoreModule::GetApiUrl() {
+string CoreModule::GetApiUrl() {
     switch (_environmentTarget) {
         case EnvironmentTarget::DEVELOPMENT:
             return "https://us-central1-readymaster-development.cloudfunctions.net/";
@@ -104,7 +104,7 @@ std::string CoreModule::GetApiUrl() {
     return "";
 }
 
-std::string CoreModule::GetOAuthUrl() {
+string CoreModule::GetOAuthUrl() {
     switch (_environmentTarget) {
         case EnvironmentTarget::DEVELOPMENT:
             return "https://development-oauth.ready.gg/?url_redirect=";
@@ -119,13 +119,13 @@ std::string CoreModule::GetOAuthUrl() {
 void CoreModule::LoadAuthSession() {
     bool wasNotLoggedIn = !IsLoggedIn();
 
-    std::string authDataString;
+    string authDataString;
     if (SharedPrefs::Load("AuthSession", authDataString)) {
         json authDataJson = json::parse(authDataString);
         bool authIsValid = authDataJson.contains("idToken") && authDataJson.contains("refreshToken");
         if (authIsValid) {
-            _idToken = authDataJson["idToken"].get<std::string>();
-            _refreshToken = authDataJson["refreshToken"].get<std::string>();
+            _idToken = authDataJson["idToken"].get<string>();
+            _refreshToken = authDataJson["refreshToken"].get<string>();
         }
     }
 
@@ -141,8 +141,8 @@ void CoreModule::SaveAuthSession() {
     SharedPrefs::Save("AuthSession", authDataJson.dump());
 }
 
-void CoreModule::OnDeepLink(std::string payload) {
-    std::unordered_map<std::string, std::string> payloadArgs = HttpUtility::ParseURL(payload);
+void CoreModule::OnDeepLink(string payload) {
+    unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
         _idToken = payloadArgs.at("token");

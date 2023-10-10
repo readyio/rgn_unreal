@@ -3,7 +3,9 @@
 #include "EnvironmentTarget.h"
 #include <string>
 
+using namespace std;
+
 struct ConfigureData {
-    std::string appId;
+    string appId;
     EnvironmentTarget environmentTarget;
 };

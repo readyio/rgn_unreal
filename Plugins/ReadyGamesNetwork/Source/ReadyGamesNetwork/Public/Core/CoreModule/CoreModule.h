@@ -10,26 +10,27 @@
 #include <string>
 #include <functional>
 
+using namespace std;
 using json = nlohmann::json;
 
 class CoreModule {
 private:
-    static std::vector<AuthChangeCallback*> _authChangeCallbacks;
+    static vector<AuthChangeCallback*> _authChangeCallbacks;
 
-    static std::string _appId;
+    static string _appId;
     static EnvironmentTarget _environmentTarget;
-    static std::string _idToken;
-    static std::string _refreshToken;
+    static string _idToken;
+    static string _refreshToken;
 
-    static std::string GetApiUrl();
-    static std::string GetOAuthUrl();
+    static string GetApiUrl();
+    static string GetOAuthUrl();
 
     static void LoadAuthSession();
     static void SaveAuthSession();
 
     static void NotifyAuthChange();
 
-    static void OnDeepLink(std::string payload);
+    static void OnDeepLink(string payload);
 
 public:
     static void Initialize();
@@ -40,26 +41,26 @@ public:
     static void SubscribeToAuthChange(AuthChangeCallback* callback);
     static void UnsubscribeFromAuthChange(AuthChangeCallback* callback);
 
-    static void DevSignIn(std::string email, std::string password);
+    static void DevSignIn(string email, string password);
     static void SignIn();
     static void SignOut();
 
     static bool IsLoggedIn();
-    static std::string GetUserToken();
+    static string GetUserToken();
 
     template <class TRequestBody, class TResponse>
-    static void CallAPI(std::string name, TRequestBody body, const std::function<void(TResponse)>& complete, const std::function<void(int, std::string)> fail) {
+    static void CallAPI(string name, TRequestBody body, const function<void(TResponse)>& complete, const function<void(int, string)> fail) {
         HttpHeaders headers;
         headers.add("Content-type", "application/json");
         if (!_idToken.empty()) {
             headers.add("Authorization", "Bearer " + _idToken);
         }
-        std::string url = GetApiUrl() + name;
+        string url = GetApiUrl() + name;
         json bodyJson = body;
         Http::Request(url, HttpMethod::POST, headers, bodyJson.dump(),
             [complete, fail](HttpResponse httpResponse) {
                 int httpResponseCode = httpResponse.getResponseCode();
-                std::string httpResponseBody = httpResponse.getResponseBody();
+                string httpResponseBody = httpResponse.getResponseBody();
 
                 if (httpResponseCode == 200) {
                     json responseJson = json::parse(httpResponseBody);

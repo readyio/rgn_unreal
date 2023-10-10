@@ -1,11 +1,14 @@
 #include "Core/WalletsModule/WalletsModule.h"
-#include "Core/WalletsModule/Requests/CreateWalletRequest.h"
-#include "Core/WalletsModule/Requests/GetUserWalletsRequest.h"
 #include "Core/CoreModule/CoreModule.h"
+#include "GeneratedModels/RGN/Utility/BaseMigrationRequestData.h"
+#include "GeneratedModels/RGN/Modules/Wallets/CreateWalletRequestData.h"
 
-void WalletsModule::CreateWallet(const std::string& password,
-    const std::function<void(CreateWalletResponse)>& complete,
-    const std::function<void(int, std::string)>& fail) {
+using BaseMigrationRequestData = RGN::Utility::BaseMigrationRequestData;
+using CreateWalletRequest = RGN::Modules::Wallets::CreateWalletRequestData;
+
+void WalletsModule::CreateWallet(const string& password,
+    const function<void(CreateWalletResponse)>& complete,
+    const function<void(int, string)>& fail) {
         CreateWalletRequest request;
         request.version = 2;
         request.password = password;
@@ -13,9 +16,9 @@ void WalletsModule::CreateWallet(const std::string& password,
     }
 
 void WalletsModule::GetUserWallets(
-    const std::function<void(GetUserWalletsResponse)>& complete,
-    const std::function<void(int, std::string)>& fail) {
-        GetUserWalletsRequest request;
+    const function<void(GetUserWalletsResponse)>& complete,
+    const function<void(int, string)>& fail) {
+        BaseMigrationRequestData request;
         request.version = 2;
         CoreModule::CallAPI("wallets-getUserWallets", request, complete, fail);
     }

@@ -3,10 +3,12 @@
 #include <string>
 #include <functional>
 
+using namespace std;
+
 class AuthChangeCallback {
 private:
-	std::function<void(bool)> _callback;
+	function<void(bool)> _callback;
 public:
-	AuthChangeCallback(std::function<void(bool)> callback);
+	AuthChangeCallback(function<void(bool)> callback);
 	void raise(bool isLoggedIn);
 };
