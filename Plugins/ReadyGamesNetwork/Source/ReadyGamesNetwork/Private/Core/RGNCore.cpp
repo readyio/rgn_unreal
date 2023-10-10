@@ -1,11 +1,14 @@
 #include "Core/RGNCore.h"
 #include "Os/Os.h"
 #include "SharedPrefs/SharedPrefs.h"
+#include "GeneratedModels/RGN/Model/Request/RefreshTokensRequestData.h"
+#include "GeneratedModels/RGN/Model/Response/RefreshTokensResponseData.h"
 
 using json = nlohmann::json;
+using RefreshTokensRequestData = RGN::Model::Request::RefreshTokensRequestData;
+using RefreshTokensResponseData = RGN::Model::Response::RefreshTokensResponseData;
 
 vector<RGNAuthCallback*> RGNCore::_authCallbacks = vector<RGNAuthCallback*>();
-
 string RGNCore::_appId = "";
 RGNEnvironmentTarget RGNCore::_environmentTarget = RGNEnvironmentTarget::NONE;
 string RGNCore::_idToken = "";
@@ -82,10 +85,30 @@ void RGNCore::SignOut() {
     _idToken = "";
     _refreshToken = "";
     SaveAuthSession();
+    NotifyAuthChange();
+}
+
+void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
+    RefreshTokensRequestData request;
+    request.appPackageName = _appId;
+    request.refreshToken = _refreshToken;
+    std::string name = "user-refreshTokens";
+    RGNCore::CallAPI<RefreshTokensRequestData, RefreshTokensResponseData>(name, request,
+        [callback](RefreshTokensResponseData response) {
+            _idToken = response.idToken;
+            _refreshToken = response.refreshToken;
+            SaveAuthSession();
+            NotifyAuthChange();
+            callback(true);
+        },
+        [callback](int code, string message) {
+            callback(false);
+        }
+    );
 }
 
 bool RGNCore::IsLoggedIn() {
-    return !_idToken.empty();
+    return _idToken != "";
 }
 
 string RGNCore::GetUserToken() {
@@ -146,7 +169,7 @@ void RGNCore::OnDeepLink(string payload) {
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
         _idToken = payloadArgs.at("token");
-        // TODO: grab refreshToken too (if there is course)
+        // TODO: grab refreshToken
         SaveAuthSession();
         NotifyAuthChange();
     }

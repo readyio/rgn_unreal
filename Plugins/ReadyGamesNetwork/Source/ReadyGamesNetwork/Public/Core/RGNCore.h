@@ -44,6 +44,7 @@ public:
     static void DevSignIn(string email, string password);
     static void SignIn();
     static void SignOut();
+    static void RefreshTokens(const function<void(bool)>& callback);
 
     static bool IsLoggedIn();
     static string GetUserToken();
@@ -58,7 +59,7 @@ public:
         string url = GetApiUrl() + name;
         json bodyJson = body;
         Http::Request(url, HttpMethod::POST, headers, bodyJson.dump(),
-            [complete, fail](HttpResponse httpResponse) {
+            [name, body, complete, fail](HttpResponse httpResponse) {
                 int httpResponseCode = httpResponse.getResponseCode();
                 string httpResponseBody = httpResponse.getResponseBody();
 
@@ -67,8 +68,22 @@ public:
                     TResponse response = responseJson.template get<TResponse>();
                     complete(response);
                 }
-                else if (httpResponseCode == 403) {
-                    // TODO: 
+                else if (httpResponseCode == 401) {
+                    if (_refreshToken != "") {
+                        RefreshTokens([name, body, complete, fail, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
+                            if (successRefreshTokens) {
+                                CallAPI(name, body, complete, fail);
+                            }
+                            else {
+                                SignOut();
+                                fail(httpResponseCode, httpResponseBody);
+                            }
+                        });
+                    }
+                    else {
+                        SignOut();
+                        fail(httpResponseCode, httpResponseBody);
+                    }
                 }
                 else {
                     fail(httpResponseCode, httpResponseBody);
