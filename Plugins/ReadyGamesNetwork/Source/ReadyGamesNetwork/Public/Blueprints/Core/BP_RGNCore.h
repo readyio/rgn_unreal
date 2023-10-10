@@ -1,27 +1,26 @@
 #pragma once
 
+#include <vector>
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../BP_ConfigureData.h"
-#include "../../Core/CoreModule/AuthChangeCallback.h"
-#include <vector>
-#include "BP_CoreModule.generated.h"
+#include "BP_RGNConfigureData.h"
+#include "BP_RGNCore.generated.h"
 
 // Delegate for signIn event
-DECLARE_DYNAMIC_DELEGATE_OneParam(FAuthChangeCallback, bool, isLoggedIn);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNAuthCallback, bool, isLoggedIn);
 
 UCLASS()
-class READYGAMESNETWORK_API UBP_CoreModuleFunctions : public UBlueprintFunctionLibrary
+class READYGAMESNETWORK_API UBP_RGNCore : public UBlueprintFunctionLibrary
 {
     GENERATED_BODY()
 
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void Configure(FBP_ConfigureData configureData);
+    static void Configure(FBP_RGNConfigureData configureData);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void SubscribeToAuthChange(FAuthChangeCallback callback);
+    static void SubscribeToAuthCallback(FRGNAuthCallback callback);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void UnsubscribeFromAuthChange(FAuthChangeCallback callback);
+    static void UnsubscribeFromAuthCallback(FRGNAuthCallback callback);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void DevSignIn(const FString& email, const FString& password);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
@@ -34,5 +33,5 @@ public:
     static FString GetUserToken();
 
 private:
-    static std::vector<FAuthChangeCallback> _authChangeCallbacks;
+    static std::vector<FRGNAuthCallback> _authCallbacks;
 };

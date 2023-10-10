@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../../json.hpp"
-#include "../../DeepLink/DeepLink.h"
-#include "../../Http/Http.h"
-#include "../ConfigureData.h"
-#include "../EnvironmentTarget.h"
-#include "AuthChangeCallback.h"
+#include "../json.hpp"
+#include "../DeepLink/DeepLink.h"
+#include "../Http/Http.h"
+#include "RGNConfigureData.h"
+#include "RGNEnvironmentTarget.h"
+#include "RGNAuthCallback.h"
 #include <vector>
 #include <string>
 #include <functional>
@@ -13,12 +13,12 @@
 using namespace std;
 using json = nlohmann::json;
 
-class CoreModule {
+class RGNCore {
 private:
-    static vector<AuthChangeCallback*> _authChangeCallbacks;
+    static vector<RGNAuthCallback*> _authCallbacks;
 
     static string _appId;
-    static EnvironmentTarget _environmentTarget;
+    static RGNEnvironmentTarget _environmentTarget;
     static string _idToken;
     static string _refreshToken;
 
@@ -36,10 +36,10 @@ public:
     static void Initialize();
     static void Deinitialize();
 
-    static void Configure(ConfigureData configureData);
+    static void Configure(RGNConfigureData configureData);
 
-    static void SubscribeToAuthChange(AuthChangeCallback* callback);
-    static void UnsubscribeFromAuthChange(AuthChangeCallback* callback);
+    static void SubscribeToAuthCallback(RGNAuthCallback* callback);
+    static void UnsubscribeFromAuthCallback(RGNAuthCallback* callback);
 
     static void DevSignIn(string email, string password);
     static void SignIn();
@@ -66,6 +66,9 @@ public:
                     json responseJson = json::parse(httpResponseBody);
                     TResponse response = responseJson.template get<TResponse>();
                     complete(response);
+                }
+                else if (httpResponseCode == 403) {
+                    // TODO: 
                 }
                 else {
                     fail(httpResponseCode, httpResponseBody);

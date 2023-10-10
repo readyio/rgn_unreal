@@ -5,10 +5,10 @@
 
 using namespace std;
 
-class AuthChangeCallback {
+class RGNAuthCallback {
 private:
 	function<void(bool)> _callback;
 public:
-	AuthChangeCallback(function<void(bool)> callback);
+	RGNAuthCallback(function<void(bool)> callback);
 	void raise(bool isLoggedIn);
 };

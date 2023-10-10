@@ -1,6 +1,6 @@
 #pragma once
 
-enum class EnvironmentTarget : uint8 {
+enum class RGNEnvironmentTarget : uint8 {
     NONE = 0,
 	DEVELOPMENT = 1,
 	STAGING = 2,

@@ -1,16 +1,16 @@
 #include "ReadyGamesNetwork.h"
-#include "Core/CoreModule/CoreModule.h"
+#include "Core/RGNCore.h"
 
 #define LOCTEXT_NAMESPACE "FReadyGamesNetworkModule"
 
 void FReadyGamesNetworkModule::StartupModule()
 {
-	CoreModule::Initialize();
+	RGNCore::Initialize();
 }
 
 void FReadyGamesNetworkModule::ShutdownModule()
 {
-	CoreModule::Deinitialize();
+	RGNCore::Deinitialize();
 }
 
 #undef LOCTEXT_NAMESPACE

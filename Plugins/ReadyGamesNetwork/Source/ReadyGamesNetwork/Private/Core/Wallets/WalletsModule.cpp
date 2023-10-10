@@ -1,5 +1,5 @@
-#include "Core/WalletsModule/WalletsModule.h"
-#include "Core/CoreModule/CoreModule.h"
+#include "Core/Wallets/WalletsModule.h"
+#include "Core/RGNCore.h"
 #include "GeneratedModels/RGN/Utility/BaseMigrationRequestData.h"
 #include "GeneratedModels/RGN/Modules/Wallets/CreateWalletRequestData.h"
 
@@ -12,7 +12,7 @@ void WalletsModule::CreateWallet(const string& password,
         CreateWalletRequest request;
         request.version = 2;
         request.password = password;
-        CoreModule::CallAPI("wallets-createWallet", request, complete, fail);
+        RGNCore::CallAPI("wallets-createWallet", request, complete, fail);
     }
 
 void WalletsModule::GetUserWallets(
@@ -20,5 +20,5 @@ void WalletsModule::GetUserWallets(
     const function<void(int, string)>& fail) {
         BaseMigrationRequestData request;
         request.version = 2;
-        CoreModule::CallAPI("wallets-getUserWallets", request, complete, fail);
+        RGNCore::CallAPI("wallets-getUserWallets", request, complete, fail);
     }

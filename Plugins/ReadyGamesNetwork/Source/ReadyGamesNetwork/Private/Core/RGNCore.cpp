@@ -1,44 +1,44 @@
-#include "Core/CoreModule/CoreModule.h"
+#include "Core/RGNCore.h"
 #include "Os/Os.h"
 #include "SharedPrefs/SharedPrefs.h"
 
 using json = nlohmann::json;
 
-vector<AuthChangeCallback*> CoreModule::_authChangeCallbacks = vector<AuthChangeCallback*>();
+vector<RGNAuthCallback*> RGNCore::_authCallbacks = vector<RGNAuthCallback*>();
 
-string CoreModule::_appId = "";
-EnvironmentTarget CoreModule::_environmentTarget = EnvironmentTarget::NONE;
-string CoreModule::_idToken = "";
-string CoreModule::_refreshToken = "";
+string RGNCore::_appId = "";
+RGNEnvironmentTarget RGNCore::_environmentTarget = RGNEnvironmentTarget::NONE;
+string RGNCore::_idToken = "";
+string RGNCore::_refreshToken = "";
 
-void CoreModule::Initialize() {
+void RGNCore::Initialize() {
     DeepLink::Initialize();
     DeepLink::Start();
 }
 
-void CoreModule::Deinitialize() {
+void RGNCore::Deinitialize() {
     DeepLink::Stop();
 }
 
-void CoreModule::Configure(ConfigureData configureData) {
+void RGNCore::Configure(RGNConfigureData configureData) {
     _appId = configureData.appId;
     _environmentTarget = configureData.environmentTarget;
 
     LoadAuthSession();
 }
 
-void CoreModule::SubscribeToAuthChange(AuthChangeCallback* callback) {
-    _authChangeCallbacks.push_back(callback);
+void RGNCore::SubscribeToAuthCallback(RGNAuthCallback* callback) {
+    _authCallbacks.push_back(callback);
 }
 
-void CoreModule::UnsubscribeFromAuthChange(AuthChangeCallback* callback) {
-    auto it = find(_authChangeCallbacks.begin(), _authChangeCallbacks.end(), callback);
-    if (it != _authChangeCallbacks.end()) {
-        _authChangeCallbacks.erase(it);
+void RGNCore::UnsubscribeFromAuthCallback(RGNAuthCallback* callback) {
+    auto it = find(_authCallbacks.begin(), _authCallbacks.end(), callback);
+    if (it != _authCallbacks.end()) {
+        _authCallbacks.erase(it);
     }
 }
 
-void CoreModule::DevSignIn(string email, string password) {
+void RGNCore::DevSignIn(string email, string password) {
     string url = GetApiUrl() + "user-signInWithEmailPassword";
 
     HttpHeaders headers;
@@ -66,7 +66,7 @@ void CoreModule::DevSignIn(string email, string password) {
     );
 }
 
-void CoreModule::SignIn() {
+void RGNCore::SignIn() {
     string redirectUrl = _appId + "://";
     string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&appId=" + _appId;
     Os::OpenURL(url);
@@ -78,45 +78,45 @@ void CoreModule::SignIn() {
     DeepLink::Subscribe(deepLinkCallback);
 }
 
-void CoreModule::SignOut() {
+void RGNCore::SignOut() {
     _idToken = "";
     _refreshToken = "";
     SaveAuthSession();
 }
 
-bool CoreModule::IsLoggedIn() {
+bool RGNCore::IsLoggedIn() {
     return !_idToken.empty();
 }
 
-string CoreModule::GetUserToken() {
+string RGNCore::GetUserToken() {
     return _idToken;
 }
 
-string CoreModule::GetApiUrl() {
+string RGNCore::GetApiUrl() {
     switch (_environmentTarget) {
-        case EnvironmentTarget::DEVELOPMENT:
+        case RGNEnvironmentTarget::DEVELOPMENT:
             return "https://us-central1-readymaster-development.cloudfunctions.net/";
-        case EnvironmentTarget::STAGING:
+        case RGNEnvironmentTarget::STAGING:
             return "https://us-central1-readysandbox.cloudfunctions.net/";
-        case EnvironmentTarget::PRODUCTION:
+        case RGNEnvironmentTarget::PRODUCTION:
             return "https://us-central1-readymaster-2b268.cloudfunctions.net/";
     }
     return "";
 }
 
-string CoreModule::GetOAuthUrl() {
+string RGNCore::GetOAuthUrl() {
     switch (_environmentTarget) {
-        case EnvironmentTarget::DEVELOPMENT:
+        case RGNEnvironmentTarget::DEVELOPMENT:
             return "https://development-oauth.ready.gg/?url_redirect=";
-        case EnvironmentTarget::STAGING:
+        case RGNEnvironmentTarget::STAGING:
             return "https://staging-oauth.ready.gg/?url_redirect=";
-        case EnvironmentTarget::PRODUCTION:
+        case RGNEnvironmentTarget::PRODUCTION:
             return "https://oauth.ready.gg/?url_redirect=";
     }
     return "";
 }
 
-void CoreModule::LoadAuthSession() {
+void RGNCore::LoadAuthSession() {
     bool wasNotLoggedIn = !IsLoggedIn();
 
     string authDataString;
@@ -134,14 +134,14 @@ void CoreModule::LoadAuthSession() {
     }
 }
 
-void CoreModule::SaveAuthSession() {
+void RGNCore::SaveAuthSession() {
     json authDataJson;
     authDataJson["idToken"] = _idToken;
     authDataJson["refreshToken"] = _refreshToken;
     SharedPrefs::Save("AuthSession", authDataJson.dump());
 }
 
-void CoreModule::OnDeepLink(string payload) {
+void RGNCore::OnDeepLink(string payload) {
     unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
@@ -152,9 +152,9 @@ void CoreModule::OnDeepLink(string payload) {
     }
 }
 
-void CoreModule::NotifyAuthChange() {
+void RGNCore::NotifyAuthChange() {
     bool isLoggedIn = IsLoggedIn();
-    for (auto callback : _authChangeCallbacks) {
+    for (auto callback : _authCallbacks) {
         callback->raise(isLoggedIn);
     }
 }

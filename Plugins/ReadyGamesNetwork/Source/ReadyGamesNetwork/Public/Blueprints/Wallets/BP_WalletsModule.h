@@ -2,8 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "Responses/BP_CreateWalletResponse.h"
-#include "Responses/BP_GetUserWalletsResponse.h"
+#include "BP_CreateWalletResponse.h"
+#include "BP_GetUserWalletsResponse.h"
 #include "BP_WalletsModule.generated.h"
 
 // Declare delegate for fail response (maybe in future should be moved outside)

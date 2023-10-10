@@ -1,5 +1,5 @@
-#include "Blueprints/WalletsModule/BP_WalletsModule.h"
-#include "Core/WalletsModule/WalletsModule.h"
+#include "Blueprints/Wallets/BP_WalletsModule.h"
+#include "Core/Wallets/WalletsModule.h"
 #include "Http/Http.h"
 #include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
 #include "json.hpp"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../../../Blueprints/GeneratedModels/RGN/Modules/Wallets/BP_RGNWallet.h"
+#include "../GeneratedModels/RGN/Modules/Wallets/BP_RGNWallet.h"
 #include "BP_GetUserWalletsResponse.generated.h"
 
 USTRUCT(BlueprintType)
