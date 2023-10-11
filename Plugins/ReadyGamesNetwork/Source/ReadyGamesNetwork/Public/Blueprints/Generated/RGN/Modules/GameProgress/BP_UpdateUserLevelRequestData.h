@@ -10,7 +10,7 @@ struct READYGAMESNETWORK_API FBP_UpdateUserLevelRequestData : public FBP_BaseMig
     GENERATED_BODY()
 
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
-    T playerProgress;
+    UObject* playerProgress;
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
     TArray<FBP_Currency> reward;
 };
