@@ -13,7 +13,7 @@ namespace RGN { namespace Model { namespace Request {
         /**
          * Represents the current version of the API implementation on the server.
          */
-        int32_t version = 0;
+        int32_t version = 2;
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseMigrationRequestData, version)
     };
 }}}
