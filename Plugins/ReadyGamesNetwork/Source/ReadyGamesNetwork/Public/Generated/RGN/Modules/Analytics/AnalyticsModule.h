@@ -11,7 +11,7 @@ namespace RGN { namespace Modules { namespace Analytics {
             string& eventName,
             string& eventParameters,
             System::Threading::CancellationToken& cancellationToken,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

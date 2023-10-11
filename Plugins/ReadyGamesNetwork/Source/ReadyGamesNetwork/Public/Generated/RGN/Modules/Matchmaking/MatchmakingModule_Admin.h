@@ -9,7 +9,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
     public:
         static void DeleteMatchesByAppIdAsync(
             string& appIdToRemoveTheMatchesFor,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

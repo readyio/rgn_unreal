@@ -11,14 +11,14 @@ namespace RGN { namespace Modules { namespace Wallets {
     class WalletsModule {
     public:
         static void IsUserHavePrimaryWalletAsync(
-            const function<void(RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& result)>& compelete,
+            const function<void(RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void GetUserWalletsAsync(
-            const function<void(RGN::Modules::Wallets::GetUserWalletsResponseData& result)>& compelete,
+            const function<void(RGN::Modules::Wallets::GetUserWalletsResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void CreateWalletAsync(
             string& password,
-            const function<void(RGN::Modules::Wallets::CreateWalletResponseData& result)>& compelete,
+            const function<void(RGN::Modules::Wallets::CreateWalletResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

@@ -11,12 +11,12 @@ namespace RGN { namespace Modules { namespace Messaging {
         static void Subscribe(
             string& topic,
             RGN::Modules::Messaging::IMessageReceiver& messageReceiver,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void Unsubscribe(
             string& topic,
             RGN::Modules::Messaging::IMessageReceiver& messageReceiver,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void SendMessageByUserId(
             string& appId,
@@ -24,7 +24,7 @@ namespace RGN { namespace Modules { namespace Messaging {
             string& payload,
             string& title,
             string& text,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

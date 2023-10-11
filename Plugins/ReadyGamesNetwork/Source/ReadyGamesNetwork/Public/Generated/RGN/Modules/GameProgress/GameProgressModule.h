@@ -14,25 +14,25 @@ namespace RGN { namespace Modules { namespace GameProgress {
     public:
         static void OnGameCompleteAsync(
             vector<RGN::Modules::Currency::Currency>& reward,
-            const function<void(RGN::Modules::GameProgress::OnGameCompleteResult& result)>& compelete,
+            const function<void(RGN::Modules::GameProgress::OnGameCompleteResult& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void GetGameProgressAsync(
-            const function<void(RGN::Modules::GameProgress::GameProgress& result)>& compelete,
+            const function<void(RGN::Modules::GameProgress::GameProgress& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         template<class T>
         static void AddUserProgressAsync(
             T userProgress,
-            const function<void(T result)>& compelete,
+            const function<void(T result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         template<class T>
         static void UpdateUserProgressAsync(
             T userProgress,
             vector<RGN::Modules::Currency::Currency>& reward,
-            const function<void(RGN::Modules::GameProgress::UpdateUserLevelResponseData<T> result)>& compelete,
+            const function<void(RGN::Modules::GameProgress::UpdateUserLevelResponseData<T> result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         template<class T>
         static void GetUserProgressAsync(
-            const function<void(RGN::Modules::GameProgress::GetPlayerLevelResponseData<T> result)>& compelete,
+            const function<void(RGN::Modules::GameProgress::GetPlayerLevelResponseData<T> result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

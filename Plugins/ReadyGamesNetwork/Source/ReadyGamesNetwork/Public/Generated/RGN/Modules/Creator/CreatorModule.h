@@ -14,17 +14,17 @@ namespace RGN { namespace Modules { namespace Creator {
     public:
         static void BecomeACreatorAsync(
             string& brandName,
-            const function<void(RGN::Modules::Creator::CreatorSignupResponseData& result)>& compelete,
+            const function<void(RGN::Modules::Creator::CreatorSignupResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void SubmitItemAsync(
             RGN::Modules::VirtualItems::VirtualItem& customizedItem,
-            const function<void(RGN::Modules::Creator::CreatorSubmitItemResponseData& result)>& compelete,
+            const function<void(RGN::Modules::Creator::CreatorSubmitItemResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void GetCreatorDataAsync(
-            const function<void(RGN::Modules::Creator::CreatorData& result)>& compelete,
+            const function<void(RGN::Modules::Creator::CreatorData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void ClaimCurrenciesAsync(
-            const function<void(RGN::Modules::Currency::ClaimCurrencyResponseData& result)>& compelete,
+            const function<void(RGN::Modules::Currency::ClaimCurrencyResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

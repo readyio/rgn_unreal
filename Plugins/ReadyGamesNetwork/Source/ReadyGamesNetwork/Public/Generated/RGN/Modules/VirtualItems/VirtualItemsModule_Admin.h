@@ -9,22 +9,22 @@ namespace RGN { namespace Modules { namespace VirtualItems {
     public:
         static void DeleteVirtualItemsByIdsAsync(
             vector<string>& virtualItemIds,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void DeleteVirtualItemsByNameAsync(
             string& itemName,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void DeleteVirtualItemByAppIdAsync(
             string& appId,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void AddFromCSVWithBlockchainStubAsync(
             string& virtualItemName,
             string& csvContent,
             string& csvDelimiter,
             System::Threading::CancellationToken& cancellationToken,
-            const function<void(vector<string>& result)>& compelete,
+            const function<void(vector<string>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

@@ -10,15 +10,15 @@ namespace RGN { namespace Modules { namespace Leaderboard {
     public:
         static void AddLeaderboardAsync(
             RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
-            const function<void(string& result)>& compelete,
+            const function<void(string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void UpdateLeaderboardAsync(
             RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
-            const function<void(string& result)>& compelete,
+            const function<void(string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void DeleteLeaderboardAsync(
             string& leaderboardId,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}

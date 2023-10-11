@@ -12,15 +12,15 @@ namespace RGN { namespace Modules { namespace Store {
             string& lootBoxName,
             vector<string>& virtualItemTags,
             vector<RGN::Modules::VirtualItems::PriceInfo>& prices,
-            const function<void(string& result)>& compelete,
+            const function<void(string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void DeleteLootBoxAsync(
             string& lootBoxId,
-            const function<void(string& result)>& compelete,
+            const function<void(string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
         static void DeleteStoreOfferAsync(
             string& offerId,
-            const function<void(void)>& compelete,
+            const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) { }
     };
 }}}
