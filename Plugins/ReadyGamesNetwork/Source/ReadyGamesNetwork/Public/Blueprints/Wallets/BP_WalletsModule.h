@@ -2,9 +2,9 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../GeneratedModels/RGN/Modules/Wallets/BP_IsUserHavePrimaryWalletResponseData.h"
-#include "../GeneratedModels/RGN/Modules/Wallets/BP_CreateWalletResponseData.h"
-#include "../GeneratedModels/RGN/Modules/Wallets/BP_GetUserWalletsResponseData.h"
+#include "../Generated/RGN/Modules/Wallets/BP_IsUserHavePrimaryWalletResponseData.h"
+#include "../Generated/RGN/Modules/Wallets/BP_CreateWalletResponseData.h"
+#include "../Generated/RGN/Modules/Wallets/BP_GetUserWalletsResponseData.h"
 #include "BP_WalletsModule.generated.h"
 
 // Declare delegate for fail response (maybe in future should be moved outside)

@@ -1,9 +1,9 @@
 #include "Core/Wallets/WalletsModule.h"
 #include "Core/RGNCore.h"
-#include "GeneratedModels/RGN/Utility/BaseMigrationRequestData.h"
-#include "GeneratedModels/RGN/Modules/Wallets/CreateWalletRequestData.h"
+#include "Generated/RGN/Model/Request/BaseMigrationRequestData.h"
+#include "Generated/RGN/Modules/Wallets/CreateWalletRequestData.h"
 
-using BaseMigrationRequestData = RGN::Utility::BaseMigrationRequestData;
+using BaseMigrationRequestData = RGN::Model::Request::BaseMigrationRequestData;
 using CreateWalletRequest = RGN::Modules::Wallets::CreateWalletRequestData;
 
 void WalletsModule::IsUserHavePrimaryWalletAsync(

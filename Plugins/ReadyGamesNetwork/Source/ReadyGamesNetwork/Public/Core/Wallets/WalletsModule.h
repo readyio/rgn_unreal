@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../GeneratedModels/RGN/Modules/Wallets/IsUserHavePrimaryWalletResponseData.h"
-#include "../../GeneratedModels/RGN/Modules/Wallets/CreateWalletResponseData.h"
-#include "../../GeneratedModels/RGN/Modules/Wallets/GetUserWalletsResponseData.h"
+#include "../../Generated/RGN/Modules/Wallets/IsUserHavePrimaryWalletResponseData.h"
+#include "../../Generated/RGN/Modules/Wallets/CreateWalletResponseData.h"
+#include "../../Generated/RGN/Modules/Wallets/GetUserWalletsResponseData.h"
 #include <string>
 #include <functional>
 

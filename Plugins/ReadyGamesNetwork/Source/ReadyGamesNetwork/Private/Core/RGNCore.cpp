@@ -1,8 +1,8 @@
 #include "Core/RGNCore.h"
 #include "Os/Os.h"
 #include "SharedPrefs/SharedPrefs.h"
-#include "GeneratedModels/RGN/Model/Request/RefreshTokensRequestData.h"
-#include "GeneratedModels/RGN/Model/Response/RefreshTokensResponseData.h"
+#include "Generated/RGN/Model/Request/RefreshTokensRequestData.h"
+#include "Generated/RGN/Model/Response/RefreshTokensResponseData.h"
 
 using json = nlohmann::json;
 using RefreshTokensRequestData = RGN::Model::Request::RefreshTokensRequestData;
