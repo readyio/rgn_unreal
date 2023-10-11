@@ -1,18 +1,22 @@
 #pragma once
 
+#include "../../GeneratedModels/RGN/Modules/Wallets/IsUserHavePrimaryWalletResponseData.h"
 #include "../../GeneratedModels/RGN/Modules/Wallets/CreateWalletResponseData.h"
 #include "../../GeneratedModels/RGN/Modules/Wallets/GetUserWalletsResponseData.h"
 #include <string>
 #include <functional>
 
 using namespace std;
-using CreateWalletResponse = RGN::Modules::Wallets::CreateWalletResponseData;
-using GetUserWalletsResponse = RGN::Modules::Wallets::GetUserWalletsResponseData;
+using IsUserHavePrimaryWalletResponseData = RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData;
+using CreateWalletResponseData = RGN::Modules::Wallets::CreateWalletResponseData;
+using GetUserWalletsResponseData = RGN::Modules::Wallets::GetUserWalletsResponseData;
 
 class WalletsModule {
 public:
+	static void IsUserHavePrimaryWalletAsync(
+		const function<void(IsUserHavePrimaryWalletResponseData)>& complete, const function<void(int, string)>& fail);
 	static void CreateWallet(const string& password,
-		const function<void(CreateWalletResponse)>& complete, const function<void(int, string)>& fail);
+		const function<void(CreateWalletResponseData)>& complete, const function<void(int, string)>& fail);
 	static void GetUserWallets(
-		const function<void(GetUserWalletsResponse)>& complete, const function<void(int, string)>& fail);
+		const function<void(GetUserWalletsResponseData)>& complete, const function<void(int, string)>& fail);
 };

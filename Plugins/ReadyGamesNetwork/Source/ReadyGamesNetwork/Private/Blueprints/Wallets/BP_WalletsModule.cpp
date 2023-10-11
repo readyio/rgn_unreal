@@ -6,14 +6,30 @@
 
 using json = nlohmann::json;
 
+void UBP_WalletsModule::IsUserHavePrimaryWalletAsync(
+    FIsUserHavePrimaryWalletResponse successEvent, FWalletsFailResponse failEvent) {
+        WalletsModule::IsUserHavePrimaryWalletAsync(
+            [successEvent](IsUserHavePrimaryWalletResponseData response) {
+                json responseJson = response;
+                FString responseJsonString = FString(responseJson.dump().c_str());
+                FBP_IsUserHavePrimaryWalletResponseData bpResponse;
+                FJsonObjectConverter::JsonObjectStringToUStruct<FBP_IsUserHavePrimaryWalletResponseData>(responseJsonString, &bpResponse, 0, 0);
+                successEvent.ExecuteIfBound(bpResponse);
+            },
+            [failEvent](int code, std::string message) {
+                failEvent.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+            }
+        );
+    }
+
 void UBP_WalletsModule::CreateWallet(const FString& password,
     FCreateWalletSuccessResponse successEvent, FWalletsFailResponse failEvent) {
         WalletsModule::CreateWallet(std::string(TCHAR_TO_UTF8(*password)),
-            [successEvent](CreateWalletResponse response) {
+            [successEvent](CreateWalletResponseData response) {
                 json responseJson = response;
                 FString responseJsonString = FString(responseJson.dump().c_str());
-                FBP_CreateWalletResponse bpResponse;
-                FJsonObjectConverter::JsonObjectStringToUStruct<FBP_CreateWalletResponse>(responseJsonString, &bpResponse, 0, 0);
+                FBP_CreateWalletResponseData bpResponse;
+                FJsonObjectConverter::JsonObjectStringToUStruct<FBP_CreateWalletResponseData>(responseJsonString, &bpResponse, 0, 0);
                 successEvent.ExecuteIfBound(bpResponse);
             },
             [failEvent](int code, std::string message) {
@@ -25,11 +41,11 @@ void UBP_WalletsModule::CreateWallet(const FString& password,
 void UBP_WalletsModule::GetUserWallets(
     FGetUserWalletsSuccessResponse successEvent, FWalletsFailResponse failEvent) {
         WalletsModule::GetUserWallets(
-            [successEvent](GetUserWalletsResponse response) {
+            [successEvent](GetUserWalletsResponseData response) {
                 json responseJson = response;
                 FString responseJsonString = FString(responseJson.dump().c_str());
-                FBP_GetUserWalletsResponse bpResponse;
-                FJsonObjectConverter::JsonObjectStringToUStruct<FBP_GetUserWalletsResponse>(responseJsonString, &bpResponse, 0, 0);
+                FBP_GetUserWalletsResponseData bpResponse;
+                FJsonObjectConverter::JsonObjectStringToUStruct<FBP_GetUserWalletsResponseData>(responseJsonString, &bpResponse, 0, 0);
                 successEvent.ExecuteIfBound(bpResponse);
             },
             [failEvent](int code, std::string message) {

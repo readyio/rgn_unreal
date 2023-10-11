@@ -6,8 +6,16 @@
 using BaseMigrationRequestData = RGN::Utility::BaseMigrationRequestData;
 using CreateWalletRequest = RGN::Modules::Wallets::CreateWalletRequestData;
 
+void WalletsModule::IsUserHavePrimaryWalletAsync(
+    const function<void(IsUserHavePrimaryWalletResponseData)>& complete,
+    const function<void(int, string)>& fail) {
+        BaseMigrationRequestData request;
+        request.version = 2;
+        RGNCore::CallAPI("wallets-isUserHavePrimaryWallet", request, complete, fail);
+    }
+
 void WalletsModule::CreateWallet(const string& password,
-    const function<void(CreateWalletResponse)>& complete,
+    const function<void(CreateWalletResponseData)>& complete,
     const function<void(int, string)>& fail) {
         CreateWalletRequest request;
         request.version = 2;
@@ -16,7 +24,7 @@ void WalletsModule::CreateWallet(const string& password,
     }
 
 void WalletsModule::GetUserWallets(
-    const function<void(GetUserWalletsResponse)>& complete,
+    const function<void(GetUserWalletsResponseData)>& complete,
     const function<void(int, string)>& fail) {
         BaseMigrationRequestData request;
         request.version = 2;
