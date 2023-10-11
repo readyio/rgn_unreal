@@ -2,7 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "../Currency/BP_Currency.h"
-#include "../../Utility/BP_BaseMigrationRequestData.h"
+#include "../../Model/Request/BP_BaseMigrationRequestData.h"
 #include "BP_OnGameCompleteRequestData.generated.h"
 
 USTRUCT(BlueprintType)

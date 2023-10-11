@@ -2,7 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "../VirtualItems/BP_VirtualItem.h"
-#include "../../Utility/BP_BaseMigrationRequestData.h"
+#include "../../Model/Request/BP_BaseMigrationRequestData.h"
 #include "BP_CreatorSubmitItemRequestData.generated.h"
 
 USTRUCT(BlueprintType)

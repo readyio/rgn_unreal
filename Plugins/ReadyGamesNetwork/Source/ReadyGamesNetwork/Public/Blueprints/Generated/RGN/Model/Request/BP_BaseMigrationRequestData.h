@@ -1,7 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
-#include "../Model/Request/BP_BaseRequestData.h"
+#include "BP_BaseRequestData.h"
 #include "BP_BaseMigrationRequestData.generated.h"
 
 /**
@@ -14,6 +14,6 @@ struct READYGAMESNETWORK_API FBP_BaseMigrationRequestData : public FBP_BaseReque
     /**
      * Represents the current version of the API implementation on the server.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | BaseMigrationRequestData")
+    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Request")
     int32 version;
 };

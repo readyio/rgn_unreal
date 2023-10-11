@@ -9,5 +9,5 @@ struct READYGAMESNETWORK_API FBP_UpdateUserLevelResponseData : public FBP_BaseRe
     GENERATED_BODY()
 
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
-    UObject* playerProgress;
+    T playerProgress;
 };

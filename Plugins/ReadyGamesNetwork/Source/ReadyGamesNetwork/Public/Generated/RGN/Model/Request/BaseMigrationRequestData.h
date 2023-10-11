@@ -1,11 +1,11 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
-#include "../../../json.hpp"
-#include "../Model/Request/BaseRequestData.h"
+#include "../../../../json.hpp"
+#include "BaseRequestData.h"
 using json = nlohmann::json;
 using namespace std;
 
-namespace RGN { namespace Utility {
+namespace RGN { namespace Model { namespace Request {
     /**
      * This class supports multiple versions of an API by appending a "version" parameter to the request data.
      */
@@ -16,4 +16,4 @@ namespace RGN { namespace Utility {
         int32_t version = 0;
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseMigrationRequestData, version)
     };
-}}
+}}}
