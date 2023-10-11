@@ -6,7 +6,7 @@ using namespace std;
 
 namespace RGN { namespace Model { namespace Request {
     struct BaseRequestData {
-        string appPackageName;
+        string appPackageName = RGNCore::GetAppId();
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseRequestData, appPackageName)
     };
 }}}
