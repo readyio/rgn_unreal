@@ -49,6 +49,8 @@ public:
     static bool IsLoggedIn();
     static string GetUserToken();
 
+    static string GetAppId() { return _appId; }
+
     template <class TRequestBody, class TResponse>
     static void CallAPI(string name, TRequestBody body, const function<void(TResponse)>& complete, const function<void(int, string)> fail) {
         HttpHeaders headers;
