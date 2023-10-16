@@ -12,14 +12,9 @@ namespace RGN { namespace Modules { namespace SignIn {
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
             };
-        static void SendPasswordResetEmail(
-            string email,
-            const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+        static void SendPasswordResetEmail(string email) {
             };
-        static void SignOut(
-            const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+        static void SignOut() {
             };
     };
 }}}

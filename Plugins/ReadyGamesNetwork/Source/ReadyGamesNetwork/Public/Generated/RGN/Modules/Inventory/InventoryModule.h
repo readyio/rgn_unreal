@@ -177,15 +177,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["limit"] = limit;
                 RGNCore::CallAPI("inventoryV2-getWithVirtualItemsDataByAppIds", requestData, complete, fail);
             };
-        static void ParseInventoryItemData(
-            string json,
-            const function<void(RGN::Modules::Inventory::InventoryItemData result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+        static void ParseInventoryItemData(string json) {
             };
-        static void ParseInventoryItemsData(
-            string json,
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+        static void ParseInventoryItemsData(string json) {
             };
         static void GetByTagsAsync(
             vector<string> tags,
