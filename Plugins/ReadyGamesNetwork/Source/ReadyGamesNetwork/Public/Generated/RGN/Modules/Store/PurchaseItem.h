@@ -3,7 +3,9 @@
 #include "../../../../json.hpp"
 #include "../VirtualItems/VirtualItem.h"
 #include "../Inventory/InventoryItemData.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {

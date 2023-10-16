@@ -4,7 +4,6 @@
 #include <string>
 #include <functional>
 #include "IMessageReceiver.h"
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Messaging {
@@ -30,7 +29,7 @@ namespace RGN { namespace Modules { namespace Messaging {
             string text,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["userId"] = userId;
                 requestData["payload"] = payload;

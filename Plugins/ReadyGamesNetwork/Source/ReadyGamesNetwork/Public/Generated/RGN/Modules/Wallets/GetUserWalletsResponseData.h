@@ -3,7 +3,9 @@
 #include "../../../../json.hpp"
 #include "RGNWallet.h"
 #include "../../Model/Response/BaseResponseData.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Wallets {

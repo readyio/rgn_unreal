@@ -3,6 +3,10 @@
 #include "CoreMinimal.h"
 #include "BP_VirtualItem.h"
 #include "../../Model/Request/BP_BaseRequestData.h"
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include "../../../../../Generated/RGN/Modules/VirtualItems/UpdateVirtualItemsRequestData.h"
 #include "BP_UpdateVirtualItemsRequestData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -13,4 +17,16 @@ struct READYGAMESNETWORK_API FBP_UpdateVirtualItemsRequestData : public FBP_Base
     FString itemId;
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
     FBP_VirtualItem virtualItem;
+
+	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::UpdateVirtualItemsRequestData& source, FBP_UpdateVirtualItemsRequestData& target) {
+		target.itemId = FString(source.itemId.c_str());
+		FBP_VirtualItem::ConvertToUnrealModel(source.virtualItem, target.virtualItem);
+		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
+	}
+
+	static void ConvertToCoreModel(const FBP_UpdateVirtualItemsRequestData& source, RGN::Modules::VirtualItems::UpdateVirtualItemsRequestData& target) {
+		target.itemId = string(TCHAR_TO_UTF8(*source.itemId));
+		FBP_VirtualItem::ConvertToCoreModel(source.virtualItem, target.virtualItem);
+		FBP_BaseRequestData::ConvertToCoreModel(source, target);
+	}
 };

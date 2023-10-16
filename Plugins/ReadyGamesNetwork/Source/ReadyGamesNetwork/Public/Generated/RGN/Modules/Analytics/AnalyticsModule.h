@@ -1,10 +1,9 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../..//Core/RGNCore.h"
+#include "../../../../Core/RGNCore.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Analytics {
@@ -13,10 +12,10 @@ namespace RGN { namespace Modules { namespace Analytics {
         static void LogEventAsync(
             string eventName,
             string eventParameters,
-            System::Threading::CancellationToken cancellationToken,
+            CancellationToken cancellationToken,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["eventName"] = eventName;
                 requestData["projectId"] = RGNCore::GetAppId();
                 requestData["userId"] = userId;

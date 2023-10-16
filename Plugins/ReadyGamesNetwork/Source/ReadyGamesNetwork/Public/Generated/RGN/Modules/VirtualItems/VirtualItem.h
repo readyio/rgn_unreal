@@ -7,7 +7,9 @@
 #include "PriceInfo.h"
 #include "BlockchainInfo.h"
 #include "MaterialInfo.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {

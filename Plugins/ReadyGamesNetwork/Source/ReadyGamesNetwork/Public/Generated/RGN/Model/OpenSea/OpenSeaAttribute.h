@@ -1,7 +1,9 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Model { namespace OpenSea {
@@ -13,7 +15,7 @@ namespace RGN { namespace Model { namespace OpenSea {
         /**
          * Value of the trait
          */
-        json value = nullptr;
+        string value = nullptr;
         /**
          * Indicating how you would like it to be displayed
          */

@@ -1,13 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../..//Core/RGNCore.h"
+#include "../../../../Core/RGNCore.h"
 #include "RGNCoinEconomy.h"
 #include "Currency.h"
 #include "CurrencyProductsData.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Currency {
@@ -37,7 +36,7 @@ namespace RGN { namespace Modules { namespace Currency {
             vector<RGN::Modules::Currency::Currency> currencies,
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["currencies"] = currencies;
                 requestData["version"] = 3;

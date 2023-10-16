@@ -6,7 +6,6 @@
 #include "CreateWalletResponseData.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Wallets {

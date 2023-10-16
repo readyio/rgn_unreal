@@ -7,6 +7,10 @@
 #include "BP_PriceInfo.h"
 #include "BP_BlockchainInfo.h"
 #include "BP_MaterialInfo.h"
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
 #include "BP_VirtualItem.generated.h"
 
 USTRUCT(BlueprintType)
@@ -133,4 +137,114 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
     TArray<FString> compatibleItemIds;
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
     TArray<FBP_MaterialInfo> materialInfos;
+
+	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::VirtualItem& source, FBP_VirtualItem& target) {
+		target.id = FString(source.id.c_str());
+		target.name = FString(source.name.c_str());
+		target.description = FString(source.description.c_str());
+		FBP_VirtualItemImage::ConvertToUnrealModel(source.image, target.image);
+		target.createdAt = source.createdAt;
+		target.updatedAt = source.updatedAt;
+		target.createdBy = FString(source.createdBy.c_str());
+		target.updatedBy = FString(source.updatedBy.c_str());
+		target.isStackable = source.isStackable;
+		target.isNFT = source.isNFT;
+		for (const auto& source_appIds_item : source.appIds) {
+			FString b_source_appIds_item;
+			b_source_appIds_item = FString(source_appIds_item.c_str());
+			target.appIds.Add(b_source_appIds_item);
+		}
+		for (const auto& source_tags_item : source.tags) {
+			FString b_source_tags_item;
+			b_source_tags_item = FString(source_tags_item.c_str());
+			target.tags.Add(b_source_tags_item);
+		}
+		for (const auto& source_childs_item : source.childs) {
+			FString b_source_childs_item;
+			b_source_childs_item = FString(source_childs_item.c_str());
+			target.childs.Add(b_source_childs_item);
+		}
+		for (const auto& source_addressableIds_item : source.addressableIds) {
+			FBP_AddressableInfo b_source_addressableIds_item;
+			FBP_AddressableInfo::ConvertToUnrealModel(source_addressableIds_item, b_source_addressableIds_item);
+			target.addressableIds.Add(b_source_addressableIds_item);
+		}
+		for (const auto& source_properties_item : source.properties) {
+			FBP_Properties b_source_properties_item;
+			FBP_Properties::ConvertToUnrealModel(source_properties_item, b_source_properties_item);
+			target.properties.Add(b_source_properties_item);
+		}
+		for (const auto& source_prices_item : source.prices) {
+			FBP_PriceInfo b_source_prices_item;
+			FBP_PriceInfo::ConvertToUnrealModel(source_prices_item, b_source_prices_item);
+			target.prices.Add(b_source_prices_item);
+		}
+		target.totalQuantity = source.totalQuantity;
+		FBP_BlockchainInfo::ConvertToUnrealModel(source.blockchain, target.blockchain);
+		for (const auto& source_compatibleItemIds_item : source.compatibleItemIds) {
+			FString b_source_compatibleItemIds_item;
+			b_source_compatibleItemIds_item = FString(source_compatibleItemIds_item.c_str());
+			target.compatibleItemIds.Add(b_source_compatibleItemIds_item);
+		}
+		for (const auto& source_materialInfos_item : source.materialInfos) {
+			FBP_MaterialInfo b_source_materialInfos_item;
+			FBP_MaterialInfo::ConvertToUnrealModel(source_materialInfos_item, b_source_materialInfos_item);
+			target.materialInfos.Add(b_source_materialInfos_item);
+		}
+	}
+
+	static void ConvertToCoreModel(const FBP_VirtualItem& source, RGN::Modules::VirtualItems::VirtualItem& target) {
+		target.id = string(TCHAR_TO_UTF8(*source.id));
+		target.name = string(TCHAR_TO_UTF8(*source.name));
+		target.description = string(TCHAR_TO_UTF8(*source.description));
+		FBP_VirtualItemImage::ConvertToCoreModel(source.image, target.image);
+		target.createdAt = source.createdAt;
+		target.updatedAt = source.updatedAt;
+		target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
+		target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
+		target.isStackable = source.isStackable;
+		target.isNFT = source.isNFT;
+		for (const auto& source_appIds_item : source.appIds) {
+			string cpp_source_appIds_item;
+			cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
+			target.appIds.push_back(cpp_source_appIds_item);
+		}
+		for (const auto& source_tags_item : source.tags) {
+			string cpp_source_tags_item;
+			cpp_source_tags_item = string(TCHAR_TO_UTF8(*source_tags_item));
+			target.tags.push_back(cpp_source_tags_item);
+		}
+		for (const auto& source_childs_item : source.childs) {
+			string cpp_source_childs_item;
+			cpp_source_childs_item = string(TCHAR_TO_UTF8(*source_childs_item));
+			target.childs.push_back(cpp_source_childs_item);
+		}
+		for (const auto& source_addressableIds_item : source.addressableIds) {
+			RGN::Modules::VirtualItems::AddressableInfo cpp_source_addressableIds_item;
+			FBP_AddressableInfo::ConvertToCoreModel(source_addressableIds_item, cpp_source_addressableIds_item);
+			target.addressableIds.push_back(cpp_source_addressableIds_item);
+		}
+		for (const auto& source_properties_item : source.properties) {
+			RGN::Modules::VirtualItems::Properties cpp_source_properties_item;
+			FBP_Properties::ConvertToCoreModel(source_properties_item, cpp_source_properties_item);
+			target.properties.push_back(cpp_source_properties_item);
+		}
+		for (const auto& source_prices_item : source.prices) {
+			RGN::Modules::VirtualItems::PriceInfo cpp_source_prices_item;
+			FBP_PriceInfo::ConvertToCoreModel(source_prices_item, cpp_source_prices_item);
+			target.prices.push_back(cpp_source_prices_item);
+		}
+		target.totalQuantity = source.totalQuantity;
+		FBP_BlockchainInfo::ConvertToCoreModel(source.blockchain, target.blockchain);
+		for (const auto& source_compatibleItemIds_item : source.compatibleItemIds) {
+			string cpp_source_compatibleItemIds_item;
+			cpp_source_compatibleItemIds_item = string(TCHAR_TO_UTF8(*source_compatibleItemIds_item));
+			target.compatibleItemIds.push_back(cpp_source_compatibleItemIds_item);
+		}
+		for (const auto& source_materialInfos_item : source.materialInfos) {
+			RGN::Modules::VirtualItems::MaterialInfo cpp_source_materialInfos_item;
+			FBP_MaterialInfo::ConvertToCoreModel(source_materialInfos_item, cpp_source_materialInfos_item);
+			target.materialInfos.push_back(cpp_source_materialInfos_item);
+		}
+	}
 };

@@ -1,7 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../..//Core/RGNCore.h"
+#include "../../../../Core/RGNCore.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "../VirtualItems/Properties.h"
 #include "AddToInventoryResponseData.h"
@@ -13,7 +13,6 @@
 #include "VirtualItemUpgrade.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Inventory {
@@ -46,7 +45,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             int32_t quantity,
             const function<void(RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["userId"] = userId;
                 requestData["virtualItemId"] = virtualItemId;
@@ -59,7 +58,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             int32_t quantity,
             const function<void(RGN::Modules::Inventory::RemoveByOwnedIdResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["userId"] = userId;
                 requestData["ownedItemId"] = ownedItemId;
@@ -70,7 +69,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             string ownedItemId,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
@@ -81,7 +80,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             string json,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["json"] = json;
@@ -92,7 +91,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             string ownedItemId,
             const function<void(vector<RGN::Modules::Inventory::UpgradesResponseData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
@@ -105,7 +104,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             vector<RGN::Modules::Currency::Currency> upgradePrice,
             const function<void(vector<RGN::Modules::Inventory::VirtualItemUpgrade> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["newUpgradeLevel"] = newUpgradeLevel;
@@ -118,7 +117,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             string ownedItemId,
             const function<void(RGN::Modules::Inventory::InventoryItemData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
@@ -128,7 +127,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             vector<string> ownedItemIds,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemIds"] = ownedItemIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
@@ -138,7 +137,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             vector<string> virtualItemIds,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["virtualItemIds"] = virtualItemIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
                 RGNCore::CallAPI("inventoryV2-getByVirtualItemIds", requestData, complete, fail);
@@ -146,7 +145,7 @@ namespace RGN { namespace Modules { namespace Inventory {
         static void GetAllForCurrentAppAsync(
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
                 RGNCore::CallAPI("inventoryV2-getByAppId", requestData, complete, fail);
@@ -155,7 +154,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             vector<string> appIds,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appIds"] = appIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
                 RGNCore::CallAPI("inventoryV2-getByAppIds", requestData, complete, fail);
@@ -172,7 +171,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             int32_t limit,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appIds"] = appIds;
                 requestData["startAfter"] = startAfter;
                 requestData["limit"] = limit;
@@ -193,7 +192,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             string appId,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["tags"] = tags;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
@@ -203,7 +202,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             string ownedItemId,
             const function<void(vector<string> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
@@ -215,7 +214,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             string appId,
             const function<void(vector<string> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["tags"] = tags;

@@ -4,7 +4,9 @@
 #include "TimeInfo.h"
 #include "../VirtualItems/Properties.h"
 #include "../VirtualItems/PriceInfo.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {

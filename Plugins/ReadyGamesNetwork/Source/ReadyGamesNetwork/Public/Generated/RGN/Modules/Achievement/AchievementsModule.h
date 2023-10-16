@@ -1,14 +1,13 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../..//Core/RGNCore.h"
+#include "../../../../Core/RGNCore.h"
 #include "AchievementData.h"
 #include "AchievementWithUserData.h"
 #include "TriggerAndClaimResponse.h"
 #include "UserAchievement.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Achievement {
@@ -18,7 +17,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             vector<string> ids,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
                 RGNCore::CallAPI("achievements-getByIds", requestData, complete, fail);
@@ -29,7 +28,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             string startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIds"] = appIds;
                 requestData["limit"] = limit;
@@ -49,7 +48,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             bool withHistory,
             const function<void(vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIds"] = appIds;
                 requestData["limit"] = limit;
@@ -67,7 +66,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             string requestName,
             const function<void(RGN::Modules::Achievement::AchievementData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestName"] = requestName;
                 RGNCore::CallAPI("achievements-getByRequestName", requestData, complete, fail);
@@ -76,7 +75,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             vector<string> requestNames,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestNames"] = requestNames;
                 RGNCore::CallAPI("achievements-getByRequestNames", requestData, complete, fail);
@@ -109,7 +108,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             int32_t limit,
             const function<void(vector<RGN::Modules::Achievement::UserAchievement> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["userId"] = String;
                 requestData["startAfter"] = Int64;

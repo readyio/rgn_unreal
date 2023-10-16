@@ -1,11 +1,10 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../..//Core/RGNCore.h"
+#include "../../../../Core/RGNCore.h"
 #include "../VirtualItems/PriceInfo.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
@@ -17,7 +16,7 @@ namespace RGN { namespace Modules { namespace Store {
             vector<RGN::Modules::VirtualItems::PriceInfo> prices,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxName"] = lootBoxName;
                 requestData["virtualItemTags"] = virtualItemTags;
@@ -28,7 +27,7 @@ namespace RGN { namespace Modules { namespace Store {
             string lootBoxId,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxId"] = lootBoxId;
                 RGNCore::CallAPI("storeV2-deleteLootBox", requestData, complete, fail);
@@ -37,7 +36,7 @@ namespace RGN { namespace Modules { namespace Store {
             string offerId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 RGNCore::CallAPI("storeV2-deleteStoreOffer", requestData, complete, fail);

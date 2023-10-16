@@ -8,7 +8,6 @@
 #include "../Currency/ClaimCurrencyResponseData.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Creator {

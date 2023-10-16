@@ -3,13 +3,14 @@
 #include "../../../../json.hpp"
 #include "../Currency/Currency.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace GameProgress {
-    template <class T>
     struct UpdateUserLevelRequestData : public RGN::Model::Request::BaseMigrationRequestData {
-        T playerProgress;
+        string playerProgress;
         vector<RGN::Modules::Currency::Currency> reward;
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(UpdateUserLevelRequestData, playerProgress, reward)
     };

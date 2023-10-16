@@ -4,11 +4,8 @@
 #include "../Currency/Currency.h"
 #include "OnGameCompleteResult.h"
 #include "GameProgress.h"
-#include "UpdateUserLevelResponseData.h"
-#include "GetPlayerLevelResponseData.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace GameProgress {
@@ -23,22 +20,19 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(RGN::Modules::GameProgress::GameProgress result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
             };
-        template<class T>
         static void AddUserProgressAsync(
-            T userProgress,
-            const function<void(T result)>& complete,
+            string userProgressJson,
+            const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
             };
-        template<class T>
         static void UpdateUserProgressAsync(
-            T userProgress,
+            string userProgressJson,
             vector<RGN::Modules::Currency::Currency> reward,
-            const function<void(RGN::Modules::GameProgress::UpdateUserLevelResponseData<T> result)>& complete,
+            const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
             };
-        template<class T>
         static void GetUserProgressAsync(
-            const function<void(RGN::Modules::GameProgress::GetPlayerLevelResponseData<T> result)>& complete,
+            const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
             };
     };

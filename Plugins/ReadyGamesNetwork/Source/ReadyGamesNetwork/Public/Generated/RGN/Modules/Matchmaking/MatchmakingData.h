@@ -2,7 +2,9 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "Vote.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Matchmaking {
@@ -91,7 +93,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
         /**
          * A dictionary mapping the participant identifiers to their respective optional payload data in the matchmaking process.
          */
-        std::unordered_map<string, json> participantsPayload;
+        std::unordered_map<string, string> participantsPayload;
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(MatchmakingData, id, appId, type, finishType, startType, maxUsers, isStarted, votingEnabled, oncePerUserVoting, createdBy, updatedBy, createdAt, updatedAt, participants, votes, participantsScore, participantsPayload)
     };
 }}}

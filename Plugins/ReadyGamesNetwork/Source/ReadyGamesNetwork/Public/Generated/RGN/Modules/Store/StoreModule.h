@@ -1,7 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../..//Core/RGNCore.h"
+#include "../../../../Core/RGNCore.h"
 #include "PurchaseResult.h"
 #include "LootBox.h"
 #include "../Inventory/InventoryItemData.h"
@@ -10,7 +10,6 @@
 #include "TimeInfo.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Store {
@@ -22,7 +21,7 @@ namespace RGN { namespace Modules { namespace Store {
             string offerId,
             const function<void(RGN::Modules::Store::PurchaseResult result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["itemIds"] = itemIds;
                 requestData["currencies"] = currencies;
@@ -35,7 +34,7 @@ namespace RGN { namespace Modules { namespace Store {
             vector<string> currencies,
             const function<void(RGN::Modules::Store::PurchaseResult result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["currencies"] = currencies;
@@ -46,7 +45,7 @@ namespace RGN { namespace Modules { namespace Store {
             vector<string> ids,
             const function<void(vector<RGN::Modules::Store::LootBox> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
                 RGNCore::CallAPI("storeV2-getLootBoxesByIds", requestData, complete, fail);
@@ -57,7 +56,7 @@ namespace RGN { namespace Modules { namespace Store {
             string startAfter,
             const function<void(vector<RGN::Modules::Store::LootBox> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
@@ -73,7 +72,7 @@ namespace RGN { namespace Modules { namespace Store {
             string name,
             const function<void(bool result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
                 RGNCore::CallAPI("storeV2-lootBoxIsAvailable", requestData, complete, fail);
@@ -82,7 +81,7 @@ namespace RGN { namespace Modules { namespace Store {
             string name,
             const function<void(int64_t result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
                 RGNCore::CallAPI("storeV2-lootBoxIsAvailable", requestData, complete, fail);
@@ -91,7 +90,7 @@ namespace RGN { namespace Modules { namespace Store {
             string name,
             const function<void(RGN::Modules::Inventory::InventoryItemData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
                 RGNCore::CallAPI("storeV2-openLootBox", requestData, complete, fail);
@@ -105,7 +104,7 @@ namespace RGN { namespace Modules { namespace Store {
             int32_t quantity,
             const function<void(RGN::Modules::Store::StoreOffer result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIds"] = appIds;
                 requestData["itemIds"] = itemIds;
@@ -118,10 +117,10 @@ namespace RGN { namespace Modules { namespace Store {
         static void ImportStoreOffersFromCSVAsync(
             string content,
             string delimiter,
-            System::Threading::CancellationToken cancellationToken,
+            CancellationToken cancellationToken,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["userId"] = userId;
                 requestData["csvUtf8String"] = content;
@@ -134,7 +133,7 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["tags"] = tags;
                 requestData["optionalAppId"] = appId;
@@ -146,7 +145,7 @@ namespace RGN { namespace Modules { namespace Store {
             System::DateTime timestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["timestamp"] = new DateTimeOffset(timestamp).ToUnixTimeMilliseconds();
                 RGNCore::CallAPI("storeV2-getByTimestamp", requestData, complete, fail);
@@ -158,7 +157,7 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIds"] = appIds;
                 requestData["limit"] = limit;
@@ -187,7 +186,7 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIds"] = appIds;
                 requestData["limit"] = limit;
@@ -199,7 +198,7 @@ namespace RGN { namespace Modules { namespace Store {
             vector<string> ids,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
                 RGNCore::CallAPI("storeV2-getByIds", requestData, complete, fail);
@@ -208,7 +207,7 @@ namespace RGN { namespace Modules { namespace Store {
             string offerId,
             const function<void(vector<string> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 RGNCore::CallAPI("storeV2-getTags", requestData, complete, fail);
@@ -219,7 +218,7 @@ namespace RGN { namespace Modules { namespace Store {
             string appId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["tags"] = tags;
@@ -231,7 +230,7 @@ namespace RGN { namespace Modules { namespace Store {
             string name,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["name"] = name;
@@ -242,7 +241,7 @@ namespace RGN { namespace Modules { namespace Store {
             string description,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["description"] = description;
@@ -265,7 +264,7 @@ namespace RGN { namespace Modules { namespace Store {
             string imageUrl,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["imageUrl"] = imageUrl;
@@ -275,7 +274,7 @@ namespace RGN { namespace Modules { namespace Store {
             string storeOfferId,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
                 RGNCore::CallAPI("storeV2-getProperties", requestData, complete, fail);
@@ -285,7 +284,7 @@ namespace RGN { namespace Modules { namespace Store {
             string json,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
                 requestData["json"] = json;

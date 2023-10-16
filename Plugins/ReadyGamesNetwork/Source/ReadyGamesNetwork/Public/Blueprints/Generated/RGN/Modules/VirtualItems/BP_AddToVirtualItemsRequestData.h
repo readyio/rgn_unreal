@@ -3,6 +3,10 @@
 #include "CoreMinimal.h"
 #include "BP_VirtualItem.h"
 #include "../../Model/Request/BP_BaseRequestData.h"
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include "../../../../../Generated/RGN/Modules/VirtualItems/AddToVirtualItemsRequestData.h"
 #include "BP_AddToVirtualItemsRequestData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -11,4 +15,14 @@ struct READYGAMESNETWORK_API FBP_AddToVirtualItemsRequestData : public FBP_BaseR
 
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
     FBP_VirtualItem virtualItem;
+
+	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::AddToVirtualItemsRequestData& source, FBP_AddToVirtualItemsRequestData& target) {
+		FBP_VirtualItem::ConvertToUnrealModel(source.virtualItem, target.virtualItem);
+		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
+	}
+
+	static void ConvertToCoreModel(const FBP_AddToVirtualItemsRequestData& source, RGN::Modules::VirtualItems::AddToVirtualItemsRequestData& target) {
+		FBP_VirtualItem::ConvertToCoreModel(source.virtualItem, target.virtualItem);
+		FBP_BaseRequestData::ConvertToCoreModel(source, target);
+	}
 };

@@ -2,6 +2,10 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "BP_Vote.h"
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include "../../../../../Generated/RGN/Modules/Matchmaking/MatchmakingData.h"
 #include "BP_MatchmakingData.generated.h"
 
 /**
@@ -110,4 +114,84 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
      */
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
     TMap<FString, FString> participantsPayload;
+
+	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::MatchmakingData& source, FBP_MatchmakingData& target) {
+		target.id = FString(source.id.c_str());
+		target.appId = FString(source.appId.c_str());
+		target.type = FString(source.type.c_str());
+		target.finishType = FString(source.finishType.c_str());
+		target.startType = FString(source.startType.c_str());
+		target.maxUsers = source.maxUsers;
+		target.isStarted = source.isStarted;
+		target.votingEnabled = source.votingEnabled;
+		target.oncePerUserVoting = source.oncePerUserVoting;
+		target.createdBy = FString(source.createdBy.c_str());
+		target.updatedBy = FString(source.updatedBy.c_str());
+		target.createdAt = source.createdAt;
+		target.updatedAt = source.updatedAt;
+		for (const auto& source_participants_item : source.participants) {
+			FString b_source_participants_item;
+			b_source_participants_item = FString(source_participants_item.c_str());
+			target.participants.Add(b_source_participants_item);
+		}
+		for (const auto& source_votes_item : source.votes) {
+			FBP_Vote b_source_votes_item;
+			FBP_Vote::ConvertToUnrealModel(source_votes_item, b_source_votes_item);
+			target.votes.Add(b_source_votes_item);
+		}
+		for (const auto& [source_participantsScore_key, source_participantsScore_value] : source.participantsScore) {
+			FString b_source_participantsScore_key;
+			b_source_participantsScore_key = FString(source_participantsScore_key.c_str());
+			int64 b_source_participantsScore_value;
+			b_source_participantsScore_value = source_participantsScore_value;
+			target.participantsScore.Add(b_source_participantsScore_key, b_source_participantsScore_value);
+		}
+		for (const auto& [source_participantsPayload_key, source_participantsPayload_value] : source.participantsPayload) {
+			FString b_source_participantsPayload_key;
+			b_source_participantsPayload_key = FString(source_participantsPayload_key.c_str());
+			FString b_source_participantsPayload_value;
+			b_source_participantsPayload_value = FString(source_participantsPayload_value.c_str());
+			target.participantsPayload.Add(b_source_participantsPayload_key, b_source_participantsPayload_value);
+		}
+	}
+
+	static void ConvertToCoreModel(const FBP_MatchmakingData& source, RGN::Modules::Matchmaking::MatchmakingData& target) {
+		target.id = string(TCHAR_TO_UTF8(*source.id));
+		target.appId = string(TCHAR_TO_UTF8(*source.appId));
+		target.type = string(TCHAR_TO_UTF8(*source.type));
+		target.finishType = string(TCHAR_TO_UTF8(*source.finishType));
+		target.startType = string(TCHAR_TO_UTF8(*source.startType));
+		target.maxUsers = source.maxUsers;
+		target.isStarted = source.isStarted;
+		target.votingEnabled = source.votingEnabled;
+		target.oncePerUserVoting = source.oncePerUserVoting;
+		target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
+		target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
+		target.createdAt = source.createdAt;
+		target.updatedAt = source.updatedAt;
+		for (const auto& source_participants_item : source.participants) {
+			string cpp_source_participants_item;
+			cpp_source_participants_item = string(TCHAR_TO_UTF8(*source_participants_item));
+			target.participants.push_back(cpp_source_participants_item);
+		}
+		for (const auto& source_votes_item : source.votes) {
+			RGN::Modules::Matchmaking::Vote cpp_source_votes_item;
+			FBP_Vote::ConvertToCoreModel(source_votes_item, cpp_source_votes_item);
+			target.votes.push_back(cpp_source_votes_item);
+		}
+		for (const auto& [source_participantsScore_key, source_participantsScore_value] : source.participantsScore) {
+			string cpp_source_participantsScore_key;
+			cpp_source_participantsScore_key = string(TCHAR_TO_UTF8(*source_participantsScore_key));
+			int64_t cpp_source_participantsScore_value;
+			cpp_source_participantsScore_value = source_participantsScore_value;
+			target.participantsScore.insert({cpp_source_participantsScore_key, cpp_source_participantsScore_value});
+		}
+		for (const auto& [source_participantsPayload_key, source_participantsPayload_value] : source.participantsPayload) {
+			string cpp_source_participantsPayload_key;
+			cpp_source_participantsPayload_key = string(TCHAR_TO_UTF8(*source_participantsPayload_key));
+			string cpp_source_participantsPayload_value;
+			cpp_source_participantsPayload_value = string(TCHAR_TO_UTF8(*source_participantsPayload_value));
+			target.participantsPayload.insert({cpp_source_participantsPayload_key, cpp_source_participantsPayload_value});
+		}
+	}
 };

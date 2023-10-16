@@ -1,10 +1,9 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../..//Core/RGNCore.h"
+#include "../../../../Core/RGNCore.h"
 #include <string>
 #include <functional>
-using json = nlohmann::json;
 using namespace std;
 
 namespace RGN { namespace Modules { namespace VirtualItems {
@@ -14,7 +13,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             vector<string> virtualItemIds,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemIds"] = virtualItemIds;
                 RGNCore::CallAPI("virtualItemsV2-deleteVirtualItemsByIds", requestData, complete, fail);
@@ -23,7 +22,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             string itemName,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["itemName"] = itemName;
                 RGNCore::CallAPI("virtualItemsV2-deleteVirtualItemsByName", requestData, complete, fail);
@@ -32,7 +31,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             string appId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = appId;
                 RGNCore::CallAPI("virtualItemsV2-deleteVirtualItemByAppId", requestData, complete, fail);
             };
@@ -40,10 +39,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             string virtualItemName,
             string csvContent,
             string csvDelimiter,
-            System::Threading::CancellationToken cancellationToken,
+            CancellationToken cancellationToken,
             const function<void(vector<string> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                json requestData;
+                nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemName"] = virtualItemName;
                 requestData["csvFileString"] = csvContent;

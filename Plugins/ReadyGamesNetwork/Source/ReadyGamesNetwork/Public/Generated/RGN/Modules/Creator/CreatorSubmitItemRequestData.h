@@ -3,7 +3,9 @@
 #include "../../../../json.hpp"
 #include "../VirtualItems/VirtualItem.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Creator {

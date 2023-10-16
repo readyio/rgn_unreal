@@ -3,7 +3,9 @@
 #include "../../../../json.hpp"
 #include "InventoryData.h"
 #include "../../Model/Request/BaseRequestData.h"
-using json = nlohmann::json;
+#include <string>
+#include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace RGN { namespace Modules { namespace Inventory {

@@ -2,6 +2,10 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "../../Model/Response/BP_BaseResponseData.h"
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include "../../../../../Generated/RGN/Modules/GameProgress/GetPlayerLevelResponseData.h"
 #include "BP_GetPlayerLevelResponseData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -10,4 +14,14 @@ struct READYGAMESNETWORK_API FBP_GetPlayerLevelResponseData : public FBP_BaseRes
 
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
     FString playerProgress;
+
+	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::GetPlayerLevelResponseData& source, FBP_GetPlayerLevelResponseData& target) {
+		target.playerProgress = FString(source.playerProgress.c_str());
+		FBP_BaseResponseData::ConvertToUnrealModel(source, target);
+	}
+
+	static void ConvertToCoreModel(const FBP_GetPlayerLevelResponseData& source, RGN::Modules::GameProgress::GetPlayerLevelResponseData& target) {
+		target.playerProgress = string(TCHAR_TO_UTF8(*source.playerProgress));
+		FBP_BaseResponseData::ConvertToCoreModel(source, target);
+	}
 };
