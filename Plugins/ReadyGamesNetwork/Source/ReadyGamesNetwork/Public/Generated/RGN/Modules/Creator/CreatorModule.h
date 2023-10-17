@@ -20,6 +20,7 @@ namespace RGN { namespace Modules { namespace Creator {
             const function<void(RGN::Modules::Creator::CreatorSignupResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSignupRequestData requestData;
+                requestData.brandName = brandName;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Creator::CreatorSignupResponseData>(
                     "creator-signup",
                     requestData,
@@ -31,6 +32,7 @@ namespace RGN { namespace Modules { namespace Creator {
             const function<void(RGN::Modules::Creator::CreatorSubmitItemResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSubmitItemRequestData requestData;
+                requestData.customizedItem = customizedItem;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Creator::CreatorSubmitItemResponseData>(
                     "creator-addItem",
                     requestData,

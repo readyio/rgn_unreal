@@ -25,6 +25,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const function<void(RGN::Modules::VirtualItems::VirtualItem result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::VirtualItems::AddToVirtualItemsRequestData requestData;
+                requestData.virtualItem = virtualItem;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
                     "virtualItemsV2-add",
                     requestData,
@@ -55,6 +56,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const function<void(RGN::Modules::VirtualItems::VirtualItem result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::VirtualItems::UpdateVirtualItemsRequestData requestData;
+                requestData.itemId = itemId;
+                requestData.virtualItem = virtualItem;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
                     "virtualItemsV2-update",
                     requestData,
@@ -90,6 +93,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const function<void(vector<RGN::Modules::VirtualItems::VirtualItem> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData requestData;
+                requestData.appIds = new List<string> { _rgnCore.AppIDForRequests };
+                requestData.limit = limit;
+                requestData.startAfter = startAfter;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByAppId",
                     requestData,
@@ -101,6 +107,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const function<void(vector<RGN::Modules::VirtualItems::VirtualItem> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::VirtualItems::GetVirtualItemsByIdsRequestData requestData;
+                requestData.ids = virtualItemsIds;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByIds",
                     requestData,

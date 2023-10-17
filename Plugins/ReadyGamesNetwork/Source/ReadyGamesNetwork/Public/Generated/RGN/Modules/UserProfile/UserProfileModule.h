@@ -30,6 +30,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(RGN::Modules::UserProfile::UserData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
+                requestData.userId = userId;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::UserProfile::UserData>(
                     "",
                     requestData,
@@ -46,6 +47,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
+                requestData.userId = userId;
                 RGNCore::CallAPI<nlohmann::json, TFullProfileData>(
                     "",
                     requestData,
@@ -57,6 +59,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(vector<RGN::Modules::UserProfile::UserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SearchUsersRequestData requestData;
+                requestData.nicknameQuery = nicknameQuery;
                 RGNCore::CallAPI<nlohmann::json, List<UserData>>(
                     "user-searchUsers",
                     requestData,
@@ -78,6 +81,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData requestData;
+                requestData.shortUID = shortUID;
                 RGNCore::CallAPI<nlohmann::json, string>(
                     "user-getUserIdByShortUID",
                     requestData,
@@ -116,6 +120,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
+                requestData.displayName = displayName;
+                requestData.bio = bio;
                 RGNCore::CallAPI<nlohmann::json, string>(
                     "user-updateProfile",
                     requestData,

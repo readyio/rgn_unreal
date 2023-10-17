@@ -37,6 +37,8 @@ namespace RGN { namespace Modules { namespace Wallets {
             const function<void(RGN::Modules::Wallets::CreateWalletResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Wallets::CreateWalletRequestData requestData;
+                requestData.token = token;
+                requestData.password = password;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Wallets::CreateWalletResponseData>(
                     "wallets-createWallet",
                     requestData,

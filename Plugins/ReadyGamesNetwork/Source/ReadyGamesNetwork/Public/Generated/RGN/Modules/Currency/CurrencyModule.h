@@ -53,6 +53,7 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseCurrencyProductRequestData requestData;
+                requestData.productId = productId;
                 RGNCore::CallAPI<nlohmann::json, List<Currency>>(
                     "currency-purchaseProduct",
                     requestData,

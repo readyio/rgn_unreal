@@ -17,6 +17,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(RGN::Modules::GameProgress::OnGameCompleteResult result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::OnGameCompleteRequestData requestData;
+                requestData.reward = reward;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::GameProgress::OnGameCompleteResult>(
                     "game-onGameComplete",
                     requestData,
@@ -38,6 +39,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::AddUserLevelRequestData<T> requestData;
+                requestData.playerProgress = userProgressJson;
                 RGNCore::CallAPI<nlohmann::json, T>(
                     "game-addPlayerProgress",
                     requestData,
@@ -50,6 +52,8 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::UpdateUserLevelRequestData<T> requestData;
+                requestData.playerProgress = userProgressJson;
+                requestData.reward = reward;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::GameProgress::UpdateUserLevelResponseData<T>>(
                     "game-updatePlayerProgress",
                     requestData,
