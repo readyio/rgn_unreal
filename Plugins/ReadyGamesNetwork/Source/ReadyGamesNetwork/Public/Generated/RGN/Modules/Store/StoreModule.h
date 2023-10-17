@@ -27,7 +27,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["currencies"] = currencies;
                 requestData["offerId"] = offerId;
                 requestData["version"] = 2;
-                RGNCore::CallAPI("storeV2-buyVirtualItems", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-buyVirtualItems",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void BuyStoreOfferAsync(
             string offerId,
@@ -39,7 +43,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["offerId"] = offerId;
                 requestData["currencies"] = currencies;
                 requestData["version"] = 2;
-                RGNCore::CallAPI("storeV2-buyStoreOffer", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-buyStoreOffer",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetLootBoxesByIdsAsync(
             vector<string> ids,
@@ -48,7 +56,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
-                RGNCore::CallAPI("storeV2-getLootBoxesByIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getLootBoxesByIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetLootBoxesByAppIdAsync(
             string appId,
@@ -60,7 +72,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = appId;
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI("storeV2-getLootBoxesByAppId", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getLootBoxesByAppId",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetLootBoxesForCurrentAppAsync(
             int32_t limit,
@@ -75,7 +91,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
-                RGNCore::CallAPI("storeV2-lootBoxIsAvailable", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-lootBoxIsAvailable",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetAvailableLootBoxItemsCountAsync(
             string name,
@@ -84,7 +104,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
-                RGNCore::CallAPI("storeV2-lootBoxIsAvailable", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-lootBoxIsAvailable",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void OpenLootboxAsync(
             string name,
@@ -93,7 +117,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
-                RGNCore::CallAPI("storeV2-openLootBox", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-openLootBox",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddVirtualItemsStoreOfferAsync(
             vector<string> appIds,
@@ -112,7 +140,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["description"] = description;
                 requestData["tags"] = tags;
                 requestData["quantity"] = quantity;
-                RGNCore::CallAPI("storeV2-addVirtualItemsStoreOffer", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-addVirtualItemsStoreOffer",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void ImportStoreOffersFromCSVAsync(
             string content,
@@ -125,7 +157,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["userId"] = userId;
                 requestData["csvUtf8String"] = content;
                 requestData["delimiter"] = delimiter;
-                RGNCore::CallAPI("storeV2-importStoreOffersFromCSV", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-importStoreOffersFromCSV",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByTagsAsync(
             vector<string> tags,
@@ -138,7 +174,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["tags"] = tags;
                 requestData["optionalAppId"] = appId;
                 requestData["ignoreTimestamp"] = ignoreTimestamp;
-                RGNCore::CallAPI("storeV2-getByTags", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getByTags",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByTimestampAsync(
             string appId,
@@ -148,7 +188,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["timestamp"] = new DateTimeOffset(timestamp).ToUnixTimeMilliseconds();
-                RGNCore::CallAPI("storeV2-getByTimestamp", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getByTimestamp",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByAppIdsAsync(
             vector<string> appIds,
@@ -163,7 +207,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
                 requestData["ignoreTimestamp"] = ignoreTimestamp;
-                RGNCore::CallAPI("storeV2-getByAppIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getByAppIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetForCurrentAppAsync(
             int32_t limit,
@@ -192,7 +240,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
                 requestData["ignoreTimestamp"] = ignoreTimestamp;
-                RGNCore::CallAPI("storeV2-getWithVirtualItemsDataByAppIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getWithVirtualItemsDataByAppIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByIdsAsync(
             vector<string> ids,
@@ -201,7 +253,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
-                RGNCore::CallAPI("storeV2-getByIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getByIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetTagsAsync(
             string offerId,
@@ -210,7 +266,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
-                RGNCore::CallAPI("storeV2-getTags", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getTags",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetTagsAsync(
             string offerId,
@@ -223,7 +283,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["offerId"] = offerId;
                 requestData["tags"] = tags;
                 requestData["optionalAppId"] = appId;
-                RGNCore::CallAPI("storeV2-setTags", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-setTags",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetNameAsync(
             string offerId,
@@ -234,7 +298,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["name"] = name;
-                RGNCore::CallAPI("storeV2-setName", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-setName",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetDescriptionAsync(
             string offerId,
@@ -245,7 +313,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["description"] = description;
-                RGNCore::CallAPI("storeV2-setDescription", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-setDescription",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetPricesAsync(
             string offerId,
@@ -268,7 +340,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["imageUrl"] = imageUrl;
-                RGNCore::CallAPI("storeV2-setImageUrl", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-setImageUrl",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetPropertiesAsync(
             string storeOfferId,
@@ -277,7 +353,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
-                RGNCore::CallAPI("storeV2-getProperties", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-getProperties",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetPropertiesAsync(
             string storeOfferId,
@@ -288,7 +368,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
                 requestData["json"] = json;
-                RGNCore::CallAPI("storeV2-setProperties", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-setProperties",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

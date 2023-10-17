@@ -31,7 +31,11 @@ namespace RGN { namespace Modules { namespace Messaging {
                 requestData["payload"] = payload;
                 requestData["title"] = title;
                 requestData["text"] = text;
-                RGNCore::CallAPI("messaging-sendMessageByUserId", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "messaging-sendMessageByUserId",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

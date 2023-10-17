@@ -21,7 +21,11 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["lootBoxName"] = lootBoxName;
                 requestData["virtualItemTags"] = virtualItemTags;
                 requestData["prices"] = prices;
-                RGNCore::CallAPI("storeV2-createLootBox", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-createLootBox",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteLootBoxAsync(
             string lootBoxId,
@@ -30,7 +34,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxId"] = lootBoxId;
-                RGNCore::CallAPI("storeV2-deleteLootBox", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-deleteLootBox",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteStoreOfferAsync(
             string offerId,
@@ -39,7 +47,11 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
-                RGNCore::CallAPI("storeV2-deleteStoreOffer", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "storeV2-deleteStoreOffer",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

@@ -50,7 +50,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["userId"] = userId;
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["quantity"] = quantity;
-                RGNCore::CallAPI("inventoryV2-removeByVirtualItemId", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-removeByVirtualItemId",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void RemoveByInventoryItemIdAsync(
             string userId,
@@ -63,7 +67,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["userId"] = userId;
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["quantity"] = quantity;
-                RGNCore::CallAPI("inventoryV2-removeByInventoryItemId", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-removeByInventoryItemId",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetPropertiesAsync(
             string ownedItemId,
@@ -73,7 +81,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getProperties", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getProperties",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetPropertiesAsync(
             string ownedItemId,
@@ -85,7 +97,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["json"] = json;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-setProperties", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-setProperties",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetUpgradesAsync(
             string ownedItemId,
@@ -95,7 +111,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getUpgrades", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getUpgrades",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void UpgradeAsync(
             string ownedItemId,
@@ -111,7 +131,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["upgradeId"] = upgradeId;
                 requestData["upgradePrice"] = upgradePrice;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-upgrade", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-upgrade",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByIdAsync(
             string ownedItemId,
@@ -121,7 +145,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getById", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getById",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByIdsAsync(
             vector<string> ownedItemIds,
@@ -131,7 +159,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemIds"] = ownedItemIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getByIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getByIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByVirtualItemIdsAsync(
             vector<string> virtualItemIds,
@@ -140,7 +172,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 nlohmann::json requestData;
                 requestData["virtualItemIds"] = virtualItemIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getByVirtualItemIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getByVirtualItemIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetAllForCurrentAppAsync(
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
@@ -148,7 +184,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getByAppId", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getByAppId",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByAppIdsAsync(
             vector<string> appIds,
@@ -157,7 +197,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 nlohmann::json requestData;
                 requestData["appIds"] = appIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getByAppIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getByAppIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             string startAfter,
@@ -175,11 +219,15 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appIds"] = appIds;
                 requestData["startAfter"] = startAfter;
                 requestData["limit"] = limit;
-                RGNCore::CallAPI("inventoryV2-getWithVirtualItemsDataByAppIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getWithVirtualItemsDataByAppIds",
+                    requestData,
+                    complete,
+                    fail);
             };
-        static void ParseInventoryItemData(string json) {
+        static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string json) {
             };
-        static void ParseInventoryItemsData(string json) {
+        static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(string json) {
             };
         static void GetByTagsAsync(
             vector<string> tags,
@@ -190,7 +238,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = appId;
                 requestData["tags"] = tags;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getByTags", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getByTags",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetTagsAsync(
             string ownedItemId,
@@ -200,7 +252,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-getTags", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-getTags",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetTagsAsync(
             string ownedItemId,
@@ -213,7 +269,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["tags"] = tags;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI("inventoryV2-setTags", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "inventoryV2-setTags",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

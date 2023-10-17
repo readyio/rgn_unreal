@@ -16,7 +16,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemIds"] = virtualItemIds;
-                RGNCore::CallAPI("virtualItemsV2-deleteVirtualItemsByIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "virtualItemsV2-deleteVirtualItemsByIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteVirtualItemsByNameAsync(
             string itemName,
@@ -25,7 +29,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["itemName"] = itemName;
-                RGNCore::CallAPI("virtualItemsV2-deleteVirtualItemsByName", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "virtualItemsV2-deleteVirtualItemsByName",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteVirtualItemByAppIdAsync(
             string appId,
@@ -33,7 +41,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
-                RGNCore::CallAPI("virtualItemsV2-deleteVirtualItemByAppId", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "virtualItemsV2-deleteVirtualItemByAppId",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddFromCSVWithBlockchainStubAsync(
             string virtualItemName,
@@ -48,7 +60,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["csvFileString"] = csvContent;
                 requestData["delimiter"] = csvDelimiter;
                 requestData["addBlockchainStub"] = true;
-                RGNCore::CallAPI("virtualItemsV2-addFromCSV", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "virtualItemsV2-addFromCSV",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

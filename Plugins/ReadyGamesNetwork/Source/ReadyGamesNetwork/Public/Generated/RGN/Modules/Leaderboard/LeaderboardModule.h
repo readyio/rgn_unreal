@@ -18,7 +18,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = id;
-                RGNCore::CallAPI("leaderboardV2-getById", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-getById",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetLeaderboardByRequestNameAsync(
             string requestName,
@@ -27,7 +31,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestName"] = requestName;
-                RGNCore::CallAPI("leaderboardV2-getByRequestName", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-getByRequestName",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetLeaderboardByRequestNamesAsync(
             vector<string> requestNames,
@@ -36,14 +44,22 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestNames"] = requestNames;
-                RGNCore::CallAPI("leaderboardV2-getByRequestNames", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-getByRequestNames",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetLeaderboardIdsAsync(
             const function<void(vector<string> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
-                RGNCore::CallAPI("leaderboardV2-getIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-getIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetScoreAsync(
             string leaderboardId,
@@ -56,7 +72,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 requestData["leaderboardId"] = leaderboardId;
                 requestData["score"] = score;
                 requestData["extraData"] = extraData;
-                RGNCore::CallAPI("leaderboardV2-setScore", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-setScore",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddScoreAsync(
             string leaderboardId,
@@ -69,7 +89,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 requestData["leaderboardId"] = leaderboardId;
                 requestData["score"] = score;
                 requestData["extraData"] = extraData;
-                RGNCore::CallAPI("leaderboardV2-addScore", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-addScore",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetUserEntryAsync(
             string leaderboardId,
@@ -78,7 +102,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
-                RGNCore::CallAPI("leaderboardV2-getUserEntry", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-getUserEntry",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetEntriesAsync(
             string leaderboardId,
@@ -93,7 +121,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 requestData["includeUser"] = includeUser;
                 requestData["quantityAroundUser"] = quantityAroundUser;
                 requestData["quantityTop"] = quantityTop;
-                RGNCore::CallAPI("leaderboardV2-getEntries", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-getEntries",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}
