@@ -63,7 +63,7 @@ void RGNCore::DevSignIn(string email, string password) {
 
 void RGNCore::SignIn() {
     string redirectUrl = _appId + "://";
-    string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&appId=" + _appId;
+    string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&returnRefreshToken=true&appId=" + _appId;
     Os::OpenURL(url);
 
     DeepLinkCallback* deepLinkCallback = new DeepLinkCallback([&](string payload) {
@@ -91,10 +91,15 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
             _refreshToken = response.at("refreshToken");
             SaveAuthSession();
             NotifyAuthChange();
-            callback(true);
+
+            if (callback) {
+                callback(true);
+            }
         },
         [callback](int code, string message) {
-            callback(false);
+            if (callback) {
+                callback(false);
+            }
         }
     );
 }
@@ -227,10 +232,8 @@ void RGNCore::OnDeepLink(string payload) {
     unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
-        _idToken = payloadArgs.at("token");
-        // TODO: grab refreshToken
-        SaveAuthSession();
-        NotifyAuthChange();
+        _refreshToken = payloadArgs.at("token");
+        RefreshTokens(nullptr);
     }
 }
 
