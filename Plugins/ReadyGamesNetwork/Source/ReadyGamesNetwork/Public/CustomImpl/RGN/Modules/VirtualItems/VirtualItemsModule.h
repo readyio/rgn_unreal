@@ -13,37 +13,36 @@
 #include <future>
 #include <thread>
 
-using namespace std;
-
 namespace RGN { namespace Modules { namespace VirtualItems {
     class VirtualItemsModuleCustomImpl {
     public:
         
         static void UploadImageAsync(
-            string virtualItemId,
-            vector<uint8_t> thumbnailTextureBytes,
+            std::string virtualItemId,
+            std::vector<uint8_t> thumbnailTextureBytes,
             CancellationToken cancellationToken,
-            const function<void(bool result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const std::function<void(bool result)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["virtualItemId"] = virtualItemId;
                 bodyJson["byteArray"] = thumbnailTextureBytes;
-                RGNCore::CallAPI("virtualItemsV2-uploadThumbnail", bodyJson, [complete]() {
+                RGNCore::CallAPI<nlohmann::json>("virtualItemsV2-uploadThumbnail", bodyJson, [complete]() {
                     complete(true);
                 }, fail, cancellationToken);
             };
         static void DownloadImageAsync(
-            string virtualItemId,
+            std::string virtualItemId,
             RGN::Model::ImageSize size,
             CancellationToken cancellationToken,
-            const function<void(vector<uint8_t> result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
-                VirtualItemsModule::GetVirtualItemsByIdsAsync({ virtualItemId }, [complete, fail, size](auto virtualItems) {
+            const std::function<void(std::vector<uint8_t> result)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
+                VirtualItemsModule::GetVirtualItemsByIdsAsync({ virtualItemId }, [complete, fail, size]
+                (vector<RGN::Modules::VirtualItems::VirtualItem> virtualItems) {
                     RGN::Modules::VirtualItems::VirtualItem virtualItem = virtualItems[0];
                     RGN::Modules::VirtualItems::VirtualItemImage virtualItemImage = virtualItem.image;
 
-                    string imageUrl = "";
+                    std::string imageUrl = "";
                     switch (size) {
                         case RGN::Model::ImageSize::Large:
                             imageUrl = virtualItemImage.source;
@@ -63,14 +62,14 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     headers.add("Content-type", "application/json");
                     Http::Request(imageUrl, HttpMethod::GET, headers, "", [complete, fail](HttpResponse httpResponse) {
                         int httpResponseCode = httpResponse.getResponseCode();
-                        string httpResponseBody = httpResponse.getResponseBody();
+                        std::string httpResponseBody = httpResponse.getResponseBody();
 
                         if (httpResponseCode != 200) {
                             fail(httpResponseCode, httpResponseBody);
                             return;
                         }
 
-                        vector<uint8_t> byteVector;
+                        std::vector<uint8_t> byteVector;
                         for (char strChar : httpResponseBody) {
                             byteVector.push_back(static_cast<uint8_t>(strChar));
                         }
@@ -79,32 +78,32 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 }, fail);
             };
         static void UploadMaterialTexturesAsync(
-            string virtualItemId,
-            vector<vector<uint8_t>> materialTexturesBytes,
+            std::string virtualItemId,
+            std::vector<std::vector<uint8_t>> materialTexturesBytes,
             CancellationToken cancellationToken,
-            const function<void(bool result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const std::function<void(bool result)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["virtualItemId"] = virtualItemId;
-                for (auto materialTextureBytes : materialTexturesBytes) {
+                for (std::vector<uint8_t> materialTextureBytes : materialTexturesBytes) {
                     nlohmann::json materialTextureJson = materialTextureBytes;
                     materialTextureJson["byteArray"] = materialTextureBytes;
                     bodyJson["texturesInfos"].push_back(materialTextureBytes);
                 }
-                RGNCore::CallAPI("virtualItemsV2-uploadTextures", bodyJson, [complete]() {
+                RGNCore::CallAPI<nlohmann::json>("virtualItemsV2-uploadTextures", bodyJson, [complete]() {
                     complete(true);
                 }, fail, cancellationToken);
             };
         static void DownloadMaterialTexturesAsync(
-            string virtualItemId,
+            std::string virtualItemId,
             CancellationToken cancellationToken,
-            const function<void(vector<vector<uint8_t>> result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
-                vector<vector<uint8_t>> textures = { {} };
+            const std::function<void(std::vector<std::vector<uint8_t>> result)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
+                std::vector<std::vector<uint8_t>> textures = { {} };
 
                 for (int i = 0; ; i++) {
-                    string url = 
+                    std::string url =
                         "https://firebasestorage.googleapis.com/v0/b/" +
                         RGNCore::GetStorageBucket() +
                         ".appspot.com/o/virtual-items%2F" +
@@ -113,21 +112,21 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                         to_string(i) +
                         ".png?alt=media";
 
-                    auto future = async(launch::async, [url, &textures]() {
+                    std::future<bool> future = async(launch::async, [url, &textures]() {
                         bool successed = false;
 
                         HttpHeaders headers;
                         headers.add("Content-type", "application/json");
                         Http::Request(url, HttpMethod::GET, headers, "", [&successed, &textures](HttpResponse httpResponse) {
                             int httpResponseCode = httpResponse.getResponseCode();
-                            string httpResponseBody = httpResponse.getResponseBody();
+                            std::string httpResponseBody = httpResponse.getResponseBody();
 
                             successed = httpResponseCode == 200;
                             if (!successed) {
                                 return;
                             }
 
-                            vector<uint8_t> byteVector;
+                            std::vector<uint8_t> byteVector;
                             for (char strChar : httpResponseBody) {
                                 byteVector.push_back(static_cast<uint8_t>(strChar));
                             }

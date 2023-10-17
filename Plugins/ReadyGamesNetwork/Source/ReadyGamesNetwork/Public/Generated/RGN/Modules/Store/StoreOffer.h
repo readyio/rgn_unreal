@@ -4,6 +4,7 @@
 #include "TimeInfo.h"
 #include "../VirtualItems/Properties.h"
 #include "../VirtualItems/PriceInfo.h"
+#include "../VirtualItems/VirtualItem.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -90,6 +91,7 @@ namespace RGN { namespace Modules { namespace Store {
          * by using the group field. To "group" currencies and prices together.
          */
         vector<RGN::Modules::VirtualItems::PriceInfo> prices;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(StoreOffer, id, name, description, appIds, tags, imageUrl, createdAt, updatedAt, createdBy, updatedBy, time, properties, itemIds, prices)
+        vector<RGN::Modules::VirtualItems::VirtualItem> virtualItems;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(StoreOffer, id, name, description, appIds, tags, imageUrl, createdAt, updatedAt, createdBy, updatedBy, time, properties, itemIds, prices, virtualItems)
     };
 }}}

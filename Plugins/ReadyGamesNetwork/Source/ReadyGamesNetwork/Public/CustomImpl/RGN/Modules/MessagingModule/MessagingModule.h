@@ -5,30 +5,34 @@
 #include "../../../../Generated/RGN/Modules/Messaging/MessagingModule.h"
 #include <string>
 
-using namespace std;
-
 namespace RGN { namespace Modules { namespace Messaging {
 	class MessagingModuleCustomImpl {
 	public:
         static void Subscribe(
-            string topic,
+            std::string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
-                // TODO
+                // Not implemented
             };
         static void Unsubscribe(
-            string topic,
+            std::string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
-                // TODO
+                // Not implemented
             };
         static void SendMessageByUserId(
-            string appId,
-            string userId,
-            string payload,
-            string title,
-            string text,
-            const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
-                // TODO
+            std::string appId,
+            std::string userId,
+            std::string payload,
+            std::string title,
+            std::string text,
+            const std::function<void(void)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
+                nlohmann::json requestData;
+                requestData["appId"] = appId;
+                requestData["userId"] = userId;
+                requestData["payload"] = payload;
+                requestData["title"] = title;
+                requestData["text"] = text;
+                RGNCore::CallAPI<nlohmann::json>("messaging-sendMessageByUserId", requestData, complete, fail);
             };
 	};
 }}}

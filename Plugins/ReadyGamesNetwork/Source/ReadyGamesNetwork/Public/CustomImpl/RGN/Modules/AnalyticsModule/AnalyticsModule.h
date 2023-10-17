@@ -6,17 +6,15 @@
 #include "../../../../Generated/RGN/Modules/Analytics/AnalyticsModule.h"
 #include <string>
 
-using namespace std;
-
 namespace RGN { namespace Modules { namespace Analytics {
 	class AnalyticsModuleCustomImpl {
 	public:
         static void LogEventAsync(
-            string eventName,
-            string eventParameters,
+            std::string eventName,
+            std::string eventParameters,
             CancellationToken cancellationToken,
-            const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const std::function<void(void)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["eventName"] = eventName;
                 bodyJson["projectId"] = RGNCore::GetAppId();
@@ -24,7 +22,7 @@ namespace RGN { namespace Modules { namespace Analytics {
                 bodyJson["userPseudoId"] = RGNAnalytics::GetAnalyticsId();
                 bodyJson["sessionId"] = RGNAnalytics::GetSessionId();
                 bodyJson["eventParameters"] = eventParameters;
-                RGNCore::CallAPI("achievements-getByAppIds", bodyJson, complete, nullptr);
+                RGNCore::CallAPI<nlohmann::json>("achievements-getByAppIds", bodyJson, complete, nullptr);
             };
 	};
 }}}

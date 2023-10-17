@@ -3,6 +3,7 @@
 #include "../../../../json.hpp"
 #include "VirtualItemUpgrade.h"
 #include "../VirtualItems/Properties.h"
+#include "../VirtualItems/VirtualItem.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -78,6 +79,7 @@ namespace RGN { namespace Modules { namespace Inventory {
          * inventory item
          */
         vector<RGN::Modules::VirtualItems::Properties> properties;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(InventoryItemData, id, virtualItemId, appIds, tags, quantity, status, createdAt, updatedAt, itemUpgrades, properties)
+        RGN::Modules::VirtualItems::VirtualItem virtualItem;
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(InventoryItemData, id, virtualItemId, appIds, tags, quantity, status, createdAt, updatedAt, itemUpgrades, properties, virtualItem)
     };
 }}}
