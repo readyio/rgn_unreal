@@ -17,9 +17,9 @@ using json = nlohmann::json;
 class RGNCore {
 private:
     static vector<RGNAuthCallback*> _authCallbacks;
-
     static string _appId;
     static RGNEnvironmentTarget _environmentTarget;
+    static string _userId;
     static string _idToken;
     static string _refreshToken;
 
@@ -48,6 +48,7 @@ public:
     static void RefreshTokens(const function<void(bool)>& callback);
 
     static bool IsLoggedIn();
+    static string GetUserId();
     static string GetUserToken();
     static string GetAppId();
     static string GetStorageBucket();

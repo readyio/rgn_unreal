@@ -1,4 +1,5 @@
 #include "Core/RGNCore.h"
+#include "Core/RGNAnalytics.h"
 #include "Os/Os.h"
 #include "SharedPrefs/SharedPrefs.h"
 #include "Generated/RGN/Model/Request/RefreshTokensRequestData.h"
@@ -11,12 +12,14 @@ using RefreshTokensResponseData = RGN::Model::Response::RefreshTokensResponseDat
 vector<RGNAuthCallback*> RGNCore::_authCallbacks = vector<RGNAuthCallback*>();
 string RGNCore::_appId = "";
 RGNEnvironmentTarget RGNCore::_environmentTarget = RGNEnvironmentTarget::NONE;
+string RGNCore::_userId = "";
 string RGNCore::_idToken = "";
 string RGNCore::_refreshToken = "";
 
 void RGNCore::Initialize() {
     DeepLink::Initialize();
     DeepLink::Start();
+    RGNAnalytics::Initialize();
 }
 
 void RGNCore::Deinitialize() {
@@ -50,15 +53,12 @@ void RGNCore::DevSignIn(string email, string password) {
 
     RGNCore::CallAPI("user-signInWithEmailPassword", requestBody,
         [](json response) {
+            _userId = response.at("userId");
             _idToken = response.at("idToken");
             _refreshToken = response.at("refreshToken");
             SaveAuthSession();
             NotifyAuthChange();
-        },
-        [](int code, string message) {
-            // Dev Sign In Failed
-        }
-    );
+        }, nullptr);
 }
 
 void RGNCore::SignIn() {
@@ -87,8 +87,10 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
 
     RGNCore::CallAPI("user-refreshTokens", requestBody,
         [callback](json response) {
+            _userId = response.at("userId");
             _idToken = response.at("idToken");
             _refreshToken = response.at("refreshToken");
+
             SaveAuthSession();
             NotifyAuthChange();
 
@@ -106,6 +108,10 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
 
 bool RGNCore::IsLoggedIn() {
     return _idToken != "";
+}
+
+string RGNCore::GetUserId() {
+    return _userId;
 }
 
 string RGNCore::GetUserToken() {
@@ -145,7 +151,9 @@ void RGNCore::CallAPI(string name, json body, const function<void(json)>& comple
 
         if (httpResponseCode == 200) {
             json response = json::parse(httpResponseBody);
-            complete(response);
+            if (complete) {
+                complete(response);
+            }
         }
         else if (httpResponseCode == 401) {
             if (_refreshToken != "") {
@@ -159,18 +167,24 @@ void RGNCore::CallAPI(string name, json body, const function<void(json)>& comple
                     }
                     else {
                         SignOut();
-                        fail(httpResponseCode, httpResponseBody);
+                        if (fail) {
+                            fail(httpResponseCode, httpResponseBody);
+                        }
                     }
                     });
             }
             else {
                 SignOut();
-                fail(httpResponseCode, httpResponseBody);
+                if (fail) {
+                    fail(httpResponseCode, httpResponseBody);
+                }
             }
         }
         else {
             SignOut();
-            fail(httpResponseCode, httpResponseBody);
+            if (fail) {
+                fail(httpResponseCode, httpResponseBody);
+            }
         }
     });
 }
@@ -228,18 +242,18 @@ void RGNCore::SaveAuthSession() {
     SharedPrefs::Save("AuthSession", authDataJson.dump());
 }
 
+void RGNCore::NotifyAuthChange() {
+    bool isLoggedIn = IsLoggedIn();
+    for (auto callback : _authCallbacks) {
+        callback->raise(isLoggedIn);
+    }
+}
+
 void RGNCore::OnDeepLink(string payload) {
     unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
         _refreshToken = payloadArgs.at("token");
         RefreshTokens(nullptr);
-    }
-}
-
-void RGNCore::NotifyAuthChange() {
-    bool isLoggedIn = IsLoggedIn();
-    for (auto callback : _authCallbacks) {
-        callback->raise(isLoggedIn);
     }
 }
