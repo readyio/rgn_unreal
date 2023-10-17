@@ -49,118 +49,40 @@ public:
 
     static bool IsLoggedIn();
     static string GetUserToken();
+    static string GetAppId();
+    static string GetStorageBucket();
 
-    static string GetAppId() { return _appId; }
-
-    template <class TRequestBody, class TResponse>
-    static void CallAPI(string name, TRequestBody body, const function<void(TResponse)>& complete, const function<void(int, string)> fail,
-        CancellationToken* cancellationToken) 
-    {
-        HttpHeaders headers;
-        headers.add("Content-type", "application/json");
-        if (!_idToken.empty()) {
-            headers.add("Authorization", "Bearer " + _idToken);
-        }
-        string url = GetApiUrl() + name;
+    static void CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken);
+    static void CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail);
+    
+    template<class TRequestBody, class TResponse>
+    static void CallAPI(string name, TRequestBody body, const function<void(TResponse)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken) {
         json bodyJson = body;
-        Http::Request(url, HttpMethod::POST, headers, bodyJson.dump(), [name, body, complete, fail, cancellationToken](HttpResponse httpResponse) {
-            if (cancellationToken && cancellationToken->isCancellationRequested()) {
-                return;
-            }
-
-            int httpResponseCode = httpResponse.getResponseCode();
-            string httpResponseBody = httpResponse.getResponseBody();
-
-            if (httpResponseCode == 200) {
-                json responseJson = json::parse(httpResponseBody);
-                TResponse response = responseJson.template get<TResponse>();
-                complete(response);
-            }
-            else if (httpResponseCode == 401) {
-                if (_refreshToken != "") {
-                    RefreshTokens([name, body, complete, fail, cancellationToken, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
-                        if (cancellationToken && cancellationToken->isCancellationRequested()) {
-                            return;
-                        }
-                            
-                        if (successRefreshTokens) {
-                            CallAPI<TRequestBody, TResponse>(name, body, complete, fail, cancellationToken);
-                        }
-                        else {
-                            SignOut();
-                            fail(httpResponseCode, httpResponseBody);
-                        }
-                    });
-                }
-                else {
-                    SignOut();
-                    fail(httpResponseCode, httpResponseBody);
-                }
-            }
-            else {
-                SignOut();
-                fail(httpResponseCode, httpResponseBody);
-            }
-        });
+        CallAPI(name, bodyJson,
+            [complete](json response) {
+                TResponse tResponse = response.template get<TResponse>();
+                complete(tResponse);
+            },
+        fail, cancellationToken);
     }
 
-    template <class TRequestBody, class TResponse>
+    template<class TRequestBody, class TResponse>
     static void CallAPI(string name, TRequestBody body, const function<void(TResponse)>& complete, const function<void(int, string)> fail) {
-        CallAPI<TRequestBody, TResponse>(name, body, complete, fail, nullptr);
+        CallAPI<TRequestBody, TResponse>(name, body, complete, fail, CancellationToken());
     }
 
-    template <class TRequestBody>
-    static void CallAPI(string name, TRequestBody body, const function<void()>& complete, const function<void(int, string)> fail,
-        CancellationToken* cancellationToken) 
-    {
-        HttpHeaders headers;
-        headers.add("Content-type", "application/json");
-        if (!_idToken.empty()) {
-            headers.add("Authorization", "Bearer " + _idToken);
-        }
-        string url = GetApiUrl() + name;
+    template<class TRequestBody>
+    static void CallAPI(string name, TRequestBody body, const function<void(void)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken) {
         json bodyJson = body;
-        Http::Request(url, HttpMethod::POST, headers, bodyJson.dump(), [name, body, complete, fail, cancellationToken](HttpResponse httpResponse) {
-            if (cancellationToken && cancellationToken->isCancellationRequested()) {
-                return;
-            }
-
-            int httpResponseCode = httpResponse.getResponseCode();
-            string httpResponseBody = httpResponse.getResponseBody();
-
-            if (httpResponseCode == 200) {
+        CallAPI(name, bodyJson,
+            [complete](json response) {
                 complete();
-            }
-            else if (httpResponseCode == 401) {
-                if (_refreshToken != "") {
-                    RefreshTokens([name, body, complete, fail, cancellationToken, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
-                        if (cancellationToken && cancellationToken->isCancellationRequested()) {
-                            return;
-                        }
-
-                        if (successRefreshTokens) {
-                            CallAPI<TRequestBody>(name, body, complete, fail, cancellationToken);
-                        }
-                        else {
-                            SignOut();
-                            fail(httpResponseCode, httpResponseBody);
-                        }
-                    });
-                }
-                else {
-                    SignOut();
-                    fail(httpResponseCode, httpResponseBody);
-                }
-            }
-            else {
-                SignOut();
-                fail(httpResponseCode, httpResponseBody);
-            }
-        });
+            },
+        fail, cancellationToken);
     }
 
-    template <class TRequestBody>
-    static void CallAPI(string name, TRequestBody body, const function<void()>& complete, const function<void(int, string)> fail) {
-        CallAPI<TRequestBody>(name, body, complete, fail, nullptr);
+    template<class TRequestBody>
+    static void CallAPI(string name, TRequestBody body, const function<void(void)>& complete, const function<void(int, string)> fail) {
+        CallAPI<TRequestBody>(name, body, complete, fail, CancellationToken());
     }
 };

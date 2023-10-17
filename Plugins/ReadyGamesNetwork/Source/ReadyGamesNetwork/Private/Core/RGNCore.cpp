@@ -42,29 +42,21 @@ void RGNCore::UnsubscribeFromAuthCallback(RGNAuthCallback* callback) {
 }
 
 void RGNCore::DevSignIn(string email, string password) {
-    string url = GetApiUrl() + "user-signInWithEmailPassword";
+    json requestBody;
+    requestBody["email"] = email;
+    requestBody["password"] = password;
+    requestBody["appId"] = _appId;
+    requestBody["returnSecureToken"] = true;
 
-    HttpHeaders headers;
-    headers.add("Content-type", "application/json");
-
-    json requestJson;
-    requestJson["email"] = email;
-    requestJson["password"] = password;
-    requestJson["appId"] = _appId;
-    requestJson["returnSecureToken"] = true;
-
-    Http::Request(url, HttpMethod::POST, headers, requestJson.dump(),
-        [](HttpResponse httpResponse) {
-            int httpResponseCode = httpResponse.getResponseCode();
-            string httpResponseBody = httpResponse.getResponseBody();
-
-            if (httpResponseCode == 200) {
-                json responseJson = json::parse(httpResponseBody);
-                _idToken = responseJson.at("idToken");
-                _refreshToken = responseJson.at("refreshToken");
-                SaveAuthSession();
-                NotifyAuthChange();
-            }
+    RGNCore::CallAPI("user-signInWithEmailPassword", requestBody,
+        [](json response) {
+            _idToken = response.at("idToken");
+            _refreshToken = response.at("refreshToken");
+            SaveAuthSession();
+            NotifyAuthChange();
+        },
+        [](int code, string message) {
+            // Dev Sign In Failed
         }
     );
 }
@@ -89,14 +81,14 @@ void RGNCore::SignOut() {
 }
 
 void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
-    RefreshTokensRequestData request;
-    request.appPackageName = _appId;
-    request.refreshToken = _refreshToken;
-    std::string name = "user-refreshTokens";
-    RGNCore::CallAPI<RefreshTokensRequestData, RefreshTokensResponseData>(name, request,
-        [callback](RefreshTokensResponseData response) {
-            _idToken = response.idToken;
-            _refreshToken = response.refreshToken;
+    json requestBody;
+    requestBody["appPackageName"] = _appId;
+    requestBody["refreshToken"] = _refreshToken;
+
+    RGNCore::CallAPI("user-refreshTokens", requestBody,
+        [callback](json response) {
+            _idToken = response.at("idToken");
+            _refreshToken = response.at("refreshToken");
             SaveAuthSession();
             NotifyAuthChange();
             callback(true);
@@ -113,6 +105,73 @@ bool RGNCore::IsLoggedIn() {
 
 string RGNCore::GetUserToken() {
     return _idToken;
+}
+
+string RGNCore::GetAppId() {
+    return _appId; 
+}
+
+string RGNCore::GetStorageBucket() {
+    switch (_environmentTarget) {
+    case RGNEnvironmentTarget::DEVELOPMENT:
+        return "readymaster-development";
+    case RGNEnvironmentTarget::STAGING:
+        return "readysandbox";
+    case RGNEnvironmentTarget::PRODUCTION:
+        return "readymaster-2b268";
+    }
+    return "";
+}
+
+void RGNCore::CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken) {
+    HttpHeaders headers;
+    headers.add("Content-type", "application/json");
+    if (!_idToken.empty()) {
+        headers.add("Authorization", "Bearer " + _idToken);
+    }
+    string url = GetApiUrl() + name;
+    Http::Request(url, HttpMethod::POST, headers, body.dump(), [name, body, complete, fail, cancellationToken](HttpResponse httpResponse) {
+        if (cancellationToken.isCancellationRequested()) {
+            return;
+        }
+
+        int httpResponseCode = httpResponse.getResponseCode();
+        string httpResponseBody = httpResponse.getResponseBody();
+
+        if (httpResponseCode == 200) {
+            json response = json::parse(httpResponseBody);
+            complete(response);
+        }
+        else if (httpResponseCode == 401) {
+            if (_refreshToken != "") {
+                RefreshTokens([name, body, complete, fail, cancellationToken, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
+                    if (cancellationToken.isCancellationRequested()) {
+                        return;
+                    }
+
+                    if (successRefreshTokens) {
+                        CallAPI(name, body, complete, fail, cancellationToken);
+                    }
+                    else {
+                        SignOut();
+                        fail(httpResponseCode, httpResponseBody);
+                    }
+                    });
+            }
+            else {
+                SignOut();
+                fail(httpResponseCode, httpResponseBody);
+            }
+        }
+        else {
+            SignOut();
+            fail(httpResponseCode, httpResponseBody);
+        }
+    });
+}
+
+void RGNCore::CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail) {
+    CallAPI(name, body, complete, fail, CancellationToken());
 }
 
 string RGNCore::GetApiUrl() {
