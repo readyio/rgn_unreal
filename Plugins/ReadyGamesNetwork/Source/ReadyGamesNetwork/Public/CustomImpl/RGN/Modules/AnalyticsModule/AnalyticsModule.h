@@ -24,7 +24,7 @@ namespace RGN { namespace Modules { namespace Analytics {
                 bodyJson["userPseudoId"] = RGNAnalytics::GetAnalyticsId();
                 bodyJson["sessionId"] = RGNAnalytics::GetSessionId();
                 bodyJson["eventParameters"] = eventParameters;
-                RGNCore::CallAPI("achievements-getByAppIds", bodyJson, nullptr, nullptr);
+                RGNCore::CallAPI("achievements-getByAppIds", bodyJson, complete, nullptr);
             };
 	};
 }}}

@@ -26,11 +26,10 @@ private:
     static string GetApiUrl();
     static string GetOAuthUrl();
 
+    static void InternalCallAPI(string name, string body, const function<void(string)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken);
     static void LoadAuthSession();
     static void SaveAuthSession();
-
     static void NotifyAuthChange();
-
     static void OnDeepLink(string payload);
 
 public:
@@ -52,38 +51,128 @@ public:
     static string GetUserToken();
     static string GetAppId();
     static string GetStorageBucket();
-
-    static void CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken);
-    static void CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail);
-    
-    template<class TRequestBody, class TResponse>
-    static void CallAPI(string name, TRequestBody body, const function<void(TResponse)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken) {
-        json bodyJson = body;
-        CallAPI(name, bodyJson,
-            [complete](json response) {
-                TResponse tResponse = response.template get<TResponse>();
-                complete(tResponse);
-            },
-        fail, cancellationToken);
+ 
+    /***
+    * CallAPI<string,void>
+    **/
+    static void CallAPI(string name, string body,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body, [complete](string response) {
+            complete();
+        }, fail, cancellationToken);
     }
-
-    template<class TRequestBody, class TResponse>
-    static void CallAPI(string name, TRequestBody body, const function<void(TResponse)>& complete, const function<void(int, string)> fail) {
-        CallAPI<TRequestBody, TResponse>(name, body, complete, fail, CancellationToken());
+    static void CallAPI(string name, string body,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI(name, body, complete, fail, CancellationToken());
     }
-
+    /***
+    * CallAPI<json,void>
+    **/
+    static void CallAPI(string name, json body,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body.dump(), [complete](string response) {
+            complete();
+            }, fail, cancellationToken);
+    }
+    static void CallAPI(string name, json body,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI(name, body, complete, fail, CancellationToken());
+    }
+    /*** 
+    * CallAPI<string,string>
+    **/
+    static void CallAPI(string name, string body,
+        const function<void(string)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body, complete, fail, cancellationToken);
+    }
+    static void CallAPI(string name, string body,
+        const function<void(string)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI(name, body, complete, fail, CancellationToken());
+    }
+    /***
+    * CallAPI<json,json>
+    **/
+    static void CallAPI(string name, json body,
+        const function<void(json)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body.dump(), [complete](string response) {
+            complete(json::parse(response));
+        }, fail, cancellationToken);
+    }
+    static void CallAPI(string name, json body,
+        const function<void(json)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI(name, body, complete, fail, CancellationToken());
+    }
+    /***
+    * CallAPI<string,json>
+    **/
+    static void CallAPI(string name, string body,
+        const function<void(json)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body, [complete](string response) {
+            complete(json::parse(response));
+            }, fail, cancellationToken);
+    }
+    static void CallAPI(string name, string body,
+        const function<void(json)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI(name, body, complete, fail, CancellationToken());
+    }
+    /***
+    * CallAPI<json,string>
+    **/
+    static void CallAPI(string name, json body,
+        const function<void(string)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body.dump(), complete, fail, cancellationToken);
+    }
+    static void CallAPI(string name, json body,
+        const function<void(string)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI(name, body, complete, fail, CancellationToken());
+    }
+    /***
+    * CallAPI<CustomModel,void>
+    **/
     template<class TRequestBody>
-    static void CallAPI(string name, TRequestBody body, const function<void(void)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken) {
+    static void CallAPI(string name, TRequestBody body,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
         json bodyJson = body;
-        CallAPI(name, bodyJson,
-            [complete](json response) {
-                complete();
-            },
-        fail, cancellationToken);
+        InternalCallAPI(name, bodyJson.dump(), [complete](string response) {
+            complete();
+        }, fail, cancellationToken);
     }
-
     template<class TRequestBody>
-    static void CallAPI(string name, TRequestBody body, const function<void(void)>& complete, const function<void(int, string)> fail) {
+    static void CallAPI(string name, TRequestBody body,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail) {
         CallAPI<TRequestBody>(name, body, complete, fail, CancellationToken());
+    }
+    /***
+    * CallAPI<CustomModel,CustomModel>
+    **/
+    template<class TRequestBody, class TResponse>
+    static void CallAPI(string name, TRequestBody body,
+        const function<void(TResponse)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        json bodyJson = body;
+        InternalCallAPI(name, bodyJson.dump(), [complete](string response) {
+            json responseJson = json::parse(response);
+            complete(responseJson.template get<TResponse>());
+        }, fail, cancellationToken);
+    }
+    template<class TRequestBody, class TResponse>
+    static void CallAPI(string name, TRequestBody body,
+        const function<void(TResponse)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI<TRequestBody, TResponse>(name, body, complete, fail, CancellationToken());
     }
 };

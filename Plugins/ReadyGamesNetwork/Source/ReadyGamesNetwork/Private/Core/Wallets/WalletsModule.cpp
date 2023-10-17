@@ -2,6 +2,7 @@
 #include "Core/RGNCore.h"
 #include "Generated/RGN/Model/Request/BaseMigrationRequestData.h"
 #include "Generated/RGN/Modules/Wallets/CreateWalletRequestData.h"
+#include "Logging/StructuredLog.h"
 
 using BaseMigrationRequestData = RGN::Model::Request::BaseMigrationRequestData;
 using CreateWalletRequest = RGN::Modules::Wallets::CreateWalletRequestData;
@@ -11,7 +12,7 @@ void WalletsModule::IsUserHavePrimaryWalletAsync(
     const function<void(int, string)>& fail) {
         BaseMigrationRequestData request;
         request.version = 2;
-        RGNCore::CallAPI("wallets-isUserHavePrimaryWallet", request, complete, fail);
+        RGNCore::CallAPI<BaseMigrationRequestData, IsUserHavePrimaryWalletResponseData>("wallets-isUserHavePrimaryWallet", request, complete, fail);
     }
 
 void WalletsModule::CreateWallet(const string& password,
@@ -20,7 +21,7 @@ void WalletsModule::CreateWallet(const string& password,
         CreateWalletRequest request;
         request.version = 2;
         request.password = password;
-        RGNCore::CallAPI("wallets-createWallet", request, complete, fail);
+        RGNCore::CallAPI<CreateWalletRequest, CreateWalletResponseData>("wallets-createWallet", request, complete, fail);
     }
 
 void WalletsModule::GetUserWallets(
@@ -28,5 +29,5 @@ void WalletsModule::GetUserWallets(
     const function<void(int, string)>& fail) {
         BaseMigrationRequestData request;
         request.version = 2;
-        RGNCore::CallAPI("wallets-getUserWallets", request, complete, fail);
+        RGNCore::CallAPI<BaseMigrationRequestData, GetUserWalletsResponseData>("wallets-getUserWallets", request, complete, fail);
     }

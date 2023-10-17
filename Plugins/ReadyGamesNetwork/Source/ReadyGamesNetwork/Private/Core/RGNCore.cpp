@@ -52,13 +52,13 @@ void RGNCore::DevSignIn(string email, string password) {
     requestBody["returnSecureToken"] = true;
 
     RGNCore::CallAPI("user-signInWithEmailPassword", requestBody,
-        [](json response) {
+        function<void(json)>([](json response) {
             _userId = response.at("userId");
             _idToken = response.at("idToken");
             _refreshToken = response.at("refreshToken");
             SaveAuthSession();
             NotifyAuthChange();
-        }, nullptr);
+        }), nullptr);
 }
 
 void RGNCore::SignIn() {
@@ -86,7 +86,7 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
     requestBody["refreshToken"] = _refreshToken;
 
     RGNCore::CallAPI("user-refreshTokens", requestBody,
-        [callback](json response) {
+        function<void(json)>([callback](json response) {
             _userId = response.at("userId");
             _idToken = response.at("idToken");
             _refreshToken = response.at("refreshToken");
@@ -97,7 +97,7 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
             if (callback) {
                 callback(true);
             }
-        },
+        }),
         [callback](int code, string message) {
             if (callback) {
                 callback(false);
@@ -134,14 +134,40 @@ string RGNCore::GetStorageBucket() {
     return "";
 }
 
-void RGNCore::CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail, CancellationToken cancellationToken) {
+string RGNCore::GetApiUrl() {
+    switch (_environmentTarget) {
+        case RGNEnvironmentTarget::DEVELOPMENT:
+            return "https://us-central1-readymaster-development.cloudfunctions.net/";
+        case RGNEnvironmentTarget::STAGING:
+            return "https://us-central1-readysandbox.cloudfunctions.net/";
+        case RGNEnvironmentTarget::PRODUCTION:
+            return "https://us-central1-readymaster-2b268.cloudfunctions.net/";
+    }
+    return "";
+}
+
+string RGNCore::GetOAuthUrl() {
+    switch (_environmentTarget) {
+        case RGNEnvironmentTarget::DEVELOPMENT:
+            return "https://development-oauth.ready.gg/?url_redirect=";
+        case RGNEnvironmentTarget::STAGING:
+            return "https://staging-oauth.ready.gg/?url_redirect=";
+        case RGNEnvironmentTarget::PRODUCTION:
+            return "https://oauth.ready.gg/?url_redirect=";
+    }
+    return "";
+}
+
+void RGNCore::InternalCallAPI(string name, string body,
+    const function<void(string)>& complete,
+    const function<void(int, string)> fail, CancellationToken cancellationToken) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
     if (!_idToken.empty()) {
         headers.add("Authorization", "Bearer " + _idToken);
     }
     string url = GetApiUrl() + name;
-    Http::Request(url, HttpMethod::POST, headers, body.dump(), [name, body, complete, fail, cancellationToken](HttpResponse httpResponse) {
+    Http::Request(url, HttpMethod::POST, headers, body, [name, body, complete, fail, cancellationToken](HttpResponse httpResponse) {
         if (cancellationToken.isCancellationRequested()) {
             return;
         }
@@ -150,10 +176,7 @@ void RGNCore::CallAPI(string name, json body, const function<void(json)>& comple
         string httpResponseBody = httpResponse.getResponseBody();
 
         if (httpResponseCode == 200) {
-            json response = json::parse(httpResponseBody);
-            if (complete) {
-                complete(response);
-            }
+            complete(httpResponseBody);
         }
         else if (httpResponseCode == 401) {
             if (_refreshToken != "") {
@@ -163,7 +186,7 @@ void RGNCore::CallAPI(string name, json body, const function<void(json)>& comple
                     }
 
                     if (successRefreshTokens) {
-                        CallAPI(name, body, complete, fail, cancellationToken);
+                        InternalCallAPI(name, body, complete, fail, cancellationToken);
                     }
                     else {
                         SignOut();
@@ -187,34 +210,6 @@ void RGNCore::CallAPI(string name, json body, const function<void(json)>& comple
             }
         }
     });
-}
-
-void RGNCore::CallAPI(string name, json body, const function<void(json)>& complete, const function<void(int, string)> fail) {
-    CallAPI(name, body, complete, fail, CancellationToken());
-}
-
-string RGNCore::GetApiUrl() {
-    switch (_environmentTarget) {
-        case RGNEnvironmentTarget::DEVELOPMENT:
-            return "https://us-central1-readymaster-development.cloudfunctions.net/";
-        case RGNEnvironmentTarget::STAGING:
-            return "https://us-central1-readysandbox.cloudfunctions.net/";
-        case RGNEnvironmentTarget::PRODUCTION:
-            return "https://us-central1-readymaster-2b268.cloudfunctions.net/";
-    }
-    return "";
-}
-
-string RGNCore::GetOAuthUrl() {
-    switch (_environmentTarget) {
-        case RGNEnvironmentTarget::DEVELOPMENT:
-            return "https://development-oauth.ready.gg/?url_redirect=";
-        case RGNEnvironmentTarget::STAGING:
-            return "https://staging-oauth.ready.gg/?url_redirect=";
-        case RGNEnvironmentTarget::PRODUCTION:
-            return "https://oauth.ready.gg/?url_redirect=";
-    }
-    return "";
 }
 
 void RGNCore::LoadAuthSession() {

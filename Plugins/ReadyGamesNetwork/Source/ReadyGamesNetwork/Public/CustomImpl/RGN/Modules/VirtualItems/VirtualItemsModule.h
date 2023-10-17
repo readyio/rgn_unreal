@@ -29,7 +29,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["virtualItemId"] = virtualItemId;
                 bodyJson["byteArray"] = thumbnailTextureBytes;
-                RGNCore::CallAPI("virtualItemsV2-uploadThumbnail", bodyJson, [complete](auto response) {
+                RGNCore::CallAPI("virtualItemsV2-uploadThumbnail", bodyJson, [complete]() {
                     complete(true);
                 }, fail, cancellationToken);
             };
@@ -92,7 +92,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     materialTextureJson["byteArray"] = materialTextureBytes;
                     bodyJson["texturesInfos"].push_back(materialTextureBytes);
                 }
-                RGNCore::CallAPI("virtualItemsV2-uploadTextures", bodyJson, [complete](auto response) {
+                RGNCore::CallAPI("virtualItemsV2-uploadTextures", bodyJson, [complete]() {
                     complete(true);
                 }, fail, cancellationToken);
             };
