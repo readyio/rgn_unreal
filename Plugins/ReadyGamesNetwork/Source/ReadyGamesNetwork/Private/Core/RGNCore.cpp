@@ -52,13 +52,13 @@ void RGNCore::DevSignIn(string email, string password) {
     requestBody["returnSecureToken"] = true;
 
     RGNCore::CallAPI("user-signInWithEmailPassword", requestBody,
-        function<void(json)>([](json response) {
+        [](json response) {
             _userId = response.at("userId");
             _idToken = response.at("idToken");
             _refreshToken = response.at("refreshToken");
             SaveAuthSession();
             NotifyAuthChange();
-        }), nullptr);
+        }, nullptr);
 }
 
 void RGNCore::SignIn() {
@@ -86,7 +86,7 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
     requestBody["refreshToken"] = _refreshToken;
 
     RGNCore::CallAPI("user-refreshTokens", requestBody,
-        function<void(json)>([callback](json response) {
+        [callback](json response) {
             _userId = response.at("userId");
             _idToken = response.at("idToken");
             _refreshToken = response.at("refreshToken");
@@ -97,7 +97,7 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
             if (callback) {
                 callback(true);
             }
-        }),
+        },
         [callback](int code, string message) {
             if (callback) {
                 callback(false);
