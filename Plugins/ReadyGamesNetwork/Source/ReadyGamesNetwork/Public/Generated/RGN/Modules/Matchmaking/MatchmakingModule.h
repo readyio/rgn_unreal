@@ -20,7 +20,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI("matchmaking-getJoinOpenMatches", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-getJoinOpenMatches",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetVoteOpenMatchesAsync(
             int32_t limit,
@@ -32,7 +36,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI("matchmaking-getVoteOpenMatches", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-getVoteOpenMatches",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetFinishedMatchesAsync(
             int32_t limit,
@@ -44,7 +52,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI("matchmaking-getFinishedMatches", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-getFinishedMatches",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetFinishedMatchByIdAsync(
             string matchId,
@@ -54,7 +66,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["matchId"] = matchId;
-                RGNCore::CallAPI("matchmaking-getFinishedMatchById", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-getFinishedMatchById",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void CreateMatchAsync(
             RGN::Modules::Matchmaking::MatchmakingData matchConfig,
@@ -68,7 +84,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["matchConfig"] = matchConfig;
                 requestData["participateInOnCreate"] = participateInOnCreate;
                 requestData["participatePayload"] = participatePayload;
-                RGNCore::CallAPI("matchmaking-createMatch", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-createMatch",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void ParticipateInMatchAsync(
             string matchId,
@@ -80,7 +100,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
                 requestData["participantPayload"] = participantPayload;
-                RGNCore::CallAPI("matchmaking-participateInMatch", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-participateInMatch",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void StartMatchAsync(
             string matchId,
@@ -90,7 +114,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
-                RGNCore::CallAPI("matchmaking-startMatch", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-startMatch",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void VoteForMatchAsync(
             string matchId,
@@ -102,7 +130,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
                 requestData["participantId"] = participantId;
-                RGNCore::CallAPI("matchmaking-voteForMatch", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-voteForMatch",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SubmitMatchScoreAsync(
             string matchId,
@@ -114,7 +146,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
                 requestData["score"] = score;
-                RGNCore::CallAPI("matchmaking-submitMatchScore", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-submitMatchScore",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void FinishMatchAsync(
             string matchId,
@@ -124,7 +160,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
-                RGNCore::CallAPI("matchmaking-finishMatch", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-finishMatch",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

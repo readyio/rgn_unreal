@@ -16,7 +16,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIdToRemoveTheMatchesFor"] = appIdToRemoveTheMatchesFor;
-                RGNCore::CallAPI("matchmaking-deleteAllMatchesForApp", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "matchmaking-deleteAllMatchesForApp",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

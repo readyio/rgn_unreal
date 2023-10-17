@@ -17,7 +17,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = achievementData;
-                RGNCore::CallAPI("achievements-add", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-add",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void UpdateAchievementAsync(
             RGN::Modules::Achievement::AchievementData achievementData,
@@ -26,7 +30,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = achievementData;
-                RGNCore::CallAPI("achievements-update", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-update",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteAchievementAsync(
             string achievementId,
@@ -35,7 +43,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = achievementId;
-                RGNCore::CallAPI("achievements-delete", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-delete",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddLoginDaysInRowAchievementAsync(
             string achievementId,
@@ -45,7 +57,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;
-                RGNCore::CallAPI("achievements-addLoginDaysInRowAchievement", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-addLoginDaysInRowAchievement",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddLoginDaysInRowAchievementAsync(
             RGN::Modules::Achievement::AchievementData achievementData,
@@ -54,8 +70,12 @@ namespace RGN { namespace Modules { namespace Achievement {
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
-                requestData["achievementId"] = achievementId;
-                RGNCore::CallAPI("achievements-addLoginDaysInRowAchievement", requestData, complete, fail);
+                requestData["achievementData"] = achievementData;
+                RGNCore::CallAPI(
+                    "achievements-addLoginDaysInRowAchievement",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteLoginDaysInRowGameConstRecordAsync(
             string achievementId,
@@ -65,7 +85,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;
-                RGNCore::CallAPI("achievements-deleteLoginDaysInRowGameConstRecord", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-deleteLoginDaysInRowGameConstRecord",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddPlayerProgressAchievementAsync(
             string achievementId,
@@ -78,7 +102,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["achievementId"] = achievementId;
                 requestData["playerProgressFieldName"] = playerProgressFieldName;
                 requestData["playerProgressFieldValueToReach"] = playerProgressFieldValueToReach;
-                RGNCore::CallAPI("achievements-addPlayerProgressAchievement", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-addPlayerProgressAchievement",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddPlayerProgressAchievementAsync(
             RGN::Modules::Achievement::AchievementData achievementData,
@@ -88,10 +116,14 @@ namespace RGN { namespace Modules { namespace Achievement {
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
-                requestData["achievementId"] = achievementId;
+                requestData["achievementData"] = achievementData;
                 requestData["playerProgressFieldName"] = playerProgressFieldName;
                 requestData["playerProgressFieldValueToReach"] = playerProgressFieldValueToReach;
-                RGNCore::CallAPI("achievements-addPlayerProgressAchievement", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-addPlayerProgressAchievement",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeletePlayerProgressAchievementAsync(
             string achievementId,
@@ -104,7 +136,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["achievementId"] = achievementId;
                 requestData["playerProgressFieldName"] = playerProgressFieldName;
                 requestData["playerProgressFieldValueToReach"] = playerProgressFieldValueToReach;
-                RGNCore::CallAPI("achievements-deletePlayerProgressGameConstRecord", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-deletePlayerProgressGameConstRecord",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

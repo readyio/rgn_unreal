@@ -22,7 +22,11 @@ namespace RGN { namespace Modules { namespace Analytics {
                 requestData["userPseudoId"] = userPseudoId;
                 requestData["sessionId"] = mSessionId;
                 requestData["eventParameters"] = eventParameters;
-                RGNCore::CallAPI("analytics-logEvent", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "analytics-logEvent",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

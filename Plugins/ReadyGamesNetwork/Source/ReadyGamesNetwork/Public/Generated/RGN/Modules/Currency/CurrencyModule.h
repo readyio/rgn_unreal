@@ -40,7 +40,11 @@ namespace RGN { namespace Modules { namespace Currency {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["currencies"] = currencies;
                 requestData["version"] = 3;
-                RGNCore::CallAPI("currency-addUserCurrencies", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "currency-addUserCurrencies",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

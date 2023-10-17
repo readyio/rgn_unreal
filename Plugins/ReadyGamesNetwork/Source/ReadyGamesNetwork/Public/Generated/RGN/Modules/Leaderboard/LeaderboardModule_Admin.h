@@ -17,7 +17,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
-                RGNCore::CallAPI("leaderboardV2-add", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-add",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void UpdateLeaderboardAsync(
             RGN::Modules::Leaderboard::LeaderboardData leaderboardData,
@@ -26,7 +30,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
-                RGNCore::CallAPI("leaderboardV2-update", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-update",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteLeaderboardAsync(
             string leaderboardId,
@@ -35,7 +43,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = leaderboardId;
-                RGNCore::CallAPI("leaderboardV2-delete", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "leaderboardV2-delete",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

@@ -20,7 +20,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
-                RGNCore::CallAPI("achievements-getByIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-getByIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByAppIdsAsync(
             vector<string> appIds,
@@ -33,7 +37,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["appIds"] = appIds;
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI("achievements-getByAppIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-getByAppIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetForCurrentAppAsync(
             int32_t limit,
@@ -54,7 +62,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
                 requestData["withHistory"] = withHistory;
-                RGNCore::CallAPI("achievements-getByAppIds", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-getByAppIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetForCurrentAppWithUserDataAsync(
             int32_t limit,
@@ -69,7 +81,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestName"] = requestName;
-                RGNCore::CallAPI("achievements-getByRequestName", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-getByRequestName",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByRequestNamesAsync(
             vector<string> requestNames,
@@ -78,7 +94,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestNames"] = requestNames;
-                RGNCore::CallAPI("achievements-getByRequestNames", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-getByRequestNames",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void TriggerByIdAsync(
             string id,
@@ -113,7 +133,11 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["userId"] = String;
                 requestData["startAfter"] = Int64;
                 requestData["limit"] = Int32;
-                RGNCore::CallAPI("achievements-getUserAchievements", requestData, complete, fail);
+                RGNCore::CallAPI(
+                    "achievements-getUserAchievements",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}
