@@ -20,7 +20,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchesResponseData>(
                     "matchmaking-getJoinOpenMatches",
                     requestData,
                     complete,
@@ -36,7 +36,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchesResponseData>(
                     "matchmaking-getVoteOpenMatches",
                     requestData,
                     complete,
@@ -52,7 +52,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchesResponseData>(
                     "matchmaking-getFinishedMatches",
                     requestData,
                     complete,
@@ -66,7 +66,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["matchId"] = matchId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchResponseData>(
                     "matchmaking-getFinishedMatchById",
                     requestData,
                     complete,
@@ -84,7 +84,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["matchConfig"] = matchConfig;
                 requestData["participateInOnCreate"] = participateInOnCreate;
                 requestData["participatePayload"] = participatePayload;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchResponseData>(
                     "matchmaking-createMatch",
                     requestData,
                     complete,
@@ -100,7 +100,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
                 requestData["participantPayload"] = participantPayload;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-participateInMatch",
                     requestData,
                     complete,
@@ -114,7 +114,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-startMatch",
                     requestData,
                     complete,
@@ -130,7 +130,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
                 requestData["participantId"] = participantId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-voteForMatch",
                     requestData,
                     complete,
@@ -146,7 +146,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
                 requestData["score"] = score;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-submitMatchScore",
                     requestData,
                     complete,
@@ -160,7 +160,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-finishMatch",
                     requestData,
                     complete,

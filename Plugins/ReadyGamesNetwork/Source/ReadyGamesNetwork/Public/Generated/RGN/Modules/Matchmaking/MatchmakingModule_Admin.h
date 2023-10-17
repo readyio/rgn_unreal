@@ -16,7 +16,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIdToRemoveTheMatchesFor"] = appIdToRemoveTheMatchesFor;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "matchmaking-deleteAllMatchesForApp",
                     requestData,
                     complete,

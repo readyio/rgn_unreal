@@ -18,7 +18,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = id;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::LeaderboardData>(
                     "leaderboardV2-getById",
                     requestData,
                     complete,
@@ -31,7 +31,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestName"] = requestName;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::LeaderboardData>(
                     "leaderboardV2-getByRequestName",
                     requestData,
                     complete,
@@ -44,7 +44,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestNames"] = requestNames;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardsResponse>(
                     "leaderboardV2-getByRequestNames",
                     requestData,
                     complete,
@@ -55,7 +55,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData>(
                     "leaderboardV2-getIds",
                     requestData,
                     complete,
@@ -72,7 +72,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 requestData["leaderboardId"] = leaderboardId;
                 requestData["score"] = score;
                 requestData["extraData"] = extraData;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::SetScoreResponseData>(
                     "leaderboardV2-setScore",
                     requestData,
                     complete,
@@ -89,7 +89,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 requestData["leaderboardId"] = leaderboardId;
                 requestData["score"] = score;
                 requestData["extraData"] = extraData;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::SetScoreResponseData>(
                     "leaderboardV2-addScore",
                     requestData,
                     complete,
@@ -102,7 +102,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::LeaderboardEntry>(
                     "leaderboardV2-getUserEntry",
                     requestData,
                     complete,
@@ -121,7 +121,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 requestData["includeUser"] = includeUser;
                 requestData["quantityAroundUser"] = quantityAroundUser;
                 requestData["quantityTop"] = quantityTop;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData>(
                     "leaderboardV2-getEntries",
                     requestData,
                     complete,

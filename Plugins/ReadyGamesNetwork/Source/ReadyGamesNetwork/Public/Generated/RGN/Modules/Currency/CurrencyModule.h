@@ -40,7 +40,7 @@ namespace RGN { namespace Modules { namespace Currency {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["currencies"] = currencies;
                 requestData["version"] = 3;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Currency::AddUserCurrenciesResponseData>(
                     "currency-addUserCurrencies",
                     requestData,
                     complete,

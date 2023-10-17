@@ -27,7 +27,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["currencies"] = currencies;
                 requestData["offerId"] = offerId;
                 requestData["version"] = 2;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyVirtualItemsResponse>(
                     "storeV2-buyVirtualItems",
                     requestData,
                     complete,
@@ -43,7 +43,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["offerId"] = offerId;
                 requestData["currencies"] = currencies;
                 requestData["version"] = 2;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyStoreOfferResponse>(
                     "storeV2-buyStoreOffer",
                     requestData,
                     complete,
@@ -56,7 +56,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
                     "storeV2-getLootBoxesByIds",
                     requestData,
                     complete,
@@ -72,7 +72,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = appId;
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
                     "storeV2-getLootBoxesByAppId",
                     requestData,
                     complete,
@@ -91,7 +91,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::LootboxIsAvailableResponse>(
                     "storeV2-lootBoxIsAvailable",
                     requestData,
                     complete,
@@ -104,7 +104,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::LootboxIsAvailableResponse>(
                     "storeV2-lootBoxIsAvailable",
                     requestData,
                     complete,
@@ -117,7 +117,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["name"] = name;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::PurchaseItem>(
                     "storeV2-openLootBox",
                     requestData,
                     complete,
@@ -140,7 +140,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["description"] = description;
                 requestData["tags"] = tags;
                 requestData["quantity"] = quantity;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::StoreOffer>(
                     "storeV2-addVirtualItemsStoreOffer",
                     requestData,
                     complete,
@@ -157,7 +157,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["userId"] = userId;
                 requestData["csvUtf8String"] = content;
                 requestData["delimiter"] = delimiter;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::ImportStoreOffersFromCSVResponse>(
                     "storeV2-importStoreOffersFromCSV",
                     requestData,
                     complete,
@@ -174,7 +174,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["tags"] = tags;
                 requestData["optionalAppId"] = appId;
                 requestData["ignoreTimestamp"] = ignoreTimestamp;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTags",
                     requestData,
                     complete,
@@ -188,7 +188,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["timestamp"] = new DateTimeOffset(timestamp).ToUnixTimeMilliseconds();
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTimestamp",
                     requestData,
                     complete,
@@ -207,7 +207,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
                 requestData["ignoreTimestamp"] = ignoreTimestamp;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByAppIds",
                     requestData,
                     complete,
@@ -240,7 +240,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
                 requestData["ignoreTimestamp"] = ignoreTimestamp;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse>(
                     "storeV2-getWithVirtualItemsDataByAppIds",
                     requestData,
                     complete,
@@ -253,7 +253,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ids"] = ids;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByIds",
                     requestData,
                     complete,
@@ -266,7 +266,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOfferTagsResponse>(
                     "storeV2-getTags",
                     requestData,
                     complete,
@@ -283,7 +283,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["offerId"] = offerId;
                 requestData["tags"] = tags;
                 requestData["optionalAppId"] = appId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-setTags",
                     requestData,
                     complete,
@@ -298,7 +298,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["name"] = name;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-setName",
                     requestData,
                     complete,
@@ -313,7 +313,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["description"] = description;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-setDescription",
                     requestData,
                     complete,
@@ -340,7 +340,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 requestData["imageUrl"] = imageUrl;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-setImageUrl",
                     requestData,
                     complete,
@@ -353,7 +353,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "storeV2-getProperties",
                     requestData,
                     complete,
@@ -368,7 +368,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
                 requestData["json"] = json;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "storeV2-setProperties",
                     requestData,
                     complete,

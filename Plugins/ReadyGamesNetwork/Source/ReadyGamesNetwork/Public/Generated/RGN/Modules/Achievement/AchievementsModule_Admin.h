@@ -43,7 +43,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = achievementId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "achievements-delete",
                     requestData,
                     complete,
@@ -57,7 +57,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "achievements-addLoginDaysInRowAchievement",
                     requestData,
                     complete,
@@ -71,7 +71,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementData"] = achievementData;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "achievements-addLoginDaysInRowAchievement",
                     requestData,
                     complete,
@@ -85,7 +85,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "achievements-deleteLoginDaysInRowGameConstRecord",
                     requestData,
                     complete,
@@ -102,7 +102,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["achievementId"] = achievementId;
                 requestData["playerProgressFieldName"] = playerProgressFieldName;
                 requestData["playerProgressFieldValueToReach"] = playerProgressFieldValueToReach;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "achievements-addPlayerProgressAchievement",
                     requestData,
                     complete,
@@ -119,7 +119,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["achievementData"] = achievementData;
                 requestData["playerProgressFieldName"] = playerProgressFieldName;
                 requestData["playerProgressFieldValueToReach"] = playerProgressFieldValueToReach;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "achievements-addPlayerProgressAchievement",
                     requestData,
                     complete,
@@ -136,7 +136,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 requestData["achievementId"] = achievementId;
                 requestData["playerProgressFieldName"] = playerProgressFieldName;
                 requestData["playerProgressFieldValueToReach"] = playerProgressFieldValueToReach;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "achievements-deletePlayerProgressGameConstRecord",
                     requestData,
                     complete,

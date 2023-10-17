@@ -43,7 +43,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = leaderboardId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "leaderboardV2-delete",
                     requestData,
                     complete,

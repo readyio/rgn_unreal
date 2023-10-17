@@ -47,7 +47,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-deleteStoreOffer",
                     requestData,
                     complete,

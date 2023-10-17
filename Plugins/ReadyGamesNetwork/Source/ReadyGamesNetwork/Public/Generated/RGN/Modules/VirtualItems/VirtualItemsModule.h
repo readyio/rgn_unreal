@@ -49,7 +49,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["itemId"] = itemId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-deleteVirtualItem",
                     requestData,
                     complete,
@@ -79,7 +79,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["tags"] = tags;
                 requestData["optionalAppId"] = appId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByTags",
                     requestData,
                     complete,
@@ -93,7 +93,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::GetVirtualItemTagsResponse>(
                     "virtualItemsV2-getTags",
                     requestData,
                     complete,
@@ -110,7 +110,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["tags"] = tags;
                 requestData["optionalAppId"] = appId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-setTags",
                     requestData,
                     complete,
@@ -125,7 +125,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["name"] = name;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-setName",
                     requestData,
                     complete,
@@ -140,7 +140,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["description"] = description;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-setDescription",
                     requestData,
                     complete,

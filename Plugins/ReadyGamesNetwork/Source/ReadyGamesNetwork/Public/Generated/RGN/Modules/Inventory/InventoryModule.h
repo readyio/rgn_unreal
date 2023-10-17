@@ -50,7 +50,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["userId"] = userId;
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["quantity"] = quantity;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData>(
                     "inventoryV2-removeByVirtualItemId",
                     requestData,
                     complete,
@@ -67,7 +67,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["userId"] = userId;
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["quantity"] = quantity;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::RemoveByOwnedIdResponseData>(
                     "inventoryV2-removeByInventoryItemId",
                     requestData,
                     complete,
@@ -219,7 +219,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appIds"] = appIds;
                 requestData["startAfter"] = startAfter;
                 requestData["limit"] = limit;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData>(
                     "inventoryV2-getWithVirtualItemsDataByAppIds",
                     requestData,
                     complete,
