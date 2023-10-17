@@ -3,7 +3,11 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "LeaderboardData.h"
+#include "GetLeaderboardsResponse.h"
+#include "GetLeaderboardIdsResponseData.h"
+#include "SetScoreResponseData.h"
 #include "LeaderboardEntry.h"
+#include "GetLeaderboardEntriesResponseData.h"
 #include <string>
 #include <functional>
 using namespace std;

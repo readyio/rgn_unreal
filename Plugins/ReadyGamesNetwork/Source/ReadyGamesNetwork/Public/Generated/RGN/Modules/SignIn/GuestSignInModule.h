@@ -11,8 +11,10 @@ namespace RGN { namespace Modules { namespace SignIn {
         static void TryToSignInAsync(
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void SignOut() {
+                // Request parameters are null
             };
     };
 }}}

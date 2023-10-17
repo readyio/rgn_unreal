@@ -4,9 +4,15 @@
 #include "../../../../Core/RGNCore.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "UserData.h"
+#include "GetUserProfileRequestData.h"
+#include "SearchUsersRequestData.h"
 #include "../Currency/Currency.h"
+#include "GetUserIdByShortUIDRequestData.h"
+#include "UpdateUserProfileRequestData.h"
 #include "../../Model/ImageSize.h"
+#include "SetInvisibleStatusRequestData.h"
 #include "GetUserStatusResponseData.h"
+#include "GetUserStatusRequestData.h"
 #include <string>
 #include <functional>
 using namespace std;
@@ -17,34 +23,66 @@ namespace RGN { namespace Modules { namespace UserProfile {
         static void GetProfileAsync(
             const function<void(RGN::Modules::UserProfile::UserData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetProfileAsync(
             string userId,
             const function<void(RGN::Modules::UserProfile::UserData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::UserProfile::UserData>(
+                    "",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetFullUserProfileAsync(
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetFullUserProfileAsync(
             string userId,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, TFullProfileData>(
+                    "",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SearchUsersAsync(
             string nicknameQuery,
             const function<void(vector<RGN::Modules::UserProfile::UserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::UserProfile::SearchUsersRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, List<UserData>>(
+                    "user-searchUsers",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetUserCurrenciesAsync(
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Model::Request::BaseRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, List<Currency::Currency>>(
+                    "user-getUserCurrenciesV2",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetUserIdByShortUIDAsync(
             string shortUID,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, string>(
+                    "user-getUserIdByShortUID",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetDisplayNameAsync(
             string displayName,
@@ -77,6 +115,12 @@ namespace RGN { namespace Modules { namespace UserProfile {
             string bio,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, string>(
+                    "user-updateProfile",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void UploadAvatarImageAsync(
             vector<uint8_t> bytes,
@@ -98,6 +142,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             CancellationToken cancellationToken,
             const function<void(vector<uint8_t> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void ChangeAdminStatusByEmailAsync(
             string email,
@@ -159,19 +204,38 @@ namespace RGN { namespace Modules { namespace UserProfile {
             bool invisibleStatus,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::UserProfile::SetInvisibleStatusRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json>(
+                    "userStatuses-setInvisibleStatus",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void PingAsync(
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Model::Request::BaseRequestData requestData;
+                RGNCore::CallAPI(
+                    "userStatuses-ping",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SuspendAsync(
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetUserStateAsync(
             string userId,
             const function<void(RGN::Modules::UserProfile::GetUserStatusResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::UserProfile::GetUserStatusRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::UserProfile::GetUserStatusResponseData>(
+                    "userStatuses-getUserState",
+                    requestData,
+                    complete,
+                    fail);
             };
     };
 }}}

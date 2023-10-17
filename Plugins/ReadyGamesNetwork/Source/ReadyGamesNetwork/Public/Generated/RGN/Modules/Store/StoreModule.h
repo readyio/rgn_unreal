@@ -2,12 +2,23 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "BuyVirtualItemsResponse.h"
 #include "PurchaseResult.h"
+#include "BuyStoreOfferResponse.h"
+#include "GetLootBoxesResponse.h"
 #include "LootBox.h"
+#include "LootboxIsAvailableResponse.h"
+#include "PurchaseItem.h"
 #include "../Inventory/InventoryItemData.h"
 #include "StoreOffer.h"
+#include "ImportStoreOffersFromCSVResponse.h"
+#include "GetStoreOffersResponse.h"
+#include "GetStoreOffersWithVirtualItemsDataResponse.h"
+#include "GetStoreOfferTagsResponse.h"
 #include "../VirtualItems/PriceInfo.h"
+#include "SetPricesRequestData.h"
 #include "TimeInfo.h"
+#include "SetTimeRequestData.h"
 #include <string>
 #include <functional>
 using namespace std;
@@ -83,6 +94,7 @@ namespace RGN { namespace Modules { namespace Store {
             string startAfter,
             const function<void(vector<RGN::Modules::Store::LootBox> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void LootboxIsAvailableAsync(
             string name,
@@ -219,6 +231,7 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             int32_t limit,
@@ -226,6 +239,7 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetWithVirtualItemsDataByAppIdsAsync(
             vector<string> appIds,
@@ -324,12 +338,24 @@ namespace RGN { namespace Modules { namespace Store {
             vector<RGN::Modules::VirtualItems::PriceInfo> prices,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Store::SetPricesRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json>(
+                    "storeV2-setPrices",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetTimeAsync(
             string offerId,
             RGN::Modules::Store::TimeInfo time,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Store::SetTimeRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json>(
+                    "storeV2-setTime",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void SetImageUrlAsync(
             string offerId,

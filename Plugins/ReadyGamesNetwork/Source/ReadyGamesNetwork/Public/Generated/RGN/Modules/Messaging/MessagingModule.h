@@ -12,10 +12,12 @@ namespace RGN { namespace Modules { namespace Messaging {
         static void Subscribe(
             string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
+                // Request parameters are null
             };
         static void Unsubscribe(
             string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
+                // Request parameters are null
             };
         static void SendMessageByUserId(
             string appId,

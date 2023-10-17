@@ -6,11 +6,13 @@
 #include "../VirtualItems/Properties.h"
 #include "AddToInventoryResponseData.h"
 #include "InventoryItemData.h"
+#include "AddVirtualItemToUserInventoryRequestData.h"
 #include "RemoveByVirtualItemIdResponseData.h"
 #include "RemoveByOwnedIdResponseData.h"
 #include "UpgradesResponseData.h"
 #include "../Currency/Currency.h"
 #include "VirtualItemUpgrade.h"
+#include "InventoryItemsWithVirtualItemsData.h"
 #include <string>
 #include <functional>
 using namespace std;
@@ -24,6 +26,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             RGN::Modules::VirtualItems::Properties properties,
             const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void AddToInventoryAsync(
             string userId,
@@ -32,12 +35,19 @@ namespace RGN { namespace Modules { namespace Inventory {
             RGN::Modules::VirtualItems::Properties properties,
             const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void AddToInventoryAsync(
             string userId,
             RGN::Modules::Inventory::InventoryItemData inventoryData,
             const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::AddToInventoryResponseData>(
+                    "",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void RemoveByVirtualItemIdAsync(
             string userId,
@@ -208,6 +218,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             int32_t limit,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetWithVirtualItemsDataByAppIdsAsync(
             vector<string> appIds,
@@ -226,8 +237,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string json) {
+                // Request parameters are null
             };
         static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(string json) {
+                // Request parameters are null
             };
         static void GetByTagsAsync(
             vector<string> tags,

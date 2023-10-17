@@ -2,9 +2,16 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "GetAchievementsResponse.h"
 #include "AchievementData.h"
+#include "GetAchievementsWithUserDataResponse.h"
 #include "AchievementWithUserData.h"
 #include "TriggerAndClaimResponse.h"
+#include "TriggerByIdRequestData.h"
+#include "TriggerByRequestNameRequestData.h"
+#include "ClaimByIdRequestData.h"
+#include "ClaimByRequestNameRequestData.h"
+#include "GetUserAchievementsResponse.h"
 #include "UserAchievement.h"
 #include <string>
 #include <functional>
@@ -48,6 +55,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             string startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetByAppIdsWithUserDataAsync(
             vector<string> appIds,
@@ -73,6 +81,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             string startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                // Request parameters are null
             };
         static void GetByRequestNameAsync(
             string requestName,
@@ -105,22 +114,46 @@ namespace RGN { namespace Modules { namespace Achievement {
             int32_t progress,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Achievement::TriggerByIdRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                    "achievements-triggerById",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void TriggerByRequestNameAsync(
             string requestName,
             int32_t progress,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Achievement::TriggerByRequestNameRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                    "achievements-triggerByRequestName",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void ClaimByIdAsync(
             string achievementId,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Achievement::ClaimByIdRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                    "achievements-claimById",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void ClaimByRequestNameAsync(
             string requestName,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Achievement::ClaimByRequestNameRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                    "achievements-claimByRequestName",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetUserAchievementsAsync(
             string userId,

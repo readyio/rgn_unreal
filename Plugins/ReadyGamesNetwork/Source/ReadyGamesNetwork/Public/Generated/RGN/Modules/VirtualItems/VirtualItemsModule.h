@@ -5,6 +5,13 @@
 #include "../../../../CustomImpl/RGN/Modules/VirtualItems/VirtualItemsModule.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "VirtualItem.h"
+#include "AddVirtualItemResponseData.h"
+#include "AddToVirtualItemsRequestData.h"
+#include "UpdateVirtualItemsRequestData.h"
+#include "VirtualItemsResponseData.h"
+#include "GetAllVirtualItemsByAppIdsRequestData.h"
+#include "GetVirtualItemsByIdsRequestData.h"
+#include "GetVirtualItemTagsResponse.h"
 #include "../../Model/ImageSize.h"
 #include <string>
 #include <functional>
@@ -17,6 +24,12 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             RGN::Modules::VirtualItems::VirtualItem virtualItem,
             const function<void(RGN::Modules::VirtualItems::VirtualItem result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::VirtualItems::AddToVirtualItemsRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
+                    "virtualItemsV2-add",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void AddFromCSVAsync(
             string virtualItemName,
@@ -41,6 +54,12 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             RGN::Modules::VirtualItems::VirtualItem virtualItem,
             const function<void(RGN::Modules::VirtualItems::VirtualItem result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::VirtualItems::UpdateVirtualItemsRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
+                    "virtualItemsV2-update",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void DeleteVirtualItemAsync(
             string itemId,
@@ -58,17 +77,35 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void GetVirtualItemsAsync(
             const function<void(vector<RGN::Modules::VirtualItems::VirtualItem> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Model::Request::BaseMigrationRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
+                    "virtualItemsV2-getByAppId",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetVirtualItemsAsync(
             int32_t limit,
             string startAfter,
             const function<void(vector<RGN::Modules::VirtualItems::VirtualItem> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
+                    "virtualItemsV2-getByAppId",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetVirtualItemsByIdsAsync(
             vector<string> virtualItemsIds,
             const function<void(vector<RGN::Modules::VirtualItems::VirtualItem> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::VirtualItems::GetVirtualItemsByIdsRequestData requestData;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
+                    "virtualItemsV2-getByIds",
+                    requestData,
+                    complete,
+                    fail);
             };
         static void GetByTagsAsync(
             vector<string> tags,
