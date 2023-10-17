@@ -32,6 +32,10 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseRGNCoinRequestData requestData;
+                requestData.iapUUID = iapUUID;
+                requestData.requestId = System.Guid.NewGuid().ToString("N");
+                requestData.iapTransactionId = iapTransactionId;
+                requestData.iapReceipt = iapReceipt;
                 RGNCore::CallAPI(
                     "currency-purchaseRGNCoinV2",
                     requestData,

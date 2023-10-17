@@ -211,6 +211,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SetInvisibleStatusRequestData requestData;
+                requestData.invisibleStatus = invisibleStatus;
                 RGNCore::CallAPI<nlohmann::json>(
                     "userStatuses-setInvisibleStatus",
                     requestData,
@@ -237,6 +238,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(RGN::Modules::UserProfile::GetUserStatusResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserStatusRequestData requestData;
+                requestData.userId = userId;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::UserProfile::GetUserStatusResponseData>(
                     "userStatuses-getUserState",
                     requestData,
