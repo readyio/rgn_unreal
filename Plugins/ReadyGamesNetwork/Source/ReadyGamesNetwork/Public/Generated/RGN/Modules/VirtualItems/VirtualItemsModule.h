@@ -105,7 +105,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData.limit = limit;
                 requestData.startAfter = startAfter;
                 RGNCore::CallAPI<RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
-                    "virtualItemsV2-getByAppId",
+                    "virtualItemsV2-getByAppIds",
                     requestData,
                     [complete] (RGN::Modules::VirtualItems::VirtualItemsResponseData result) {
                         complete(result.virtualItems);

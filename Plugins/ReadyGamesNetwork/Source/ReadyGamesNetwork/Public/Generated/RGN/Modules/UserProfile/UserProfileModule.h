@@ -34,7 +34,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
                 requestData.userId = userId;
                 RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserProfileRequestData, RGN::Modules::UserProfile::UserData>(
-                    "",
+                    "user-getProfile",
                     requestData,
                     complete,
                     fail);
@@ -51,7 +51,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
                 requestData.userId = userId;
                 RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserProfileRequestData, string>(
-                    "",
+                    "user-getFullProfile",
                     requestData,
                     [complete] (string result) {
                         complete(getFullProfile.CallAsync<GetUserProfileRequestData, TFullProfileData>(new GetUserProfileRequestData() {
