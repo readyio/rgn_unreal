@@ -7,7 +7,7 @@ std::string RGNAnalytics::_analyticsId = "";
 std::string RGNAnalytics::_sessionId = "";
 
 void RGNAnalytics::GenerateSessionId() {
-    _sessionId = random::generate_uuid_v4();
+    _sessionId = RGN::Random::generate_uuid_v4();
 }
 
 void RGNAnalytics::LoadOrGenerateAnalyticsId() {
@@ -18,7 +18,7 @@ void RGNAnalytics::LoadOrGenerateAnalyticsId() {
             _analyticsId = analyticsInfoJson["analyticsId"].get<std::string>();
         }
         else {
-            _analyticsId = random::generate_uuid_v4();
+            _analyticsId = RGN::Random::generate_uuid_v4();
             analyticsInfoJson["analyticsId"] = _analyticsId;
             SharedPrefs::Save("AnalyticsInfo", analyticsInfoJson.dump());
         }

@@ -51,7 +51,7 @@ void RGNCore::DevSignIn(string email, string password) {
     requestBody["appId"] = _appId;
     requestBody["returnSecureToken"] = true;
 
-    RGNCore::CallAPI("user-signInWithEmailPassword", requestBody,
+    RGNCore::CallAPI<json, json>("user-signInWithEmailPassword", requestBody,
         [](json response) {
             _userId = response.at("userId");
             _idToken = response.at("idToken");
@@ -85,7 +85,7 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
     requestBody["appPackageName"] = _appId;
     requestBody["refreshToken"] = _refreshToken;
 
-    RGNCore::CallAPI("user-refreshTokens", requestBody,
+    RGNCore::CallAPI<json, json>("user-refreshTokens", requestBody,
         [callback](json response) {
             _userId = response.at("userId");
             _idToken = response.at("idToken");

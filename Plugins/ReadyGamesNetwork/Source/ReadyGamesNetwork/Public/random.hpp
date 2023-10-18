@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-namespace random {
+namespace RGN { namespace Random {
     static std::random_device              rd;
     static std::mt19937                    gen(rd());
     static std::uniform_int_distribution<> dis(0, 15);
@@ -35,4 +35,4 @@ namespace random {
         };
         return ss.str();
     }
-}
+}}
