@@ -101,7 +101,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const function<void(vector<RGN::Modules::VirtualItems::VirtualItem> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData requestData;
-                requestData.appIds = new List<string> { _rgnCore.AppIDForRequests };
+                requestData.appIds = vector<string>{ RGNCore::GetAppId() };
                 requestData.limit = limit;
                 requestData.startAfter = startAfter;
                 RGNCore::CallAPI<RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
