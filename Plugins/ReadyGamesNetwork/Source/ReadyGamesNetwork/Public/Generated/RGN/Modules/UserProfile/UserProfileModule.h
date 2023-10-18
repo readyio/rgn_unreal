@@ -49,10 +49,14 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
                 requestData.userId = userId;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(getFullProfile.CallAsync<GetUserProfileRequestData, TFullProfileData>(new GetUserProfileRequestData() {
+                userId = userId
+            }));
+                    },
                     fail);
             };
         static void SearchUsersAsync(
@@ -61,20 +65,24 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SearchUsersRequestData requestData;
                 requestData.nicknameQuery = nicknameQuery;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, vector<RGN::Modules::UserProfile::UserData>>(
                     "user-searchUsers",
                     requestData,
-                    complete,
+                    [complete] (vector<RGN::Modules::UserProfile::UserData> result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void GetUserCurrenciesAsync(
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, vector<RGN::Modules::Currency::Currency>>(
                     "user-getUserCurrenciesV2",
                     requestData,
-                    complete,
+                    [complete] (vector<RGN::Modules::Currency::Currency> result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void GetUserIdByShortUIDAsync(
@@ -83,10 +91,12 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData requestData;
                 requestData.shortUID = shortUID;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "user-getUserIdByShortUID",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void SetDisplayNameAsync(
@@ -99,7 +109,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-updateDisplayName",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["displayName"] as string);
+                    },
                     fail);
             };
         static void SetBioAsync(
@@ -112,7 +124,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-updateBio",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["bio"] as string);
+                    },
                     fail);
             };
         static void SetDisplayNameAndBioAsync(
@@ -123,10 +137,13 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
                 requestData.displayName = displayName;
                 requestData.bio = bio;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "user-updateProfile",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(function.CallAsync<UpdateUserProfileRequestData, string>(
+                new UpdateUserProfileRequestData() { displayName = displayName, bio = bio }));
+                    },
                     fail);
             };
         static void UploadAvatarImageAsync(
@@ -140,7 +157,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-uploadProfilePicture",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(true);
+                    },
                     fail);
             };
         static void DownloadAvatarImageAsync(
@@ -164,7 +183,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-changeAdminStatusByEmail",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void ChangeAdminStatusByUserIdAsync(
@@ -180,7 +201,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-changeAdminStatusByUserId",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void GetUserCustomClaimsByUserIdAsync(
@@ -192,7 +215,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-getUserCustomClaimsByUserId",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void GetUserCustomClaimsByEmailAsync(
@@ -204,7 +229,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-getUserCustomClaimsByEmail",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void SetInvisibleStatusAsync(

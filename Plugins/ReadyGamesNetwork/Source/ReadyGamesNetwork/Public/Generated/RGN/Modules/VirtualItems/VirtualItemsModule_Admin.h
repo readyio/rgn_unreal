@@ -63,7 +63,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI(
                     "virtualItemsV2-addFromCSV",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["newVirtualItemIds"]);
+                    },
                     fail);
             };
     };

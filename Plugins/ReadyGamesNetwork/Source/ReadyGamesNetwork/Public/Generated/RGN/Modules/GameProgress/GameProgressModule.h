@@ -41,10 +41,12 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::AddUserLevelRequestData<T> requestData;
                 requestData.playerProgress = userProgressJson;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "game-addPlayerProgress",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void UpdateUserProgressAsync(
@@ -55,20 +57,24 @@ namespace RGN { namespace Modules { namespace GameProgress {
                 RGN::Modules::GameProgress::UpdateUserLevelRequestData<T> requestData;
                 requestData.playerProgress = userProgressJson;
                 requestData.reward = reward;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "game-updatePlayerProgress",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void GetUserProgressAsync(
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "game-getPlayerProgress",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(result);
+                    },
                     fail);
             };
     };

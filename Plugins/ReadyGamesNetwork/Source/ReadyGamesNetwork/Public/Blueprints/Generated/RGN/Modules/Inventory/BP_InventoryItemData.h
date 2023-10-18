@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "BP_VirtualItemUpgrade.h"
 #include "../VirtualItems/BP_Properties.h"
+#include "../VirtualItems/BP_VirtualItem.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -91,6 +92,8 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      */
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
     TArray<FBP_Properties> properties;
+    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    FBP_VirtualItem virtualItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::InventoryItemData& source, FBP_InventoryItemData& target) {
 		target.id = FString(source.id.c_str());
@@ -119,6 +122,7 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
 			FBP_Properties::ConvertToUnrealModel(source_properties_item, b_source_properties_item);
 			target.properties.Add(b_source_properties_item);
 		}
+		FBP_VirtualItem::ConvertToUnrealModel(source.virtualItem, target.virtualItem);
 	}
 
 	static void ConvertToCoreModel(const FBP_InventoryItemData& source, RGN::Modules::Inventory::InventoryItemData& target) {
@@ -148,5 +152,6 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
 			FBP_Properties::ConvertToCoreModel(source_properties_item, cpp_source_properties_item);
 			target.properties.push_back(cpp_source_properties_item);
 		}
+		FBP_VirtualItem::ConvertToCoreModel(source.virtualItem, target.virtualItem);
 	}
 };

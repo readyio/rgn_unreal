@@ -41,7 +41,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyVirtualItemsResponse>(
                     "storeV2-buyVirtualItems",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::BuyVirtualItemsResponse result) {
                         complete(purchaseResult);
                     },
                     fail);
@@ -59,7 +59,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyStoreOfferResponse>(
                     "storeV2-buyStoreOffer",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::BuyStoreOfferResponse result) {
                         complete(purchaseResult);
                     },
                     fail);
@@ -74,7 +74,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
                     "storeV2-getLootBoxesByIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetLootBoxesResponse result) {
                         complete(result.lootBoxes);
                     },
                     fail);
@@ -92,7 +92,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
                     "storeV2-getLootBoxesByAppId",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetLootBoxesResponse result) {
                         complete(result.lootBoxes);
                     },
                     fail);
@@ -114,7 +114,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::LootboxIsAvailableResponse>(
                     "storeV2-lootBoxIsAvailable",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::LootboxIsAvailableResponse result) {
                         complete(result.isAvailable);
                     },
                     fail);
@@ -129,7 +129,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::LootboxIsAvailableResponse>(
                     "storeV2-lootBoxIsAvailable",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::LootboxIsAvailableResponse result) {
                         complete(result.count);
                     },
                     fail);
@@ -144,7 +144,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::PurchaseItem>(
                     "storeV2-openLootBox",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::PurchaseItem result) {
                         complete(new InventoryItemData(result.inventoryItem, result.virtualItem));
                     },
                     fail);
@@ -186,7 +186,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::ImportStoreOffersFromCSVResponse>(
                     "storeV2-importStoreOffersFromCSV",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::ImportStoreOffersFromCSVResponse result) {
                         complete(importedOffers);
                     },
                     fail);
@@ -205,7 +205,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTags",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetStoreOffersResponse result) {
                         complete(queriedOffers);
                     },
                     fail);
@@ -221,7 +221,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTimestamp",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetStoreOffersResponse result) {
                         complete(queriedOffers);
                     },
                     fail);
@@ -242,7 +242,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByAppIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetStoreOffersResponse result) {
                         complete(queriedOffers);
                     },
                     fail);
@@ -279,7 +279,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse>(
                     "storeV2-getWithVirtualItemsDataByAppIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse result) {
                         complete(queriedOffers);
                     },
                     fail);
@@ -294,7 +294,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetStoreOffersResponse result) {
                         complete(result.offers);
                     },
                     fail);
@@ -309,7 +309,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOfferTagsResponse>(
                     "storeV2-getTags",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Store::GetStoreOfferTagsResponse result) {
                         complete(result.tags);
                     },
                     fail);
@@ -407,10 +407,12 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "storeV2-getProperties",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void SetPropertiesAsync(
@@ -422,10 +424,12 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
                 requestData["json"] = json;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, string>(
                     "storeV2-setProperties",
                     requestData,
-                    complete,
+                    [complete] (string result) {
+                        complete(result);
+                    },
                     fail);
             };
     };

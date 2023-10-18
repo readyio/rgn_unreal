@@ -96,7 +96,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getProperties",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["properties"]);
+                    },
                     fail);
             };
         static void SetPropertiesAsync(
@@ -112,7 +114,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-setProperties",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["properties"]);
+                    },
                     fail);
             };
         static void GetUpgradesAsync(
@@ -126,7 +130,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getUpgrades",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["upgrades"]);
+                    },
                     fail);
             };
         static void UpgradeAsync(
@@ -146,7 +152,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-upgrade",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["upgrades"]);
+                    },
                     fail);
             };
         static void GetByIdAsync(
@@ -160,7 +168,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getById",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["inventoryItem"]);
+                    },
                     fail);
             };
         static void GetByIdsAsync(
@@ -174,7 +184,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getByIds",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["inventoryItems"]);
+                    },
                     fail);
             };
         static void GetByVirtualItemIdsAsync(
@@ -187,7 +199,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getByVirtualItemIds",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["inventoryItems"]);
+                    },
                     fail);
             };
         static void GetAllForCurrentAppAsync(
@@ -199,7 +213,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getByAppId",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["inventoryItems"]);
+                    },
                     fail);
             };
         static void GetByAppIdsAsync(
@@ -212,7 +228,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getByAppIds",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["inventoryItems"]);
+                    },
                     fail);
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
@@ -235,7 +253,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData>(
                     "inventoryV2-getWithVirtualItemsDataByAppIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData result) {
                         complete(PopulateInventoryDataWithVirtualItemsDeepCopy(result, jsonDependency));
                     },
                     fail);
@@ -258,7 +276,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getByTags",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["inventoryItems"]);
+                    },
                     fail);
             };
         static void GetTagsAsync(
@@ -272,7 +292,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-getTags",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["tags"]);
+                    },
                     fail);
             };
         static void SetTagsAsync(
@@ -289,7 +311,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI(
                     "inventoryV2-setTags",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["tags"]);
+                    },
                     fail);
             };
     };

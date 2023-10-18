@@ -24,7 +24,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI(
                     "storeV2-createLootBox",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["lootBoxId"].ToString());
+                    },
                     fail);
             };
         static void DeleteLootBoxAsync(
@@ -37,7 +39,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI(
                     "storeV2-deleteLootBox",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["lootBoxId"].ToString());
+                    },
                     fail);
             };
         static void DeleteStoreOfferAsync(

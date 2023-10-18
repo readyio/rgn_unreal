@@ -30,7 +30,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
                     "achievements-getByIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Achievement::GetAchievementsResponse result) {
                         complete(result.achievements);
                     },
                     fail);
@@ -49,7 +49,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
                     "achievements-getByAppIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Achievement::GetAchievementsResponse result) {
                         complete(result.achievements);
                     },
                     fail);
@@ -77,7 +77,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsWithUserDataResponse>(
                     "achievements-getByAppIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Achievement::GetAchievementsWithUserDataResponse result) {
                         complete(achievements);
                     },
                     fail);
@@ -112,7 +112,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
                     "achievements-getByRequestNames",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Achievement::GetAchievementsResponse result) {
                         complete(result.achievements);
                     },
                     fail);
@@ -183,7 +183,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetUserAchievementsResponse>(
                     "achievements-getUserAchievements",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Achievement::GetUserAchievementsResponse result) {
                         complete(response.userAchievements);
                     },
                     fail);

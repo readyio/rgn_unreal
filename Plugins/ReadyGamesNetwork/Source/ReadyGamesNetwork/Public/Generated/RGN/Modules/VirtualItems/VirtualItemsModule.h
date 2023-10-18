@@ -29,7 +29,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
                     "virtualItemsV2-add",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::VirtualItems::AddVirtualItemResponseData result) {
                         complete(result.virtualItem);
                     },
                     fail);
@@ -49,7 +49,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI(
                     "virtualItemsV2-addFromCSV",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["newVirtualItemIds"]);
+                    },
                     fail);
             };
         static void UpdateVirtualItemAsync(
@@ -63,7 +65,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
                     "virtualItemsV2-update",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::VirtualItems::AddVirtualItemResponseData result) {
                         complete(result.virtualItem);
                     },
                     fail);
@@ -88,7 +90,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByAppId",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::VirtualItems::VirtualItemsResponseData result) {
                         complete(result.virtualItems);
                     },
                     fail);
@@ -105,7 +107,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByAppId",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::VirtualItems::VirtualItemsResponseData result) {
                         complete(result.virtualItems);
                     },
                     fail);
@@ -119,7 +121,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByIds",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::VirtualItems::VirtualItemsResponseData result) {
                         complete(result.virtualItems);
                     },
                     fail);
@@ -136,8 +138,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByTags",
                     requestData,
-                    [complete] (auto result) {
-                        complete(virtualItems);
+                    [complete] (RGN::Modules::VirtualItems::VirtualItemsResponseData result) {
+                        complete(result.virtualItems);
                     },
                     fail);
             };
@@ -152,7 +154,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::GetVirtualItemTagsResponse>(
                     "virtualItemsV2-getTags",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::VirtualItems::GetVirtualItemTagsResponse result) {
                         complete(result.tags);
                     },
                     fail);
@@ -215,7 +217,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI(
                     "virtualItemsV2-getProperties",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["properties"]);
+                    },
                     fail);
             };
         static void SetPropertiesAsync(
@@ -231,7 +235,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI(
                     "virtualItemsV2-setProperties",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["properties"]);
+                    },
                     fail);
             };
         static void UploadImageAsync(

@@ -4,6 +4,7 @@
 #include "BP_TimeInfo.h"
 #include "../VirtualItems/BP_Properties.h"
 #include "../VirtualItems/BP_PriceInfo.h"
+#include "../VirtualItems/BP_VirtualItem.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -107,6 +108,8 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
      */
     UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
     TArray<FBP_PriceInfo> prices;
+    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    TArray<FBP_VirtualItem> virtualItems;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::StoreOffer& source, FBP_StoreOffer& target) {
 		target.id = FString(source.id.c_str());
@@ -142,6 +145,11 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
 			FBP_PriceInfo b_source_prices_item;
 			FBP_PriceInfo::ConvertToUnrealModel(source_prices_item, b_source_prices_item);
 			target.prices.Add(b_source_prices_item);
+		}
+		for (const auto& source_virtualItems_item : source.virtualItems) {
+			FBP_VirtualItem b_source_virtualItems_item;
+			FBP_VirtualItem::ConvertToUnrealModel(source_virtualItems_item, b_source_virtualItems_item);
+			target.virtualItems.Add(b_source_virtualItems_item);
 		}
 	}
 
@@ -179,6 +187,11 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
 			RGN::Modules::VirtualItems::PriceInfo cpp_source_prices_item;
 			FBP_PriceInfo::ConvertToCoreModel(source_prices_item, cpp_source_prices_item);
 			target.prices.push_back(cpp_source_prices_item);
+		}
+		for (const auto& source_virtualItems_item : source.virtualItems) {
+			RGN::Modules::VirtualItems::VirtualItem cpp_source_virtualItems_item;
+			FBP_VirtualItem::ConvertToCoreModel(source_virtualItems_item, cpp_source_virtualItems_item);
+			target.virtualItems.push_back(cpp_source_virtualItems_item);
 		}
 	}
 };

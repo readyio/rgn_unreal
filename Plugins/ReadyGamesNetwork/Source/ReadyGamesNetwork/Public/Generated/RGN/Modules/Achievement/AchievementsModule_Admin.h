@@ -20,7 +20,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI(
                     "achievements-add",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["result"]["id"]);
+                    },
                     fail);
             };
         static void UpdateAchievementAsync(
@@ -33,7 +35,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI(
                     "achievements-update",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["result"]["id"]);
+                    },
                     fail);
             };
         static void DeleteAchievementAsync(

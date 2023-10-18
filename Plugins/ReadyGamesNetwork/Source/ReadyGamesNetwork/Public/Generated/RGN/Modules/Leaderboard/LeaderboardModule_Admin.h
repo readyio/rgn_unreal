@@ -20,7 +20,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI(
                     "leaderboardV2-add",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["result"]["leaderboardId"]);
+                    },
                     fail);
             };
         static void UpdateLeaderboardAsync(
@@ -33,7 +35,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI(
                     "leaderboardV2-update",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["result"]["leaderboardId"]);
+                    },
                     fail);
             };
         static void DeleteLeaderboardAsync(

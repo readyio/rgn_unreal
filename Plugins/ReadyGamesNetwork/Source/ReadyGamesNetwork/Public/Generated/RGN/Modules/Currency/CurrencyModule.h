@@ -41,7 +41,9 @@ namespace RGN { namespace Modules { namespace Currency {
                 RGNCore::CallAPI(
                     "currency-purchaseRGNCoinV2",
                     requestData,
-                    complete,
+                    [complete] (nlohmann::json result) {
+                        complete(result["userCurrencies"]);
+                    },
                     fail);
             };
         static void GetInAppPurchaseCurrencyDataAsync(
@@ -60,10 +62,12 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseCurrencyProductRequestData requestData;
                 requestData.productId = productId;
-                RGNCore::CallAPI<nlohmann::json, null>(
+                RGNCore::CallAPI<nlohmann::json, vector<RGN::Modules::Currency::Currency>>(
                     "currency-purchaseProduct",
                     requestData,
-                    complete,
+                    [complete] (vector<RGN::Modules::Currency::Currency> result) {
+                        complete(result);
+                    },
                     fail);
             };
         static void AddUserCurrenciesAsync(
@@ -77,7 +81,7 @@ namespace RGN { namespace Modules { namespace Currency {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Currency::AddUserCurrenciesResponseData>(
                     "currency-addUserCurrencies",
                     requestData,
-                    [complete] (auto result) {
+                    [complete] (RGN::Modules::Currency::AddUserCurrenciesResponseData result) {
                         complete(result.userCurrencies);
                     },
                     fail);
