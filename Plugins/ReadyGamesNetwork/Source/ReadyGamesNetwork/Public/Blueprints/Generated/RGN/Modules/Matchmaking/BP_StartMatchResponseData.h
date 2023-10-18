@@ -1,10 +1,10 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Matchmaking/StartMatchResponseData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Matchmaking/StartMatchResponseData.h"
 #include "BP_StartMatchResponseData.generated.h"
 
 USTRUCT(BlueprintType)

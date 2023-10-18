@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardData.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardReward.h"
 #include "BP_LeaderboardReward.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardData.h"
 #include "BP_LeaderboardData.generated.h"
 
 /**

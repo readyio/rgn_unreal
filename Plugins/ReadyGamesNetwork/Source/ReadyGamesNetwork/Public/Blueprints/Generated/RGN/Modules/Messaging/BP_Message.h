@@ -1,10 +1,10 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Messaging/Message.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Messaging/Message.h"
 #include "BP_Message.generated.h"
 
 /**

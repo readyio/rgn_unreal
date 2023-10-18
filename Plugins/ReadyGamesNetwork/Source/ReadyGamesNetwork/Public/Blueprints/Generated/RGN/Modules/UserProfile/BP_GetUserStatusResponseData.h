@@ -1,12 +1,14 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/UserProfile/GetUserStatusResponseData.h"
+#include "../../../../../Generated/RGN/Modules/UserProfile/UserStatus.h"
 #include "BP_UserStatus.h"
+#include "../../../../../Generated/RGN/Model/Response/BaseResponseData.h"
 #include "../../Model/Response/BP_BaseResponseData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/UserProfile/GetUserStatusResponseData.h"
 #include "BP_GetUserStatusResponseData.generated.h"
 
 USTRUCT(BlueprintType)

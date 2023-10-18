@@ -1,12 +1,14 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Store/BuyStoreOfferResponse.h"
+#include "../../../../../Generated/RGN/Modules/Store/PurchaseItem.h"
 #include "BP_PurchaseItem.h"
+#include "../../../../../Generated/RGN/Modules/Currency/Currency.h"
 #include "../Currency/BP_Currency.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Store/BuyStoreOfferResponse.h"
 #include "BP_BuyStoreOfferResponse.generated.h"
 
 USTRUCT(BlueprintType)

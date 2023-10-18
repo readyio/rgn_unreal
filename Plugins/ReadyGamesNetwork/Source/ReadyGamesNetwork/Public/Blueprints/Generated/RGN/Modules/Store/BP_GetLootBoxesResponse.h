@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Store/GetLootBoxesResponse.h"
+#include "../../../../../Generated/RGN/Modules/Store/LootBox.h"
 #include "BP_LootBox.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Store/GetLootBoxesResponse.h"
 #include "BP_GetLootBoxesResponse.generated.h"
 
 USTRUCT(BlueprintType)

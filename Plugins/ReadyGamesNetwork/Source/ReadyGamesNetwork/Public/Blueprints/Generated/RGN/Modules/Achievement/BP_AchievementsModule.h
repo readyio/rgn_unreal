@@ -17,18 +17,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FAchievementsModuleFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetByIdsAsyncResponse, const TArray<FBP_AchievementData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetByAppIdsAsyncResponse, const TArray<FBP_AchievementData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetForCurrentAppAsyncResponse, const TArray<FBP_AchievementData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetByAppIdsWithUserDataAsyncResponse, const TArray<FBP_AchievementWithUserData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetForCurrentAppWithUserDataAsyncResponse, const TArray<FBP_AchievementWithUserData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetByRequestNameAsyncResponse, const FBP_AchievementData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetByRequestNamesAsyncResponse, const TArray<FBP_AchievementData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FTriggerByIdAsyncResponse, const FBP_TriggerAndClaimResponse&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FTriggerByRequestNameAsyncResponse, const FBP_TriggerAndClaimResponse&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FClaimByIdAsyncResponse, const FBP_TriggerAndClaimResponse&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FClaimByRequestNameAsyncResponse, const FBP_TriggerAndClaimResponse&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetUserAchievementsAsyncResponse, const TArray<FBP_UserAchievement>&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_AchievementsModule : public UBlueprintFunctionLibrary {

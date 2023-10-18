@@ -14,11 +14,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FCurrencyModuleFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetRGNCoinEconomyAsyncResponse, const FBP_RGNCoinEconomy&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FPurchaseRGNCoinAsyncResponse, const TArray<FBP_Currency>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetInAppPurchaseCurrencyDataAsyncResponse, const FBP_CurrencyProductsData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FPurchaseCurrencyProductAsyncResponse, const TArray<FBP_Currency>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FAddUserCurrenciesAsyncResponse, const TArray<FBP_Currency>&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_CurrencyModule : public UBlueprintFunctionLibrary {

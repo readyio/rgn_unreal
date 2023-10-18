@@ -1,10 +1,10 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/GameProgress/GameProgress.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/GameProgress/GameProgress.h"
 #include "BP_GameProgress.generated.h"
 
 USTRUCT(BlueprintType)

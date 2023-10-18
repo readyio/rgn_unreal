@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Model/Request/RefreshTokensRequestData.h"
+#include "../../../../../Generated/RGN/Model/Request/BaseRequestData.h"
 #include "BP_BaseRequestData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Model/Request/RefreshTokensRequestData.h"
 #include "BP_RefreshTokensRequestData.generated.h"
 
 USTRUCT(BlueprintType)

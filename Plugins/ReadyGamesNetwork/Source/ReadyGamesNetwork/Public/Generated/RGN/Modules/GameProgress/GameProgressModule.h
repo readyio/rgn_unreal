@@ -8,6 +8,8 @@
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "AddUserLevelRequestData.h"
 #include "UpdateUserLevelRequestData.h"
+#include "UpdateUserLevelResponseData.h"
+#include "GetPlayerLevelResponseData.h"
 #include <string>
 #include <functional>
 using namespace std;

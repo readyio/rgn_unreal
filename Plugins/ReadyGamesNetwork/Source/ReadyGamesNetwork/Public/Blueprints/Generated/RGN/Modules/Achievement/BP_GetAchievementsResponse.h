@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/GetAchievementsResponse.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/AchievementData.h"
 #include "BP_AchievementData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Achievement/GetAchievementsResponse.h"
 #include "BP_GetAchievementsResponse.generated.h"
 
 USTRUCT(BlueprintType)

@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Store/ImportStoreOffersFromCSVResponse.h"
+#include "../../../../../Generated/RGN/Modules/Store/StoreOffer.h"
 #include "BP_StoreOffer.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Store/ImportStoreOffersFromCSVResponse.h"
 #include "BP_ImportStoreOffersFromCSVResponse.generated.h"
 
 USTRUCT(BlueprintType)

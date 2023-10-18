@@ -1,16 +1,22 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItemImage.h"
 #include "BP_VirtualItemImage.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/AddressableInfo.h"
 #include "BP_AddressableInfo.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/Properties.h"
 #include "BP_Properties.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/PriceInfo.h"
 #include "BP_PriceInfo.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/BlockchainInfo.h"
 #include "BP_BlockchainInfo.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/MaterialInfo.h"
 #include "BP_MaterialInfo.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
 #include "BP_VirtualItem.generated.h"
 
 USTRUCT(BlueprintType)

@@ -7,15 +7,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FAchievementsModule_AdminFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FAddAchievementAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FUpdateAchievementAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE(FDeleteAchievementAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FAddLoginDaysInRowAchievementAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FAddLoginDaysInRowAchievementAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FDeleteLoginDaysInRowGameConstRecordAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FAddPlayerProgressAchievementAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FAddPlayerProgressAchievementAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FDeletePlayerProgressAchievementAsyncResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_AchievementsModule_Admin : public UBlueprintFunctionLibrary {

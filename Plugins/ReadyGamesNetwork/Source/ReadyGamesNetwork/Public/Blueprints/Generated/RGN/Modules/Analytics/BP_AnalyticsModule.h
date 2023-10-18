@@ -6,7 +6,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FAnalyticsModuleFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE(FLogEventAsyncResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_AnalyticsModule : public UBlueprintFunctionLibrary {

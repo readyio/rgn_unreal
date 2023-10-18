@@ -16,22 +16,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FVirtualItemsModuleFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FAddVirtualItemAsyncResponse, const FBP_VirtualItem&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FAddFromCSVAsyncResponse, const TArray<FString>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FUpdateVirtualItemAsyncResponse, const FBP_VirtualItem&, response);
-DECLARE_DYNAMIC_DELEGATE(FDeleteVirtualItemAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetVirtualItemsAsyncResponse, const TArray<FBP_VirtualItem>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetVirtualItemsAsyncResponse, const TArray<FBP_VirtualItem>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetVirtualItemsByIdsAsyncResponse, const TArray<FBP_VirtualItem>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetByTagsAsyncResponse, const TArray<FBP_VirtualItem>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetTagsAsyncResponse, const TArray<FString>&, response);
-DECLARE_DYNAMIC_DELEGATE(FSetTagsAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FSetNameAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FSetDescriptionAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetPropertiesAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FSetPropertiesAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FUploadImageAsyncResponse, const bool&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FDownloadImageAsyncResponse, const TArray<uint8>&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_VirtualItemsModule : public UBlueprintFunctionLibrary {

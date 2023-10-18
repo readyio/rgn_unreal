@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Currency/PurchaseRGNCoinResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Currency/Currency.h"
 #include "BP_Currency.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Currency/PurchaseRGNCoinResponseData.h"
 #include "BP_PurchaseRGNCoinResponseData.generated.h"
 
 USTRUCT(BlueprintType)

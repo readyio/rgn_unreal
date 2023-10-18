@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/CompletedAchievementHistoryEntry.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/AchievementReward.h"
 #include "BP_AchievementReward.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Achievement/CompletedAchievementHistoryEntry.h"
 #include "BP_CompletedAchievementHistoryEntry.generated.h"
 
 /**

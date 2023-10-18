@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/GameProgress/GameUserFullProfileData.h"
+#include "../../../../../Generated/RGN/Modules/UserProfile/UserProfileData.h"
 #include "../UserProfile/BP_UserProfileData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/GameProgress/GameUserFullProfileData.h"
 #include "BP_GameUserFullProfileData.generated.h"
 
 USTRUCT(BlueprintType)

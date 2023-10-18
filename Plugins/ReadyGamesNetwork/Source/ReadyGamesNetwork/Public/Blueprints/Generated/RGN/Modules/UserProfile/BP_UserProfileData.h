@@ -1,12 +1,14 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/UserProfile/UserProfileData.h"
+#include "../../../../../Generated/RGN/Modules/Currency/Currency.h"
 #include "../Currency/BP_Currency.h"
+#include "../../../../../Generated/RGN/Modules/UserProfile/UserData.h"
 #include "BP_UserData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/UserProfile/UserProfileData.h"
 #include "BP_UserProfileData.generated.h"
 
 USTRUCT(BlueprintType)

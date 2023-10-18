@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/GetLeaderboardEntriesResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardEntry.h"
 #include "BP_LeaderboardEntry.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Leaderboard/GetLeaderboardEntriesResponseData.h"
 #include "BP_GetLeaderboardEntriesResponseData.generated.h"
 
 USTRUCT(BlueprintType)

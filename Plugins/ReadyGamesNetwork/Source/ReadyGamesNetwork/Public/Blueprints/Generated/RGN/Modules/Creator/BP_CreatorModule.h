@@ -14,10 +14,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FCreatorModuleFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FBecomeACreatorAsyncResponse, const FBP_CreatorSignupResponseData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FSubmitItemAsyncResponse, const FBP_CreatorSubmitItemResponseData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetCreatorDataAsyncResponse, const FBP_CreatorData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FClaimCurrenciesAsyncResponse, const FBP_ClaimCurrencyResponseData&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_CreatorModule : public UBlueprintFunctionLibrary {

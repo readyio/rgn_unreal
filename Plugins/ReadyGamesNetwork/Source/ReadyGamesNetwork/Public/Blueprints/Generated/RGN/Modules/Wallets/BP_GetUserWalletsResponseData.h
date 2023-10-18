@@ -1,12 +1,14 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Wallets/GetUserWalletsResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Wallets/RGNWallet.h"
 #include "BP_RGNWallet.h"
+#include "../../../../../Generated/RGN/Model/Response/BaseResponseData.h"
 #include "../../Model/Response/BP_BaseResponseData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Wallets/GetUserWalletsResponseData.h"
 #include "BP_GetUserWalletsResponseData.generated.h"
 
 USTRUCT(BlueprintType)

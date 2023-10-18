@@ -1,12 +1,14 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Store/SetPricesRequestData.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/PriceInfo.h"
 #include "../VirtualItems/BP_PriceInfo.h"
+#include "../../../../../Generated/RGN/Model/Request/BaseRequestData.h"
 #include "../../Model/Request/BP_BaseRequestData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Store/SetPricesRequestData.h"
 #include "BP_SetPricesRequestData.generated.h"
 
 USTRUCT(BlueprintType)

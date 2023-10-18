@@ -1,13 +1,16 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Inventory/InventoryItemData.h"
+#include "../../../../../Generated/RGN/Modules/Inventory/VirtualItemUpgrade.h"
 #include "BP_VirtualItemUpgrade.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/Properties.h"
 #include "../VirtualItems/BP_Properties.h"
+#include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
 #include "../VirtualItems/BP_VirtualItem.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Inventory/InventoryItemData.h"
 #include "BP_InventoryItemData.generated.h"
 
 /**

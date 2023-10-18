@@ -10,16 +10,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FMatchmakingModuleFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetJoinOpenMatchesAsyncResponse, const TArray<FBP_MatchmakingData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetVoteOpenMatchesAsyncResponse, const TArray<FBP_MatchmakingData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetFinishedMatchesAsyncResponse, const TArray<FBP_MatchmakingData>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGetFinishedMatchByIdAsyncResponse, const FBP_MatchmakingData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FCreateMatchAsyncResponse, const FBP_MatchmakingData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FParticipateInMatchAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FStartMatchAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FVoteForMatchAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FSubmitMatchScoreAsyncResponse, const FString&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FFinishMatchAsyncResponse, const FString&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_MatchmakingModule : public UBlueprintFunctionLibrary {

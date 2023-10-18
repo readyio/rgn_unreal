@@ -6,8 +6,6 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FGuestSignInModuleFailResponse, int32, code, const FString&, message);
 
-DECLARE_DYNAMIC_DELEGATE(FTryToSignInAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE(FSignOutResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_GuestSignInModule : public UBlueprintFunctionLibrary {

@@ -1,11 +1,12 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
+#include "../../../../../Generated/RGN/Modules/Inventory/UpgradesResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Inventory/VirtualItemUpgrade.h"
 #include "BP_VirtualItemUpgrade.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "../../../../../Generated/RGN/Modules/Inventory/UpgradesResponseData.h"
 #include "BP_UpgradesResponseData.generated.h"
 
 USTRUCT(BlueprintType)
