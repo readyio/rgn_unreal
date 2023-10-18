@@ -17,7 +17,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "leaderboardV2-add",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -32,7 +32,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "leaderboardV2-update",
                     requestData,
                     [complete] (nlohmann::json result) {

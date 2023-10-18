@@ -17,7 +17,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = achievementData;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "achievements-add",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -32,7 +32,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = achievementData;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "achievements-update",
                     requestData,
                     [complete] (nlohmann::json result) {

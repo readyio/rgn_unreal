@@ -7,6 +7,9 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FStoreModule_AdminFailResponse, int32, code, const FString&, message);
 
+DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleAdminCreateLootBoxAsyncResponse, const FString&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleAdminDeleteLootBoxAsyncResponse, const FString&, response);
+DECLARE_DYNAMIC_DELEGATE(FStoreModuleAdminDeleteStoreOfferAsyncResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_StoreModule_Admin : public UBlueprintFunctionLibrary {

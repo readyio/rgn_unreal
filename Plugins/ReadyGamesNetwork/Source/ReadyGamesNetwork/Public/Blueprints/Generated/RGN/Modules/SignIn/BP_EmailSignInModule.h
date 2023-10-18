@@ -6,6 +6,9 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FEmailSignInModuleFailResponse, int32, code, const FString&, message);
 
+DECLARE_DYNAMIC_DELEGATE(FEmailSignInModuleTryToSignInResponse);
+DECLARE_DYNAMIC_DELEGATE(FEmailSignInModuleSendPasswordResetEmailResponse);
+DECLARE_DYNAMIC_DELEGATE(FEmailSignInModuleSignOutResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_EmailSignInModule : public UBlueprintFunctionLibrary {

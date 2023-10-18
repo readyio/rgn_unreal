@@ -60,7 +60,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["csvFileString"] = csvContent;
                 requestData["delimiter"] = csvDelimiter;
                 requestData["addBlockchainStub"] = true;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-addFromCSV",
                     requestData,
                     [complete] (nlohmann::json result) {

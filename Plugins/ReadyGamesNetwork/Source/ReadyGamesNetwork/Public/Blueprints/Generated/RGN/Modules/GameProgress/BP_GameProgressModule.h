@@ -15,6 +15,11 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FGameProgressModuleFailResponse, int32, code, const FString&, message);
 
+DECLARE_DYNAMIC_DELEGATE_OneParam(FGameProgressModuleOnGameCompleteAsyncResponse, const FBP_OnGameCompleteResult&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FGameProgressModuleGetGameProgressAsyncResponse, const FBP_GameProgress&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FGameProgressModuleAddUserProgressAsyncResponse, const FString&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FGameProgressModuleUpdateUserProgressAsyncResponse, const FString&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FGameProgressModuleGetUserProgressAsyncResponse, const FString&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_GameProgressModule : public UBlueprintFunctionLibrary {

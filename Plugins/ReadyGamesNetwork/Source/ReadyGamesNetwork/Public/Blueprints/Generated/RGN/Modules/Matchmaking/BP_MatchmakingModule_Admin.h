@@ -6,6 +6,7 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FMatchmakingModule_AdminFailResponse, int32, code, const FString&, message);
 
+DECLARE_DYNAMIC_DELEGATE(FMatchmakingModuleAdminDeleteMatchesByAppIdAsyncResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_MatchmakingModule_Admin : public UBlueprintFunctionLibrary {

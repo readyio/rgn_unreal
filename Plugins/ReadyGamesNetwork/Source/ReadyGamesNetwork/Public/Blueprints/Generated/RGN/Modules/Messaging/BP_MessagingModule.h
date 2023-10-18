@@ -6,6 +6,9 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FMessagingModuleFailResponse, int32, code, const FString&, message);
 
+DECLARE_DYNAMIC_DELEGATE(FMessagingModuleSubscribeResponse);
+DECLARE_DYNAMIC_DELEGATE(FMessagingModuleUnsubscribeResponse);
+DECLARE_DYNAMIC_DELEGATE(FMessagingModuleSendMessageByUserIdResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_MessagingModule : public UBlueprintFunctionLibrary {

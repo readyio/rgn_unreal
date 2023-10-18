@@ -21,7 +21,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["lootBoxName"] = lootBoxName;
                 requestData["virtualItemTags"] = virtualItemTags;
                 requestData["prices"] = prices;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "storeV2-createLootBox",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -36,7 +36,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxId"] = lootBoxId;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "storeV2-deleteLootBox",
                     requestData,
                     [complete] (nlohmann::json result) {

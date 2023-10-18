@@ -11,6 +11,9 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FWalletsModuleFailResponse, int32, code, const FString&, message);
 
+DECLARE_DYNAMIC_DELEGATE_OneParam(FWalletsModuleIsUserHavePrimaryWalletAsyncResponse, const FBP_IsUserHavePrimaryWalletResponseData&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FWalletsModuleGetUserWalletsAsyncResponse, const FBP_GetUserWalletsResponseData&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FWalletsModuleCreateWalletAsyncResponse, const FBP_CreateWalletResponseData&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_WalletsModule : public UBlueprintFunctionLibrary {

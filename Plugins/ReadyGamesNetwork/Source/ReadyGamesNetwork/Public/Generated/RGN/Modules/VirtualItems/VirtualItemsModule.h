@@ -46,7 +46,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["virtualItemName"] = virtualItemName;
                 requestData["csvFileString"] = csvContent;
                 requestData["delimiter"] = csvDelimiter;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-addFromCSV",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -214,7 +214,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-getProperties",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -232,7 +232,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["json"] = json;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-setProperties",
                     requestData,
                     [complete] (nlohmann::json result) {

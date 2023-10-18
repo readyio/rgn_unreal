@@ -94,7 +94,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getProperties",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -112,7 +112,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["json"] = json;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-setProperties",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -128,7 +128,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getUpgrades",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -150,7 +150,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["upgradeId"] = upgradeId;
                 requestData["upgradePrice"] = upgradePrice;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-upgrade",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -166,7 +166,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getById",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -182,7 +182,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemIds"] = ownedItemIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByIds",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -197,7 +197,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 nlohmann::json requestData;
                 requestData["virtualItemIds"] = virtualItemIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByVirtualItemIds",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -211,7 +211,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByAppId",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -226,7 +226,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 nlohmann::json requestData;
                 requestData["appIds"] = appIds;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByAppIds",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -275,7 +275,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = appId;
                 requestData["tags"] = tags;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByTags",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -291,7 +291,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getTags",
                     requestData,
                     [complete] (nlohmann::json result) {
@@ -310,7 +310,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["tags"] = tags;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-setTags",
                     requestData,
                     [complete] (nlohmann::json result) {

@@ -39,7 +39,7 @@ namespace RGN { namespace Modules { namespace Currency {
                 requestData.requestId = RGN::Random::generate_uuid_v4();;
                 requestData.iapTransactionId = iapTransactionId;
                 requestData.iapReceipt = iapReceipt;
-                RGNCore::CallAPI(
+                RGNCore::CallAPI<RGN::Modules::Currency::PurchaseRGNCoinRequestData, nlohmann::json>(
                     "currency-purchaseRGNCoinV2",
                     requestData,
                     [complete] (nlohmann::json result) {
