@@ -6,6 +6,8 @@
 #include "OnGameCompleteRequestData.h"
 #include "GameProgress.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
+#include "AddUserLevelRequestData.h"
+#include "UpdateUserLevelRequestData.h"
 #include <string>
 #include <functional>
 using namespace std;
@@ -39,9 +41,9 @@ namespace RGN { namespace Modules { namespace GameProgress {
             string userProgressJson,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                RGN::Modules::GameProgress::AddUserLevelRequestData<T> requestData;
+                RGN::Modules::GameProgress::AddUserLevelRequestData requestData;
                 requestData.playerProgress = userProgressJson;
-                RGNCore::CallAPI<RGN::Modules::GameProgress::AddUserLevelRequestData<T>, string>(
+                RGNCore::CallAPI<RGN::Modules::GameProgress::AddUserLevelRequestData, string>(
                     "game-addPlayerProgress",
                     requestData,
                     [complete] (string result) {
@@ -54,10 +56,10 @@ namespace RGN { namespace Modules { namespace GameProgress {
             vector<RGN::Modules::Currency::Currency> reward,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                RGN::Modules::GameProgress::UpdateUserLevelRequestData<T> requestData;
+                RGN::Modules::GameProgress::UpdateUserLevelRequestData requestData;
                 requestData.playerProgress = userProgressJson;
                 requestData.reward = reward;
-                RGNCore::CallAPI<RGN::Modules::GameProgress::UpdateUserLevelRequestData<T>, string>(
+                RGNCore::CallAPI<RGN::Modules::GameProgress::UpdateUserLevelRequestData, string>(
                     "game-updatePlayerProgress",
                     requestData,
                     [complete] (string result) {
