@@ -26,7 +26,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchesResponseData>(
                     "matchmaking-getJoinOpenMatches",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matches);
+                    },
                     fail);
             };
         static void GetVoteOpenMatchesAsync(
@@ -42,7 +44,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchesResponseData>(
                     "matchmaking-getVoteOpenMatches",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matches);
+                    },
                     fail);
             };
         static void GetFinishedMatchesAsync(
@@ -58,7 +62,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchesResponseData>(
                     "matchmaking-getFinishedMatches",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matches);
+                    },
                     fail);
             };
         static void GetFinishedMatchByIdAsync(
@@ -72,7 +78,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchResponseData>(
                     "matchmaking-getFinishedMatchById",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.match);
+                    },
                     fail);
             };
         static void CreateMatchAsync(
@@ -90,7 +98,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::GetMatchResponseData>(
                     "matchmaking-createMatch",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.match);
+                    },
                     fail);
             };
         static void ParticipateInMatchAsync(
@@ -106,7 +116,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-participateInMatch",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matchId);
+                    },
                     fail);
             };
         static void StartMatchAsync(
@@ -120,7 +132,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-startMatch",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matchId);
+                    },
                     fail);
             };
         static void VoteForMatchAsync(
@@ -136,7 +150,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-voteForMatch",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matchId);
+                    },
                     fail);
             };
         static void SubmitMatchScoreAsync(
@@ -152,7 +168,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-submitMatchScore",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matchId);
+                    },
                     fail);
             };
         static void FinishMatchAsync(
@@ -166,7 +184,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Matchmaking::StartMatchResponseData>(
                     "matchmaking-finishMatch",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.matchId);
+                    },
                     fail);
             };
     };

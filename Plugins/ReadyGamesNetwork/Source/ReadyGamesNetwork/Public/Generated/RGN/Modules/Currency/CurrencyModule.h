@@ -3,9 +3,11 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "RGNCoinEconomy.h"
+#include "../../Model/Request/BaseRequestData.h"
 #include "PurchaseRGNCoinRequestData.h"
 #include "Currency.h"
 #include "CurrencyProductsData.h"
+#include "../../Model/Request/BaseMigrationRequestData.h"
 #include "PurchaseCurrencyProductRequestData.h"
 #include "AddUserCurrenciesResponseData.h"
 #include <string>
@@ -58,7 +60,7 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseCurrencyProductRequestData requestData;
                 requestData.productId = productId;
-                RGNCore::CallAPI<nlohmann::json, List<Currency>>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "currency-purchaseProduct",
                     requestData,
                     complete,
@@ -75,7 +77,9 @@ namespace RGN { namespace Modules { namespace Currency {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Currency::AddUserCurrenciesResponseData>(
                     "currency-addUserCurrencies",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.userCurrencies);
+                    },
                     fail);
             };
     };

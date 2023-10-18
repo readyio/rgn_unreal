@@ -7,6 +7,7 @@
 #include "CreatorSubmitItemResponseData.h"
 #include "CreatorSubmitItemRequestData.h"
 #include "CreatorData.h"
+#include "../../Model/Request/BaseMigrationRequestData.h"
 #include "../Currency/ClaimCurrencyResponseData.h"
 #include <string>
 #include <functional>

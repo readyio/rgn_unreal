@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "IsUserHavePrimaryWalletResponseData.h"
+#include "../../Model/Request/BaseMigrationRequestData.h"
 #include "GetUserWalletsResponseData.h"
 #include "CreateWalletResponseData.h"
 #include "CreateWalletRequestData.h"

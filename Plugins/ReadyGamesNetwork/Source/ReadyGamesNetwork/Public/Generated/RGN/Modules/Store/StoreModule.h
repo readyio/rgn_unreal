@@ -41,7 +41,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyVirtualItemsResponse>(
                     "storeV2-buyVirtualItems",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(purchaseResult);
+                    },
                     fail);
             };
         static void BuyStoreOfferAsync(
@@ -57,7 +59,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyStoreOfferResponse>(
                     "storeV2-buyStoreOffer",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(purchaseResult);
+                    },
                     fail);
             };
         static void GetLootBoxesByIdsAsync(
@@ -70,7 +74,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
                     "storeV2-getLootBoxesByIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.lootBoxes);
+                    },
                     fail);
             };
         static void GetLootBoxesByAppIdAsync(
@@ -86,7 +92,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
                     "storeV2-getLootBoxesByAppId",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.lootBoxes);
+                    },
                     fail);
             };
         static void GetLootBoxesForCurrentAppAsync(
@@ -106,7 +114,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::LootboxIsAvailableResponse>(
                     "storeV2-lootBoxIsAvailable",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.isAvailable);
+                    },
                     fail);
             };
         static void GetAvailableLootBoxItemsCountAsync(
@@ -119,7 +129,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::LootboxIsAvailableResponse>(
                     "storeV2-lootBoxIsAvailable",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.count);
+                    },
                     fail);
             };
         static void OpenLootboxAsync(
@@ -132,7 +144,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::PurchaseItem>(
                     "storeV2-openLootBox",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(new InventoryItemData(result.inventoryItem, result.virtualItem));
+                    },
                     fail);
             };
         static void AddVirtualItemsStoreOfferAsync(
@@ -172,7 +186,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::ImportStoreOffersFromCSVResponse>(
                     "storeV2-importStoreOffersFromCSV",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(importedOffers);
+                    },
                     fail);
             };
         static void GetByTagsAsync(
@@ -189,7 +205,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTags",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(queriedOffers);
+                    },
                     fail);
             };
         static void GetByTimestampAsync(
@@ -203,7 +221,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTimestamp",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(queriedOffers);
+                    },
                     fail);
             };
         static void GetByAppIdsAsync(
@@ -222,7 +242,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByAppIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(queriedOffers);
+                    },
                     fail);
             };
         static void GetForCurrentAppAsync(
@@ -257,7 +279,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse>(
                     "storeV2-getWithVirtualItemsDataByAppIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(queriedOffers);
+                    },
                     fail);
             };
         static void GetByIdsAsync(
@@ -270,7 +294,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.offers);
+                    },
                     fail);
             };
         static void GetTagsAsync(
@@ -283,7 +309,9 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOfferTagsResponse>(
                     "storeV2-getTags",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.tags);
+                    },
                     fail);
             };
         static void SetTagsAsync(
@@ -379,7 +407,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "storeV2-getProperties",
                     requestData,
                     complete,
@@ -394,7 +422,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
                 requestData["json"] = json;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "storeV2-setProperties",
                     requestData,
                     complete,

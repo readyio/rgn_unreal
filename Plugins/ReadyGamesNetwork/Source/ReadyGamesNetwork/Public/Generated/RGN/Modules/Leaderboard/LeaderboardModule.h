@@ -51,7 +51,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardsResponse>(
                     "leaderboardV2-getByRequestNames",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.Leaderboards);
+                    },
                     fail);
             };
         static void GetLeaderboardIdsAsync(
@@ -62,7 +64,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData>(
                     "leaderboardV2-getIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.ids);
+                    },
                     fail);
             };
         static void SetScoreAsync(
@@ -79,7 +83,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::SetScoreResponseData>(
                     "leaderboardV2-setScore",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.place);
+                    },
                     fail);
             };
         static void AddScoreAsync(
@@ -96,7 +102,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::SetScoreResponseData>(
                     "leaderboardV2-addScore",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.place);
+                    },
                     fail);
             };
         static void GetUserEntryAsync(
@@ -128,7 +136,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData>(
                     "leaderboardV2-getEntries",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.entries);
+                    },
                     fail);
             };
     };

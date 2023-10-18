@@ -6,6 +6,7 @@
 #include "UserData.h"
 #include "GetUserProfileRequestData.h"
 #include "SearchUsersRequestData.h"
+#include "../../Model/Request/BaseRequestData.h"
 #include "../Currency/Currency.h"
 #include "GetUserIdByShortUIDRequestData.h"
 #include "UpdateUserProfileRequestData.h"
@@ -48,7 +49,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
                 requestData.userId = userId;
-                RGNCore::CallAPI<nlohmann::json, TFullProfileData>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "",
                     requestData,
                     complete,
@@ -60,7 +61,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SearchUsersRequestData requestData;
                 requestData.nicknameQuery = nicknameQuery;
-                RGNCore::CallAPI<nlohmann::json, List<UserData>>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "user-searchUsers",
                     requestData,
                     complete,
@@ -70,7 +71,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, List<Currency::Currency>>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "user-getUserCurrenciesV2",
                     requestData,
                     complete,
@@ -82,7 +83,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData requestData;
                 requestData.shortUID = shortUID;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "user-getUserIdByShortUID",
                     requestData,
                     complete,
@@ -122,7 +123,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
                 requestData.displayName = displayName;
                 requestData.bio = bio;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "user-updateProfile",
                     requestData,
                     complete,

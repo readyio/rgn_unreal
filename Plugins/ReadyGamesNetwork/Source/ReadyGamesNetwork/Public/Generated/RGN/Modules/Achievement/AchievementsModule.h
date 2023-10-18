@@ -30,7 +30,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
                     "achievements-getByIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.achievements);
+                    },
                     fail);
             };
         static void GetByAppIdsAsync(
@@ -47,7 +49,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
                     "achievements-getByAppIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.achievements);
+                    },
                     fail);
             };
         static void GetForCurrentAppAsync(
@@ -73,7 +77,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsWithUserDataResponse>(
                     "achievements-getByAppIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(achievements);
+                    },
                     fail);
             };
         static void GetForCurrentAppWithUserDataAsync(
@@ -106,7 +112,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
                     "achievements-getByRequestNames",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(result.achievements);
+                    },
                     fail);
             };
         static void TriggerByIdAsync(
@@ -175,7 +183,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetUserAchievementsResponse>(
                     "achievements-getUserAchievements",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(response.userAchievements);
+                    },
                     fail);
             };
     };

@@ -5,6 +5,7 @@
 #include "OnGameCompleteResult.h"
 #include "OnGameCompleteRequestData.h"
 #include "GameProgress.h"
+#include "../../Model/Request/BaseMigrationRequestData.h"
 #include <string>
 #include <functional>
 using namespace std;
@@ -40,7 +41,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::AddUserLevelRequestData<T> requestData;
                 requestData.playerProgress = userProgressJson;
-                RGNCore::CallAPI<nlohmann::json, T>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "game-addPlayerProgress",
                     requestData,
                     complete,
@@ -54,7 +55,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
                 RGN::Modules::GameProgress::UpdateUserLevelRequestData<T> requestData;
                 requestData.playerProgress = userProgressJson;
                 requestData.reward = reward;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::GameProgress::UpdateUserLevelResponseData<T>>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "game-updatePlayerProgress",
                     requestData,
                     complete,
@@ -64,7 +65,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::GameProgress::GetPlayerLevelResponseData<T>>(
+                RGNCore::CallAPI<nlohmann::json, null>(
                     "game-getPlayerProgress",
                     requestData,
                     complete,

@@ -235,7 +235,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData>(
                     "inventoryV2-getWithVirtualItemsDataByAppIds",
                     requestData,
-                    complete,
+                    [complete] (auto result) {
+                        complete(PopulateInventoryDataWithVirtualItemsDeepCopy(result, jsonDependency));
+                    },
                     fail);
             };
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string json) {
