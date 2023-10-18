@@ -266,29 +266,5 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     complete,
                     fail);
             };
-        static void UploadMaterialTexturesAsync(
-            string virtualItemId,
-            vector<vector<uint8_t>> materialTexturesBytes,
-            CancellationToken cancellationToken,
-            const function<void(bool result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
-                RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::UploadMaterialTexturesAsync(
-                    virtualItemId,
-                    materialTexturesBytes,
-                    cancellationToken,
-                    complete,
-                    fail);
-            };
-        static void DownloadMaterialTexturesAsync(
-            string virtualItemId,
-            CancellationToken cancellationToken,
-            const function<void(vector<vector<uint8_t>> result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
-                RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::DownloadMaterialTexturesAsync(
-                    virtualItemId,
-                    cancellationToken,
-                    complete,
-                    fail);
-            };
     };
 }}}

@@ -4,6 +4,10 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "BP_MatchmakingModule_Admin.generated.h"
 
+DECLARE_DYNAMIC_DELEGATE_TwoParams(FMatchmakingModule_AdminFailResponse, int32, code, const FString&, message);
+
+DECLARE_DYNAMIC_DELEGATE(FDeleteMatchesByAppIdAsyncResponse);
+
 UCLASS()
 class READYGAMESNETWORK_API UBP_MatchmakingModule_Admin : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
