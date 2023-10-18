@@ -98,7 +98,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getProperties",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["properties"]);
+                        complete(result["properties"].template get<string>());
                     },
                     fail);
             };
@@ -116,7 +116,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-setProperties",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["properties"]);
+                        complete(result["properties"].template get<string>());
                     },
                     fail);
             };
@@ -132,7 +132,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getUpgrades",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["upgrades"]);
+                        complete(result["upgrades"].template get<vector<RGN::Modules::Inventory::UpgradesResponseData>>());
                     },
                     fail);
             };
@@ -154,7 +154,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-upgrade",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["upgrades"]);
+                        complete(result["upgrades"].template get<vector<RGN::Modules::Inventory::VirtualItemUpgrade>>());
                     },
                     fail);
             };
@@ -170,7 +170,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getById",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["inventoryItem"]);
+                        complete(result["inventoryItem"].template get<RGN::Modules::Inventory::InventoryItemData>());
                     },
                     fail);
             };
@@ -186,7 +186,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getByIds",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["inventoryItems"]);
+                        complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
@@ -201,7 +201,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getByVirtualItemIds",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["inventoryItems"]);
+                        complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
@@ -215,7 +215,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getByAppId",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["inventoryItems"]);
+                        complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
@@ -230,7 +230,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getByAppIds",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["inventoryItems"]);
+                        complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
@@ -283,7 +283,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getByTags",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["inventoryItems"]);
+                        complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
@@ -299,7 +299,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-getTags",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["tags"]);
+                        complete(result["tags"].template get<vector<string>>());
                     },
                     fail);
             };
@@ -318,7 +318,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-setTags",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["tags"]);
+                        complete(result["tags"].template get<vector<string>>());
                     },
                     fail);
             };

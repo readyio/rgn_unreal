@@ -21,7 +21,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-add",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["result"]["id"]);
+                        complete(result["result"]["id"].template get<string>());
                     },
                     fail);
             };
@@ -36,7 +36,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-update",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["result"]["id"]);
+                        complete(result["result"]["id"].template get<string>());
                     },
                     fail);
             };

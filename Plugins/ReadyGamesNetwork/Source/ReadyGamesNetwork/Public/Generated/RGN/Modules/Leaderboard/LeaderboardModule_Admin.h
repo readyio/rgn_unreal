@@ -21,7 +21,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     "leaderboardV2-add",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["result"]["leaderboardId"]);
+                        complete(result["result"]["leaderboardId"].template get<string>());
                     },
                     fail);
             };
@@ -36,7 +36,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     "leaderboardV2-update",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["result"]["leaderboardId"]);
+                        complete(result["result"]["leaderboardId"].template get<string>());
                     },
                     fail);
             };

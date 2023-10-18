@@ -64,7 +64,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-addFromCSV",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["newVirtualItemIds"]);
+                        complete(result["newVirtualItemIds"].template get<vector<string>>());
                     },
                     fail);
             };
