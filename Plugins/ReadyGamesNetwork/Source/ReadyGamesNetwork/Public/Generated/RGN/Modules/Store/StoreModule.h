@@ -348,7 +348,9 @@ namespace RGN { namespace Modules { namespace Store {
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Store::SetPricesRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json>(
+                requestData.offerId = offerId;
+                requestData.prices = prices;
+                RGNCore::CallAPI<RGN::Modules::Store::SetPricesRequestData>(
                     "storeV2-setPrices",
                     requestData,
                     complete,
@@ -360,7 +362,9 @@ namespace RGN { namespace Modules { namespace Store {
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Store::SetTimeRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json>(
+                requestData.offerId = offerId;
+                requestData.time = time;
+                RGNCore::CallAPI<RGN::Modules::Store::SetTimeRequestData>(
                     "storeV2-setTime",
                     requestData,
                     complete,

@@ -22,7 +22,7 @@ namespace RGN { namespace Modules { namespace Creator {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSignupRequestData requestData;
                 requestData.brandName = brandName;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Creator::CreatorSignupResponseData>(
+                RGNCore::CallAPI<RGN::Modules::Creator::CreatorSignupRequestData, RGN::Modules::Creator::CreatorSignupResponseData>(
                     "creator-signup",
                     requestData,
                     complete,
@@ -34,7 +34,7 @@ namespace RGN { namespace Modules { namespace Creator {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSubmitItemRequestData requestData;
                 requestData.customizedItem = customizedItem;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Creator::CreatorSubmitItemResponseData>(
+                RGNCore::CallAPI<RGN::Modules::Creator::CreatorSubmitItemRequestData, RGN::Modules::Creator::CreatorSubmitItemResponseData>(
                     "creator-addItem",
                     requestData,
                     complete,
@@ -44,7 +44,7 @@ namespace RGN { namespace Modules { namespace Creator {
             const function<void(RGN::Modules::Creator::CreatorData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Creator::CreatorData>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Creator::CreatorData>(
                     "creator-getCreatorData",
                     requestData,
                     complete,
@@ -54,7 +54,7 @@ namespace RGN { namespace Modules { namespace Creator {
             const function<void(RGN::Modules::Currency::ClaimCurrencyResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Currency::ClaimCurrencyResponseData>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Currency::ClaimCurrencyResponseData>(
                     "creator-claimCurrency",
                     requestData,
                     complete,

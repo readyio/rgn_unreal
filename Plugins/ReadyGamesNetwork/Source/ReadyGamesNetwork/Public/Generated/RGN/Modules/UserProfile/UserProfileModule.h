@@ -33,7 +33,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
                 requestData.userId = userId;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::UserProfile::UserData>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserProfileRequestData, RGN::Modules::UserProfile::UserData>(
                     "",
                     requestData,
                     complete,
@@ -50,7 +50,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
                 requestData.userId = userId;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserProfileRequestData, string>(
                     "",
                     requestData,
                     [complete] (string result) {
@@ -66,7 +66,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SearchUsersRequestData requestData;
                 requestData.nicknameQuery = nicknameQuery;
-                RGNCore::CallAPI<nlohmann::json, vector<RGN::Modules::UserProfile::UserData>>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::SearchUsersRequestData, vector<RGN::Modules::UserProfile::UserData>>(
                     "user-searchUsers",
                     requestData,
                     [complete] (vector<RGN::Modules::UserProfile::UserData> result) {
@@ -78,7 +78,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, vector<RGN::Modules::Currency::Currency>>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseRequestData, vector<RGN::Modules::Currency::Currency>>(
                     "user-getUserCurrenciesV2",
                     requestData,
                     [complete] (vector<RGN::Modules::Currency::Currency> result) {
@@ -92,7 +92,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData requestData;
                 requestData.shortUID = shortUID;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData, string>(
                     "user-getUserIdByShortUID",
                     requestData,
                     [complete] (string result) {
@@ -138,7 +138,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
                 requestData.displayName = displayName;
                 requestData.bio = bio;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::UpdateUserProfileRequestData, string>(
                     "user-updateProfile",
                     requestData,
                     [complete] (string result) {
@@ -246,7 +246,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SetInvisibleStatusRequestData requestData;
                 requestData.invisibleStatus = invisibleStatus;
-                RGNCore::CallAPI<nlohmann::json>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::SetInvisibleStatusRequestData>(
                     "userStatuses-setInvisibleStatus",
                     requestData,
                     complete,
@@ -273,7 +273,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserStatusRequestData requestData;
                 requestData.userId = userId;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::UserProfile::GetUserStatusResponseData>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserStatusRequestData, RGN::Modules::UserProfile::GetUserStatusResponseData>(
                     "userStatuses-getUserState",
                     requestData,
                     complete,

@@ -19,7 +19,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::OnGameCompleteRequestData requestData;
                 requestData.reward = reward;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::GameProgress::OnGameCompleteResult>(
+                RGNCore::CallAPI<RGN::Modules::GameProgress::OnGameCompleteRequestData, RGN::Modules::GameProgress::OnGameCompleteResult>(
                     "game-onGameComplete",
                     requestData,
                     complete,
@@ -29,7 +29,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(RGN::Modules::GameProgress::GameProgress result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::GameProgress::GameProgress>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::GameProgress::GameProgress>(
                     "game-getGameProgress",
                     requestData,
                     complete,
@@ -41,7 +41,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::AddUserLevelRequestData<T> requestData;
                 requestData.playerProgress = userProgressJson;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<RGN::Modules::GameProgress::AddUserLevelRequestData<T>, string>(
                     "game-addPlayerProgress",
                     requestData,
                     [complete] (string result) {
@@ -57,7 +57,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
                 RGN::Modules::GameProgress::UpdateUserLevelRequestData<T> requestData;
                 requestData.playerProgress = userProgressJson;
                 requestData.reward = reward;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<RGN::Modules::GameProgress::UpdateUserLevelRequestData<T>, string>(
                     "game-updatePlayerProgress",
                     requestData,
                     [complete] (string result) {
@@ -69,7 +69,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, string>(
                     "game-getPlayerProgress",
                     requestData,
                     [complete] (string result) {

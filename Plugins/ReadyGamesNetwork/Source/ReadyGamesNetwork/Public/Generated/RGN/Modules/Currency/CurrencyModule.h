@@ -22,7 +22,7 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(RGN::Modules::Currency::RGNCoinEconomy result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Currency::RGNCoinEconomy>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseRequestData, RGN::Modules::Currency::RGNCoinEconomy>(
                     "currency-getRGNCoinEconomy",
                     requestData,
                     complete,
@@ -51,7 +51,7 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(RGN::Modules::Currency::CurrencyProductsData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Currency::CurrencyProductsData>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Currency::CurrencyProductsData>(
                     "currency-getProducts",
                     requestData,
                     complete,
@@ -63,7 +63,7 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseCurrencyProductRequestData requestData;
                 requestData.productId = productId;
-                RGNCore::CallAPI<nlohmann::json, vector<RGN::Modules::Currency::Currency>>(
+                RGNCore::CallAPI<RGN::Modules::Currency::PurchaseCurrencyProductRequestData, vector<RGN::Modules::Currency::Currency>>(
                     "currency-purchaseProduct",
                     requestData,
                     [complete] (vector<RGN::Modules::Currency::Currency> result) {

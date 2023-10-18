@@ -17,7 +17,7 @@ namespace RGN { namespace Modules { namespace Wallets {
             const function<void(RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData>(
                     "wallets-isUserHavePrimaryWallet",
                     requestData,
                     complete,
@@ -27,7 +27,7 @@ namespace RGN { namespace Modules { namespace Wallets {
             const function<void(RGN::Modules::Wallets::GetUserWalletsResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Wallets::GetUserWalletsResponseData>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Wallets::GetUserWalletsResponseData>(
                     "wallets-getUserWallets",
                     requestData,
                     complete,
@@ -39,7 +39,7 @@ namespace RGN { namespace Modules { namespace Wallets {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Wallets::CreateWalletRequestData requestData;
                 requestData.password = password;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Wallets::CreateWalletResponseData>(
+                RGNCore::CallAPI<RGN::Modules::Wallets::CreateWalletRequestData, RGN::Modules::Wallets::CreateWalletResponseData>(
                     "wallets-createWallet",
                     requestData,
                     complete,

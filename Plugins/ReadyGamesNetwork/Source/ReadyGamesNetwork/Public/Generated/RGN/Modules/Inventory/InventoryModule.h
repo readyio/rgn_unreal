@@ -46,7 +46,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData requestData;
                 requestData.userId = userId;
                 requestData.virtualItemInventoryData = inventoryData;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::AddToInventoryResponseData>(
+                RGNCore::CallAPI<RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData, RGN::Modules::Inventory::AddToInventoryResponseData>(
                     "",
                     requestData,
                     complete,

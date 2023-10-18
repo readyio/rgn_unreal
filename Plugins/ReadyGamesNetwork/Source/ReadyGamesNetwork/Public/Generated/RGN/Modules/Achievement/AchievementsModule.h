@@ -120,7 +120,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGN::Modules::Achievement::TriggerByIdRequestData requestData;
                 requestData.id = id;
                 requestData.progress = progress;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                RGNCore::CallAPI<RGN::Modules::Achievement::TriggerByIdRequestData, RGN::Modules::Achievement::TriggerAndClaimResponse>(
                     "achievements-triggerById",
                     requestData,
                     complete,
@@ -134,7 +134,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                 RGN::Modules::Achievement::TriggerByRequestNameRequestData requestData;
                 requestData.requestName = requestName;
                 requestData.progress = progress;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                RGNCore::CallAPI<RGN::Modules::Achievement::TriggerByRequestNameRequestData, RGN::Modules::Achievement::TriggerAndClaimResponse>(
                     "achievements-triggerByRequestName",
                     requestData,
                     complete,
@@ -146,7 +146,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Achievement::ClaimByIdRequestData requestData;
                 requestData.id = achievementId;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                RGNCore::CallAPI<RGN::Modules::Achievement::ClaimByIdRequestData, RGN::Modules::Achievement::TriggerAndClaimResponse>(
                     "achievements-claimById",
                     requestData,
                     complete,
@@ -158,7 +158,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Achievement::ClaimByRequestNameRequestData requestData;
                 requestData.requestName = requestName;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::TriggerAndClaimResponse>(
+                RGNCore::CallAPI<RGN::Modules::Achievement::ClaimByRequestNameRequestData, RGN::Modules::Achievement::TriggerAndClaimResponse>(
                     "achievements-claimByRequestName",
                     requestData,
                     complete,
