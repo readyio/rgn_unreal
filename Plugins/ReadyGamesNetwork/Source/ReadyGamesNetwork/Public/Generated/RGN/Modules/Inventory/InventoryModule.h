@@ -2,7 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
-#include "../../../../CustomImpl/RGN/Modules/Inventory\InventoryModule.h"
+#include "../../../../CustomImpl/RGN/Modules/Inventory/InventoryModule.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "../VirtualItems/Properties.h"
 #include "AddToInventoryResponseData.h"
@@ -260,15 +260,11 @@ namespace RGN { namespace Modules { namespace Inventory {
             };
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string json) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemData(
-                    json,
-                    complete,
-                    fail);
+                    json);
             };
         static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(string json) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemsData(
-                    json,
-                    complete,
-                    fail);
+                    json);
             };
         static void GetByTagsAsync(
             vector<string> tags,

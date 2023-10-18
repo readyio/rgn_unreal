@@ -1,7 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "../../../../CustomImpl/RGN/Modules/Messaging\MessagingModule.h"
+#include "../../../../CustomImpl/RGN/Modules/Messaging/MessagingModule.h"
 #include <string>
 #include <functional>
 #include "IMessageReceiver.h"
@@ -15,18 +15,14 @@ namespace RGN { namespace Modules { namespace Messaging {
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::Subscribe(
                     topic,
-                    messageReceiver,
-                    complete,
-                    fail);
+                    messageReceiver);
             };
         static void Unsubscribe(
             string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::Unsubscribe(
                     topic,
-                    messageReceiver,
-                    complete,
-                    fail);
+                    messageReceiver);
             };
         static void SendMessageByUserId(
             string appId,

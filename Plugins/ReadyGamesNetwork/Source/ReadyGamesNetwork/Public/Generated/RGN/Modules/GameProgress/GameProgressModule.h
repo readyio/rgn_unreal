@@ -46,9 +46,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
                 RGNCore::CallAPI<RGN::Modules::GameProgress::AddUserLevelRequestData, string>(
                     "game-addPlayerProgress",
                     requestData,
-                    [complete] (string result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
         static void UpdateUserProgressAsync(
@@ -62,9 +60,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
                 RGNCore::CallAPI<RGN::Modules::GameProgress::UpdateUserLevelRequestData, string>(
                     "game-updatePlayerProgress",
                     requestData,
-                    [complete] (string result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
         static void GetUserProgressAsync(
@@ -74,9 +70,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, string>(
                     "game-getPlayerProgress",
                     requestData,
-                    [complete] (string result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
     };
