@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../CustomImpl/RGN/Modules/Achievement/AchievementsModule.h"
 #include "GetAchievementsResponse.h"
 #include "AchievementData.h"
 #include "GetAchievementsWithUserDataResponse.h"
@@ -68,18 +69,12 @@ namespace RGN { namespace Modules { namespace Achievement {
             bool withHistory,
             const function<void(vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = RGNCore::GetAppId();
-                requestData["appIds"] = appIds;
-                requestData["limit"] = limit;
-                requestData["startAfter"] = startAfter;
-                requestData["withHistory"] = withHistory;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsWithUserDataResponse>(
-                    "achievements-getByAppIds",
-                    requestData,
-                    [complete] (RGN::Modules::Achievement::GetAchievementsWithUserDataResponse result) {
-                        complete(achievements);
-                    },
+                RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetByAppIdsWithUserDataAsync(
+                    appIds,
+                    limit,
+                    startAfter,
+                    withHistory,
+                    complete,
                     fail);
             };
         static void GetForCurrentAppWithUserDataAsync(

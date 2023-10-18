@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../CustomImpl/RGN/Modules/Analytics/AnalyticsModule.h"
 #include <string>
 #include <functional>
 using namespace std;
@@ -15,16 +16,10 @@ namespace RGN { namespace Modules { namespace Analytics {
             CancellationToken cancellationToken,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["eventName"] = eventName;
-                requestData["projectId"] = RGNCore::GetAppId();
-                requestData["userId"] = userId;
-                requestData["userPseudoId"] = userPseudoId;
-                requestData["sessionId"] = mSessionId;
-                requestData["eventParameters"] = eventParameters;
-                RGNCore::CallAPI<nlohmann::json>(
-                    "analytics-logEvent",
-                    requestData,
+                RGN::Modules::Analytics::AnalyticsModuleCustomImpl::LogEventAsync(
+                    eventName,
+                    eventParameters,
+                    cancellationToken,
                     complete,
                     fail);
             };

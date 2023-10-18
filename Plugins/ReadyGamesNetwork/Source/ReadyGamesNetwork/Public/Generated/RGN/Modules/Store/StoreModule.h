@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../CustomImpl/RGN/Modules/Store/StoreModule.h"
 #include "BuyVirtualItemsResponse.h"
 #include "PurchaseResult.h"
 #include "BuyStoreOfferResponse.h"
@@ -32,18 +33,11 @@ namespace RGN { namespace Modules { namespace Store {
             string offerId,
             const function<void(RGN::Modules::Store::PurchaseResult result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = RGNCore::GetAppId();
-                requestData["itemIds"] = itemIds;
-                requestData["currencies"] = currencies;
-                requestData["offerId"] = offerId;
-                requestData["version"] = 2;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyVirtualItemsResponse>(
-                    "storeV2-buyVirtualItems",
-                    requestData,
-                    [complete] (RGN::Modules::Store::BuyVirtualItemsResponse result) {
-                        complete(purchaseResult);
-                    },
+                RGN::Modules::Store::StoreModuleCustomImpl::BuyVirtualItemsAsync(
+                    itemIds,
+                    currencies,
+                    offerId,
+                    complete,
                     fail);
             };
         static void BuyStoreOfferAsync(
@@ -51,17 +45,10 @@ namespace RGN { namespace Modules { namespace Store {
             vector<string> currencies,
             const function<void(RGN::Modules::Store::PurchaseResult result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = RGNCore::GetAppId();
-                requestData["offerId"] = offerId;
-                requestData["currencies"] = currencies;
-                requestData["version"] = 2;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyStoreOfferResponse>(
-                    "storeV2-buyStoreOffer",
-                    requestData,
-                    [complete] (RGN::Modules::Store::BuyStoreOfferResponse result) {
-                        complete(purchaseResult);
-                    },
+                RGN::Modules::Store::StoreModuleCustomImpl::BuyStoreOfferAsync(
+                    offerId,
+                    currencies,
+                    complete,
                     fail);
             };
         static void GetLootBoxesByIdsAsync(
@@ -270,18 +257,12 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = RGNCore::GetAppId();
-                requestData["appIds"] = appIds;
-                requestData["limit"] = limit;
-                requestData["startAfter"] = startAfter;
-                requestData["ignoreTimestamp"] = ignoreTimestamp;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse>(
-                    "storeV2-getWithVirtualItemsDataByAppIds",
-                    requestData,
-                    [complete] (RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse result) {
-                        complete(queriedOffers);
-                    },
+                RGN::Modules::Store::StoreModuleCustomImpl::GetWithVirtualItemsDataByAppIdsAsync(
+                    appIds,
+                    limit,
+                    startAfter,
+                    ignoreTimestamp,
+                    complete,
                     fail);
             };
         static void GetByIdsAsync(

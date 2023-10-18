@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../CustomImpl/RGN/Modules/Inventory/InventoryModule.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "../VirtualItems/Properties.h"
 #include "AddToInventoryResponseData.h"
@@ -238,7 +239,11 @@ namespace RGN { namespace Modules { namespace Inventory {
             int32_t limit,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Inventory::InventoryModuleCustomImpl::GetWithVirtualItemsDataForCurrentAppAsync(
+                    startAfter,
+                    limit,
+                    complete,
+                    fail);
             };
         static void GetWithVirtualItemsDataByAppIdsAsync(
             vector<string> appIds,
@@ -246,23 +251,24 @@ namespace RGN { namespace Modules { namespace Inventory {
             int32_t limit,
             const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appIds"] = appIds;
-                requestData["startAfter"] = startAfter;
-                requestData["limit"] = limit;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData>(
-                    "inventoryV2-getWithVirtualItemsDataByAppIds",
-                    requestData,
-                    [complete] (RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData result) {
-                        complete(PopulateInventoryDataWithVirtualItemsDeepCopy(result, jsonDependency));
-                    },
+                RGN::Modules::Inventory::InventoryModuleCustomImpl::GetWithVirtualItemsDataByAppIdsAsync(
+                    appIds,
+                    startAfter,
+                    limit,
+                    complete,
                     fail);
             };
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string json) {
-                // Request parameters are null
+                RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemData(
+                    json,
+                    complete,
+                    fail);
             };
         static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(string json) {
-                // Request parameters are null
+                RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemsData(
+                    json,
+                    complete,
+                    fail);
             };
         static void GetByTagsAsync(
             vector<string> tags,

@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../random.hpp"
 #include "RGNCoinEconomy.h"
 #include "../../Model/Request/BaseRequestData.h"
 #include "PurchaseRGNCoinRequestData.h"
@@ -35,7 +36,7 @@ namespace RGN { namespace Modules { namespace Currency {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseRGNCoinRequestData requestData;
                 requestData.iapUUID = iapUUID;
-                requestData.requestId = System.Guid.NewGuid().ToString("N");
+                requestData.requestId = RGN::Random::generate_uuid_v4();;
                 requestData.iapTransactionId = iapTransactionId;
                 requestData.iapReceipt = iapReceipt;
                 RGNCore::CallAPI(

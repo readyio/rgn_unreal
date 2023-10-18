@@ -1,6 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
+#include "../../../../CustomImpl/RGN/Modules/Messaging/MessagingModule.h"
 #include <string>
 #include <functional>
 #include "IMessageReceiver.h"
@@ -12,12 +13,20 @@ namespace RGN { namespace Modules { namespace Messaging {
         static void Subscribe(
             string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
-                // Request parameters are null
+                RGN::Modules::Messaging::MessagingModuleCustomImpl::Subscribe(
+                    topic,
+                    messageReceiver,
+                    complete,
+                    fail);
             };
         static void Unsubscribe(
             string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
-                // Request parameters are null
+                RGN::Modules::Messaging::MessagingModuleCustomImpl::Unsubscribe(
+                    topic,
+                    messageReceiver,
+                    complete,
+                    fail);
             };
         static void SendMessageByUserId(
             string appId,
@@ -27,15 +36,12 @@ namespace RGN { namespace Modules { namespace Messaging {
             string text,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = appId;
-                requestData["userId"] = userId;
-                requestData["payload"] = payload;
-                requestData["title"] = title;
-                requestData["text"] = text;
-                RGNCore::CallAPI<nlohmann::json>(
-                    "messaging-sendMessageByUserId",
-                    requestData,
+                RGN::Modules::Messaging::MessagingModuleCustomImpl::SendMessageByUserId(
+                    appId,
+                    userId,
+                    payload,
+                    title,
+                    text,
                     complete,
                     fail);
             };

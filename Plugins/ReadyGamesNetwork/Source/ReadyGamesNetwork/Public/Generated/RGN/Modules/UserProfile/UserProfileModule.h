@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../CustomImpl/RGN/Modules/UserProfile/UserProfileModule.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "UserData.h"
 #include "GetUserProfileRequestData.h"
@@ -168,7 +169,12 @@ namespace RGN { namespace Modules { namespace UserProfile {
             CancellationToken cancellationToken,
             const function<void(vector<uint8_t> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::UserProfile::UserProfileModuleCustomImpl::DownloadAvatarImageAsync(
+                    userId,
+                    size,
+                    cancellationToken,
+                    complete,
+                    fail);
             };
         static void ChangeAdminStatusByEmailAsync(
             string email,
