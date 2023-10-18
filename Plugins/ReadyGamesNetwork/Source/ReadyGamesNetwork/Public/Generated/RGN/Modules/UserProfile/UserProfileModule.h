@@ -69,9 +69,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI<RGN::Modules::UserProfile::SearchUsersRequestData, vector<RGN::Modules::UserProfile::UserData>>(
                     "user-searchUsers",
                     requestData,
-                    [complete] (vector<RGN::Modules::UserProfile::UserData> result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
         static void GetUserCurrenciesAsync(
@@ -81,9 +79,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI<RGN::Model::Request::BaseRequestData, vector<RGN::Modules::Currency::Currency>>(
                     "user-getUserCurrenciesV2",
                     requestData,
-                    [complete] (vector<RGN::Modules::Currency::Currency> result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
         static void GetUserIdByShortUIDAsync(
@@ -95,9 +91,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData, string>(
                     "user-getUserIdByShortUID",
                     requestData,
-                    [complete] (string result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
         static void SetDisplayNameAsync(
@@ -189,9 +183,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-changeAdminStatusByEmail",
                     requestData,
-                    [complete] (nlohmann::json result) {
-                        complete(result.template get<std::unordered_map<string, string>>());
-                    },
+                    complete,
                     fail);
             };
         static void ChangeAdminStatusByUserIdAsync(
@@ -207,9 +199,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-changeAdminStatusByUserId",
                     requestData,
-                    [complete] (nlohmann::json result) {
-                        complete(result.template get<std::unordered_map<string, string>>());
-                    },
+                    complete,
                     fail);
             };
         static void GetUserCustomClaimsByUserIdAsync(
@@ -221,9 +211,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-getUserCustomClaimsByUserId",
                     requestData,
-                    [complete] (nlohmann::json result) {
-                        complete(result.template get<std::unordered_map<string, string>>());
-                    },
+                    complete,
                     fail);
             };
         static void GetUserCustomClaimsByEmailAsync(
@@ -235,9 +223,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI(
                     "user-getUserCustomClaimsByEmail",
                     requestData,
-                    [complete] (nlohmann::json result) {
-                        complete(result.template get<std::unordered_map<string, string>>());
-                    },
+                    complete,
                     fail);
             };
         static void SetInvisibleStatusAsync(

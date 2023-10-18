@@ -395,9 +395,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, string>(
                     "storeV2-getProperties",
                     requestData,
-                    [complete] (string result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
         static void SetPropertiesAsync(
@@ -412,9 +410,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, string>(
                     "storeV2-setProperties",
                     requestData,
-                    [complete] (string result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
     };

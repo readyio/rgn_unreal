@@ -66,9 +66,7 @@ namespace RGN { namespace Modules { namespace Currency {
                 RGNCore::CallAPI<RGN::Modules::Currency::PurchaseCurrencyProductRequestData, vector<RGN::Modules::Currency::Currency>>(
                     "currency-purchaseProduct",
                     requestData,
-                    [complete] (vector<RGN::Modules::Currency::Currency> result) {
-                        complete(result);
-                    },
+                    complete,
                     fail);
             };
         static void AddUserCurrenciesAsync(
