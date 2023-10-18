@@ -25,7 +25,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-createLootBox",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["lootBoxId"].ToString());
+                        complete(result["lootBoxId"].ToString().template get<string>());
                     },
                     fail);
             };
@@ -40,7 +40,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-deleteLootBox",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["lootBoxId"].ToString());
+                        complete(result["lootBoxId"].ToString().template get<string>());
                     },
                     fail);
             };

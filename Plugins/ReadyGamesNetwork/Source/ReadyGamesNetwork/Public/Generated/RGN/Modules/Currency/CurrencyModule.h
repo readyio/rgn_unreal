@@ -43,7 +43,7 @@ namespace RGN { namespace Modules { namespace Currency {
                     "currency-purchaseRGNCoinV2",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["userCurrencies"]);
+                        complete(result["userCurrencies"].template get<vector<RGN::Modules::Currency::Currency>>());
                     },
                     fail);
             };

@@ -111,7 +111,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-updateDisplayName",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["displayName"] as string);
+                        complete(result["displayName"].template get<string>());
                     },
                     fail);
             };
@@ -126,7 +126,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-updateBio",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["bio"] as string);
+                        complete(result["bio"].template get<string>());
                     },
                     fail);
             };
@@ -159,7 +159,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-uploadProfilePicture",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(true);
+                        complete(true.template get<bool>());
                     },
                     fail);
             };
@@ -190,7 +190,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-changeAdminStatusByEmail",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result);
+                        complete(result.template get<std::unordered_map<string, string>>());
                     },
                     fail);
             };
@@ -208,7 +208,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-changeAdminStatusByUserId",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result);
+                        complete(result.template get<std::unordered_map<string, string>>());
                     },
                     fail);
             };
@@ -222,7 +222,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-getUserCustomClaimsByUserId",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result);
+                        complete(result.template get<std::unordered_map<string, string>>());
                     },
                     fail);
             };
@@ -236,7 +236,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-getUserCustomClaimsByEmail",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result);
+                        complete(result.template get<std::unordered_map<string, string>>());
                     },
                     fail);
             };
