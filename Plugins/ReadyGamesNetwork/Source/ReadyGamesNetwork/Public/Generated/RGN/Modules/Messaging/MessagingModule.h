@@ -15,18 +15,14 @@ namespace RGN { namespace Modules { namespace Messaging {
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::Subscribe(
                     topic,
-                    messageReceiver,
-                    complete,
-                    fail);
+                    messageReceiver);
             };
         static void Unsubscribe(
             string topic,
             RGN::Modules::Messaging::IMessageReceiver messageReceiver) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::Unsubscribe(
                     topic,
-                    messageReceiver,
-                    complete,
-                    fail);
+                    messageReceiver);
             };
         static void SendMessageByUserId(
             string appId,
