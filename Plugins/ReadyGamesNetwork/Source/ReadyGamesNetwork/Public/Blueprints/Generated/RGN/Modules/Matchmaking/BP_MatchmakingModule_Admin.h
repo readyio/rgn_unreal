@@ -12,4 +12,10 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_MatchmakingModule_Admin : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void DeleteMatchesByAppIdAsync(
+        const FString& appIdToRemoveTheMatchesFor,
+        FMatchmakingModuleAdminDeleteMatchesByAppIdAsyncResponse onSuccess, FMatchmakingModule_AdminFailResponse onFail) {
+             // TODO
+    }
 };

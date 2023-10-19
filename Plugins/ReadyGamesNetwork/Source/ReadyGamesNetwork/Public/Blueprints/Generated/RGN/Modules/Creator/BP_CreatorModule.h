@@ -23,4 +23,26 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_CreatorModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
+    static void BecomeACreatorAsync(
+        const FString& brandName,
+        FCreatorModuleBecomeACreatorAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
+    static void SubmitItemAsync(
+        const FBP_VirtualItem& customizedItem,
+        FCreatorModuleSubmitItemAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
+    static void GetCreatorDataAsync(
+        FCreatorModuleGetCreatorDataAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
+    static void ClaimCurrenciesAsync(
+        FCreatorModuleClaimCurrenciesAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
+             // TODO
+    }
 };

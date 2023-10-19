@@ -19,4 +19,20 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_WalletsModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
+    static void IsUserHavePrimaryWalletAsync(
+        FWalletsModuleIsUserHavePrimaryWalletAsyncResponse onSuccess, FWalletsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
+    static void GetUserWalletsAsync(
+        FWalletsModuleGetUserWalletsAsyncResponse onSuccess, FWalletsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
+    static void CreateWalletAsync(
+        const FString& password,
+        FWalletsModuleCreateWalletAsyncResponse onSuccess, FWalletsModuleFailResponse onFail) {
+             // TODO
+    }
 };

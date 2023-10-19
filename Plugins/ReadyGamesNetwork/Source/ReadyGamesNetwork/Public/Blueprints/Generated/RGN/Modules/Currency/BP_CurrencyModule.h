@@ -24,4 +24,34 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_CurrencyModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
+    static void GetRGNCoinEconomyAsync(
+        FCurrencyModuleGetRGNCoinEconomyAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
+    static void PurchaseRGNCoinAsync(
+        const FString& iapUUID,
+        const FString& iapTransactionId,
+        const FString& iapReceipt,
+        FCurrencyModulePurchaseRGNCoinAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
+    static void GetInAppPurchaseCurrencyDataAsync(
+        FCurrencyModuleGetInAppPurchaseCurrencyDataAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
+    static void PurchaseCurrencyProductAsync(
+        const FString& productId,
+        FCurrencyModulePurchaseCurrencyProductAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
+    static void AddUserCurrenciesAsync(
+        const TArray<FBP_Currency>& currencies,
+        FCurrencyModuleAddUserCurrenciesAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
+             // TODO
+    }
 };

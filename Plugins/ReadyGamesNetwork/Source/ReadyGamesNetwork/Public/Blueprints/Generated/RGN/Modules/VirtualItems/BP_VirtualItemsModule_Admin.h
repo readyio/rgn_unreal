@@ -15,4 +15,31 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_VirtualItemsModule_Admin : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void DeleteVirtualItemsByIdsAsync(
+        const TArray<FString>& virtualItemIds,
+        FVirtualItemsModuleAdminDeleteVirtualItemsByIdsAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void DeleteVirtualItemsByNameAsync(
+        const FString& itemName,
+        FVirtualItemsModuleAdminDeleteVirtualItemsByNameAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void DeleteVirtualItemByAppIdAsync(
+        const FString& appId,
+        FVirtualItemsModuleAdminDeleteVirtualItemByAppIdAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void AddFromCSVWithBlockchainStubAsync(
+        const FString& virtualItemName,
+        const FString& csvContent,
+        const FString& csvDelimiter,
+        const FBP_CancellationToken& cancellationToken,
+        FVirtualItemsModuleAdminAddFromCSVWithBlockchainStubAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+             // TODO
+    }
 };

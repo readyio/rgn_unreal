@@ -41,4 +41,127 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_UserProfileModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetProfileAsync1(
+        FUserProfileModuleGetProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetProfileAsync2(
+        const FString& userId,
+        FUserProfileModuleGetProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetFullUserProfileAsync1(
+        FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetFullUserProfileAsync2(
+        const FString& userId,
+        FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void SearchUsersAsync(
+        const FString& nicknameQuery,
+        FUserProfileModuleSearchUsersAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetUserCurrenciesAsync(
+        FUserProfileModuleGetUserCurrenciesAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetUserIdByShortUIDAsync(
+        const FString& shortUID,
+        FUserProfileModuleGetUserIdByShortUIDAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void SetDisplayNameAsync(
+        const FString& displayName,
+        FUserProfileModuleSetDisplayNameAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void SetBioAsync(
+        const FString& bio,
+        FUserProfileModuleSetBioAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void SetDisplayNameAndBioAsync(
+        const FString& displayName,
+        const FString& bio,
+        FUserProfileModuleSetDisplayNameAndBioAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void UploadAvatarImageAsync(
+        const TArray<uint8>& bytes,
+        const FBP_CancellationToken& cancellationToken,
+        FUserProfileModuleUploadAvatarImageAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void DownloadAvatarImageAsync(
+        const FString& userId,
+        const EBP_ImageSize& size,
+        const FBP_CancellationToken& cancellationToken,
+        FUserProfileModuleDownloadAvatarImageAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void ChangeAdminStatusByEmailAsync(
+        const FString& email,
+        bool isAdmin,
+        int32 accessLevel,
+        FUserProfileModuleChangeAdminStatusByEmailAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void ChangeAdminStatusByUserIdAsync(
+        const FString& userId,
+        bool isAdmin,
+        int32 accessLevel,
+        FUserProfileModuleChangeAdminStatusByUserIdAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetUserCustomClaimsByUserIdAsync(
+        const FString& userId,
+        FUserProfileModuleGetUserCustomClaimsByUserIdAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetUserCustomClaimsByEmailAsync(
+        const FString& email,
+        FUserProfileModuleGetUserCustomClaimsByEmailAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void SetInvisibleStatusAsync(
+        bool invisibleStatus,
+        FUserProfileModuleSetInvisibleStatusAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void PingAsync(
+        FUserProfileModulePingAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void SuspendAsync(
+        FUserProfileModuleSuspendAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void GetUserStateAsync(
+        const FString& userId,
+        FUserProfileModuleGetUserStateAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+             // TODO
+    }
 };

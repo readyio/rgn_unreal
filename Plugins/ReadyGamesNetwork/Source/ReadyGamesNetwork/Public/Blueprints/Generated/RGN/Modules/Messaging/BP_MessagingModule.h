@@ -14,4 +14,28 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_MessagingModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
+    static void Subscribe(
+        const FString& topic,
+        const FBP_IMessageReceiver& messageReceiver,
+        FMessagingModuleSubscribeResponse onSuccess, FMessagingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
+    static void Unsubscribe(
+        const FString& topic,
+        const FBP_IMessageReceiver& messageReceiver,
+        FMessagingModuleUnsubscribeResponse onSuccess, FMessagingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
+    static void SendMessageByUserId(
+        const FString& appId,
+        const FString& userId,
+        const FString& payload,
+        const FString& title,
+        const FString& text,
+        FMessagingModuleSendMessageByUserIdResponse onSuccess, FMessagingModuleFailResponse onFail) {
+             // TODO
+    }
 };

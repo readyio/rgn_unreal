@@ -36,4 +36,114 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_VirtualItemsModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void AddVirtualItemAsync(
+        const FBP_VirtualItem& virtualItem,
+        FVirtualItemsModuleAddVirtualItemAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void AddFromCSVAsync(
+        const FString& virtualItemName,
+        const FString& csvContent,
+        const FString& csvDelimiter,
+        const FBP_CancellationToken& cancellationToken,
+        FVirtualItemsModuleAddFromCSVAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void UpdateVirtualItemAsync(
+        const FString& itemId,
+        const FBP_VirtualItem& virtualItem,
+        FVirtualItemsModuleUpdateVirtualItemAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void DeleteVirtualItemAsync(
+        const FString& itemId,
+        FVirtualItemsModuleDeleteVirtualItemAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void GetVirtualItemsAsync1(
+        FVirtualItemsModuleGetVirtualItemsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void GetVirtualItemsAsync2(
+        int32 limit,
+        const FString& startAfter,
+        FVirtualItemsModuleGetVirtualItemsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void GetVirtualItemsByIdsAsync(
+        const TArray<FString>& virtualItemsIds,
+        FVirtualItemsModuleGetVirtualItemsByIdsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void GetByTagsAsync(
+        const TArray<FString>& tags,
+        const FString& appId,
+        FVirtualItemsModuleGetByTagsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void GetTagsAsync(
+        const FString& virtualItemId,
+        FVirtualItemsModuleGetTagsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void SetTagsAsync(
+        const FString& virtualItemId,
+        const TArray<FString>& tags,
+        const FString& appId,
+        FVirtualItemsModuleSetTagsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void SetNameAsync(
+        const FString& virtualItemId,
+        const FString& name,
+        FVirtualItemsModuleSetNameAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void SetDescriptionAsync(
+        const FString& virtualItemId,
+        const FString& description,
+        FVirtualItemsModuleSetDescriptionAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void GetPropertiesAsync(
+        const FString& virtualItemId,
+        FVirtualItemsModuleGetPropertiesAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void SetPropertiesAsync(
+        const FString& virtualItemId,
+        const FString& json,
+        FVirtualItemsModuleSetPropertiesAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void UploadImageAsync(
+        const FString& virtualItemId,
+        const TArray<uint8>& thumbnailTextureBytes,
+        const FBP_CancellationToken& cancellationToken,
+        FVirtualItemsModuleUploadImageAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    static void DownloadImageAsync(
+        const FString& virtualItemId,
+        const EBP_ImageSize& size,
+        const FBP_CancellationToken& cancellationToken,
+        FVirtualItemsModuleDownloadImageAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
+             // TODO
+    }
 };

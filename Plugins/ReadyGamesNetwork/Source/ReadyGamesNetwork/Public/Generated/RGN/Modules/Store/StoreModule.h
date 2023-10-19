@@ -199,12 +199,12 @@ namespace RGN { namespace Modules { namespace Store {
             };
         static void GetByTimestampAsync(
             string appId,
-            System::DateTime timestamp,
+            int64_t timestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
-                requestData["timestamp"] = new DateTimeOffset(timestamp).ToUnixTimeMilliseconds();
+                requestData["timestamp"] = timestamp;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTimestamp",
                     requestData,

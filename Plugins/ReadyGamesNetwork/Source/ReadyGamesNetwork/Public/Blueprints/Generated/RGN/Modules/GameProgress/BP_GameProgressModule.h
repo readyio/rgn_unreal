@@ -25,4 +25,33 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_GameProgressModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
+    static void OnGameCompleteAsync(
+        const TArray<FBP_Currency>& reward,
+        FGameProgressModuleOnGameCompleteAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
+    static void GetGameProgressAsync(
+        FGameProgressModuleGetGameProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
+    static void AddUserProgressAsync(
+        const FString& userProgressJson,
+        FGameProgressModuleAddUserProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
+    static void UpdateUserProgressAsync(
+        const FString& userProgressJson,
+        const TArray<FBP_Currency>& reward,
+        FGameProgressModuleUpdateUserProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
+    static void GetUserProgressAsync(
+        FGameProgressModuleGetUserProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+             // TODO
+    }
 };

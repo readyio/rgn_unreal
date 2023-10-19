@@ -34,4 +34,87 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_AchievementsModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetByIdsAsync(
+        const TArray<FString>& ids,
+        FAchievementsModuleGetByIdsAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetByAppIdsAsync(
+        const TArray<FString>& appIds,
+        int32 limit,
+        const FString& startAfter,
+        FAchievementsModuleGetByAppIdsAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetForCurrentAppAsync(
+        int32 limit,
+        const FString& startAfter,
+        FAchievementsModuleGetForCurrentAppAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetByAppIdsWithUserDataAsync(
+        const TArray<FString>& appIds,
+        int32 limit,
+        const FString& startAfter,
+        bool withHistory,
+        FAchievementsModuleGetByAppIdsWithUserDataAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetForCurrentAppWithUserDataAsync(
+        int32 limit,
+        const FString& startAfter,
+        FAchievementsModuleGetForCurrentAppWithUserDataAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetByRequestNameAsync(
+        const FString& requestName,
+        FAchievementsModuleGetByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetByRequestNamesAsync(
+        const TArray<FString>& requestNames,
+        FAchievementsModuleGetByRequestNamesAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void TriggerByIdAsync(
+        const FString& id,
+        int32 progress,
+        FAchievementsModuleTriggerByIdAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void TriggerByRequestNameAsync(
+        const FString& requestName,
+        int32 progress,
+        FAchievementsModuleTriggerByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void ClaimByIdAsync(
+        const FString& achievementId,
+        FAchievementsModuleClaimByIdAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void ClaimByRequestNameAsync(
+        const FString& requestName,
+        FAchievementsModuleClaimByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetUserAchievementsAsync(
+        const FString& userId,
+        int64 startAfter,
+        int32 limit,
+        FAchievementsModuleGetUserAchievementsAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
+             // TODO
+    }
 };

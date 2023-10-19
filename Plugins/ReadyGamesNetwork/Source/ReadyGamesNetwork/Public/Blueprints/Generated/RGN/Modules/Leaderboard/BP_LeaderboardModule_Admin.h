@@ -15,4 +15,22 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_LeaderboardModule_Admin : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void AddLeaderboardAsync(
+        const FBP_LeaderboardData& leaderboardData,
+        FLeaderboardModuleAdminAddLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void UpdateLeaderboardAsync(
+        const FBP_LeaderboardData& leaderboardData,
+        FLeaderboardModuleAdminUpdateLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void DeleteLeaderboardAsync(
+        const FString& leaderboardId,
+        FLeaderboardModuleAdminDeleteLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
+             // TODO
+    }
 };

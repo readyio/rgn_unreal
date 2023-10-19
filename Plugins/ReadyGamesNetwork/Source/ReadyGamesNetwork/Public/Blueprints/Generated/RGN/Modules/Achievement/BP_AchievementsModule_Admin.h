@@ -19,4 +19,67 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_AchievementsModule_Admin : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void AddAchievementAsync(
+        const FBP_AchievementData& achievementData,
+        FAchievementsModuleAdminAddAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void UpdateAchievementAsync(
+        const FBP_AchievementData& achievementData,
+        FAchievementsModuleAdminUpdateAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void DeleteAchievementAsync(
+        const FString& achievementId,
+        FAchievementsModuleAdminDeleteAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void AddLoginDaysInRowAchievementAsync1(
+        const FString& achievementId,
+        int32 daysInRow,
+        FAchievementsModuleAdminAddLoginDaysInRowAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void AddLoginDaysInRowAchievementAsync2(
+        const FBP_AchievementData& achievementData,
+        int32 daysInRow,
+        FAchievementsModuleAdminAddLoginDaysInRowAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void DeleteLoginDaysInRowGameConstRecordAsync(
+        const FString& achievementId,
+        int32 daysInRow,
+        FAchievementsModuleAdminDeleteLoginDaysInRowGameConstRecordAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void AddPlayerProgressAchievementAsync1(
+        const FString& achievementId,
+        const FString& playerProgressFieldName,
+        int64 playerProgressFieldValueToReach,
+        FAchievementsModuleAdminAddPlayerProgressAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void AddPlayerProgressAchievementAsync2(
+        const FBP_AchievementData& achievementData,
+        const FString& playerProgressFieldName,
+        int64 playerProgressFieldValueToReach,
+        FAchievementsModuleAdminAddPlayerProgressAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void DeletePlayerProgressAchievementAsync(
+        const FString& achievementId,
+        const FString& playerProgressFieldName,
+        int64 playerProgressFieldValueToReach,
+        FAchievementsModuleAdminDeletePlayerProgressAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
+             // TODO
+    }
 };

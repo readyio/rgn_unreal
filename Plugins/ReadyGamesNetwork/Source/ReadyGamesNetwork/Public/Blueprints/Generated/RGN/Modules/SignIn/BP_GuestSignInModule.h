@@ -13,4 +13,14 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_GuestSignInModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
+    static void TryToSignInAsync(
+        FGuestSignInModuleTryToSignInAsyncResponse onSuccess, FGuestSignInModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
+    static void SignOut(
+        FGuestSignInModuleSignOutResponse onSuccess, FGuestSignInModuleFailResponse onFail) {
+             // TODO
+    }
 };

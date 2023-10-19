@@ -15,4 +15,24 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_StoreModule_Admin : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    static void CreateLootBoxAsync(
+        const FString& lootBoxName,
+        const TArray<FString>& virtualItemTags,
+        const TArray<FBP_PriceInfo>& prices,
+        FStoreModuleAdminCreateLootBoxAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    static void DeleteLootBoxAsync(
+        const FString& lootBoxId,
+        FStoreModuleAdminDeleteLootBoxAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    static void DeleteStoreOfferAsync(
+        const FString& offerId,
+        FStoreModuleAdminDeleteStoreOfferAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
+             // TODO
+    }
 };

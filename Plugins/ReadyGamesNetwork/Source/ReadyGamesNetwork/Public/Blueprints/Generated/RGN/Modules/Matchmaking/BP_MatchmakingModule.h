@@ -25,4 +25,82 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_MatchmakingModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void GetJoinOpenMatchesAsync(
+        int32 limit,
+        const FString& startAfter,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleGetJoinOpenMatchesAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void GetVoteOpenMatchesAsync(
+        int32 limit,
+        const FString& startAfter,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleGetVoteOpenMatchesAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void GetFinishedMatchesAsync(
+        int32 limit,
+        const FString& startAfter,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleGetFinishedMatchesAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void GetFinishedMatchByIdAsync(
+        const FString& matchId,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleGetFinishedMatchByIdAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void CreateMatchAsync(
+        const FBP_MatchmakingData& matchConfig,
+        bool participateInOnCreate,
+        const TMap<FString, FString>& participatePayload,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleCreateMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void ParticipateInMatchAsync(
+        const FString& matchId,
+        const TMap<FString, FString>& participantPayload,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleParticipateInMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void StartMatchAsync(
+        const FString& matchId,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleStartMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void VoteForMatchAsync(
+        const FString& matchId,
+        const FString& participantId,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleVoteForMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void SubmitMatchScoreAsync(
+        const FString& matchId,
+        int64 score,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleSubmitMatchScoreAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    static void FinishMatchAsync(
+        const FString& matchId,
+        const FBP_CancellationToken& cancellationToken,
+        FMatchmakingModuleFinishMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+             // TODO
+    }
 };

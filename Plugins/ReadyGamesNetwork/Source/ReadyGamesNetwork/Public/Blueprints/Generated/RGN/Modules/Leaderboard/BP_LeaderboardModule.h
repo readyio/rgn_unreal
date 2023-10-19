@@ -25,4 +25,58 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_LeaderboardModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void GetLeaderboardByIdAsync(
+        const FString& id,
+        FLeaderboardModuleGetLeaderboardByIdAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void GetLeaderboardByRequestNameAsync(
+        const FString& requestName,
+        FLeaderboardModuleGetLeaderboardByRequestNameAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void GetLeaderboardByRequestNamesAsync(
+        const TArray<FString>& requestNames,
+        FLeaderboardModuleGetLeaderboardByRequestNamesAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void GetLeaderboardIdsAsync(
+        FLeaderboardModuleGetLeaderboardIdsAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void SetScoreAsync(
+        const FString& leaderboardId,
+        int32 score,
+        const FString& extraData,
+        FLeaderboardModuleSetScoreAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void AddScoreAsync(
+        const FString& leaderboardId,
+        int32 score,
+        const FString& extraData,
+        FLeaderboardModuleAddScoreAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void GetUserEntryAsync(
+        const FString& leaderboardId,
+        FLeaderboardModuleGetUserEntryAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void GetEntriesAsync(
+        const FString& leaderboardId,
+        int32 quantityTop,
+        bool includeUser,
+        int32 quantityAroundUser,
+        FLeaderboardModuleGetEntriesAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
+             // TODO
+    }
 };

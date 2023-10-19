@@ -40,4 +40,149 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_InventoryModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void AddToInventoryAsync1(
+        const FString& virtualItemId,
+        int32 quantity,
+        const FBP_Properties& properties,
+        FInventoryModuleAddToInventoryAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void AddToInventoryAsync2(
+        const FString& userId,
+        const FString& virtualItemId,
+        int32 quantity,
+        const FBP_Properties& properties,
+        FInventoryModuleAddToInventoryAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void AddToInventoryAsync3(
+        const FString& userId,
+        const FBP_InventoryItemData& inventoryData,
+        FInventoryModuleAddToInventoryAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void RemoveByVirtualItemIdAsync(
+        const FString& userId,
+        const FString& virtualItemId,
+        int32 quantity,
+        FInventoryModuleRemoveByVirtualItemIdAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void RemoveByInventoryItemIdAsync(
+        const FString& userId,
+        const FString& ownedItemId,
+        int32 quantity,
+        FInventoryModuleRemoveByInventoryItemIdAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetPropertiesAsync(
+        const FString& ownedItemId,
+        FInventoryModuleGetPropertiesAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void SetPropertiesAsync(
+        const FString& ownedItemId,
+        const FString& json,
+        FInventoryModuleSetPropertiesAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetUpgradesAsync(
+        const FString& ownedItemId,
+        FInventoryModuleGetUpgradesAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void UpgradeAsync(
+        const FString& ownedItemId,
+        int32 newUpgradeLevel,
+        const FString& upgradeId,
+        const TArray<FBP_Currency>& upgradePrice,
+        FInventoryModuleUpgradeAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetByIdAsync(
+        const FString& ownedItemId,
+        FInventoryModuleGetByIdAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetByIdsAsync(
+        const TArray<FString>& ownedItemIds,
+        FInventoryModuleGetByIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetByVirtualItemIdsAsync(
+        const TArray<FString>& virtualItemIds,
+        FInventoryModuleGetByVirtualItemIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetAllForCurrentAppAsync(
+        FInventoryModuleGetAllForCurrentAppAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetByAppIdsAsync(
+        const TArray<FString>& appIds,
+        FInventoryModuleGetByAppIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetWithVirtualItemsDataForCurrentAppAsync(
+        const FString& startAfter,
+        int32 limit,
+        FInventoryModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetWithVirtualItemsDataByAppIdsAsync(
+        const TArray<FString>& appIds,
+        const FString& startAfter,
+        int32 limit,
+        FInventoryModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void ParseInventoryItemData(
+        const FString& json,
+        FInventoryModuleParseInventoryItemDataResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void ParseInventoryItemsData(
+        const FString& json,
+        FInventoryModuleParseInventoryItemsDataResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetByTagsAsync(
+        const TArray<FString>& tags,
+        const FString& appId,
+        FInventoryModuleGetByTagsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void GetTagsAsync(
+        const FString& ownedItemId,
+        FInventoryModuleGetTagsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    static void SetTagsAsync(
+        const FString& ownedItemId,
+        const TArray<FString>& tags,
+        const FString& appId,
+        FInventoryModuleSetTagsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+             // TODO
+    }
 };

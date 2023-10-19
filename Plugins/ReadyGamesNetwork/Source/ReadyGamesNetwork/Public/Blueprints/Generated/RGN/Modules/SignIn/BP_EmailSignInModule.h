@@ -14,4 +14,20 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_EmailSignInModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
+    static void TryToSignIn(
+        FEmailSignInModuleTryToSignInResponse onSuccess, FEmailSignInModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
+    static void SendPasswordResetEmail(
+        const FString& email,
+        FEmailSignInModuleSendPasswordResetEmailResponse onSuccess, FEmailSignInModuleFailResponse onFail) {
+             // TODO
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
+    static void SignOut(
+        FEmailSignInModuleSignOutResponse onSuccess, FEmailSignInModuleFailResponse onFail) {
+             // TODO
+    }
 };
