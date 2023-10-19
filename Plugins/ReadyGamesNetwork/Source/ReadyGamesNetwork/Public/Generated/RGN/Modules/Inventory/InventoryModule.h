@@ -27,7 +27,12 @@ namespace RGN { namespace Modules { namespace Inventory {
             RGN::Modules::VirtualItems::Properties properties,
             const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Inventory::InventoryModuleCustomImpl::AddToInventoryAsync(
+                    virtualItemId,
+                    quantity,
+                    properties,
+                    complete,
+                    fail);
             };
         static void AddToInventoryAsync(
             string userId,
@@ -36,7 +41,13 @@ namespace RGN { namespace Modules { namespace Inventory {
             RGN::Modules::VirtualItems::Properties properties,
             const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Inventory::InventoryModuleCustomImpl::AddToInventoryAsync(
+                    userId,
+                    virtualItemId,
+                    quantity,
+                    properties,
+                    complete,
+                    fail);
             };
         static void AddToInventoryAsync(
             string userId,

@@ -26,7 +26,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
         static void GetProfileAsync(
             const function<void(RGN::Modules::UserProfile::UserData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetProfileAsync(
+                    complete,
+                    fail);
             };
         static void GetProfileAsync(
             string userId,
@@ -139,15 +141,10 @@ namespace RGN { namespace Modules { namespace UserProfile {
             CancellationToken cancellationToken,
             const function<void(bool result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = RGNCore::GetAppId();
-                requestData["base64String"] = base64String;
-                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
-                    "user-uploadProfilePicture",
-                    requestData,
-                    [complete] (nlohmann::json result) {
-                        complete(true.template get<bool>());
-                    },
+                RGN::Modules::UserProfile::UserProfileModuleCustomImpl::UploadAvatarImageAsync(
+                    bytes,
+                    cancellationToken,
+                    complete,
                     fail);
             };
         static void DownloadAvatarImageAsync(
@@ -232,7 +229,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
         static void SuspendAsync(
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::UserProfile::UserProfileModuleCustomImpl::SuspendAsync(
+                    complete,
+                    fail);
             };
         static void GetUserStateAsync(
             string userId,

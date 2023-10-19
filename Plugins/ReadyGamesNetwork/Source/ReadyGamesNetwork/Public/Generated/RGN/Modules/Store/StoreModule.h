@@ -89,7 +89,11 @@ namespace RGN { namespace Modules { namespace Store {
             string startAfter,
             const function<void(vector<RGN::Modules::Store::LootBox> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Store::StoreModuleCustomImpl::GetLootBoxesForCurrentAppAsync(
+                    limit,
+                    startAfter,
+                    complete,
+                    fail);
             };
         static void LootboxIsAvailableAsync(
             string name,
@@ -125,15 +129,9 @@ namespace RGN { namespace Modules { namespace Store {
             string name,
             const function<void(RGN::Modules::Inventory::InventoryItemData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = RGNCore::GetAppId();
-                requestData["name"] = name;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::PurchaseItem>(
-                    "storeV2-openLootBox",
-                    requestData,
-                    [complete] (RGN::Modules::Store::PurchaseItem result) {
-                        complete(new InventoryItemData(result.inventoryItem, result.virtualItem));
-                    },
+                RGN::Modules::Store::StoreModuleCustomImpl::OpenLootboxAsync(
+                    name,
+                    complete,
                     fail);
             };
         static void AddVirtualItemsStoreOfferAsync(
@@ -174,7 +172,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-importStoreOffersFromCSV",
                     requestData,
                     [complete] (RGN::Modules::Store::ImportStoreOffersFromCSVResponse result) {
-                        complete(importedOffers);
+                        complete(result.offers);
                     },
                     fail);
             };
@@ -193,7 +191,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-getByTags",
                     requestData,
                     [complete] (RGN::Modules::Store::GetStoreOffersResponse result) {
-                        complete(queriedOffers);
+                        complete(result.offers);
                     },
                     fail);
             };
@@ -209,7 +207,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-getByTimestamp",
                     requestData,
                     [complete] (RGN::Modules::Store::GetStoreOffersResponse result) {
-                        complete(queriedOffers);
+                        complete(result.offers);
                     },
                     fail);
             };
@@ -230,7 +228,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-getByAppIds",
                     requestData,
                     [complete] (RGN::Modules::Store::GetStoreOffersResponse result) {
-                        complete(queriedOffers);
+                        complete(result.offers);
                     },
                     fail);
             };
@@ -240,7 +238,12 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Store::StoreModuleCustomImpl::GetForCurrentAppAsync(
+                    limit,
+                    startAfter,
+                    ignoreTimestamp,
+                    complete,
+                    fail);
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             int32_t limit,
@@ -248,7 +251,12 @@ namespace RGN { namespace Modules { namespace Store {
             bool ignoreTimestamp,
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Store::StoreModuleCustomImpl::GetWithVirtualItemsDataForCurrentAppAsync(
+                    limit,
+                    startAfter,
+                    ignoreTimestamp,
+                    complete,
+                    fail);
             };
         static void GetWithVirtualItemsDataByAppIdsAsync(
             vector<string> appIds,

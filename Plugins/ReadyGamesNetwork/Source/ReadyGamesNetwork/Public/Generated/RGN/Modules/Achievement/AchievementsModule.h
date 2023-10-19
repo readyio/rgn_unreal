@@ -60,7 +60,11 @@ namespace RGN { namespace Modules { namespace Achievement {
             string startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetForCurrentAppAsync(
+                    limit,
+                    startAfter,
+                    complete,
+                    fail);
             };
         static void GetByAppIdsWithUserDataAsync(
             vector<string> appIds,
@@ -82,7 +86,11 @@ namespace RGN { namespace Modules { namespace Achievement {
             string startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                // Request parameters are null
+                RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetForCurrentAppWithUserDataAsync(
+                    limit,
+                    startAfter,
+                    complete,
+                    fail);
             };
         static void GetByRequestNameAsync(
             string requestName,
@@ -170,17 +178,11 @@ namespace RGN { namespace Modules { namespace Achievement {
             int32_t limit,
             const function<void(vector<RGN::Modules::Achievement::UserAchievement> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                nlohmann::json requestData;
-                requestData["appId"] = RGNCore::GetAppId();
-                requestData["userId"] = String;
-                requestData["startAfter"] = Int64;
-                requestData["limit"] = Int32;
-                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetUserAchievementsResponse>(
-                    "achievements-getUserAchievements",
-                    requestData,
-                    [complete] (RGN::Modules::Achievement::GetUserAchievementsResponse result) {
-                        complete(response.userAchievements);
-                    },
+                RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetUserAchievementsAsync(
+                    userId,
+                    startAfter,
+                    limit,
+                    complete,
                     fail);
             };
     };
