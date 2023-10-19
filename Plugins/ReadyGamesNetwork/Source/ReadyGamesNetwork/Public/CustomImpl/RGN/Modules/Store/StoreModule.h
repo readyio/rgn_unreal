@@ -15,6 +15,74 @@
 namespace RGN { namespace Modules { namespace Store {
 	class StoreModuleCustomImpl {
 	public:
+        static void GetLootBoxesForCurrentAppAsync(
+            int32_t limit,
+            string startAfter,
+            const function<void(vector<RGN::Modules::Store::LootBox> result)>& complete,
+            const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Store::StoreModule::GetLootBoxesByAppIdAsync(
+                    RGNCore::GetAppId(),
+                    limit,
+                    startAfter,
+                    complete,
+                    fail
+                );
+            };
+        static void OpenLootboxAsync(
+            string name,
+            const function<void(RGN::Modules::Inventory::InventoryItemData result)>& complete,
+            const function<void(int httpCode, string error)>& fail) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["name"] = name;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::PurchaseItem>(
+                    "storeV2-openLootBox",
+                    requestData,
+                    [complete](RGN::Modules::Store::PurchaseItem result) {
+                        RGN::Modules::Inventory::InventoryItemData inventoryItemData;
+                        inventoryItemData.id = result.inventoryItem.id;
+                        inventoryItemData.virtualItemId = result.virtualItem.id;
+                        inventoryItemData.appIds = result.inventoryItem.appIds;
+                        inventoryItemData.tags = result.inventoryItem.tags;
+                        inventoryItemData.quantity = result.inventoryItem.quantity;
+                        inventoryItemData.status = result.inventoryItem.status;
+                        inventoryItemData.itemUpgrades = result.inventoryItem.itemUpgrades;
+                        inventoryItemData.properties = result.inventoryItem.properties;
+                        inventoryItemData.virtualItem = result.virtualItem;
+                        complete(inventoryItemData);
+                    },
+                fail);
+            };
+        static void GetForCurrentAppAsync(
+            int32_t limit,
+            string startAfter,
+            bool ignoreTimestamp,
+            const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
+            const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Store::StoreModule::GetByAppIdsAsync(
+                    { RGNCore::GetAppId() },
+                    limit,
+                    startAfter,
+                    ignoreTimestamp,
+                    complete,
+                    fail
+                );
+            };
+        static void GetWithVirtualItemsDataForCurrentAppAsync(
+            int32_t limit,
+            string startAfter,
+            bool ignoreTimestamp,
+            const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
+            const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Store::StoreModule::GetWithVirtualItemsDataByAppIdsAsync(
+                    { RGNCore::GetAppId() },
+                    limit,
+                    startAfter,
+                    ignoreTimestamp,
+                    complete,
+                    fail
+                );
+            };
         static void BuyVirtualItemsAsync(
             std::vector<string> itemIds,
             std::vector<string> currencies,

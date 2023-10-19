@@ -10,6 +10,35 @@
 namespace RGN { namespace Modules { namespace Inventory {
 	class InventoryModuleCustomImpl {
 	public:
+        static void AddToInventoryAsync(
+            std::string virtualItemId,
+            int32_t quantity,
+            RGN::Modules::VirtualItems::Properties properties,
+            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
+                AddToInventoryAsync(RGNCore::GetUserId(), virtualItemId, quantity, properties, complete, fail);
+            };
+
+        static void AddToInventoryAsync(
+            std::string userId,
+            std::string virtualItemId,
+            int32_t quantity,
+            RGN::Modules::VirtualItems::Properties properties,
+            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const std::function<void(int httpCode, std::string error)>& fail) {
+                RGN::Modules::Inventory::InventoryItemData inventoryItemData;
+                inventoryItemData.virtualItemId = virtualItemId;
+                inventoryItemData.appIds = { RGNCore::GetAppId() };
+                inventoryItemData.quantity = quantity;
+                inventoryItemData.properties = { properties };
+                RGN::Modules::Inventory::InventoryModule::AddToInventoryAsync(
+                    userId,
+                    inventoryItemData,
+                    complete,
+                    fail
+                );
+            };
+
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             std::string startAfter,
             int32_t limit,
