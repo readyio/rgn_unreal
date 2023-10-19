@@ -53,6 +53,21 @@ public:
     static string GetStorageBucket();
  
     /***
+    * CallAPI<void,void>
+    **/
+    static void CallAPI(string name,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail, CancellationToken cancellationToken) {
+        InternalCallAPI(name, "", [complete](string response) {
+            complete();
+        }, fail, cancellationToken);
+    }
+    static void CallAPI(string name,
+        const function<void(void)>& complete,
+        const function<void(int, string)> fail) {
+        CallAPI(name, complete, fail, CancellationToken());
+    }
+    /***
     * CallAPI<string,string>
     **/
     static void CallAPI(string name, string body,
