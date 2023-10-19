@@ -2,7 +2,14 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "../../../../../Generated/RGN/Modules/Matchmaking/MatchmakingModule_Admin.h"
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <functional>
 #include "BP_MatchmakingModule_Admin.generated.h"
+
+using namespace std;
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FMatchmakingModule_AdminFailResponse, int32, code, const FString&, message);
 
@@ -16,6 +23,8 @@ public:
     static void DeleteMatchesByAppIdAsync(
         const FString& appIdToRemoveTheMatchesFor,
         FMatchmakingModuleAdminDeleteMatchesByAppIdAsyncResponse onSuccess, FMatchmakingModule_AdminFailResponse onFail) {
-             // TODO
+            string cpp_appIdToRemoveTheMatchesFor;
+			cpp_appIdToRemoveTheMatchesFor = string(TCHAR_TO_UTF8(*appIdToRemoveTheMatchesFor));
+            // TODO
     }
 };

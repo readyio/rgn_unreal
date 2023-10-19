@@ -3,6 +3,8 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../VirtualItems/PriceInfo.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;
@@ -25,7 +27,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-createLootBox",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["lootBoxId"].ToString().template get<string>());
+                        complete(result["lootBoxId"].template get<string>());
                     },
                     fail);
             };
@@ -40,7 +42,7 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-deleteLootBox",
                     requestData,
                     [complete] (nlohmann::json result) {
-                        complete(result["lootBoxId"].ToString().template get<string>());
+                        complete(result["lootBoxId"].template get<string>());
                     },
                     fail);
             };

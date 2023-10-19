@@ -2,7 +2,16 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "../../../../Core/BP_CancellationToken.h"
+#include "../../../../../Core/CancellationToken.h"
+#include "../../../../../Generated/RGN/Modules/Analytics/AnalyticsModule.h"
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <functional>
 #include "BP_AnalyticsModule.generated.h"
+
+using namespace std;
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FAnalyticsModuleFailResponse, int32, code, const FString&, message);
 
@@ -18,6 +27,12 @@ public:
         const FString& eventParameters,
         const FBP_CancellationToken& cancellationToken,
         FAnalyticsModuleLogEventAsyncResponse onSuccess, FAnalyticsModuleFailResponse onFail) {
-             // TODO
+            string cpp_eventName;
+            string cpp_eventParameters;
+            CancellationToken cpp_cancellationToken;
+			cpp_eventName = string(TCHAR_TO_UTF8(*eventName));
+			cpp_eventParameters = string(TCHAR_TO_UTF8(*eventParameters));
+			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            // TODO
     }
 };

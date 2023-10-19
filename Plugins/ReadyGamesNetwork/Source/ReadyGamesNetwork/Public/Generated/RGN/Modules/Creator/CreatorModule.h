@@ -9,6 +9,8 @@
 #include "CreatorData.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "../Currency/ClaimCurrencyResponseData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

@@ -14,6 +14,8 @@
 #include "ClaimByRequestNameRequestData.h"
 #include "GetUserAchievementsResponse.h"
 #include "UserAchievement.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

@@ -2,18 +2,32 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/AchievementsModule.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/GetAchievementsResponse.h"
 #include "BP_GetAchievementsResponse.h"
-#include "BP_AchievementData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/GetAchievementsWithUserDataResponse.h"
 #include "BP_GetAchievementsWithUserDataResponse.h"
-#include "BP_AchievementWithUserData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/AchievementData.h"
+#include "BP_AchievementData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/TriggerAndClaimResponse.h"
 #include "BP_TriggerAndClaimResponse.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/TriggerByIdRequestData.h"
 #include "BP_TriggerByIdRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/TriggerByRequestNameRequestData.h"
 #include "BP_TriggerByRequestNameRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/ClaimByIdRequestData.h"
 #include "BP_ClaimByIdRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/ClaimByRequestNameRequestData.h"
 #include "BP_ClaimByRequestNameRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/GetUserAchievementsResponse.h"
 #include "BP_GetUserAchievementsResponse.h"
-#include "BP_UserAchievement.h"
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <functional>
 #include "BP_AchievementsModule.generated.h"
+
+using namespace std;
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FAchievementsModuleFailResponse, int32, code, const FString&, message);
 
@@ -38,7 +52,13 @@ public:
     static void GetByIdsAsync(
         const TArray<FString>& ids,
         FAchievementsModuleGetByIdsAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            vector<string> cpp_ids;
+			for (const auto& ids_item : ids) {
+				string cpp_ids_item;
+				cpp_ids_item = string(TCHAR_TO_UTF8(*ids_item));
+				cpp_ids.push_back(cpp_ids_item);
+			}
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByAppIdsAsync(
@@ -46,14 +66,28 @@ public:
         int32 limit,
         const FString& startAfter,
         FAchievementsModuleGetByAppIdsAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            vector<string> cpp_appIds;
+            int32_t cpp_limit;
+            string cpp_startAfter;
+			for (const auto& appIds_item : appIds) {
+				string cpp_appIds_item;
+				cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+				cpp_appIds.push_back(cpp_appIds_item);
+			}
+			cpp_limit = limit;
+			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetForCurrentAppAsync(
         int32 limit,
         const FString& startAfter,
         FAchievementsModuleGetForCurrentAppAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            int32_t cpp_limit;
+            string cpp_startAfter;
+			cpp_limit = limit;
+			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByAppIdsWithUserDataAsync(
@@ -62,52 +96,88 @@ public:
         const FString& startAfter,
         bool withHistory,
         FAchievementsModuleGetByAppIdsWithUserDataAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            vector<string> cpp_appIds;
+            int32_t cpp_limit;
+            string cpp_startAfter;
+            bool cpp_withHistory;
+			for (const auto& appIds_item : appIds) {
+				string cpp_appIds_item;
+				cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+				cpp_appIds.push_back(cpp_appIds_item);
+			}
+			cpp_limit = limit;
+			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+			cpp_withHistory = withHistory;
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetForCurrentAppWithUserDataAsync(
         int32 limit,
         const FString& startAfter,
         FAchievementsModuleGetForCurrentAppWithUserDataAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            int32_t cpp_limit;
+            string cpp_startAfter;
+			cpp_limit = limit;
+			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByRequestNameAsync(
         const FString& requestName,
         FAchievementsModuleGetByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            string cpp_requestName;
+			cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByRequestNamesAsync(
         const TArray<FString>& requestNames,
         FAchievementsModuleGetByRequestNamesAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            vector<string> cpp_requestNames;
+			for (const auto& requestNames_item : requestNames) {
+				string cpp_requestNames_item;
+				cpp_requestNames_item = string(TCHAR_TO_UTF8(*requestNames_item));
+				cpp_requestNames.push_back(cpp_requestNames_item);
+			}
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void TriggerByIdAsync(
         const FString& id,
         int32 progress,
         FAchievementsModuleTriggerByIdAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            string cpp_id;
+            int32_t cpp_progress;
+			cpp_id = string(TCHAR_TO_UTF8(*id));
+			cpp_progress = progress;
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void TriggerByRequestNameAsync(
         const FString& requestName,
         int32 progress,
         FAchievementsModuleTriggerByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            string cpp_requestName;
+            int32_t cpp_progress;
+			cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
+			cpp_progress = progress;
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void ClaimByIdAsync(
         const FString& achievementId,
         FAchievementsModuleClaimByIdAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            string cpp_achievementId;
+			cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void ClaimByRequestNameAsync(
         const FString& requestName,
         FAchievementsModuleClaimByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            string cpp_requestName;
+			cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetUserAchievementsAsync(
@@ -115,6 +185,12 @@ public:
         int64 startAfter,
         int32 limit,
         FAchievementsModuleGetUserAchievementsAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
-             // TODO
+            string cpp_userId;
+            int64_t cpp_startAfter;
+            int32_t cpp_limit;
+			cpp_userId = string(TCHAR_TO_UTF8(*userId));
+			cpp_startAfter = startAfter;
+			cpp_limit = limit;
+            // TODO
     }
 };

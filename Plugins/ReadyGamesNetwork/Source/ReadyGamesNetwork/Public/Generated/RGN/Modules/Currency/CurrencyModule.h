@@ -11,6 +11,8 @@
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "PurchaseCurrencyProductRequestData.h"
 #include "AddUserCurrenciesResponseData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

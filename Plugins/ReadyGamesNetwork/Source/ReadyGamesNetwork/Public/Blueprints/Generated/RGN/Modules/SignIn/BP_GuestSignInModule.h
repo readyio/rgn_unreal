@@ -2,7 +2,14 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "../../../../../Generated/RGN/Modules/SignIn/GuestSignInModule.h"
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <functional>
 #include "BP_GuestSignInModule.generated.h"
+
+using namespace std;
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FGuestSignInModuleFailResponse, int32, code, const FString&, message);
 
@@ -16,11 +23,11 @@ public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
     static void TryToSignInAsync(
         FGuestSignInModuleTryToSignInAsyncResponse onSuccess, FGuestSignInModuleFailResponse onFail) {
-             // TODO
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
     static void SignOut(
         FGuestSignInModuleSignOutResponse onSuccess, FGuestSignInModuleFailResponse onFail) {
-             // TODO
+            // TODO
     }
 };

@@ -2,7 +2,8 @@
 
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
-#include "../../../../Generated/RGN/Modules/Inventory/InventoryModule.h"
+#include "../../../../Generated/RGN/Modules/Inventory/AddVirtualItemToUserInventoryRequestData.h"
+#include "../../../../Generated/RGN/Modules/Inventory/AddToInventoryResponseData.h"
 #include "../../../../Generated/RGN/Modules/Inventory/InventoryItemsWithVirtualItemsData.h"
 #include "../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
 #include <string>
@@ -31,14 +32,28 @@ namespace RGN { namespace Modules { namespace Inventory {
                 inventoryItemData.appIds = { RGNCore::GetAppId() };
                 inventoryItemData.quantity = quantity;
                 inventoryItemData.properties = { properties };
-                RGN::Modules::Inventory::InventoryModule::AddToInventoryAsync(
+                AddToInventoryAsync(
                     userId,
                     inventoryItemData,
                     complete,
                     fail
                 );
             };
-
+        static void AddToInventoryAsync(
+            string userId,
+            RGN::Modules::Inventory::InventoryItemData inventoryData,
+            const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const function<void(int httpCode, string error)>& fail) {
+                RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData requestData;
+                requestData.userId = userId;
+                requestData.virtualItemInventoryData = inventoryData;
+                RGNCore::CallAPI<RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData, RGN::Modules::Inventory::AddToInventoryResponseData>(
+                    "inventoryV2-addToInventory",
+                    requestData,
+                    complete,
+                    fail
+                );
+            };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             std::string startAfter,
             int32_t limit,

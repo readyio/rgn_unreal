@@ -3,6 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../../../../CustomImpl/RGN/Modules/VirtualItems/VirtualItemsModule.h"
+#include "../../../../Core/CancellationToken.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "VirtualItem.h"
 #include "AddVirtualItemResponseData.h"
@@ -13,6 +14,8 @@
 #include "GetVirtualItemsByIdsRequestData.h"
 #include "GetVirtualItemTagsResponse.h"
 #include "../../Model/ImageSize.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

@@ -3,6 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../../../../CustomImpl/RGN/Modules/UserProfile/UserProfileModule.h"
+#include "../../../../Core/CancellationToken.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "UserData.h"
 #include "GetUserProfileRequestData.h"
@@ -16,6 +17,8 @@
 #include "SetInvisibleStatusRequestData.h"
 #include "GetUserStatusResponseData.h"
 #include "GetUserStatusRequestData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

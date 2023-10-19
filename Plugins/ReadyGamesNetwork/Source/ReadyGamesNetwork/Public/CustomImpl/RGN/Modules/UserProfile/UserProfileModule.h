@@ -3,7 +3,10 @@
 #include "../../../../json.hpp"
 #include "../../../../base64.hpp"
 #include "../../../../Core/RGNCore.h"
-#include "../../../../Generated/RGN/Modules/UserProfile/UserProfileModule.h"
+#include "../../../../Generated/RGN/Modules/UserProfile/GetUserProfileRequestData.h"
+#include "../../../../Generated/RGN/Modules/UserProfile/UserData.h"
+#include "../../../../Generated/RGN/Modules/UserProfile/UserProfilePicture.h"
+#include "../../../../Generated/RGN/Model/ImageSize.h"
 #include <string>
 
 namespace RGN { namespace Modules { namespace UserProfile {
@@ -12,8 +15,11 @@ namespace RGN { namespace Modules { namespace UserProfile {
         static void GetProfileAsync(
             const function<void(RGN::Modules::UserProfile::UserData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
-                RGN::Modules::UserProfile::UserProfileModule::GetProfileAsync(
-                    RGNCore::GetUserId(),
+                RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
+                requestData.userId = RGNCore::GetUserId();
+                RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserProfileRequestData, RGN::Modules::UserProfile::UserData>(
+                    "user-getProfile",
+                    requestData,
                     complete,
                     fail
                 );
@@ -61,7 +67,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             CancellationToken cancellationToken,
             const std::function<void(std::vector<uint8_t> result)>& complete,
             const std::function<void(int httpCode, std::string error)>& fail) {
-                UserProfileModule::GetProfileAsync([complete, fail, size]
+                GetProfileAsync([complete, fail, size]
                 (RGN::Modules::UserProfile::UserData userData) {
                     RGN::Modules::UserProfile::UserProfilePicture userProfilePicture = userData.profilePicture;
 

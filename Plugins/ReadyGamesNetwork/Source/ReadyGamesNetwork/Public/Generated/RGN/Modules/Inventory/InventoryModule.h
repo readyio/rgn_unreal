@@ -14,6 +14,8 @@
 #include "../Currency/Currency.h"
 #include "VirtualItemUpgrade.h"
 #include "InventoryItemsWithVirtualItemsData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

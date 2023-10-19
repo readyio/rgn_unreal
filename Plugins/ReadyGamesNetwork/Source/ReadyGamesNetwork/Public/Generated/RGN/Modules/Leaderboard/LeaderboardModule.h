@@ -8,6 +8,8 @@
 #include "SetScoreResponseData.h"
 #include "LeaderboardEntry.h"
 #include "GetLeaderboardEntriesResponseData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

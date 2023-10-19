@@ -16,7 +16,7 @@ namespace RGN { namespace Base64 {
         return (std::isalnum(c) || (c == '+') || (c == '/'));
     }
 
-    std::string base64_encode(uint8_t const* buf, unsigned int bufLen) {
+    inline std::string base64_encode(uint8_t const* buf, unsigned int bufLen) {
         std::string ret;
         int i = 0;
         int j = 0;
@@ -57,7 +57,7 @@ namespace RGN { namespace Base64 {
         return ret;
     }
 
-    std::vector<uint8_t> base64_decode(std::string const& encoded_string) {
+    inline std::vector<uint8_t> base64_decode(std::string const& encoded_string) {
         int in_len = encoded_string.size();
         int i = 0;
         int j = 0;

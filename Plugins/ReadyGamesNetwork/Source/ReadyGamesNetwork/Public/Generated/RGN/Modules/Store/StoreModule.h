@@ -3,6 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../../../../CustomImpl/RGN/Modules/Store/StoreModule.h"
+#include "../../../../Core/CancellationToken.h"
 #include "BuyVirtualItemsResponse.h"
 #include "PurchaseResult.h"
 #include "BuyStoreOfferResponse.h"
@@ -20,6 +21,8 @@
 #include "SetPricesRequestData.h"
 #include "TimeInfo.h"
 #include "SetTimeRequestData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

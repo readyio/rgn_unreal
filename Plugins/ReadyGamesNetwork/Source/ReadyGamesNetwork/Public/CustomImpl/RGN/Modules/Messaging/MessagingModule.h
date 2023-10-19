@@ -2,7 +2,7 @@
 
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
-#include "../../../../Generated/RGN/Modules/Messaging/MessagingModule.h"
+#include "../../../../Generated/RGN/Modules/Messaging/IMessageReceiver.h"
 #include <string>
 
 namespace RGN { namespace Modules { namespace Messaging {

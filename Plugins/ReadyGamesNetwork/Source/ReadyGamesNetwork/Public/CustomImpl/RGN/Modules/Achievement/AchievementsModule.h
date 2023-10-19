@@ -2,8 +2,9 @@
 
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
-#include "../../../../Generated/RGN/Modules/Achievement/AchievementsModule.h"
+#include "../../../../Generated/RGN/Modules/Achievement/GetAchievementsResponse.h"
 #include "../../../../Generated/RGN/Modules/Achievement/GetAchievementsWithUserDataResponse.h"
+#include "../../../../Generated/RGN/Modules/Achievement/GetUserAchievementsResponse.h"
 #include <string>
 #include <algorithm>
 
@@ -15,11 +16,17 @@ namespace RGN { namespace Modules { namespace Achievement {
             std::string startAfter,
             const std::function<void(std::vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const std::function<void(int httpCode, std::string error)>& fail) {
-                RGN::Modules::Achievement::AchievementsModule::GetByAppIdsAsync(
-                    { RGNCore::GetAppId() },
-                    limit,
-                    startAfter,
-                    complete,
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["appIds"] = { RGNCore::GetAppId() };
+                requestData["limit"] = limit;
+                requestData["startAfter"] = startAfter;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
+                    "achievements-getByAppIds",
+                    requestData,
+                    [complete](RGN::Modules::Achievement::GetAchievementsResponse result) {
+                        complete(result.achievements);
+                    },
                     fail
                 );
             };

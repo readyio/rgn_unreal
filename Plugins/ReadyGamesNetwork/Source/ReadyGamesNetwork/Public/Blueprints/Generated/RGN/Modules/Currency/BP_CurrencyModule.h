@@ -2,15 +2,30 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "../../../../../Generated/RGN/Modules/Currency/CurrencyModule.h"
+#include "../../../../../Generated/RGN/Modules/Currency/RGNCoinEconomy.h"
 #include "BP_RGNCoinEconomy.h"
+#include "../../../../../Generated/RGN/Model/Request/BaseRequestData.h"
 #include "../../Model/Request/BP_BaseRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Currency/PurchaseRGNCoinRequestData.h"
 #include "BP_PurchaseRGNCoinRequestData.h"
-#include "BP_Currency.h"
+#include "../../../../../Generated/RGN/Modules/Currency/CurrencyProductsData.h"
 #include "BP_CurrencyProductsData.h"
+#include "../../../../../Generated/RGN/Model/Request/BaseMigrationRequestData.h"
 #include "../../Model/Request/BP_BaseMigrationRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Currency/PurchaseCurrencyProductRequestData.h"
 #include "BP_PurchaseCurrencyProductRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Currency/Currency.h"
+#include "BP_Currency.h"
+#include "../../../../../Generated/RGN/Modules/Currency/AddUserCurrenciesResponseData.h"
 #include "BP_AddUserCurrenciesResponseData.h"
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <functional>
 #include "BP_CurrencyModule.generated.h"
+
+using namespace std;
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FCurrencyModuleFailResponse, int32, code, const FString&, message);
 
@@ -27,7 +42,7 @@ public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void GetRGNCoinEconomyAsync(
         FCurrencyModuleGetRGNCoinEconomyAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
-             // TODO
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void PurchaseRGNCoinAsync(
@@ -35,23 +50,37 @@ public:
         const FString& iapTransactionId,
         const FString& iapReceipt,
         FCurrencyModulePurchaseRGNCoinAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
-             // TODO
+            string cpp_iapUUID;
+            string cpp_iapTransactionId;
+            string cpp_iapReceipt;
+			cpp_iapUUID = string(TCHAR_TO_UTF8(*iapUUID));
+			cpp_iapTransactionId = string(TCHAR_TO_UTF8(*iapTransactionId));
+			cpp_iapReceipt = string(TCHAR_TO_UTF8(*iapReceipt));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void GetInAppPurchaseCurrencyDataAsync(
         FCurrencyModuleGetInAppPurchaseCurrencyDataAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
-             // TODO
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void PurchaseCurrencyProductAsync(
         const FString& productId,
         FCurrencyModulePurchaseCurrencyProductAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
-             // TODO
+            string cpp_productId;
+			cpp_productId = string(TCHAR_TO_UTF8(*productId));
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void AddUserCurrenciesAsync(
         const TArray<FBP_Currency>& currencies,
         FCurrencyModuleAddUserCurrenciesAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
-             // TODO
+            vector<RGN::Modules::Currency::Currency> cpp_currencies;
+			for (const auto& currencies_item : currencies) {
+				RGN::Modules::Currency::Currency cpp_currencies_item;
+				FBP_Currency::ConvertToCoreModel(currencies_item, cpp_currencies_item);
+				cpp_currencies.push_back(cpp_currencies_item);
+			}
+            // TODO
     }
 };

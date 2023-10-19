@@ -10,6 +10,8 @@
 #include "UpdateUserLevelRequestData.h"
 #include "UpdateUserLevelResponseData.h"
 #include "GetPlayerLevelResponseData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

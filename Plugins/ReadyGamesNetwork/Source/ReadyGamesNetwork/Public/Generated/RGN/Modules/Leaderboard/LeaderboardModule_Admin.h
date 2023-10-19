@@ -3,6 +3,8 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "LeaderboardData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;

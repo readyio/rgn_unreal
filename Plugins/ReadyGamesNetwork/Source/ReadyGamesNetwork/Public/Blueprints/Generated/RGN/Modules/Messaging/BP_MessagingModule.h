@@ -2,8 +2,16 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "../../../../../Generated/RGN/Modules/Messaging/MessagingModule.h"
+#include "../../../../../Generated/RGN/Modules/Messaging/IMessageReceiver.h"
 #include "BP_IMessageReceiver.h"
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <functional>
 #include "BP_MessagingModule.generated.h"
+
+using namespace std;
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FMessagingModuleFailResponse, int32, code, const FString&, message);
 
@@ -20,14 +28,22 @@ public:
         const FString& topic,
         const FBP_IMessageReceiver& messageReceiver,
         FMessagingModuleSubscribeResponse onSuccess, FMessagingModuleFailResponse onFail) {
-             // TODO
+            string cpp_topic;
+            RGN::Modules::Messaging::IMessageReceiver cpp_messageReceiver;
+			cpp_topic = string(TCHAR_TO_UTF8(*topic));
+			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void Unsubscribe(
         const FString& topic,
         const FBP_IMessageReceiver& messageReceiver,
         FMessagingModuleUnsubscribeResponse onSuccess, FMessagingModuleFailResponse onFail) {
-             // TODO
+            string cpp_topic;
+            RGN::Modules::Messaging::IMessageReceiver cpp_messageReceiver;
+			cpp_topic = string(TCHAR_TO_UTF8(*topic));
+			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
+            // TODO
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void SendMessageByUserId(
@@ -37,6 +53,16 @@ public:
         const FString& title,
         const FString& text,
         FMessagingModuleSendMessageByUserIdResponse onSuccess, FMessagingModuleFailResponse onFail) {
-             // TODO
+            string cpp_appId;
+            string cpp_userId;
+            string cpp_payload;
+            string cpp_title;
+            string cpp_text;
+			cpp_appId = string(TCHAR_TO_UTF8(*appId));
+			cpp_userId = string(TCHAR_TO_UTF8(*userId));
+			cpp_payload = string(TCHAR_TO_UTF8(*payload));
+			cpp_title = string(TCHAR_TO_UTF8(*title));
+			cpp_text = string(TCHAR_TO_UTF8(*text));
+            // TODO
     }
 };

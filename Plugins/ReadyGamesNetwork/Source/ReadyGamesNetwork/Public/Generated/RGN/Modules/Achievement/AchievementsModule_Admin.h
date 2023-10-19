@@ -3,6 +3,8 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "AchievementData.h"
+#include <vector>
+#include <unordered_map>
 #include <string>
 #include <functional>
 using namespace std;
