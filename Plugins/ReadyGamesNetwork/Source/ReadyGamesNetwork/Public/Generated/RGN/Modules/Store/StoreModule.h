@@ -165,7 +165,7 @@ namespace RGN { namespace Modules { namespace Store {
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
-                requestData["userId"] = userId;
+                requestData["userId"] = RGNCore::GetUserId();
                 requestData["csvUtf8String"] = content;
                 requestData["delimiter"] = delimiter;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::ImportStoreOffersFromCSVResponse>(

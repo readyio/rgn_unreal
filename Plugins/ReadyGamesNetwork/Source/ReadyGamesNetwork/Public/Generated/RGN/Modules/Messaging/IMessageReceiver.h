@@ -6,7 +6,6 @@ using namespace std;
 
 namespace RGN { namespace Modules { namespace Messaging {
     struct IMessageReceiver {
-        virtual void OnMessageReceived(string topic, RGN::Modules::Messaging::Message message) = 0;
     };
 }}}
 
