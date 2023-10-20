@@ -107,7 +107,7 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
 }
 
 bool RGNCore::IsLoggedIn() {
-    return _idToken != "";
+    return _userId != "" && _idToken != "";
 }
 
 string RGNCore::GetUserId() {
@@ -217,11 +217,9 @@ void RGNCore::LoadAuthSession() {
     string authDataString;
     if (SharedPrefs::Load("AuthSession", authDataString)) {
         json authDataJson = json::parse(authDataString);
-        bool authIsValid = authDataJson.contains("idToken") && authDataJson.contains("refreshToken");
-        if (authIsValid) {
-            _idToken = authDataJson["idToken"].get<string>();
-            _refreshToken = authDataJson["refreshToken"].get<string>();
-        }
+        _userId = authDataJson.contains("userId") ? authDataJson["userId"].get<string>() : "";
+        _idToken = authDataJson.contains("idToken") ? authDataJson["idToken"].get<string>() : "";
+        _refreshToken = authDataJson.contains("refreshToken") ? authDataJson["refreshToken"].get<string>() : "";
     }
 
     if (wasNotLoggedIn && IsLoggedIn()) {
@@ -231,6 +229,7 @@ void RGNCore::LoadAuthSession() {
 
 void RGNCore::SaveAuthSession() {
     json authDataJson;
+    authDataJson["userId"] = _userId;
     authDataJson["idToken"] = _idToken;
     authDataJson["refreshToken"] = _refreshToken;
     SharedPrefs::Save("AuthSession", authDataJson.dump());
