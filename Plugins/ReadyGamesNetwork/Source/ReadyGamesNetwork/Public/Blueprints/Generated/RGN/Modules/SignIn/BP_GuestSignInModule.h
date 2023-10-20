@@ -23,11 +23,19 @@ public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
     static void TryToSignInAsync(
         FGuestSignInModuleTryToSignInAsyncResponse onSuccess, FGuestSignInModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::SignIn::GuestSignInModule::TryToSignInAsync(
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | SignIn")
     static void SignOut(
         FGuestSignInModuleSignOutResponse onSuccess, FGuestSignInModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::SignIn::GuestSignInModule::SignOut(
+            );
     }
 };

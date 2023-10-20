@@ -44,7 +44,17 @@ public:
         FLeaderboardModuleGetLeaderboardByIdAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
             string cpp_id;
 			cpp_id = string(TCHAR_TO_UTF8(*id));
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardByIdAsync(
+                cpp_id,
+                [onSuccess](RGN::Modules::Leaderboard::LeaderboardData response) {
+                    FBP_LeaderboardData bpResponse;
+					FBP_LeaderboardData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetLeaderboardByRequestNameAsync(
@@ -52,7 +62,17 @@ public:
         FLeaderboardModuleGetLeaderboardByRequestNameAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
             string cpp_requestName;
 			cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardByRequestNameAsync(
+                cpp_requestName,
+                [onSuccess](RGN::Modules::Leaderboard::LeaderboardData response) {
+                    FBP_LeaderboardData bpResponse;
+					FBP_LeaderboardData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetLeaderboardByRequestNamesAsync(
@@ -64,12 +84,39 @@ public:
 				cpp_requestNames_item = string(TCHAR_TO_UTF8(*requestNames_item));
 				cpp_requestNames.push_back(cpp_requestNames_item);
 			}
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardByRequestNamesAsync(
+                cpp_requestNames,
+                [onSuccess](vector<RGN::Modules::Leaderboard::LeaderboardData> response) {
+                    TArray<FBP_LeaderboardData> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_LeaderboardData b_response_item;
+						FBP_LeaderboardData::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetLeaderboardIdsAsync(
         FLeaderboardModuleGetLeaderboardIdsAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardIdsAsync(
+                [onSuccess](vector<string> response) {
+                    TArray<FString> bpResponse;
+					for (const auto& response_item : response) {
+						FString b_response_item;
+						b_response_item = FString(response_item.c_str());
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void SetScoreAsync(
@@ -83,7 +130,19 @@ public:
 			cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
 			cpp_score = score;
 			cpp_extraData = string(TCHAR_TO_UTF8(*extraData));
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::SetScoreAsync(
+                cpp_leaderboardId,
+                cpp_score,
+                cpp_extraData,
+                [onSuccess](int32_t response) {
+                    int32 bpResponse;
+					bpResponse = response;
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void AddScoreAsync(
@@ -97,7 +156,19 @@ public:
 			cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
 			cpp_score = score;
 			cpp_extraData = string(TCHAR_TO_UTF8(*extraData));
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::AddScoreAsync(
+                cpp_leaderboardId,
+                cpp_score,
+                cpp_extraData,
+                [onSuccess](int32_t response) {
+                    int32 bpResponse;
+					bpResponse = response;
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetUserEntryAsync(
@@ -105,7 +176,17 @@ public:
         FLeaderboardModuleGetUserEntryAsyncResponse onSuccess, FLeaderboardModuleFailResponse onFail) {
             string cpp_leaderboardId;
 			cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::GetUserEntryAsync(
+                cpp_leaderboardId,
+                [onSuccess](RGN::Modules::Leaderboard::LeaderboardEntry response) {
+                    FBP_LeaderboardEntry bpResponse;
+					FBP_LeaderboardEntry::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetEntriesAsync(
@@ -122,6 +203,23 @@ public:
 			cpp_quantityTop = quantityTop;
 			cpp_includeUser = includeUser;
 			cpp_quantityAroundUser = quantityAroundUser;
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule::GetEntriesAsync(
+                cpp_leaderboardId,
+                cpp_quantityTop,
+                cpp_includeUser,
+                cpp_quantityAroundUser,
+                [onSuccess](vector<RGN::Modules::Leaderboard::LeaderboardEntry> response) {
+                    TArray<FBP_LeaderboardEntry> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_LeaderboardEntry b_response_item;
+						FBP_LeaderboardEntry::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

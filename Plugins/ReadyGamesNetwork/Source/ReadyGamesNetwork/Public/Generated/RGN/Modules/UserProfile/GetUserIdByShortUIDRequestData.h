@@ -10,6 +10,23 @@ using namespace std;
 namespace RGN { namespace Modules { namespace UserProfile {
     struct GetUserIdByShortUIDRequestData : public RGN::Model::Request::BaseMigrationRequestData {
         string shortUID;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetUserIdByShortUIDRequestData, shortUID)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetUserIdByShortUIDRequestData& nlohmann_json_t) {
+            nlohmann_json_j["version"] = nlohmann_json_t.version;
+            nlohmann_json_j["appPackageName"] = nlohmann_json_t.appPackageName;
+            nlohmann_json_j["shortUID"] = nlohmann_json_t.shortUID;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetUserIdByShortUIDRequestData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("version")) {
+                nlohmann_json_j.at("version").get_to(nlohmann_json_t.version);
+            }
+            if (nlohmann_json_j.contains("appPackageName")) {
+                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+            }
+            if (nlohmann_json_j.contains("shortUID")) {
+                nlohmann_json_j.at("shortUID").get_to(nlohmann_json_t.shortUID);
+            }
+        }
     };
 }}}

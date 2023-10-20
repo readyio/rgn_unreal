@@ -20,6 +20,23 @@ namespace RGN { namespace Model { namespace OpenSea {
          * Indicating how you would like it to be displayed
          */
         string display_type;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(OpenSeaAttribute, trait_type, value, display_type)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const OpenSeaAttribute& nlohmann_json_t) {
+            nlohmann_json_j["trait_type"] = nlohmann_json_t.trait_type;
+            nlohmann_json_j["value"] = nlohmann_json_t.value;
+            nlohmann_json_j["display_type"] = nlohmann_json_t.display_type;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, OpenSeaAttribute& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("trait_type")) {
+                nlohmann_json_j.at("trait_type").get_to(nlohmann_json_t.trait_type);
+            }
+            if (nlohmann_json_j.contains("value")) {
+                nlohmann_json_j.at("value").get_to(nlohmann_json_t.value);
+            }
+            if (nlohmann_json_j.contains("display_type")) {
+                nlohmann_json_j.at("display_type").get_to(nlohmann_json_t.display_type);
+            }
+        }
     };
 }}}

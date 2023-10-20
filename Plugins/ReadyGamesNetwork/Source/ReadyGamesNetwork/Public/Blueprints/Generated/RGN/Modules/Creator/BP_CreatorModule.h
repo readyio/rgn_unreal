@@ -44,7 +44,17 @@ public:
         FCreatorModuleBecomeACreatorAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
             string cpp_brandName;
 			cpp_brandName = string(TCHAR_TO_UTF8(*brandName));
-            // TODO
+            RGN::Modules::Creator::CreatorModule::BecomeACreatorAsync(
+                cpp_brandName,
+                [onSuccess](RGN::Modules::Creator::CreatorSignupResponseData response) {
+                    FBP_CreatorSignupResponseData bpResponse;
+					FBP_CreatorSignupResponseData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
     static void SubmitItemAsync(
@@ -52,16 +62,44 @@ public:
         FCreatorModuleSubmitItemAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
             RGN::Modules::VirtualItems::VirtualItem cpp_customizedItem;
 			FBP_VirtualItem::ConvertToCoreModel(customizedItem, cpp_customizedItem);
-            // TODO
+            RGN::Modules::Creator::CreatorModule::SubmitItemAsync(
+                cpp_customizedItem,
+                [onSuccess](RGN::Modules::Creator::CreatorSubmitItemResponseData response) {
+                    FBP_CreatorSubmitItemResponseData bpResponse;
+					FBP_CreatorSubmitItemResponseData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
     static void GetCreatorDataAsync(
         FCreatorModuleGetCreatorDataAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::Creator::CreatorModule::GetCreatorDataAsync(
+                [onSuccess](RGN::Modules::Creator::CreatorData response) {
+                    FBP_CreatorData bpResponse;
+					FBP_CreatorData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
     static void ClaimCurrenciesAsync(
         FCreatorModuleClaimCurrenciesAsyncResponse onSuccess, FCreatorModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::Creator::CreatorModule::ClaimCurrenciesAsync(
+                [onSuccess](RGN::Modules::Currency::ClaimCurrencyResponseData response) {
+                    FBP_ClaimCurrencyResponseData bpResponse;
+					FBP_ClaimCurrencyResponseData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

@@ -10,6 +10,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace UserProfile {
     struct SearchUsersResultData {
         vector<RGN::Modules::UserProfile::UserData> queryResult;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(SearchUsersResultData, queryResult)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const SearchUsersResultData& nlohmann_json_t) {
+            nlohmann_json_j["queryResult"] = nlohmann_json_t.queryResult;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, SearchUsersResultData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("queryResult")) {
+                nlohmann_json_j.at("queryResult").get_to(nlohmann_json_t.queryResult);
+            }
+        }
     };
 }}}

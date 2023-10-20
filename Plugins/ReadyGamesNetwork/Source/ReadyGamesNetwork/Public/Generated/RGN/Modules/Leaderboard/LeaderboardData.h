@@ -97,6 +97,67 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * This field is automatically populated by the backend
          */
         string updatedBy;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(LeaderboardData, id, requestName, name, description, setBy, invertSortOrder, decimalOffset, type, resetEveryTimeAtCron, rewardsAtReset, createdAt, updatedAt, createdBy, updatedBy)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const LeaderboardData& nlohmann_json_t) {
+            nlohmann_json_j["id"] = nlohmann_json_t.id;
+            nlohmann_json_j["requestName"] = nlohmann_json_t.requestName;
+            nlohmann_json_j["name"] = nlohmann_json_t.name;
+            nlohmann_json_j["description"] = nlohmann_json_t.description;
+            nlohmann_json_j["setBy"] = nlohmann_json_t.setBy;
+            nlohmann_json_j["invertSortOrder"] = nlohmann_json_t.invertSortOrder;
+            nlohmann_json_j["decimalOffset"] = nlohmann_json_t.decimalOffset;
+            nlohmann_json_j["type"] = nlohmann_json_t.type;
+            nlohmann_json_j["resetEveryTimeAtCron"] = nlohmann_json_t.resetEveryTimeAtCron;
+            nlohmann_json_j["rewardsAtReset"] = nlohmann_json_t.rewardsAtReset;
+            nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
+            nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
+            nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
+            nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("id")) {
+                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+            }
+            if (nlohmann_json_j.contains("requestName")) {
+                nlohmann_json_j.at("requestName").get_to(nlohmann_json_t.requestName);
+            }
+            if (nlohmann_json_j.contains("name")) {
+                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+            }
+            if (nlohmann_json_j.contains("description")) {
+                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+            }
+            if (nlohmann_json_j.contains("setBy")) {
+                nlohmann_json_j.at("setBy").get_to(nlohmann_json_t.setBy);
+            }
+            if (nlohmann_json_j.contains("invertSortOrder")) {
+                nlohmann_json_j.at("invertSortOrder").get_to(nlohmann_json_t.invertSortOrder);
+            }
+            if (nlohmann_json_j.contains("decimalOffset")) {
+                nlohmann_json_j.at("decimalOffset").get_to(nlohmann_json_t.decimalOffset);
+            }
+            if (nlohmann_json_j.contains("type")) {
+                nlohmann_json_j.at("type").get_to(nlohmann_json_t.type);
+            }
+            if (nlohmann_json_j.contains("resetEveryTimeAtCron")) {
+                nlohmann_json_j.at("resetEveryTimeAtCron").get_to(nlohmann_json_t.resetEveryTimeAtCron);
+            }
+            if (nlohmann_json_j.contains("rewardsAtReset")) {
+                nlohmann_json_j.at("rewardsAtReset").get_to(nlohmann_json_t.rewardsAtReset);
+            }
+            if (nlohmann_json_j.contains("createdAt")) {
+                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+            }
+            if (nlohmann_json_j.contains("updatedAt")) {
+                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+            }
+            if (nlohmann_json_j.contains("createdBy")) {
+                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+            }
+            if (nlohmann_json_j.contains("updatedBy")) {
+                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+            }
+        }
     };
 }}}

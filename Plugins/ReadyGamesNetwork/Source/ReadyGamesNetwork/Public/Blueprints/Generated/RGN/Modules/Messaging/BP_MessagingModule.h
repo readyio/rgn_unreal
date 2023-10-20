@@ -32,7 +32,9 @@ public:
             RGN::Modules::Messaging::IMessageReceiver cpp_messageReceiver;
 			cpp_topic = string(TCHAR_TO_UTF8(*topic));
 			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
-            // TODO
+            RGN::Modules::Messaging::MessagingModule::Subscribe(
+                cpp_topic,
+                cpp_messageReceiver            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void Unsubscribe(
@@ -43,7 +45,9 @@ public:
             RGN::Modules::Messaging::IMessageReceiver cpp_messageReceiver;
 			cpp_topic = string(TCHAR_TO_UTF8(*topic));
 			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
-            // TODO
+            RGN::Modules::Messaging::MessagingModule::Unsubscribe(
+                cpp_topic,
+                cpp_messageReceiver            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void SendMessageByUserId(
@@ -63,6 +67,18 @@ public:
 			cpp_payload = string(TCHAR_TO_UTF8(*payload));
 			cpp_title = string(TCHAR_TO_UTF8(*title));
 			cpp_text = string(TCHAR_TO_UTF8(*text));
-            // TODO
+            RGN::Modules::Messaging::MessagingModule::SendMessageByUserId(
+                cpp_appId,
+                cpp_userId,
+                cpp_payload,
+                cpp_title,
+                cpp_text,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

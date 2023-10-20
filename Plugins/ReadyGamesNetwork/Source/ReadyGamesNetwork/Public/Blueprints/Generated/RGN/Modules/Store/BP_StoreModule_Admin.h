@@ -43,7 +43,19 @@ public:
 				FBP_PriceInfo::ConvertToCoreModel(prices_item, cpp_prices_item);
 				cpp_prices.push_back(cpp_prices_item);
 			}
-            // TODO
+            RGN::Modules::Store::StoreModule_Admin::CreateLootBoxAsync(
+                cpp_lootBoxName,
+                cpp_virtualItemTags,
+                cpp_prices,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void DeleteLootBoxAsync(
@@ -51,7 +63,17 @@ public:
         FStoreModuleAdminDeleteLootBoxAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
             string cpp_lootBoxId;
 			cpp_lootBoxId = string(TCHAR_TO_UTF8(*lootBoxId));
-            // TODO
+            RGN::Modules::Store::StoreModule_Admin::DeleteLootBoxAsync(
+                cpp_lootBoxId,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void DeleteStoreOfferAsync(
@@ -59,6 +81,14 @@ public:
         FStoreModuleAdminDeleteStoreOfferAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
             string cpp_offerId;
 			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-            // TODO
+            RGN::Modules::Store::StoreModule_Admin::DeleteStoreOfferAsync(
+                cpp_offerId,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

@@ -11,6 +11,19 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Currency {
     struct AddUserCurrenciesRequestData : public RGN::Model::Request::BaseRequestData {
         vector<RGN::Modules::Currency::Currency> currencies;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddUserCurrenciesRequestData, currencies)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const AddUserCurrenciesRequestData& nlohmann_json_t) {
+            nlohmann_json_j["appPackageName"] = nlohmann_json_t.appPackageName;
+            nlohmann_json_j["currencies"] = nlohmann_json_t.currencies;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, AddUserCurrenciesRequestData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appPackageName")) {
+                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+            }
+            if (nlohmann_json_j.contains("currencies")) {
+                nlohmann_json_j.at("currencies").get_to(nlohmann_json_t.currencies);
+            }
+        }
     };
 }}}

@@ -12,6 +12,27 @@ namespace RGN { namespace Model {
         string large;
         string medium;
         string small;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ImageUrl, source, large, medium, small)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const ImageUrl& nlohmann_json_t) {
+            nlohmann_json_j["source"] = nlohmann_json_t.source;
+            nlohmann_json_j["large"] = nlohmann_json_t.large;
+            nlohmann_json_j["medium"] = nlohmann_json_t.medium;
+            nlohmann_json_j["small"] = nlohmann_json_t.small;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, ImageUrl& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("source")) {
+                nlohmann_json_j.at("source").get_to(nlohmann_json_t.source);
+            }
+            if (nlohmann_json_j.contains("large")) {
+                nlohmann_json_j.at("large").get_to(nlohmann_json_t.large);
+            }
+            if (nlohmann_json_j.contains("medium")) {
+                nlohmann_json_j.at("medium").get_to(nlohmann_json_t.medium);
+            }
+            if (nlohmann_json_j.contains("small")) {
+                nlohmann_json_j.at("small").get_to(nlohmann_json_t.small);
+            }
+        }
     };
 }}

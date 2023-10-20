@@ -38,6 +38,35 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * This field works like a tag. Two prices with the same group name are combined together
          */
         string group;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PriceInfo, appIds, itemId, name, quantity, quantityWithoutDiscount, group)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const PriceInfo& nlohmann_json_t) {
+            nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
+            nlohmann_json_j["itemId"] = nlohmann_json_t.itemId;
+            nlohmann_json_j["name"] = nlohmann_json_t.name;
+            nlohmann_json_j["quantity"] = nlohmann_json_t.quantity;
+            nlohmann_json_j["quantityWithoutDiscount"] = nlohmann_json_t.quantityWithoutDiscount;
+            nlohmann_json_j["group"] = nlohmann_json_t.group;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, PriceInfo& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appIds")) {
+                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+            }
+            if (nlohmann_json_j.contains("itemId")) {
+                nlohmann_json_j.at("itemId").get_to(nlohmann_json_t.itemId);
+            }
+            if (nlohmann_json_j.contains("name")) {
+                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+            }
+            if (nlohmann_json_j.contains("quantity")) {
+                nlohmann_json_j.at("quantity").get_to(nlohmann_json_t.quantity);
+            }
+            if (nlohmann_json_j.contains("quantityWithoutDiscount")) {
+                nlohmann_json_j.at("quantityWithoutDiscount").get_to(nlohmann_json_t.quantityWithoutDiscount);
+            }
+            if (nlohmann_json_j.contains("group")) {
+                nlohmann_json_j.at("group").get_to(nlohmann_json_t.group);
+            }
+        }
     };
 }}}

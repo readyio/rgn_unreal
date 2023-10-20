@@ -48,6 +48,39 @@ namespace RGN { namespace Modules { namespace Achievement {
          * F:RGN.Modules.Achievement.AchievementData.repeatable is true
          */
         vector<RGN::Modules::Achievement::CompletedAchievementHistoryEntry> history;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(UserAchievement, id, value, valueToReach, isCompleted, isClaimed, lastCompleteTime, history)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const UserAchievement& nlohmann_json_t) {
+            nlohmann_json_j["id"] = nlohmann_json_t.id;
+            nlohmann_json_j["value"] = nlohmann_json_t.value;
+            nlohmann_json_j["valueToReach"] = nlohmann_json_t.valueToReach;
+            nlohmann_json_j["isCompleted"] = nlohmann_json_t.isCompleted;
+            nlohmann_json_j["isClaimed"] = nlohmann_json_t.isClaimed;
+            nlohmann_json_j["lastCompleteTime"] = nlohmann_json_t.lastCompleteTime;
+            nlohmann_json_j["history"] = nlohmann_json_t.history;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, UserAchievement& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("id")) {
+                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+            }
+            if (nlohmann_json_j.contains("value")) {
+                nlohmann_json_j.at("value").get_to(nlohmann_json_t.value);
+            }
+            if (nlohmann_json_j.contains("valueToReach")) {
+                nlohmann_json_j.at("valueToReach").get_to(nlohmann_json_t.valueToReach);
+            }
+            if (nlohmann_json_j.contains("isCompleted")) {
+                nlohmann_json_j.at("isCompleted").get_to(nlohmann_json_t.isCompleted);
+            }
+            if (nlohmann_json_j.contains("isClaimed")) {
+                nlohmann_json_j.at("isClaimed").get_to(nlohmann_json_t.isClaimed);
+            }
+            if (nlohmann_json_j.contains("lastCompleteTime")) {
+                nlohmann_json_j.at("lastCompleteTime").get_to(nlohmann_json_t.lastCompleteTime);
+            }
+            if (nlohmann_json_j.contains("history")) {
+                nlohmann_json_j.at("history").get_to(nlohmann_json_t.history);
+            }
+        }
     };
 }}}

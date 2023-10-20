@@ -10,6 +10,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace VirtualItems {
     struct AddVirtualItemResponseData {
         RGN::Modules::VirtualItems::VirtualItem virtualItem;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddVirtualItemResponseData, virtualItem)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const AddVirtualItemResponseData& nlohmann_json_t) {
+            nlohmann_json_j["virtualItem"] = nlohmann_json_t.virtualItem;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, AddVirtualItemResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("virtualItem")) {
+                nlohmann_json_j.at("virtualItem").get_to(nlohmann_json_t.virtualItem);
+            }
+        }
     };
 }}}

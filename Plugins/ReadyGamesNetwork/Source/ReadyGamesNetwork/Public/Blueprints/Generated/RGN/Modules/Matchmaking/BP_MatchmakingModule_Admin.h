@@ -25,6 +25,14 @@ public:
         FMatchmakingModuleAdminDeleteMatchesByAppIdAsyncResponse onSuccess, FMatchmakingModule_AdminFailResponse onFail) {
             string cpp_appIdToRemoveTheMatchesFor;
 			cpp_appIdToRemoveTheMatchesFor = string(TCHAR_TO_UTF8(*appIdToRemoveTheMatchesFor));
-            // TODO
+            RGN::Modules::Matchmaking::MatchmakingModule_Admin::DeleteMatchesByAppIdAsync(
+                cpp_appIdToRemoveTheMatchesFor,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

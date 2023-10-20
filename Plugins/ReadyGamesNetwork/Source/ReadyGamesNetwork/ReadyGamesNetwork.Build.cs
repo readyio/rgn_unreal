@@ -55,7 +55,13 @@ public class ReadyGamesNetwork : ModuleRules
 			}
 			);
 
-		AppendStringToPublicDefinition("READY_GAMES_SDK_UNREAL", "1");
+
+		PublicDefinitions.AddRange(
+			new string[]
+			{
+				"READY_GAMES_SDK_UNREAL=1"
+			}
+		);
 
 		if (Target.Platform == UnrealTargetPlatform.IOS)
 		{

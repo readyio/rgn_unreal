@@ -34,6 +34,27 @@ namespace RGN { namespace Modules { namespace Achievement {
          * This field is automatically populated by the backend
          */
         int64_t completeTime = 0;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(CompletedAchievementHistoryEntry, id, valueToReach, rewards, completeTime)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const CompletedAchievementHistoryEntry& nlohmann_json_t) {
+            nlohmann_json_j["id"] = nlohmann_json_t.id;
+            nlohmann_json_j["valueToReach"] = nlohmann_json_t.valueToReach;
+            nlohmann_json_j["rewards"] = nlohmann_json_t.rewards;
+            nlohmann_json_j["completeTime"] = nlohmann_json_t.completeTime;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, CompletedAchievementHistoryEntry& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("id")) {
+                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+            }
+            if (nlohmann_json_j.contains("valueToReach")) {
+                nlohmann_json_j.at("valueToReach").get_to(nlohmann_json_t.valueToReach);
+            }
+            if (nlohmann_json_j.contains("rewards")) {
+                nlohmann_json_j.at("rewards").get_to(nlohmann_json_t.rewards);
+            }
+            if (nlohmann_json_j.contains("completeTime")) {
+                nlohmann_json_j.at("completeTime").get_to(nlohmann_json_t.completeTime);
+            }
+        }
     };
 }}}

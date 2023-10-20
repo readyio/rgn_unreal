@@ -272,11 +272,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string json) {
-                RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemData(
+                return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemData(
                     json);
             };
         static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(string json) {
-                RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemsData(
+                return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemsData(
                     json);
             };
         static void GetByTagsAsync(

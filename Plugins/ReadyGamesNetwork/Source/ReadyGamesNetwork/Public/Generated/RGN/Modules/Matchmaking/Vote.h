@@ -19,6 +19,19 @@ namespace RGN { namespace Modules { namespace Matchmaking {
          * Gets or sets the identifier of the participant that the vote is for.
          */
         string participantId;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Vote, voterId, participantId)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const Vote& nlohmann_json_t) {
+            nlohmann_json_j["voterId"] = nlohmann_json_t.voterId;
+            nlohmann_json_j["participantId"] = nlohmann_json_t.participantId;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, Vote& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("voterId")) {
+                nlohmann_json_j.at("voterId").get_to(nlohmann_json_t.voterId);
+            }
+            if (nlohmann_json_j.contains("participantId")) {
+                nlohmann_json_j.at("participantId").get_to(nlohmann_json_t.participantId);
+            }
+        }
     };
 }}}

@@ -33,6 +33,16 @@ public:
 			cpp_eventName = string(TCHAR_TO_UTF8(*eventName));
 			cpp_eventParameters = string(TCHAR_TO_UTF8(*eventParameters));
 			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
-            // TODO
+            RGN::Modules::Analytics::AnalyticsModule::LogEventAsync(
+                cpp_eventName,
+                cpp_eventParameters,
+                cpp_cancellationToken,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

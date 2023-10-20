@@ -10,6 +10,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Leaderboard {
     struct GetLeaderboardEntriesResponseData {
         vector<RGN::Modules::Leaderboard::LeaderboardEntry> entries;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetLeaderboardEntriesResponseData, entries)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetLeaderboardEntriesResponseData& nlohmann_json_t) {
+            nlohmann_json_j["entries"] = nlohmann_json_t.entries;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetLeaderboardEntriesResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("entries")) {
+                nlohmann_json_j.at("entries").get_to(nlohmann_json_t.entries);
+            }
+        }
     };
 }}}

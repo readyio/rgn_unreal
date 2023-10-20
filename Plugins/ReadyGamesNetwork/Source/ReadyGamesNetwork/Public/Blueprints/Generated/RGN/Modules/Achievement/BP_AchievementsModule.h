@@ -5,10 +5,12 @@
 #include "../../../../../Generated/RGN/Modules/Achievement/AchievementsModule.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/GetAchievementsResponse.h"
 #include "BP_GetAchievementsResponse.h"
-#include "../../../../../Generated/RGN/Modules/Achievement/GetAchievementsWithUserDataResponse.h"
-#include "BP_GetAchievementsWithUserDataResponse.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/AchievementData.h"
 #include "BP_AchievementData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/GetAchievementsWithUserDataResponse.h"
+#include "BP_GetAchievementsWithUserDataResponse.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/AchievementWithUserData.h"
+#include "BP_AchievementWithUserData.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/TriggerAndClaimResponse.h"
 #include "BP_TriggerAndClaimResponse.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/TriggerByIdRequestData.h"
@@ -21,6 +23,8 @@
 #include "BP_ClaimByRequestNameRequestData.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/GetUserAchievementsResponse.h"
 #include "BP_GetUserAchievementsResponse.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/UserAchievement.h"
+#include "BP_UserAchievement.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -58,7 +62,21 @@ public:
 				cpp_ids_item = string(TCHAR_TO_UTF8(*ids_item));
 				cpp_ids.push_back(cpp_ids_item);
 			}
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetByIdsAsync(
+                cpp_ids,
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementData> response) {
+                    TArray<FBP_AchievementData> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_AchievementData b_response_item;
+						FBP_AchievementData::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByAppIdsAsync(
@@ -76,7 +94,23 @@ public:
 			}
 			cpp_limit = limit;
 			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetByAppIdsAsync(
+                cpp_appIds,
+                cpp_limit,
+                cpp_startAfter,
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementData> response) {
+                    TArray<FBP_AchievementData> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_AchievementData b_response_item;
+						FBP_AchievementData::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetForCurrentAppAsync(
@@ -87,7 +121,22 @@ public:
             string cpp_startAfter;
 			cpp_limit = limit;
 			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetForCurrentAppAsync(
+                cpp_limit,
+                cpp_startAfter,
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementData> response) {
+                    TArray<FBP_AchievementData> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_AchievementData b_response_item;
+						FBP_AchievementData::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByAppIdsWithUserDataAsync(
@@ -108,7 +157,24 @@ public:
 			cpp_limit = limit;
 			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
 			cpp_withHistory = withHistory;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetByAppIdsWithUserDataAsync(
+                cpp_appIds,
+                cpp_limit,
+                cpp_startAfter,
+                cpp_withHistory,
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementWithUserData> response) {
+                    TArray<FBP_AchievementWithUserData> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_AchievementWithUserData b_response_item;
+						FBP_AchievementWithUserData::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetForCurrentAppWithUserDataAsync(
@@ -119,7 +185,22 @@ public:
             string cpp_startAfter;
 			cpp_limit = limit;
 			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetForCurrentAppWithUserDataAsync(
+                cpp_limit,
+                cpp_startAfter,
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementWithUserData> response) {
+                    TArray<FBP_AchievementWithUserData> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_AchievementWithUserData b_response_item;
+						FBP_AchievementWithUserData::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByRequestNameAsync(
@@ -127,7 +208,17 @@ public:
         FAchievementsModuleGetByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
             string cpp_requestName;
 			cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetByRequestNameAsync(
+                cpp_requestName,
+                [onSuccess](RGN::Modules::Achievement::AchievementData response) {
+                    FBP_AchievementData bpResponse;
+					FBP_AchievementData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByRequestNamesAsync(
@@ -139,7 +230,21 @@ public:
 				cpp_requestNames_item = string(TCHAR_TO_UTF8(*requestNames_item));
 				cpp_requestNames.push_back(cpp_requestNames_item);
 			}
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetByRequestNamesAsync(
+                cpp_requestNames,
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementData> response) {
+                    TArray<FBP_AchievementData> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_AchievementData b_response_item;
+						FBP_AchievementData::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void TriggerByIdAsync(
@@ -150,7 +255,18 @@ public:
             int32_t cpp_progress;
 			cpp_id = string(TCHAR_TO_UTF8(*id));
 			cpp_progress = progress;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::TriggerByIdAsync(
+                cpp_id,
+                cpp_progress,
+                [onSuccess](RGN::Modules::Achievement::TriggerAndClaimResponse response) {
+                    FBP_TriggerAndClaimResponse bpResponse;
+					FBP_TriggerAndClaimResponse::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void TriggerByRequestNameAsync(
@@ -161,7 +277,18 @@ public:
             int32_t cpp_progress;
 			cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
 			cpp_progress = progress;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::TriggerByRequestNameAsync(
+                cpp_requestName,
+                cpp_progress,
+                [onSuccess](RGN::Modules::Achievement::TriggerAndClaimResponse response) {
+                    FBP_TriggerAndClaimResponse bpResponse;
+					FBP_TriggerAndClaimResponse::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void ClaimByIdAsync(
@@ -169,7 +296,17 @@ public:
         FAchievementsModuleClaimByIdAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
             string cpp_achievementId;
 			cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::ClaimByIdAsync(
+                cpp_achievementId,
+                [onSuccess](RGN::Modules::Achievement::TriggerAndClaimResponse response) {
+                    FBP_TriggerAndClaimResponse bpResponse;
+					FBP_TriggerAndClaimResponse::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void ClaimByRequestNameAsync(
@@ -177,7 +314,17 @@ public:
         FAchievementsModuleClaimByRequestNameAsyncResponse onSuccess, FAchievementsModuleFailResponse onFail) {
             string cpp_requestName;
 			cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::ClaimByRequestNameAsync(
+                cpp_requestName,
+                [onSuccess](RGN::Modules::Achievement::TriggerAndClaimResponse response) {
+                    FBP_TriggerAndClaimResponse bpResponse;
+					FBP_TriggerAndClaimResponse::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetUserAchievementsAsync(
@@ -191,6 +338,22 @@ public:
 			cpp_userId = string(TCHAR_TO_UTF8(*userId));
 			cpp_startAfter = startAfter;
 			cpp_limit = limit;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule::GetUserAchievementsAsync(
+                cpp_userId,
+                cpp_startAfter,
+                cpp_limit,
+                [onSuccess](vector<RGN::Modules::Achievement::UserAchievement> response) {
+                    TArray<FBP_UserAchievement> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_UserAchievement b_response_item;
+						FBP_UserAchievement::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

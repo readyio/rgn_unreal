@@ -19,6 +19,19 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * Game-specific properties in JSON format.
          */
         string json;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Properties, appIds, json)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const Properties& nlohmann_json_t) {
+            nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
+            nlohmann_json_j["json"] = nlohmann_json_t.json;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, Properties& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appIds")) {
+                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+            }
+            if (nlohmann_json_j.contains("json")) {
+                nlohmann_json_j.at("json").get_to(nlohmann_json_t.json);
+            }
+        }
     };
 }}}

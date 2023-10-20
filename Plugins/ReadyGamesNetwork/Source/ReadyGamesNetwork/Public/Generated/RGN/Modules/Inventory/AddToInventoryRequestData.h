@@ -11,6 +11,19 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Inventory {
     struct AddToInventoryRequestData : public RGN::Model::Request::BaseRequestData {
         vector<RGN::Modules::Inventory::InventoryData> inventoryDatas;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(AddToInventoryRequestData, inventoryDatas)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const AddToInventoryRequestData& nlohmann_json_t) {
+            nlohmann_json_j["appPackageName"] = nlohmann_json_t.appPackageName;
+            nlohmann_json_j["inventoryDatas"] = nlohmann_json_t.inventoryDatas;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, AddToInventoryRequestData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appPackageName")) {
+                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+            }
+            if (nlohmann_json_j.contains("inventoryDatas")) {
+                nlohmann_json_j.at("inventoryDatas").get_to(nlohmann_json_t.inventoryDatas);
+            }
+        }
     };
 }}}

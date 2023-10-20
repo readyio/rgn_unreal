@@ -204,7 +204,6 @@ void RGNCore::InternalCallAPI(string name, string body,
             }
         }
         else {
-            SignOut();
             if (fail) {
                 fail(httpResponseCode, httpResponseBody);
             }

@@ -37,6 +37,27 @@ namespace RGN { namespace Modules { namespace Achievement {
          * For "addLeaderboardScore", it represents the score that will be added for the current user to the leaderboard
          */
         int32_t quantity = 0;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(AchievementReward, type, appIds, name, quantity)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const AchievementReward& nlohmann_json_t) {
+            nlohmann_json_j["type"] = nlohmann_json_t.type;
+            nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
+            nlohmann_json_j["name"] = nlohmann_json_t.name;
+            nlohmann_json_j["quantity"] = nlohmann_json_t.quantity;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, AchievementReward& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("type")) {
+                nlohmann_json_j.at("type").get_to(nlohmann_json_t.type);
+            }
+            if (nlohmann_json_j.contains("appIds")) {
+                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+            }
+            if (nlohmann_json_j.contains("name")) {
+                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+            }
+            if (nlohmann_json_j.contains("quantity")) {
+                nlohmann_json_j.at("quantity").get_to(nlohmann_json_t.quantity);
+            }
+        }
     };
 }}}

@@ -10,6 +10,23 @@ using namespace std;
 namespace RGN { namespace Modules { namespace GameProgress {
     struct UpdateUserLevelResponseData : public RGN::Model::Response::BaseResponseData {
         string playerProgress;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(UpdateUserLevelResponseData, playerProgress)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const UpdateUserLevelResponseData& nlohmann_json_t) {
+            nlohmann_json_j["status"] = nlohmann_json_t.status;
+            nlohmann_json_j["message"] = nlohmann_json_t.message;
+            nlohmann_json_j["playerProgress"] = nlohmann_json_t.playerProgress;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, UpdateUserLevelResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("status")) {
+                nlohmann_json_j.at("status").get_to(nlohmann_json_t.status);
+            }
+            if (nlohmann_json_j.contains("message")) {
+                nlohmann_json_j.at("message").get_to(nlohmann_json_t.message);
+            }
+            if (nlohmann_json_j.contains("playerProgress")) {
+                nlohmann_json_j.at("playerProgress").get_to(nlohmann_json_t.playerProgress);
+            }
+        }
     };
 }}}

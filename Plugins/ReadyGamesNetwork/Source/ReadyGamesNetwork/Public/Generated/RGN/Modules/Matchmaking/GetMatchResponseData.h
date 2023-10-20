@@ -10,6 +10,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Matchmaking {
     struct GetMatchResponseData {
         RGN::Modules::Matchmaking::MatchmakingData match;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetMatchResponseData, match)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetMatchResponseData& nlohmann_json_t) {
+            nlohmann_json_j["match"] = nlohmann_json_t.match;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetMatchResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("match")) {
+                nlohmann_json_j.at("match").get_to(nlohmann_json_t.match);
+            }
+        }
     };
 }}}

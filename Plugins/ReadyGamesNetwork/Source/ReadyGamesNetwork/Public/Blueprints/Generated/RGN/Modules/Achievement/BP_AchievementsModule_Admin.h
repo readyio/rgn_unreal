@@ -33,7 +33,17 @@ public:
         FAchievementsModuleAdminAddAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
             RGN::Modules::Achievement::AchievementData cpp_achievementData;
 			FBP_AchievementData::ConvertToCoreModel(achievementData, cpp_achievementData);
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::AddAchievementAsync(
+                cpp_achievementData,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void UpdateAchievementAsync(
@@ -41,7 +51,17 @@ public:
         FAchievementsModuleAdminUpdateAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
             RGN::Modules::Achievement::AchievementData cpp_achievementData;
 			FBP_AchievementData::ConvertToCoreModel(achievementData, cpp_achievementData);
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::UpdateAchievementAsync(
+                cpp_achievementData,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void DeleteAchievementAsync(
@@ -49,7 +69,15 @@ public:
         FAchievementsModuleAdminDeleteAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
             string cpp_achievementId;
 			cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::DeleteAchievementAsync(
+                cpp_achievementId,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void AddLoginDaysInRowAchievementAsync1(
@@ -60,7 +88,16 @@ public:
             int32_t cpp_daysInRow;
 			cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
 			cpp_daysInRow = daysInRow;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::AddLoginDaysInRowAchievementAsync(
+                cpp_achievementId,
+                cpp_daysInRow,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void AddLoginDaysInRowAchievementAsync2(
@@ -71,7 +108,16 @@ public:
             int32_t cpp_daysInRow;
 			FBP_AchievementData::ConvertToCoreModel(achievementData, cpp_achievementData);
 			cpp_daysInRow = daysInRow;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::AddLoginDaysInRowAchievementAsync(
+                cpp_achievementData,
+                cpp_daysInRow,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void DeleteLoginDaysInRowGameConstRecordAsync(
@@ -82,7 +128,16 @@ public:
             int32_t cpp_daysInRow;
 			cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
 			cpp_daysInRow = daysInRow;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::DeleteLoginDaysInRowGameConstRecordAsync(
+                cpp_achievementId,
+                cpp_daysInRow,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void AddPlayerProgressAchievementAsync1(
@@ -96,7 +151,17 @@ public:
 			cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
 			cpp_playerProgressFieldName = string(TCHAR_TO_UTF8(*playerProgressFieldName));
 			cpp_playerProgressFieldValueToReach = playerProgressFieldValueToReach;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::AddPlayerProgressAchievementAsync(
+                cpp_achievementId,
+                cpp_playerProgressFieldName,
+                cpp_playerProgressFieldValueToReach,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void AddPlayerProgressAchievementAsync2(
@@ -110,7 +175,17 @@ public:
 			FBP_AchievementData::ConvertToCoreModel(achievementData, cpp_achievementData);
 			cpp_playerProgressFieldName = string(TCHAR_TO_UTF8(*playerProgressFieldName));
 			cpp_playerProgressFieldValueToReach = playerProgressFieldValueToReach;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::AddPlayerProgressAchievementAsync(
+                cpp_achievementData,
+                cpp_playerProgressFieldName,
+                cpp_playerProgressFieldValueToReach,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void DeletePlayerProgressAchievementAsync(
@@ -124,6 +199,16 @@ public:
 			cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
 			cpp_playerProgressFieldName = string(TCHAR_TO_UTF8(*playerProgressFieldName));
 			cpp_playerProgressFieldValueToReach = playerProgressFieldValueToReach;
-            // TODO
+            RGN::Modules::Achievement::AchievementsModule_Admin::DeletePlayerProgressAchievementAsync(
+                cpp_achievementId,
+                cpp_playerProgressFieldName,
+                cpp_playerProgressFieldValueToReach,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

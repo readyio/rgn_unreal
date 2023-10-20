@@ -9,6 +9,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Store {
     struct GetStoreOfferTagsResponse {
         vector<string> tags;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetStoreOfferTagsResponse, tags)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetStoreOfferTagsResponse& nlohmann_json_t) {
+            nlohmann_json_j["tags"] = nlohmann_json_t.tags;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetStoreOfferTagsResponse& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("tags")) {
+                nlohmann_json_j.at("tags").get_to(nlohmann_json_t.tags);
+            }
+        }
     };
 }}}

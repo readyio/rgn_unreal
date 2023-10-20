@@ -114,6 +114,91 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         RGN::Modules::VirtualItems::BlockchainInfo blockchain;
         vector<string> compatibleItemIds;
         vector<RGN::Modules::VirtualItems::MaterialInfo> materialInfos;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(VirtualItem, id, name, description, image, createdAt, updatedAt, createdBy, updatedBy, isStackable, isNFT, appIds, tags, childs, addressableIds, properties, prices, totalQuantity, blockchain, compatibleItemIds, materialInfos)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const VirtualItem& nlohmann_json_t) {
+            nlohmann_json_j["id"] = nlohmann_json_t.id;
+            nlohmann_json_j["name"] = nlohmann_json_t.name;
+            nlohmann_json_j["description"] = nlohmann_json_t.description;
+            nlohmann_json_j["image"] = nlohmann_json_t.image;
+            nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
+            nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
+            nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
+            nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
+            nlohmann_json_j["isStackable"] = nlohmann_json_t.isStackable;
+            nlohmann_json_j["isNFT"] = nlohmann_json_t.isNFT;
+            nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
+            nlohmann_json_j["tags"] = nlohmann_json_t.tags;
+            nlohmann_json_j["childs"] = nlohmann_json_t.childs;
+            nlohmann_json_j["addressableIds"] = nlohmann_json_t.addressableIds;
+            nlohmann_json_j["properties"] = nlohmann_json_t.properties;
+            nlohmann_json_j["prices"] = nlohmann_json_t.prices;
+            nlohmann_json_j["totalQuantity"] = nlohmann_json_t.totalQuantity;
+            nlohmann_json_j["blockchain"] = nlohmann_json_t.blockchain;
+            nlohmann_json_j["compatibleItemIds"] = nlohmann_json_t.compatibleItemIds;
+            nlohmann_json_j["materialInfos"] = nlohmann_json_t.materialInfos;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, VirtualItem& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("id")) {
+                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+            }
+            if (nlohmann_json_j.contains("name")) {
+                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+            }
+            if (nlohmann_json_j.contains("description")) {
+                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+            }
+            if (nlohmann_json_j.contains("image")) {
+                nlohmann_json_j.at("image").get_to(nlohmann_json_t.image);
+            }
+            if (nlohmann_json_j.contains("createdAt")) {
+                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+            }
+            if (nlohmann_json_j.contains("updatedAt")) {
+                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+            }
+            if (nlohmann_json_j.contains("createdBy")) {
+                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+            }
+            if (nlohmann_json_j.contains("updatedBy")) {
+                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+            }
+            if (nlohmann_json_j.contains("isStackable")) {
+                nlohmann_json_j.at("isStackable").get_to(nlohmann_json_t.isStackable);
+            }
+            if (nlohmann_json_j.contains("isNFT")) {
+                nlohmann_json_j.at("isNFT").get_to(nlohmann_json_t.isNFT);
+            }
+            if (nlohmann_json_j.contains("appIds")) {
+                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+            }
+            if (nlohmann_json_j.contains("tags")) {
+                nlohmann_json_j.at("tags").get_to(nlohmann_json_t.tags);
+            }
+            if (nlohmann_json_j.contains("childs")) {
+                nlohmann_json_j.at("childs").get_to(nlohmann_json_t.childs);
+            }
+            if (nlohmann_json_j.contains("addressableIds")) {
+                nlohmann_json_j.at("addressableIds").get_to(nlohmann_json_t.addressableIds);
+            }
+            if (nlohmann_json_j.contains("properties")) {
+                nlohmann_json_j.at("properties").get_to(nlohmann_json_t.properties);
+            }
+            if (nlohmann_json_j.contains("prices")) {
+                nlohmann_json_j.at("prices").get_to(nlohmann_json_t.prices);
+            }
+            if (nlohmann_json_j.contains("totalQuantity")) {
+                nlohmann_json_j.at("totalQuantity").get_to(nlohmann_json_t.totalQuantity);
+            }
+            if (nlohmann_json_j.contains("blockchain")) {
+                nlohmann_json_j.at("blockchain").get_to(nlohmann_json_t.blockchain);
+            }
+            if (nlohmann_json_j.contains("compatibleItemIds")) {
+                nlohmann_json_j.at("compatibleItemIds").get_to(nlohmann_json_t.compatibleItemIds);
+            }
+            if (nlohmann_json_j.contains("materialInfos")) {
+                nlohmann_json_j.at("materialInfos").get_to(nlohmann_json_t.materialInfos);
+            }
+        }
     };
 }}}

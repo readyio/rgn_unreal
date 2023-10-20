@@ -27,6 +27,27 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * The address of the original minter of the NFT
          */
         string walletAddress;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(BlockchainInfo, purchasedQuantity, totalQuantity, tokenId, walletAddress)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const BlockchainInfo& nlohmann_json_t) {
+            nlohmann_json_j["purchasedQuantity"] = nlohmann_json_t.purchasedQuantity;
+            nlohmann_json_j["totalQuantity"] = nlohmann_json_t.totalQuantity;
+            nlohmann_json_j["tokenId"] = nlohmann_json_t.tokenId;
+            nlohmann_json_j["walletAddress"] = nlohmann_json_t.walletAddress;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, BlockchainInfo& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("purchasedQuantity")) {
+                nlohmann_json_j.at("purchasedQuantity").get_to(nlohmann_json_t.purchasedQuantity);
+            }
+            if (nlohmann_json_j.contains("totalQuantity")) {
+                nlohmann_json_j.at("totalQuantity").get_to(nlohmann_json_t.totalQuantity);
+            }
+            if (nlohmann_json_j.contains("tokenId")) {
+                nlohmann_json_j.at("tokenId").get_to(nlohmann_json_t.tokenId);
+            }
+            if (nlohmann_json_j.contains("walletAddress")) {
+                nlohmann_json_j.at("walletAddress").get_to(nlohmann_json_t.walletAddress);
+            }
+        }
     };
 }}}

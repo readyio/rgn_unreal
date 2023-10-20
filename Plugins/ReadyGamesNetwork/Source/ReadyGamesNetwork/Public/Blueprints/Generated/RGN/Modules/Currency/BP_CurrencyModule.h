@@ -7,6 +7,8 @@
 #include "BP_RGNCoinEconomy.h"
 #include "../../../../../Generated/RGN/Model/Request/BaseRequestData.h"
 #include "../../Model/Request/BP_BaseRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Currency/Currency.h"
+#include "BP_Currency.h"
 #include "../../../../../Generated/RGN/Modules/Currency/PurchaseRGNCoinRequestData.h"
 #include "BP_PurchaseRGNCoinRequestData.h"
 #include "../../../../../Generated/RGN/Modules/Currency/CurrencyProductsData.h"
@@ -15,8 +17,6 @@
 #include "../../Model/Request/BP_BaseMigrationRequestData.h"
 #include "../../../../../Generated/RGN/Modules/Currency/PurchaseCurrencyProductRequestData.h"
 #include "BP_PurchaseCurrencyProductRequestData.h"
-#include "../../../../../Generated/RGN/Modules/Currency/Currency.h"
-#include "BP_Currency.h"
 #include "../../../../../Generated/RGN/Modules/Currency/AddUserCurrenciesResponseData.h"
 #include "BP_AddUserCurrenciesResponseData.h"
 #include <vector>
@@ -42,7 +42,16 @@ public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void GetRGNCoinEconomyAsync(
         FCurrencyModuleGetRGNCoinEconomyAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::Currency::CurrencyModule::GetRGNCoinEconomyAsync(
+                [onSuccess](RGN::Modules::Currency::RGNCoinEconomy response) {
+                    FBP_RGNCoinEconomy bpResponse;
+					FBP_RGNCoinEconomy::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void PurchaseRGNCoinAsync(
@@ -56,12 +65,37 @@ public:
 			cpp_iapUUID = string(TCHAR_TO_UTF8(*iapUUID));
 			cpp_iapTransactionId = string(TCHAR_TO_UTF8(*iapTransactionId));
 			cpp_iapReceipt = string(TCHAR_TO_UTF8(*iapReceipt));
-            // TODO
+            RGN::Modules::Currency::CurrencyModule::PurchaseRGNCoinAsync(
+                cpp_iapUUID,
+                cpp_iapTransactionId,
+                cpp_iapReceipt,
+                [onSuccess](vector<RGN::Modules::Currency::Currency> response) {
+                    TArray<FBP_Currency> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_Currency b_response_item;
+						FBP_Currency::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void GetInAppPurchaseCurrencyDataAsync(
         FCurrencyModuleGetInAppPurchaseCurrencyDataAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::Currency::CurrencyModule::GetInAppPurchaseCurrencyDataAsync(
+                [onSuccess](RGN::Modules::Currency::CurrencyProductsData response) {
+                    FBP_CurrencyProductsData bpResponse;
+					FBP_CurrencyProductsData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void PurchaseCurrencyProductAsync(
@@ -69,7 +103,21 @@ public:
         FCurrencyModulePurchaseCurrencyProductAsyncResponse onSuccess, FCurrencyModuleFailResponse onFail) {
             string cpp_productId;
 			cpp_productId = string(TCHAR_TO_UTF8(*productId));
-            // TODO
+            RGN::Modules::Currency::CurrencyModule::PurchaseCurrencyProductAsync(
+                cpp_productId,
+                [onSuccess](vector<RGN::Modules::Currency::Currency> response) {
+                    TArray<FBP_Currency> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_Currency b_response_item;
+						FBP_Currency::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
     static void AddUserCurrenciesAsync(
@@ -81,6 +129,20 @@ public:
 				FBP_Currency::ConvertToCoreModel(currencies_item, cpp_currencies_item);
 				cpp_currencies.push_back(cpp_currencies_item);
 			}
-            // TODO
+            RGN::Modules::Currency::CurrencyModule::AddUserCurrenciesAsync(
+                cpp_currencies,
+                [onSuccess](vector<RGN::Modules::Currency::Currency> response) {
+                    TArray<FBP_Currency> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_Currency b_response_item;
+						FBP_Currency::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

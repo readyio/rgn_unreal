@@ -10,6 +10,19 @@ using namespace std;
 namespace RGN { namespace Modules { namespace VirtualItems {
     struct GetVirtualItemsByIdsRequestData : public RGN::Model::Request::BaseRequestData {
         vector<string> ids;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetVirtualItemsByIdsRequestData, ids)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetVirtualItemsByIdsRequestData& nlohmann_json_t) {
+            nlohmann_json_j["appPackageName"] = nlohmann_json_t.appPackageName;
+            nlohmann_json_j["ids"] = nlohmann_json_t.ids;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetVirtualItemsByIdsRequestData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appPackageName")) {
+                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+            }
+            if (nlohmann_json_j.contains("ids")) {
+                nlohmann_json_j.at("ids").get_to(nlohmann_json_t.ids);
+            }
+        }
     };
 }}}

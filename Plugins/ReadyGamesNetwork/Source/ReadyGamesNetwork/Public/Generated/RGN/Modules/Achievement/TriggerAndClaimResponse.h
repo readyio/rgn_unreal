@@ -23,6 +23,19 @@ namespace RGN { namespace Modules { namespace Achievement {
          * In case the rewards have been given to the user this will contain the rewards
          */
         vector<RGN::Modules::Achievement::AchievementReward> rewards;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(TriggerAndClaimResponse, rewardsHaveBeenGivenOut, rewards)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const TriggerAndClaimResponse& nlohmann_json_t) {
+            nlohmann_json_j["rewardsHaveBeenGivenOut"] = nlohmann_json_t.rewardsHaveBeenGivenOut;
+            nlohmann_json_j["rewards"] = nlohmann_json_t.rewards;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, TriggerAndClaimResponse& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("rewardsHaveBeenGivenOut")) {
+                nlohmann_json_j.at("rewardsHaveBeenGivenOut").get_to(nlohmann_json_t.rewardsHaveBeenGivenOut);
+            }
+            if (nlohmann_json_j.contains("rewards")) {
+                nlohmann_json_j.at("rewards").get_to(nlohmann_json_t.rewards);
+            }
+        }
     };
 }}}

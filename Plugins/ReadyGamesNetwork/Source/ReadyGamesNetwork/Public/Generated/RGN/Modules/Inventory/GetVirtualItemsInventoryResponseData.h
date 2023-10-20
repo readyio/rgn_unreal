@@ -10,6 +10,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Inventory {
     struct GetVirtualItemsInventoryResponseData {
         vector<RGN::Modules::Inventory::InventoryItemData> virtualItemInventoryDatas;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetVirtualItemsInventoryResponseData, virtualItemInventoryDatas)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetVirtualItemsInventoryResponseData& nlohmann_json_t) {
+            nlohmann_json_j["virtualItemInventoryDatas"] = nlohmann_json_t.virtualItemInventoryDatas;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetVirtualItemsInventoryResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("virtualItemInventoryDatas")) {
+                nlohmann_json_j.at("virtualItemInventoryDatas").get_to(nlohmann_json_t.virtualItemInventoryDatas);
+            }
+        }
     };
 }}}

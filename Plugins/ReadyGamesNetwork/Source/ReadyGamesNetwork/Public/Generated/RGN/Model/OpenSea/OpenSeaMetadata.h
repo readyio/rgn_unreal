@@ -61,6 +61,47 @@ namespace RGN { namespace Model { namespace OpenSea {
          * These are the attributes for the item, which will show up on the OpenSea page for the item.
          */
         vector<RGN::Model::OpenSea::OpenSeaAttribute> attributes;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(OpenSeaMetadata, name, description, external_url, background_color, animation_url, youtube_url, image, image_data, attributes)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const OpenSeaMetadata& nlohmann_json_t) {
+            nlohmann_json_j["name"] = nlohmann_json_t.name;
+            nlohmann_json_j["description"] = nlohmann_json_t.description;
+            nlohmann_json_j["external_url"] = nlohmann_json_t.external_url;
+            nlohmann_json_j["background_color"] = nlohmann_json_t.background_color;
+            nlohmann_json_j["animation_url"] = nlohmann_json_t.animation_url;
+            nlohmann_json_j["youtube_url"] = nlohmann_json_t.youtube_url;
+            nlohmann_json_j["image"] = nlohmann_json_t.image;
+            nlohmann_json_j["image_data"] = nlohmann_json_t.image_data;
+            nlohmann_json_j["attributes"] = nlohmann_json_t.attributes;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, OpenSeaMetadata& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("name")) {
+                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+            }
+            if (nlohmann_json_j.contains("description")) {
+                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+            }
+            if (nlohmann_json_j.contains("external_url")) {
+                nlohmann_json_j.at("external_url").get_to(nlohmann_json_t.external_url);
+            }
+            if (nlohmann_json_j.contains("background_color")) {
+                nlohmann_json_j.at("background_color").get_to(nlohmann_json_t.background_color);
+            }
+            if (nlohmann_json_j.contains("animation_url")) {
+                nlohmann_json_j.at("animation_url").get_to(nlohmann_json_t.animation_url);
+            }
+            if (nlohmann_json_j.contains("youtube_url")) {
+                nlohmann_json_j.at("youtube_url").get_to(nlohmann_json_t.youtube_url);
+            }
+            if (nlohmann_json_j.contains("image")) {
+                nlohmann_json_j.at("image").get_to(nlohmann_json_t.image);
+            }
+            if (nlohmann_json_j.contains("image_data")) {
+                nlohmann_json_j.at("image_data").get_to(nlohmann_json_t.image_data);
+            }
+            if (nlohmann_json_j.contains("attributes")) {
+                nlohmann_json_j.at("attributes").get_to(nlohmann_json_t.attributes);
+            }
+        }
     };
 }}}

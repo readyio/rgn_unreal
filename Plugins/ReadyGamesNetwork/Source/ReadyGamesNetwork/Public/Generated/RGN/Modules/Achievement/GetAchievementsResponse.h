@@ -10,6 +10,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Achievement {
     struct GetAchievementsResponse {
         vector<RGN::Modules::Achievement::AchievementData> achievements;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetAchievementsResponse, achievements)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetAchievementsResponse& nlohmann_json_t) {
+            nlohmann_json_j["achievements"] = nlohmann_json_t.achievements;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetAchievementsResponse& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("achievements")) {
+                nlohmann_json_j.at("achievements").get_to(nlohmann_json_t.achievements);
+            }
+        }
     };
 }}}

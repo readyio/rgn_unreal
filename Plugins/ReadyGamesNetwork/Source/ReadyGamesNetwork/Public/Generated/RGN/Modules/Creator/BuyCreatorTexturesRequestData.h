@@ -10,6 +10,19 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Creator {
     struct BuyCreatorTexturesRequestData : public RGN::Model::Request::BaseRequestData {
         vector<string> textureIds;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(BuyCreatorTexturesRequestData, textureIds)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const BuyCreatorTexturesRequestData& nlohmann_json_t) {
+            nlohmann_json_j["appPackageName"] = nlohmann_json_t.appPackageName;
+            nlohmann_json_j["textureIds"] = nlohmann_json_t.textureIds;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, BuyCreatorTexturesRequestData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appPackageName")) {
+                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+            }
+            if (nlohmann_json_j.contains("textureIds")) {
+                nlohmann_json_j.at("textureIds").get_to(nlohmann_json_t.textureIds);
+            }
+        }
     };
 }}}

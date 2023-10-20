@@ -10,6 +10,19 @@ using namespace std;
 namespace RGN { namespace Model { namespace Request {
     struct TokenRequestData : public RGN::Model::Request::BaseRequestData {
         string idToken;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(TokenRequestData, idToken)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const TokenRequestData& nlohmann_json_t) {
+            nlohmann_json_j["appPackageName"] = nlohmann_json_t.appPackageName;
+            nlohmann_json_j["idToken"] = nlohmann_json_t.idToken;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, TokenRequestData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appPackageName")) {
+                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+            }
+            if (nlohmann_json_j.contains("idToken")) {
+                nlohmann_json_j.at("idToken").get_to(nlohmann_json_t.idToken);
+            }
+        }
     };
 }}}

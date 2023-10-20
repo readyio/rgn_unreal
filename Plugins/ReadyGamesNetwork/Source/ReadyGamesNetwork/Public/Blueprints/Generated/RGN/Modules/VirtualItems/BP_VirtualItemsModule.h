@@ -61,7 +61,17 @@ public:
         FVirtualItemsModuleAddVirtualItemAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
             RGN::Modules::VirtualItems::VirtualItem cpp_virtualItem;
 			FBP_VirtualItem::ConvertToCoreModel(virtualItem, cpp_virtualItem);
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::AddVirtualItemAsync(
+                cpp_virtualItem,
+                [onSuccess](RGN::Modules::VirtualItems::VirtualItem response) {
+                    FBP_VirtualItem bpResponse;
+					FBP_VirtualItem::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void AddFromCSVAsync(
@@ -78,7 +88,24 @@ public:
 			cpp_csvContent = string(TCHAR_TO_UTF8(*csvContent));
 			cpp_csvDelimiter = string(TCHAR_TO_UTF8(*csvDelimiter));
 			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::AddFromCSVAsync(
+                cpp_virtualItemName,
+                cpp_csvContent,
+                cpp_csvDelimiter,
+                cpp_cancellationToken,
+                [onSuccess](vector<string> response) {
+                    TArray<FString> bpResponse;
+					for (const auto& response_item : response) {
+						FString b_response_item;
+						b_response_item = FString(response_item.c_str());
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void UpdateVirtualItemAsync(
@@ -89,7 +116,18 @@ public:
             RGN::Modules::VirtualItems::VirtualItem cpp_virtualItem;
 			cpp_itemId = string(TCHAR_TO_UTF8(*itemId));
 			FBP_VirtualItem::ConvertToCoreModel(virtualItem, cpp_virtualItem);
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::UpdateVirtualItemAsync(
+                cpp_itemId,
+                cpp_virtualItem,
+                [onSuccess](RGN::Modules::VirtualItems::VirtualItem response) {
+                    FBP_VirtualItem bpResponse;
+					FBP_VirtualItem::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void DeleteVirtualItemAsync(
@@ -97,12 +135,33 @@ public:
         FVirtualItemsModuleDeleteVirtualItemAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
             string cpp_itemId;
 			cpp_itemId = string(TCHAR_TO_UTF8(*itemId));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::DeleteVirtualItemAsync(
+                cpp_itemId,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetVirtualItemsAsync1(
         FVirtualItemsModuleGetVirtualItemsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::GetVirtualItemsAsync(
+                [onSuccess](vector<RGN::Modules::VirtualItems::VirtualItem> response) {
+                    TArray<FBP_VirtualItem> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_VirtualItem b_response_item;
+						FBP_VirtualItem::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetVirtualItemsAsync2(
@@ -113,7 +172,22 @@ public:
             string cpp_startAfter;
 			cpp_limit = limit;
 			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::GetVirtualItemsAsync(
+                cpp_limit,
+                cpp_startAfter,
+                [onSuccess](vector<RGN::Modules::VirtualItems::VirtualItem> response) {
+                    TArray<FBP_VirtualItem> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_VirtualItem b_response_item;
+						FBP_VirtualItem::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetVirtualItemsByIdsAsync(
@@ -125,7 +199,21 @@ public:
 				cpp_virtualItemsIds_item = string(TCHAR_TO_UTF8(*virtualItemsIds_item));
 				cpp_virtualItemsIds.push_back(cpp_virtualItemsIds_item);
 			}
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::GetVirtualItemsByIdsAsync(
+                cpp_virtualItemsIds,
+                [onSuccess](vector<RGN::Modules::VirtualItems::VirtualItem> response) {
+                    TArray<FBP_VirtualItem> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_VirtualItem b_response_item;
+						FBP_VirtualItem::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetByTagsAsync(
@@ -140,7 +228,22 @@ public:
 				cpp_tags.push_back(cpp_tags_item);
 			}
 			cpp_appId = string(TCHAR_TO_UTF8(*appId));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::GetByTagsAsync(
+                cpp_tags,
+                cpp_appId,
+                [onSuccess](vector<RGN::Modules::VirtualItems::VirtualItem> response) {
+                    TArray<FBP_VirtualItem> bpResponse;
+					for (const auto& response_item : response) {
+						FBP_VirtualItem b_response_item;
+						FBP_VirtualItem::ConvertToUnrealModel(response_item, b_response_item);
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetTagsAsync(
@@ -148,7 +251,21 @@ public:
         FVirtualItemsModuleGetTagsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
             string cpp_virtualItemId;
 			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::GetTagsAsync(
+                cpp_virtualItemId,
+                [onSuccess](vector<string> response) {
+                    TArray<FString> bpResponse;
+					for (const auto& response_item : response) {
+						FString b_response_item;
+						b_response_item = FString(response_item.c_str());
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void SetTagsAsync(
@@ -166,7 +283,17 @@ public:
 				cpp_tags.push_back(cpp_tags_item);
 			}
 			cpp_appId = string(TCHAR_TO_UTF8(*appId));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::SetTagsAsync(
+                cpp_virtualItemId,
+                cpp_tags,
+                cpp_appId,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void SetNameAsync(
@@ -177,7 +304,16 @@ public:
             string cpp_name;
 			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
 			cpp_name = string(TCHAR_TO_UTF8(*name));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::SetNameAsync(
+                cpp_virtualItemId,
+                cpp_name,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void SetDescriptionAsync(
@@ -188,7 +324,16 @@ public:
             string cpp_description;
 			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
 			cpp_description = string(TCHAR_TO_UTF8(*description));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::SetDescriptionAsync(
+                cpp_virtualItemId,
+                cpp_description,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetPropertiesAsync(
@@ -196,7 +341,17 @@ public:
         FVirtualItemsModuleGetPropertiesAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
             string cpp_virtualItemId;
 			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::GetPropertiesAsync(
+                cpp_virtualItemId,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void SetPropertiesAsync(
@@ -207,7 +362,18 @@ public:
             string cpp_json;
 			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
 			cpp_json = string(TCHAR_TO_UTF8(*json));
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::SetPropertiesAsync(
+                cpp_virtualItemId,
+                cpp_json,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void UploadImageAsync(
@@ -225,7 +391,19 @@ public:
 				cpp_thumbnailTextureBytes.push_back(cpp_thumbnailTextureBytes_item);
 			}
 			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::UploadImageAsync(
+                cpp_virtualItemId,
+                cpp_thumbnailTextureBytes,
+                cpp_cancellationToken,
+                [onSuccess](bool response) {
+                    bool bpResponse;
+					bpResponse = response;
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void DownloadImageAsync(
@@ -239,6 +417,22 @@ public:
 			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
 			cpp_size = static_cast<RGN::Model::ImageSize>(size);
 			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
-            // TODO
+            RGN::Modules::VirtualItems::VirtualItemsModule::DownloadImageAsync(
+                cpp_virtualItemId,
+                cpp_size,
+                cpp_cancellationToken,
+                [onSuccess](vector<uint8_t> response) {
+                    TArray<uint8> bpResponse;
+					for (const auto& response_item : response) {
+						uint8 b_response_item;
+						b_response_item = response_item;
+						bpResponse.Add(b_response_item);
+					}
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

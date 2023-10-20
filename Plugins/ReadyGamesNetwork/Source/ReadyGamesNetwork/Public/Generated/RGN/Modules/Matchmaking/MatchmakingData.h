@@ -94,6 +94,79 @@ namespace RGN { namespace Modules { namespace Matchmaking {
          * A dictionary mapping the participant identifiers to their respective optional payload data in the matchmaking process.
          */
         std::unordered_map<string, string> participantsPayload;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(MatchmakingData, id, appId, type, finishType, startType, maxUsers, isStarted, votingEnabled, oncePerUserVoting, createdBy, updatedBy, createdAt, updatedAt, participants, votes, participantsScore, participantsPayload)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const MatchmakingData& nlohmann_json_t) {
+            nlohmann_json_j["id"] = nlohmann_json_t.id;
+            nlohmann_json_j["appId"] = nlohmann_json_t.appId;
+            nlohmann_json_j["type"] = nlohmann_json_t.type;
+            nlohmann_json_j["finishType"] = nlohmann_json_t.finishType;
+            nlohmann_json_j["startType"] = nlohmann_json_t.startType;
+            nlohmann_json_j["maxUsers"] = nlohmann_json_t.maxUsers;
+            nlohmann_json_j["isStarted"] = nlohmann_json_t.isStarted;
+            nlohmann_json_j["votingEnabled"] = nlohmann_json_t.votingEnabled;
+            nlohmann_json_j["oncePerUserVoting"] = nlohmann_json_t.oncePerUserVoting;
+            nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
+            nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
+            nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
+            nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
+            nlohmann_json_j["participants"] = nlohmann_json_t.participants;
+            nlohmann_json_j["votes"] = nlohmann_json_t.votes;
+            nlohmann_json_j["participantsScore"] = nlohmann_json_t.participantsScore;
+            nlohmann_json_j["participantsPayload"] = nlohmann_json_t.participantsPayload;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, MatchmakingData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("id")) {
+                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+            }
+            if (nlohmann_json_j.contains("appId")) {
+                nlohmann_json_j.at("appId").get_to(nlohmann_json_t.appId);
+            }
+            if (nlohmann_json_j.contains("type")) {
+                nlohmann_json_j.at("type").get_to(nlohmann_json_t.type);
+            }
+            if (nlohmann_json_j.contains("finishType")) {
+                nlohmann_json_j.at("finishType").get_to(nlohmann_json_t.finishType);
+            }
+            if (nlohmann_json_j.contains("startType")) {
+                nlohmann_json_j.at("startType").get_to(nlohmann_json_t.startType);
+            }
+            if (nlohmann_json_j.contains("maxUsers")) {
+                nlohmann_json_j.at("maxUsers").get_to(nlohmann_json_t.maxUsers);
+            }
+            if (nlohmann_json_j.contains("isStarted")) {
+                nlohmann_json_j.at("isStarted").get_to(nlohmann_json_t.isStarted);
+            }
+            if (nlohmann_json_j.contains("votingEnabled")) {
+                nlohmann_json_j.at("votingEnabled").get_to(nlohmann_json_t.votingEnabled);
+            }
+            if (nlohmann_json_j.contains("oncePerUserVoting")) {
+                nlohmann_json_j.at("oncePerUserVoting").get_to(nlohmann_json_t.oncePerUserVoting);
+            }
+            if (nlohmann_json_j.contains("createdBy")) {
+                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+            }
+            if (nlohmann_json_j.contains("updatedBy")) {
+                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+            }
+            if (nlohmann_json_j.contains("createdAt")) {
+                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+            }
+            if (nlohmann_json_j.contains("updatedAt")) {
+                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+            }
+            if (nlohmann_json_j.contains("participants")) {
+                nlohmann_json_j.at("participants").get_to(nlohmann_json_t.participants);
+            }
+            if (nlohmann_json_j.contains("votes")) {
+                nlohmann_json_j.at("votes").get_to(nlohmann_json_t.votes);
+            }
+            if (nlohmann_json_j.contains("participantsScore")) {
+                nlohmann_json_j.at("participantsScore").get_to(nlohmann_json_t.participantsScore);
+            }
+            if (nlohmann_json_j.contains("participantsPayload")) {
+                nlohmann_json_j.at("participantsPayload").get_to(nlohmann_json_t.participantsPayload);
+            }
+        }
     };
 }}}

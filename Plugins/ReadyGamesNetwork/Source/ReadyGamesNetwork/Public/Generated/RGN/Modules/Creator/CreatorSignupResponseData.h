@@ -10,6 +10,19 @@ namespace RGN { namespace Modules { namespace Creator {
     struct CreatorSignupResponseData {
         string message;
         bool success = false;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreatorSignupResponseData, message, success)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const CreatorSignupResponseData& nlohmann_json_t) {
+            nlohmann_json_j["message"] = nlohmann_json_t.message;
+            nlohmann_json_j["success"] = nlohmann_json_t.success;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, CreatorSignupResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("message")) {
+                nlohmann_json_j.at("message").get_to(nlohmann_json_t.message);
+            }
+            if (nlohmann_json_j.contains("success")) {
+                nlohmann_json_j.at("success").get_to(nlohmann_json_t.success);
+            }
+        }
     };
 }}}

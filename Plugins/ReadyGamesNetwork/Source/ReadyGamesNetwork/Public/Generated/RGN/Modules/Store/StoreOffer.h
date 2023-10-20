@@ -92,6 +92,71 @@ namespace RGN { namespace Modules { namespace Store {
          */
         vector<RGN::Modules::VirtualItems::PriceInfo> prices;
         vector<RGN::Modules::VirtualItems::VirtualItem> virtualItems;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(StoreOffer, id, name, description, appIds, tags, imageUrl, createdAt, updatedAt, createdBy, updatedBy, time, properties, itemIds, prices, virtualItems)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const StoreOffer& nlohmann_json_t) {
+            nlohmann_json_j["id"] = nlohmann_json_t.id;
+            nlohmann_json_j["name"] = nlohmann_json_t.name;
+            nlohmann_json_j["description"] = nlohmann_json_t.description;
+            nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
+            nlohmann_json_j["tags"] = nlohmann_json_t.tags;
+            nlohmann_json_j["imageUrl"] = nlohmann_json_t.imageUrl;
+            nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
+            nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
+            nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
+            nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
+            nlohmann_json_j["time"] = nlohmann_json_t.time;
+            nlohmann_json_j["properties"] = nlohmann_json_t.properties;
+            nlohmann_json_j["itemIds"] = nlohmann_json_t.itemIds;
+            nlohmann_json_j["prices"] = nlohmann_json_t.prices;
+            nlohmann_json_j["virtualItems"] = nlohmann_json_t.virtualItems;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, StoreOffer& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("id")) {
+                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+            }
+            if (nlohmann_json_j.contains("name")) {
+                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+            }
+            if (nlohmann_json_j.contains("description")) {
+                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+            }
+            if (nlohmann_json_j.contains("appIds")) {
+                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+            }
+            if (nlohmann_json_j.contains("tags")) {
+                nlohmann_json_j.at("tags").get_to(nlohmann_json_t.tags);
+            }
+            if (nlohmann_json_j.contains("imageUrl")) {
+                nlohmann_json_j.at("imageUrl").get_to(nlohmann_json_t.imageUrl);
+            }
+            if (nlohmann_json_j.contains("createdAt")) {
+                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+            }
+            if (nlohmann_json_j.contains("updatedAt")) {
+                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+            }
+            if (nlohmann_json_j.contains("createdBy")) {
+                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+            }
+            if (nlohmann_json_j.contains("updatedBy")) {
+                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+            }
+            if (nlohmann_json_j.contains("time")) {
+                nlohmann_json_j.at("time").get_to(nlohmann_json_t.time);
+            }
+            if (nlohmann_json_j.contains("properties")) {
+                nlohmann_json_j.at("properties").get_to(nlohmann_json_t.properties);
+            }
+            if (nlohmann_json_j.contains("itemIds")) {
+                nlohmann_json_j.at("itemIds").get_to(nlohmann_json_t.itemIds);
+            }
+            if (nlohmann_json_j.contains("prices")) {
+                nlohmann_json_j.at("prices").get_to(nlohmann_json_t.prices);
+            }
+            if (nlohmann_json_j.contains("virtualItems")) {
+                nlohmann_json_j.at("virtualItems").get_to(nlohmann_json_t.virtualItems);
+            }
+        }
     };
 }}}

@@ -12,6 +12,19 @@ namespace RGN { namespace Modules { namespace Achievement {
     struct GetAchievementsWithUserDataResponse {
         vector<RGN::Modules::Achievement::AchievementWithUserData> achievements;
         vector<RGN::Modules::Achievement::UserAchievement> userAchievements;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GetAchievementsWithUserDataResponse, achievements, userAchievements)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const GetAchievementsWithUserDataResponse& nlohmann_json_t) {
+            nlohmann_json_j["achievements"] = nlohmann_json_t.achievements;
+            nlohmann_json_j["userAchievements"] = nlohmann_json_t.userAchievements;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, GetAchievementsWithUserDataResponse& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("achievements")) {
+                nlohmann_json_j.at("achievements").get_to(nlohmann_json_t.achievements);
+            }
+            if (nlohmann_json_j.contains("userAchievements")) {
+                nlohmann_json_j.at("userAchievements").get_to(nlohmann_json_t.userAchievements);
+            }
+        }
     };
 }}}

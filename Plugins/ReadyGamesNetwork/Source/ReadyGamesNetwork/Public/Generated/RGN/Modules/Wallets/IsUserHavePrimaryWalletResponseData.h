@@ -11,6 +11,27 @@ namespace RGN { namespace Modules { namespace Wallets {
     struct IsUserHavePrimaryWalletResponseData : public RGN::Model::Response::BaseResponseData {
         bool isUserHavePrimaryWallet = false;
         string address;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(IsUserHavePrimaryWalletResponseData, isUserHavePrimaryWallet, address)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const IsUserHavePrimaryWalletResponseData& nlohmann_json_t) {
+            nlohmann_json_j["status"] = nlohmann_json_t.status;
+            nlohmann_json_j["message"] = nlohmann_json_t.message;
+            nlohmann_json_j["isUserHavePrimaryWallet"] = nlohmann_json_t.isUserHavePrimaryWallet;
+            nlohmann_json_j["address"] = nlohmann_json_t.address;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, IsUserHavePrimaryWalletResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("status")) {
+                nlohmann_json_j.at("status").get_to(nlohmann_json_t.status);
+            }
+            if (nlohmann_json_j.contains("message")) {
+                nlohmann_json_j.at("message").get_to(nlohmann_json_t.message);
+            }
+            if (nlohmann_json_j.contains("isUserHavePrimaryWallet")) {
+                nlohmann_json_j.at("isUserHavePrimaryWallet").get_to(nlohmann_json_t.isUserHavePrimaryWallet);
+            }
+            if (nlohmann_json_j.contains("address")) {
+                nlohmann_json_j.at("address").get_to(nlohmann_json_t.address);
+            }
+        }
     };
 }}}

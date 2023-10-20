@@ -29,7 +29,17 @@ public:
         FLeaderboardModuleAdminAddLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
             RGN::Modules::Leaderboard::LeaderboardData cpp_leaderboardData;
 			FBP_LeaderboardData::ConvertToCoreModel(leaderboardData, cpp_leaderboardData);
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule_Admin::AddLeaderboardAsync(
+                cpp_leaderboardData,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void UpdateLeaderboardAsync(
@@ -37,7 +47,17 @@ public:
         FLeaderboardModuleAdminUpdateLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
             RGN::Modules::Leaderboard::LeaderboardData cpp_leaderboardData;
 			FBP_LeaderboardData::ConvertToCoreModel(leaderboardData, cpp_leaderboardData);
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule_Admin::UpdateLeaderboardAsync(
+                cpp_leaderboardData,
+                [onSuccess](string response) {
+                    FString bpResponse;
+					bpResponse = FString(response.c_str());
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void DeleteLeaderboardAsync(
@@ -45,6 +65,14 @@ public:
         FLeaderboardModuleAdminDeleteLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
             string cpp_leaderboardId;
 			cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
-            // TODO
+            RGN::Modules::Leaderboard::LeaderboardModule_Admin::DeleteLeaderboardAsync(
+                cpp_leaderboardId,
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                }
+            );
     }
 };

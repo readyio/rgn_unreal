@@ -9,6 +9,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Leaderboard {
     struct SetScoreResponseData {
         int32_t place = 0;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(SetScoreResponseData, place)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const SetScoreResponseData& nlohmann_json_t) {
+            nlohmann_json_j["place"] = nlohmann_json_t.place;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, SetScoreResponseData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("place")) {
+                nlohmann_json_j.at("place").get_to(nlohmann_json_t.place);
+            }
+        }
     };
 }}}

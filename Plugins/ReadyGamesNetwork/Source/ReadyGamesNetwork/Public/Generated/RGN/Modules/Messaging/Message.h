@@ -20,6 +20,19 @@ namespace RGN { namespace Modules { namespace Messaging {
          * This could be for example Json string
          */
         string Payload;
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Message, Id, Payload)
+
+        friend void to_json(nlohmann::json& nlohmann_json_j, const Message& nlohmann_json_t) {
+            nlohmann_json_j["Id"] = nlohmann_json_t.Id;
+            nlohmann_json_j["Payload"] = nlohmann_json_t.Payload;
+        }
+
+        friend void from_json(const nlohmann::json& nlohmann_json_j, Message& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("Id")) {
+                nlohmann_json_j.at("Id").get_to(nlohmann_json_t.Id);
+            }
+            if (nlohmann_json_j.contains("Payload")) {
+                nlohmann_json_j.at("Payload").get_to(nlohmann_json_t.Payload);
+            }
+        }
     };
 }}}
