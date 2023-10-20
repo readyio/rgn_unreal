@@ -468,7 +468,8 @@ public:
             string cpp_json;
 			cpp_json = string(TCHAR_TO_UTF8(*json));
             RGN::Modules::Inventory::InventoryModule::ParseInventoryItemData(
-                cpp_json            );
+                cpp_json
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void ParseInventoryItemsData(
@@ -477,7 +478,8 @@ public:
             string cpp_json;
 			cpp_json = string(TCHAR_TO_UTF8(*json));
             RGN::Modules::Inventory::InventoryModule::ParseInventoryItemsData(
-                cpp_json            );
+                cpp_json
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetByTagsAsync(

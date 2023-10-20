@@ -34,7 +34,8 @@ public:
 			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
             RGN::Modules::Messaging::MessagingModule::Subscribe(
                 cpp_topic,
-                cpp_messageReceiver            );
+                cpp_messageReceiver
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void Unsubscribe(
@@ -47,7 +48,8 @@ public:
 			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
             RGN::Modules::Messaging::MessagingModule::Unsubscribe(
                 cpp_topic,
-                cpp_messageReceiver            );
+                cpp_messageReceiver
+            );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void SendMessageByUserId(
