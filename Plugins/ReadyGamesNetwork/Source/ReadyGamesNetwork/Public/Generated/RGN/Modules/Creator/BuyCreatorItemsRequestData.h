@@ -18,10 +18,16 @@ namespace RGN { namespace Modules { namespace Creator {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, BuyCreatorItemsRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("itemIds")) {
-                nlohmann_json_j.at("itemIds").get_to(nlohmann_json_t.itemIds);
+                auto json_itemIds = nlohmann_json_j.at("itemIds");
+                if (!json_itemIds.is_null() && json_itemIds.is_array()) {
+                    json_itemIds.get_to(nlohmann_json_t.itemIds);
+                }
             }
         }
     };

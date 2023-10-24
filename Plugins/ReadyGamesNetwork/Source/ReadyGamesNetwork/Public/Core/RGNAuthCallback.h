@@ -7,8 +7,8 @@ using namespace std;
 
 class RGNAuthCallback {
 private:
-	function<void(bool)> _callback;
+	function<void(bool)> _onAuthChange;
 public:
-	RGNAuthCallback(function<void(bool)> callback);
-	void raise(bool isLoggedIn);
+	RGNAuthCallback(function<void(bool)> onAuthChange);
+	void onAuthChange(bool isLoggedIn);
 };

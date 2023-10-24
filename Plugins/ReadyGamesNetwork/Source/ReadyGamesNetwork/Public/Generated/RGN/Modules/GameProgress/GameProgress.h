@@ -16,7 +16,10 @@ namespace RGN { namespace Modules { namespace GameProgress {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GameProgress& nlohmann_json_t) {
             if (nlohmann_json_j.contains("level")) {
-                nlohmann_json_j.at("level").get_to(nlohmann_json_t.level);
+                auto json_level = nlohmann_json_j.at("level");
+                if (!json_level.is_null() && json_level.is_number()) {
+                    json_level.get_to(nlohmann_json_t.level);
+                }
             }
         }
     };

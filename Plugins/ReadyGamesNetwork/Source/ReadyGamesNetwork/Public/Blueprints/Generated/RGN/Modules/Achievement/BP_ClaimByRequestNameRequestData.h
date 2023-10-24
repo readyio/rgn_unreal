@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_ClaimByRequestNameRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     FString requestName;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::ClaimByRequestNameRequestData& source, FBP_ClaimByRequestNameRequestData& target) {

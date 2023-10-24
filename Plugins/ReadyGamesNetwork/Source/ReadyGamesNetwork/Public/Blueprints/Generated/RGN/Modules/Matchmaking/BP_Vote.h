@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_Vote {
     /**
      * Gets or sets the identifier of the voter.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString voterId;
     /**
      * Gets or sets the identifier of the participant that the vote is for.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString participantId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::Vote& source, FBP_Vote& target) {

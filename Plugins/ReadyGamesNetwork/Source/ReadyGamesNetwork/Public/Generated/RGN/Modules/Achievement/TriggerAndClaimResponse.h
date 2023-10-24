@@ -31,10 +31,16 @@ namespace RGN { namespace Modules { namespace Achievement {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, TriggerAndClaimResponse& nlohmann_json_t) {
             if (nlohmann_json_j.contains("rewardsHaveBeenGivenOut")) {
-                nlohmann_json_j.at("rewardsHaveBeenGivenOut").get_to(nlohmann_json_t.rewardsHaveBeenGivenOut);
+                auto json_rewardsHaveBeenGivenOut = nlohmann_json_j.at("rewardsHaveBeenGivenOut");
+                if (!json_rewardsHaveBeenGivenOut.is_null() && json_rewardsHaveBeenGivenOut.is_boolean()) {
+                    json_rewardsHaveBeenGivenOut.get_to(nlohmann_json_t.rewardsHaveBeenGivenOut);
+                }
             }
             if (nlohmann_json_j.contains("rewards")) {
-                nlohmann_json_j.at("rewards").get_to(nlohmann_json_t.rewards);
+                auto json_rewards = nlohmann_json_j.at("rewards");
+                if (!json_rewards.is_null() && json_rewards.is_array()) {
+                    json_rewards.get_to(nlohmann_json_t.rewards);
+                }
             }
         }
     };

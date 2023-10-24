@@ -21,16 +21,28 @@ namespace RGN { namespace Modules { namespace Achievement {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, TriggerByIdRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("version")) {
-                nlohmann_json_j.at("version").get_to(nlohmann_json_t.version);
+                auto json_version = nlohmann_json_j.at("version");
+                if (!json_version.is_null() && json_version.is_number()) {
+                    json_version.get_to(nlohmann_json_t.version);
+                }
             }
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("progress")) {
-                nlohmann_json_j.at("progress").get_to(nlohmann_json_t.progress);
+                auto json_progress = nlohmann_json_j.at("progress");
+                if (!json_progress.is_null() && json_progress.is_number()) {
+                    json_progress.get_to(nlohmann_json_t.progress);
+                }
             }
         }
     };

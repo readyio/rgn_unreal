@@ -54,25 +54,46 @@ namespace RGN { namespace Modules { namespace Leaderboard {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardEntry& nlohmann_json_t) {
             if (nlohmann_json_j.contains("userId")) {
-                nlohmann_json_j.at("userId").get_to(nlohmann_json_t.userId);
+                auto json_userId = nlohmann_json_j.at("userId");
+                if (!json_userId.is_null() && json_userId.is_string()) {
+                    json_userId.get_to(nlohmann_json_t.userId);
+                }
             }
             if (nlohmann_json_j.contains("displayName")) {
-                nlohmann_json_j.at("displayName").get_to(nlohmann_json_t.displayName);
+                auto json_displayName = nlohmann_json_j.at("displayName");
+                if (!json_displayName.is_null() && json_displayName.is_string()) {
+                    json_displayName.get_to(nlohmann_json_t.displayName);
+                }
             }
             if (nlohmann_json_j.contains("profilePicture")) {
-                nlohmann_json_j.at("profilePicture").get_to(nlohmann_json_t.profilePicture);
+                auto json_profilePicture = nlohmann_json_j.at("profilePicture");
+                if (!json_profilePicture.is_null()) {
+                    json_profilePicture.get_to(nlohmann_json_t.profilePicture);
+                }
             }
             if (nlohmann_json_j.contains("score")) {
-                nlohmann_json_j.at("score").get_to(nlohmann_json_t.score);
+                auto json_score = nlohmann_json_j.at("score");
+                if (!json_score.is_null() && json_score.is_number()) {
+                    json_score.get_to(nlohmann_json_t.score);
+                }
             }
             if (nlohmann_json_j.contains("formattedScore")) {
-                nlohmann_json_j.at("formattedScore").get_to(nlohmann_json_t.formattedScore);
+                auto json_formattedScore = nlohmann_json_j.at("formattedScore");
+                if (!json_formattedScore.is_null() && json_formattedScore.is_string()) {
+                    json_formattedScore.get_to(nlohmann_json_t.formattedScore);
+                }
             }
             if (nlohmann_json_j.contains("place")) {
-                nlohmann_json_j.at("place").get_to(nlohmann_json_t.place);
+                auto json_place = nlohmann_json_j.at("place");
+                if (!json_place.is_null() && json_place.is_number()) {
+                    json_place.get_to(nlohmann_json_t.place);
+                }
             }
             if (nlohmann_json_j.contains("extraData")) {
-                nlohmann_json_j.at("extraData").get_to(nlohmann_json_t.extraData);
+                auto json_extraData = nlohmann_json_j.at("extraData");
+                if (!json_extraData.is_null() && json_extraData.is_string()) {
+                    json_extraData.get_to(nlohmann_json_t.extraData);
+                }
             }
         }
     };

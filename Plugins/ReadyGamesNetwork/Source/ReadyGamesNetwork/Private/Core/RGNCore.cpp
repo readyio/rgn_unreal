@@ -44,33 +44,42 @@ void RGNCore::UnsubscribeFromAuthCallback(RGNAuthCallback* callback) {
     }
 }
 
-void RGNCore::DevSignIn(string email, string password) {
+void RGNCore::DevSignIn(string email, string password, const function<void(bool)>& onSignIn) {
     json requestBody;
     requestBody["email"] = email;
     requestBody["password"] = password;
     requestBody["appId"] = _appId;
     requestBody["returnSecureToken"] = true;
 
-    RGNCore::CallAPI<json, json>("user-signInWithEmailPassword", requestBody,
-        [](json response) {
-            _userId = response.at("userId");
-            _idToken = response.at("idToken");
-            _refreshToken = response.at("refreshToken");
+    RGNCore::NonAuthInternalCallAPI("user-signInWithEmailPassword", requestBody.dump(),
+        [onSignIn](string response) {
+            json jsonResponse = json::parse(response);
+            _userId = jsonResponse.at("userId");
+            _idToken = jsonResponse.at("idToken");
+            _refreshToken = jsonResponse.at("refreshToken");
+
             SaveAuthSession();
             NotifyAuthChange();
-        }, nullptr);
+
+            if (onSignIn) {
+                onSignIn(true);
+            }
+        },
+        [onSignIn](int httpCode, string httpMessage) {
+            if (onSignIn) {
+                onSignIn(false);
+            }
+        }
+    );
 }
 
-void RGNCore::SignIn() {
+void RGNCore::SignIn(const function<void(bool)>& onSignIn) {
     string redirectUrl = _appId + "://";
     string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&returnRefreshToken=true&appId=" + _appId;
     Os::OpenURL(url);
-
-    DeepLinkCallback* deepLinkCallback = new DeepLinkCallback([&](string payload) {
-        OnDeepLink(payload);
-        DeepLink::Unsubscribe(deepLinkCallback);
+    DeepLink::Listen([onSignIn](string payload) {
+        OnDeepLink(payload, onSignIn);
     });
-    DeepLink::Subscribe(deepLinkCallback);
 }
 
 void RGNCore::SignOut() {
@@ -85,11 +94,12 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
     requestBody["appPackageName"] = _appId;
     requestBody["refreshToken"] = _refreshToken;
 
-    RGNCore::CallAPI<json, json>("user-refreshTokens", requestBody,
-        [callback](json response) {
-            _userId = response.at("userId");
-            _idToken = response.at("idToken");
-            _refreshToken = response.at("refreshToken");
+    RGNCore::NonAuthInternalCallAPI("user-refreshTokens", requestBody.dump(),
+        [callback](string response) {
+            json jsonResponse = json::parse(response);
+            _userId = jsonResponse.at("userId");
+            _idToken = jsonResponse.at("idToken");
+            _refreshToken = jsonResponse.at("refreshToken");
 
             SaveAuthSession();
             NotifyAuthChange();
@@ -98,7 +108,7 @@ void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
                 callback(true);
             }
         },
-        [callback](int code, string message) {
+        [callback](int httpCode, string httpMessage) {
             if (callback) {
                 callback(false);
             }
@@ -160,7 +170,7 @@ string RGNCore::GetOAuthUrl() {
 
 void RGNCore::InternalCallAPI(string name, string body,
     const function<void(string)>& complete,
-    const function<void(int, string)> fail, CancellationToken cancellationToken) {
+    const function<void(int, string)>& fail, CancellationToken cancellationToken) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
     if (!_idToken.empty()) {
@@ -211,6 +221,26 @@ void RGNCore::InternalCallAPI(string name, string body,
     });
 }
 
+void RGNCore::NonAuthInternalCallAPI(string name, string body,
+    const function<void(string)>& complete, const function<void(int, string)>& fail) {
+    HttpHeaders headers;
+    headers.add("Content-type", "application/json");
+    string url = GetApiUrl() + name;
+    Http::Request(url, HttpMethod::POST, headers, body, [complete, fail](HttpResponse httpResponse) {
+        int httpResponseCode = httpResponse.getResponseCode();
+        string httpResponseBody = httpResponse.getResponseBody();
+
+        if (httpResponseCode == 200) {
+            complete(httpResponseBody);
+        }
+        else {
+            if (fail) {
+                fail(httpResponseCode, httpResponseBody);
+            }
+        }
+    });
+}
+
 void RGNCore::LoadAuthSession() {
     bool wasNotLoggedIn = !IsLoggedIn();
 
@@ -238,15 +268,15 @@ void RGNCore::SaveAuthSession() {
 void RGNCore::NotifyAuthChange() {
     bool isLoggedIn = IsLoggedIn();
     for (auto callback : _authCallbacks) {
-        callback->raise(isLoggedIn);
+        callback->onAuthChange(isLoggedIn);
     }
 }
 
-void RGNCore::OnDeepLink(string payload) {
+void RGNCore::OnDeepLink(string payload, const function<void(bool)>& onSignIn) {
     unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
         _refreshToken = payloadArgs.at("token");
-        RefreshTokens(nullptr);
+        RefreshTokens(onSignIn);
     }
 }

@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_SearchUsersResultData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     TArray<FBP_UserData> queryResult;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::SearchUsersResultData& source, FBP_SearchUsersResultData& target) {

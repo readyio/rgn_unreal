@@ -11,11 +11,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_RGNCoinEconomyProduct {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     FString uid;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     float priceInUSD;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::RGNCoinEconomyProduct& source, FBP_RGNCoinEconomyProduct& target) {

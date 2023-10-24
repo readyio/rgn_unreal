@@ -11,9 +11,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_CreatorSignupResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     FString message;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     bool success;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSignupResponseData& source, FBP_CreatorSignupResponseData& target) {

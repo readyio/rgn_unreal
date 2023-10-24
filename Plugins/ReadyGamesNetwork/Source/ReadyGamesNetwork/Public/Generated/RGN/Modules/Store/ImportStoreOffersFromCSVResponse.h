@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, ImportStoreOffersFromCSVResponse& nlohmann_json_t) {
             if (nlohmann_json_j.contains("offers")) {
-                nlohmann_json_j.at("offers").get_to(nlohmann_json_t.offers);
+                auto json_offers = nlohmann_json_j.at("offers");
+                if (!json_offers.is_null() && json_offers.is_array()) {
+                    json_offers.get_to(nlohmann_json_t.offers);
+                }
             }
         }
     };

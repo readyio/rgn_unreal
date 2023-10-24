@@ -11,9 +11,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_BaseResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Response")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Response")
     int32 status;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Response")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Response")
     FString message;
 
 	static void ConvertToUnrealModel(const RGN::Model::Response::BaseResponseData& source, FBP_BaseResponseData& target) {

@@ -16,7 +16,10 @@ namespace RGN { namespace Modules { namespace UserProfile {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, UserCustomClaims& nlohmann_json_t) {
             if (nlohmann_json_j.contains("claims")) {
-                nlohmann_json_j.at("claims").get_to(nlohmann_json_t.claims);
+                auto json_claims = nlohmann_json_j.at("claims");
+                if (!json_claims.is_null()) {
+                    json_claims.get_to(nlohmann_json_t.claims);
+                }
             }
         }
     };

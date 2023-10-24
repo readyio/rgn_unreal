@@ -15,7 +15,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetUserWalletsResponseData : public FBP_BaseResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     TArray<FBP_RGNWallet> wallets;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::GetUserWalletsResponseData& source, FBP_GetUserWalletsResponseData& target) {

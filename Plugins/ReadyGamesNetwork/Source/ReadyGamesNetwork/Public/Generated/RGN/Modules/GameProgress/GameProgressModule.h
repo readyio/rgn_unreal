@@ -47,7 +47,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::AddUserLevelRequestData requestData;
                 requestData.playerProgress = userProgressJson;
-                RGNCore::CallAPI<RGN::Modules::GameProgress::AddUserLevelRequestData, string>(
+                RGNCore::CallAPI<RGN::Modules::GameProgress::AddUserLevelRequestData>(
                     "game-addPlayerProgress",
                     requestData,
                     complete,
@@ -61,7 +61,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
                 RGN::Modules::GameProgress::UpdateUserLevelRequestData requestData;
                 requestData.playerProgress = userProgressJson;
                 requestData.reward = reward;
-                RGNCore::CallAPI<RGN::Modules::GameProgress::UpdateUserLevelRequestData, string>(
+                RGNCore::CallAPI<RGN::Modules::GameProgress::UpdateUserLevelRequestData>(
                     "game-updatePlayerProgress",
                     requestData,
                     complete,
@@ -71,7 +71,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
-                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, string>(
+                RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData>(
                     "game-getPlayerProgress",
                     requestData,
                     complete,

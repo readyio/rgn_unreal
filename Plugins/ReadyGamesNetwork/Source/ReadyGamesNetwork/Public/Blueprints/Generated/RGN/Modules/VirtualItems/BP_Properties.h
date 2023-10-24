@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_Properties {
     /**
      * List of application identifiers where the properties are used.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     TArray<FString> appIds;
     /**
      * Game-specific properties in JSON format.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FString json;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::Properties& source, FBP_Properties& target) {

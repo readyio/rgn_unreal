@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_AddVirtualItemResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FBP_VirtualItem virtualItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::AddVirtualItemResponseData& source, FBP_AddVirtualItemResponseData& target) {

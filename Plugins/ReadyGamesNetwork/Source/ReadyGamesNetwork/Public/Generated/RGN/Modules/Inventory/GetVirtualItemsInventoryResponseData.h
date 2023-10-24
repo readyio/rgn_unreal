@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Inventory {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GetVirtualItemsInventoryResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("virtualItemInventoryDatas")) {
-                nlohmann_json_j.at("virtualItemInventoryDatas").get_to(nlohmann_json_t.virtualItemInventoryDatas);
+                auto json_virtualItemInventoryDatas = nlohmann_json_j.at("virtualItemInventoryDatas");
+                if (!json_virtualItemInventoryDatas.is_null() && json_virtualItemInventoryDatas.is_array()) {
+                    json_virtualItemInventoryDatas.get_to(nlohmann_json_t.virtualItemInventoryDatas);
+                }
             }
         }
     };

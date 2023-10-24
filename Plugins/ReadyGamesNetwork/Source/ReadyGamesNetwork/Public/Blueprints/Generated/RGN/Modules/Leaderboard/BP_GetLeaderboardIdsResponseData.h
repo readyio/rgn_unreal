@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetLeaderboardIdsResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     TArray<FString> ids;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData& source, FBP_GetLeaderboardIdsResponseData& target) {

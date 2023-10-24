@@ -15,9 +15,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_SetPricesRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     FString offerId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     TArray<FBP_PriceInfo> prices;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::SetPricesRequestData& source, FBP_SetPricesRequestData& target) {

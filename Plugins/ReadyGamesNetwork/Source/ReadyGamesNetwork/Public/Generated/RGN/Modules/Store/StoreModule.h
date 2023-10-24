@@ -403,7 +403,7 @@ namespace RGN { namespace Modules { namespace Store {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-getProperties",
                     requestData,
                     complete,
@@ -418,7 +418,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
                 requestData["json"] = json;
-                RGNCore::CallAPI<nlohmann::json, string>(
+                RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-setProperties",
                     requestData,
                     complete,

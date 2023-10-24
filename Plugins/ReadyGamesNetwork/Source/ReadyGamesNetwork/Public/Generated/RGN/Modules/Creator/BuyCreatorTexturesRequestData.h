@@ -18,10 +18,16 @@ namespace RGN { namespace Modules { namespace Creator {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, BuyCreatorTexturesRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("textureIds")) {
-                nlohmann_json_j.at("textureIds").get_to(nlohmann_json_t.textureIds);
+                auto json_textureIds = nlohmann_json_j.at("textureIds");
+                if (!json_textureIds.is_null() && json_textureIds.is_array()) {
+                    json_textureIds.get_to(nlohmann_json_t.textureIds);
+                }
             }
         }
     };

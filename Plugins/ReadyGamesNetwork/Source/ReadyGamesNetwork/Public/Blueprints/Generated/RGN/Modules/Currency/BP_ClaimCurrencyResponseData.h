@@ -13,11 +13,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_ClaimCurrencyResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     bool isSuccess;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     TArray<FBP_Currency> unclaimedCurrencies;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     TArray<FBP_Currency> currencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::ClaimCurrencyResponseData& source, FBP_ClaimCurrencyResponseData& target) {

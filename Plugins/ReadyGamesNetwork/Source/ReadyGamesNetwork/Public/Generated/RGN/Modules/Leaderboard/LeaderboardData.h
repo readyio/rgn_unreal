@@ -117,46 +117,88 @@ namespace RGN { namespace Modules { namespace Leaderboard {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("requestName")) {
-                nlohmann_json_j.at("requestName").get_to(nlohmann_json_t.requestName);
+                auto json_requestName = nlohmann_json_j.at("requestName");
+                if (!json_requestName.is_null() && json_requestName.is_string()) {
+                    json_requestName.get_to(nlohmann_json_t.requestName);
+                }
             }
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("description")) {
-                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+                auto json_description = nlohmann_json_j.at("description");
+                if (!json_description.is_null() && json_description.is_string()) {
+                    json_description.get_to(nlohmann_json_t.description);
+                }
             }
             if (nlohmann_json_j.contains("setBy")) {
-                nlohmann_json_j.at("setBy").get_to(nlohmann_json_t.setBy);
+                auto json_setBy = nlohmann_json_j.at("setBy");
+                if (!json_setBy.is_null() && json_setBy.is_string()) {
+                    json_setBy.get_to(nlohmann_json_t.setBy);
+                }
             }
             if (nlohmann_json_j.contains("invertSortOrder")) {
-                nlohmann_json_j.at("invertSortOrder").get_to(nlohmann_json_t.invertSortOrder);
+                auto json_invertSortOrder = nlohmann_json_j.at("invertSortOrder");
+                if (!json_invertSortOrder.is_null() && json_invertSortOrder.is_boolean()) {
+                    json_invertSortOrder.get_to(nlohmann_json_t.invertSortOrder);
+                }
             }
             if (nlohmann_json_j.contains("decimalOffset")) {
-                nlohmann_json_j.at("decimalOffset").get_to(nlohmann_json_t.decimalOffset);
+                auto json_decimalOffset = nlohmann_json_j.at("decimalOffset");
+                if (!json_decimalOffset.is_null() && json_decimalOffset.is_number()) {
+                    json_decimalOffset.get_to(nlohmann_json_t.decimalOffset);
+                }
             }
             if (nlohmann_json_j.contains("type")) {
-                nlohmann_json_j.at("type").get_to(nlohmann_json_t.type);
+                auto json_type = nlohmann_json_j.at("type");
+                if (!json_type.is_null() && json_type.is_string()) {
+                    json_type.get_to(nlohmann_json_t.type);
+                }
             }
             if (nlohmann_json_j.contains("resetEveryTimeAtCron")) {
-                nlohmann_json_j.at("resetEveryTimeAtCron").get_to(nlohmann_json_t.resetEveryTimeAtCron);
+                auto json_resetEveryTimeAtCron = nlohmann_json_j.at("resetEveryTimeAtCron");
+                if (!json_resetEveryTimeAtCron.is_null() && json_resetEveryTimeAtCron.is_string()) {
+                    json_resetEveryTimeAtCron.get_to(nlohmann_json_t.resetEveryTimeAtCron);
+                }
             }
             if (nlohmann_json_j.contains("rewardsAtReset")) {
-                nlohmann_json_j.at("rewardsAtReset").get_to(nlohmann_json_t.rewardsAtReset);
+                auto json_rewardsAtReset = nlohmann_json_j.at("rewardsAtReset");
+                if (!json_rewardsAtReset.is_null() && json_rewardsAtReset.is_array()) {
+                    json_rewardsAtReset.get_to(nlohmann_json_t.rewardsAtReset);
+                }
             }
             if (nlohmann_json_j.contains("createdAt")) {
-                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+                auto json_createdAt = nlohmann_json_j.at("createdAt");
+                if (!json_createdAt.is_null() && json_createdAt.is_number()) {
+                    json_createdAt.get_to(nlohmann_json_t.createdAt);
+                }
             }
             if (nlohmann_json_j.contains("updatedAt")) {
-                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+                auto json_updatedAt = nlohmann_json_j.at("updatedAt");
+                if (!json_updatedAt.is_null() && json_updatedAt.is_number()) {
+                    json_updatedAt.get_to(nlohmann_json_t.updatedAt);
+                }
             }
             if (nlohmann_json_j.contains("createdBy")) {
-                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+                auto json_createdBy = nlohmann_json_j.at("createdBy");
+                if (!json_createdBy.is_null() && json_createdBy.is_string()) {
+                    json_createdBy.get_to(nlohmann_json_t.createdBy);
+                }
             }
             if (nlohmann_json_j.contains("updatedBy")) {
-                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+                auto json_updatedBy = nlohmann_json_j.at("updatedBy");
+                if (!json_updatedBy.is_null() && json_updatedBy.is_string()) {
+                    json_updatedBy.get_to(nlohmann_json_t.updatedBy);
+                }
             }
         }
     };

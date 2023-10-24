@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Leaderboard {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GetLeaderboardEntriesResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("entries")) {
-                nlohmann_json_j.at("entries").get_to(nlohmann_json_t.entries);
+                auto json_entries = nlohmann_json_j.at("entries");
+                if (!json_entries.is_null() && json_entries.is_array()) {
+                    json_entries.get_to(nlohmann_json_t.entries);
+                }
             }
         }
     };

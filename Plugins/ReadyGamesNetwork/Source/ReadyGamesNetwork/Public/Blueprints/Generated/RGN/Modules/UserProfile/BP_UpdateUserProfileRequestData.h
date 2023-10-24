@@ -13,9 +13,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_UpdateUserProfileRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString displayName;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString bio;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UpdateUserProfileRequestData& source, FBP_UpdateUserProfileRequestData& target) {

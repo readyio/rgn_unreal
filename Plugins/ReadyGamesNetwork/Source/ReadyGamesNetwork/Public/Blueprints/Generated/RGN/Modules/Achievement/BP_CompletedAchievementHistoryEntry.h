@@ -20,19 +20,19 @@ struct READYGAMESNETWORK_API FBP_CompletedAchievementHistoryEntry {
     /**
      * Achievement document id
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     FString id;
     /**
      * Value which should be reached to complete the achievement when
      * the achievement was triggered
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     int32 valueToReach;
     /**
      * Achievement rewards ids and quantity rewards to add to users when
      * the achievement is triggered
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     TArray<FBP_AchievementReward> rewards;
     /**
      * Time when the achievement triggered
@@ -40,7 +40,7 @@ struct READYGAMESNETWORK_API FBP_CompletedAchievementHistoryEntry {
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
      * This field is automatically populated by the backend
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     int64 completeTime;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::CompletedAchievementHistoryEntry& source, FBP_CompletedAchievementHistoryEntry& target) {

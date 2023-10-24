@@ -18,10 +18,16 @@ namespace RGN { namespace Modules { namespace UserProfile {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, SetInvisibleStatusRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("invisibleStatus")) {
-                nlohmann_json_j.at("invisibleStatus").get_to(nlohmann_json_t.invisibleStatus);
+                auto json_invisibleStatus = nlohmann_json_j.at("invisibleStatus");
+                if (!json_invisibleStatus.is_null() && json_invisibleStatus.is_boolean()) {
+                    json_invisibleStatus.get_to(nlohmann_json_t.invisibleStatus);
+                }
             }
         }
     };

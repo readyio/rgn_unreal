@@ -15,9 +15,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_PurchaseItem {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     FBP_VirtualItem virtualItem;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     FBP_InventoryItemData inventoryItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::PurchaseItem& source, FBP_PurchaseItem& target) {

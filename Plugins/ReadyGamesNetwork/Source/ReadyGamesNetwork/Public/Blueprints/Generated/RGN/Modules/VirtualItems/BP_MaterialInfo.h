@@ -11,11 +11,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_MaterialInfo {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FString materialToReplace;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FString baseColor;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FString baseTextureId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::MaterialInfo& source, FBP_MaterialInfo& target) {

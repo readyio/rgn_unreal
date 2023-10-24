@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_ImportStoreOffersFromCSVResponse {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     TArray<FBP_StoreOffer> offers;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::ImportStoreOffersFromCSVResponse& source, FBP_ImportStoreOffersFromCSVResponse& target) {

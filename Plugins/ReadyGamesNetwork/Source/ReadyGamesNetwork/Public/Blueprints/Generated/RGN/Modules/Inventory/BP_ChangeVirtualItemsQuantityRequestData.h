@@ -15,7 +15,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_ChangeVirtualItemsQuantityRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     TArray<FBP_InventoryData> inventoryDatas;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::ChangeVirtualItemsQuantityRequestData& source, FBP_ChangeVirtualItemsQuantityRequestData& target) {

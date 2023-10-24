@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Creator {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, CreatorSubmitItemResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("addedItem")) {
-                nlohmann_json_j.at("addedItem").get_to(nlohmann_json_t.addedItem);
+                auto json_addedItem = nlohmann_json_j.at("addedItem");
+                if (!json_addedItem.is_null()) {
+                    json_addedItem.get_to(nlohmann_json_t.addedItem);
+                }
             }
         }
     };

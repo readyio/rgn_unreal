@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, VirtualItemsResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("virtualItems")) {
-                nlohmann_json_j.at("virtualItems").get_to(nlohmann_json_t.virtualItems);
+                auto json_virtualItems = nlohmann_json_j.at("virtualItems");
+                if (!json_virtualItems.is_null() && json_virtualItems.is_array()) {
+                    json_virtualItems.get_to(nlohmann_json_t.virtualItems);
+                }
             }
         }
     };

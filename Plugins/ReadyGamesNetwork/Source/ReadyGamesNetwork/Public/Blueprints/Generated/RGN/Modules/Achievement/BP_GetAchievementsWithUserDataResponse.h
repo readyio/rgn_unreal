@@ -15,9 +15,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetAchievementsWithUserDataResponse {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     TArray<FBP_AchievementWithUserData> achievements;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     TArray<FBP_UserAchievement> userAchievements;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::GetAchievementsWithUserDataResponse& source, FBP_GetAchievementsWithUserDataResponse& target) {

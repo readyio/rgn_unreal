@@ -44,16 +44,28 @@ namespace RGN { namespace Modules { namespace Achievement {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, CompletedAchievementHistoryEntry& nlohmann_json_t) {
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("valueToReach")) {
-                nlohmann_json_j.at("valueToReach").get_to(nlohmann_json_t.valueToReach);
+                auto json_valueToReach = nlohmann_json_j.at("valueToReach");
+                if (!json_valueToReach.is_null() && json_valueToReach.is_number()) {
+                    json_valueToReach.get_to(nlohmann_json_t.valueToReach);
+                }
             }
             if (nlohmann_json_j.contains("rewards")) {
-                nlohmann_json_j.at("rewards").get_to(nlohmann_json_t.rewards);
+                auto json_rewards = nlohmann_json_j.at("rewards");
+                if (!json_rewards.is_null() && json_rewards.is_array()) {
+                    json_rewards.get_to(nlohmann_json_t.rewards);
+                }
             }
             if (nlohmann_json_j.contains("completeTime")) {
-                nlohmann_json_j.at("completeTime").get_to(nlohmann_json_t.completeTime);
+                auto json_completeTime = nlohmann_json_j.at("completeTime");
+                if (!json_completeTime.is_null() && json_completeTime.is_number()) {
+                    json_completeTime.get_to(nlohmann_json_t.completeTime);
+                }
             }
         }
     };

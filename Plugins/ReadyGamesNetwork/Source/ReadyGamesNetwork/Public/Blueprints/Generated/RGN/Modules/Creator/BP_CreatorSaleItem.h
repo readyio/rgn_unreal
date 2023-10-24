@@ -13,13 +13,13 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_CreatorSaleItem {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     FString id;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     FString name;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     int32 totalUnit;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     TArray<FBP_Currency> totalCurrencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSaleItem& source, FBP_CreatorSaleItem& target) {

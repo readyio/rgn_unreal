@@ -37,49 +37,94 @@ namespace RGN { namespace Modules { namespace GameProgress {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GameUserFullProfileData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("lastAppPackageName")) {
-                nlohmann_json_j.at("lastAppPackageName").get_to(nlohmann_json_t.lastAppPackageName);
+                auto json_lastAppPackageName = nlohmann_json_j.at("lastAppPackageName");
+                if (!json_lastAppPackageName.is_null() && json_lastAppPackageName.is_string()) {
+                    json_lastAppPackageName.get_to(nlohmann_json_t.lastAppPackageName);
+                }
             }
             if (nlohmann_json_j.contains("invisibleStatus")) {
-                nlohmann_json_j.at("invisibleStatus").get_to(nlohmann_json_t.invisibleStatus);
+                auto json_invisibleStatus = nlohmann_json_j.at("invisibleStatus");
+                if (!json_invisibleStatus.is_null() && json_invisibleStatus.is_boolean()) {
+                    json_invisibleStatus.get_to(nlohmann_json_t.invisibleStatus);
+                }
             }
             if (nlohmann_json_j.contains("currencies")) {
-                nlohmann_json_j.at("currencies").get_to(nlohmann_json_t.currencies);
+                auto json_currencies = nlohmann_json_j.at("currencies");
+                if (!json_currencies.is_null() && json_currencies.is_array()) {
+                    json_currencies.get_to(nlohmann_json_t.currencies);
+                }
             }
             if (nlohmann_json_j.contains("userId")) {
-                nlohmann_json_j.at("userId").get_to(nlohmann_json_t.userId);
+                auto json_userId = nlohmann_json_j.at("userId");
+                if (!json_userId.is_null() && json_userId.is_string()) {
+                    json_userId.get_to(nlohmann_json_t.userId);
+                }
             }
             if (nlohmann_json_j.contains("email")) {
-                nlohmann_json_j.at("email").get_to(nlohmann_json_t.email);
+                auto json_email = nlohmann_json_j.at("email");
+                if (!json_email.is_null() && json_email.is_string()) {
+                    json_email.get_to(nlohmann_json_t.email);
+                }
             }
             if (nlohmann_json_j.contains("displayName")) {
-                nlohmann_json_j.at("displayName").get_to(nlohmann_json_t.displayName);
+                auto json_displayName = nlohmann_json_j.at("displayName");
+                if (!json_displayName.is_null() && json_displayName.is_string()) {
+                    json_displayName.get_to(nlohmann_json_t.displayName);
+                }
             }
             if (nlohmann_json_j.contains("profilePicture")) {
-                nlohmann_json_j.at("profilePicture").get_to(nlohmann_json_t.profilePicture);
+                auto json_profilePicture = nlohmann_json_j.at("profilePicture");
+                if (!json_profilePicture.is_null()) {
+                    json_profilePicture.get_to(nlohmann_json_t.profilePicture);
+                }
             }
             if (nlohmann_json_j.contains("bio")) {
-                nlohmann_json_j.at("bio").get_to(nlohmann_json_t.bio);
+                auto json_bio = nlohmann_json_j.at("bio");
+                if (!json_bio.is_null() && json_bio.is_string()) {
+                    json_bio.get_to(nlohmann_json_t.bio);
+                }
             }
             if (nlohmann_json_j.contains("readyWins")) {
-                nlohmann_json_j.at("readyWins").get_to(nlohmann_json_t.readyWins);
+                auto json_readyWins = nlohmann_json_j.at("readyWins");
+                if (!json_readyWins.is_null() && json_readyWins.is_number()) {
+                    json_readyWins.get_to(nlohmann_json_t.readyWins);
+                }
             }
             if (nlohmann_json_j.contains("readyLosses")) {
-                nlohmann_json_j.at("readyLosses").get_to(nlohmann_json_t.readyLosses);
+                auto json_readyLosses = nlohmann_json_j.at("readyLosses");
+                if (!json_readyLosses.is_null() && json_readyLosses.is_number()) {
+                    json_readyLosses.get_to(nlohmann_json_t.readyLosses);
+                }
             }
             if (nlohmann_json_j.contains("readyDraws")) {
-                nlohmann_json_j.at("readyDraws").get_to(nlohmann_json_t.readyDraws);
+                auto json_readyDraws = nlohmann_json_j.at("readyDraws");
+                if (!json_readyDraws.is_null() && json_readyDraws.is_number()) {
+                    json_readyDraws.get_to(nlohmann_json_t.readyDraws);
+                }
             }
             if (nlohmann_json_j.contains("readyTrophies")) {
-                nlohmann_json_j.at("readyTrophies").get_to(nlohmann_json_t.readyTrophies);
+                auto json_readyTrophies = nlohmann_json_j.at("readyTrophies");
+                if (!json_readyTrophies.is_null() && json_readyTrophies.is_number()) {
+                    json_readyTrophies.get_to(nlohmann_json_t.readyTrophies);
+                }
             }
             if (nlohmann_json_j.contains("readyAchievements")) {
-                nlohmann_json_j.at("readyAchievements").get_to(nlohmann_json_t.readyAchievements);
+                auto json_readyAchievements = nlohmann_json_j.at("readyAchievements");
+                if (!json_readyAchievements.is_null() && json_readyAchievements.is_number()) {
+                    json_readyAchievements.get_to(nlohmann_json_t.readyAchievements);
+                }
             }
             if (nlohmann_json_j.contains("previousThreshold")) {
-                nlohmann_json_j.at("previousThreshold").get_to(nlohmann_json_t.previousThreshold);
+                auto json_previousThreshold = nlohmann_json_j.at("previousThreshold");
+                if (!json_previousThreshold.is_null() && json_previousThreshold.is_number()) {
+                    json_previousThreshold.get_to(nlohmann_json_t.previousThreshold);
+                }
             }
             if (nlohmann_json_j.contains("nextThreshold")) {
-                nlohmann_json_j.at("nextThreshold").get_to(nlohmann_json_t.nextThreshold);
+                auto json_nextThreshold = nlohmann_json_j.at("nextThreshold");
+                if (!json_nextThreshold.is_null() && json_nextThreshold.is_number()) {
+                    json_nextThreshold.get_to(nlohmann_json_t.nextThreshold);
+                }
             }
         }
     };

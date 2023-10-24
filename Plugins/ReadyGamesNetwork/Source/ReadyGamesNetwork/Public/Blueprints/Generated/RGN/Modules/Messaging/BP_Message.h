@@ -17,13 +17,13 @@ struct READYGAMESNETWORK_API FBP_Message {
     /**
      * Unique id of the message
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Messaging")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Messaging")
     FString Id;
     /**
      * Payload string to attach data to the message
      * This could be for example Json string
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Messaging")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Messaging")
     FString Payload;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Messaging::Message& source, FBP_Message& target) {

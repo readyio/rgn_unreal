@@ -113,49 +113,94 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, StoreOffer& nlohmann_json_t) {
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("description")) {
-                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+                auto json_description = nlohmann_json_j.at("description");
+                if (!json_description.is_null() && json_description.is_string()) {
+                    json_description.get_to(nlohmann_json_t.description);
+                }
             }
             if (nlohmann_json_j.contains("appIds")) {
-                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
+                }
             }
             if (nlohmann_json_j.contains("tags")) {
-                nlohmann_json_j.at("tags").get_to(nlohmann_json_t.tags);
+                auto json_tags = nlohmann_json_j.at("tags");
+                if (!json_tags.is_null() && json_tags.is_array()) {
+                    json_tags.get_to(nlohmann_json_t.tags);
+                }
             }
             if (nlohmann_json_j.contains("imageUrl")) {
-                nlohmann_json_j.at("imageUrl").get_to(nlohmann_json_t.imageUrl);
+                auto json_imageUrl = nlohmann_json_j.at("imageUrl");
+                if (!json_imageUrl.is_null() && json_imageUrl.is_string()) {
+                    json_imageUrl.get_to(nlohmann_json_t.imageUrl);
+                }
             }
             if (nlohmann_json_j.contains("createdAt")) {
-                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+                auto json_createdAt = nlohmann_json_j.at("createdAt");
+                if (!json_createdAt.is_null() && json_createdAt.is_number()) {
+                    json_createdAt.get_to(nlohmann_json_t.createdAt);
+                }
             }
             if (nlohmann_json_j.contains("updatedAt")) {
-                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+                auto json_updatedAt = nlohmann_json_j.at("updatedAt");
+                if (!json_updatedAt.is_null() && json_updatedAt.is_number()) {
+                    json_updatedAt.get_to(nlohmann_json_t.updatedAt);
+                }
             }
             if (nlohmann_json_j.contains("createdBy")) {
-                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+                auto json_createdBy = nlohmann_json_j.at("createdBy");
+                if (!json_createdBy.is_null() && json_createdBy.is_string()) {
+                    json_createdBy.get_to(nlohmann_json_t.createdBy);
+                }
             }
             if (nlohmann_json_j.contains("updatedBy")) {
-                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+                auto json_updatedBy = nlohmann_json_j.at("updatedBy");
+                if (!json_updatedBy.is_null() && json_updatedBy.is_string()) {
+                    json_updatedBy.get_to(nlohmann_json_t.updatedBy);
+                }
             }
             if (nlohmann_json_j.contains("time")) {
-                nlohmann_json_j.at("time").get_to(nlohmann_json_t.time);
+                auto json_time = nlohmann_json_j.at("time");
+                if (!json_time.is_null()) {
+                    json_time.get_to(nlohmann_json_t.time);
+                }
             }
             if (nlohmann_json_j.contains("properties")) {
-                nlohmann_json_j.at("properties").get_to(nlohmann_json_t.properties);
+                auto json_properties = nlohmann_json_j.at("properties");
+                if (!json_properties.is_null() && json_properties.is_array()) {
+                    json_properties.get_to(nlohmann_json_t.properties);
+                }
             }
             if (nlohmann_json_j.contains("itemIds")) {
-                nlohmann_json_j.at("itemIds").get_to(nlohmann_json_t.itemIds);
+                auto json_itemIds = nlohmann_json_j.at("itemIds");
+                if (!json_itemIds.is_null() && json_itemIds.is_array()) {
+                    json_itemIds.get_to(nlohmann_json_t.itemIds);
+                }
             }
             if (nlohmann_json_j.contains("prices")) {
-                nlohmann_json_j.at("prices").get_to(nlohmann_json_t.prices);
+                auto json_prices = nlohmann_json_j.at("prices");
+                if (!json_prices.is_null() && json_prices.is_array()) {
+                    json_prices.get_to(nlohmann_json_t.prices);
+                }
             }
             if (nlohmann_json_j.contains("virtualItems")) {
-                nlohmann_json_j.at("virtualItems").get_to(nlohmann_json_t.virtualItems);
+                auto json_virtualItems = nlohmann_json_j.at("virtualItems");
+                if (!json_virtualItems.is_null() && json_virtualItems.is_array()) {
+                    json_virtualItems.get_to(nlohmann_json_t.virtualItems);
+                }
             }
         }
     };

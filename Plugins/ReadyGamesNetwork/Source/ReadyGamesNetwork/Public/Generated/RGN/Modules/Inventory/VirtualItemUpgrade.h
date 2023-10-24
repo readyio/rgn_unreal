@@ -18,10 +18,16 @@ namespace RGN { namespace Modules { namespace Inventory {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, VirtualItemUpgrade& nlohmann_json_t) {
             if (nlohmann_json_j.contains("upgradeId")) {
-                nlohmann_json_j.at("upgradeId").get_to(nlohmann_json_t.upgradeId);
+                auto json_upgradeId = nlohmann_json_j.at("upgradeId");
+                if (!json_upgradeId.is_null() && json_upgradeId.is_string()) {
+                    json_upgradeId.get_to(nlohmann_json_t.upgradeId);
+                }
             }
             if (nlohmann_json_j.contains("upgradeLevel")) {
-                nlohmann_json_j.at("upgradeLevel").get_to(nlohmann_json_t.upgradeLevel);
+                auto json_upgradeLevel = nlohmann_json_j.at("upgradeLevel");
+                if (!json_upgradeLevel.is_null() && json_upgradeLevel.is_number()) {
+                    json_upgradeLevel.get_to(nlohmann_json_t.upgradeLevel);
+                }
             }
         }
     };

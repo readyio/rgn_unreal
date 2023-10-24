@@ -15,7 +15,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_CreatorSubmitItemRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     FBP_VirtualItem customizedItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSubmitItemRequestData& source, FBP_CreatorSubmitItemRequestData& target) {

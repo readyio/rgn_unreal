@@ -18,9 +18,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_AddVirtualItemToUserInventoryRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString userId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FBP_InventoryItemData virtualItemInventoryData;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData& source, FBP_AddVirtualItemToUserInventoryRequestData& target) {

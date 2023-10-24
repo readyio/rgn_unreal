@@ -22,13 +22,22 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, BuyStoreOfferResponse& nlohmann_json_t) {
             if (nlohmann_json_j.contains("offerId")) {
-                nlohmann_json_j.at("offerId").get_to(nlohmann_json_t.offerId);
+                auto json_offerId = nlohmann_json_j.at("offerId");
+                if (!json_offerId.is_null() && json_offerId.is_string()) {
+                    json_offerId.get_to(nlohmann_json_t.offerId);
+                }
             }
             if (nlohmann_json_j.contains("purchasedItems")) {
-                nlohmann_json_j.at("purchasedItems").get_to(nlohmann_json_t.purchasedItems);
+                auto json_purchasedItems = nlohmann_json_j.at("purchasedItems");
+                if (!json_purchasedItems.is_null() && json_purchasedItems.is_array()) {
+                    json_purchasedItems.get_to(nlohmann_json_t.purchasedItems);
+                }
             }
             if (nlohmann_json_j.contains("updatedCurrencies")) {
-                nlohmann_json_j.at("updatedCurrencies").get_to(nlohmann_json_t.updatedCurrencies);
+                auto json_updatedCurrencies = nlohmann_json_j.at("updatedCurrencies");
+                if (!json_updatedCurrencies.is_null() && json_updatedCurrencies.is_array()) {
+                    json_updatedCurrencies.get_to(nlohmann_json_t.updatedCurrencies);
+                }
             }
         }
     };

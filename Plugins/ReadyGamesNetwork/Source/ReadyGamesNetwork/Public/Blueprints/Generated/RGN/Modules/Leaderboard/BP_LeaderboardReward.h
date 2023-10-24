@@ -17,17 +17,17 @@ struct READYGAMESNETWORK_API FBP_LeaderboardReward {
     /**
      * The place from users will be earned
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int32 placeFrom;
     /**
      * The place to users will be earned
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int32 placeTo;
     /**
      * Specifies reward, achievement contains virtual items reward, currency reward, etc
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString achievementId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardReward& source, FBP_LeaderboardReward& target) {

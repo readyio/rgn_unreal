@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Matchmaking {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GetMatchResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("match")) {
-                nlohmann_json_j.at("match").get_to(nlohmann_json_t.match);
+                auto json_match = nlohmann_json_j.at("match");
+                if (!json_match.is_null()) {
+                    json_match.get_to(nlohmann_json_t.match);
+                }
             }
         }
     };

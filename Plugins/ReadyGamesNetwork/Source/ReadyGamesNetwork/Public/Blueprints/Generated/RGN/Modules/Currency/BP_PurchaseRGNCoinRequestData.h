@@ -13,13 +13,13 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_PurchaseRGNCoinRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     FString iapUUID;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     FString requestId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     FString iapTransactionId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     FString iapReceipt;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::PurchaseRGNCoinRequestData& source, FBP_PurchaseRGNCoinRequestData& target) {

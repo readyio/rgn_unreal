@@ -18,10 +18,16 @@ namespace RGN { namespace Model { namespace Response {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, BaseResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("status")) {
-                nlohmann_json_j.at("status").get_to(nlohmann_json_t.status);
+                auto json_status = nlohmann_json_j.at("status");
+                if (!json_status.is_null() && json_status.is_number()) {
+                    json_status.get_to(nlohmann_json_t.status);
+                }
             }
             if (nlohmann_json_j.contains("message")) {
-                nlohmann_json_j.at("message").get_to(nlohmann_json_t.message);
+                auto json_message = nlohmann_json_j.at("message");
+                if (!json_message.is_null() && json_message.is_string()) {
+                    json_message.get_to(nlohmann_json_t.message);
+                }
             }
         }
     };

@@ -20,37 +20,37 @@ struct READYGAMESNETWORK_API FBP_LeaderboardEntry {
     /**
      * Gets the unique identifier of the user.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString userId;
     /**
      * Gets the displayed name of the user.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString displayName;
     /**
      * Gets the url of user profile picture.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FBP_UserProfilePicture profilePicture;
     /**
      * Gets the score of the user.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int32 score;
     /**
      * Gets the score of the user formatted as a string.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString formattedScore;
     /**
      * Gets or sets the rank or place of the user on the leaderboard.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int32 place;
     /**
      * Gets or sets the extra data associated with the user's score entry.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString extraData;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardEntry& source, FBP_LeaderboardEntry& target) {

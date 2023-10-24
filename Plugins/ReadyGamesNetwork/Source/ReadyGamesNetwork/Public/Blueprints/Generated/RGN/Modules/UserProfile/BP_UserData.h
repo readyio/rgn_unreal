@@ -13,15 +13,15 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_UserData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString userId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString email;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString displayName;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FBP_UserProfilePicture profilePicture;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString bio;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UserData& source, FBP_UserData& target) {

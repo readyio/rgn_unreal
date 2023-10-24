@@ -21,13 +21,22 @@ namespace RGN { namespace Modules { namespace VirtualItems {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, UpdateVirtualItemsRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("itemId")) {
-                nlohmann_json_j.at("itemId").get_to(nlohmann_json_t.itemId);
+                auto json_itemId = nlohmann_json_j.at("itemId");
+                if (!json_itemId.is_null() && json_itemId.is_string()) {
+                    json_itemId.get_to(nlohmann_json_t.itemId);
+                }
             }
             if (nlohmann_json_j.contains("virtualItem")) {
-                nlohmann_json_j.at("virtualItem").get_to(nlohmann_json_t.virtualItem);
+                auto json_virtualItem = nlohmann_json_j.at("virtualItem");
+                if (!json_virtualItem.is_null()) {
+                    json_virtualItem.get_to(nlohmann_json_t.virtualItem);
+                }
             }
         }
     };

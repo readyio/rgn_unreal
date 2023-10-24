@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_RGNCoinEconomy {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     TArray<FBP_RGNCoinEconomyProduct> products;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::RGNCoinEconomy& source, FBP_RGNCoinEconomy& target) {

@@ -19,36 +19,36 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
     /**
      * Unique id of the leaderboard
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString id;
     /**
      * Leaderboard request name. This value can be used to query leaderboards
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString requestName;
     /**
      * Leaderboard name
      * Is used also to store localization key for the name
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString name;
     /**
      * Leaderboard description
      * Is used also to store localization key for the description
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString description;
     /**
      * Define who can set/add score to the leaderboard
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString setBy;
     /**
      * Sorting direction:
      * false - places are sorted in descending order;
      * true - places are sorted in ascending order.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     bool invertSortOrder;
     /**
      * This parameter determines how many digits of the score integer are displayed
@@ -56,7 +56,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      * The size of the decimal part
      * e.g., with decimalOffset: 2, the number 1234 will be displayed as 12.34.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int32 decimalOffset;
     /**
      * The leaderboard type that determines the results unit.Possible values:
@@ -64,7 +64,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      * time — Time in milliseconds.
      * Default value is numeric
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString type;
     /**
      * If it is provided, then it specifies reset period for the leaderboard
@@ -80,12 +80,12 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      * └───────────────────────── second(0 - 59, optional)
      * You can use the https://crontab.guru/ to create cron settings
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString resetEveryTimeAtCron;
     /**
      * Rewards which will be earned at reset period
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     TArray<FBP_LeaderboardReward> rewardsAtReset;
     /**
      * Date and time when the leaderboard was created
@@ -93,7 +93,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
      * This field is automatically populated by the backend
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int64 createdAt;
     /**
      * Date and time when the leaderboard was last time updated
@@ -101,19 +101,19 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
      * This field is automatically populated by the backend
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int64 updatedAt;
     /**
      * User Id who created the leaderboard
      * This field is automatically populated by the backend
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString createdBy;
     /**
      * User Id who last time updated the leaderboard
      * This field is automatically populated by the backend
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString updatedBy;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {

@@ -19,7 +19,7 @@ struct READYGAMESNETWORK_API FBP_BaseMigrationRequestData : public FBP_BaseReque
     /**
      * Represents the current version of the API implementation on the server.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Request")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Request")
     int32 version;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::BaseMigrationRequestData& source, FBP_BaseMigrationRequestData& target) {

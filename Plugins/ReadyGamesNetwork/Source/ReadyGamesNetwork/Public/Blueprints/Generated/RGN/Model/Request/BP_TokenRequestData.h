@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_TokenRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Request")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Request")
     FString idToken;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::TokenRequestData& source, FBP_TokenRequestData& target) {

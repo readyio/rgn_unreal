@@ -11,9 +11,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_RemoveByVirtualItemIdResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString virtualItemId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     int32 newQuantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData& source, FBP_RemoveByVirtualItemIdResponseData& target) {

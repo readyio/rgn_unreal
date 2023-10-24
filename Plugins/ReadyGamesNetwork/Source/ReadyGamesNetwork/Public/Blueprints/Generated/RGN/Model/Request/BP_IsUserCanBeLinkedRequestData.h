@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_IsUserCanBeLinkedRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Request")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Request")
     FString email;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::IsUserCanBeLinkedRequestData& source, FBP_IsUserCanBeLinkedRequestData& target) {

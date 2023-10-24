@@ -15,7 +15,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_OnGameCompleteRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GameProgress")
     TArray<FBP_Currency> reward;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::OnGameCompleteRequestData& source, FBP_OnGameCompleteRequestData& target) {

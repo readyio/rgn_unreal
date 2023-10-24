@@ -3,7 +3,7 @@
 #include "Core/RGNConfigureData.h"
 #include "Http/Http.h"
 
-std::vector<FRGNAuthCallback> UBP_RGNCore::_authCallbacks = std::vector<FRGNAuthCallback>();
+std::vector<FRGNAuthChangeCallback> UBP_RGNCore::_authCallbacks = std::vector<FRGNAuthChangeCallback>();
 
 void UBP_RGNCore::Configure(FBP_RGNConfigureData configureData) {
     RGNConfigureData coreConfigureData;
@@ -12,32 +12,38 @@ void UBP_RGNCore::Configure(FBP_RGNConfigureData configureData) {
     RGNCore::Configure(coreConfigureData);
 
     RGNAuthCallback* authCallback = new RGNAuthCallback([&](bool isLoggedIn) {
-        AsyncTask(ENamedThreads::GameThread, [=]() {
-            for (auto callback : _authCallbacks) {
-                callback.ExecuteIfBound(isLoggedIn);
-            }
-        });
+        for (auto callback : _authCallbacks) {
+            callback.ExecuteIfBound(isLoggedIn);
+        }
     });
     RGNCore::SubscribeToAuthCallback(authCallback);
 }
 
-void UBP_RGNCore::SubscribeToAuthCallback(FRGNAuthCallback callback) {
-    _authCallbacks.push_back(callback);
+void UBP_RGNCore::SubscribeToAuthCallback(FRGNAuthChangeCallback onAuthChange) {
+    _authCallbacks.push_back(onAuthChange);
 }
 
-void UBP_RGNCore::UnsubscribeFromAuthCallback(FRGNAuthCallback callback) {
-    auto it = std::find(_authCallbacks.begin(), _authCallbacks.end(), callback);
+void UBP_RGNCore::UnsubscribeFromAuthCallback(FRGNAuthChangeCallback onAuthChange) {
+    auto it = std::find(_authCallbacks.begin(), _authCallbacks.end(), onAuthChange);
     if (it != _authCallbacks.end()) {
         _authCallbacks.erase(it);
     }
 }
 
-void UBP_RGNCore::DevSignIn(const FString& email, const FString& password) {
-    RGNCore::DevSignIn(std::string(TCHAR_TO_UTF8(*email)), std::string(TCHAR_TO_UTF8(*password)));
+void UBP_RGNCore::DevSignIn(const FString& email, const FString& password, FRGNSignInCallback onSignIn) {
+    RGNCore::DevSignIn(
+        std::string(TCHAR_TO_UTF8(*email)),
+        std::string(TCHAR_TO_UTF8(*password)),
+        [onSignIn](bool isLoggedIn) {
+            onSignIn.ExecuteIfBound(isLoggedIn);
+        }
+    );
 }
 
-void UBP_RGNCore::SignIn() {
-    RGNCore::SignIn();
+void UBP_RGNCore::SignIn(FRGNSignInCallback onSignIn) {
+    RGNCore::SignIn([onSignIn](bool isLoggedIn) {
+        onSignIn.ExecuteIfBound(isLoggedIn);
+    });
 }
 
 void UBP_RGNCore::SignOut() {
@@ -46,6 +52,10 @@ void UBP_RGNCore::SignOut() {
 
 bool UBP_RGNCore::IsLoggedIn() {
     return RGNCore::IsLoggedIn();
+}
+
+FString UBP_RGNCore::GetUserId() {
+    return FString(RGNCore::GetUserId().c_str());
 }
 
 FString UBP_RGNCore::GetUserToken() {

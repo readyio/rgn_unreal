@@ -21,13 +21,22 @@ namespace RGN { namespace Modules { namespace Inventory {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, UpgradesResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("ownedItemId")) {
-                nlohmann_json_j.at("ownedItemId").get_to(nlohmann_json_t.ownedItemId);
+                auto json_ownedItemId = nlohmann_json_j.at("ownedItemId");
+                if (!json_ownedItemId.is_null() && json_ownedItemId.is_string()) {
+                    json_ownedItemId.get_to(nlohmann_json_t.ownedItemId);
+                }
             }
             if (nlohmann_json_j.contains("virtualItemId")) {
-                nlohmann_json_j.at("virtualItemId").get_to(nlohmann_json_t.virtualItemId);
+                auto json_virtualItemId = nlohmann_json_j.at("virtualItemId");
+                if (!json_virtualItemId.is_null() && json_virtualItemId.is_string()) {
+                    json_virtualItemId.get_to(nlohmann_json_t.virtualItemId);
+                }
             }
             if (nlohmann_json_j.contains("itemUpgrades")) {
-                nlohmann_json_j.at("itemUpgrades").get_to(nlohmann_json_t.itemUpgrades);
+                auto json_itemUpgrades = nlohmann_json_j.at("itemUpgrades");
+                if (!json_itemUpgrades.is_null() && json_itemUpgrades.is_array()) {
+                    json_itemUpgrades.get_to(nlohmann_json_t.itemUpgrades);
+                }
             }
         }
     };

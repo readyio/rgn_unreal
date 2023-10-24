@@ -24,19 +24,34 @@ namespace RGN { namespace Modules { namespace Currency {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, CurrencyOffer& nlohmann_json_t) {
             if (nlohmann_json_j.contains("productId")) {
-                nlohmann_json_j.at("productId").get_to(nlohmann_json_t.productId);
+                auto json_productId = nlohmann_json_j.at("productId");
+                if (!json_productId.is_null() && json_productId.is_string()) {
+                    json_productId.get_to(nlohmann_json_t.productId);
+                }
             }
             if (nlohmann_json_j.contains("offeredProductId")) {
-                nlohmann_json_j.at("offeredProductId").get_to(nlohmann_json_t.offeredProductId);
+                auto json_offeredProductId = nlohmann_json_j.at("offeredProductId");
+                if (!json_offeredProductId.is_null() && json_offeredProductId.is_string()) {
+                    json_offeredProductId.get_to(nlohmann_json_t.offeredProductId);
+                }
             }
             if (nlohmann_json_j.contains("remainingTime")) {
-                nlohmann_json_j.at("remainingTime").get_to(nlohmann_json_t.remainingTime);
+                auto json_remainingTime = nlohmann_json_j.at("remainingTime");
+                if (!json_remainingTime.is_null() && json_remainingTime.is_number()) {
+                    json_remainingTime.get_to(nlohmann_json_t.remainingTime);
+                }
             }
             if (nlohmann_json_j.contains("offeringPrice")) {
-                nlohmann_json_j.at("offeringPrice").get_to(nlohmann_json_t.offeringPrice);
+                auto json_offeringPrice = nlohmann_json_j.at("offeringPrice");
+                if (!json_offeringPrice.is_null() && json_offeringPrice.is_number()) {
+                    json_offeringPrice.get_to(nlohmann_json_t.offeringPrice);
+                }
             }
             if (nlohmann_json_j.contains("promotionalMessage")) {
-                nlohmann_json_j.at("promotionalMessage").get_to(nlohmann_json_t.promotionalMessage);
+                auto json_promotionalMessage = nlohmann_json_j.at("promotionalMessage");
+                if (!json_promotionalMessage.is_null() && json_promotionalMessage.is_string()) {
+                    json_promotionalMessage.get_to(nlohmann_json_t.promotionalMessage);
+                }
             }
         }
     };

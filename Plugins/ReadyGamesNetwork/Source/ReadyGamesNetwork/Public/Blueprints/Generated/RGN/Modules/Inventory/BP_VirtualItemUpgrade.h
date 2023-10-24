@@ -11,9 +11,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_VirtualItemUpgrade {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString upgradeId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     int32 upgradeLevel;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::VirtualItemUpgrade& source, FBP_VirtualItemUpgrade& target) {

@@ -25,19 +25,34 @@ namespace RGN { namespace Modules { namespace UserProfile {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, UserData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("userId")) {
-                nlohmann_json_j.at("userId").get_to(nlohmann_json_t.userId);
+                auto json_userId = nlohmann_json_j.at("userId");
+                if (!json_userId.is_null() && json_userId.is_string()) {
+                    json_userId.get_to(nlohmann_json_t.userId);
+                }
             }
             if (nlohmann_json_j.contains("email")) {
-                nlohmann_json_j.at("email").get_to(nlohmann_json_t.email);
+                auto json_email = nlohmann_json_j.at("email");
+                if (!json_email.is_null() && json_email.is_string()) {
+                    json_email.get_to(nlohmann_json_t.email);
+                }
             }
             if (nlohmann_json_j.contains("displayName")) {
-                nlohmann_json_j.at("displayName").get_to(nlohmann_json_t.displayName);
+                auto json_displayName = nlohmann_json_j.at("displayName");
+                if (!json_displayName.is_null() && json_displayName.is_string()) {
+                    json_displayName.get_to(nlohmann_json_t.displayName);
+                }
             }
             if (nlohmann_json_j.contains("profilePicture")) {
-                nlohmann_json_j.at("profilePicture").get_to(nlohmann_json_t.profilePicture);
+                auto json_profilePicture = nlohmann_json_j.at("profilePicture");
+                if (!json_profilePicture.is_null()) {
+                    json_profilePicture.get_to(nlohmann_json_t.profilePicture);
+                }
             }
             if (nlohmann_json_j.contains("bio")) {
-                nlohmann_json_j.at("bio").get_to(nlohmann_json_t.bio);
+                auto json_bio = nlohmann_json_j.at("bio");
+                if (!json_bio.is_null() && json_bio.is_string()) {
+                    json_bio.get_to(nlohmann_json_t.bio);
+                }
             }
         }
     };

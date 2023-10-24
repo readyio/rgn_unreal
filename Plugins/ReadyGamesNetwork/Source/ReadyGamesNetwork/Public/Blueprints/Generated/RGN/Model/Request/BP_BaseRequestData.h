@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Request")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Request")
     FString appPackageName;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::BaseRequestData& source, FBP_BaseRequestData& target) {

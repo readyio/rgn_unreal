@@ -20,13 +20,22 @@ namespace RGN { namespace Modules { namespace Currency {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, Currency& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appIds")) {
-                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
+                }
             }
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("quantity")) {
-                nlohmann_json_j.at("quantity").get_to(nlohmann_json_t.quantity);
+                auto json_quantity = nlohmann_json_j.at("quantity");
+                if (!json_quantity.is_null() && json_quantity.is_number()) {
+                    json_quantity.get_to(nlohmann_json_t.quantity);
+                }
             }
         }
     };

@@ -18,10 +18,16 @@ namespace RGN { namespace Modules { namespace Creator {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, CreatorSignupResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("message")) {
-                nlohmann_json_j.at("message").get_to(nlohmann_json_t.message);
+                auto json_message = nlohmann_json_j.at("message");
+                if (!json_message.is_null() && json_message.is_string()) {
+                    json_message.get_to(nlohmann_json_t.message);
+                }
             }
             if (nlohmann_json_j.contains("success")) {
-                nlohmann_json_j.at("success").get_to(nlohmann_json_t.success);
+                auto json_success = nlohmann_json_j.at("success");
+                if (!json_success.is_null() && json_success.is_boolean()) {
+                    json_success.get_to(nlohmann_json_t.success);
+                }
             }
         }
     };

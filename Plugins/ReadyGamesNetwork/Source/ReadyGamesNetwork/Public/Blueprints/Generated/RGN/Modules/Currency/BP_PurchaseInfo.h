@@ -13,9 +13,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_PurchaseInfo {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     TArray<FBP_Currency> cost;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::PurchaseInfo& source, FBP_PurchaseInfo& target) {

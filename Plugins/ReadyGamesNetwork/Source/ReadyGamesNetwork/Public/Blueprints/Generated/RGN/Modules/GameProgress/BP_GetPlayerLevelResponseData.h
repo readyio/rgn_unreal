@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetPlayerLevelResponseData : public FBP_BaseResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GameProgress")
     FString playerProgress;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::GetPlayerLevelResponseData& source, FBP_GetPlayerLevelResponseData& target) {

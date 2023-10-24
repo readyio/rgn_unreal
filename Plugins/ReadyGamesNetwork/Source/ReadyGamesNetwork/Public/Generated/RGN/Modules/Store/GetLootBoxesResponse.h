@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GetLootBoxesResponse& nlohmann_json_t) {
             if (nlohmann_json_j.contains("lootBoxes")) {
-                nlohmann_json_j.at("lootBoxes").get_to(nlohmann_json_t.lootBoxes);
+                auto json_lootBoxes = nlohmann_json_j.at("lootBoxes");
+                if (!json_lootBoxes.is_null() && json_lootBoxes.is_array()) {
+                    json_lootBoxes.get_to(nlohmann_json_t.lootBoxes);
+                }
             }
         }
     };

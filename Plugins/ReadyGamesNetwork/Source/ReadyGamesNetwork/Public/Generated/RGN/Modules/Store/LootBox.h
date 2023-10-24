@@ -79,37 +79,70 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LootBox& nlohmann_json_t) {
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("appId")) {
-                nlohmann_json_j.at("appId").get_to(nlohmann_json_t.appId);
+                auto json_appId = nlohmann_json_j.at("appId");
+                if (!json_appId.is_null() && json_appId.is_string()) {
+                    json_appId.get_to(nlohmann_json_t.appId);
+                }
             }
             if (nlohmann_json_j.contains("totalQuantity")) {
-                nlohmann_json_j.at("totalQuantity").get_to(nlohmann_json_t.totalQuantity);
+                auto json_totalQuantity = nlohmann_json_j.at("totalQuantity");
+                if (!json_totalQuantity.is_null() && json_totalQuantity.is_number()) {
+                    json_totalQuantity.get_to(nlohmann_json_t.totalQuantity);
+                }
             }
             if (nlohmann_json_j.contains("purchasedQuantity")) {
-                nlohmann_json_j.at("purchasedQuantity").get_to(nlohmann_json_t.purchasedQuantity);
+                auto json_purchasedQuantity = nlohmann_json_j.at("purchasedQuantity");
+                if (!json_purchasedQuantity.is_null() && json_purchasedQuantity.is_number()) {
+                    json_purchasedQuantity.get_to(nlohmann_json_t.purchasedQuantity);
+                }
             }
             if (nlohmann_json_j.contains("availableQuantity")) {
-                nlohmann_json_j.at("availableQuantity").get_to(nlohmann_json_t.availableQuantity);
+                auto json_availableQuantity = nlohmann_json_j.at("availableQuantity");
+                if (!json_availableQuantity.is_null() && json_availableQuantity.is_number()) {
+                    json_availableQuantity.get_to(nlohmann_json_t.availableQuantity);
+                }
             }
             if (nlohmann_json_j.contains("createdAt")) {
-                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+                auto json_createdAt = nlohmann_json_j.at("createdAt");
+                if (!json_createdAt.is_null() && json_createdAt.is_number()) {
+                    json_createdAt.get_to(nlohmann_json_t.createdAt);
+                }
             }
             if (nlohmann_json_j.contains("updatedAt")) {
-                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+                auto json_updatedAt = nlohmann_json_j.at("updatedAt");
+                if (!json_updatedAt.is_null() && json_updatedAt.is_number()) {
+                    json_updatedAt.get_to(nlohmann_json_t.updatedAt);
+                }
             }
             if (nlohmann_json_j.contains("createdBy")) {
-                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+                auto json_createdBy = nlohmann_json_j.at("createdBy");
+                if (!json_createdBy.is_null() && json_createdBy.is_string()) {
+                    json_createdBy.get_to(nlohmann_json_t.createdBy);
+                }
             }
             if (nlohmann_json_j.contains("updatedBy")) {
-                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+                auto json_updatedBy = nlohmann_json_j.at("updatedBy");
+                if (!json_updatedBy.is_null() && json_updatedBy.is_string()) {
+                    json_updatedBy.get_to(nlohmann_json_t.updatedBy);
+                }
             }
             if (nlohmann_json_j.contains("prices")) {
-                nlohmann_json_j.at("prices").get_to(nlohmann_json_t.prices);
+                auto json_prices = nlohmann_json_j.at("prices");
+                if (!json_prices.is_null() && json_prices.is_array()) {
+                    json_prices.get_to(nlohmann_json_t.prices);
+                }
             }
         }
     };

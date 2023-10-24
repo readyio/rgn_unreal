@@ -19,10 +19,16 @@ namespace RGN { namespace Modules { namespace Currency {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, PurchaseInfo& nlohmann_json_t) {
             if (nlohmann_json_j.contains("cost")) {
-                nlohmann_json_j.at("cost").get_to(nlohmann_json_t.cost);
+                auto json_cost = nlohmann_json_j.at("cost");
+                if (!json_cost.is_null() && json_cost.is_array()) {
+                    json_cost.get_to(nlohmann_json_t.cost);
+                }
             }
             if (nlohmann_json_j.contains("quantity")) {
-                nlohmann_json_j.at("quantity").get_to(nlohmann_json_t.quantity);
+                auto json_quantity = nlohmann_json_j.at("quantity");
+                if (!json_quantity.is_null() && json_quantity.is_number()) {
+                    json_quantity.get_to(nlohmann_json_t.quantity);
+                }
             }
         }
     };

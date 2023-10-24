@@ -13,9 +13,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_CreateWalletRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     FString token;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     FString password;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::CreateWalletRequestData& source, FBP_CreateWalletRequestData& target) {

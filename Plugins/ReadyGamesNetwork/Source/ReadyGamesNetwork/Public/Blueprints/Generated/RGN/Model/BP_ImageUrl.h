@@ -11,13 +11,13 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_ImageUrl {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | ImageUrl")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString source;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | ImageUrl")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString large;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | ImageUrl")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString medium;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | ImageUrl")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString small;
 
 	static void ConvertToUnrealModel(const RGN::Model::ImageUrl& source, FBP_ImageUrl& target) {

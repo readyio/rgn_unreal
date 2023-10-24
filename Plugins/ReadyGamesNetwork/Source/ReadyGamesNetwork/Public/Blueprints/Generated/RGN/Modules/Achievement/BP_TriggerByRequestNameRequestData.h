@@ -13,9 +13,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_TriggerByRequestNameRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     FString requestName;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     int32 progress;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::TriggerByRequestNameRequestData& source, FBP_TriggerByRequestNameRequestData& target) {

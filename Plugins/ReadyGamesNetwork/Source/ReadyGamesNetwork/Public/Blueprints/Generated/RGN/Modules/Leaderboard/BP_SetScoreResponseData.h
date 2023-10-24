@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_SetScoreResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Leaderboard")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     int32 place;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::SetScoreResponseData& source, FBP_SetScoreResponseData& target) {

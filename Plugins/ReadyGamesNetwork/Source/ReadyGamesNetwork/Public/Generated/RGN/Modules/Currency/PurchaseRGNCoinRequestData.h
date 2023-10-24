@@ -24,19 +24,34 @@ namespace RGN { namespace Modules { namespace Currency {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, PurchaseRGNCoinRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("iapUUID")) {
-                nlohmann_json_j.at("iapUUID").get_to(nlohmann_json_t.iapUUID);
+                auto json_iapUUID = nlohmann_json_j.at("iapUUID");
+                if (!json_iapUUID.is_null() && json_iapUUID.is_string()) {
+                    json_iapUUID.get_to(nlohmann_json_t.iapUUID);
+                }
             }
             if (nlohmann_json_j.contains("requestId")) {
-                nlohmann_json_j.at("requestId").get_to(nlohmann_json_t.requestId);
+                auto json_requestId = nlohmann_json_j.at("requestId");
+                if (!json_requestId.is_null() && json_requestId.is_string()) {
+                    json_requestId.get_to(nlohmann_json_t.requestId);
+                }
             }
             if (nlohmann_json_j.contains("iapTransactionId")) {
-                nlohmann_json_j.at("iapTransactionId").get_to(nlohmann_json_t.iapTransactionId);
+                auto json_iapTransactionId = nlohmann_json_j.at("iapTransactionId");
+                if (!json_iapTransactionId.is_null() && json_iapTransactionId.is_string()) {
+                    json_iapTransactionId.get_to(nlohmann_json_t.iapTransactionId);
+                }
             }
             if (nlohmann_json_j.contains("iapReceipt")) {
-                nlohmann_json_j.at("iapReceipt").get_to(nlohmann_json_t.iapReceipt);
+                auto json_iapReceipt = nlohmann_json_j.at("iapReceipt");
+                if (!json_iapReceipt.is_null() && json_iapReceipt.is_string()) {
+                    json_iapReceipt.get_to(nlohmann_json_t.iapReceipt);
+                }
             }
         }
     };

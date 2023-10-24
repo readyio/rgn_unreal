@@ -21,13 +21,22 @@ namespace RGN { namespace Modules { namespace Currency {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, ClaimCurrencyResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("isSuccess")) {
-                nlohmann_json_j.at("isSuccess").get_to(nlohmann_json_t.isSuccess);
+                auto json_isSuccess = nlohmann_json_j.at("isSuccess");
+                if (!json_isSuccess.is_null() && json_isSuccess.is_boolean()) {
+                    json_isSuccess.get_to(nlohmann_json_t.isSuccess);
+                }
             }
             if (nlohmann_json_j.contains("unclaimedCurrencies")) {
-                nlohmann_json_j.at("unclaimedCurrencies").get_to(nlohmann_json_t.unclaimedCurrencies);
+                auto json_unclaimedCurrencies = nlohmann_json_j.at("unclaimedCurrencies");
+                if (!json_unclaimedCurrencies.is_null() && json_unclaimedCurrencies.is_array()) {
+                    json_unclaimedCurrencies.get_to(nlohmann_json_t.unclaimedCurrencies);
+                }
             }
             if (nlohmann_json_j.contains("currencies")) {
-                nlohmann_json_j.at("currencies").get_to(nlohmann_json_t.currencies);
+                auto json_currencies = nlohmann_json_j.at("currencies");
+                if (!json_currencies.is_null() && json_currencies.is_array()) {
+                    json_currencies.get_to(nlohmann_json_t.currencies);
+                }
             }
         }
     };

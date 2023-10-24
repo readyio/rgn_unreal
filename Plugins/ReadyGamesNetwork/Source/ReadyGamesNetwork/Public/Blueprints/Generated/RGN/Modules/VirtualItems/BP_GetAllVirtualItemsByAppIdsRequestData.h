@@ -13,11 +13,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetAllVirtualItemsByAppIdsRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     TArray<FString> appIds;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     int32 limit;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FString startAfter;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData& source, FBP_GetAllVirtualItemsByAppIdsRequestData& target) {

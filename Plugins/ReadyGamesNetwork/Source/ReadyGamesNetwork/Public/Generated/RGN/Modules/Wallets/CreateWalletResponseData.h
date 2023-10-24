@@ -22,16 +22,28 @@ namespace RGN { namespace Modules { namespace Wallets {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, CreateWalletResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("address")) {
-                nlohmann_json_j.at("address").get_to(nlohmann_json_t.address);
+                auto json_address = nlohmann_json_j.at("address");
+                if (!json_address.is_null() && json_address.is_string()) {
+                    json_address.get_to(nlohmann_json_t.address);
+                }
             }
             if (nlohmann_json_j.contains("wallet_created")) {
-                nlohmann_json_j.at("wallet_created").get_to(nlohmann_json_t.wallet_created);
+                auto json_wallet_created = nlohmann_json_j.at("wallet_created");
+                if (!json_wallet_created.is_null() && json_wallet_created.is_boolean()) {
+                    json_wallet_created.get_to(nlohmann_json_t.wallet_created);
+                }
             }
             if (nlohmann_json_j.contains("success")) {
-                nlohmann_json_j.at("success").get_to(nlohmann_json_t.success);
+                auto json_success = nlohmann_json_j.at("success");
+                if (!json_success.is_null() && json_success.is_boolean()) {
+                    json_success.get_to(nlohmann_json_t.success);
+                }
             }
             if (nlohmann_json_j.contains("error")) {
-                nlohmann_json_j.at("error").get_to(nlohmann_json_t.error);
+                auto json_error = nlohmann_json_j.at("error");
+                if (!json_error.is_null() && json_error.is_string()) {
+                    json_error.get_to(nlohmann_json_t.error);
+                }
             }
         }
     };

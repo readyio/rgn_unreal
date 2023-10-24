@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetMatchResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FBP_MatchmakingData match;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::GetMatchResponseData& source, FBP_GetMatchResponseData& target) {

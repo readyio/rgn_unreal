@@ -11,13 +11,13 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_CreateWalletResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     FString address;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     bool wallet_created;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     bool success;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     FString error;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::CreateWalletResponseData& source, FBP_CreateWalletResponseData& target) {

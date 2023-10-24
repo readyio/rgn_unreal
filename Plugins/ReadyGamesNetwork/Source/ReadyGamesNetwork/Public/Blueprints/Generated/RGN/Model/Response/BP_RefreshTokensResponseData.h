@@ -11,11 +11,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_RefreshTokensResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Response")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Response")
     FString userId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Response")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Response")
     FString idToken;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Response")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Response")
     FString refreshToken;
 
 	static void ConvertToUnrealModel(const RGN::Model::Response::RefreshTokensResponseData& source, FBP_RefreshTokensResponseData& target) {

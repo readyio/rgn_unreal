@@ -37,16 +37,28 @@ namespace RGN { namespace Modules { namespace VirtualItems {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, BlockchainInfo& nlohmann_json_t) {
             if (nlohmann_json_j.contains("purchasedQuantity")) {
-                nlohmann_json_j.at("purchasedQuantity").get_to(nlohmann_json_t.purchasedQuantity);
+                auto json_purchasedQuantity = nlohmann_json_j.at("purchasedQuantity");
+                if (!json_purchasedQuantity.is_null() && json_purchasedQuantity.is_number()) {
+                    json_purchasedQuantity.get_to(nlohmann_json_t.purchasedQuantity);
+                }
             }
             if (nlohmann_json_j.contains("totalQuantity")) {
-                nlohmann_json_j.at("totalQuantity").get_to(nlohmann_json_t.totalQuantity);
+                auto json_totalQuantity = nlohmann_json_j.at("totalQuantity");
+                if (!json_totalQuantity.is_null() && json_totalQuantity.is_number()) {
+                    json_totalQuantity.get_to(nlohmann_json_t.totalQuantity);
+                }
             }
             if (nlohmann_json_j.contains("tokenId")) {
-                nlohmann_json_j.at("tokenId").get_to(nlohmann_json_t.tokenId);
+                auto json_tokenId = nlohmann_json_j.at("tokenId");
+                if (!json_tokenId.is_null() && json_tokenId.is_number()) {
+                    json_tokenId.get_to(nlohmann_json_t.tokenId);
+                }
             }
             if (nlohmann_json_j.contains("walletAddress")) {
-                nlohmann_json_j.at("walletAddress").get_to(nlohmann_json_t.walletAddress);
+                auto json_walletAddress = nlohmann_json_j.at("walletAddress");
+                if (!json_walletAddress.is_null() && json_walletAddress.is_string()) {
+                    json_walletAddress.get_to(nlohmann_json_t.walletAddress);
+                }
             }
         }
     };

@@ -23,17 +23,17 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
     /**
      * Unique id of the inventory item
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString id;
     /**
      * The Virtual Item id for this inventory item
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString virtualItemId;
     /**
      * List of application ids where this item is used
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     TArray<FString> appIds;
     /**
      * List of tags to filter the offers
@@ -41,7 +41,7 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      * For example in a shooter game: "guns", "rifles"
      * Later in the UI you can get only inventory items for specific tag
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     TArray<FString> tags;
     /**
      * How many items the user have in inventory
@@ -50,7 +50,7 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      * For stackable Virtual Items it represents the count of Virtual Items
      * in user inventory.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     int32 quantity;
     /**
      * Current status of inventory item
@@ -59,7 +59,7 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      * After blockchain confirmation the item
      * will have confirmed status
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString status;
     /**
      * Date and time when the inventory item was created
@@ -67,7 +67,7 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
      * This field is automatically populated by the backend
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     int64 createdAt;
     /**
      * Date and time when the inventory item data was last time updated
@@ -75,7 +75,7 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
      * This field is automatically populated by the backend
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     int64 updatedAt;
     /**
      * The upgrades for non stackable virtual item
@@ -84,7 +84,7 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      * It is possible to have multiple upgrades with different names and values
      * for one item.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     TArray<FBP_VirtualItemUpgrade> itemUpgrades;
     /**
      * List of inventory item custom json. It is used to store
@@ -93,9 +93,9 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
      * "additiona_description", "in_app_products", "display_animation" for this
      * inventory item
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     TArray<FBP_Properties> properties;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FBP_VirtualItem virtualItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::InventoryItemData& source, FBP_InventoryItemData& target) {

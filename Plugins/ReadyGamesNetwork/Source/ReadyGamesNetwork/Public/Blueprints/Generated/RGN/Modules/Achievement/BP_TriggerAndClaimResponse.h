@@ -22,12 +22,12 @@ struct READYGAMESNETWORK_API FBP_TriggerAndClaimResponse {
      * When the rewards have been given to the user this is true
      * Otherwise it is false
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     bool rewardsHaveBeenGivenOut;
     /**
      * In case the rewards have been given to the user this will contain the rewards
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Achievement")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     TArray<FBP_AchievementReward> rewards;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::TriggerAndClaimResponse& source, FBP_TriggerAndClaimResponse& target) {

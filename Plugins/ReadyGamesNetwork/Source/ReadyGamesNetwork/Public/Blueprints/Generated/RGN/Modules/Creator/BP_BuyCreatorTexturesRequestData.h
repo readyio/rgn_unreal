@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_BuyCreatorTexturesRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     TArray<FString> textureIds;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::BuyCreatorTexturesRequestData& source, FBP_BuyCreatorTexturesRequestData& target) {

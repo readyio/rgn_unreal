@@ -28,10 +28,16 @@ namespace RGN { namespace Modules { namespace Messaging {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, Message& nlohmann_json_t) {
             if (nlohmann_json_j.contains("Id")) {
-                nlohmann_json_j.at("Id").get_to(nlohmann_json_t.Id);
+                auto json_Id = nlohmann_json_j.at("Id");
+                if (!json_Id.is_null() && json_Id.is_string()) {
+                    json_Id.get_to(nlohmann_json_t.Id);
+                }
             }
             if (nlohmann_json_j.contains("Payload")) {
-                nlohmann_json_j.at("Payload").get_to(nlohmann_json_t.Payload);
+                auto json_Payload = nlohmann_json_j.at("Payload");
+                if (!json_Payload.is_null() && json_Payload.is_string()) {
+                    json_Payload.get_to(nlohmann_json_t.Payload);
+                }
             }
         }
     };

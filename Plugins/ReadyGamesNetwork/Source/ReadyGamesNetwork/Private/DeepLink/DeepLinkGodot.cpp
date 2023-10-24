@@ -1,26 +1,24 @@
 #ifdef READY_GAMES_SDK_GODOT
 
-void DeepLinkAdapter::Initialize() {
+std::vector<std::function<void(std::string)>> DeepLink::_callbacks;
+
+void DeepLink::Initialize() {
 
 }
 
-void DeepLinkAdapter::Start() {
+void DeepLink::Start() {
 
 }
 
-void DeepLinkAdapter::Stop() {
+void DeepLink::Stop() {
 
 }
 
-void DeepLinkAdapter::AddListener(DeepLinkListener* listener) {
+void DeepLink::Listen(std::function<void(std::string)> callback) {
 
 }
 
-void DeepLinkAdapter::RemoveListener(DeepLinkListener* listener) {
-
-}
-
-void DeepLinkAdapter::OnDeepLink(std::string payload) {
+void DeepLink::OnDeepLink(std::string payload) {
 
 }
 

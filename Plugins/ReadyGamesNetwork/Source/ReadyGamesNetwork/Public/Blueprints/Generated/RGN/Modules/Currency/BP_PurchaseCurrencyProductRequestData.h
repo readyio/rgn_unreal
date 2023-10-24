@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_PurchaseCurrencyProductRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Currency")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     FString productId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::PurchaseCurrencyProductRequestData& source, FBP_PurchaseCurrencyProductRequestData& target) {

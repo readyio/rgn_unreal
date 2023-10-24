@@ -18,10 +18,16 @@ namespace RGN { namespace Modules { namespace Inventory {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, RemoveByOwnedIdResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("ownedItemId")) {
-                nlohmann_json_j.at("ownedItemId").get_to(nlohmann_json_t.ownedItemId);
+                auto json_ownedItemId = nlohmann_json_j.at("ownedItemId");
+                if (!json_ownedItemId.is_null() && json_ownedItemId.is_string()) {
+                    json_ownedItemId.get_to(nlohmann_json_t.ownedItemId);
+                }
             }
             if (nlohmann_json_j.contains("newQuantity")) {
-                nlohmann_json_j.at("newQuantity").get_to(nlohmann_json_t.newQuantity);
+                auto json_newQuantity = nlohmann_json_j.at("newQuantity");
+                if (!json_newQuantity.is_null() && json_newQuantity.is_number()) {
+                    json_newQuantity.get_to(nlohmann_json_t.newQuantity);
+                }
             }
         }
     };

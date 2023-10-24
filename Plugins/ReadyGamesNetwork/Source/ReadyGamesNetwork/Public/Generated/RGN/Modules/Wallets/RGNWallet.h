@@ -16,7 +16,10 @@ namespace RGN { namespace Modules { namespace Wallets {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, RGNWallet& nlohmann_json_t) {
             if (nlohmann_json_j.contains("address")) {
-                nlohmann_json_j.at("address").get_to(nlohmann_json_t.address);
+                auto json_address = nlohmann_json_j.at("address");
+                if (!json_address.is_null() && json_address.is_string()) {
+                    json_address.get_to(nlohmann_json_t.address);
+                }
             }
         }
     };

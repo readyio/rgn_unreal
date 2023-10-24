@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_SetInvisibleStatusRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     bool invisibleStatus;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::SetInvisibleStatusRequestData& source, FBP_SetInvisibleStatusRequestData& target) {

@@ -47,16 +47,28 @@ namespace RGN { namespace Modules { namespace Achievement {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, AchievementReward& nlohmann_json_t) {
             if (nlohmann_json_j.contains("type")) {
-                nlohmann_json_j.at("type").get_to(nlohmann_json_t.type);
+                auto json_type = nlohmann_json_j.at("type");
+                if (!json_type.is_null() && json_type.is_string()) {
+                    json_type.get_to(nlohmann_json_t.type);
+                }
             }
             if (nlohmann_json_j.contains("appIds")) {
-                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
+                }
             }
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("quantity")) {
-                nlohmann_json_j.at("quantity").get_to(nlohmann_json_t.quantity);
+                auto json_quantity = nlohmann_json_j.at("quantity");
+                if (!json_quantity.is_null() && json_quantity.is_number()) {
+                    json_quantity.get_to(nlohmann_json_t.quantity);
+                }
             }
         }
     };

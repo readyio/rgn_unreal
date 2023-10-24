@@ -20,10 +20,16 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, PurchaseItem& nlohmann_json_t) {
             if (nlohmann_json_j.contains("virtualItem")) {
-                nlohmann_json_j.at("virtualItem").get_to(nlohmann_json_t.virtualItem);
+                auto json_virtualItem = nlohmann_json_j.at("virtualItem");
+                if (!json_virtualItem.is_null()) {
+                    json_virtualItem.get_to(nlohmann_json_t.virtualItem);
+                }
             }
             if (nlohmann_json_j.contains("inventoryItem")) {
-                nlohmann_json_j.at("inventoryItem").get_to(nlohmann_json_t.inventoryItem);
+                auto json_inventoryItem = nlohmann_json_j.at("inventoryItem");
+                if (!json_inventoryItem.is_null()) {
+                    json_inventoryItem.get_to(nlohmann_json_t.inventoryItem);
+                }
             }
         }
     };

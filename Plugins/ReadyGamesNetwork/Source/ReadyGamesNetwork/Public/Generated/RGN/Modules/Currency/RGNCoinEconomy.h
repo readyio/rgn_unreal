@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Currency {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, RGNCoinEconomy& nlohmann_json_t) {
             if (nlohmann_json_j.contains("products")) {
-                nlohmann_json_j.at("products").get_to(nlohmann_json_t.products);
+                auto json_products = nlohmann_json_j.at("products");
+                if (!json_products.is_null() && json_products.is_array()) {
+                    json_products.get_to(nlohmann_json_t.products);
+                }
             }
         }
     };

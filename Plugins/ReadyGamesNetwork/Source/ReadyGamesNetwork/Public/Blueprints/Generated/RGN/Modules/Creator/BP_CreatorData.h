@@ -15,9 +15,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_CreatorData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     TArray<FBP_Currency> unclaimedCurrencies;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     TArray<FBP_CreatorSaleItem> creatorSaleItems;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorData& source, FBP_CreatorData& target) {

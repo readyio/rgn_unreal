@@ -61,25 +61,46 @@ namespace RGN { namespace Modules { namespace Achievement {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, UserAchievement& nlohmann_json_t) {
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("value")) {
-                nlohmann_json_j.at("value").get_to(nlohmann_json_t.value);
+                auto json_value = nlohmann_json_j.at("value");
+                if (!json_value.is_null() && json_value.is_number()) {
+                    json_value.get_to(nlohmann_json_t.value);
+                }
             }
             if (nlohmann_json_j.contains("valueToReach")) {
-                nlohmann_json_j.at("valueToReach").get_to(nlohmann_json_t.valueToReach);
+                auto json_valueToReach = nlohmann_json_j.at("valueToReach");
+                if (!json_valueToReach.is_null() && json_valueToReach.is_number()) {
+                    json_valueToReach.get_to(nlohmann_json_t.valueToReach);
+                }
             }
             if (nlohmann_json_j.contains("isCompleted")) {
-                nlohmann_json_j.at("isCompleted").get_to(nlohmann_json_t.isCompleted);
+                auto json_isCompleted = nlohmann_json_j.at("isCompleted");
+                if (!json_isCompleted.is_null() && json_isCompleted.is_boolean()) {
+                    json_isCompleted.get_to(nlohmann_json_t.isCompleted);
+                }
             }
             if (nlohmann_json_j.contains("isClaimed")) {
-                nlohmann_json_j.at("isClaimed").get_to(nlohmann_json_t.isClaimed);
+                auto json_isClaimed = nlohmann_json_j.at("isClaimed");
+                if (!json_isClaimed.is_null() && json_isClaimed.is_boolean()) {
+                    json_isClaimed.get_to(nlohmann_json_t.isClaimed);
+                }
             }
             if (nlohmann_json_j.contains("lastCompleteTime")) {
-                nlohmann_json_j.at("lastCompleteTime").get_to(nlohmann_json_t.lastCompleteTime);
+                auto json_lastCompleteTime = nlohmann_json_j.at("lastCompleteTime");
+                if (!json_lastCompleteTime.is_null() && json_lastCompleteTime.is_number()) {
+                    json_lastCompleteTime.get_to(nlohmann_json_t.lastCompleteTime);
+                }
             }
             if (nlohmann_json_j.contains("history")) {
-                nlohmann_json_j.at("history").get_to(nlohmann_json_t.history);
+                auto json_history = nlohmann_json_j.at("history");
+                if (!json_history.is_null() && json_history.is_array()) {
+                    json_history.get_to(nlohmann_json_t.history);
+                }
             }
         }
     };

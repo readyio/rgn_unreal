@@ -89,7 +89,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData requestData;
                 requestData.shortUID = shortUID;
-                RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData, string>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData>(
                     "user-getUserIdByShortUID",
                     requestData,
                     complete,
@@ -133,7 +133,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
                 requestData.displayName = displayName;
                 requestData.bio = bio;
-                RGNCore::CallAPI<RGN::Modules::UserProfile::UpdateUserProfileRequestData, string>(
+                RGNCore::CallAPI<RGN::Modules::UserProfile::UpdateUserProfileRequestData>(
                     "user-updateProfile",
                     requestData,
                     complete,

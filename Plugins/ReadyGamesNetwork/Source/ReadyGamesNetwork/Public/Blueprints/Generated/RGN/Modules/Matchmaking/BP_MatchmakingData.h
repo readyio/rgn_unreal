@@ -20,17 +20,17 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
     /**
      * Unique identifier of the matchmaking process.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString id;
     /**
      * Identifier of the application where the matchmaking process is running.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString appId;
     /**
      * Specifies the type of the match. Currently, only "default" is supported.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString type;
     /**
      * Defines how the match is finished.
@@ -39,7 +39,7 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
      * M:RGN.Modules.Matchmaking.MatchmakingModule.SubmitMatchScoreAsync(System.String,System.Int64,System.Threading.CancellationToken) method),
      * or "timeBased" (automatically finishes based on time condition).
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString finishType;
     /**
      * Defines how the match is started.
@@ -47,73 +47,73 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
      * "matchFillBased" (automatically starts once all participant slots are filled) - this is default value,
      * or "timeBased" (automatically starts based on time condition).
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString startType;
     /**
      * Specifies the maximum number of users that can participate in the matchmaking process. Default is 2.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     int32 maxUsers;
     /**
      * Indicates whether the matchmaking process has been started.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     bool isStarted;
     /**
      * Determines whether voting is enabled during the matchmaking process.
      * Default is false
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     bool votingEnabled;
     /**
      * Specifies whether a user can vote only once during the matchmaking process.
      * Default is true
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     bool oncePerUserVoting;
     /**
      * The identifier of the user who initiated the matchmaking process.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString createdBy;
     /**
      * The identifier of the user who updated the matchmaking process data.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     FString updatedBy;
     /**
      * The timestamp representing when the match was created.
      * in milliseconds since midnight, January 1, 1970 UTC.
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     int64 createdAt;
     /**
      * The timestamp representing when the matchmaking data was last updated.
      * in milliseconds since midnight, January 1, 1970 UTC.
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     int64 updatedAt;
     /**
      * A list of identifiers of users who are participating in the matchmaking process.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     TArray<FString> participants;
     /**
      * A list of votes cast during the matchmaking process.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     TArray<FBP_Vote> votes;
     /**
      * A dictionary mapping the participant identifiers to their respective scores in the matchmaking process.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     TMap<FString, int64> participantsScore;
     /**
      * A dictionary mapping the participant identifiers to their respective optional payload data in the matchmaking process.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Matchmaking")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     TMap<FString, FString> participantsPayload;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::MatchmakingData& source, FBP_MatchmakingData& target) {

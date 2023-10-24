@@ -19,16 +19,28 @@ namespace RGN { namespace Modules { namespace VirtualItems {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, VirtualItemImage& nlohmann_json_t) {
             if (nlohmann_json_j.contains("source")) {
-                nlohmann_json_j.at("source").get_to(nlohmann_json_t.source);
+                auto json_source = nlohmann_json_j.at("source");
+                if (!json_source.is_null() && json_source.is_string()) {
+                    json_source.get_to(nlohmann_json_t.source);
+                }
             }
             if (nlohmann_json_j.contains("large")) {
-                nlohmann_json_j.at("large").get_to(nlohmann_json_t.large);
+                auto json_large = nlohmann_json_j.at("large");
+                if (!json_large.is_null() && json_large.is_string()) {
+                    json_large.get_to(nlohmann_json_t.large);
+                }
             }
             if (nlohmann_json_j.contains("medium")) {
-                nlohmann_json_j.at("medium").get_to(nlohmann_json_t.medium);
+                auto json_medium = nlohmann_json_j.at("medium");
+                if (!json_medium.is_null() && json_medium.is_string()) {
+                    json_medium.get_to(nlohmann_json_t.medium);
+                }
             }
             if (nlohmann_json_j.contains("small")) {
-                nlohmann_json_j.at("small").get_to(nlohmann_json_t.small);
+                auto json_small = nlohmann_json_j.at("small");
+                if (!json_small.is_null() && json_small.is_string()) {
+                    json_small.get_to(nlohmann_json_t.small);
+                }
             }
         }
     };

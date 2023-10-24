@@ -15,11 +15,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_UserProfileData : public FBP_UserData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString lastAppPackageName;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     bool invisibleStatus;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     TArray<FBP_Currency> currencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UserProfileData& source, FBP_UserProfileData& target) {

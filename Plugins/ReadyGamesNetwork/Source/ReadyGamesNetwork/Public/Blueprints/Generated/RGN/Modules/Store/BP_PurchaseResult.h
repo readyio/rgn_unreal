@@ -15,11 +15,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_PurchaseResult {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     FString offerId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     TArray<FBP_InventoryItemData> items;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     TArray<FBP_Currency> updatedCurrencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::PurchaseResult& source, FBP_PurchaseResult& target) {

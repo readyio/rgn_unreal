@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_UserCustomClaims {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     TMap<FString, FString> claims;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UserCustomClaims& source, FBP_UserCustomClaims& target) {

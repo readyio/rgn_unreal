@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GameProgress {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GameProgress")
     int32 level;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::GameProgress& source, FBP_GameProgress& target) {

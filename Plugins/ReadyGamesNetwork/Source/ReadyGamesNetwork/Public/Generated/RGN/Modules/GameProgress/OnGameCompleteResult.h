@@ -20,10 +20,16 @@ namespace RGN { namespace Modules { namespace GameProgress {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, OnGameCompleteResult& nlohmann_json_t) {
             if (nlohmann_json_j.contains("gameProgress")) {
-                nlohmann_json_j.at("gameProgress").get_to(nlohmann_json_t.gameProgress);
+                auto json_gameProgress = nlohmann_json_j.at("gameProgress");
+                if (!json_gameProgress.is_null()) {
+                    json_gameProgress.get_to(nlohmann_json_t.gameProgress);
+                }
             }
             if (nlohmann_json_j.contains("userCurrencies")) {
-                nlohmann_json_j.at("userCurrencies").get_to(nlohmann_json_t.userCurrencies);
+                auto json_userCurrencies = nlohmann_json_j.at("userCurrencies");
+                if (!json_userCurrencies.is_null()) {
+                    json_userCurrencies.get_to(nlohmann_json_t.userCurrencies);
+                }
             }
         }
     };

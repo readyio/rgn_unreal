@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetVirtualItemTagsResponse {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     TArray<FString> tags;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::GetVirtualItemTagsResponse& source, FBP_GetVirtualItemTagsResponse& target) {

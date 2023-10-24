@@ -19,10 +19,16 @@ namespace RGN { namespace Modules { namespace Inventory {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, ChangeVirtualItemsQuantityResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("updatedItems")) {
-                nlohmann_json_j.at("updatedItems").get_to(nlohmann_json_t.updatedItems);
+                auto json_updatedItems = nlohmann_json_j.at("updatedItems");
+                if (!json_updatedItems.is_null() && json_updatedItems.is_array()) {
+                    json_updatedItems.get_to(nlohmann_json_t.updatedItems);
+                }
             }
         }
     };

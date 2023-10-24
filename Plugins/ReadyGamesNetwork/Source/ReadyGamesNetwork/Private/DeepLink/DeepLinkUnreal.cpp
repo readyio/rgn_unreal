@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 #endif
 
-std::vector<DeepLinkCallback*> DeepLink::_callbacks;
+std::vector<std::function<void(std::string)>> DeepLink::_callbacks;
 
 #if PLATFORM_IOS
 static FDelegateHandle _onOpenURLHandle;
@@ -58,21 +58,17 @@ void DeepLink::Stop() {
 #endif
 }
 
-void DeepLink::Subscribe(DeepLinkCallback* callback) {
+void DeepLink::Listen(std::function<void(std::string)> callback) {
     _callbacks.push_back(callback);
 }
 
-void DeepLink::Unsubscribe(DeepLinkCallback* callback) {
-    auto it = std::find(_callbacks.begin(), _callbacks.end(), callback);
-    if (it != _callbacks.end()) {
-        _callbacks.erase(it);
-    }
-}
-
 void DeepLink::OnDeepLink(std::string payload) {
-    for (auto callback : _callbacks) {
-        callback->raise(payload);
-    }
+    AsyncTask(ENamedThreads::GameThread, [payload]() {
+        for (auto callback : _callbacks) {
+            callback(payload);
+        }
+        _callbacks.clear();
+    });
 }
 
 #if PLATFORM_ANDROID

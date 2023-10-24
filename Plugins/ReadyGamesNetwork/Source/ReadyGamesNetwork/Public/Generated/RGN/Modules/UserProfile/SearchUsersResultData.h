@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace UserProfile {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, SearchUsersResultData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("queryResult")) {
-                nlohmann_json_j.at("queryResult").get_to(nlohmann_json_t.queryResult);
+                auto json_queryResult = nlohmann_json_j.at("queryResult");
+                if (!json_queryResult.is_null() && json_queryResult.is_array()) {
+                    json_queryResult.get_to(nlohmann_json_t.queryResult);
+                }
             }
         }
     };

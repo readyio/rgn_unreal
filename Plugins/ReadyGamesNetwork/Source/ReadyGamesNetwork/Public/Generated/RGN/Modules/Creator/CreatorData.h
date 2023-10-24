@@ -20,10 +20,16 @@ namespace RGN { namespace Modules { namespace Creator {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, CreatorData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("unclaimedCurrencies")) {
-                nlohmann_json_j.at("unclaimedCurrencies").get_to(nlohmann_json_t.unclaimedCurrencies);
+                auto json_unclaimedCurrencies = nlohmann_json_j.at("unclaimedCurrencies");
+                if (!json_unclaimedCurrencies.is_null() && json_unclaimedCurrencies.is_array()) {
+                    json_unclaimedCurrencies.get_to(nlohmann_json_t.unclaimedCurrencies);
+                }
             }
             if (nlohmann_json_j.contains("creatorSaleItems")) {
-                nlohmann_json_j.at("creatorSaleItems").get_to(nlohmann_json_t.creatorSaleItems);
+                auto json_creatorSaleItems = nlohmann_json_j.at("creatorSaleItems");
+                if (!json_creatorSaleItems.is_null() && json_creatorSaleItems.is_array()) {
+                    json_creatorSaleItems.get_to(nlohmann_json_t.creatorSaleItems);
+                }
             }
         }
     };

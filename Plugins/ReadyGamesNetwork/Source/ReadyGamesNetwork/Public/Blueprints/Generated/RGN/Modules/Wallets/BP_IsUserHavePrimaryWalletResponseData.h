@@ -13,9 +13,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_IsUserHavePrimaryWalletResponseData : public FBP_BaseResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     bool isUserHavePrimaryWallet;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     FString address;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& source, FBP_IsUserHavePrimaryWalletResponseData& target) {

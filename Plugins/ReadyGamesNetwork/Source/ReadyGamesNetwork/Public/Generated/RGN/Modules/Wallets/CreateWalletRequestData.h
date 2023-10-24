@@ -21,16 +21,28 @@ namespace RGN { namespace Modules { namespace Wallets {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, CreateWalletRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("version")) {
-                nlohmann_json_j.at("version").get_to(nlohmann_json_t.version);
+                auto json_version = nlohmann_json_j.at("version");
+                if (!json_version.is_null() && json_version.is_number()) {
+                    json_version.get_to(nlohmann_json_t.version);
+                }
             }
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("token")) {
-                nlohmann_json_j.at("token").get_to(nlohmann_json_t.token);
+                auto json_token = nlohmann_json_j.at("token");
+                if (!json_token.is_null() && json_token.is_string()) {
+                    json_token.get_to(nlohmann_json_t.token);
+                }
             }
             if (nlohmann_json_j.contains("password")) {
-                nlohmann_json_j.at("password").get_to(nlohmann_json_t.password);
+                auto json_password = nlohmann_json_j.at("password");
+                if (!json_password.is_null() && json_password.is_string()) {
+                    json_password.get_to(nlohmann_json_t.password);
+                }
             }
         }
     };

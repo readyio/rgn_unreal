@@ -32,13 +32,22 @@ namespace RGN { namespace Modules { namespace Leaderboard {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardReward& nlohmann_json_t) {
             if (nlohmann_json_j.contains("placeFrom")) {
-                nlohmann_json_j.at("placeFrom").get_to(nlohmann_json_t.placeFrom);
+                auto json_placeFrom = nlohmann_json_j.at("placeFrom");
+                if (!json_placeFrom.is_null() && json_placeFrom.is_number()) {
+                    json_placeFrom.get_to(nlohmann_json_t.placeFrom);
+                }
             }
             if (nlohmann_json_j.contains("placeTo")) {
-                nlohmann_json_j.at("placeTo").get_to(nlohmann_json_t.placeTo);
+                auto json_placeTo = nlohmann_json_j.at("placeTo");
+                if (!json_placeTo.is_null() && json_placeTo.is_number()) {
+                    json_placeTo.get_to(nlohmann_json_t.placeTo);
+                }
             }
             if (nlohmann_json_j.contains("achievementId")) {
-                nlohmann_json_j.at("achievementId").get_to(nlohmann_json_t.achievementId);
+                auto json_achievementId = nlohmann_json_j.at("achievementId");
+                if (!json_achievementId.is_null() && json_achievementId.is_string()) {
+                    json_achievementId.get_to(nlohmann_json_t.achievementId);
+                }
             }
         }
     };

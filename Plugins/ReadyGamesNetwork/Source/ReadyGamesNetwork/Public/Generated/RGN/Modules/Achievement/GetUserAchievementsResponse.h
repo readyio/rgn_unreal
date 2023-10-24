@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Achievement {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GetUserAchievementsResponse& nlohmann_json_t) {
             if (nlohmann_json_j.contains("userAchievements")) {
-                nlohmann_json_j.at("userAchievements").get_to(nlohmann_json_t.userAchievements);
+                auto json_userAchievements = nlohmann_json_j.at("userAchievements");
+                if (!json_userAchievements.is_null() && json_userAchievements.is_array()) {
+                    json_userAchievements.get_to(nlohmann_json_t.userAchievements);
+                }
             }
         }
     };

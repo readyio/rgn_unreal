@@ -15,9 +15,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_OnGameCompleteResult {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GameProgress")
     FBP_GameProgress gameProgress;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | GameProgress")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GameProgress")
     FBP_UserCurrencyData userCurrencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::OnGameCompleteResult& source, FBP_OnGameCompleteResult& target) {

@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetStoreOffersResponse {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Store")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     TArray<FBP_StoreOffer> offers;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::GetStoreOffersResponse& source, FBP_GetStoreOffersResponse& target) {

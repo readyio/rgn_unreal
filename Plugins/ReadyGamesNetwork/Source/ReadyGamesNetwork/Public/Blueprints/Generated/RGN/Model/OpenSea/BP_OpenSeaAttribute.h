@@ -14,17 +14,17 @@ struct READYGAMESNETWORK_API FBP_OpenSeaAttribute {
     /**
      * Name of the trait
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString trait_type;
     /**
      * Value of the trait
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString value;
     /**
      * Indicating how you would like it to be displayed
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString display_type;
 
 	static void ConvertToUnrealModel(const RGN::Model::OpenSea::OpenSeaAttribute& source, FBP_OpenSeaAttribute& target) {

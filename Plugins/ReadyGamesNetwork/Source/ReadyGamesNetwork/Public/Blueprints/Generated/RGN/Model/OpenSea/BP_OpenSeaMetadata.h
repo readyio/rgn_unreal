@@ -20,25 +20,25 @@ struct READYGAMESNETWORK_API FBP_OpenSeaMetadata {
     /**
      * Name of the item.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString name;
     /**
      * A human readable description of the item. Markdown is supported.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString description;
     /**
      * This is the URL that will appear below the asset's image
      * on OpenSea and will allow users to leave OpenSea and view
      * the item on your site.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString external_url;
     /**
      * Background color of the item on OpenSea.
      * Must be a six-character hexadecimal without a pre-pended #.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString background_color;
     /**
      * URL to a multi-media attachment for the item. The file extensions
@@ -49,30 +49,30 @@ struct READYGAMESNETWORK_API FBP_OpenSeaMetadata {
      * Scripts and relative paths within the HTML page are now supported.
      * However, access to browser extensions is not supported.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString animation_url;
     /**
      * A URL to a YouTube video.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString youtube_url;
     /**
      * This is the URL to the image of the item. Can be just about any type
      * of image (including SVGs, which will be cached into PNGs by OpenSea),
      * and can be IPFS URLs or paths. We recommend using a 350 x 350 image.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString image;
     /**
      * Raw SVG image data, if you want to generate images on the fly (not recommended).
      * Only use this if you're not including the image parameter.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString image_data;
     /**
      * These are the attributes for the item, which will show up on the OpenSea page for the item.
      */
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | OpenSea")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     TArray<FBP_OpenSeaAttribute> attributes;
 
 	static void ConvertToUnrealModel(const RGN::Model::OpenSea::OpenSeaMetadata& source, FBP_OpenSeaMetadata& target) {

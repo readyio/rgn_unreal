@@ -50,22 +50,40 @@ namespace RGN { namespace Modules { namespace VirtualItems {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, PriceInfo& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appIds")) {
-                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
+                }
             }
             if (nlohmann_json_j.contains("itemId")) {
-                nlohmann_json_j.at("itemId").get_to(nlohmann_json_t.itemId);
+                auto json_itemId = nlohmann_json_j.at("itemId");
+                if (!json_itemId.is_null() && json_itemId.is_string()) {
+                    json_itemId.get_to(nlohmann_json_t.itemId);
+                }
             }
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("quantity")) {
-                nlohmann_json_j.at("quantity").get_to(nlohmann_json_t.quantity);
+                auto json_quantity = nlohmann_json_j.at("quantity");
+                if (!json_quantity.is_null() && json_quantity.is_number()) {
+                    json_quantity.get_to(nlohmann_json_t.quantity);
+                }
             }
             if (nlohmann_json_j.contains("quantityWithoutDiscount")) {
-                nlohmann_json_j.at("quantityWithoutDiscount").get_to(nlohmann_json_t.quantityWithoutDiscount);
+                auto json_quantityWithoutDiscount = nlohmann_json_j.at("quantityWithoutDiscount");
+                if (!json_quantityWithoutDiscount.is_null() && json_quantityWithoutDiscount.is_number()) {
+                    json_quantityWithoutDiscount.get_to(nlohmann_json_t.quantityWithoutDiscount);
+                }
             }
             if (nlohmann_json_j.contains("group")) {
-                nlohmann_json_j.at("group").get_to(nlohmann_json_t.group);
+                auto json_group = nlohmann_json_j.at("group");
+                if (!json_group.is_null() && json_group.is_string()) {
+                    json_group.get_to(nlohmann_json_t.group);
+                }
             }
         }
     };

@@ -15,7 +15,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_AddToInventoryRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     TArray<FBP_InventoryData> inventoryDatas;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::AddToInventoryRequestData& source, FBP_AddToInventoryRequestData& target) {

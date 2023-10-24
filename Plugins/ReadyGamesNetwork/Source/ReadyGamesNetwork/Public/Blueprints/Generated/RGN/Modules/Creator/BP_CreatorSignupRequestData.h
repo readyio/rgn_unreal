@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_CreatorSignupRequestData : public FBP_BaseMigrationRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Creator")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Creator")
     FString brandName;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSignupRequestData& source, FBP_CreatorSignupRequestData& target) {

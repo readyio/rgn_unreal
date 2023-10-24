@@ -13,11 +13,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_UpgradesResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString ownedItemId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     FString virtualItemId;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Inventory")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Inventory")
     TArray<FBP_VirtualItemUpgrade> itemUpgrades;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::UpgradesResponseData& source, FBP_UpgradesResponseData& target) {

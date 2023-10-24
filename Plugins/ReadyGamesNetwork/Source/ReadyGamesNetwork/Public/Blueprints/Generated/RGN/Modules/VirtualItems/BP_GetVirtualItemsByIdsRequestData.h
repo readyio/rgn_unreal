@@ -13,7 +13,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetVirtualItemsByIdsRequestData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | VirtualItems")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     TArray<FString> ids;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::GetVirtualItemsByIdsRequestData& source, FBP_GetVirtualItemsByIdsRequestData& target) {

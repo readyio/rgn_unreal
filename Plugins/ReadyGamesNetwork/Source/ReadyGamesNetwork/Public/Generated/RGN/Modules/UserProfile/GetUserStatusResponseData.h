@@ -24,19 +24,34 @@ namespace RGN { namespace Modules { namespace UserProfile {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GetUserStatusResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("status")) {
-                nlohmann_json_j.at("status").get_to(nlohmann_json_t.status);
+                auto json_status = nlohmann_json_j.at("status");
+                if (!json_status.is_null() && json_status.is_number()) {
+                    json_status.get_to(nlohmann_json_t.status);
+                }
             }
             if (nlohmann_json_j.contains("message")) {
-                nlohmann_json_j.at("message").get_to(nlohmann_json_t.message);
+                auto json_message = nlohmann_json_j.at("message");
+                if (!json_message.is_null() && json_message.is_string()) {
+                    json_message.get_to(nlohmann_json_t.message);
+                }
             }
             if (nlohmann_json_j.contains("userStatus")) {
-                nlohmann_json_j.at("userStatus").get_to(nlohmann_json_t.userStatus);
+                auto json_userStatus = nlohmann_json_j.at("userStatus");
+                if (!json_userStatus.is_null()) {
+                    json_userStatus.get_to(nlohmann_json_t.userStatus);
+                }
             }
             if (nlohmann_json_j.contains("lastAppPackageName")) {
-                nlohmann_json_j.at("lastAppPackageName").get_to(nlohmann_json_t.lastAppPackageName);
+                auto json_lastAppPackageName = nlohmann_json_j.at("lastAppPackageName");
+                if (!json_lastAppPackageName.is_null() && json_lastAppPackageName.is_string()) {
+                    json_lastAppPackageName.get_to(nlohmann_json_t.lastAppPackageName);
+                }
             }
             if (nlohmann_json_j.contains("lastActivityTS")) {
-                nlohmann_json_j.at("lastActivityTS").get_to(nlohmann_json_t.lastActivityTS);
+                auto json_lastActivityTS = nlohmann_json_j.at("lastActivityTS");
+                if (!json_lastActivityTS.is_null() && json_lastActivityTS.is_number()) {
+                    json_lastActivityTS.get_to(nlohmann_json_t.lastActivityTS);
+                }
             }
         }
     };

@@ -27,10 +27,16 @@ namespace RGN { namespace Modules { namespace VirtualItems {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, Properties& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appIds")) {
-                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
+                }
             }
             if (nlohmann_json_j.contains("json")) {
-                nlohmann_json_j.at("json").get_to(nlohmann_json_t.json);
+                auto json_json = nlohmann_json_j.at("json");
+                if (!json_json.is_null() && json_json.is_string()) {
+                    json_json.get_to(nlohmann_json_t.json);
+                }
             }
         }
     };

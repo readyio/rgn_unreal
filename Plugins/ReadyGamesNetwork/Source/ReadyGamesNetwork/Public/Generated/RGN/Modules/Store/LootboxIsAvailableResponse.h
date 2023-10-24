@@ -18,10 +18,16 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LootboxIsAvailableResponse& nlohmann_json_t) {
             if (nlohmann_json_j.contains("isAvailable")) {
-                nlohmann_json_j.at("isAvailable").get_to(nlohmann_json_t.isAvailable);
+                auto json_isAvailable = nlohmann_json_j.at("isAvailable");
+                if (!json_isAvailable.is_null() && json_isAvailable.is_boolean()) {
+                    json_isAvailable.get_to(nlohmann_json_t.isAvailable);
+                }
             }
             if (nlohmann_json_j.contains("count")) {
-                nlohmann_json_j.at("count").get_to(nlohmann_json_t.count);
+                auto json_count = nlohmann_json_j.at("count");
+                if (!json_count.is_null() && json_count.is_number()) {
+                    json_count.get_to(nlohmann_json_t.count);
+                }
             }
         }
     };

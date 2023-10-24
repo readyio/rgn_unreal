@@ -15,11 +15,11 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_GetUserStatusResponseData : public FBP_BaseResponseData {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     EBP_UserStatus userStatus;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     FString lastAppPackageName;
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | UserProfile")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | UserProfile")
     int64 lastActivityTS;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::GetUserStatusResponseData& source, FBP_GetUserStatusResponseData& target) {

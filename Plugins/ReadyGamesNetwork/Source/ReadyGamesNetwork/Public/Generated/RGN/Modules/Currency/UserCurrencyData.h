@@ -17,7 +17,10 @@ namespace RGN { namespace Modules { namespace Currency {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, UserCurrencyData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("currencies")) {
-                nlohmann_json_j.at("currencies").get_to(nlohmann_json_t.currencies);
+                auto json_currencies = nlohmann_json_j.at("currencies");
+                if (!json_currencies.is_null() && json_currencies.is_array()) {
+                    json_currencies.get_to(nlohmann_json_t.currencies);
+                }
             }
         }
     };

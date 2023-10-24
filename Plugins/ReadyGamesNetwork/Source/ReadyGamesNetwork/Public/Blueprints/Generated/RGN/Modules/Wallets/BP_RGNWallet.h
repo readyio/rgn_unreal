@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_RGNWallet {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadOnly, Category = "ReadyGamesNetwork | Wallets")
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Wallets")
     FString address;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::RGNWallet& source, FBP_RGNWallet& target) {

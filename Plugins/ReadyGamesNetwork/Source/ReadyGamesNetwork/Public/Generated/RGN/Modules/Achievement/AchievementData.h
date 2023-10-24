@@ -151,64 +151,124 @@ namespace RGN { namespace Modules { namespace Achievement {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, AchievementData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("appIds")) {
-                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
+                }
             }
             if (nlohmann_json_j.contains("requestName")) {
-                nlohmann_json_j.at("requestName").get_to(nlohmann_json_t.requestName);
+                auto json_requestName = nlohmann_json_j.at("requestName");
+                if (!json_requestName.is_null() && json_requestName.is_string()) {
+                    json_requestName.get_to(nlohmann_json_t.requestName);
+                }
             }
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("description")) {
-                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+                auto json_description = nlohmann_json_j.at("description");
+                if (!json_description.is_null() && json_description.is_string()) {
+                    json_description.get_to(nlohmann_json_t.description);
+                }
             }
             if (nlohmann_json_j.contains("setBy")) {
-                nlohmann_json_j.at("setBy").get_to(nlohmann_json_t.setBy);
+                auto json_setBy = nlohmann_json_j.at("setBy");
+                if (!json_setBy.is_null() && json_setBy.is_string()) {
+                    json_setBy.get_to(nlohmann_json_t.setBy);
+                }
             }
             if (nlohmann_json_j.contains("isClaimable")) {
-                nlohmann_json_j.at("isClaimable").get_to(nlohmann_json_t.isClaimable);
+                auto json_isClaimable = nlohmann_json_j.at("isClaimable");
+                if (!json_isClaimable.is_null() && json_isClaimable.is_boolean()) {
+                    json_isClaimable.get_to(nlohmann_json_t.isClaimable);
+                }
             }
             if (nlohmann_json_j.contains("valueToReach")) {
-                nlohmann_json_j.at("valueToReach").get_to(nlohmann_json_t.valueToReach);
+                auto json_valueToReach = nlohmann_json_j.at("valueToReach");
+                if (!json_valueToReach.is_null() && json_valueToReach.is_number()) {
+                    json_valueToReach.get_to(nlohmann_json_t.valueToReach);
+                }
             }
             if (nlohmann_json_j.contains("completedAchievementsToUnlock")) {
-                nlohmann_json_j.at("completedAchievementsToUnlock").get_to(nlohmann_json_t.completedAchievementsToUnlock);
+                auto json_completedAchievementsToUnlock = nlohmann_json_j.at("completedAchievementsToUnlock");
+                if (!json_completedAchievementsToUnlock.is_null() && json_completedAchievementsToUnlock.is_array()) {
+                    json_completedAchievementsToUnlock.get_to(nlohmann_json_t.completedAchievementsToUnlock);
+                }
             }
             if (nlohmann_json_j.contains("repeatable")) {
-                nlohmann_json_j.at("repeatable").get_to(nlohmann_json_t.repeatable);
+                auto json_repeatable = nlohmann_json_j.at("repeatable");
+                if (!json_repeatable.is_null() && json_repeatable.is_boolean()) {
+                    json_repeatable.get_to(nlohmann_json_t.repeatable);
+                }
             }
             if (nlohmann_json_j.contains("repeatNoMoreOftenThanCron")) {
-                nlohmann_json_j.at("repeatNoMoreOftenThanCron").get_to(nlohmann_json_t.repeatNoMoreOftenThanCron);
+                auto json_repeatNoMoreOftenThanCron = nlohmann_json_j.at("repeatNoMoreOftenThanCron");
+                if (!json_repeatNoMoreOftenThanCron.is_null() && json_repeatNoMoreOftenThanCron.is_string()) {
+                    json_repeatNoMoreOftenThanCron.get_to(nlohmann_json_t.repeatNoMoreOftenThanCron);
+                }
             }
             if (nlohmann_json_j.contains("startTime")) {
-                nlohmann_json_j.at("startTime").get_to(nlohmann_json_t.startTime);
+                auto json_startTime = nlohmann_json_j.at("startTime");
+                if (!json_startTime.is_null() && json_startTime.is_number()) {
+                    json_startTime.get_to(nlohmann_json_t.startTime);
+                }
             }
             if (nlohmann_json_j.contains("endTime")) {
-                nlohmann_json_j.at("endTime").get_to(nlohmann_json_t.endTime);
+                auto json_endTime = nlohmann_json_j.at("endTime");
+                if (!json_endTime.is_null() && json_endTime.is_number()) {
+                    json_endTime.get_to(nlohmann_json_t.endTime);
+                }
             }
             if (nlohmann_json_j.contains("resetTimeLimitEvery")) {
-                nlohmann_json_j.at("resetTimeLimitEvery").get_to(nlohmann_json_t.resetTimeLimitEvery);
+                auto json_resetTimeLimitEvery = nlohmann_json_j.at("resetTimeLimitEvery");
+                if (!json_resetTimeLimitEvery.is_null() && json_resetTimeLimitEvery.is_string()) {
+                    json_resetTimeLimitEvery.get_to(nlohmann_json_t.resetTimeLimitEvery);
+                }
             }
             if (nlohmann_json_j.contains("rewards")) {
-                nlohmann_json_j.at("rewards").get_to(nlohmann_json_t.rewards);
+                auto json_rewards = nlohmann_json_j.at("rewards");
+                if (!json_rewards.is_null() && json_rewards.is_array()) {
+                    json_rewards.get_to(nlohmann_json_t.rewards);
+                }
             }
             if (nlohmann_json_j.contains("createdAt")) {
-                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+                auto json_createdAt = nlohmann_json_j.at("createdAt");
+                if (!json_createdAt.is_null() && json_createdAt.is_number()) {
+                    json_createdAt.get_to(nlohmann_json_t.createdAt);
+                }
             }
             if (nlohmann_json_j.contains("updatedAt")) {
-                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+                auto json_updatedAt = nlohmann_json_j.at("updatedAt");
+                if (!json_updatedAt.is_null() && json_updatedAt.is_number()) {
+                    json_updatedAt.get_to(nlohmann_json_t.updatedAt);
+                }
             }
             if (nlohmann_json_j.contains("createdBy")) {
-                nlohmann_json_j.at("createdBy").get_to(nlohmann_json_t.createdBy);
+                auto json_createdBy = nlohmann_json_j.at("createdBy");
+                if (!json_createdBy.is_null() && json_createdBy.is_string()) {
+                    json_createdBy.get_to(nlohmann_json_t.createdBy);
+                }
             }
             if (nlohmann_json_j.contains("updatedBy")) {
-                nlohmann_json_j.at("updatedBy").get_to(nlohmann_json_t.updatedBy);
+                auto json_updatedBy = nlohmann_json_j.at("updatedBy");
+                if (!json_updatedBy.is_null() && json_updatedBy.is_string()) {
+                    json_updatedBy.get_to(nlohmann_json_t.updatedBy);
+                }
             }
         }
     };

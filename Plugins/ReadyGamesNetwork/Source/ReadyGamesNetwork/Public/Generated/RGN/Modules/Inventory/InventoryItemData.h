@@ -97,37 +97,70 @@ namespace RGN { namespace Modules { namespace Inventory {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, InventoryItemData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("id")) {
-                nlohmann_json_j.at("id").get_to(nlohmann_json_t.id);
+                auto json_id = nlohmann_json_j.at("id");
+                if (!json_id.is_null() && json_id.is_string()) {
+                    json_id.get_to(nlohmann_json_t.id);
+                }
             }
             if (nlohmann_json_j.contains("virtualItemId")) {
-                nlohmann_json_j.at("virtualItemId").get_to(nlohmann_json_t.virtualItemId);
+                auto json_virtualItemId = nlohmann_json_j.at("virtualItemId");
+                if (!json_virtualItemId.is_null() && json_virtualItemId.is_string()) {
+                    json_virtualItemId.get_to(nlohmann_json_t.virtualItemId);
+                }
             }
             if (nlohmann_json_j.contains("appIds")) {
-                nlohmann_json_j.at("appIds").get_to(nlohmann_json_t.appIds);
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
+                }
             }
             if (nlohmann_json_j.contains("tags")) {
-                nlohmann_json_j.at("tags").get_to(nlohmann_json_t.tags);
+                auto json_tags = nlohmann_json_j.at("tags");
+                if (!json_tags.is_null() && json_tags.is_array()) {
+                    json_tags.get_to(nlohmann_json_t.tags);
+                }
             }
             if (nlohmann_json_j.contains("quantity")) {
-                nlohmann_json_j.at("quantity").get_to(nlohmann_json_t.quantity);
+                auto json_quantity = nlohmann_json_j.at("quantity");
+                if (!json_quantity.is_null() && json_quantity.is_number()) {
+                    json_quantity.get_to(nlohmann_json_t.quantity);
+                }
             }
             if (nlohmann_json_j.contains("status")) {
-                nlohmann_json_j.at("status").get_to(nlohmann_json_t.status);
+                auto json_status = nlohmann_json_j.at("status");
+                if (!json_status.is_null() && json_status.is_string()) {
+                    json_status.get_to(nlohmann_json_t.status);
+                }
             }
             if (nlohmann_json_j.contains("createdAt")) {
-                nlohmann_json_j.at("createdAt").get_to(nlohmann_json_t.createdAt);
+                auto json_createdAt = nlohmann_json_j.at("createdAt");
+                if (!json_createdAt.is_null() && json_createdAt.is_number()) {
+                    json_createdAt.get_to(nlohmann_json_t.createdAt);
+                }
             }
             if (nlohmann_json_j.contains("updatedAt")) {
-                nlohmann_json_j.at("updatedAt").get_to(nlohmann_json_t.updatedAt);
+                auto json_updatedAt = nlohmann_json_j.at("updatedAt");
+                if (!json_updatedAt.is_null() && json_updatedAt.is_number()) {
+                    json_updatedAt.get_to(nlohmann_json_t.updatedAt);
+                }
             }
             if (nlohmann_json_j.contains("itemUpgrades")) {
-                nlohmann_json_j.at("itemUpgrades").get_to(nlohmann_json_t.itemUpgrades);
+                auto json_itemUpgrades = nlohmann_json_j.at("itemUpgrades");
+                if (!json_itemUpgrades.is_null() && json_itemUpgrades.is_array()) {
+                    json_itemUpgrades.get_to(nlohmann_json_t.itemUpgrades);
+                }
             }
             if (nlohmann_json_j.contains("properties")) {
-                nlohmann_json_j.at("properties").get_to(nlohmann_json_t.properties);
+                auto json_properties = nlohmann_json_j.at("properties");
+                if (!json_properties.is_null() && json_properties.is_array()) {
+                    json_properties.get_to(nlohmann_json_t.properties);
+                }
             }
             if (nlohmann_json_j.contains("virtualItem")) {
-                nlohmann_json_j.at("virtualItem").get_to(nlohmann_json_t.virtualItem);
+                auto json_virtualItem = nlohmann_json_j.at("virtualItem");
+                if (!json_virtualItem.is_null()) {
+                    json_virtualItem.get_to(nlohmann_json_t.virtualItem);
+                }
             }
         }
     };

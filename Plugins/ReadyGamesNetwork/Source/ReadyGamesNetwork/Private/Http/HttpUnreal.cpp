@@ -26,7 +26,6 @@ void Http::Request(std::string url, HttpMethod method, HttpHeaders& headers, std
 			FString responseFStr = UnrealHttpResponse->GetContentAsString();
 			std::string responseStr = std::string(TCHAR_TO_UTF8(*responseFStr));
 			int responseCode = UnrealHttpResponse->GetResponseCode();
-
 			HttpResponse response(responseStr, responseCode);
 
 			callback(response);

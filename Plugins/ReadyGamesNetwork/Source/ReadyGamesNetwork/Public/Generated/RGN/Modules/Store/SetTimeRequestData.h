@@ -21,13 +21,22 @@ namespace RGN { namespace Modules { namespace Store {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, SetTimeRequestData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("appPackageName")) {
-                nlohmann_json_j.at("appPackageName").get_to(nlohmann_json_t.appPackageName);
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
             }
             if (nlohmann_json_j.contains("offerId")) {
-                nlohmann_json_j.at("offerId").get_to(nlohmann_json_t.offerId);
+                auto json_offerId = nlohmann_json_j.at("offerId");
+                if (!json_offerId.is_null() && json_offerId.is_string()) {
+                    json_offerId.get_to(nlohmann_json_t.offerId);
+                }
             }
             if (nlohmann_json_j.contains("time")) {
-                nlohmann_json_j.at("time").get_to(nlohmann_json_t.time);
+                auto json_time = nlohmann_json_j.at("time");
+                if (!json_time.is_null()) {
+                    json_time.get_to(nlohmann_json_t.time);
+                }
             }
         }
     };

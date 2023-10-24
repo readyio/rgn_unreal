@@ -76,31 +76,58 @@ namespace RGN { namespace Model { namespace OpenSea {
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, OpenSeaMetadata& nlohmann_json_t) {
             if (nlohmann_json_j.contains("name")) {
-                nlohmann_json_j.at("name").get_to(nlohmann_json_t.name);
+                auto json_name = nlohmann_json_j.at("name");
+                if (!json_name.is_null() && json_name.is_string()) {
+                    json_name.get_to(nlohmann_json_t.name);
+                }
             }
             if (nlohmann_json_j.contains("description")) {
-                nlohmann_json_j.at("description").get_to(nlohmann_json_t.description);
+                auto json_description = nlohmann_json_j.at("description");
+                if (!json_description.is_null() && json_description.is_string()) {
+                    json_description.get_to(nlohmann_json_t.description);
+                }
             }
             if (nlohmann_json_j.contains("external_url")) {
-                nlohmann_json_j.at("external_url").get_to(nlohmann_json_t.external_url);
+                auto json_external_url = nlohmann_json_j.at("external_url");
+                if (!json_external_url.is_null() && json_external_url.is_string()) {
+                    json_external_url.get_to(nlohmann_json_t.external_url);
+                }
             }
             if (nlohmann_json_j.contains("background_color")) {
-                nlohmann_json_j.at("background_color").get_to(nlohmann_json_t.background_color);
+                auto json_background_color = nlohmann_json_j.at("background_color");
+                if (!json_background_color.is_null() && json_background_color.is_string()) {
+                    json_background_color.get_to(nlohmann_json_t.background_color);
+                }
             }
             if (nlohmann_json_j.contains("animation_url")) {
-                nlohmann_json_j.at("animation_url").get_to(nlohmann_json_t.animation_url);
+                auto json_animation_url = nlohmann_json_j.at("animation_url");
+                if (!json_animation_url.is_null() && json_animation_url.is_string()) {
+                    json_animation_url.get_to(nlohmann_json_t.animation_url);
+                }
             }
             if (nlohmann_json_j.contains("youtube_url")) {
-                nlohmann_json_j.at("youtube_url").get_to(nlohmann_json_t.youtube_url);
+                auto json_youtube_url = nlohmann_json_j.at("youtube_url");
+                if (!json_youtube_url.is_null() && json_youtube_url.is_string()) {
+                    json_youtube_url.get_to(nlohmann_json_t.youtube_url);
+                }
             }
             if (nlohmann_json_j.contains("image")) {
-                nlohmann_json_j.at("image").get_to(nlohmann_json_t.image);
+                auto json_image = nlohmann_json_j.at("image");
+                if (!json_image.is_null() && json_image.is_string()) {
+                    json_image.get_to(nlohmann_json_t.image);
+                }
             }
             if (nlohmann_json_j.contains("image_data")) {
-                nlohmann_json_j.at("image_data").get_to(nlohmann_json_t.image_data);
+                auto json_image_data = nlohmann_json_j.at("image_data");
+                if (!json_image_data.is_null() && json_image_data.is_string()) {
+                    json_image_data.get_to(nlohmann_json_t.image_data);
+                }
             }
             if (nlohmann_json_j.contains("attributes")) {
-                nlohmann_json_j.at("attributes").get_to(nlohmann_json_t.attributes);
+                auto json_attributes = nlohmann_json_j.at("attributes");
+                if (!json_attributes.is_null() && json_attributes.is_array()) {
+                    json_attributes.get_to(nlohmann_json_t.attributes);
+                }
             }
         }
     };
