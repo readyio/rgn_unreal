@@ -27,6 +27,8 @@ public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void SignIn(FRGNSignInCallback onSignIn);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
+    static void SignInAnonymously(FRGNSignInCallback onSignIn);
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void SignOut();
     UFUNCTION(BlueprintPure, Category = "ReadyGamesNetwork | Core")
     static bool IsLoggedIn();

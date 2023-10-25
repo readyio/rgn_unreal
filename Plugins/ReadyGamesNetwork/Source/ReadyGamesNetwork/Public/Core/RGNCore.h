@@ -46,6 +46,7 @@ public:
 
     static void DevSignIn(string email, string password, const function<void(bool)>& onSignIn);
     static void SignIn(const function<void(bool)>& onSignIn);
+    static void SignInAnonymously(const function<void(bool)>& onSignIn);
     static void SignOut();
     static void RefreshTokens(const function<void(bool)>& callback);
 

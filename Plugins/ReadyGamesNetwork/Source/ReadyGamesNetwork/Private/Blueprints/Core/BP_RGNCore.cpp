@@ -46,6 +46,12 @@ void UBP_RGNCore::SignIn(FRGNSignInCallback onSignIn) {
     });
 }
 
+void UBP_RGNCore::SignInAnonymously(FRGNSignInCallback onSignIn) {
+    RGNCore::SignInAnonymously([onSignIn](bool isLoggedIn) {
+        onSignIn.ExecuteIfBound(isLoggedIn);
+    });
+}
+
 void UBP_RGNCore::SignOut() {
     RGNCore::SignOut();
 }

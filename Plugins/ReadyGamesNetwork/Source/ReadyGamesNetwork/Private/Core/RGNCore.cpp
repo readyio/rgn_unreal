@@ -82,6 +82,33 @@ void RGNCore::SignIn(const function<void(bool)>& onSignIn) {
     });
 }
 
+void RGNCore::SignInAnonymously(const function<void(bool)>& onSignIn) {
+    json requestBody;
+    requestBody["appId"] = _appId;
+    requestBody["returnSecureToken"] = true;
+
+    RGNCore::NonAuthInternalCallAPI("user-signUpAnonymously", requestBody.dump(),
+        [onSignIn](string response) {
+            json jsonResponse = json::parse(response);
+            _userId = jsonResponse.at("userId");
+            _idToken = jsonResponse.at("idToken");
+            _refreshToken = jsonResponse.at("refreshToken");
+
+            SaveAuthSession();
+            NotifyAuthChange();
+
+            if (onSignIn) {
+                onSignIn(true);
+            }
+        },
+        [onSignIn](int httpCode, string httpMessage) {
+            if (onSignIn) {
+                onSignIn(false);
+            }
+        }
+    );
+}
+
 void RGNCore::SignOut() {
     _idToken = "";
     _refreshToken = "";
