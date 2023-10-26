@@ -28,7 +28,7 @@
       <loopElements tag="$">
         <setStringFromTagTet result="TagText" tag="$"/>
 
-        <setBoolIsEqual bIsUrlKey="bIsUrlName" arg1="$S(TagText)" arg2="URL_PLACEHOLDER"/>
+        <setBoolIsEqual result="bIsUrlName" arg1="$S(TagText)" arg2="URL_PLACEHOLDER"/>
         <if condition="bIsUrlName">
           <true>
             <removeElement tag="$"/>
@@ -36,7 +36,7 @@
           </true>
         </if>
 
-        <setBoolIsEqual bIsUrlKey="bIsUrlScheme" arg1="$S(TagText)" arg2="URL_SCHEME_PLACEHOLDER"/>
+        <setBoolIsEqual result="bIsUrlScheme" arg1="$S(TagText)" arg2="URL_SCHEME_PLACEHOLDER"/>
         <if condition="bIsUrlScheme">
           <true>
             <removeElement tag="$"/>
