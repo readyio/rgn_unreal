@@ -32,7 +32,7 @@
         <if condition="bIsUrlName">
           <true>
             <removeElement tag="$"/>
-            <addElement tag="$" value="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
+            <addElement tag="$" name="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
           </true>
         </if>
 
@@ -40,7 +40,7 @@
         <if condition="bIsUrlScheme">
           <true>
             <removeElement tag="$"/>
-            <addElement tag="$" value="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
+            <addElement tag="$" name="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
           </true>
         </if>
 
