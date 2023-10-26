@@ -26,7 +26,7 @@
     <loopElements tag="dict">
       
       <loopElements tag="$">
-        <setStringFromTagTet result="TagText" tag="$"/>
+        <setStringFromTagText result="TagText" tag="$"/>
 
         <setBoolIsEqual result="bIsUrlName" arg1="$S(TagText)" arg2="URL_PLACEHOLDER"/>
         <if condition="bIsUrlName">
