@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <init>
+    <setStringFromProperty result="ProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectId" default=""/>
     <log text="ReadyGamesNetwork SDK iOS Initialization"/>
   </init>
 
@@ -12,7 +13,7 @@
           <key>CFBundleTypeRole</key>
           <string>Editor</string>
           <key>CFBundleURLName</key>
-          <string>io.getready.rgntest</string> <!-- TODO: Replace by actual CFBundleURLName value -->
+          <string>$S(ProjectId)</string>
           <key>CFBundleURLSchemes</key>
           <array>
             <string>rgnunreal</string>

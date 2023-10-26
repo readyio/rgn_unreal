@@ -6,8 +6,8 @@
 UENUM(BlueprintType)
 enum class EBP_RGNEnvironmentTarget : uint8
 {
-    None,
-    Development,
-    Staging,
-    Production
+    None = 0,
+    Development = 1,
+    Staging = 2,
+    Production = 3
 };

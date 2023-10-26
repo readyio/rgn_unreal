@@ -3,7 +3,6 @@
 #include <vector>
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "BP_RGNConfigureData.h"
 #include "BP_RGNCore.generated.h"
 
 // Delegate for signIn event
@@ -17,9 +16,7 @@ class READYGAMESNETWORK_API UBP_RGNCore : public UBlueprintFunctionLibrary
 
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void Configure(FBP_RGNConfigureData configureData);
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void UseFunctionsEmulator(const FString& hostAndPort);
+    static void Initialize();
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void SubscribeToAuthCallback(FRGNAuthChangeCallback onAuthChange);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")

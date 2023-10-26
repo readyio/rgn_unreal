@@ -7,29 +7,19 @@ public class ReadyGamesNetwork : ModuleRules
 {
 	public ReadyGamesNetwork(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"Runtime/Launch/Public"
-				// ... add public include paths required here ...
 			}
 			);
-				
-		
-		PrivateIncludePaths.AddRange(
-			new string[] {
-				// ... add other private include paths required here ...
-			}
-			);
-			
 		
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
 				"HTTP"
-				// ... add other public dependencies that you statically link with here ...
 			}
 			);
 			
@@ -43,18 +33,9 @@ public class ReadyGamesNetwork : ModuleRules
 				"SlateCore",
 				"Json",
 				"JsonUtilities"
-				// ... add private dependencies that you statically link with here ...	
 			}
 			);
 		
-		
-		DynamicallyLoadedModuleNames.AddRange(
-			new string[]
-			{
-				// ... add any modules that your module loads dynamically here ...
-			}
-			);
-
 
 		PublicDefinitions.AddRange(
 			new string[]

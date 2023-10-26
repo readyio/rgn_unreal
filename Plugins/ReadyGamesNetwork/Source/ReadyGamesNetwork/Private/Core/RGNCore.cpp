@@ -18,26 +18,17 @@ string RGNCore::_userId = "";
 string RGNCore::_idToken = "";
 string RGNCore::_refreshToken = "";
 
-void RGNCore::Initialize() {
+void RGNCore::Initialize(RGNConfigureData configureData) {
+    _appId = configureData.appId;
+    _environmentTarget = configureData.environmentTarget;
+    _useFunctionsEmulator = configureData.useFunctionsEmulator;
+    _emulatorHostAndPort = configureData.emulatorHost + ":" + configureData.emulatorPort;
+
     DeepLink::Initialize();
     DeepLink::Start();
     RGNAnalytics::Initialize();
-}
-
-void RGNCore::Deinitialize() {
-    DeepLink::Stop();
-}
-
-void RGNCore::Configure(RGNConfigureData configureData) {
-    _appId = configureData.appId;
-    _environmentTarget = configureData.environmentTarget;
 
     LoadAuthSession();
-}
-
-void RGNCore::UseFunctionsEmulator(string hostAndPort) {
-    _useFunctionsEmulator = true;
-    _emulatorHostAndPort = hostAndPort;
 }
 
 void RGNCore::SubscribeToAuthCallback(RGNAuthCallback* callback) {

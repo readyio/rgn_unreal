@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns:android="http://schemas.android.com/apk/res/android">
 	<init>
+    <setStringFromProperty result="ProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectId" default=""/>
 		<log text="ReadyGamesNetwork SDK Android Initialization"/>
 	</init>
 
 	<androidManifestUpdates>
-
+    
 		<loopElements tag="activity">
 			<setStringFromAttribute result="activityName" tag="$" name="android:name"/>
       <setBoolIsEqual result="bGameActivityUE4" arg1="$S(activityName)" arg2="com.epicgames.ue4.GameActivity"/>
@@ -18,12 +19,23 @@
 						<action android:name="android.intent.action.VIEW" />
 						<category android:name="android.intent.category.DEFAULT" />
 						<category android:name="android.intent.category.BROWSABLE" />
-						<data android:scheme="io.getready.rgntest" /> <!-- TODO: Replace by actual android:scheme value -->
+						<data android:scheme="SCHEME_PLACEHOLDER" />
 					</intent-filter>
 				</addElements>
 				</true>
 			</if>
 		</loopElements>
+
+    <loopElements tag="data">
+      <setStringFromAttribute result="androidScheme" tag="$" name="android:scheme"/>
+      <setBoolIsEqual result="bAndroidScheme" arg1="$S(androidScheme)" arg2="SCHEME_PLACEHOLDER"/>
+      <if condition="bAndroidScheme">
+        <true>
+          <removeAttribute tag="$" name="android:scheme"/>
+          <addAttribute tag="$" name="android:scheme" value="$S(ProjectId)"/>
+        </true>
+      </if>
+    </loopElements>
 
 	</androidManifestUpdates>
 

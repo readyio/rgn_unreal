@@ -40,11 +40,7 @@ private:
     static void OnDeepLink(string payload, const function<void(bool)>& onSignIn);
 
 public:
-    static void Initialize();
-    static void Deinitialize();
-
-    static void Configure(RGNConfigureData configureData);
-    static void UseFunctionsEmulator(string hostAndPort);
+    static void Initialize(RGNConfigureData configureData);
 
     static void SubscribeToAuthCallback(RGNAuthCallback* onAuthChange);
     static void UnsubscribeFromAuthCallback(RGNAuthCallback* onAuthChange);

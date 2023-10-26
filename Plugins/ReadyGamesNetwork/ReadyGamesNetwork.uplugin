@@ -19,6 +19,11 @@
 			"Name": "ReadyGamesNetwork",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "ReadyGamesNetworkEditor",
+			"Type": "Editor",
+			"LoadingPhase": [ "Default" ]
 		}
 	]
 }
