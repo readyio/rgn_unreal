@@ -6,6 +6,7 @@
   </init>
 
   <iosPListUpdates>
+    
     <addElements tag="dict" once="true">
       <key>CFBundleURLTypes</key>
       <array>
@@ -13,13 +14,39 @@
           <key>CFBundleTypeRole</key>
           <string>Editor</string>
           <key>CFBundleURLName</key>
-          <string>$S(ProjectId)</string>
+          <string>URL_PLACEHOLDER</string>
           <key>CFBundleURLSchemes</key>
           <array>
-            <string>rgnunreal</string>
+            <string>URL_SCHEME_PLACEHOLDER</string>
           </array>
         </dict>
       </array>
     </addElements>
+
+    <loopElements tag="dict">
+      
+      <loopElements tag="$">
+        <setStringFromTagTet result="TagText" tag="$"/>
+
+        <setBoolIsEqual bIsUrlKey="bIsUrlName" arg1="$S(TagText)" arg2="URL_PLACEHOLDER"/>
+        <if condition="bIsUrlName">
+          <true>
+            <removeElement tag="$"/>
+            <addElement tag="$" value="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
+          </true>
+        </if>
+
+        <setBoolIsEqual bIsUrlKey="bIsUrlScheme" arg1="$S(TagText)" arg2="URL_SCHEME_PLACEHOLDER"/>
+        <if condition="bIsUrlScheme">
+          <true>
+            <removeElement tag="$"/>
+            <addElement tag="$" value="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
+          </true>
+        </if>
+
+      </loopElements>
+      
+    </loopElements>
+    
   </iosPListUpdates>
 </root>
