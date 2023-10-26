@@ -157,6 +157,7 @@ namespace RGN { namespace Modules { namespace Store {
                             inventoryItem.itemUpgrades = purchaseItem.inventoryItem.itemUpgrades;
                             inventoryItem.properties = purchaseItem.inventoryItem.properties;
                             inventoryItem.virtualItem = purchaseItem.virtualItem;
+                            inventoryItems.push_back(inventoryItem);
                         }
                         RGN::Modules::Store::PurchaseResult purchaseResult;
                         purchaseResult.offerId = offerId;
@@ -191,6 +192,7 @@ namespace RGN { namespace Modules { namespace Store {
                             inventoryItem.itemUpgrades = purchaseItem.inventoryItem.itemUpgrades;
                             inventoryItem.properties = purchaseItem.inventoryItem.properties;
                             inventoryItem.virtualItem = purchaseItem.virtualItem;
+                            inventoryItems.push_back(inventoryItem);
                         }
                         RGN::Modules::Store::PurchaseResult purchaseResult;
                         purchaseResult.offerId = offerId;
