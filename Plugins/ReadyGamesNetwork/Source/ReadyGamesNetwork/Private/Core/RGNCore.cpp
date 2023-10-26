@@ -12,6 +12,8 @@ using RefreshTokensResponseData = RGN::Model::Response::RefreshTokensResponseDat
 vector<RGNAuthCallback*> RGNCore::_authCallbacks = vector<RGNAuthCallback*>();
 string RGNCore::_appId = "";
 RGNEnvironmentTarget RGNCore::_environmentTarget = RGNEnvironmentTarget::NONE;
+bool RGNCore::_useFunctionsEmulator = false;
+string RGNCore::_emulatorHostAndPort = "";
 string RGNCore::_userId = "";
 string RGNCore::_idToken = "";
 string RGNCore::_refreshToken = "";
@@ -31,6 +33,11 @@ void RGNCore::Configure(RGNConfigureData configureData) {
     _environmentTarget = configureData.environmentTarget;
 
     LoadAuthSession();
+}
+
+void RGNCore::UseFunctionsEmulator(string hostAndPort) {
+    _useFunctionsEmulator = true;
+    _emulatorHostAndPort = hostAndPort;
 }
 
 void RGNCore::SubscribeToAuthCallback(RGNAuthCallback* callback) {
@@ -171,16 +178,27 @@ string RGNCore::GetStorageBucket() {
     return "";
 }
 
-string RGNCore::GetApiUrl() {
+string RGNCore::GetApiRegion() {
+    return "us-central1";
+}
+
+string RGNCore::GetApiProjectId() {
     switch (_environmentTarget) {
         case RGNEnvironmentTarget::DEVELOPMENT:
-            return "https://us-central1-readymaster-development.cloudfunctions.net/";
+            return "readymaster-development";
         case RGNEnvironmentTarget::STAGING:
-            return "https://us-central1-readysandbox.cloudfunctions.net/";
+            return "readysandbox";
         case RGNEnvironmentTarget::PRODUCTION:
-            return "https://us-central1-readymaster-2b268.cloudfunctions.net/";
-    }
+            return "readymaster-2b268";
+        }
     return "";
+}
+
+string RGNCore::GetApiUrl() {
+    if (_useFunctionsEmulator) {
+        return "http://" + _emulatorHostAndPort + "/" + GetApiProjectId() + "/" + GetApiRegion() + "/";
+    }
+    return "https://" + GetApiRegion() + "-" + GetApiProjectId() + ".cloudfunctions.net/";
 }
 
 string RGNCore::GetOAuthUrl() {

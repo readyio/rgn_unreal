@@ -19,10 +19,14 @@ private:
     static vector<RGNAuthCallback*> _authCallbacks;
     static string _appId;
     static RGNEnvironmentTarget _environmentTarget;
+    static bool _useFunctionsEmulator;
+    static string _emulatorHostAndPort;
     static string _userId;
     static string _idToken;
     static string _refreshToken;
 
+    static string GetApiRegion();
+    static string GetApiProjectId();
     static string GetApiUrl();
     static string GetOAuthUrl();
 
@@ -40,6 +44,7 @@ public:
     static void Deinitialize();
 
     static void Configure(RGNConfigureData configureData);
+    static void UseFunctionsEmulator(string hostAndPort);
 
     static void SubscribeToAuthCallback(RGNAuthCallback* onAuthChange);
     static void UnsubscribeFromAuthCallback(RGNAuthCallback* onAuthChange);

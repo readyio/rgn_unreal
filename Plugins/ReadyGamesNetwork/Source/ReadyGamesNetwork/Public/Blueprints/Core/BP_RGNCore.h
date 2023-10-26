@@ -19,6 +19,8 @@ public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void Configure(FBP_RGNConfigureData configureData);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
+    static void UseFunctionsEmulator(const FString& hostAndPort);
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void SubscribeToAuthCallback(FRGNAuthChangeCallback onAuthChange);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void UnsubscribeFromAuthCallback(FRGNAuthChangeCallback onAuthChange);

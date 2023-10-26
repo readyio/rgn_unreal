@@ -19,6 +19,10 @@ void UBP_RGNCore::Configure(FBP_RGNConfigureData configureData) {
     RGNCore::SubscribeToAuthCallback(authCallback);
 }
 
+void UBP_RGNCore::UseFunctionsEmulator(const FString& hostAndPort) {
+    RGNCore::UseFunctionsEmulator(std::string(TCHAR_TO_UTF8(*hostAndPort)));
+}
+
 void UBP_RGNCore::SubscribeToAuthCallback(FRGNAuthChangeCallback onAuthChange) {
     _authCallbacks.push_back(onAuthChange);
 }
