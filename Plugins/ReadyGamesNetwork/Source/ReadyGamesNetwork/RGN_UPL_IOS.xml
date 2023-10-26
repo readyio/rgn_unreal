@@ -32,17 +32,11 @@
         <if condition="bIsUrlName">
           <true>
             <removeElement tag="$"/>
-            <addElement tag="$" name="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
+            <addElement tag="PrevTagName" name="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
           </true>
         </if>
 
-        <setBoolIsEqual result="bIsUrlScheme" arg1="$S(TagText)" arg2="URL_SCHEME_PLACEHOLDER"/>
-        <if condition="bIsUrlScheme">
-          <true>
-            <removeElement tag="$"/>
-            <addElement tag="$" name="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
-          </true>
-        </if>
+        <setStringFromTag result="PrevTagName" tag="$"/>
 
       </loopElements>
       
