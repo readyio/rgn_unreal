@@ -41,7 +41,7 @@
           <addElements tag="$">
             <key>CFBundleURLSchemes</key>
           </addElements>
-          <setElement result="ArrayEntry" value="string"/>
+          <setElement result="ArrayEntry" value="array"/>
           <setElement result="URLEntry" value="string" text="$S(ProjectId)"/>
           <addElement tag="$ArrayEntry" name="URLEntry"/>
           <addElement tag="$" name="ArrayEntry"/>
