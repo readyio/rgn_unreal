@@ -15,28 +15,41 @@
 			<if condition="bGameActivity">
 				<true>
 				<addElements tag="$">
-					<intent-filter>
-						<action android:name="android.intent.action.VIEW" />
-						<category android:name="android.intent.category.DEFAULT" />
-						<category android:name="android.intent.category.BROWSABLE" />
-						<data android:scheme="SCHEME_PLACEHOLDER" />
-					</intent-filter>
+          <intent-filter>
+            <url_scheme_placeholder/>
+          </intent-filter>
 				</addElements>
 				</true>
 			</if>
 		</loopElements>
+    
+    <loopElements tag="intent-filter">
+      <setBool result="bReqKey" value="false"/>
+      
+      <loopElements tag="$">
+        <setStringFromTag result="TagName" tag="$"/>
+        <setBoolIsEqual result="bReqKey" arg1="$S(TagName)" arg2="url_scheme_placeholder"/>
+        <if condition="bReqKey">
+          <true>
+            <removeElement tag="url_scheme_placeholder"/>
+          </true>
+        </if>
+      </loopElements>
 
-    <loopElements tag="data">
-      <setStringFromAttribute result="androidScheme" tag="$" name="android:scheme"/>
-      <setBoolIsEqual result="bAndroidScheme" arg1="$S(androidScheme)" arg2="SCHEME_PLACEHOLDER"/>
-      <if condition="bAndroidScheme">
+      <if condition="bReqKey">
         <true>
-          <removeAttribute tag="$" name="android:scheme"/>
-          <addAttribute tag="$" name="android:scheme" value="$S(ProjectId)"/>
+          <addElements tag="$">
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+          </addElements>
+          <setElement result="SchemeEntry" xml="&lt;data /&gt;"/>
+          <addAttribute tag="$SchemeEntry" name="android:scheme" value="$S(ProjectId)"/>
+          <addElement tag="$" name="SchemeEntry"/>
         </true>
       </if>
     </loopElements>
-
+    
 	</androidManifestUpdates>
 
   <gradleCopies>

@@ -11,35 +11,42 @@
       <key>CFBundleURLTypes</key>
       <array>
         <dict>
-          <key>CFBundleTypeRole</key>
-          <string>Editor</string>
-          <key>CFBundleURLName</key>
-          <string>URL_PLACEHOLDER</string>
-          <key>CFBundleURLSchemes</key>
-          <array>
-            <string>URL_SCHEME_PLACEHOLDER</string>
-          </array>
+          <url_scheme_placeholder/>
         </dict>
       </array>
     </addElements>
-
+    
     <loopElements tag="dict">
+      <setBool result="bReqKey" value="false"/>
       
       <loopElements tag="$">
-        <setStringFromTagText result="TagText" tag="$"/>
-
-        <setBoolIsEqual result="bIsUrlName" arg1="$S(TagText)" arg2="URL_PLACEHOLDER"/>
-        <if condition="bIsUrlName">
+        <setStringFromTag result="TagName" tag="$"/>
+        <setBoolIsEqual result="bReqKey" arg1="$S(TagName)" arg2="url_scheme_placeholder"/>
+        <if condition="bReqKey">
           <true>
-            <removeElement tag="$"/>
-            <addElement tag="PrevTagName" name="&lt;string&gt;$S(ProjectId)&lt;/string&gt;)"/>
+            <removeElement tag="url_scheme_placeholder"/>
           </true>
         </if>
-
-        <setStringFromTag result="PrevTagName" tag="$"/>
-
       </loopElements>
-      
+
+      <if condition="bReqKey">
+        <true>
+          <addElements tag="$">
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+          </addElements>
+          <setElement result="NameEntry" value="string" text="$S(ProjectId)"/>
+          <addElement tag="$" name="NameEntry"/>
+          <addElements tag="$">
+            <key>CFBundleURLSchemes</key>
+          </addElements>
+          <setElement result="ArrayEntry" value="string"/>
+          <setElement result="URLEntry" value="string" text="$S(ProjectId)"/>
+          <addElement tag="$ArrayEntry" name="URLEntry"/>
+          <addElement tag="$" name="ArrayEntry"/>
+        </true>
+      </if>
     </loopElements>
     
   </iosPListUpdates>
