@@ -12,7 +12,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
     class MatchmakingModule_Admin {
     public:
         static void DeleteMatchesByAppIdAsync(
-            string appIdToRemoveTheMatchesFor,
+            string& appIdToRemoveTheMatchesFor,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;

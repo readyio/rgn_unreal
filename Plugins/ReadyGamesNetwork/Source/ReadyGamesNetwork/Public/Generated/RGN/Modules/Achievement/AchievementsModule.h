@@ -24,7 +24,7 @@ namespace RGN { namespace Modules { namespace Achievement {
     class AchievementsModule {
     public:
         static void GetByIdsAsync(
-            vector<string> ids,
+            vector<string>& ids,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -39,9 +39,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void GetByAppIdsAsync(
-            vector<string> appIds,
+            vector<string>& appIds,
             int32_t limit,
-            string startAfter,
+            string& startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -59,7 +59,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             };
         static void GetForCurrentAppAsync(
             int32_t limit,
-            string startAfter,
+            string& startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetForCurrentAppAsync(
@@ -69,9 +69,9 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void GetByAppIdsWithUserDataAsync(
-            vector<string> appIds,
+            vector<string>& appIds,
             int32_t limit,
-            string startAfter,
+            string& startAfter,
             bool withHistory,
             const function<void(vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -85,7 +85,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             };
         static void GetForCurrentAppWithUserDataAsync(
             int32_t limit,
-            string startAfter,
+            string& startAfter,
             const function<void(vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetForCurrentAppWithUserDataAsync(
@@ -95,7 +95,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void GetByRequestNameAsync(
-            string requestName,
+            string& requestName,
             const function<void(RGN::Modules::Achievement::AchievementData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -108,7 +108,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void GetByRequestNamesAsync(
-            vector<string> requestNames,
+            vector<string>& requestNames,
             const function<void(vector<RGN::Modules::Achievement::AchievementData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -123,7 +123,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void TriggerByIdAsync(
-            string id,
+            string& id,
             int32_t progress,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -137,7 +137,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void TriggerByRequestNameAsync(
-            string requestName,
+            string& requestName,
             int32_t progress,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -151,7 +151,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void ClaimByIdAsync(
-            string achievementId,
+            string& achievementId,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Achievement::ClaimByIdRequestData requestData;
@@ -163,7 +163,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void ClaimByRequestNameAsync(
-            string requestName,
+            string& requestName,
             const function<void(RGN::Modules::Achievement::TriggerAndClaimResponse result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Achievement::ClaimByRequestNameRequestData requestData;
@@ -175,7 +175,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void GetUserAchievementsAsync(
-            string userId,
+            string& userId,
             int64_t startAfter,
             int32_t limit,
             const function<void(vector<RGN::Modules::Achievement::UserAchievement> result)>& complete,

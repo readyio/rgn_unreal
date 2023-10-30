@@ -31,9 +31,9 @@ namespace RGN { namespace Modules { namespace Currency {
                     fail);
             };
         static void PurchaseRGNCoinAsync(
-            string iapUUID,
-            string iapTransactionId,
-            string iapReceipt,
+            string& iapUUID,
+            string& iapTransactionId,
+            string& iapReceipt,
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseRGNCoinRequestData requestData;
@@ -60,7 +60,7 @@ namespace RGN { namespace Modules { namespace Currency {
                     fail);
             };
         static void PurchaseCurrencyProductAsync(
-            string productId,
+            string& productId,
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Currency::PurchaseCurrencyProductRequestData requestData;
@@ -72,7 +72,7 @@ namespace RGN { namespace Modules { namespace Currency {
                     fail);
             };
         static void AddUserCurrenciesAsync(
-            vector<RGN::Modules::Currency::Currency> currencies,
+            vector<RGN::Modules::Currency::Currency>& currencies,
             const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;

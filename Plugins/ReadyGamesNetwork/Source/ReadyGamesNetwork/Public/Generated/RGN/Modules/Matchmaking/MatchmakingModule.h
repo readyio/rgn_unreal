@@ -18,8 +18,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
     public:
         static void GetJoinOpenMatchesAsync(
             int32_t limit,
-            string startAfter,
-            CancellationToken cancellationToken,
+            string& startAfter,
+            CancellationToken& cancellationToken,
             const function<void(vector<RGN::Modules::Matchmaking::MatchmakingData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -36,8 +36,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             };
         static void GetVoteOpenMatchesAsync(
             int32_t limit,
-            string startAfter,
-            CancellationToken cancellationToken,
+            string& startAfter,
+            CancellationToken& cancellationToken,
             const function<void(vector<RGN::Modules::Matchmaking::MatchmakingData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -54,8 +54,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             };
         static void GetFinishedMatchesAsync(
             int32_t limit,
-            string startAfter,
-            CancellationToken cancellationToken,
+            string& startAfter,
+            CancellationToken& cancellationToken,
             const function<void(vector<RGN::Modules::Matchmaking::MatchmakingData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -71,8 +71,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     fail);
             };
         static void GetFinishedMatchByIdAsync(
-            string matchId,
-            CancellationToken cancellationToken,
+            string& matchId,
+            CancellationToken& cancellationToken,
             const function<void(RGN::Modules::Matchmaking::MatchmakingData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -87,10 +87,10 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     fail);
             };
         static void CreateMatchAsync(
-            RGN::Modules::Matchmaking::MatchmakingData matchConfig,
+            RGN::Modules::Matchmaking::MatchmakingData& matchConfig,
             bool participateInOnCreate,
-            std::unordered_map<string, string> participatePayload,
-            CancellationToken cancellationToken,
+            std::unordered_map<string, string>& participatePayload,
+            CancellationToken& cancellationToken,
             const function<void(RGN::Modules::Matchmaking::MatchmakingData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -107,9 +107,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     fail);
             };
         static void ParticipateInMatchAsync(
-            string matchId,
-            std::unordered_map<string, string> participantPayload,
-            CancellationToken cancellationToken,
+            string& matchId,
+            std::unordered_map<string, string>& participantPayload,
+            CancellationToken& cancellationToken,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -125,8 +125,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     fail);
             };
         static void StartMatchAsync(
-            string matchId,
-            CancellationToken cancellationToken,
+            string& matchId,
+            CancellationToken& cancellationToken,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -141,9 +141,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     fail);
             };
         static void VoteForMatchAsync(
-            string matchId,
-            string participantId,
-            CancellationToken cancellationToken,
+            string& matchId,
+            string& participantId,
+            CancellationToken& cancellationToken,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -159,9 +159,9 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     fail);
             };
         static void SubmitMatchScoreAsync(
-            string matchId,
+            string& matchId,
             int64_t score,
-            CancellationToken cancellationToken,
+            CancellationToken& cancellationToken,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -177,8 +177,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     fail);
             };
         static void FinishMatchAsync(
-            string matchId,
-            CancellationToken cancellationToken,
+            string& matchId,
+            CancellationToken& cancellationToken,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;

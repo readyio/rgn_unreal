@@ -36,7 +36,7 @@ namespace RGN { namespace Modules { namespace Wallets {
                     fail);
             };
         static void CreateWalletAsync(
-            string password,
+            string& password,
             const function<void(RGN::Modules::Wallets::CreateWalletResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Wallets::CreateWalletRequestData requestData;

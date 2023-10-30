@@ -20,7 +20,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
     class GameProgressModule {
     public:
         static void OnGameCompleteAsync(
-            vector<RGN::Modules::Currency::Currency> reward,
+            vector<RGN::Modules::Currency::Currency>& reward,
             const function<void(RGN::Modules::GameProgress::OnGameCompleteResult result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::OnGameCompleteRequestData requestData;
@@ -42,7 +42,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
                     fail);
             };
         static void AddUserProgressAsync(
-            string userProgressJson,
+            string& userProgressJson,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::AddUserLevelRequestData requestData;
@@ -54,8 +54,8 @@ namespace RGN { namespace Modules { namespace GameProgress {
                     fail);
             };
         static void UpdateUserProgressAsync(
-            string userProgressJson,
-            vector<RGN::Modules::Currency::Currency> reward,
+            string& userProgressJson,
+            vector<RGN::Modules::Currency::Currency>& reward,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::GameProgress::UpdateUserLevelRequestData requestData;

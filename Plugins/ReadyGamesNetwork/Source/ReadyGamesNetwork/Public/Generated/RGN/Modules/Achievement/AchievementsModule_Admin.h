@@ -13,7 +13,7 @@ namespace RGN { namespace Modules { namespace Achievement {
     class AchievementsModule_Admin {
     public:
         static void AddAchievementAsync(
-            RGN::Modules::Achievement::AchievementData achievementData,
+            RGN::Modules::Achievement::AchievementData& achievementData,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -28,7 +28,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void UpdateAchievementAsync(
-            RGN::Modules::Achievement::AchievementData achievementData,
+            RGN::Modules::Achievement::AchievementData& achievementData,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -43,7 +43,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void DeleteAchievementAsync(
-            string achievementId,
+            string& achievementId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -56,7 +56,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void AddLoginDaysInRowAchievementAsync(
-            string achievementId,
+            string& achievementId,
             int32_t daysInRow,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -70,7 +70,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void AddLoginDaysInRowAchievementAsync(
-            RGN::Modules::Achievement::AchievementData achievementData,
+            RGN::Modules::Achievement::AchievementData& achievementData,
             int32_t daysInRow,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -84,7 +84,7 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void DeleteLoginDaysInRowGameConstRecordAsync(
-            string achievementId,
+            string& achievementId,
             int32_t daysInRow,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -98,8 +98,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void AddPlayerProgressAchievementAsync(
-            string achievementId,
-            string playerProgressFieldName,
+            string& achievementId,
+            string& playerProgressFieldName,
             int64_t playerProgressFieldValueToReach,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -115,8 +115,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void AddPlayerProgressAchievementAsync(
-            RGN::Modules::Achievement::AchievementData achievementData,
-            string playerProgressFieldName,
+            RGN::Modules::Achievement::AchievementData& achievementData,
+            string& playerProgressFieldName,
             int64_t playerProgressFieldValueToReach,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
@@ -132,8 +132,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail);
             };
         static void DeletePlayerProgressAchievementAsync(
-            string achievementId,
-            string playerProgressFieldName,
+            string& achievementId,
+            string& playerProgressFieldName,
             int64_t playerProgressFieldValueToReach,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {

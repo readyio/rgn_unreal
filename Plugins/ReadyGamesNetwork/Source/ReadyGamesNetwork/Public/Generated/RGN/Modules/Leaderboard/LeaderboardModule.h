@@ -18,7 +18,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
     class LeaderboardModule {
     public:
         static void GetLeaderboardByIdAsync(
-            string id,
+            string& id,
             const function<void(RGN::Modules::Leaderboard::LeaderboardData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -31,7 +31,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void GetLeaderboardByRequestNameAsync(
-            string requestName,
+            string& requestName,
             const function<void(RGN::Modules::Leaderboard::LeaderboardData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -44,7 +44,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void GetLeaderboardByRequestNamesAsync(
-            vector<string> requestNames,
+            vector<string>& requestNames,
             const function<void(vector<RGN::Modules::Leaderboard::LeaderboardData> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -72,9 +72,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void SetScoreAsync(
-            string leaderboardId,
+            string& leaderboardId,
             int32_t score,
-            string extraData,
+            string& extraData,
             const function<void(int32_t result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -91,9 +91,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void AddScoreAsync(
-            string leaderboardId,
+            string& leaderboardId,
             int32_t score,
-            string extraData,
+            string& extraData,
             const function<void(int32_t result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -110,7 +110,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void GetUserEntryAsync(
-            string leaderboardId,
+            string& leaderboardId,
             const function<void(RGN::Modules::Leaderboard::LeaderboardEntry result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -123,7 +123,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void GetEntriesAsync(
-            string leaderboardId,
+            string& leaderboardId,
             int32_t quantityTop,
             bool includeUser,
             int32_t quantityAroundUser,

@@ -13,7 +13,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
     class LeaderboardModule_Admin {
     public:
         static void AddLeaderboardAsync(
-            RGN::Modules::Leaderboard::LeaderboardData leaderboardData,
+            RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -28,7 +28,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void UpdateLeaderboardAsync(
-            RGN::Modules::Leaderboard::LeaderboardData leaderboardData,
+            RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -43,7 +43,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail);
             };
         static void DeleteLeaderboardAsync(
-            string leaderboardId,
+            string& leaderboardId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;

@@ -13,7 +13,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
     class VirtualItemsModule_Admin {
     public:
         static void DeleteVirtualItemsByIdsAsync(
-            vector<string> virtualItemIds,
+            vector<string>& virtualItemIds,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -26,7 +26,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     fail);
             };
         static void DeleteVirtualItemsByNameAsync(
-            string itemName,
+            string& itemName,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -39,7 +39,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     fail);
             };
         static void DeleteVirtualItemByAppIdAsync(
-            string appId,
+            string& appId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -51,10 +51,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     fail);
             };
         static void AddFromCSVWithBlockchainStubAsync(
-            string virtualItemName,
-            string csvContent,
-            string csvDelimiter,
-            CancellationToken cancellationToken,
+            string& virtualItemName,
+            string& csvContent,
+            string& csvDelimiter,
+            CancellationToken& cancellationToken,
             const function<void(vector<string> result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;

@@ -19,7 +19,7 @@ namespace RGN { namespace Modules { namespace Creator {
     class CreatorModule {
     public:
         static void BecomeACreatorAsync(
-            string brandName,
+            string& brandName,
             const function<void(RGN::Modules::Creator::CreatorSignupResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSignupRequestData requestData;
@@ -31,7 +31,7 @@ namespace RGN { namespace Modules { namespace Creator {
                     fail);
             };
         static void SubmitItemAsync(
-            RGN::Modules::VirtualItems::VirtualItem customizedItem,
+            RGN::Modules::VirtualItems::VirtualItem& customizedItem,
             const function<void(RGN::Modules::Creator::CreatorSubmitItemResponseData result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSubmitItemRequestData requestData;

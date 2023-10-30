@@ -13,9 +13,9 @@ namespace RGN { namespace Modules { namespace Store {
     class StoreModule_Admin {
     public:
         static void CreateLootBoxAsync(
-            string lootBoxName,
-            vector<string> virtualItemTags,
-            vector<RGN::Modules::VirtualItems::PriceInfo> prices,
+            string& lootBoxName,
+            vector<string>& virtualItemTags,
+            vector<RGN::Modules::VirtualItems::PriceInfo>& prices,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -32,7 +32,7 @@ namespace RGN { namespace Modules { namespace Store {
                     fail);
             };
         static void DeleteLootBoxAsync(
-            string lootBoxId,
+            string& lootBoxId,
             const function<void(string result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
@@ -47,7 +47,7 @@ namespace RGN { namespace Modules { namespace Store {
                     fail);
             };
         static void DeleteStoreOfferAsync(
-            string offerId,
+            string& offerId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
