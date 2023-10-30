@@ -42,7 +42,7 @@ void RGNCore::UnsubscribeFromAuthCallback(RGNAuthCallback* callback) {
     }
 }
 
-void RGNCore::DevSignIn(string email, string password, const function<void(bool)>& onSignIn) {
+void RGNCore::DevSignIn(const string& email, const string& password, const function<void(bool)>& onSignIn) {
     json requestBody;
     requestBody["email"] = email;
     requestBody["password"] = password;
@@ -204,7 +204,7 @@ string RGNCore::GetOAuthUrl() {
     return "";
 }
 
-void RGNCore::InternalCallAPI(string name, string body,
+void RGNCore::InternalCallAPI(const string& name, const string& body,
     const function<void(const string&)>& complete,
     const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
     HttpHeaders headers;
@@ -257,7 +257,7 @@ void RGNCore::InternalCallAPI(string name, string body,
     });
 }
 
-void RGNCore::NonAuthInternalCallAPI(string name, string body,
+void RGNCore::NonAuthInternalCallAPI(const string& name, const string& body,
     const function<void(const string&)>& complete, const function<void(const int, const string&)>& fail) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
@@ -308,7 +308,7 @@ void RGNCore::NotifyAuthChange() {
     }
 }
 
-void RGNCore::OnDeepLink(string payload, const function<void(bool)>& onSignIn) {
+void RGNCore::OnDeepLink(const string& payload, const function<void(bool)>& onSignIn) {
     unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
