@@ -381,8 +381,8 @@ public:
     }
     /**
      * Gets current user competed achievements
-     * If the  is provided, then it returns the comleted achievements for provided userId
-     * Supports pagination queries in case the  and  are provided
+     * If the userId is provided, then it returns the comleted achievements for provided userId
+     * Supports pagination queries in case the startAfter and limit are provided
      * @param userId - User id to return the completed achievements
      * @param startAfter - The time stamp to start the query after F:RGN.Modules.Achievement.UserAchievement.lastCompleteTime
      * @param limit - Maximal number of documents to return

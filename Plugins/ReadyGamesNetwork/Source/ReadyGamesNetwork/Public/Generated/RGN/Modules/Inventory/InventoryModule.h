@@ -99,7 +99,7 @@ namespace RGN { namespace Modules { namespace Inventory {
          * @param quantity - The quantity of the virtual item to remove. Must be a positive number.
          * @return A task that represents the asynchronous operation.
          * The task result contains a T:RGN.Modules.Inventory.RemoveByVirtualItemIdResponseData object which holds the server's response data.
-         * @throw: Thrown when  is null or empty.
+         * @throw: Thrown when virtualItemId is null or empty.
          */
         static void RemoveByVirtualItemIdAsync(
             const string& userId,
@@ -125,7 +125,7 @@ namespace RGN { namespace Modules { namespace Inventory {
          * @param quantity - The quantity of the owned item to remove. Must be a positive number. Default is 1.
          * @return A task that represents the asynchronous operation.
          * The task result contains a T:RGN.Modules.Inventory.RemoveByOwnedIdResponseData object which holds the server's response data.
-         * @throw: Thrown when  is null or empty.
+         * @throw: Thrown when ownedItemId is null or empty.
          */
         static void RemoveByInventoryItemIdAsync(
             const string& userId,
@@ -340,7 +340,7 @@ namespace RGN { namespace Modules { namespace Inventory {
          * @param json - The JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.
          * @return An T:RGN.Modules.Inventory.InventoryItemData object represented by the JSON string. 
          * Returns null if the JSON string does not represent a valid T:RGN.Modules.Inventory.InventoryItemData object.
-         * @throw: Thrown when  is null or empty.
+         * @throw: Thrown when json is null or empty.
          */
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(const string& json) {
                 return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemData(
@@ -351,7 +351,7 @@ namespace RGN { namespace Modules { namespace Inventory {
          * @param json - The JSON string representation of a list of T:RGN.Modules.Inventory.InventoryItemData objects.
          * @return A list of T:RGN.Modules.Inventory.InventoryItemData objects represented by the JSON string.
          * Returns null if the JSON string does not represent a valid list of T:RGN.Modules.Inventory.InventoryItemData objects.
-         * @throw: Thrown when  is null or empty.
+         * @throw: Thrown when json is null or empty.
          */
         static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(const string& json) {
                 return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemsData(
@@ -379,7 +379,7 @@ namespace RGN { namespace Modules { namespace Inventory {
          * @param ownedItemId - The unique identifier of the owned item for which to retrieve tags.
          * @return A task that represents the asynchronous operation.
          * The task result contains a list of tags associated with the owned item.
-         * @throw: Thrown when  is null or empty.
+         * @throw: Thrown when ownedItemId is null or empty.
          */
         static void GetTagsAsync(
             const string& ownedItemId,

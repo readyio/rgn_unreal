@@ -169,7 +169,7 @@ public:
      * @param quantity - The quantity of the virtual item to remove. Must be a positive number.
      * @return A task that represents the asynchronous operation.
      * The task result contains a T:RGN.Modules.Inventory.RemoveByVirtualItemIdResponseData object which holds the server's response data.
-     * @throw: Thrown when  is null or empty.
+     * @throw: Thrown when virtualItemId is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void RemoveByVirtualItemIdAsync(
@@ -204,7 +204,7 @@ public:
      * @param quantity - The quantity of the owned item to remove. Must be a positive number. Default is 1.
      * @return A task that represents the asynchronous operation.
      * The task result contains a T:RGN.Modules.Inventory.RemoveByOwnedIdResponseData object which holds the server's response data.
-     * @throw: Thrown when  is null or empty.
+     * @throw: Thrown when ownedItemId is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void RemoveByInventoryItemIdAsync(
@@ -530,7 +530,7 @@ public:
      * @param json - The JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.
      * @return An T:RGN.Modules.Inventory.InventoryItemData object represented by the JSON string. 
      * Returns null if the JSON string does not represent a valid T:RGN.Modules.Inventory.InventoryItemData object.
-     * @throw: Thrown when  is null or empty.
+     * @throw: Thrown when json is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void ParseInventoryItemData(
@@ -547,7 +547,7 @@ public:
      * @param json - The JSON string representation of a list of T:RGN.Modules.Inventory.InventoryItemData objects.
      * @return A list of T:RGN.Modules.Inventory.InventoryItemData objects represented by the JSON string.
      * Returns null if the JSON string does not represent a valid list of T:RGN.Modules.Inventory.InventoryItemData objects.
-     * @throw: Thrown when  is null or empty.
+     * @throw: Thrown when json is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void ParseInventoryItemsData(
@@ -594,7 +594,7 @@ public:
      * @param ownedItemId - The unique identifier of the owned item for which to retrieve tags.
      * @return A task that represents the asynchronous operation.
      * The task result contains a list of tags associated with the owned item.
-     * @throw: Thrown when  is null or empty.
+     * @throw: Thrown when ownedItemId is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetTagsAsync(
