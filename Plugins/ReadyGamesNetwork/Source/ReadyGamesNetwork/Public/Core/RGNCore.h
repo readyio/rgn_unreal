@@ -31,9 +31,9 @@ private:
     static string GetOAuthUrl();
 
     static void InternalCallAPI(string name, string body,
-        const function<void(string)>& complete, const function<void(int, string)>& fail, CancellationToken cancellationToken);
+        const function<void(const string&)>& complete, const function<void(int, string)>& fail, CancellationToken cancellationToken);
     static void NonAuthInternalCallAPI(string name, string body,
-        const function<void(string)>& complete, const function<void(int, string)>& fail);
+        const function<void(const string&)>& complete, const function<void(int, string)>& fail);
     static void LoadAuthSession();
     static void SaveAuthSession();
     static void NotifyAuthChange();
@@ -76,12 +76,12 @@ public:
     * CallAPI<string,string>
     **/
     static void CallAPI(string name, string body,
-        const function<void(string)>& complete,
+        const function<void(const string&)>& complete,
         const function<void(int, string)>& fail, CancellationToken cancellationToken) {
         InternalCallAPI(name, body, complete, fail, cancellationToken);
     }
     static void CallAPI(string name, string body,
-        const function<void(string)>& complete,
+        const function<void(const string&)>& complete,
         const function<void(int, string)>& fail) {
         CallAPI(name, body, complete, fail, CancellationToken());
     }
@@ -89,12 +89,12 @@ public:
     * CallAPI<json,string>
     **/
     static void CallAPI(string name, json body,
-        const function<void(string)>& complete,
+        const function<void(const string&)>& complete,
         const function<void(int, string)>& fail, CancellationToken cancellationToken) {
         InternalCallAPI(name, body.dump(), complete, fail, cancellationToken);
     }
     static void CallAPI(string name, json body,
-        const function<void(string)>& complete,
+        const function<void(const string&)>& complete,
         const function<void(int, string)>& fail) {
         CallAPI(name, body, complete, fail, CancellationToken());
     }
@@ -118,7 +118,7 @@ public:
     **/
     template<class TRequestBody, class TResponse>
     static void CallAPI(string name, TRequestBody body,
-        const function<void(TResponse)>& complete,
+        const function<void(const TResponse&)>& complete,
         const function<void(int, string)>& fail, CancellationToken cancellationToken) {
         json bodyJson = body;
         InternalCallAPI(name, bodyJson.dump(), [complete](string response) {
@@ -128,7 +128,7 @@ public:
     }
     template<class TRequestBody, class TResponse>
     static void CallAPI(string name, TRequestBody body,
-        const function<void(TResponse)>& complete,
+        const function<void(const TResponse&)>& complete,
         const function<void(int, string)>& fail) {
         CallAPI<TRequestBody, TResponse>(name, body, complete, fail, CancellationToken());
     }
@@ -137,7 +137,7 @@ public:
     **/
     template<class TRequestBody>
     static void CallAPI(string name, TRequestBody body,
-        const function<void(string)>& complete,
+        const function<void(const string&)>& complete,
         const function<void(int, string)>& fail, CancellationToken cancellationToken) {
         json bodyJson = body;
         InternalCallAPI(name, bodyJson.dump(), [complete](string response) {
@@ -146,7 +146,7 @@ public:
     }
     template<class TRequestBody>
     static void CallAPI(string name, TRequestBody body,
-        const function<void(string)>& complete,
+        const function<void(const string&)>& complete,
         const function<void(int, string)>& fail) {
         CallAPI<TRequestBody>(name, body, complete, fail, CancellationToken());
     }

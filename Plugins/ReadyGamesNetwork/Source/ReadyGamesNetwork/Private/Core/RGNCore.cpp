@@ -205,7 +205,7 @@ string RGNCore::GetOAuthUrl() {
 }
 
 void RGNCore::InternalCallAPI(string name, string body,
-    const function<void(string)>& complete,
+    const function<void(const string&)>& complete,
     const function<void(int, string)>& fail, CancellationToken cancellationToken) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
@@ -258,7 +258,7 @@ void RGNCore::InternalCallAPI(string name, string body,
 }
 
 void RGNCore::NonAuthInternalCallAPI(string name, string body,
-    const function<void(string)>& complete, const function<void(int, string)>& fail) {
+    const function<void(const string&)>& complete, const function<void(int, string)>& fail) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
     string url = GetApiUrl() + name;

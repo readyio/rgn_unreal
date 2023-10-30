@@ -24,10 +24,10 @@ namespace RGN { namespace Modules { namespace Inventory {
     class InventoryModule {
     public:
         static void AddToInventoryAsync(
-            string& virtualItemId,
-            int32_t quantity,
-            RGN::Modules::VirtualItems::Properties& properties,
-            const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const string& virtualItemId,
+            const int32_t quantity,
+            const RGN::Modules::VirtualItems::Properties& properties,
+            const function<void(const RGN::Modules::Inventory::AddToInventoryResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::AddToInventoryAsync(
                     virtualItemId,
@@ -37,11 +37,11 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static void AddToInventoryAsync(
-            string& userId,
-            string& virtualItemId,
-            int32_t quantity,
-            RGN::Modules::VirtualItems::Properties& properties,
-            const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const string& userId,
+            const string& virtualItemId,
+            const int32_t quantity,
+            const RGN::Modules::VirtualItems::Properties& properties,
+            const function<void(const RGN::Modules::Inventory::AddToInventoryResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::AddToInventoryAsync(
                     userId,
@@ -52,9 +52,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static void AddToInventoryAsync(
-            string& userId,
-            RGN::Modules::Inventory::InventoryItemData& inventoryData,
-            const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const string& userId,
+            const RGN::Modules::Inventory::InventoryItemData& inventoryData,
+            const function<void(const RGN::Modules::Inventory::AddToInventoryResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData requestData;
                 requestData.userId = userId;
@@ -66,10 +66,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static void RemoveByVirtualItemIdAsync(
-            string& userId,
-            string& virtualItemId,
-            int32_t quantity,
-            const function<void(RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData result)>& complete,
+            const string& userId,
+            const string& virtualItemId,
+            const int32_t quantity,
+            const function<void(const RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -83,10 +83,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static void RemoveByInventoryItemIdAsync(
-            string& userId,
-            string& ownedItemId,
-            int32_t quantity,
-            const function<void(RGN::Modules::Inventory::RemoveByOwnedIdResponseData result)>& complete,
+            const string& userId,
+            const string& ownedItemId,
+            const int32_t quantity,
+            const function<void(const RGN::Modules::Inventory::RemoveByOwnedIdResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -100,8 +100,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static void GetPropertiesAsync(
-            string& ownedItemId,
-            const function<void(string result)>& complete,
+            const string& ownedItemId,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -110,15 +110,15 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getProperties",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["properties"].template get<string>());
                     },
                     fail);
             };
         static void SetPropertiesAsync(
-            string& ownedItemId,
-            string& json,
-            const function<void(string result)>& complete,
+            const string& ownedItemId,
+            const string& json,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -128,14 +128,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-setProperties",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["properties"].template get<string>());
                     },
                     fail);
             };
         static void GetUpgradesAsync(
-            string& ownedItemId,
-            const function<void(vector<RGN::Modules::Inventory::UpgradesResponseData> result)>& complete,
+            const string& ownedItemId,
+            const function<void(const vector<RGN::Modules::Inventory::UpgradesResponseData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -144,17 +144,17 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getUpgrades",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["upgrades"].template get<vector<RGN::Modules::Inventory::UpgradesResponseData>>());
                     },
                     fail);
             };
         static void UpgradeAsync(
-            string& ownedItemId,
-            int32_t newUpgradeLevel,
-            string& upgradeId,
-            vector<RGN::Modules::Currency::Currency>& upgradePrice,
-            const function<void(vector<RGN::Modules::Inventory::VirtualItemUpgrade> result)>& complete,
+            const string& ownedItemId,
+            const int32_t newUpgradeLevel,
+            const string& upgradeId,
+            const vector<RGN::Modules::Currency::Currency>& upgradePrice,
+            const function<void(const vector<RGN::Modules::Inventory::VirtualItemUpgrade>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -166,14 +166,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-upgrade",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["upgrades"].template get<vector<RGN::Modules::Inventory::VirtualItemUpgrade>>());
                     },
                     fail);
             };
         static void GetByIdAsync(
-            string& ownedItemId,
-            const function<void(RGN::Modules::Inventory::InventoryItemData result)>& complete,
+            const string& ownedItemId,
+            const function<void(const RGN::Modules::Inventory::InventoryItemData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -182,14 +182,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getById",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["inventoryItem"].template get<RGN::Modules::Inventory::InventoryItemData>());
                     },
                     fail);
             };
         static void GetByIdsAsync(
-            vector<string>& ownedItemIds,
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const vector<string>& ownedItemIds,
+            const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -198,14 +198,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByIds",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
         static void GetByVirtualItemIdsAsync(
-            vector<string>& virtualItemIds,
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const vector<string>& virtualItemIds,
+            const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["virtualItemIds"] = virtualItemIds;
@@ -213,13 +213,13 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByVirtualItemIds",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
         static void GetAllForCurrentAppAsync(
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -227,14 +227,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByAppId",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
         static void GetByAppIdsAsync(
-            vector<string>& appIds,
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const vector<string>& appIds,
+            const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appIds"] = appIds;
@@ -242,15 +242,15 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByAppIds",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
-            string& startAfter,
-            int32_t limit,
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const string& startAfter,
+            const int32_t limit,
+            const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::GetWithVirtualItemsDataForCurrentAppAsync(
                     startAfter,
@@ -259,10 +259,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     fail);
             };
         static void GetWithVirtualItemsDataByAppIdsAsync(
-            vector<string>& appIds,
-            string& startAfter,
-            int32_t limit,
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const vector<string>& appIds,
+            const string& startAfter,
+            const int32_t limit,
+            const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::GetWithVirtualItemsDataByAppIdsAsync(
                     appIds,
@@ -271,18 +271,18 @@ namespace RGN { namespace Modules { namespace Inventory {
                     complete,
                     fail);
             };
-        static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string& json) {
+        static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(const string& json) {
                 return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemData(
                     json);
             };
-        static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(string& json) {
+        static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(const string& json) {
                 return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemsData(
                     json);
             };
         static void GetByTagsAsync(
-            vector<string>& tags,
-            string& appId,
-            const function<void(vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const vector<string>& tags,
+            const string& appId,
+            const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
@@ -291,14 +291,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getByTags",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
                     fail);
             };
         static void GetTagsAsync(
-            string& ownedItemId,
-            const function<void(vector<string> result)>& complete,
+            const string& ownedItemId,
+            const function<void(const vector<string>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -307,16 +307,16 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-getTags",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["tags"].template get<vector<string>>());
                     },
                     fail);
             };
         static void SetTagsAsync(
-            string& ownedItemId,
-            vector<string>& tags,
-            string& appId,
-            const function<void(vector<string> result)>& complete,
+            const string& ownedItemId,
+            const vector<string>& tags,
+            const string& appId,
+            const function<void(const vector<string>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
@@ -326,7 +326,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "inventoryV2-setTags",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["tags"].template get<vector<string>>());
                     },
                     fail);

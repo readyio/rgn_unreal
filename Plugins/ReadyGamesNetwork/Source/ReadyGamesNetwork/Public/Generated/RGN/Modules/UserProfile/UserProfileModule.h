@@ -27,15 +27,15 @@ namespace RGN { namespace Modules { namespace UserProfile {
     class UserProfileModule {
     public:
         static void GetProfileAsync(
-            const function<void(RGN::Modules::UserProfile::UserData result)>& complete,
+            const function<void(const RGN::Modules::UserProfile::UserData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetProfileAsync(
                     complete,
                     fail);
             };
         static void GetProfileAsync(
-            string& userId,
-            const function<void(RGN::Modules::UserProfile::UserData result)>& complete,
+            const string& userId,
+            const function<void(const RGN::Modules::UserProfile::UserData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserProfileRequestData requestData;
                 requestData.userId = userId;
@@ -46,15 +46,15 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void GetFullUserProfileAsync(
-            const function<void(string result)>& complete,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetFullUserProfileAsync(
                     complete,
                     fail);
             };
         static void GetFullUserProfileAsync(
-            string& userId,
-            const function<void(string result)>& complete,
+            const string& userId,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetFullUserProfileAsync(
                     userId,
@@ -62,8 +62,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void SearchUsersAsync(
-            string& nicknameQuery,
-            const function<void(vector<RGN::Modules::UserProfile::UserData> result)>& complete,
+            const string& nicknameQuery,
+            const function<void(const vector<RGN::Modules::UserProfile::UserData>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SearchUsersRequestData requestData;
                 requestData.nicknameQuery = nicknameQuery;
@@ -74,7 +74,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void GetUserCurrenciesAsync(
-            const function<void(vector<RGN::Modules::Currency::Currency> result)>& complete,
+            const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseRequestData, vector<RGN::Modules::Currency::Currency>>(
@@ -84,8 +84,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void GetUserIdByShortUIDAsync(
-            string& shortUID,
-            const function<void(string result)>& complete,
+            const string& shortUID,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData requestData;
                 requestData.shortUID = shortUID;
@@ -96,8 +96,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void SetDisplayNameAsync(
-            string& displayName,
-            const function<void(string result)>& complete,
+            const string& displayName,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["displayName"] = displayName;
@@ -105,14 +105,14 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "user-updateDisplayName",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["displayName"].template get<string>());
                     },
                     fail);
             };
         static void SetBioAsync(
-            string& bio,
-            const function<void(string result)>& complete,
+            const string& bio,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["bio"] = bio;
@@ -120,15 +120,15 @@ namespace RGN { namespace Modules { namespace UserProfile {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "user-updateBio",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["bio"].template get<string>());
                     },
                     fail);
             };
         static void SetDisplayNameAndBioAsync(
-            string& displayName,
-            string& bio,
-            const function<void(string result)>& complete,
+            const string& displayName,
+            const string& bio,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
                 requestData.displayName = displayName;
@@ -140,9 +140,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void UploadAvatarImageAsync(
-            vector<uint8_t>& bytes,
-            CancellationToken& cancellationToken,
-            const function<void(bool result)>& complete,
+            const vector<uint8_t>& bytes,
+            const CancellationToken& cancellationToken,
+            const function<void(const bool result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::UploadAvatarImageAsync(
                     bytes,
@@ -151,10 +151,10 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void DownloadAvatarImageAsync(
-            string& userId,
-            RGN::Model::ImageSize& size,
-            CancellationToken& cancellationToken,
-            const function<void(vector<uint8_t> result)>& complete,
+            const string& userId,
+            const RGN::Model::ImageSize& size,
+            const CancellationToken& cancellationToken,
+            const function<void(const vector<uint8_t>& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::DownloadAvatarImageAsync(
                     userId,
@@ -164,10 +164,10 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void ChangeAdminStatusByEmailAsync(
-            string& email,
-            bool isAdmin,
-            int32_t accessLevel,
-            const function<void(RGN::Modules::UserProfile::UserCustomClaims result)>& complete,
+            const string& email,
+            const bool isAdmin,
+            const int32_t accessLevel,
+            const function<void(const RGN::Modules::UserProfile::UserCustomClaims& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::ChangeAdminStatusByEmailAsync(
                     email,
@@ -177,10 +177,10 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void ChangeAdminStatusByUserIdAsync(
-            string& userId,
-            bool isAdmin,
-            int32_t accessLevel,
-            const function<void(RGN::Modules::UserProfile::UserCustomClaims result)>& complete,
+            const string& userId,
+            const bool isAdmin,
+            const int32_t accessLevel,
+            const function<void(const RGN::Modules::UserProfile::UserCustomClaims& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::ChangeAdminStatusByUserIdAsync(
                     userId,
@@ -190,8 +190,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void GetUserCustomClaimsByUserIdAsync(
-            string& userId,
-            const function<void(RGN::Modules::UserProfile::UserCustomClaims result)>& complete,
+            const string& userId,
+            const function<void(const RGN::Modules::UserProfile::UserCustomClaims& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetUserCustomClaimsByUserIdAsync(
                     userId,
@@ -199,8 +199,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void GetUserCustomClaimsByEmailAsync(
-            string& email,
-            const function<void(RGN::Modules::UserProfile::UserCustomClaims result)>& complete,
+            const string& email,
+            const function<void(const RGN::Modules::UserProfile::UserCustomClaims& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetUserCustomClaimsByEmailAsync(
                     email,
@@ -208,7 +208,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void SetInvisibleStatusAsync(
-            bool invisibleStatus,
+            const bool invisibleStatus,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::SetInvisibleStatusRequestData requestData;
@@ -237,8 +237,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     fail);
             };
         static void GetUserStateAsync(
-            string& userId,
-            const function<void(RGN::Modules::UserProfile::GetUserStatusResponseData result)>& complete,
+            const string& userId,
+            const function<void(const RGN::Modules::UserProfile::GetUserStatusResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::UserProfile::GetUserStatusRequestData requestData;
                 requestData.userId = userId;

@@ -13,10 +13,10 @@ namespace RGN { namespace Modules { namespace Store {
     class StoreModule_Admin {
     public:
         static void CreateLootBoxAsync(
-            string& lootBoxName,
-            vector<string>& virtualItemTags,
-            vector<RGN::Modules::VirtualItems::PriceInfo>& prices,
-            const function<void(string result)>& complete,
+            const string& lootBoxName,
+            const vector<string>& virtualItemTags,
+            const vector<RGN::Modules::VirtualItems::PriceInfo>& prices,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -26,14 +26,14 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "storeV2-createLootBox",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["lootBoxId"].template get<string>());
                     },
                     fail);
             };
         static void DeleteLootBoxAsync(
-            string& lootBoxId,
-            const function<void(string result)>& complete,
+            const string& lootBoxId,
+            const function<void(const string& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -41,13 +41,13 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "storeV2-deleteLootBox",
                     requestData,
-                    [complete] (nlohmann::json result) {
+                    [complete] (const nlohmann::json& result) {
                         complete(result["lootBoxId"].template get<string>());
                     },
                     fail);
             };
         static void DeleteStoreOfferAsync(
-            string& offerId,
+            const string& offerId,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;

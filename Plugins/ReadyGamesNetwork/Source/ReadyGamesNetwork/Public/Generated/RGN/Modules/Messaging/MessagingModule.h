@@ -13,25 +13,25 @@ namespace RGN { namespace Modules { namespace Messaging {
     class MessagingModule {
     public:
         static void Subscribe(
-            string& topic,
-            RGN::Modules::Messaging::IMessageReceiver& messageReceiver) {
+            const string& topic,
+            const RGN::Modules::Messaging::IMessageReceiver& messageReceiver) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::Subscribe(
                     topic,
                     messageReceiver);
             };
         static void Unsubscribe(
-            string& topic,
-            RGN::Modules::Messaging::IMessageReceiver& messageReceiver) {
+            const string& topic,
+            const RGN::Modules::Messaging::IMessageReceiver& messageReceiver) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::Unsubscribe(
                     topic,
                     messageReceiver);
             };
         static void SendMessageByUserId(
-            string& appId,
-            string& userId,
-            string& payload,
-            string& title,
-            string& text,
+            const string& appId,
+            const string& userId,
+            const string& payload,
+            const string& title,
+            const string& text,
             const function<void(void)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::SendMessageByUserId(

@@ -19,8 +19,8 @@ namespace RGN { namespace Modules { namespace Creator {
     class CreatorModule {
     public:
         static void BecomeACreatorAsync(
-            string& brandName,
-            const function<void(RGN::Modules::Creator::CreatorSignupResponseData result)>& complete,
+            const string& brandName,
+            const function<void(const RGN::Modules::Creator::CreatorSignupResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSignupRequestData requestData;
                 requestData.brandName = brandName;
@@ -31,8 +31,8 @@ namespace RGN { namespace Modules { namespace Creator {
                     fail);
             };
         static void SubmitItemAsync(
-            RGN::Modules::VirtualItems::VirtualItem& customizedItem,
-            const function<void(RGN::Modules::Creator::CreatorSubmitItemResponseData result)>& complete,
+            const RGN::Modules::VirtualItems::VirtualItem& customizedItem,
+            const function<void(const RGN::Modules::Creator::CreatorSubmitItemResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Creator::CreatorSubmitItemRequestData requestData;
                 requestData.customizedItem = customizedItem;
@@ -43,7 +43,7 @@ namespace RGN { namespace Modules { namespace Creator {
                     fail);
             };
         static void GetCreatorDataAsync(
-            const function<void(RGN::Modules::Creator::CreatorData result)>& complete,
+            const function<void(const RGN::Modules::Creator::CreatorData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Creator::CreatorData>(
@@ -53,7 +53,7 @@ namespace RGN { namespace Modules { namespace Creator {
                     fail);
             };
         static void ClaimCurrenciesAsync(
-            const function<void(RGN::Modules::Currency::ClaimCurrencyResponseData result)>& complete,
+            const function<void(const RGN::Modules::Currency::ClaimCurrencyResponseData& result)>& complete,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Currency::ClaimCurrencyResponseData>(
