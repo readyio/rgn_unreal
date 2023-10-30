@@ -20,7 +20,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void GetLeaderboardByIdAsync(
             const string& id,
             const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = id;
@@ -33,7 +33,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void GetLeaderboardByRequestNameAsync(
             const string& requestName,
             const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestName"] = requestName;
@@ -46,7 +46,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void GetLeaderboardByRequestNamesAsync(
             const vector<string>& requestNames,
             const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestNames"] = requestNames;
@@ -60,7 +60,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             };
         static void GetLeaderboardIdsAsync(
             const function<void(const vector<string>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData>(
@@ -76,7 +76,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             const int32_t score,
             const string& extraData,
             const function<void(const int32_t result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
@@ -95,7 +95,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             const int32_t score,
             const string& extraData,
             const function<void(const int32_t result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
@@ -112,7 +112,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void GetUserEntryAsync(
             const string& leaderboardId,
             const function<void(const RGN::Modules::Leaderboard::LeaderboardEntry& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
@@ -128,7 +128,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             const bool includeUser,
             const int32_t quantityAroundUser,
             const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardEntry>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;

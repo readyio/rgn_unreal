@@ -15,7 +15,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void AddLeaderboardAsync(
             const RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
@@ -30,7 +30,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void UpdateLeaderboardAsync(
             const RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
@@ -45,7 +45,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void DeleteLeaderboardAsync(
             const string& leaderboardId,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = leaderboardId;

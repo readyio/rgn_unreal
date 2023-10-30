@@ -15,7 +15,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void DeleteVirtualItemsByIdsAsync(
             const vector<string>& virtualItemIds,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemIds"] = virtualItemIds;
@@ -28,7 +28,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void DeleteVirtualItemsByNameAsync(
             const string& itemName,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["itemName"] = itemName;
@@ -41,7 +41,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void DeleteVirtualItemByAppIdAsync(
             const string& appId,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
                 RGNCore::CallAPI<nlohmann::json>(
@@ -56,7 +56,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const string& csvDelimiter,
             const CancellationToken& cancellationToken,
             const function<void(const vector<string>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemName"] = virtualItemName;

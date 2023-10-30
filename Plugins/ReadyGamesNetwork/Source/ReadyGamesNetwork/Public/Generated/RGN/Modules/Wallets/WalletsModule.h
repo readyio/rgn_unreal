@@ -17,7 +17,7 @@ namespace RGN { namespace Modules { namespace Wallets {
     public:
         static void IsUserHavePrimaryWalletAsync(
             const function<void(const RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData>(
                     "wallets-isUserHavePrimaryWallet",
@@ -27,7 +27,7 @@ namespace RGN { namespace Modules { namespace Wallets {
             };
         static void GetUserWalletsAsync(
             const function<void(const RGN::Modules::Wallets::GetUserWalletsResponseData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Wallets::GetUserWalletsResponseData>(
                     "wallets-getUserWallets",
@@ -38,7 +38,7 @@ namespace RGN { namespace Modules { namespace Wallets {
         static void CreateWalletAsync(
             const string& password,
             const function<void(const RGN::Modules::Wallets::CreateWalletResponseData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::Wallets::CreateWalletRequestData requestData;
                 requestData.password = password;
                 RGNCore::CallAPI<RGN::Modules::Wallets::CreateWalletRequestData, RGN::Modules::Wallets::CreateWalletResponseData>(

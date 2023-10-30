@@ -22,7 +22,7 @@ namespace RGN { namespace Modules { namespace Currency {
     public:
         static void GetRGNCoinEconomyAsync(
             const function<void(const RGN::Modules::Currency::RGNCoinEconomy& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseRequestData, RGN::Modules::Currency::RGNCoinEconomy>(
                     "currency-getRGNCoinEconomy",
@@ -35,7 +35,7 @@ namespace RGN { namespace Modules { namespace Currency {
             const string& iapTransactionId,
             const string& iapReceipt,
             const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::Currency::PurchaseRGNCoinRequestData requestData;
                 requestData.iapUUID = iapUUID;
                 requestData.requestId = RGN::Random::generate_uuid_v4();
@@ -51,7 +51,7 @@ namespace RGN { namespace Modules { namespace Currency {
             };
         static void GetInAppPurchaseCurrencyDataAsync(
             const function<void(const RGN::Modules::Currency::CurrencyProductsData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Currency::CurrencyProductsData>(
                     "currency-getProducts",
@@ -62,7 +62,7 @@ namespace RGN { namespace Modules { namespace Currency {
         static void PurchaseCurrencyProductAsync(
             const string& productId,
             const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::Currency::PurchaseCurrencyProductRequestData requestData;
                 requestData.productId = productId;
                 RGNCore::CallAPI<RGN::Modules::Currency::PurchaseCurrencyProductRequestData, vector<RGN::Modules::Currency::Currency>>(
@@ -74,7 +74,7 @@ namespace RGN { namespace Modules { namespace Currency {
         static void AddUserCurrenciesAsync(
             const vector<RGN::Modules::Currency::Currency>& currencies,
             const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["currencies"] = currencies;

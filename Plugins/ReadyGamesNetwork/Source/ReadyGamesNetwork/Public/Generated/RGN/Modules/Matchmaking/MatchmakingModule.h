@@ -21,7 +21,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const string& startAfter,
             const CancellationToken& cancellationToken,
             const function<void(const vector<RGN::Modules::Matchmaking::MatchmakingData>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
@@ -39,7 +39,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const string& startAfter,
             const CancellationToken& cancellationToken,
             const function<void(const vector<RGN::Modules::Matchmaking::MatchmakingData>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
@@ -57,7 +57,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const string& startAfter,
             const CancellationToken& cancellationToken,
             const function<void(const vector<RGN::Modules::Matchmaking::MatchmakingData>& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["limit"] = limit;
@@ -74,7 +74,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const string& matchId,
             const CancellationToken& cancellationToken,
             const function<void(const RGN::Modules::Matchmaking::MatchmakingData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["matchId"] = matchId;
@@ -92,7 +92,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const std::unordered_map<string, string>& participatePayload,
             const CancellationToken& cancellationToken,
             const function<void(const RGN::Modules::Matchmaking::MatchmakingData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["matchConfig"] = matchConfig;
@@ -111,7 +111,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const std::unordered_map<string, string>& participantPayload,
             const CancellationToken& cancellationToken,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
@@ -128,7 +128,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const string& matchId,
             const CancellationToken& cancellationToken,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
@@ -145,7 +145,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const string& participantId,
             const CancellationToken& cancellationToken,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
@@ -163,7 +163,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const int64_t score,
             const CancellationToken& cancellationToken,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;
@@ -180,7 +180,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const string& matchId,
             const CancellationToken& cancellationToken,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = matchId;

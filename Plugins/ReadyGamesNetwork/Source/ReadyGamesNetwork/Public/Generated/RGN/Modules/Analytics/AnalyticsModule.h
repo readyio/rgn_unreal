@@ -18,7 +18,7 @@ namespace RGN { namespace Modules { namespace Analytics {
             const string& eventParameters,
             const CancellationToken& cancellationToken,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::Analytics::AnalyticsModuleCustomImpl::LogEventAsync(
                     eventName,
                     eventParameters,

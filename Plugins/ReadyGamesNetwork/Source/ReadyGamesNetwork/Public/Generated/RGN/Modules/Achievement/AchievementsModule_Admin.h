@@ -15,7 +15,7 @@ namespace RGN { namespace Modules { namespace Achievement {
         static void AddAchievementAsync(
             const RGN::Modules::Achievement::AchievementData& achievementData,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = achievementData;
@@ -30,7 +30,7 @@ namespace RGN { namespace Modules { namespace Achievement {
         static void UpdateAchievementAsync(
             const RGN::Modules::Achievement::AchievementData& achievementData,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = achievementData;
@@ -45,7 +45,7 @@ namespace RGN { namespace Modules { namespace Achievement {
         static void DeleteAchievementAsync(
             const string& achievementId,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = achievementId;
@@ -59,7 +59,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const string& achievementId,
             const int32_t daysInRow,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;
@@ -73,7 +73,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const RGN::Modules::Achievement::AchievementData& achievementData,
             const int32_t daysInRow,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementData"] = achievementData;
@@ -87,7 +87,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const string& achievementId,
             const int32_t daysInRow,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;
@@ -102,7 +102,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const string& playerProgressFieldName,
             const int64_t playerProgressFieldValueToReach,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;
@@ -119,7 +119,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const string& playerProgressFieldName,
             const int64_t playerProgressFieldValueToReach,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementData"] = achievementData;
@@ -136,7 +136,7 @@ namespace RGN { namespace Modules { namespace Achievement {
             const string& playerProgressFieldName,
             const int64_t playerProgressFieldValueToReach,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["achievementId"] = achievementId;

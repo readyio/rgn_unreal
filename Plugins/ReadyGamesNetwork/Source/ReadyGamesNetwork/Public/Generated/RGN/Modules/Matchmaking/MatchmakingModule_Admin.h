@@ -14,7 +14,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
         static void DeleteMatchesByAppIdAsync(
             const string& appIdToRemoveTheMatchesFor,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIdToRemoveTheMatchesFor"] = appIdToRemoveTheMatchesFor;

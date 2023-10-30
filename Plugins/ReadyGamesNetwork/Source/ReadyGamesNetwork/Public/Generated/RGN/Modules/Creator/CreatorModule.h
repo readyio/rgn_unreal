@@ -21,7 +21,7 @@ namespace RGN { namespace Modules { namespace Creator {
         static void BecomeACreatorAsync(
             const string& brandName,
             const function<void(const RGN::Modules::Creator::CreatorSignupResponseData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::Creator::CreatorSignupRequestData requestData;
                 requestData.brandName = brandName;
                 RGNCore::CallAPI<RGN::Modules::Creator::CreatorSignupRequestData, RGN::Modules::Creator::CreatorSignupResponseData>(
@@ -33,7 +33,7 @@ namespace RGN { namespace Modules { namespace Creator {
         static void SubmitItemAsync(
             const RGN::Modules::VirtualItems::VirtualItem& customizedItem,
             const function<void(const RGN::Modules::Creator::CreatorSubmitItemResponseData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::Creator::CreatorSubmitItemRequestData requestData;
                 requestData.customizedItem = customizedItem;
                 RGNCore::CallAPI<RGN::Modules::Creator::CreatorSubmitItemRequestData, RGN::Modules::Creator::CreatorSubmitItemResponseData>(
@@ -44,7 +44,7 @@ namespace RGN { namespace Modules { namespace Creator {
             };
         static void GetCreatorDataAsync(
             const function<void(const RGN::Modules::Creator::CreatorData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Creator::CreatorData>(
                     "creator-getCreatorData",
@@ -54,7 +54,7 @@ namespace RGN { namespace Modules { namespace Creator {
             };
         static void ClaimCurrenciesAsync(
             const function<void(const RGN::Modules::Currency::ClaimCurrencyResponseData& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Currency::ClaimCurrencyResponseData>(
                     "creator-claimCurrency",

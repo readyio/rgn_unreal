@@ -17,7 +17,7 @@ namespace RGN { namespace Modules { namespace Store {
             const vector<string>& virtualItemTags,
             const vector<RGN::Modules::VirtualItems::PriceInfo>& prices,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxName"] = lootBoxName;
@@ -34,7 +34,7 @@ namespace RGN { namespace Modules { namespace Store {
         static void DeleteLootBoxAsync(
             const string& lootBoxId,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxId"] = lootBoxId;
@@ -49,7 +49,7 @@ namespace RGN { namespace Modules { namespace Store {
         static void DeleteStoreOfferAsync(
             const string& offerId,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;

@@ -33,7 +33,7 @@ namespace RGN { namespace Modules { namespace Messaging {
             const string& title,
             const string& text,
             const function<void(void)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::SendMessageByUserId(
                     appId,
                     userId,

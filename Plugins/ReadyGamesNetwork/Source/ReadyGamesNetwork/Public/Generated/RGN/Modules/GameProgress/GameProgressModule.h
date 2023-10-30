@@ -22,7 +22,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
         static void OnGameCompleteAsync(
             const vector<RGN::Modules::Currency::Currency>& reward,
             const function<void(const RGN::Modules::GameProgress::OnGameCompleteResult& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::GameProgress::OnGameCompleteRequestData requestData;
                 requestData.reward = reward;
                 RGNCore::CallAPI<RGN::Modules::GameProgress::OnGameCompleteRequestData, RGN::Modules::GameProgress::OnGameCompleteResult>(
@@ -33,7 +33,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             };
         static void GetGameProgressAsync(
             const function<void(const RGN::Modules::GameProgress::GameProgress& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::GameProgress::GameProgress>(
                     "game-getGameProgress",
@@ -44,7 +44,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
         static void AddUserProgressAsync(
             const string& userProgressJson,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::GameProgress::AddUserLevelRequestData requestData;
                 requestData.playerProgress = userProgressJson;
                 RGNCore::CallAPI<RGN::Modules::GameProgress::AddUserLevelRequestData>(
@@ -57,7 +57,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             const string& userProgressJson,
             const vector<RGN::Modules::Currency::Currency>& reward,
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Modules::GameProgress::UpdateUserLevelRequestData requestData;
                 requestData.playerProgress = userProgressJson;
                 requestData.reward = reward;
@@ -69,7 +69,7 @@ namespace RGN { namespace Modules { namespace GameProgress {
             };
         static void GetUserProgressAsync(
             const function<void(const string& result)>& complete,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData>(
                     "game-getPlayerProgress",
