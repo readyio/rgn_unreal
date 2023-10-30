@@ -38,6 +38,10 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_LeaderboardModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    /**
+     * Asynchronous method that retrieves leaderboard data.
+     * Resulting Data contains leaderboard description fields like id, name, type, etc.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetLeaderboardByIdAsync(
         const FString& id,
@@ -56,6 +60,10 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronous method that retrieves leaderboard data.
+     * Resulting Data contains leaderboard description fields like id, name, type, etc.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetLeaderboardByRequestNameAsync(
         const FString& requestName,
@@ -118,6 +126,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously sets the player's score on the specified leaderboard.
+     * @param leaderboardId - The ID of the leaderboard where the score will be set.
+     * @param score - The score to be set on the leaderboard.
+     * @param extraData - (Optional) Extra data associated with the score. Defaults to an empty string if not provided.
+     * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void SetScoreAsync(
         const FString& leaderboardId,
@@ -144,6 +159,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously adds the player's score on the specified leaderboard.
+     * @param leaderboardId - The ID of the leaderboard where the score will be added.
+     * @param score - The score to be added on the leaderboard.
+     * @param extraData - (Optional) Extra data associated with the score. Defaults to an empty string if not provided.
+     * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void AddScoreAsync(
         const FString& leaderboardId,
@@ -170,6 +192,11 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves the player's entry on the specified leaderboard.
+     * @param leaderboardId - The ID of the leaderboard from which the entry will be retrieved.
+     * @return A task that represents the asynchronous operation. The task result contains the player's entry data on the leaderboard.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetUserEntryAsync(
         const FString& leaderboardId,
@@ -188,6 +215,14 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a specified number of top entries and entries around the user from the specified leaderboard.
+     * @param leaderboardId - The ID of the leaderboard from which the entries will be retrieved.
+     * @param quantityTop - The number of top entries to retrieve from the leaderboard.
+     * @param includeUser - Whether to include the user's entry in the retrieved entries.
+     * @param quantityAroundUser - The number of entries to retrieve around the user's entry.
+     * @return A task that represents the asynchronous operation. The task result contains a list of the retrieved leaderboard entries.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void GetEntriesAsync(
         const FString& leaderboardId,

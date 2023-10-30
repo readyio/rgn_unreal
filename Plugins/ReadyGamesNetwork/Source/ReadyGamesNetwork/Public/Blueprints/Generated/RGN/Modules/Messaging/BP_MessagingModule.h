@@ -23,6 +23,11 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_MessagingModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    /**
+     * Subscribes the  to the provided "
+     * @param topic - Not null topic string to subscribe
+     * @param messageReceiver - Not null message receiver class instance to subsribe to the topic
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void Subscribe(
         const FString& topic,
@@ -37,6 +42,11 @@ public:
                 cpp_messageReceiver
             );
     }
+    /**
+     * Unsubscribes the  from the provided "
+     * @param topic - Not null topic string
+     * @param messageReceiver - Not null message receiver class instance
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void Unsubscribe(
         const FString& topic,
@@ -51,6 +61,21 @@ public:
                 cpp_messageReceiver
             );
     }
+    /**
+     * Sends a message to provided user.
+     * This method works only for admin users.
+     * If the title and text are null or empty it will send a data message.
+     * Data messages do not appear in the device system tray.
+     * If the title and/or the text are provided, the ht
+     * @param appId - The project id to send the message
+     * @param userId - The user id to send the message to
+     * @param payload - Any string (preferable json) with custom data
+     * that will be attached to the message
+     * @param title - Optional. If provided, the message will appear in system tray
+     * in case the application is in background
+     * @param text - Optional. If provided, the message will appear in system tray
+     * in case the application is in background
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void SendMessageByUserId(
         const FString& appId,

@@ -57,6 +57,16 @@ namespace RGN { namespace Modules { namespace Achievement {
                     },
                     fail);
             };
+        /**
+         * Asynchronously retrieves a list of achievements for the current application from the Ready Games Network (RGN).
+         * @param limit - An integer indicating the maximum number of achievements to retrieve.
+         * @param startAfter - An optional parameter representing an achievement id after which to
+         * start retrieving the achievements. The default is an empty string.
+         * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+         * of T:RGN.Modules.Achievement.AchievementData objects representing the achievements that match the current application identifier,
+         * limit and other optional parameters.
+         * @throw: Thrown when the provided limit value is zero.
+         */
         static void GetForCurrentAppAsync(
             const int32_t limit,
             const string& startAfter,
@@ -83,6 +93,17 @@ namespace RGN { namespace Modules { namespace Achievement {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronously retrieves a list of achievements for the current application from the Ready Games Network (RGN).
+         * The user achievement data is also returned in case user made any progress with the given achievement
+         * @param limit - An integer indicating the maximum number of achievements to retrieve.
+         * @param startAfter - An optional parameter representing an achievement id after which to
+         * start retrieving the achievements. The default is an empty string.
+         * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+         * of T:RGN.Modules.Achievement.AchievementWithUserData objects representing the achievements that match the current application identifier,
+         * limit and other optional parameters.
+         * @throw: Thrown when the provided limit value is zero.
+         */
         static void GetForCurrentAppWithUserDataAsync(
             const int32_t limit,
             const string& startAfter,
@@ -94,6 +115,14 @@ namespace RGN { namespace Modules { namespace Achievement {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronously retrieves a achievement from the Ready Games Network (RGN)
+         * based on the provided achievement request name.
+         * @param requestName - Request name to filter achievements.
+         * @return A Task representing the asynchronous operation. The Result property of the Task returns a list of
+         * T:RGN.Modules.Achievement.AchievementData objects representing the achievement that match the specified identifiers.
+         * @throw: Thrown when the provided request name is null or empty.
+         */
         static void GetByRequestNameAsync(
             const string& requestName,
             const function<void(const RGN::Modules::Achievement::AchievementData& result)>& complete,
@@ -122,6 +151,12 @@ namespace RGN { namespace Modules { namespace Achievement {
                     },
                     fail);
             };
+        /**
+         * Triggers the achievement by id to make achievement progress
+         * @param id - The achievement id to trigger
+         * @param progress - The achievement trigger progress delta
+         * @return Trigger and Claim response data
+         */
         static void TriggerByIdAsync(
             const string& id,
             const int32_t progress,
@@ -136,6 +171,12 @@ namespace RGN { namespace Modules { namespace Achievement {
                     complete,
                     fail);
             };
+        /**
+         * Triggers the achievement by request name to make achievement progress
+         * @param requestName - The achievement request name to trigger
+         * @param progress - The achievement trigger progress delta
+         * @return Trigger and Claim response data
+         */
         static void TriggerByRequestNameAsync(
             const string& requestName,
             const int32_t progress,
@@ -150,6 +191,12 @@ namespace RGN { namespace Modules { namespace Achievement {
                     complete,
                     fail);
             };
+        /**
+         * Claim the achievement to give rewards to the user
+         * For more information about the rewards see T:RGN.Modules.Achievement.AchievementData class
+         * @param achievementId - The achievement id to trigger
+         * @return Trigger and Claim response data
+         */
         static void ClaimByIdAsync(
             const string& achievementId,
             const function<void(const RGN::Modules::Achievement::TriggerAndClaimResponse& result)>& complete,
@@ -162,6 +209,12 @@ namespace RGN { namespace Modules { namespace Achievement {
                     complete,
                     fail);
             };
+        /**
+         * Claim the achievement to give rewards to the user
+         * For more information about the rewards see T:RGN.Modules.Achievement.AchievementData class
+         * @param requestName - The achievement id to trigger
+         * @return Trigger and Claim response data
+         */
         static void ClaimByRequestNameAsync(
             const string& requestName,
             const function<void(const RGN::Modules::Achievement::TriggerAndClaimResponse& result)>& complete,
@@ -174,6 +227,15 @@ namespace RGN { namespace Modules { namespace Achievement {
                     complete,
                     fail);
             };
+        /**
+         * Gets current user competed achievements
+         * If the  is provided, then it returns the comleted achievements for provided userId
+         * Supports pagination queries in case the  and  are provided
+         * @param userId - User id to return the completed achievements
+         * @param startAfter - The time stamp to start the query after F:RGN.Modules.Achievement.UserAchievement.lastCompleteTime
+         * @param limit - Maximal number of documents to return
+         * @return Requested amount of completed achievements
+         */
         static void GetUserAchievementsAsync(
             const string& userId,
             const int64_t startAfter,

@@ -38,6 +38,10 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_CreatorModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    /**
+     * Sends an asynchronous request to the backend to become a creator
+     * @return FirebaseCreatorSignupResponseData.message = "Success" OR "Brand name already exists" OR "User is already enrolled in Creator Program" OR "Invalid BrandName";
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Creator")
     static void BecomeACreatorAsync(
         const FString& brandName,

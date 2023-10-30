@@ -112,6 +112,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of achievements for the current application from the Ready Games Network (RGN).
+     * @param limit - An integer indicating the maximum number of achievements to retrieve.
+     * @param startAfter - An optional parameter representing an achievement id after which to
+     * start retrieving the achievements. The default is an empty string.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+     * of T:RGN.Modules.Achievement.AchievementData objects representing the achievements that match the current application identifier,
+     * limit and other optional parameters.
+     * @throw: Thrown when the provided limit value is zero.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetForCurrentAppAsync(
         int32 limit,
@@ -176,6 +186,17 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of achievements for the current application from the Ready Games Network (RGN).
+     * The user achievement data is also returned in case user made any progress with the given achievement
+     * @param limit - An integer indicating the maximum number of achievements to retrieve.
+     * @param startAfter - An optional parameter representing an achievement id after which to
+     * start retrieving the achievements. The default is an empty string.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+     * of T:RGN.Modules.Achievement.AchievementWithUserData objects representing the achievements that match the current application identifier,
+     * limit and other optional parameters.
+     * @throw: Thrown when the provided limit value is zero.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetForCurrentAppWithUserDataAsync(
         int32 limit,
@@ -202,6 +223,14 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a achievement from the Ready Games Network (RGN)
+     * based on the provided achievement request name.
+     * @param requestName - Request name to filter achievements.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list of
+     * T:RGN.Modules.Achievement.AchievementData objects representing the achievement that match the specified identifiers.
+     * @throw: Thrown when the provided request name is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetByRequestNameAsync(
         const FString& requestName,
@@ -246,6 +275,12 @@ public:
                 }
             );
     }
+    /**
+     * Triggers the achievement by id to make achievement progress
+     * @param id - The achievement id to trigger
+     * @param progress - The achievement trigger progress delta
+     * @return Trigger and Claim response data
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void TriggerByIdAsync(
         const FString& id,
@@ -268,6 +303,12 @@ public:
                 }
             );
     }
+    /**
+     * Triggers the achievement by request name to make achievement progress
+     * @param requestName - The achievement request name to trigger
+     * @param progress - The achievement trigger progress delta
+     * @return Trigger and Claim response data
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void TriggerByRequestNameAsync(
         const FString& requestName,
@@ -290,6 +331,12 @@ public:
                 }
             );
     }
+    /**
+     * Claim the achievement to give rewards to the user
+     * For more information about the rewards see T:RGN.Modules.Achievement.AchievementData class
+     * @param achievementId - The achievement id to trigger
+     * @return Trigger and Claim response data
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void ClaimByIdAsync(
         const FString& achievementId,
@@ -308,6 +355,12 @@ public:
                 }
             );
     }
+    /**
+     * Claim the achievement to give rewards to the user
+     * For more information about the rewards see T:RGN.Modules.Achievement.AchievementData class
+     * @param requestName - The achievement id to trigger
+     * @return Trigger and Claim response data
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void ClaimByRequestNameAsync(
         const FString& requestName,
@@ -326,6 +379,15 @@ public:
                 }
             );
     }
+    /**
+     * Gets current user competed achievements
+     * If the  is provided, then it returns the comleted achievements for provided userId
+     * Supports pagination queries in case the  and  are provided
+     * @param userId - User id to return the completed achievements
+     * @param startAfter - The time stamp to start the query after F:RGN.Modules.Achievement.UserAchievement.lastCompleteTime
+     * @param limit - Maximal number of documents to return
+     * @return Requested amount of completed achievements
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
     static void GetUserAchievementsAsync(
         const FString& userId,

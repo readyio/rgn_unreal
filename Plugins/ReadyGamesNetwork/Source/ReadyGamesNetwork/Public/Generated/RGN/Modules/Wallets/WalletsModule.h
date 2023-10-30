@@ -35,6 +35,11 @@ namespace RGN { namespace Modules { namespace Wallets {
                     complete,
                     fail);
             };
+        /**
+         * Creates user wallet. Right now it is possible to create just one wallet per user
+         * @param password - Password for the wallet
+         * @return Information of the create operation was successful.
+         */
         static void CreateWalletAsync(
             const string& password,
             const function<void(const RGN::Modules::Wallets::CreateWalletResponseData& result)>& complete,

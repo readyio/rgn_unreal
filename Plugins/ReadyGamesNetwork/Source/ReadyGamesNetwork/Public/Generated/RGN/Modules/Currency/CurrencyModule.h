@@ -30,6 +30,17 @@ namespace RGN { namespace Modules { namespace Currency {
                     complete,
                     fail);
             };
+        /**
+         * Adds the rgn-coin currency to the user in
+         * in-app purchase plugin callback after verifying the reciept locally
+         * 1. Start in-app purchase process
+         * 2. Wait for user purchase
+         * 3. Verify the reciept after successful purchase
+         * 4. Cann this method with the appropriate in-app item id (M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync)
+         * @param iapUUID - Unique id of the rgn-coin pack that was returned by the M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync method
+         * @param iapTransactionId - The transaction id of the in-app purchase
+         * @param iapReceipt - The receipt of the in-app purchase
+         */
         static void PurchaseRGNCoinAsync(
             const string& iapUUID,
             const string& iapTransactionId,
@@ -59,6 +70,10 @@ namespace RGN { namespace Modules { namespace Currency {
                     complete,
                     fail);
             };
+        /**
+         * Adds any project specific currency to the users profile.
+         * You can also use this method without going to the in-app purchase process if you want to give the player a currencies
+         */
         static void PurchaseCurrencyProductAsync(
             const string& productId,
             const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& complete,

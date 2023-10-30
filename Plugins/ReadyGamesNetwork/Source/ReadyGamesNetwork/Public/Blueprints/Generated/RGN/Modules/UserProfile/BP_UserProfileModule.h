@@ -76,6 +76,13 @@ public:
                 }
             );
     }
+    /**
+     * Returns user data for provided user id. The base data contains some basic user info
+     * In case you want to request more information (like user coins) please use the
+     * M:RGN.Modules.UserProfile.UserProfileModule.GetFullUserProfileAsync``1(System.String) method
+     * @param userId - User Id to get the data
+     * @return Basic user data
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetProfileAsync2(
         const FString& userId,
@@ -126,6 +133,11 @@ public:
                 }
             );
     }
+    /**
+     * Searches for users by their nickname.
+     * @param nicknameQuery - The query string to search for in user nicknames.
+     * @return A Task containing a List of UserData objects representing the matching users.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SearchUsersAsync(
         const FString& nicknameQuery,
@@ -166,6 +178,11 @@ public:
                 }
             );
     }
+    /**
+     * Gets the user ID associated with a short UID.
+     * @param shortUID - The short UID to get the associated user ID for.
+     * @return A Task containing the user ID associated with the short UID.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserIdByShortUIDAsync(
         const FString& shortUID,
@@ -184,6 +201,11 @@ public:
                 }
             );
     }
+    /**
+     * Sets the display name of the user.
+     * @param displayName - The new display name of the user.
+     * @return A Task containing the new display name of the user.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetDisplayNameAsync(
         const FString& displayName,
@@ -202,6 +224,11 @@ public:
                 }
             );
     }
+    /**
+     * Sets the bio of the user.
+     * @param bio - The new bio of the user.
+     * @return A Task containing the new bio of the user.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetBioAsync(
         const FString& bio,
@@ -220,6 +247,12 @@ public:
                 }
             );
     }
+    /**
+     * Sets the display name and bio of the user.
+     * @param displayName - The new display name of the user.
+     * @param bio - The new bio of the user.
+     * @return A Task containing the new display name of the user.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetDisplayNameAndBioAsync(
         const FString& displayName,
@@ -242,6 +275,12 @@ public:
                 }
             );
     }
+    /**
+     * Uploads a user's avatar image to the RGNCore backend.
+     * @param bytes - The byte array of the avatar image to upload.
+     * @param cancellationToken - The cancellation token.
+     * @return A boolean indicating whether the upload was successful.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void UploadAvatarImageAsync(
         const TArray<uint8>& bytes,
@@ -268,6 +307,13 @@ public:
                 }
             );
     }
+    /**
+     * Downloads the avatar image of a user as a byte array from Firebase storage.
+     * @param userId - The ID of the user whose avatar image to download.
+     * @param size - The size type of avatar image to download.
+     * @param cancellationToken - A cancellation token that can be used to cancel the download operation.
+     * @return A byte array containing the avatar image, or null if the download fails.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void DownloadAvatarImageAsync(
         const FString& userId,
@@ -298,6 +344,13 @@ public:
                 }
             );
     }
+    /**
+     * Changes the admin status and access level of a user by their email.
+     * @param email - The email of the user to modify.
+     * @param isAdmin - True if the user should be made an admin, false otherwise.
+     * @param accessLevel - The new access level for the user.
+     * @return A Task containing a Dictionary of key-value pairs representing the updated user data.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void ChangeAdminStatusByEmailAsync(
         const FString& email,
@@ -324,6 +377,13 @@ public:
                 }
             );
     }
+    /**
+     * Changes the admin status and access level of a user by their user ID.
+     * @param userId - The user ID of the user to modify.
+     * @param isAdmin - True if the user should be made an admin, false otherwise.
+     * @param accessLevel - The new access level for the user.
+     * @return A Task containing a Dictionary of key-value pairs representing the updated user data.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void ChangeAdminStatusByUserIdAsync(
         const FString& userId,
@@ -350,6 +410,11 @@ public:
                 }
             );
     }
+    /**
+     * Gets the custom claims for a user by their user ID.
+     * @param userId - The user ID of the user to retrieve custom claims for.
+     * @return A Task containing a Dictionary of key-value pairs representing the user's custom claims.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserCustomClaimsByUserIdAsync(
         const FString& userId,
@@ -368,6 +433,11 @@ public:
                 }
             );
     }
+    /**
+     * Gets the custom claims for a user by their email.
+     * @param email - The email of the user to retrieve custom claims for.
+     * @return A Task containing a Dictionary of key-value pairs representing the user's custom claims.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserCustomClaimsByEmailAsync(
         const FString& email,
@@ -386,6 +456,10 @@ public:
                 }
             );
     }
+    /**
+     * Sets the invisible status for the current user.
+     * @param invisibleStatus - True if the user should be invisible, false otherwise.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetInvisibleStatusAsync(
         bool invisibleStatus,
@@ -426,6 +500,11 @@ public:
                 }
             );
     }
+    /**
+     * Retrieves the status of a user with the specified user ID.
+     * @param userId - The user ID of the user whose status to retrieve.
+     * @return A Task containing the status of the user as a GetUserStatusResponseData object.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserStateAsync(
         const FString& userId,

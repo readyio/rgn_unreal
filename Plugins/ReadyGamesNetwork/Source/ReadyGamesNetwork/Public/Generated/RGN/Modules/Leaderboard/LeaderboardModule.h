@@ -17,6 +17,10 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Leaderboard {
     class LeaderboardModule {
     public:
+        /**
+         * Asynchronous method that retrieves leaderboard data.
+         * Resulting Data contains leaderboard description fields like id, name, type, etc.
+         */
         static void GetLeaderboardByIdAsync(
             const string& id,
             const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& complete,
@@ -30,6 +34,10 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronous method that retrieves leaderboard data.
+         * Resulting Data contains leaderboard description fields like id, name, type, etc.
+         */
         static void GetLeaderboardByRequestNameAsync(
             const string& requestName,
             const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& complete,
@@ -71,6 +79,13 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     },
                     fail);
             };
+        /**
+         * Asynchronously sets the player's score on the specified leaderboard.
+         * @param leaderboardId - The ID of the leaderboard where the score will be set.
+         * @param score - The score to be set on the leaderboard.
+         * @param extraData - (Optional) Extra data associated with the score. Defaults to an empty string if not provided.
+         * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
+         */
         static void SetScoreAsync(
             const string& leaderboardId,
             const int32_t score,
@@ -90,6 +105,13 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     },
                     fail);
             };
+        /**
+         * Asynchronously adds the player's score on the specified leaderboard.
+         * @param leaderboardId - The ID of the leaderboard where the score will be added.
+         * @param score - The score to be added on the leaderboard.
+         * @param extraData - (Optional) Extra data associated with the score. Defaults to an empty string if not provided.
+         * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
+         */
         static void AddScoreAsync(
             const string& leaderboardId,
             const int32_t score,
@@ -109,6 +131,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     },
                     fail);
             };
+        /**
+         * Asynchronously retrieves the player's entry on the specified leaderboard.
+         * @param leaderboardId - The ID of the leaderboard from which the entry will be retrieved.
+         * @return A task that represents the asynchronous operation. The task result contains the player's entry data on the leaderboard.
+         */
         static void GetUserEntryAsync(
             const string& leaderboardId,
             const function<void(const RGN::Modules::Leaderboard::LeaderboardEntry& result)>& complete,
@@ -122,6 +149,14 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronously retrieves a specified number of top entries and entries around the user from the specified leaderboard.
+         * @param leaderboardId - The ID of the leaderboard from which the entries will be retrieved.
+         * @param quantityTop - The number of top entries to retrieve from the leaderboard.
+         * @param includeUser - Whether to include the user's entry in the retrieved entries.
+         * @param quantityAroundUser - The number of entries to retrieve around the user's entry.
+         * @return A task that represents the asynchronous operation. The task result contains a list of the retrieved leaderboard entries.
+         */
         static void GetEntriesAsync(
             const string& leaderboardId,
             const int32_t quantityTop,

@@ -23,6 +23,15 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Inventory {
     class InventoryModule {
     public:
+        /**
+         * Asynchronously adds a specified quantity of a virtual item to the current logged in user's inventory.
+         * @param virtualItemId - The unique identifier of the virtual item to be added to the inventory.
+         * @param quantity - The quantity of the virtual item to be added. The default value is 1.
+         * @param properties - Optional additional properties associated with the item. The default is null.
+         * @return A Task that represents the asynchronous operation.
+         * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
+         * @throw: Thrown when the user is not logged in.
+         */
         static void AddToInventoryAsync(
             const string& virtualItemId,
             const int32_t quantity,
@@ -36,6 +45,16 @@ namespace RGN { namespace Modules { namespace Inventory {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronously adds a specified quantity of a virtual item to the inventory for a specified user.
+         * @param userId - The unique identifier of the user whose inventory will be updated.
+         * @param virtualItemId - The unique identifier of the virtual item to be added to the user's inventory.
+         * @param quantity - The quantity of the virtual item to be added. The default value is 1.
+         * @param properties - Optional additional properties associated with the item. The default is null.
+         * @return A Task that represents the asynchronous operation.
+         * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
+         * @throw: Thrown when the ownedItemId is null or empty.
+         */
         static void AddToInventoryAsync(
             const string& userId,
             const string& virtualItemId,
@@ -51,6 +70,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronously adds a specified inventory item to the inventory for a specified user.
+         * @param userId - The unique identifier of the user whose inventory will be updated.
+         * @param inventoryData - The data of the inventory item to be added to the user's inventory. Includes item's unique identifier, quantity and optional additional properties.
+         * @return A Task that represents the asynchronous operation.
+         * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
+         * @throw: Thrown when the userId or inventoryData.ownedItemId is null or empty.
+         */
         static void AddToInventoryAsync(
             const string& userId,
             const RGN::Modules::Inventory::InventoryItemData& inventoryData,
@@ -65,6 +92,15 @@ namespace RGN { namespace Modules { namespace Inventory {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its unique identifier.
+         * @param userId - The unique identifier of the user whose inventory to modify.
+         * @param virtualItemId - The unique identifier of the virtual item to remove.
+         * @param quantity - The quantity of the virtual item to remove. Must be a positive number.
+         * @return A task that represents the asynchronous operation.
+         * The task result contains a T:RGN.Modules.Inventory.RemoveByVirtualItemIdResponseData object which holds the server's response data.
+         * @throw: Thrown when  is null or empty.
+         */
         static void RemoveByVirtualItemIdAsync(
             const string& userId,
             const string& virtualItemId,
@@ -82,6 +118,15 @@ namespace RGN { namespace Modules { namespace Inventory {
                     complete,
                     fail);
             };
+        /**
+         * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its owned item identifier.
+         * @param userId - The unique identifier of the user whose inventory to modify.
+         * @param ownedItemId - The unique identifier of the owned item to remove.
+         * @param quantity - The quantity of the owned item to remove. Must be a positive number. Default is 1.
+         * @return A task that represents the asynchronous operation.
+         * The task result contains a T:RGN.Modules.Inventory.RemoveByOwnedIdResponseData object which holds the server's response data.
+         * @throw: Thrown when  is null or empty.
+         */
         static void RemoveByInventoryItemIdAsync(
             const string& userId,
             const string& ownedItemId,
@@ -99,6 +144,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     complete,
                     fail);
             };
+        /**
+         * Returns json string or throws an exception if there are no json for virtual item
+         * @return Returns json as string
+         */
         static void GetPropertiesAsync(
             const string& ownedItemId,
             const function<void(const string& result)>& complete,
@@ -115,6 +164,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     },
                     fail);
             };
+        /**
+         * Set json on a given ownedItemId.
+         * @return Returns json as string
+         */
         static void SetPropertiesAsync(
             const string& ownedItemId,
             const string& json,
@@ -133,6 +186,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     },
                     fail);
             };
+        /**
+         * Get user owned item upgrades, returns all upgrades for all owned items for virtual item ownedItemId
+         * @param ownedItemId - The ownedItemId of the virtual item to search in inventory for
+         */
         static void GetUpgradesAsync(
             const string& ownedItemId,
             const function<void(const vector<RGN::Modules::Inventory::UpgradesResponseData>& result)>& complete,
@@ -171,6 +228,10 @@ namespace RGN { namespace Modules { namespace Inventory {
                     },
                     fail);
             };
+        /**
+         * Get single owned virtual item inventory data by ownedItemId
+         * @param ownedItemId - The id of the owned item in users inventory
+         */
         static void GetByIdAsync(
             const string& ownedItemId,
             const function<void(const RGN::Modules::Inventory::InventoryItemData& result)>& complete,
@@ -247,6 +308,9 @@ namespace RGN { namespace Modules { namespace Inventory {
                     },
                     fail);
             };
+        /**
+         * Get multiple owned virtual items inventory data for current app with the Virtual Item data included
+         */
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             const string& startAfter,
             const int32_t limit,
@@ -271,10 +335,24 @@ namespace RGN { namespace Modules { namespace Inventory {
                     complete,
                     fail);
             };
+        /**
+         * Parses a JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.
+         * @param json - The JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.
+         * @return An T:RGN.Modules.Inventory.InventoryItemData object represented by the JSON string. 
+         * Returns null if the JSON string does not represent a valid T:RGN.Modules.Inventory.InventoryItemData object.
+         * @throw: Thrown when  is null or empty.
+         */
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(const string& json) {
                 return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemData(
                     json);
             };
+        /**
+         * Parses a JSON string representation of a list of T:RGN.Modules.Inventory.InventoryItemData objects.
+         * @param json - The JSON string representation of a list of T:RGN.Modules.Inventory.InventoryItemData objects.
+         * @return A list of T:RGN.Modules.Inventory.InventoryItemData objects represented by the JSON string.
+         * Returns null if the JSON string does not represent a valid list of T:RGN.Modules.Inventory.InventoryItemData objects.
+         * @throw: Thrown when  is null or empty.
+         */
         static vector<RGN::Modules::Inventory::InventoryItemData> ParseInventoryItemsData(const string& json) {
                 return RGN::Modules::Inventory::InventoryModuleCustomImpl::ParseInventoryItemsData(
                     json);
@@ -296,6 +374,13 @@ namespace RGN { namespace Modules { namespace Inventory {
                     },
                     fail);
             };
+        /**
+         * Asynchronously retrieves the tags of an owned item in the inventory by its identifier for current logged in user
+         * @param ownedItemId - The unique identifier of the owned item for which to retrieve tags.
+         * @return A task that represents the asynchronous operation.
+         * The task result contains a list of tags associated with the owned item.
+         * @throw: Thrown when  is null or empty.
+         */
         static void GetTagsAsync(
             const string& ownedItemId,
             const function<void(const vector<string>& result)>& complete,

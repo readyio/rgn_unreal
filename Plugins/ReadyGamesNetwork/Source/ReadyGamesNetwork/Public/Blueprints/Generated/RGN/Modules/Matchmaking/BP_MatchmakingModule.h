@@ -38,6 +38,15 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_MatchmakingModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    /**
+     * Asynchronously gets a list of open matches that the user can join
+     * @param limit - An integer indicating the maximum number of matches to retrieve.
+     * @param startAfter - An optional parameter representing a match id after which to
+     * start retrieving the matches. The default is an empty string.
+     * @param cancellationToken - Cancellation token to cancel the async operation. Optional
+     * @return A Task that represents the asynchronous operation.
+     * The Task result contains a list of objects, which are the open to join matches.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetJoinOpenMatchesAsync(
         int32 limit,
@@ -68,6 +77,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously gets a list of open matches that the user can vote. Some matches can have voting enabled.
+     * If the voting is enabled the users can vote for the match participants
+     * @param limit - An integer indicating the maximum number of matches to retrieve.
+     * @param startAfter - An optional parameter representing a matches id after which to
+     * start retrieving the matches. The default is an empty string.
+     * @param cancellationToken - Cancellation token to cancel the async operation. Optional
+     * @return A Task that represents the asynchronous operation.
+     * The Task result contains a list of objects, which are the open to vote matches.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetVoteOpenMatchesAsync(
         int32 limit,
@@ -98,6 +117,15 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously gets a list of finished matches
+     * @param limit - An integer indicating the maximum number of matches to retrieve.
+     * @param startAfter - An optional parameter representing a matches id after which to
+     * start retrieving the matches. The default is an empty string.
+     * @param cancellationToken - Cancellation token to cancel the async operation. Optional
+     * @return A Task that represents the asynchronous operation.
+     * The Task result contains a list of objects, which are the finished matches for current app.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetFinishedMatchesAsync(
         int32 limit,
@@ -128,6 +156,14 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously finished match by provided id. In case the match does not exist, or is from
+     * another app throws an Exception.
+     * @param matchId - The match ID that is already finished.
+     * @param cancellationToken - Cancellation token to cancel the async operation. Optional
+     * @return A Task that represents the asynchronous operation.
+     * The Task result contains the finished match data
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetFinishedMatchByIdAsync(
         const FString& matchId,
@@ -218,6 +254,15 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously starts a matchmaking match identified by the provided match ID.
+     * @param matchId - The ID of the match to start.
+     * @param cancellationToken - Optional parameter to enable cancellation of the task.
+     * Default value is an unset CancellationToken.
+     * @return A task that represents the asynchronous operation.
+     * The task result is the ID of the match that has been started.
+     * @throw: Thrown when matchId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void StartMatchAsync(
         const FString& matchId,
@@ -240,6 +285,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously votes for a matchmaking match identified by the provided match ID and participant ID.
+     * @param matchId - The ID of the match to vote for.
+     * @param participantId - The ID of the participant casting the vote.
+     * @param cancellationToken - Optional parameter to enable cancellation of the task.
+     * Default value is an unset CancellationToken.
+     * @return A task that represents the asynchronous operation.
+     * The task result is the ID of the match for which the vote has been cast.
+     * @throw: Thrown when matchId or participantId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void VoteForMatchAsync(
         const FString& matchId,
@@ -266,6 +321,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously submits the score for a matchmaking match identified by the provided match ID.
+     * @param matchId - The ID of the match for which the score is being submitted.
+     * @param score - The score to be submitted for the match.
+     * @param cancellationToken - Optional parameter to enable cancellation of the task.
+     * Default value is an unset CancellationToken.
+     * @return A task that represents the asynchronous operation.
+     * The task result is the ID of the match for which the score has been submitted.
+     * @throw: Thrown when matchId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void SubmitMatchScoreAsync(
         const FString& matchId,
@@ -292,6 +357,15 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously finishes a matchmaking match identified by the provided match ID.
+     * @param matchId - The ID of the match to finish.
+     * @param cancellationToken - Optional parameter to enable cancellation of the task.
+     * Default value is an unset CancellationToken.
+     * @return A task that represents the asynchronous operation.
+     * The task result is the ID of the match that has been finished.
+     * @throw: Thrown when matchId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void FinishMatchAsync(
         const FString& matchId,

@@ -23,6 +23,9 @@ using namespace std;
 namespace RGN { namespace Modules { namespace VirtualItems {
     class VirtualItemsModule {
     public:
+        /**
+         * Add a virtual item
+         */
         static void AddVirtualItemAsync(
             const RGN::Modules::VirtualItems::VirtualItem& virtualItem,
             const function<void(const RGN::Modules::VirtualItems::VirtualItem& result)>& complete,
@@ -37,6 +40,15 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     },
                     fail);
             };
+        /**
+         * Asynchronously adds a list of virtual items from a CSV content string to the Ready Games Network.
+         * @param virtualItemName - The name of the virtual item.
+         * @param csvContent - The content of the CSV file as a string.
+         * @param csvDelimiter - The delimiter used in the CSV file (defaults to ',').
+         * @param cancellationToken - A CancellationToken to observe while waiting for the task to complete.
+         * @return A Task that represents the asynchronous operation. The Task result contains a list of strings, which are the item IDs of the added virtual items.
+         * @throw: Thrown when 'virtualItemName', 'csvContent', or 'csvDelimiter' is null or empty.
+         */
         static void AddFromCSVAsync(
             const string& virtualItemName,
             const string& csvContent,
@@ -57,6 +69,12 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     },
                     fail);
             };
+        /**
+         * Asynchronously updates a specific virtual item in the Ready Games Network.
+         * @param itemId - The ID of the virtual item to be updated.
+         * @param virtualItem - A VirtualItem object containing the new data for the virtual item.
+         * @return A Task representing the asynchronous operation. The result of the Task is the updated VirtualItem.
+         */
         static void UpdateVirtualItemAsync(
             const string& itemId,
             const RGN::Modules::VirtualItems::VirtualItem& virtualItem,
@@ -73,6 +91,12 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     },
                     fail);
             };
+        /**
+         * Asynchronously deletes a specific virtual item from the Ready Games Network.
+         * @param itemId - The ID of the virtual item to be deleted.
+         * @return A Task representing the asynchronous operation.
+         * @throw: Thrown when 'itemId' is null or empty.
+         */
         static void DeleteVirtualItemAsync(
             const string& itemId,
             const function<void(void)>& complete,
@@ -98,6 +122,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     },
                     fail);
             };
+        /**
+         * Returns a limited list of virtual items for your game.
+         * @param limit - Maximal count of items to return
+         * @param startAfter - The item id to start after
+         */
         static void GetVirtualItemsAsync(
             const int32_t limit,
             const string& startAfter,
@@ -146,6 +175,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     },
                     fail);
             };
+        /**
+         * Returns all tags for specific virtual item
+         */
         static void GetTagsAsync(
             const string& virtualItemId,
             const function<void(const vector<string>& result)>& complete,
@@ -179,6 +211,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     complete,
                     fail);
             };
+        /**
+         * Sets the name for a specific virtual item
+         */
         static void SetNameAsync(
             const string& virtualItemId,
             const string& name,
@@ -194,6 +229,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     complete,
                     fail);
             };
+        /**
+         * Sets the description for a specific virtual item
+         */
         static void SetDescriptionAsync(
             const string& virtualItemId,
             const string& description,
@@ -209,6 +247,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     complete,
                     fail);
             };
+        /**
+         * Returns json string or throws an exception if there are no json for virtual item
+         * @return Returns json as string
+         */
         static void GetPropertiesAsync(
             const string& virtualItemId,
             const function<void(const string& result)>& complete,
@@ -225,6 +267,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     },
                     fail);
             };
+        /**
+         * Set json on a given virtualItemId.
+         * @return Returns json as string
+         */
         static void SetPropertiesAsync(
             const string& virtualItemId,
             const string& json,
@@ -243,6 +289,13 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     },
                     fail);
             };
+        /**
+         * Uploads an image thumbnail for a virtual item to the RGNCore backend.
+         * @param virtualItemId - The ID of the virtual item to upload the thumbnail for.
+         * @param thumbnailTextureBytes - The byte array of the thumbnail texture image to upload.
+         * @param cancellationToken - The cancellation token.
+         * @return A boolean indicating whether the upload was successful.
+         */
         static void UploadImageAsync(
             const string& virtualItemId,
             const vector<uint8_t>& thumbnailTextureBytes,
@@ -256,6 +309,13 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     complete,
                     fail);
             };
+        /**
+         * Downloads an image asynchronously from a specified virtual item ID.
+         * @param virtualItemId - The ID of the virtual item to download the image from.
+         * @param size - The size type of virtual item image to download.
+         * @param cancellationToken - A cancellation token that can be used to cancel the asynchronous operation.
+         * @return A byte array containing the image data.
+         */
         static void DownloadImageAsync(
             const string& virtualItemId,
             const RGN::Model::ImageSize& size,

@@ -21,6 +21,15 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_AnalyticsModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    /**
+     * Asynchronously logs an analytic event with provided event name into RGN analytics backend
+     * This method will retry logging the event up to 7 times
+     * @param eventName - The analytics event name
+     * @param eventParameters - Optional event parameters to store with the event
+     * @param cancellationToken - Optional parameter to enable cancellation of the task.
+     * Default value is an unset CancellationToken.
+     * @throw: Thrown when eventName is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Analytics")
     static void LogEventAsync(
         const FString& eventName,

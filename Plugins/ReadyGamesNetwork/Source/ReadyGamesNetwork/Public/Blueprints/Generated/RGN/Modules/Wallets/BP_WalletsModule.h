@@ -59,6 +59,11 @@ public:
                 }
             );
     }
+    /**
+     * Creates user wallet. Right now it is possible to create just one wallet per user
+     * @param password - Password for the wallet
+     * @return Information of the create operation was successful.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
     static void CreateWalletAsync(
         const FString& password,

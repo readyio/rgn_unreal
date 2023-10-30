@@ -18,6 +18,10 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Creator {
     class CreatorModule {
     public:
+        /**
+         * Sends an asynchronous request to the backend to become a creator
+         * @return FirebaseCreatorSignupResponseData.message = "Success" OR "Brand name already exists" OR "User is already enrolled in Creator Program" OR "Invalid BrandName";
+         */
         static void BecomeACreatorAsync(
             const string& brandName,
             const function<void(const RGN::Modules::Creator::CreatorSignupResponseData& result)>& complete,

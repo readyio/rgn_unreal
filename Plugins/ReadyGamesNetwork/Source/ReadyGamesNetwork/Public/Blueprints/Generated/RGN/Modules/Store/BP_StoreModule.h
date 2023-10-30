@@ -166,6 +166,18 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of lootBoxes from the Ready Games Network (RGN) store based on
+     * the provided application identifiers.
+     * @param appId - Application identifier used to filter the lootBoxes.
+     * @param limit - An integer indicating the maximum number of store offers to retrieve.
+     * @param startAfter - An optional parameter representing an store offer id after which to
+     * start retrieving the store offers. The default is an empty string.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list of
+     * T:RGN.Modules.Store.LootBox objects representing the lootBoxes that match the specified application identifiers,
+     * limit and other optional parameters.
+     * @throw: Thrown when the provided appId list is empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetLootBoxesByAppIdAsync(
         const FString& appId,
@@ -196,6 +208,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of lootBoxes for the current application from the Ready Games Network (RGN) store.
+     * @param limit - An integer indicating the maximum number of lootBoxes to retrieve.
+     * @param startAfter - An optional parameter representing an lootBox id after which to
+     * start retrieving the lootBoxes. The default is an empty string.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+     * of T:RGN.Modules.Store.LootBox objects representing the lootBoxes that match the current application identifier,
+     * limit and other optional parameters.
+     * @throw: Thrown when the provided limit value is zero.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetLootBoxesForCurrentAppAsync(
         int32 limit,
@@ -222,6 +244,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously checks if a lootbox associated with the specified name is
+     * available in the Ready Games Network (RGN) store.
+     * The name specifies the virtual items that are included into the lootbox.
+     * @param name - The unique identifier name associated with the lootbox to be checked.
+     * Specifies the virtual items that are included into the lootbox.
+     * @return A Task representing the asynchronous operation. The Result property of the Task indicates whether
+     * the lootbox is available (returns true) or not (returns false).
+     * @throw: Thrown when the provided name is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void LootboxIsAvailableAsync(
         const FString& name,
@@ -240,6 +272,15 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously gets the number of virtual items available for a lootbox
+     * The name specifies the virtual items that are included into the lootbox.
+     * @param name - The unique identifier name associated with the lootbox to be checked.
+     * Specifies the virtual items that are included into the lootbox.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns
+     * the amount of virtual items available in the loot box
+     * @throw: Thrown when the provided name is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetAvailableLootBoxItemsCountAsync(
         const FString& name,
@@ -258,6 +299,18 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously opens a lootbox associated with the specified name in the Ready Games Network (RGN) store.
+     * The name specifies the virtual items that are included into the lootbox.
+     * Randomly selects a virtual item to purchase. Goes with the selected virtual item through purchase process
+     * M:RGN.Modules.Store.StoreModule.BuyVirtualItemsAsync(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String)
+     * if the virtual item does not have price specified, it is added to users inventory for free
+     * @param name - The unique identifier name associated with the lootbox to be opened.
+     * Specifies the virtual items that are included into the lootbox.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns the
+     * T:RGN.Modules.Inventory.InventoryItemData object representing the items obtained from the opened lootbox.
+     * @throw: Thrown when the provided name is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void OpenLootboxAsync(
         const FString& name,
@@ -326,6 +379,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously imports a list of store offers from a CSV formatted string to the Ready Games Network (RGN) store.
+     * @param content - A string representing the CSV content that contains the store offers to be imported.
+     * @param delimiter - A string representing the character used as a delimiter in the CSV content.
+     * @param cancellationToken - An optional parameter for the CancellationToken that propagates a notification
+     * that operations should be cancelled. The default value is None.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns
+     * a list of T:RGN.Modules.Store.StoreOffer objects representing the successfully imported store offers.
+     * @throw: Thrown when the provided content string is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void ImportStoreOffersFromCSVAsync(
         const FString& content,
@@ -390,6 +453,14 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of store offers from the Ready Games Network (RGN) store based on a provided timestamp.
+     * @param appId - The application identifier used for filtering the store offers.
+     * @param timestamp - A long type argument representing the timestamp for filtering the store offers.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+     * of T:RGN.Modules.Store.StoreOffer objects representing the store offers that match the specified appId and timestamp.
+     * @throw: Thrown when the provided appId string is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetByTimestampAsync(
         const FString& appId,
@@ -454,6 +525,18 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of store offers for the current application from the Ready Games Network (RGN) store.
+     * @param limit - An integer indicating the maximum number of store offers to retrieve.
+     * @param startAfter - An optional parameter representing an store offer id after which to
+     * start retrieving the store offers. The default is an empty string.
+     * @param ignoreTimestamp - An optional parameter that indicates whether to ignore the timestamp in the store offers
+     * retrieval process. The default is false.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+     * of T:RGN.Modules.Store.StoreOffer objects representing the store offers that match the current application identifier,
+     * limit and other optional parameters.
+     * @throw: Thrown when the provided limit value is zero.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetForCurrentAppAsync(
         int32 limit,
@@ -484,6 +567,19 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of store offers with their associated virtual items data for the current application
+     * from the Ready Games Network (RGN) store.
+     * @param limit - An integer indicating the maximum number of store offers to retrieve.
+     * @param startAfter - An optional parameter representing an stor offer id after which to start retrieving the store offers.
+     * The default is an empty string.
+     * @param ignoreTimestamp - An optional parameter that indicates whether to ignore the timestamp in the store
+     * offers retrieval process. The default is false.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list of
+     * T:RGN.Modules.Store.StoreOffer objects with their associated store offer items data that match the current application identifier,
+     * limit and other optional parameters.
+     * @throw: Thrown when the provided limit value is zero.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetWithVirtualItemsDataForCurrentAppAsync(
         int32 limit,
@@ -578,6 +674,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves a list of tags associated with a specific store offer from the Ready Games Network (RGN) store.
+     * @param offerId - The identifier of the store offer for which to retrieve tags.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list of tags
+     * associated with the specified store offer.
+     * @throw: Thrown when the provided offerId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetTagsAsync(
         const FString& offerId,
@@ -628,6 +731,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously sets the name for a specific store offer in the Ready Games Network (RGN) store.
+     * @param offerId - The identifier of the store offer for which to set the name.
+     * @param name - The new name to be set for the specified store offer.
+     * @return A Task representing the asynchronous operation. The task result does not return a value.
+     * @throw: Thrown when the provided offerId or name is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetNameAsync(
         const FString& offerId,
@@ -648,6 +758,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously sets the description for a specific store offer in the Ready Games Network (RGN) store.
+     * @param offerId - The identifier of the store offer for which to set the description.
+     * @param description - The new description to be set for the specified store offer.
+     * @return A Task representing the asynchronous operation. The task result does not return a value.
+     * @throw: Thrown when the provided offerId or description is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetDescriptionAsync(
         const FString& offerId,
@@ -692,6 +809,14 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously sets the time information for a specific store offer in the Ready Games Network (RGN) store.
+     * @param offerId - The identifier of the store offer for which to set the time information.
+     * @param time - A TimeInfo object containing the time information to be set for the specified store offer.
+     * @return A Task representing the asynchronous operation. The task result does not return a value.
+     * @throw: Thrown when the provided offerId is null or empty or when the
+     * provided TimeInfo object is null.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetTimeAsync(
         const FString& offerId,
@@ -712,6 +837,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously sets the image URL for a specific store offer in the Ready Games Network (RGN) store.
+     * @param offerId - The identifier of the store offer for which to set the image URL.
+     * @param imageUrl - The URL of the image to be set for the specified store offer.
+     * @return A Task representing the asynchronous operation. The task result does not return a value.
+     * @throw: Thrown when the provided offerId or imageUrl is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetImageUrlAsync(
         const FString& offerId,
@@ -732,6 +864,12 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves the properties of a specific store offer in the Ready Games Network (RGN) store.
+     * @param storeOfferId - The identifier of the store offer whose properties are to be retrieved.
+     * @return A Task representing the asynchronous operation. The Task result contains a string that represents the JSON-formatted properties of the store offer.
+     * @throw: Thrown when the provided storeOfferId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetPropertiesAsync(
         const FString& storeOfferId,
@@ -750,6 +888,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously sets the properties of a specific store offer in the Ready Games Network (RGN) store.
+     * @param storeOfferId - The identifier of the store offer whose properties are to be set.
+     * @param json - A string containing the JSON representation of the properties to be set.
+     * @return A Task representing the asynchronous operation. The Task result contains a string confirmation of the properties' update.
+     * @throw: Thrown when the provided storeOfferId or json is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetPropertiesAsync(
         const FString& storeOfferId,

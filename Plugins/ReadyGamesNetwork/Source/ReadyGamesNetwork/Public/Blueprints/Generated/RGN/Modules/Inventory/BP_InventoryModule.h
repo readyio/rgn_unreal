@@ -57,6 +57,15 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_InventoryModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    /**
+     * Asynchronously adds a specified quantity of a virtual item to the current logged in user's inventory.
+     * @param virtualItemId - The unique identifier of the virtual item to be added to the inventory.
+     * @param quantity - The quantity of the virtual item to be added. The default value is 1.
+     * @param properties - Optional additional properties associated with the item. The default is null.
+     * @return A Task that represents the asynchronous operation.
+     * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
+     * @throw: Thrown when the user is not logged in.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void AddToInventoryAsync1(
         const FString& virtualItemId,
@@ -83,6 +92,16 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously adds a specified quantity of a virtual item to the inventory for a specified user.
+     * @param userId - The unique identifier of the user whose inventory will be updated.
+     * @param virtualItemId - The unique identifier of the virtual item to be added to the user's inventory.
+     * @param quantity - The quantity of the virtual item to be added. The default value is 1.
+     * @param properties - Optional additional properties associated with the item. The default is null.
+     * @return A Task that represents the asynchronous operation.
+     * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
+     * @throw: Thrown when the ownedItemId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void AddToInventoryAsync2(
         const FString& userId,
@@ -113,6 +132,14 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously adds a specified inventory item to the inventory for a specified user.
+     * @param userId - The unique identifier of the user whose inventory will be updated.
+     * @param inventoryData - The data of the inventory item to be added to the user's inventory. Includes item's unique identifier, quantity and optional additional properties.
+     * @return A Task that represents the asynchronous operation.
+     * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
+     * @throw: Thrown when the userId or inventoryData.ownedItemId is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void AddToInventoryAsync3(
         const FString& userId,
@@ -135,6 +162,15 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its unique identifier.
+     * @param userId - The unique identifier of the user whose inventory to modify.
+     * @param virtualItemId - The unique identifier of the virtual item to remove.
+     * @param quantity - The quantity of the virtual item to remove. Must be a positive number.
+     * @return A task that represents the asynchronous operation.
+     * The task result contains a T:RGN.Modules.Inventory.RemoveByVirtualItemIdResponseData object which holds the server's response data.
+     * @throw: Thrown when  is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void RemoveByVirtualItemIdAsync(
         const FString& userId,
@@ -161,6 +197,15 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its owned item identifier.
+     * @param userId - The unique identifier of the user whose inventory to modify.
+     * @param ownedItemId - The unique identifier of the owned item to remove.
+     * @param quantity - The quantity of the owned item to remove. Must be a positive number. Default is 1.
+     * @return A task that represents the asynchronous operation.
+     * The task result contains a T:RGN.Modules.Inventory.RemoveByOwnedIdResponseData object which holds the server's response data.
+     * @throw: Thrown when  is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void RemoveByInventoryItemIdAsync(
         const FString& userId,
@@ -187,6 +232,10 @@ public:
                 }
             );
     }
+    /**
+     * Returns json string or throws an exception if there are no json for virtual item
+     * @return Returns json as string
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetPropertiesAsync(
         const FString& ownedItemId,
@@ -205,6 +254,10 @@ public:
                 }
             );
     }
+    /**
+     * Set json on a given ownedItemId.
+     * @return Returns json as string
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void SetPropertiesAsync(
         const FString& ownedItemId,
@@ -227,6 +280,10 @@ public:
                 }
             );
     }
+    /**
+     * Get user owned item upgrades, returns all upgrades for all owned items for virtual item ownedItemId
+     * @param ownedItemId - The ownedItemId of the virtual item to search in inventory for
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetUpgradesAsync(
         const FString& ownedItemId,
@@ -287,6 +344,10 @@ public:
                 }
             );
     }
+    /**
+     * Get single owned virtual item inventory data by ownedItemId
+     * @param ownedItemId - The id of the owned item in users inventory
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetByIdAsync(
         const FString& ownedItemId,
@@ -401,6 +462,9 @@ public:
                 }
             );
     }
+    /**
+     * Get multiple owned virtual items inventory data for current app with the Virtual Item data included
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetWithVirtualItemsDataForCurrentAppAsync(
         const FString& startAfter,
@@ -461,6 +525,13 @@ public:
                 }
             );
     }
+    /**
+     * Parses a JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.
+     * @param json - The JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.
+     * @return An T:RGN.Modules.Inventory.InventoryItemData object represented by the JSON string. 
+     * Returns null if the JSON string does not represent a valid T:RGN.Modules.Inventory.InventoryItemData object.
+     * @throw: Thrown when  is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void ParseInventoryItemData(
         const FString& json,
@@ -471,6 +542,13 @@ public:
                 cpp_json
             );
     }
+    /**
+     * Parses a JSON string representation of a list of T:RGN.Modules.Inventory.InventoryItemData objects.
+     * @param json - The JSON string representation of a list of T:RGN.Modules.Inventory.InventoryItemData objects.
+     * @return A list of T:RGN.Modules.Inventory.InventoryItemData objects represented by the JSON string.
+     * Returns null if the JSON string does not represent a valid list of T:RGN.Modules.Inventory.InventoryItemData objects.
+     * @throw: Thrown when  is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void ParseInventoryItemsData(
         const FString& json,
@@ -511,6 +589,13 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously retrieves the tags of an owned item in the inventory by its identifier for current logged in user
+     * @param ownedItemId - The unique identifier of the owned item for which to retrieve tags.
+     * @return A task that represents the asynchronous operation.
+     * The task result contains a list of tags associated with the owned item.
+     * @throw: Thrown when  is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetTagsAsync(
         const FString& ownedItemId,

@@ -55,6 +55,9 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_VirtualItemsModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    /**
+     * Add a virtual item
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void AddVirtualItemAsync(
         const FBP_VirtualItem& virtualItem,
@@ -73,6 +76,15 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously adds a list of virtual items from a CSV content string to the Ready Games Network.
+     * @param virtualItemName - The name of the virtual item.
+     * @param csvContent - The content of the CSV file as a string.
+     * @param csvDelimiter - The delimiter used in the CSV file (defaults to ',').
+     * @param cancellationToken - A CancellationToken to observe while waiting for the task to complete.
+     * @return A Task that represents the asynchronous operation. The Task result contains a list of strings, which are the item IDs of the added virtual items.
+     * @throw: Thrown when 'virtualItemName', 'csvContent', or 'csvDelimiter' is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void AddFromCSVAsync(
         const FString& virtualItemName,
@@ -107,6 +119,12 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously updates a specific virtual item in the Ready Games Network.
+     * @param itemId - The ID of the virtual item to be updated.
+     * @param virtualItem - A VirtualItem object containing the new data for the virtual item.
+     * @return A Task representing the asynchronous operation. The result of the Task is the updated VirtualItem.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void UpdateVirtualItemAsync(
         const FString& itemId,
@@ -129,6 +147,12 @@ public:
                 }
             );
     }
+    /**
+     * Asynchronously deletes a specific virtual item from the Ready Games Network.
+     * @param itemId - The ID of the virtual item to be deleted.
+     * @return A Task representing the asynchronous operation.
+     * @throw: Thrown when 'itemId' is null or empty.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void DeleteVirtualItemAsync(
         const FString& itemId,
@@ -163,6 +187,11 @@ public:
                 }
             );
     }
+    /**
+     * Returns a limited list of virtual items for your game.
+     * @param limit - Maximal count of items to return
+     * @param startAfter - The item id to start after
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetVirtualItemsAsync2(
         int32 limit,
@@ -245,6 +274,9 @@ public:
                 }
             );
     }
+    /**
+     * Returns all tags for specific virtual item
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetTagsAsync(
         const FString& virtualItemId,
@@ -295,6 +327,9 @@ public:
                 }
             );
     }
+    /**
+     * Sets the name for a specific virtual item
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void SetNameAsync(
         const FString& virtualItemId,
@@ -315,6 +350,9 @@ public:
                 }
             );
     }
+    /**
+     * Sets the description for a specific virtual item
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void SetDescriptionAsync(
         const FString& virtualItemId,
@@ -335,6 +373,10 @@ public:
                 }
             );
     }
+    /**
+     * Returns json string or throws an exception if there are no json for virtual item
+     * @return Returns json as string
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void GetPropertiesAsync(
         const FString& virtualItemId,
@@ -353,6 +395,10 @@ public:
                 }
             );
     }
+    /**
+     * Set json on a given virtualItemId.
+     * @return Returns json as string
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void SetPropertiesAsync(
         const FString& virtualItemId,
@@ -375,6 +421,13 @@ public:
                 }
             );
     }
+    /**
+     * Uploads an image thumbnail for a virtual item to the RGNCore backend.
+     * @param virtualItemId - The ID of the virtual item to upload the thumbnail for.
+     * @param thumbnailTextureBytes - The byte array of the thumbnail texture image to upload.
+     * @param cancellationToken - The cancellation token.
+     * @return A boolean indicating whether the upload was successful.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void UploadImageAsync(
         const FString& virtualItemId,
@@ -405,6 +458,13 @@ public:
                 }
             );
     }
+    /**
+     * Downloads an image asynchronously from a specified virtual item ID.
+     * @param virtualItemId - The ID of the virtual item to download the image from.
+     * @param size - The size type of virtual item image to download.
+     * @param cancellationToken - A cancellation token that can be used to cancel the asynchronous operation.
+     * @return A byte array containing the image data.
+     */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void DownloadImageAsync(
         const FString& virtualItemId,
