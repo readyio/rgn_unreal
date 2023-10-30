@@ -23,12 +23,28 @@ void Http::Request(std::string url, HttpMethod method, HttpHeaders& headers, std
 	Request->OnProcessRequestComplete().BindLambda(
 		[callback](FHttpRequestPtr Unused, FHttpResponsePtr UnrealHttpResponse, bool bSucceeded)
 		{
-			FString responseFStr = UnrealHttpResponse->GetContentAsString();
-			std::string responseStr = std::string(TCHAR_TO_UTF8(*responseFStr));
-			int responseCode = UnrealHttpResponse->GetResponseCode();
-			HttpResponse response(responseStr, responseCode);
+			IHttpRequest* req = Unused.Get();
+			EHttpRequestStatus::Type status = req->GetStatus();
 
-			callback(response);
+			if (status == EHttpRequestStatus::Type::Succeeded) {
+				int responseCode = UnrealHttpResponse->GetResponseCode();
+				FString responseFStr = UnrealHttpResponse->GetContentAsString();
+				std::string responseStr = std::string(TCHAR_TO_UTF8(*responseFStr));
+				callback(HttpResponse(responseStr, responseCode));
+			}
+			else {
+				int responseCode = static_cast<int>(status);
+				std::string responseStr;
+				switch (status) {
+					case EHttpRequestStatus::Type::Failed_ConnectionError:
+						responseStr = "Failed connection error.";
+						break;
+					default:
+						responseStr = "Failed.";
+						break;
+				}
+				callback(HttpResponse(responseStr, responseCode));
+			}
 		});
 	Request->SetURL(FString(url.c_str()));
 	Request->SetVerb(getMethodString(method));
