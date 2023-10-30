@@ -53,10 +53,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void AddFromCSVWithBlockchainStubAsync(
             const string& virtualItemName,
             const string& csvContent,
-            const string& csvDelimiter,
-            const CancellationToken& cancellationToken,
-            const function<void(const vector<string>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& csvDelimiter = ",",
+            const CancellationToken& cancellationToken = CancellationToken(),
+            const function<void(const vector<string>& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemName"] = virtualItemName;

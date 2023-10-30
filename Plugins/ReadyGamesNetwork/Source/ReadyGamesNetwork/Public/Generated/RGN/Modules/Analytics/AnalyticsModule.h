@@ -24,10 +24,10 @@ namespace RGN { namespace Modules { namespace Analytics {
          */
         static void LogEventAsync(
             const string& eventName,
-            const string& eventParameters,
-            const CancellationToken& cancellationToken,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& eventParameters = string(),
+            const CancellationToken& cancellationToken = CancellationToken(),
+            const function<void(void)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 RGN::Modules::Analytics::AnalyticsModuleCustomImpl::LogEventAsync(
                     eventName,
                     eventParameters,

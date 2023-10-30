@@ -52,10 +52,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void AddFromCSVAsync(
             const string& virtualItemName,
             const string& csvContent,
-            const string& csvDelimiter,
-            const CancellationToken& cancellationToken,
-            const function<void(const vector<string>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& csvDelimiter = ",",
+            const CancellationToken& cancellationToken = CancellationToken(),
+            const function<void(const vector<string>& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemName"] = virtualItemName;
@@ -129,9 +129,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          */
         static void GetVirtualItemsAsync(
             const int32_t limit,
-            const string& startAfter,
-            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& startAfter = "",
+            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData requestData;
                 requestData.appIds = vector<string>{ RGNCore::GetAppId() };
                 requestData.limit = limit;
@@ -160,9 +160,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             };
         static void GetByTagsAsync(
             const vector<string>& tags,
-            const string& appId,
-            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& appId = "",
+            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["tags"] = tags;
@@ -197,9 +197,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void SetTagsAsync(
             const string& virtualItemId,
             const vector<string>& tags,
-            const string& appId,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& appId = "",
+            const function<void(void)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
@@ -299,9 +299,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void UploadImageAsync(
             const string& virtualItemId,
             const vector<uint8_t>& thumbnailTextureBytes,
-            const CancellationToken& cancellationToken,
-            const function<void(const bool result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const CancellationToken& cancellationToken = CancellationToken(),
+            const function<void(const bool result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::UploadImageAsync(
                     virtualItemId,
                     thumbnailTextureBytes,
@@ -319,9 +319,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         static void DownloadImageAsync(
             const string& virtualItemId,
             const RGN::Model::ImageSize& size,
-            const CancellationToken& cancellationToken,
-            const function<void(const vector<uint8_t>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const CancellationToken& cancellationToken = CancellationToken(),
+            const function<void(const vector<uint8_t>& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::DownloadImageAsync(
                     virtualItemId,
                     size,

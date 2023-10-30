@@ -160,9 +160,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
          */
         static void SetDisplayNameAndBioAsync(
             const string& displayName,
-            const string& bio,
-            const function<void(const string& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& bio = "",
+            const function<void(const string& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 RGN::Modules::UserProfile::UpdateUserProfileRequestData requestData;
                 requestData.displayName = displayName;
                 requestData.bio = bio;
@@ -180,9 +180,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
          */
         static void UploadAvatarImageAsync(
             const vector<uint8_t>& bytes,
-            const CancellationToken& cancellationToken,
-            const function<void(const bool result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const CancellationToken& cancellationToken = CancellationToken(),
+            const function<void(const bool result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::UploadAvatarImageAsync(
                     bytes,
                     cancellationToken,
@@ -199,9 +199,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
         static void DownloadAvatarImageAsync(
             const string& userId,
             const RGN::Model::ImageSize& size,
-            const CancellationToken& cancellationToken,
-            const function<void(const vector<uint8_t>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const CancellationToken& cancellationToken = CancellationToken(),
+            const function<void(const vector<uint8_t>& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::DownloadAvatarImageAsync(
                     userId,
                     size,

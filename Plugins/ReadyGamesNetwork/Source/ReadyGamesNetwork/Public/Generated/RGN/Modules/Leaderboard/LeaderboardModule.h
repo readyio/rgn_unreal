@@ -89,9 +89,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void SetScoreAsync(
             const string& leaderboardId,
             const int32_t score,
-            const string& extraData,
-            const function<void(const int32_t result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& extraData = "",
+            const function<void(const int32_t result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
@@ -115,9 +115,9 @@ namespace RGN { namespace Modules { namespace Leaderboard {
         static void AddScoreAsync(
             const string& leaderboardId,
             const int32_t score,
-            const string& extraData,
-            const function<void(const int32_t result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& extraData = "",
+            const function<void(const int32_t result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;

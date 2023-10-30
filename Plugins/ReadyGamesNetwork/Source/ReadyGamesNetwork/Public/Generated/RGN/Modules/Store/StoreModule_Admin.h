@@ -15,9 +15,9 @@ namespace RGN { namespace Modules { namespace Store {
         static void CreateLootBoxAsync(
             const string& lootBoxName,
             const vector<string>& virtualItemTags,
-            const vector<RGN::Modules::VirtualItems::PriceInfo>& prices,
-            const function<void(const string& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const vector<RGN::Modules::VirtualItems::PriceInfo>& prices = vector<RGN::Modules::VirtualItems::PriceInfo>(),
+            const function<void(const string& result)>& complete = {},
+            const function<void(const int httpCode, const string& error)>& fail = {}) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxName"] = lootBoxName;
