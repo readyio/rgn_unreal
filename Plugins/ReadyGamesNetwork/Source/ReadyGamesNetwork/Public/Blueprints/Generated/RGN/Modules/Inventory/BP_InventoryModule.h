@@ -67,7 +67,7 @@ public:
      * @throw: Thrown when the user is not logged in.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
-    static void AddToInventoryAsync1(
+    static void AddToInventoryAsync_VirtualItemId_Quantity_Properties(
         const FString& virtualItemId,
         int32 quantity,
         const FBP_Properties& properties,
@@ -103,7 +103,7 @@ public:
      * @throw: Thrown when the ownedItemId is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
-    static void AddToInventoryAsync2(
+    static void AddToInventoryAsync_UserId_VirtualItemId_Quantity_Properties(
         const FString& userId,
         const FString& virtualItemId,
         int32 quantity,
@@ -141,7 +141,7 @@ public:
      * @throw: Thrown when the userId or inventoryData.ownedItemId is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
-    static void AddToInventoryAsync3(
+    static void AddToInventoryAsync_UserId_InventoryData(
         const FString& userId,
         const FBP_InventoryItemData& inventoryData,
         FInventoryModuleAddToInventoryAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {

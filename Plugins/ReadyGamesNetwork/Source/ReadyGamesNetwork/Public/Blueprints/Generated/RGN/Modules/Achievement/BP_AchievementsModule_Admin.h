@@ -80,7 +80,7 @@ public:
             );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
-    static void AddLoginDaysInRowAchievementAsync1(
+    static void AddLoginDaysInRowAchievementAsync_AchievementId_DaysInRow(
         const FString& achievementId,
         int32 daysInRow,
         FAchievementsModuleAdminAddLoginDaysInRowAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
@@ -100,7 +100,7 @@ public:
             );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
-    static void AddLoginDaysInRowAchievementAsync2(
+    static void AddLoginDaysInRowAchievementAsync_AchievementData_DaysInRow(
         const FBP_AchievementData& achievementData,
         int32 daysInRow,
         FAchievementsModuleAdminAddLoginDaysInRowAchievementAsyncResponse onSuccess, FAchievementsModule_AdminFailResponse onFail) {
@@ -140,7 +140,7 @@ public:
             );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
-    static void AddPlayerProgressAchievementAsync1(
+    static void AddPlayerProgressAchievementAsync_AchievementId_PlayerProgressFieldName_PlayerProgressFieldValueToReach(
         const FString& achievementId,
         const FString& playerProgressFieldName,
         int64 playerProgressFieldValueToReach,
@@ -164,7 +164,7 @@ public:
             );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
-    static void AddPlayerProgressAchievementAsync2(
+    static void AddPlayerProgressAchievementAsync_AchievementData_PlayerProgressFieldName_PlayerProgressFieldValueToReach(
         const FBP_AchievementData& achievementData,
         const FString& playerProgressFieldName,
         int64 playerProgressFieldValueToReach,

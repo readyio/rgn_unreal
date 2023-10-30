@@ -170,7 +170,7 @@ public:
             );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
-    static void GetVirtualItemsAsync1(
+    static void GetVirtualItemsAsync(
         FVirtualItemsModuleGetVirtualItemsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {
             RGN::Modules::VirtualItems::VirtualItemsModule::GetVirtualItemsAsync(
                 [onSuccess](vector<RGN::Modules::VirtualItems::VirtualItem> response) {
@@ -193,7 +193,7 @@ public:
      * @param startAfter - The item id to start after
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
-    static void GetVirtualItemsAsync2(
+    static void GetVirtualItemsAsync_Limit_StartAfter(
         int32 limit,
         const FString& startAfter,
         FVirtualItemsModuleGetVirtualItemsAsyncResponse onSuccess, FVirtualItemsModuleFailResponse onFail) {

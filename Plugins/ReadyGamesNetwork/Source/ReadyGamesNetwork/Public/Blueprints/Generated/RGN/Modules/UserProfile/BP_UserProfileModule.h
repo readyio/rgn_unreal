@@ -63,7 +63,7 @@ class READYGAMESNETWORK_API UBP_UserProfileModule : public UBlueprintFunctionLib
     GENERATED_BODY()
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
-    static void GetProfileAsync1(
+    static void GetProfileAsync(
         FUserProfileModuleGetProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::GetProfileAsync(
                 [onSuccess](RGN::Modules::UserProfile::UserData response) {
@@ -84,7 +84,7 @@ public:
      * @return Basic user data
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
-    static void GetProfileAsync2(
+    static void GetProfileAsync_UserId(
         const FString& userId,
         FUserProfileModuleGetProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
             string cpp_userId;
@@ -102,7 +102,7 @@ public:
             );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
-    static void GetFullUserProfileAsync1(
+    static void GetFullUserProfileAsync(
         FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::GetFullUserProfileAsync(
                 [onSuccess](string response) {
@@ -116,7 +116,7 @@ public:
             );
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
-    static void GetFullUserProfileAsync2(
+    static void GetFullUserProfileAsync_UserId(
         const FString& userId,
         FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
             string cpp_userId;
