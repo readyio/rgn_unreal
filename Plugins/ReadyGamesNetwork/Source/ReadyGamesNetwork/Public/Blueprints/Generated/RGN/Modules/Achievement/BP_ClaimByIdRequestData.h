@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_ClaimByIdRequestData : public FBP_BaseMigration
     FString id;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::ClaimByIdRequestData& source, FBP_ClaimByIdRequestData& target) {
-		target.id = FString(source.id.c_str());
+        target.id = FString(source.id.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_ClaimByIdRequestData& source, RGN::Modules::Achievement::ClaimByIdRequestData& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
+        target.id = string(TCHAR_TO_UTF8(*source.id));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

@@ -16,23 +16,23 @@ namespace RGN { namespace Modules { namespace Wallets {
     class WalletsModule {
     public:
         static void IsUserHavePrimaryWalletAsync(
-            const function<void(const RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& result)>& complete,
+            const function<void(const RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData>(
                     "wallets-isUserHavePrimaryWallet",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void GetUserWalletsAsync(
-            const function<void(const RGN::Modules::Wallets::GetUserWalletsResponseData& result)>& complete,
+            const function<void(const RGN::Modules::Wallets::GetUserWalletsResponseData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Wallets::GetUserWalletsResponseData>(
                     "wallets-getUserWallets",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         /**
@@ -41,15 +41,15 @@ namespace RGN { namespace Modules { namespace Wallets {
          * @return Information of the create operation was successful.
          */
         static void CreateWalletAsync(
-            const string& password,
-            const function<void(const RGN::Modules::Wallets::CreateWalletResponseData& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const RGN::Modules::Wallets::CreateWalletResponseData& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& password) {
                 RGN::Modules::Wallets::CreateWalletRequestData requestData;
                 requestData.password = password;
                 RGNCore::CallAPI<RGN::Modules::Wallets::CreateWalletRequestData, RGN::Modules::Wallets::CreateWalletResponseData>(
                     "wallets-createWallet",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
     };

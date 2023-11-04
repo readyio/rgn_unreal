@@ -52,22 +52,22 @@ struct READYGAMESNETWORK_API FBP_TimeInfo {
     int64 intervalDelay;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::TimeInfo& source, FBP_TimeInfo& target) {
-		target.hasStart = source.hasStart;
-		target.start = source.start;
-		target.hasEnd = source.hasEnd;
-		target.end = source.end;
-		target.hasInterval = source.hasInterval;
-		target.intervalDuration = source.intervalDuration;
-		target.intervalDelay = source.intervalDelay;
+        target.hasStart = source.hasStart;
+        target.start = source.start;
+        target.hasEnd = source.hasEnd;
+        target.end = source.end;
+        target.hasInterval = source.hasInterval;
+        target.intervalDuration = source.intervalDuration;
+        target.intervalDelay = source.intervalDelay;
 	}
 
 	static void ConvertToCoreModel(const FBP_TimeInfo& source, RGN::Modules::Store::TimeInfo& target) {
-		target.hasStart = source.hasStart;
-		target.start = source.start;
-		target.hasEnd = source.hasEnd;
-		target.end = source.end;
-		target.hasInterval = source.hasInterval;
-		target.intervalDuration = source.intervalDuration;
-		target.intervalDelay = source.intervalDelay;
+        target.hasStart = source.hasStart;
+        target.start = source.start;
+        target.hasEnd = source.hasEnd;
+        target.end = source.end;
+        target.hasInterval = source.hasInterval;
+        target.intervalDuration = source.intervalDuration;
+        target.intervalDelay = source.intervalDelay;
 	}
 };

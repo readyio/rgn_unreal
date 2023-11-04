@@ -54,22 +54,22 @@ struct READYGAMESNETWORK_API FBP_LeaderboardEntry {
     FString extraData;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardEntry& source, FBP_LeaderboardEntry& target) {
-		target.userId = FString(source.userId.c_str());
-		target.displayName = FString(source.displayName.c_str());
-		FBP_UserProfilePicture::ConvertToUnrealModel(source.profilePicture, target.profilePicture);
-		target.score = source.score;
-		target.formattedScore = FString(source.formattedScore.c_str());
-		target.place = source.place;
-		target.extraData = FString(source.extraData.c_str());
+        target.userId = FString(source.userId.c_str());
+        target.displayName = FString(source.displayName.c_str());
+        FBP_UserProfilePicture::ConvertToUnrealModel(source.profilePicture, target.profilePicture);
+        target.score = source.score;
+        target.formattedScore = FString(source.formattedScore.c_str());
+        target.place = source.place;
+        target.extraData = FString(source.extraData.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardEntry& source, RGN::Modules::Leaderboard::LeaderboardEntry& target) {
-		target.userId = string(TCHAR_TO_UTF8(*source.userId));
-		target.displayName = string(TCHAR_TO_UTF8(*source.displayName));
-		FBP_UserProfilePicture::ConvertToCoreModel(source.profilePicture, target.profilePicture);
-		target.score = source.score;
-		target.formattedScore = string(TCHAR_TO_UTF8(*source.formattedScore));
-		target.place = source.place;
-		target.extraData = string(TCHAR_TO_UTF8(*source.extraData));
+        target.userId = string(TCHAR_TO_UTF8(*source.userId));
+        target.displayName = string(TCHAR_TO_UTF8(*source.displayName));
+        FBP_UserProfilePicture::ConvertToCoreModel(source.profilePicture, target.profilePicture);
+        target.score = source.score;
+        target.formattedScore = string(TCHAR_TO_UTF8(*source.formattedScore));
+        target.place = source.place;
+        target.extraData = string(TCHAR_TO_UTF8(*source.extraData));
 	}
 };

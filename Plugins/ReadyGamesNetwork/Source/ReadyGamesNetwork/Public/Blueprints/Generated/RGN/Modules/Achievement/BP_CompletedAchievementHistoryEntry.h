@@ -44,24 +44,24 @@ struct READYGAMESNETWORK_API FBP_CompletedAchievementHistoryEntry {
     int64 completeTime;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::CompletedAchievementHistoryEntry& source, FBP_CompletedAchievementHistoryEntry& target) {
-		target.id = FString(source.id.c_str());
-		target.valueToReach = source.valueToReach;
-		for (const auto& source_rewards_item : source.rewards) {
-			FBP_AchievementReward b_source_rewards_item;
-			FBP_AchievementReward::ConvertToUnrealModel(source_rewards_item, b_source_rewards_item);
-			target.rewards.Add(b_source_rewards_item);
-		}
-		target.completeTime = source.completeTime;
+        target.id = FString(source.id.c_str());
+        target.valueToReach = source.valueToReach;
+        for (const auto& source_rewards_item : source.rewards) {
+            FBP_AchievementReward b_source_rewards_item;
+            FBP_AchievementReward::ConvertToUnrealModel(source_rewards_item, b_source_rewards_item);
+            target.rewards.Add(b_source_rewards_item);
+        }
+        target.completeTime = source.completeTime;
 	}
 
 	static void ConvertToCoreModel(const FBP_CompletedAchievementHistoryEntry& source, RGN::Modules::Achievement::CompletedAchievementHistoryEntry& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
-		target.valueToReach = source.valueToReach;
-		for (const auto& source_rewards_item : source.rewards) {
-			RGN::Modules::Achievement::AchievementReward cpp_source_rewards_item;
-			FBP_AchievementReward::ConvertToCoreModel(source_rewards_item, cpp_source_rewards_item);
-			target.rewards.push_back(cpp_source_rewards_item);
-		}
-		target.completeTime = source.completeTime;
+        target.id = string(TCHAR_TO_UTF8(*source.id));
+        target.valueToReach = source.valueToReach;
+        for (const auto& source_rewards_item : source.rewards) {
+            RGN::Modules::Achievement::AchievementReward cpp_source_rewards_item;
+            FBP_AchievementReward::ConvertToCoreModel(source_rewards_item, cpp_source_rewards_item);
+            target.rewards.push_back(cpp_source_rewards_item);
+        }
+        target.completeTime = source.completeTime;
 	}
 };

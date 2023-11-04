@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_GetUserIdByShortUIDRequestData : public FBP_Bas
     FString shortUID;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData& source, FBP_GetUserIdByShortUIDRequestData& target) {
-		target.shortUID = FString(source.shortUID.c_str());
+        target.shortUID = FString(source.shortUID.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_GetUserIdByShortUIDRequestData& source, RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData& target) {
-		target.shortUID = string(TCHAR_TO_UTF8(*source.shortUID));
+        target.shortUID = string(TCHAR_TO_UTF8(*source.shortUID));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

@@ -61,30 +61,30 @@ struct READYGAMESNETWORK_API FBP_UserAchievement {
     TArray<FBP_CompletedAchievementHistoryEntry> history;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::UserAchievement& source, FBP_UserAchievement& target) {
-		target.id = FString(source.id.c_str());
-		target.value = source.value;
-		target.valueToReach = source.valueToReach;
-		target.isCompleted = source.isCompleted;
-		target.isClaimed = source.isClaimed;
-		target.lastCompleteTime = source.lastCompleteTime;
-		for (const auto& source_history_item : source.history) {
-			FBP_CompletedAchievementHistoryEntry b_source_history_item;
-			FBP_CompletedAchievementHistoryEntry::ConvertToUnrealModel(source_history_item, b_source_history_item);
-			target.history.Add(b_source_history_item);
-		}
+        target.id = FString(source.id.c_str());
+        target.value = source.value;
+        target.valueToReach = source.valueToReach;
+        target.isCompleted = source.isCompleted;
+        target.isClaimed = source.isClaimed;
+        target.lastCompleteTime = source.lastCompleteTime;
+        for (const auto& source_history_item : source.history) {
+            FBP_CompletedAchievementHistoryEntry b_source_history_item;
+            FBP_CompletedAchievementHistoryEntry::ConvertToUnrealModel(source_history_item, b_source_history_item);
+            target.history.Add(b_source_history_item);
+        }
 	}
 
 	static void ConvertToCoreModel(const FBP_UserAchievement& source, RGN::Modules::Achievement::UserAchievement& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
-		target.value = source.value;
-		target.valueToReach = source.valueToReach;
-		target.isCompleted = source.isCompleted;
-		target.isClaimed = source.isClaimed;
-		target.lastCompleteTime = source.lastCompleteTime;
-		for (const auto& source_history_item : source.history) {
-			RGN::Modules::Achievement::CompletedAchievementHistoryEntry cpp_source_history_item;
-			FBP_CompletedAchievementHistoryEntry::ConvertToCoreModel(source_history_item, cpp_source_history_item);
-			target.history.push_back(cpp_source_history_item);
-		}
+        target.id = string(TCHAR_TO_UTF8(*source.id));
+        target.value = source.value;
+        target.valueToReach = source.valueToReach;
+        target.isCompleted = source.isCompleted;
+        target.isClaimed = source.isClaimed;
+        target.lastCompleteTime = source.lastCompleteTime;
+        for (const auto& source_history_item : source.history) {
+            RGN::Modules::Achievement::CompletedAchievementHistoryEntry cpp_source_history_item;
+            FBP_CompletedAchievementHistoryEntry::ConvertToCoreModel(source_history_item, cpp_source_history_item);
+            target.history.push_back(cpp_source_history_item);
+        }
 	}
 };

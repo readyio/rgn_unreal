@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_IsUserCanBeLinkedRequestData : public FBP_BaseR
     FString email;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::IsUserCanBeLinkedRequestData& source, FBP_IsUserCanBeLinkedRequestData& target) {
-		target.email = FString(source.email.c_str());
+        target.email = FString(source.email.c_str());
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_IsUserCanBeLinkedRequestData& source, RGN::Model::Request::IsUserCanBeLinkedRequestData& target) {
-		target.email = string(TCHAR_TO_UTF8(*source.email));
+        target.email = string(TCHAR_TO_UTF8(*source.email));
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

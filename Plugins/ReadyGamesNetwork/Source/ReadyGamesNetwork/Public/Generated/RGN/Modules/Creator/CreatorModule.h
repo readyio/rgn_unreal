@@ -23,47 +23,47 @@ namespace RGN { namespace Modules { namespace Creator {
          * @return FirebaseCreatorSignupResponseData.message = "Success" OR "Brand name already exists" OR "User is already enrolled in Creator Program" OR "Invalid BrandName";
          */
         static void BecomeACreatorAsync(
-            const string& brandName,
-            const function<void(const RGN::Modules::Creator::CreatorSignupResponseData& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const RGN::Modules::Creator::CreatorSignupResponseData& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& brandName) {
                 RGN::Modules::Creator::CreatorSignupRequestData requestData;
                 requestData.brandName = brandName;
                 RGNCore::CallAPI<RGN::Modules::Creator::CreatorSignupRequestData, RGN::Modules::Creator::CreatorSignupResponseData>(
                     "creator-signup",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void SubmitItemAsync(
-            const RGN::Modules::VirtualItems::VirtualItem& customizedItem,
-            const function<void(const RGN::Modules::Creator::CreatorSubmitItemResponseData& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const RGN::Modules::Creator::CreatorSubmitItemResponseData& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const RGN::Modules::VirtualItems::VirtualItem& customizedItem) {
                 RGN::Modules::Creator::CreatorSubmitItemRequestData requestData;
                 requestData.customizedItem = customizedItem;
                 RGNCore::CallAPI<RGN::Modules::Creator::CreatorSubmitItemRequestData, RGN::Modules::Creator::CreatorSubmitItemResponseData>(
                     "creator-addItem",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void GetCreatorDataAsync(
-            const function<void(const RGN::Modules::Creator::CreatorData& result)>& complete,
+            const function<void(const RGN::Modules::Creator::CreatorData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Creator::CreatorData>(
                     "creator-getCreatorData",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void ClaimCurrenciesAsync(
-            const function<void(const RGN::Modules::Currency::ClaimCurrencyResponseData& result)>& complete,
+            const function<void(const RGN::Modules::Currency::ClaimCurrencyResponseData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::Currency::ClaimCurrencyResponseData>(
                     "creator-claimCurrency",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
     };

@@ -19,14 +19,14 @@ struct READYGAMESNETWORK_API FBP_UpdateUserProfileRequestData : public FBP_BaseM
     FString bio;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UpdateUserProfileRequestData& source, FBP_UpdateUserProfileRequestData& target) {
-		target.displayName = FString(source.displayName.c_str());
-		target.bio = FString(source.bio.c_str());
+        target.displayName = FString(source.displayName.c_str());
+        target.bio = FString(source.bio.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_UpdateUserProfileRequestData& source, RGN::Modules::UserProfile::UpdateUserProfileRequestData& target) {
-		target.displayName = string(TCHAR_TO_UTF8(*source.displayName));
-		target.bio = string(TCHAR_TO_UTF8(*source.bio));
+        target.displayName = string(TCHAR_TO_UTF8(*source.displayName));
+        target.bio = string(TCHAR_TO_UTF8(*source.bio));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

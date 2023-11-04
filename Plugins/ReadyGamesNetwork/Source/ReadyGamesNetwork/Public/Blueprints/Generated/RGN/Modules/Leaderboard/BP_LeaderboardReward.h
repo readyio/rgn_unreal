@@ -31,14 +31,14 @@ struct READYGAMESNETWORK_API FBP_LeaderboardReward {
     FString achievementId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardReward& source, FBP_LeaderboardReward& target) {
-		target.placeFrom = source.placeFrom;
-		target.placeTo = source.placeTo;
-		target.achievementId = FString(source.achievementId.c_str());
+        target.placeFrom = source.placeFrom;
+        target.placeTo = source.placeTo;
+        target.achievementId = FString(source.achievementId.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardReward& source, RGN::Modules::Leaderboard::LeaderboardReward& target) {
-		target.placeFrom = source.placeFrom;
-		target.placeTo = source.placeTo;
-		target.achievementId = string(TCHAR_TO_UTF8(*source.achievementId));
+        target.placeFrom = source.placeFrom;
+        target.placeTo = source.placeTo;
+        target.achievementId = string(TCHAR_TO_UTF8(*source.achievementId));
 	}
 };

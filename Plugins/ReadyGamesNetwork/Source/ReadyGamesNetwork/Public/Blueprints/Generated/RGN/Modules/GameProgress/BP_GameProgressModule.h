@@ -43,96 +43,96 @@ class READYGAMESNETWORK_API UBP_GameProgressModule : public UBlueprintFunctionLi
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
     static void OnGameCompleteAsync(
-        const TArray<FBP_Currency>& reward,
-        FGameProgressModuleOnGameCompleteAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+        FGameProgressModuleOnGameCompleteAsyncResponse onSuccess,
+        FGameProgressModuleFailResponse onFail,
+        const TArray<FBP_Currency>& reward) {
             vector<RGN::Modules::Currency::Currency> cpp_reward;
-			for (const auto& reward_item : reward) {
-				RGN::Modules::Currency::Currency cpp_reward_item;
-				FBP_Currency::ConvertToCoreModel(reward_item, cpp_reward_item);
-				cpp_reward.push_back(cpp_reward_item);
-			}
+            for (const auto& reward_item : reward) {
+                RGN::Modules::Currency::Currency cpp_reward_item;
+                FBP_Currency::ConvertToCoreModel(reward_item, cpp_reward_item);
+                cpp_reward.push_back(cpp_reward_item);
+            }
             RGN::Modules::GameProgress::GameProgressModule::OnGameCompleteAsync(
-                cpp_reward,
                 [onSuccess](RGN::Modules::GameProgress::OnGameCompleteResult response) {
                     FBP_OnGameCompleteResult bpResponse;
-					FBP_OnGameCompleteResult::ConvertToUnrealModel(response, bpResponse);
+                    FBP_OnGameCompleteResult::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_reward);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
     static void GetGameProgressAsync(
-        FGameProgressModuleGetGameProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+        FGameProgressModuleGetGameProgressAsyncResponse onSuccess,
+        FGameProgressModuleFailResponse onFail) {
             RGN::Modules::GameProgress::GameProgressModule::GetGameProgressAsync(
                 [onSuccess](RGN::Modules::GameProgress::GameProgress response) {
                     FBP_GameProgress bpResponse;
-					FBP_GameProgress::ConvertToUnrealModel(response, bpResponse);
+                    FBP_GameProgress::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
     static void AddUserProgressAsync(
-        const FString& userProgressJson,
-        FGameProgressModuleAddUserProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+        FGameProgressModuleAddUserProgressAsyncResponse onSuccess,
+        FGameProgressModuleFailResponse onFail,
+        const FString& userProgressJson) {
             string cpp_userProgressJson;
-			cpp_userProgressJson = string(TCHAR_TO_UTF8(*userProgressJson));
+            cpp_userProgressJson = string(TCHAR_TO_UTF8(*userProgressJson));
             RGN::Modules::GameProgress::GameProgressModule::AddUserProgressAsync(
-                cpp_userProgressJson,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userProgressJson);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
     static void UpdateUserProgressAsync(
+        FGameProgressModuleUpdateUserProgressAsyncResponse onSuccess,
+        FGameProgressModuleFailResponse onFail,
         const FString& userProgressJson,
-        const TArray<FBP_Currency>& reward,
-        FGameProgressModuleUpdateUserProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+        const TArray<FBP_Currency>& reward) {
             string cpp_userProgressJson;
             vector<RGN::Modules::Currency::Currency> cpp_reward;
-			cpp_userProgressJson = string(TCHAR_TO_UTF8(*userProgressJson));
-			for (const auto& reward_item : reward) {
-				RGN::Modules::Currency::Currency cpp_reward_item;
-				FBP_Currency::ConvertToCoreModel(reward_item, cpp_reward_item);
-				cpp_reward.push_back(cpp_reward_item);
-			}
+            cpp_userProgressJson = string(TCHAR_TO_UTF8(*userProgressJson));
+            for (const auto& reward_item : reward) {
+                RGN::Modules::Currency::Currency cpp_reward_item;
+                FBP_Currency::ConvertToCoreModel(reward_item, cpp_reward_item);
+                cpp_reward.push_back(cpp_reward_item);
+            }
             RGN::Modules::GameProgress::GameProgressModule::UpdateUserProgressAsync(
-                cpp_userProgressJson,
-                cpp_reward,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userProgressJson,
+                cpp_reward);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | GameProgress")
     static void GetUserProgressAsync(
-        FGameProgressModuleGetUserProgressAsyncResponse onSuccess, FGameProgressModuleFailResponse onFail) {
+        FGameProgressModuleGetUserProgressAsyncResponse onSuccess,
+        FGameProgressModuleFailResponse onFail) {
             RGN::Modules::GameProgress::GameProgressModule::GetUserProgressAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
 };

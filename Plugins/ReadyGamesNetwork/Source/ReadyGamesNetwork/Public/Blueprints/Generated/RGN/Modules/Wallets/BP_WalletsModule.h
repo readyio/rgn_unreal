@@ -33,31 +33,31 @@ class READYGAMESNETWORK_API UBP_WalletsModule : public UBlueprintFunctionLibrary
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
     static void IsUserHavePrimaryWalletAsync(
-        FWalletsModuleIsUserHavePrimaryWalletAsyncResponse onSuccess, FWalletsModuleFailResponse onFail) {
+        FWalletsModuleIsUserHavePrimaryWalletAsyncResponse onSuccess,
+        FWalletsModuleFailResponse onFail) {
             RGN::Modules::Wallets::WalletsModule::IsUserHavePrimaryWalletAsync(
                 [onSuccess](RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData response) {
                     FBP_IsUserHavePrimaryWalletResponseData bpResponse;
-					FBP_IsUserHavePrimaryWalletResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_IsUserHavePrimaryWalletResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
     static void GetUserWalletsAsync(
-        FWalletsModuleGetUserWalletsAsyncResponse onSuccess, FWalletsModuleFailResponse onFail) {
+        FWalletsModuleGetUserWalletsAsyncResponse onSuccess,
+        FWalletsModuleFailResponse onFail) {
             RGN::Modules::Wallets::WalletsModule::GetUserWalletsAsync(
                 [onSuccess](RGN::Modules::Wallets::GetUserWalletsResponseData response) {
                     FBP_GetUserWalletsResponseData bpResponse;
-					FBP_GetUserWalletsResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_GetUserWalletsResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     /**
      * Creates user wallet. Right now it is possible to create just one wallet per user
@@ -66,20 +66,20 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
     static void CreateWalletAsync(
-        const FString& password,
-        FWalletsModuleCreateWalletAsyncResponse onSuccess, FWalletsModuleFailResponse onFail) {
+        FWalletsModuleCreateWalletAsyncResponse onSuccess,
+        FWalletsModuleFailResponse onFail,
+        const FString& password) {
             string cpp_password;
-			cpp_password = string(TCHAR_TO_UTF8(*password));
+            cpp_password = string(TCHAR_TO_UTF8(*password));
             RGN::Modules::Wallets::WalletsModule::CreateWalletAsync(
-                cpp_password,
                 [onSuccess](RGN::Modules::Wallets::CreateWalletResponseData response) {
                     FBP_CreateWalletResponseData bpResponse;
-					FBP_CreateWalletResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_CreateWalletResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_password);
     }
 };

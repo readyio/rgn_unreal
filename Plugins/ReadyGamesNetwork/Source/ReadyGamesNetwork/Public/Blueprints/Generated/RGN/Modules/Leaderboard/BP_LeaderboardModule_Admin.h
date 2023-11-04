@@ -25,54 +25,54 @@ class READYGAMESNETWORK_API UBP_LeaderboardModule_Admin : public UBlueprintFunct
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void AddLeaderboardAsync(
-        const FBP_LeaderboardData& leaderboardData,
-        FLeaderboardModuleAdminAddLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
+        FLeaderboardModuleAdminAddLeaderboardAsyncResponse onSuccess,
+        FLeaderboardModule_AdminFailResponse onFail,
+        const FBP_LeaderboardData& leaderboardData) {
             RGN::Modules::Leaderboard::LeaderboardData cpp_leaderboardData;
-			FBP_LeaderboardData::ConvertToCoreModel(leaderboardData, cpp_leaderboardData);
+            FBP_LeaderboardData::ConvertToCoreModel(leaderboardData, cpp_leaderboardData);
             RGN::Modules::Leaderboard::LeaderboardModule_Admin::AddLeaderboardAsync(
-                cpp_leaderboardData,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_leaderboardData);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void UpdateLeaderboardAsync(
-        const FBP_LeaderboardData& leaderboardData,
-        FLeaderboardModuleAdminUpdateLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
+        FLeaderboardModuleAdminUpdateLeaderboardAsyncResponse onSuccess,
+        FLeaderboardModule_AdminFailResponse onFail,
+        const FBP_LeaderboardData& leaderboardData) {
             RGN::Modules::Leaderboard::LeaderboardData cpp_leaderboardData;
-			FBP_LeaderboardData::ConvertToCoreModel(leaderboardData, cpp_leaderboardData);
+            FBP_LeaderboardData::ConvertToCoreModel(leaderboardData, cpp_leaderboardData);
             RGN::Modules::Leaderboard::LeaderboardModule_Admin::UpdateLeaderboardAsync(
-                cpp_leaderboardData,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_leaderboardData);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
     static void DeleteLeaderboardAsync(
-        const FString& leaderboardId,
-        FLeaderboardModuleAdminDeleteLeaderboardAsyncResponse onSuccess, FLeaderboardModule_AdminFailResponse onFail) {
+        FLeaderboardModuleAdminDeleteLeaderboardAsyncResponse onSuccess,
+        FLeaderboardModule_AdminFailResponse onFail,
+        const FString& leaderboardId) {
             string cpp_leaderboardId;
-			cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
+            cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
             RGN::Modules::Leaderboard::LeaderboardModule_Admin::DeleteLeaderboardAsync(
-                cpp_leaderboardId,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_leaderboardId);
     }
 };

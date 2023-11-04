@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_AddUserLevelRequestData : public FBP_BaseMigrat
     FString playerProgress;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::AddUserLevelRequestData& source, FBP_AddUserLevelRequestData& target) {
-		target.playerProgress = FString(source.playerProgress.c_str());
+        target.playerProgress = FString(source.playerProgress.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_AddUserLevelRequestData& source, RGN::Modules::GameProgress::AddUserLevelRequestData& target) {
-		target.playerProgress = string(TCHAR_TO_UTF8(*source.playerProgress));
+        target.playerProgress = string(TCHAR_TO_UTF8(*source.playerProgress));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

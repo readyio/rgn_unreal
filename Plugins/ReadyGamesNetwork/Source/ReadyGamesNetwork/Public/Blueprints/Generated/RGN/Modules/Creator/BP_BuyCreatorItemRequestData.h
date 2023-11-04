@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_BuyCreatorItemRequestData : public FBP_BaseRequ
     FString itemId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::BuyCreatorItemRequestData& source, FBP_BuyCreatorItemRequestData& target) {
-		target.itemId = FString(source.itemId.c_str());
+        target.itemId = FString(source.itemId.c_str());
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_BuyCreatorItemRequestData& source, RGN::Modules::Creator::BuyCreatorItemRequestData& target) {
-		target.itemId = string(TCHAR_TO_UTF8(*source.itemId));
+        target.itemId = string(TCHAR_TO_UTF8(*source.itemId));
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

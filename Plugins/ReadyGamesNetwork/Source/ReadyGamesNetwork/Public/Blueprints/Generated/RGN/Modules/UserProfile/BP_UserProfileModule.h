@@ -64,17 +64,17 @@ class READYGAMESNETWORK_API UBP_UserProfileModule : public UBlueprintFunctionLib
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetProfileAsync(
-        FUserProfileModuleGetProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetProfileAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::GetProfileAsync(
                 [onSuccess](RGN::Modules::UserProfile::UserData response) {
                     FBP_UserData bpResponse;
-					FBP_UserData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_UserData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     /**
      * Returns user data for provided user id. The base data contains some basic user info
@@ -85,53 +85,53 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetProfileAsync_UserId(
-        const FString& userId,
-        FUserProfileModuleGetProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetProfileAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& userId) {
             string cpp_userId;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
             RGN::Modules::UserProfile::UserProfileModule::GetProfileAsync(
-                cpp_userId,
                 [onSuccess](RGN::Modules::UserProfile::UserData response) {
                     FBP_UserData bpResponse;
-					FBP_UserData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_UserData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetFullUserProfileAsync(
-        FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::GetFullUserProfileAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetFullUserProfileAsync_UserId(
-        const FString& userId,
-        FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetFullUserProfileAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& userId) {
             string cpp_userId;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
             RGN::Modules::UserProfile::UserProfileModule::GetFullUserProfileAsync(
-                cpp_userId,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId);
     }
     /**
      * Searches for users by their nickname.
@@ -140,43 +140,43 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SearchUsersAsync(
-        const FString& nicknameQuery,
-        FUserProfileModuleSearchUsersAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleSearchUsersAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& nicknameQuery) {
             string cpp_nicknameQuery;
-			cpp_nicknameQuery = string(TCHAR_TO_UTF8(*nicknameQuery));
+            cpp_nicknameQuery = string(TCHAR_TO_UTF8(*nicknameQuery));
             RGN::Modules::UserProfile::UserProfileModule::SearchUsersAsync(
-                cpp_nicknameQuery,
                 [onSuccess](vector<RGN::Modules::UserProfile::UserData> response) {
                     TArray<FBP_UserData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_UserData b_response_item;
-						FBP_UserData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_UserData b_response_item;
+                        FBP_UserData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_nicknameQuery);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserCurrenciesAsync(
-        FUserProfileModuleGetUserCurrenciesAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetUserCurrenciesAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::GetUserCurrenciesAsync(
                 [onSuccess](vector<RGN::Modules::Currency::Currency> response) {
                     TArray<FBP_Currency> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_Currency b_response_item;
-						FBP_Currency::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_Currency b_response_item;
+                        FBP_Currency::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     /**
      * Gets the user ID associated with a short UID.
@@ -185,21 +185,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserIdByShortUIDAsync(
-        const FString& shortUID,
-        FUserProfileModuleGetUserIdByShortUIDAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetUserIdByShortUIDAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& shortUID) {
             string cpp_shortUID;
-			cpp_shortUID = string(TCHAR_TO_UTF8(*shortUID));
+            cpp_shortUID = string(TCHAR_TO_UTF8(*shortUID));
             RGN::Modules::UserProfile::UserProfileModule::GetUserIdByShortUIDAsync(
-                cpp_shortUID,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_shortUID);
     }
     /**
      * Sets the display name of the user.
@@ -208,21 +208,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetDisplayNameAsync(
-        const FString& displayName,
-        FUserProfileModuleSetDisplayNameAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleSetDisplayNameAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& displayName) {
             string cpp_displayName;
-			cpp_displayName = string(TCHAR_TO_UTF8(*displayName));
+            cpp_displayName = string(TCHAR_TO_UTF8(*displayName));
             RGN::Modules::UserProfile::UserProfileModule::SetDisplayNameAsync(
-                cpp_displayName,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_displayName);
     }
     /**
      * Sets the bio of the user.
@@ -231,21 +231,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetBioAsync(
-        const FString& bio,
-        FUserProfileModuleSetBioAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleSetBioAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& bio) {
             string cpp_bio;
-			cpp_bio = string(TCHAR_TO_UTF8(*bio));
+            cpp_bio = string(TCHAR_TO_UTF8(*bio));
             RGN::Modules::UserProfile::UserProfileModule::SetBioAsync(
-                cpp_bio,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_bio);
     }
     /**
      * Sets the display name and bio of the user.
@@ -255,25 +255,25 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetDisplayNameAndBioAsync(
+        FUserProfileModuleSetDisplayNameAndBioAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
         const FString& displayName,
-        const FString& bio,
-        FUserProfileModuleSetDisplayNameAndBioAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        const FString& bio) {
             string cpp_displayName;
             string cpp_bio;
-			cpp_displayName = string(TCHAR_TO_UTF8(*displayName));
-			cpp_bio = string(TCHAR_TO_UTF8(*bio));
+            cpp_displayName = string(TCHAR_TO_UTF8(*displayName));
+            cpp_bio = string(TCHAR_TO_UTF8(*bio));
             RGN::Modules::UserProfile::UserProfileModule::SetDisplayNameAndBioAsync(
-                cpp_displayName,
-                cpp_bio,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_displayName,
+                cpp_bio);
     }
     /**
      * Uploads a user's avatar image to the RGNCore backend.
@@ -283,29 +283,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void UploadAvatarImageAsync(
+        FUserProfileModuleUploadAvatarImageAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
         const TArray<uint8>& bytes,
-        const FBP_CancellationToken& cancellationToken,
-        FUserProfileModuleUploadAvatarImageAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             vector<uint8_t> cpp_bytes;
             CancellationToken cpp_cancellationToken;
-			for (const auto& bytes_item : bytes) {
-				uint8_t cpp_bytes_item;
-				cpp_bytes_item = bytes_item;
-				cpp_bytes.push_back(cpp_bytes_item);
-			}
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            for (const auto& bytes_item : bytes) {
+                uint8_t cpp_bytes_item;
+                cpp_bytes_item = bytes_item;
+                cpp_bytes.push_back(cpp_bytes_item);
+            }
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::UserProfile::UserProfileModule::UploadAvatarImageAsync(
-                cpp_bytes,
-                cpp_cancellationToken,
                 [onSuccess](bool response) {
                     bool bpResponse;
-					bpResponse = response;
+                    bpResponse = response;
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_bytes,
+                cpp_cancellationToken);
     }
     /**
      * Downloads the avatar image of a user as a byte array from Firebase storage.
@@ -316,33 +316,33 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void DownloadAvatarImageAsync(
+        FUserProfileModuleDownloadAvatarImageAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
         const FString& userId,
         const EBP_ImageSize& size,
-        const FBP_CancellationToken& cancellationToken,
-        FUserProfileModuleDownloadAvatarImageAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_userId;
             RGN::Model::ImageSize cpp_size;
             CancellationToken cpp_cancellationToken;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
-			cpp_size = static_cast<RGN::Model::ImageSize>(size);
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_size = static_cast<RGN::Model::ImageSize>(size);
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::UserProfile::UserProfileModule::DownloadAvatarImageAsync(
-                cpp_userId,
-                cpp_size,
-                cpp_cancellationToken,
                 [onSuccess](vector<uint8_t> response) {
                     TArray<uint8> bpResponse;
-					for (const auto& response_item : response) {
-						uint8 b_response_item;
-						b_response_item = response_item;
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        uint8 b_response_item;
+                        b_response_item = response_item;
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId,
+                cpp_size,
+                cpp_cancellationToken);
     }
     /**
      * Changes the admin status and access level of a user by their email.
@@ -353,29 +353,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void ChangeAdminStatusByEmailAsync(
+        FUserProfileModuleChangeAdminStatusByEmailAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
         const FString& email,
         bool isAdmin,
-        int32 accessLevel,
-        FUserProfileModuleChangeAdminStatusByEmailAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        int32 accessLevel) {
             string cpp_email;
             bool cpp_isAdmin;
             int32_t cpp_accessLevel;
-			cpp_email = string(TCHAR_TO_UTF8(*email));
-			cpp_isAdmin = isAdmin;
-			cpp_accessLevel = accessLevel;
+            cpp_email = string(TCHAR_TO_UTF8(*email));
+            cpp_isAdmin = isAdmin;
+            cpp_accessLevel = accessLevel;
             RGN::Modules::UserProfile::UserProfileModule::ChangeAdminStatusByEmailAsync(
-                cpp_email,
-                cpp_isAdmin,
-                cpp_accessLevel,
                 [onSuccess](RGN::Modules::UserProfile::UserCustomClaims response) {
                     FBP_UserCustomClaims bpResponse;
-					FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
+                    FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_email,
+                cpp_isAdmin,
+                cpp_accessLevel);
     }
     /**
      * Changes the admin status and access level of a user by their user ID.
@@ -386,29 +386,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void ChangeAdminStatusByUserIdAsync(
+        FUserProfileModuleChangeAdminStatusByUserIdAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
         const FString& userId,
         bool isAdmin,
-        int32 accessLevel,
-        FUserProfileModuleChangeAdminStatusByUserIdAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        int32 accessLevel) {
             string cpp_userId;
             bool cpp_isAdmin;
             int32_t cpp_accessLevel;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
-			cpp_isAdmin = isAdmin;
-			cpp_accessLevel = accessLevel;
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_isAdmin = isAdmin;
+            cpp_accessLevel = accessLevel;
             RGN::Modules::UserProfile::UserProfileModule::ChangeAdminStatusByUserIdAsync(
-                cpp_userId,
-                cpp_isAdmin,
-                cpp_accessLevel,
                 [onSuccess](RGN::Modules::UserProfile::UserCustomClaims response) {
                     FBP_UserCustomClaims bpResponse;
-					FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
+                    FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId,
+                cpp_isAdmin,
+                cpp_accessLevel);
     }
     /**
      * Gets the custom claims for a user by their user ID.
@@ -417,21 +417,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserCustomClaimsByUserIdAsync(
-        const FString& userId,
-        FUserProfileModuleGetUserCustomClaimsByUserIdAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetUserCustomClaimsByUserIdAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& userId) {
             string cpp_userId;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
             RGN::Modules::UserProfile::UserProfileModule::GetUserCustomClaimsByUserIdAsync(
-                cpp_userId,
                 [onSuccess](RGN::Modules::UserProfile::UserCustomClaims response) {
                     FBP_UserCustomClaims bpResponse;
-					FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
+                    FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId);
     }
     /**
      * Gets the custom claims for a user by their email.
@@ -440,21 +440,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserCustomClaimsByEmailAsync(
-        const FString& email,
-        FUserProfileModuleGetUserCustomClaimsByEmailAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetUserCustomClaimsByEmailAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& email) {
             string cpp_email;
-			cpp_email = string(TCHAR_TO_UTF8(*email));
+            cpp_email = string(TCHAR_TO_UTF8(*email));
             RGN::Modules::UserProfile::UserProfileModule::GetUserCustomClaimsByEmailAsync(
-                cpp_email,
                 [onSuccess](RGN::Modules::UserProfile::UserCustomClaims response) {
                     FBP_UserCustomClaims bpResponse;
-					FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
+                    FBP_UserCustomClaims::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_email);
     }
     /**
      * Sets the invisible status for the current user.
@@ -462,43 +462,43 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SetInvisibleStatusAsync(
-        bool invisibleStatus,
-        FUserProfileModuleSetInvisibleStatusAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleSetInvisibleStatusAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        bool invisibleStatus) {
             bool cpp_invisibleStatus;
-			cpp_invisibleStatus = invisibleStatus;
+            cpp_invisibleStatus = invisibleStatus;
             RGN::Modules::UserProfile::UserProfileModule::SetInvisibleStatusAsync(
-                cpp_invisibleStatus,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_invisibleStatus);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void PingAsync(
-        FUserProfileModulePingAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModulePingAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::PingAsync(
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void SuspendAsync(
-        FUserProfileModuleSuspendAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleSuspendAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::SuspendAsync(
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     /**
      * Retrieves the status of a user with the specified user ID.
@@ -507,20 +507,20 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserStateAsync(
-        const FString& userId,
-        FUserProfileModuleGetUserStateAsyncResponse onSuccess, FUserProfileModuleFailResponse onFail) {
+        FUserProfileModuleGetUserStateAsyncResponse onSuccess,
+        FUserProfileModuleFailResponse onFail,
+        const FString& userId) {
             string cpp_userId;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
             RGN::Modules::UserProfile::UserProfileModule::GetUserStateAsync(
-                cpp_userId,
                 [onSuccess](RGN::Modules::UserProfile::GetUserStatusResponseData response) {
                     FBP_GetUserStatusResponseData bpResponse;
-					FBP_GetUserStatusResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_GetUserStatusResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId);
     }
 };

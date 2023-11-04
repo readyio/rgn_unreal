@@ -26,12 +26,12 @@ struct READYGAMESNETWORK_API FBP_Vote {
     FString participantId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::Vote& source, FBP_Vote& target) {
-		target.voterId = FString(source.voterId.c_str());
-		target.participantId = FString(source.participantId.c_str());
+        target.voterId = FString(source.voterId.c_str());
+        target.participantId = FString(source.participantId.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_Vote& source, RGN::Modules::Matchmaking::Vote& target) {
-		target.voterId = string(TCHAR_TO_UTF8(*source.voterId));
-		target.participantId = string(TCHAR_TO_UTF8(*source.participantId));
+        target.voterId = string(TCHAR_TO_UTF8(*source.voterId));
+        target.participantId = string(TCHAR_TO_UTF8(*source.participantId));
 	}
 };

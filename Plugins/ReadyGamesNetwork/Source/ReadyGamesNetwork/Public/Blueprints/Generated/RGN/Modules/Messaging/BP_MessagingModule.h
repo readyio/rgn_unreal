@@ -30,17 +30,17 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void Subscribe(
+        FMessagingModuleSubscribeResponse onSuccess,
+        FMessagingModuleFailResponse onFail,
         const FString& topic,
-        const FBP_IMessageReceiver& messageReceiver,
-        FMessagingModuleSubscribeResponse onSuccess, FMessagingModuleFailResponse onFail) {
+        const FBP_IMessageReceiver& messageReceiver) {
             string cpp_topic;
             RGN::Modules::Messaging::IMessageReceiver cpp_messageReceiver;
-			cpp_topic = string(TCHAR_TO_UTF8(*topic));
-			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
+            cpp_topic = string(TCHAR_TO_UTF8(*topic));
+            FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
             RGN::Modules::Messaging::MessagingModule::Subscribe(
                 cpp_topic,
-                cpp_messageReceiver
-            );
+                cpp_messageReceiver);
     }
     /**
      * Unsubscribes the  from the provided "
@@ -49,17 +49,17 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void Unsubscribe(
+        FMessagingModuleUnsubscribeResponse onSuccess,
+        FMessagingModuleFailResponse onFail,
         const FString& topic,
-        const FBP_IMessageReceiver& messageReceiver,
-        FMessagingModuleUnsubscribeResponse onSuccess, FMessagingModuleFailResponse onFail) {
+        const FBP_IMessageReceiver& messageReceiver) {
             string cpp_topic;
             RGN::Modules::Messaging::IMessageReceiver cpp_messageReceiver;
-			cpp_topic = string(TCHAR_TO_UTF8(*topic));
-			FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
+            cpp_topic = string(TCHAR_TO_UTF8(*topic));
+            FBP_IMessageReceiver::ConvertToCoreModel(messageReceiver, cpp_messageReceiver);
             RGN::Modules::Messaging::MessagingModule::Unsubscribe(
                 cpp_topic,
-                cpp_messageReceiver
-            );
+                cpp_messageReceiver);
     }
     /**
      * Sends a message to provided user.
@@ -78,34 +78,34 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Messaging")
     static void SendMessageByUserId(
+        FMessagingModuleSendMessageByUserIdResponse onSuccess,
+        FMessagingModuleFailResponse onFail,
         const FString& appId,
         const FString& userId,
         const FString& payload,
         const FString& title,
-        const FString& text,
-        FMessagingModuleSendMessageByUserIdResponse onSuccess, FMessagingModuleFailResponse onFail) {
+        const FString& text) {
             string cpp_appId;
             string cpp_userId;
             string cpp_payload;
             string cpp_title;
             string cpp_text;
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
-			cpp_payload = string(TCHAR_TO_UTF8(*payload));
-			cpp_title = string(TCHAR_TO_UTF8(*title));
-			cpp_text = string(TCHAR_TO_UTF8(*text));
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_payload = string(TCHAR_TO_UTF8(*payload));
+            cpp_title = string(TCHAR_TO_UTF8(*title));
+            cpp_text = string(TCHAR_TO_UTF8(*text));
             RGN::Modules::Messaging::MessagingModule::SendMessageByUserId(
-                cpp_appId,
-                cpp_userId,
-                cpp_payload,
-                cpp_title,
-                cpp_text,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appId,
+                cpp_userId,
+                cpp_payload,
+                cpp_title,
+                cpp_text);
     }
 };

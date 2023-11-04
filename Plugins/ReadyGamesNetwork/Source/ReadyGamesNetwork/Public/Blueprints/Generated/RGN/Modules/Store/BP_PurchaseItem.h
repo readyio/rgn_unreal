@@ -21,12 +21,12 @@ struct READYGAMESNETWORK_API FBP_PurchaseItem {
     FBP_InventoryItemData inventoryItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::PurchaseItem& source, FBP_PurchaseItem& target) {
-		FBP_VirtualItem::ConvertToUnrealModel(source.virtualItem, target.virtualItem);
-		FBP_InventoryItemData::ConvertToUnrealModel(source.inventoryItem, target.inventoryItem);
+        FBP_VirtualItem::ConvertToUnrealModel(source.virtualItem, target.virtualItem);
+        FBP_InventoryItemData::ConvertToUnrealModel(source.inventoryItem, target.inventoryItem);
 	}
 
 	static void ConvertToCoreModel(const FBP_PurchaseItem& source, RGN::Modules::Store::PurchaseItem& target) {
-		FBP_VirtualItem::ConvertToCoreModel(source.virtualItem, target.virtualItem);
-		FBP_InventoryItemData::ConvertToCoreModel(source.inventoryItem, target.inventoryItem);
+        FBP_VirtualItem::ConvertToCoreModel(source.virtualItem, target.virtualItem);
+        FBP_InventoryItemData::ConvertToCoreModel(source.inventoryItem, target.inventoryItem);
 	}
 };

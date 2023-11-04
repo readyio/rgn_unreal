@@ -13,46 +13,46 @@ namespace RGN { namespace Modules { namespace Leaderboard {
     class LeaderboardModule_Admin {
     public:
         static void AddLeaderboardAsync(
-            const RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
-            const function<void(const string& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const string& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const RGN::Modules::Leaderboard::LeaderboardData& leaderboardData) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "leaderboardV2-add",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["result"]["leaderboardId"].template get<string>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["result"]["leaderboardId"].template get<string>());
                     },
                     fail);
             };
         static void UpdateLeaderboardAsync(
-            const RGN::Modules::Leaderboard::LeaderboardData& leaderboardData,
-            const function<void(const string& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const string& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const RGN::Modules::Leaderboard::LeaderboardData& leaderboardData) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["data"] = leaderboardData;
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "leaderboardV2-update",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["result"]["leaderboardId"].template get<string>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["result"]["leaderboardId"].template get<string>());
                     },
                     fail);
             };
         static void DeleteLeaderboardAsync(
-            const string& leaderboardId,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& leaderboardId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = leaderboardId;
                 RGNCore::CallAPI<nlohmann::json>(
                     "leaderboardV2-delete",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
     };

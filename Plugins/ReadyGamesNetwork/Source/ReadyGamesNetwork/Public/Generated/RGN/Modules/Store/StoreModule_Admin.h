@@ -13,11 +13,11 @@ namespace RGN { namespace Modules { namespace Store {
     class StoreModule_Admin {
     public:
         static void CreateLootBoxAsync(
+            const function<void(const string& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& lootBoxName,
             const vector<string>& virtualItemTags,
-            const vector<RGN::Modules::VirtualItems::PriceInfo>& prices = vector<RGN::Modules::VirtualItems::PriceInfo>(),
-            const function<void(const string& result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const vector<RGN::Modules::VirtualItems::PriceInfo>& prices = vector<RGN::Modules::VirtualItems::PriceInfo>()) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxName"] = lootBoxName;
@@ -26,37 +26,37 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "storeV2-createLootBox",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["lootBoxId"].template get<string>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["lootBoxId"].template get<string>());
                     },
                     fail);
             };
         static void DeleteLootBoxAsync(
-            const string& lootBoxId,
-            const function<void(const string& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const string& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& lootBoxId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["lootBoxId"] = lootBoxId;
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "storeV2-deleteLootBox",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["lootBoxId"].template get<string>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["lootBoxId"].template get<string>());
                     },
                     fail);
             };
         static void DeleteStoreOfferAsync(
-            const string& offerId,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& offerId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = offerId;
                 RGNCore::CallAPI<nlohmann::json>(
                     "storeV2-deleteStoreOffer",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
     };

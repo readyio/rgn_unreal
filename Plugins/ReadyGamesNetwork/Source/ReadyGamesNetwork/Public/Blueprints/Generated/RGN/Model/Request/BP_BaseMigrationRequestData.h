@@ -23,12 +23,12 @@ struct READYGAMESNETWORK_API FBP_BaseMigrationRequestData : public FBP_BaseReque
     int32 version;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::BaseMigrationRequestData& source, FBP_BaseMigrationRequestData& target) {
-		target.version = source.version;
+        target.version = source.version;
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_BaseMigrationRequestData& source, RGN::Model::Request::BaseMigrationRequestData& target) {
-		target.version = source.version;
+        target.version = source.version;
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

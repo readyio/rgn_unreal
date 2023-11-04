@@ -27,12 +27,12 @@ struct READYGAMESNETWORK_API FBP_Message {
     FString Payload;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Messaging::Message& source, FBP_Message& target) {
-		target.Id = FString(source.Id.c_str());
-		target.Payload = FString(source.Payload.c_str());
+        target.Id = FString(source.Id.c_str());
+        target.Payload = FString(source.Payload.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_Message& source, RGN::Modules::Messaging::Message& target) {
-		target.Id = string(TCHAR_TO_UTF8(*source.Id));
-		target.Payload = string(TCHAR_TO_UTF8(*source.Payload));
+        target.Id = string(TCHAR_TO_UTF8(*source.Id));
+        target.Payload = string(TCHAR_TO_UTF8(*source.Payload));
 	}
 };

@@ -21,28 +21,28 @@ struct READYGAMESNETWORK_API FBP_GetStoreOffersWithVirtualItemsDataResponse {
     TArray<FBP_VirtualItem> virtualItems;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse& source, FBP_GetStoreOffersWithVirtualItemsDataResponse& target) {
-		for (const auto& source_offers_item : source.offers) {
-			FBP_StoreOffer b_source_offers_item;
-			FBP_StoreOffer::ConvertToUnrealModel(source_offers_item, b_source_offers_item);
-			target.offers.Add(b_source_offers_item);
-		}
-		for (const auto& source_virtualItems_item : source.virtualItems) {
-			FBP_VirtualItem b_source_virtualItems_item;
-			FBP_VirtualItem::ConvertToUnrealModel(source_virtualItems_item, b_source_virtualItems_item);
-			target.virtualItems.Add(b_source_virtualItems_item);
-		}
+        for (const auto& source_offers_item : source.offers) {
+            FBP_StoreOffer b_source_offers_item;
+            FBP_StoreOffer::ConvertToUnrealModel(source_offers_item, b_source_offers_item);
+            target.offers.Add(b_source_offers_item);
+        }
+        for (const auto& source_virtualItems_item : source.virtualItems) {
+            FBP_VirtualItem b_source_virtualItems_item;
+            FBP_VirtualItem::ConvertToUnrealModel(source_virtualItems_item, b_source_virtualItems_item);
+            target.virtualItems.Add(b_source_virtualItems_item);
+        }
 	}
 
 	static void ConvertToCoreModel(const FBP_GetStoreOffersWithVirtualItemsDataResponse& source, RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse& target) {
-		for (const auto& source_offers_item : source.offers) {
-			RGN::Modules::Store::StoreOffer cpp_source_offers_item;
-			FBP_StoreOffer::ConvertToCoreModel(source_offers_item, cpp_source_offers_item);
-			target.offers.push_back(cpp_source_offers_item);
-		}
-		for (const auto& source_virtualItems_item : source.virtualItems) {
-			RGN::Modules::VirtualItems::VirtualItem cpp_source_virtualItems_item;
-			FBP_VirtualItem::ConvertToCoreModel(source_virtualItems_item, cpp_source_virtualItems_item);
-			target.virtualItems.push_back(cpp_source_virtualItems_item);
-		}
+        for (const auto& source_offers_item : source.offers) {
+            RGN::Modules::Store::StoreOffer cpp_source_offers_item;
+            FBP_StoreOffer::ConvertToCoreModel(source_offers_item, cpp_source_offers_item);
+            target.offers.push_back(cpp_source_offers_item);
+        }
+        for (const auto& source_virtualItems_item : source.virtualItems) {
+            RGN::Modules::VirtualItems::VirtualItem cpp_source_virtualItems_item;
+            FBP_VirtualItem::ConvertToCoreModel(source_virtualItems_item, cpp_source_virtualItems_item);
+            target.virtualItems.push_back(cpp_source_virtualItems_item);
+        }
 	}
 };

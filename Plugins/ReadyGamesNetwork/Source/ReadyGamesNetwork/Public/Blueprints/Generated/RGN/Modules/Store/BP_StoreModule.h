@@ -82,89 +82,89 @@ class READYGAMESNETWORK_API UBP_StoreModule : public UBlueprintFunctionLibrary {
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void BuyVirtualItemsAsync(
+        FStoreModuleBuyVirtualItemsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const TArray<FString>& itemIds,
         const TArray<FString>& currencies,
-        const FString& offerId,
-        FStoreModuleBuyVirtualItemsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& offerId) {
             vector<string> cpp_itemIds;
             vector<string> cpp_currencies;
             string cpp_offerId;
-			for (const auto& itemIds_item : itemIds) {
-				string cpp_itemIds_item;
-				cpp_itemIds_item = string(TCHAR_TO_UTF8(*itemIds_item));
-				cpp_itemIds.push_back(cpp_itemIds_item);
-			}
-			for (const auto& currencies_item : currencies) {
-				string cpp_currencies_item;
-				cpp_currencies_item = string(TCHAR_TO_UTF8(*currencies_item));
-				cpp_currencies.push_back(cpp_currencies_item);
-			}
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            for (const auto& itemIds_item : itemIds) {
+                string cpp_itemIds_item;
+                cpp_itemIds_item = string(TCHAR_TO_UTF8(*itemIds_item));
+                cpp_itemIds.push_back(cpp_itemIds_item);
+            }
+            for (const auto& currencies_item : currencies) {
+                string cpp_currencies_item;
+                cpp_currencies_item = string(TCHAR_TO_UTF8(*currencies_item));
+                cpp_currencies.push_back(cpp_currencies_item);
+            }
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
             RGN::Modules::Store::StoreModule::BuyVirtualItemsAsync(
-                cpp_itemIds,
-                cpp_currencies,
-                cpp_offerId,
                 [onSuccess](RGN::Modules::Store::PurchaseResult response) {
                     FBP_PurchaseResult bpResponse;
-					FBP_PurchaseResult::ConvertToUnrealModel(response, bpResponse);
+                    FBP_PurchaseResult::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_itemIds,
+                cpp_currencies,
+                cpp_offerId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void BuyStoreOfferAsync(
+        FStoreModuleBuyStoreOfferAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& offerId,
-        const TArray<FString>& currencies,
-        FStoreModuleBuyStoreOfferAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const TArray<FString>& currencies) {
             string cpp_offerId;
             vector<string> cpp_currencies;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-			for (const auto& currencies_item : currencies) {
-				string cpp_currencies_item;
-				cpp_currencies_item = string(TCHAR_TO_UTF8(*currencies_item));
-				cpp_currencies.push_back(cpp_currencies_item);
-			}
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            for (const auto& currencies_item : currencies) {
+                string cpp_currencies_item;
+                cpp_currencies_item = string(TCHAR_TO_UTF8(*currencies_item));
+                cpp_currencies.push_back(cpp_currencies_item);
+            }
             RGN::Modules::Store::StoreModule::BuyStoreOfferAsync(
-                cpp_offerId,
-                cpp_currencies,
                 [onSuccess](RGN::Modules::Store::PurchaseResult response) {
                     FBP_PurchaseResult bpResponse;
-					FBP_PurchaseResult::ConvertToUnrealModel(response, bpResponse);
+                    FBP_PurchaseResult::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId,
+                cpp_currencies);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetLootBoxesByIdsAsync(
-        const TArray<FString>& ids,
-        FStoreModuleGetLootBoxesByIdsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        FStoreModuleGetLootBoxesByIdsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const TArray<FString>& ids) {
             vector<string> cpp_ids;
-			for (const auto& ids_item : ids) {
-				string cpp_ids_item;
-				cpp_ids_item = string(TCHAR_TO_UTF8(*ids_item));
-				cpp_ids.push_back(cpp_ids_item);
-			}
+            for (const auto& ids_item : ids) {
+                string cpp_ids_item;
+                cpp_ids_item = string(TCHAR_TO_UTF8(*ids_item));
+                cpp_ids.push_back(cpp_ids_item);
+            }
             RGN::Modules::Store::StoreModule::GetLootBoxesByIdsAsync(
-                cpp_ids,
                 [onSuccess](vector<RGN::Modules::Store::LootBox> response) {
                     TArray<FBP_LootBox> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_LootBox b_response_item;
-						FBP_LootBox::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_LootBox b_response_item;
+                        FBP_LootBox::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ids);
     }
     /**
      * Asynchronously retrieves a list of lootBoxes from the Ready Games Network (RGN) store based on
@@ -180,33 +180,33 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetLootBoxesByAppIdAsync(
+        FStoreModuleGetLootBoxesByAppIdAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& appId,
         int32 limit,
-        const FString& startAfter,
-        FStoreModuleGetLootBoxesByAppIdAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& startAfter) {
             string cpp_appId;
             int32_t cpp_limit;
             string cpp_startAfter;
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
             RGN::Modules::Store::StoreModule::GetLootBoxesByAppIdAsync(
-                cpp_appId,
-                cpp_limit,
-                cpp_startAfter,
                 [onSuccess](vector<RGN::Modules::Store::LootBox> response) {
                     TArray<FBP_LootBox> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_LootBox b_response_item;
-						FBP_LootBox::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_LootBox b_response_item;
+                        FBP_LootBox::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appId,
+                cpp_limit,
+                cpp_startAfter);
     }
     /**
      * Asynchronously retrieves a list of lootBoxes for the current application from the Ready Games Network (RGN) store.
@@ -220,29 +220,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetLootBoxesForCurrentAppAsync(
+        FStoreModuleGetLootBoxesForCurrentAppAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         int32 limit,
-        const FString& startAfter,
-        FStoreModuleGetLootBoxesForCurrentAppAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& startAfter) {
             int32_t cpp_limit;
             string cpp_startAfter;
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
             RGN::Modules::Store::StoreModule::GetLootBoxesForCurrentAppAsync(
-                cpp_limit,
-                cpp_startAfter,
                 [onSuccess](vector<RGN::Modules::Store::LootBox> response) {
                     TArray<FBP_LootBox> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_LootBox b_response_item;
-						FBP_LootBox::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_LootBox b_response_item;
+                        FBP_LootBox::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_limit,
+                cpp_startAfter);
     }
     /**
      * Asynchronously checks if a lootbox associated with the specified name is
@@ -256,21 +256,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void LootboxIsAvailableAsync(
-        const FString& name,
-        FStoreModuleLootboxIsAvailableAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        FStoreModuleLootboxIsAvailableAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const FString& name) {
             string cpp_name;
-			cpp_name = string(TCHAR_TO_UTF8(*name));
+            cpp_name = string(TCHAR_TO_UTF8(*name));
             RGN::Modules::Store::StoreModule::LootboxIsAvailableAsync(
-                cpp_name,
                 [onSuccess](bool response) {
                     bool bpResponse;
-					bpResponse = response;
+                    bpResponse = response;
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_name);
     }
     /**
      * Asynchronously gets the number of virtual items available for a lootbox
@@ -283,21 +283,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetAvailableLootBoxItemsCountAsync(
-        const FString& name,
-        FStoreModuleGetAvailableLootBoxItemsCountAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        FStoreModuleGetAvailableLootBoxItemsCountAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const FString& name) {
             string cpp_name;
-			cpp_name = string(TCHAR_TO_UTF8(*name));
+            cpp_name = string(TCHAR_TO_UTF8(*name));
             RGN::Modules::Store::StoreModule::GetAvailableLootBoxItemsCountAsync(
-                cpp_name,
                 [onSuccess](int64_t response) {
                     int64 bpResponse;
-					bpResponse = response;
+                    bpResponse = response;
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_name);
     }
     /**
      * Asynchronously opens a lootbox associated with the specified name in the Ready Games Network (RGN) store.
@@ -313,71 +313,71 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void OpenLootboxAsync(
-        const FString& name,
-        FStoreModuleOpenLootboxAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        FStoreModuleOpenLootboxAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const FString& name) {
             string cpp_name;
-			cpp_name = string(TCHAR_TO_UTF8(*name));
+            cpp_name = string(TCHAR_TO_UTF8(*name));
             RGN::Modules::Store::StoreModule::OpenLootboxAsync(
-                cpp_name,
                 [onSuccess](RGN::Modules::Inventory::InventoryItemData response) {
                     FBP_InventoryItemData bpResponse;
-					FBP_InventoryItemData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_InventoryItemData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_name);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void AddVirtualItemsStoreOfferAsync(
+        FStoreModuleAddVirtualItemsStoreOfferAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const TArray<FString>& appIds,
         const TArray<FString>& itemIds,
         const FString& name,
         const FString& description,
         const TArray<FString>& tags,
-        int32 quantity,
-        FStoreModuleAddVirtualItemsStoreOfferAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        int32 quantity) {
             vector<string> cpp_appIds;
             vector<string> cpp_itemIds;
             string cpp_name;
             string cpp_description;
             vector<string> cpp_tags;
             int32_t cpp_quantity;
-			for (const auto& appIds_item : appIds) {
-				string cpp_appIds_item;
-				cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
-				cpp_appIds.push_back(cpp_appIds_item);
-			}
-			for (const auto& itemIds_item : itemIds) {
-				string cpp_itemIds_item;
-				cpp_itemIds_item = string(TCHAR_TO_UTF8(*itemIds_item));
-				cpp_itemIds.push_back(cpp_itemIds_item);
-			}
-			cpp_name = string(TCHAR_TO_UTF8(*name));
-			cpp_description = string(TCHAR_TO_UTF8(*description));
-			for (const auto& tags_item : tags) {
-				string cpp_tags_item;
-				cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
-				cpp_tags.push_back(cpp_tags_item);
-			}
-			cpp_quantity = quantity;
+            for (const auto& appIds_item : appIds) {
+                string cpp_appIds_item;
+                cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+                cpp_appIds.push_back(cpp_appIds_item);
+            }
+            for (const auto& itemIds_item : itemIds) {
+                string cpp_itemIds_item;
+                cpp_itemIds_item = string(TCHAR_TO_UTF8(*itemIds_item));
+                cpp_itemIds.push_back(cpp_itemIds_item);
+            }
+            cpp_name = string(TCHAR_TO_UTF8(*name));
+            cpp_description = string(TCHAR_TO_UTF8(*description));
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_quantity = quantity;
             RGN::Modules::Store::StoreModule::AddVirtualItemsStoreOfferAsync(
+                [onSuccess](RGN::Modules::Store::StoreOffer response) {
+                    FBP_StoreOffer bpResponse;
+                    FBP_StoreOffer::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
                 cpp_appIds,
                 cpp_itemIds,
                 cpp_name,
                 cpp_description,
                 cpp_tags,
-                cpp_quantity,
-                [onSuccess](RGN::Modules::Store::StoreOffer response) {
-                    FBP_StoreOffer bpResponse;
-					FBP_StoreOffer::ConvertToUnrealModel(response, bpResponse);
-                    onSuccess.ExecuteIfBound(bpResponse);
-                },
-                [onFail](int code, std::string message) {
-                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                cpp_quantity);
     }
     /**
      * Asynchronously imports a list of store offers from a CSV formatted string to the Ready Games Network (RGN) store.
@@ -391,67 +391,67 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void ImportStoreOffersFromCSVAsync(
+        FStoreModuleImportStoreOffersFromCSVAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& content,
         const FString& delimiter,
-        const FBP_CancellationToken& cancellationToken,
-        FStoreModuleImportStoreOffersFromCSVAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_content;
             string cpp_delimiter;
             CancellationToken cpp_cancellationToken;
-			cpp_content = string(TCHAR_TO_UTF8(*content));
-			cpp_delimiter = string(TCHAR_TO_UTF8(*delimiter));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_content = string(TCHAR_TO_UTF8(*content));
+            cpp_delimiter = string(TCHAR_TO_UTF8(*delimiter));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Store::StoreModule::ImportStoreOffersFromCSVAsync(
-                cpp_content,
-                cpp_delimiter,
-                cpp_cancellationToken,
                 [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
                     TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_content,
+                cpp_delimiter,
+                cpp_cancellationToken);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetByTagsAsync(
+        FStoreModuleGetByTagsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const TArray<FString>& tags,
         const FString& appId,
-        bool ignoreTimestamp,
-        FStoreModuleGetByTagsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        bool ignoreTimestamp) {
             vector<string> cpp_tags;
             string cpp_appId;
             bool cpp_ignoreTimestamp;
-			for (const auto& tags_item : tags) {
-				string cpp_tags_item;
-				cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
-				cpp_tags.push_back(cpp_tags_item);
-			}
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
-			cpp_ignoreTimestamp = ignoreTimestamp;
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            cpp_ignoreTimestamp = ignoreTimestamp;
             RGN::Modules::Store::StoreModule::GetByTagsAsync(
-                cpp_tags,
-                cpp_appId,
-                cpp_ignoreTimestamp,
                 [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
                     TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_tags,
+                cpp_appId,
+                cpp_ignoreTimestamp);
     }
     /**
      * Asynchronously retrieves a list of store offers from the Ready Games Network (RGN) store based on a provided timestamp.
@@ -463,67 +463,67 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetByTimestampAsync(
+        FStoreModuleGetByTimestampAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& appId,
-        int64 timestamp,
-        FStoreModuleGetByTimestampAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        int64 timestamp) {
             string cpp_appId;
             int64_t cpp_timestamp;
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
-			cpp_timestamp = timestamp;
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            cpp_timestamp = timestamp;
             RGN::Modules::Store::StoreModule::GetByTimestampAsync(
-                cpp_appId,
-                cpp_timestamp,
                 [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
                     TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appId,
+                cpp_timestamp);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetByAppIdsAsync(
+        FStoreModuleGetByAppIdsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const TArray<FString>& appIds,
         int32 limit,
         const FString& startAfter,
-        bool ignoreTimestamp,
-        FStoreModuleGetByAppIdsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        bool ignoreTimestamp) {
             vector<string> cpp_appIds;
             int32_t cpp_limit;
             string cpp_startAfter;
             bool cpp_ignoreTimestamp;
-			for (const auto& appIds_item : appIds) {
-				string cpp_appIds_item;
-				cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
-				cpp_appIds.push_back(cpp_appIds_item);
-			}
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			cpp_ignoreTimestamp = ignoreTimestamp;
+            for (const auto& appIds_item : appIds) {
+                string cpp_appIds_item;
+                cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+                cpp_appIds.push_back(cpp_appIds_item);
+            }
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_ignoreTimestamp = ignoreTimestamp;
             RGN::Modules::Store::StoreModule::GetByAppIdsAsync(
-                cpp_appIds,
-                cpp_limit,
-                cpp_startAfter,
-                cpp_ignoreTimestamp,
                 [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
                     TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appIds,
+                cpp_limit,
+                cpp_startAfter,
+                cpp_ignoreTimestamp);
     }
     /**
      * Asynchronously retrieves a list of store offers for the current application from the Ready Games Network (RGN) store.
@@ -539,33 +539,33 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetForCurrentAppAsync(
+        FStoreModuleGetForCurrentAppAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         int32 limit,
         const FString& startAfter,
-        bool ignoreTimestamp,
-        FStoreModuleGetForCurrentAppAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        bool ignoreTimestamp) {
             int32_t cpp_limit;
             string cpp_startAfter;
             bool cpp_ignoreTimestamp;
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			cpp_ignoreTimestamp = ignoreTimestamp;
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_ignoreTimestamp = ignoreTimestamp;
             RGN::Modules::Store::StoreModule::GetForCurrentAppAsync(
-                cpp_limit,
-                cpp_startAfter,
-                cpp_ignoreTimestamp,
                 [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
                     TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_limit,
+                cpp_startAfter,
+                cpp_ignoreTimestamp);
     }
     /**
      * Asynchronously retrieves a list of store offers with their associated virtual items data for the current application
@@ -582,97 +582,97 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetWithVirtualItemsDataForCurrentAppAsync(
+        FStoreModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         int32 limit,
         const FString& startAfter,
-        bool ignoreTimestamp,
-        FStoreModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        bool ignoreTimestamp) {
             int32_t cpp_limit;
             string cpp_startAfter;
             bool cpp_ignoreTimestamp;
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			cpp_ignoreTimestamp = ignoreTimestamp;
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_ignoreTimestamp = ignoreTimestamp;
             RGN::Modules::Store::StoreModule::GetWithVirtualItemsDataForCurrentAppAsync(
-                cpp_limit,
-                cpp_startAfter,
-                cpp_ignoreTimestamp,
                 [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
                     TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_limit,
+                cpp_startAfter,
+                cpp_ignoreTimestamp);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetWithVirtualItemsDataByAppIdsAsync(
+        FStoreModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const TArray<FString>& appIds,
         int32 limit,
         const FString& startAfter,
-        bool ignoreTimestamp,
-        FStoreModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        bool ignoreTimestamp) {
             vector<string> cpp_appIds;
             int32_t cpp_limit;
             string cpp_startAfter;
             bool cpp_ignoreTimestamp;
-			for (const auto& appIds_item : appIds) {
-				string cpp_appIds_item;
-				cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
-				cpp_appIds.push_back(cpp_appIds_item);
-			}
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			cpp_ignoreTimestamp = ignoreTimestamp;
+            for (const auto& appIds_item : appIds) {
+                string cpp_appIds_item;
+                cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+                cpp_appIds.push_back(cpp_appIds_item);
+            }
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_ignoreTimestamp = ignoreTimestamp;
             RGN::Modules::Store::StoreModule::GetWithVirtualItemsDataByAppIdsAsync(
+                [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
+                    TArray<FBP_StoreOffer> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
                 cpp_appIds,
                 cpp_limit,
                 cpp_startAfter,
-                cpp_ignoreTimestamp,
-                [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
-                    TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
-                    onSuccess.ExecuteIfBound(bpResponse);
-                },
-                [onFail](int code, std::string message) {
-                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                cpp_ignoreTimestamp);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetByIdsAsync(
-        const TArray<FString>& ids,
-        FStoreModuleGetByIdsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        FStoreModuleGetByIdsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const TArray<FString>& ids) {
             vector<string> cpp_ids;
-			for (const auto& ids_item : ids) {
-				string cpp_ids_item;
-				cpp_ids_item = string(TCHAR_TO_UTF8(*ids_item));
-				cpp_ids.push_back(cpp_ids_item);
-			}
+            for (const auto& ids_item : ids) {
+                string cpp_ids_item;
+                cpp_ids_item = string(TCHAR_TO_UTF8(*ids_item));
+                cpp_ids.push_back(cpp_ids_item);
+            }
             RGN::Modules::Store::StoreModule::GetByIdsAsync(
-                cpp_ids,
                 [onSuccess](vector<RGN::Modules::Store::StoreOffer> response) {
                     TArray<FBP_StoreOffer> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_StoreOffer b_response_item;
-						FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_StoreOffer b_response_item;
+                        FBP_StoreOffer::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ids);
     }
     /**
      * Asynchronously retrieves a list of tags associated with a specific store offer from the Ready Games Network (RGN) store.
@@ -683,53 +683,53 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetTagsAsync(
-        const FString& offerId,
-        FStoreModuleGetTagsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        FStoreModuleGetTagsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const FString& offerId) {
             string cpp_offerId;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
             RGN::Modules::Store::StoreModule::GetTagsAsync(
-                cpp_offerId,
                 [onSuccess](vector<string> response) {
                     TArray<FString> bpResponse;
-					for (const auto& response_item : response) {
-						FString b_response_item;
-						b_response_item = FString(response_item.c_str());
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FString b_response_item;
+                        b_response_item = FString(response_item.c_str());
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetTagsAsync(
+        FStoreModuleSetTagsAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& offerId,
         const TArray<FString>& tags,
-        const FString& appId,
-        FStoreModuleSetTagsAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& appId) {
             string cpp_offerId;
             vector<string> cpp_tags;
             string cpp_appId;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-			for (const auto& tags_item : tags) {
-				string cpp_tags_item;
-				cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
-				cpp_tags.push_back(cpp_tags_item);
-			}
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
             RGN::Modules::Store::StoreModule::SetTagsAsync(
-                cpp_offerId,
-                cpp_tags,
-                cpp_appId,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId,
+                cpp_tags,
+                cpp_appId);
     }
     /**
      * Asynchronously sets the name for a specific store offer in the Ready Games Network (RGN) store.
@@ -740,23 +740,23 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetNameAsync(
+        FStoreModuleSetNameAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& offerId,
-        const FString& name,
-        FStoreModuleSetNameAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& name) {
             string cpp_offerId;
             string cpp_name;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-			cpp_name = string(TCHAR_TO_UTF8(*name));
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            cpp_name = string(TCHAR_TO_UTF8(*name));
             RGN::Modules::Store::StoreModule::SetNameAsync(
-                cpp_offerId,
-                cpp_name,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId,
+                cpp_name);
     }
     /**
      * Asynchronously sets the description for a specific store offer in the Ready Games Network (RGN) store.
@@ -767,47 +767,47 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetDescriptionAsync(
+        FStoreModuleSetDescriptionAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& offerId,
-        const FString& description,
-        FStoreModuleSetDescriptionAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& description) {
             string cpp_offerId;
             string cpp_description;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-			cpp_description = string(TCHAR_TO_UTF8(*description));
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            cpp_description = string(TCHAR_TO_UTF8(*description));
             RGN::Modules::Store::StoreModule::SetDescriptionAsync(
-                cpp_offerId,
-                cpp_description,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId,
+                cpp_description);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetPricesAsync(
+        FStoreModuleSetPricesAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& offerId,
-        const TArray<FBP_PriceInfo>& prices,
-        FStoreModuleSetPricesAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const TArray<FBP_PriceInfo>& prices) {
             string cpp_offerId;
             vector<RGN::Modules::VirtualItems::PriceInfo> cpp_prices;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-			for (const auto& prices_item : prices) {
-				RGN::Modules::VirtualItems::PriceInfo cpp_prices_item;
-				FBP_PriceInfo::ConvertToCoreModel(prices_item, cpp_prices_item);
-				cpp_prices.push_back(cpp_prices_item);
-			}
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            for (const auto& prices_item : prices) {
+                RGN::Modules::VirtualItems::PriceInfo cpp_prices_item;
+                FBP_PriceInfo::ConvertToCoreModel(prices_item, cpp_prices_item);
+                cpp_prices.push_back(cpp_prices_item);
+            }
             RGN::Modules::Store::StoreModule::SetPricesAsync(
-                cpp_offerId,
-                cpp_prices,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId,
+                cpp_prices);
     }
     /**
      * Asynchronously sets the time information for a specific store offer in the Ready Games Network (RGN) store.
@@ -819,23 +819,23 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetTimeAsync(
+        FStoreModuleSetTimeAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& offerId,
-        const FBP_TimeInfo& time,
-        FStoreModuleSetTimeAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FBP_TimeInfo& time) {
             string cpp_offerId;
             RGN::Modules::Store::TimeInfo cpp_time;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-			FBP_TimeInfo::ConvertToCoreModel(time, cpp_time);
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            FBP_TimeInfo::ConvertToCoreModel(time, cpp_time);
             RGN::Modules::Store::StoreModule::SetTimeAsync(
-                cpp_offerId,
-                cpp_time,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId,
+                cpp_time);
     }
     /**
      * Asynchronously sets the image URL for a specific store offer in the Ready Games Network (RGN) store.
@@ -846,23 +846,23 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetImageUrlAsync(
+        FStoreModuleSetImageUrlAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& offerId,
-        const FString& imageUrl,
-        FStoreModuleSetImageUrlAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& imageUrl) {
             string cpp_offerId;
             string cpp_imageUrl;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
-			cpp_imageUrl = string(TCHAR_TO_UTF8(*imageUrl));
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            cpp_imageUrl = string(TCHAR_TO_UTF8(*imageUrl));
             RGN::Modules::Store::StoreModule::SetImageUrlAsync(
-                cpp_offerId,
-                cpp_imageUrl,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId,
+                cpp_imageUrl);
     }
     /**
      * Asynchronously retrieves the properties of a specific store offer in the Ready Games Network (RGN) store.
@@ -872,21 +872,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void GetPropertiesAsync(
-        const FString& storeOfferId,
-        FStoreModuleGetPropertiesAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        FStoreModuleGetPropertiesAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const FString& storeOfferId) {
             string cpp_storeOfferId;
-			cpp_storeOfferId = string(TCHAR_TO_UTF8(*storeOfferId));
+            cpp_storeOfferId = string(TCHAR_TO_UTF8(*storeOfferId));
             RGN::Modules::Store::StoreModule::GetPropertiesAsync(
-                cpp_storeOfferId,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_storeOfferId);
     }
     /**
      * Asynchronously sets the properties of a specific store offer in the Ready Games Network (RGN) store.
@@ -897,24 +897,24 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void SetPropertiesAsync(
+        FStoreModuleSetPropertiesAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
         const FString& storeOfferId,
-        const FString& json,
-        FStoreModuleSetPropertiesAsyncResponse onSuccess, FStoreModuleFailResponse onFail) {
+        const FString& json) {
             string cpp_storeOfferId;
             string cpp_json;
-			cpp_storeOfferId = string(TCHAR_TO_UTF8(*storeOfferId));
-			cpp_json = string(TCHAR_TO_UTF8(*json));
+            cpp_storeOfferId = string(TCHAR_TO_UTF8(*storeOfferId));
+            cpp_json = string(TCHAR_TO_UTF8(*json));
             RGN::Modules::Store::StoreModule::SetPropertiesAsync(
-                cpp_storeOfferId,
-                cpp_json,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_storeOfferId,
+                cpp_json);
     }
 };

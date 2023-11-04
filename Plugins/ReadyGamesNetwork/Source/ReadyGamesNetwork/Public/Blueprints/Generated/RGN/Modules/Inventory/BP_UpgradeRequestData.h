@@ -21,16 +21,16 @@ struct READYGAMESNETWORK_API FBP_UpgradeRequestData : public FBP_BaseRequestData
     int32 newUpgradeLevel;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::UpgradeRequestData& source, FBP_UpgradeRequestData& target) {
-		target.ownedItemId = FString(source.ownedItemId.c_str());
-		target.upgradeId = FString(source.upgradeId.c_str());
-		target.newUpgradeLevel = source.newUpgradeLevel;
+        target.ownedItemId = FString(source.ownedItemId.c_str());
+        target.upgradeId = FString(source.upgradeId.c_str());
+        target.newUpgradeLevel = source.newUpgradeLevel;
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_UpgradeRequestData& source, RGN::Modules::Inventory::UpgradeRequestData& target) {
-		target.ownedItemId = string(TCHAR_TO_UTF8(*source.ownedItemId));
-		target.upgradeId = string(TCHAR_TO_UTF8(*source.upgradeId));
-		target.newUpgradeLevel = source.newUpgradeLevel;
+        target.ownedItemId = string(TCHAR_TO_UTF8(*source.ownedItemId));
+        target.upgradeId = string(TCHAR_TO_UTF8(*source.upgradeId));
+        target.newUpgradeLevel = source.newUpgradeLevel;
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

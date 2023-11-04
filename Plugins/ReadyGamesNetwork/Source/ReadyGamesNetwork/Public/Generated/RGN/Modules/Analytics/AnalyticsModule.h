@@ -23,16 +23,16 @@ namespace RGN { namespace Modules { namespace Analytics {
          * @throw: Thrown when eventName is null or empty.
          */
         static void LogEventAsync(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& eventName,
             const string& eventParameters = string(),
-            const CancellationToken& cancellationToken = CancellationToken(),
-            const function<void(void)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::Analytics::AnalyticsModuleCustomImpl::LogEventAsync(
                     eventName,
                     eventParameters,
                     cancellationToken,
-                    complete,
+                    success,
                     fail);
             };
     };

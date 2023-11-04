@@ -31,20 +31,20 @@ struct READYGAMESNETWORK_API FBP_TriggerAndClaimResponse {
     TArray<FBP_AchievementReward> rewards;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::TriggerAndClaimResponse& source, FBP_TriggerAndClaimResponse& target) {
-		target.rewardsHaveBeenGivenOut = source.rewardsHaveBeenGivenOut;
-		for (const auto& source_rewards_item : source.rewards) {
-			FBP_AchievementReward b_source_rewards_item;
-			FBP_AchievementReward::ConvertToUnrealModel(source_rewards_item, b_source_rewards_item);
-			target.rewards.Add(b_source_rewards_item);
-		}
+        target.rewardsHaveBeenGivenOut = source.rewardsHaveBeenGivenOut;
+        for (const auto& source_rewards_item : source.rewards) {
+            FBP_AchievementReward b_source_rewards_item;
+            FBP_AchievementReward::ConvertToUnrealModel(source_rewards_item, b_source_rewards_item);
+            target.rewards.Add(b_source_rewards_item);
+        }
 	}
 
 	static void ConvertToCoreModel(const FBP_TriggerAndClaimResponse& source, RGN::Modules::Achievement::TriggerAndClaimResponse& target) {
-		target.rewardsHaveBeenGivenOut = source.rewardsHaveBeenGivenOut;
-		for (const auto& source_rewards_item : source.rewards) {
-			RGN::Modules::Achievement::AchievementReward cpp_source_rewards_item;
-			FBP_AchievementReward::ConvertToCoreModel(source_rewards_item, cpp_source_rewards_item);
-			target.rewards.push_back(cpp_source_rewards_item);
-		}
+        target.rewardsHaveBeenGivenOut = source.rewardsHaveBeenGivenOut;
+        for (const auto& source_rewards_item : source.rewards) {
+            RGN::Modules::Achievement::AchievementReward cpp_source_rewards_item;
+            FBP_AchievementReward::ConvertToCoreModel(source_rewards_item, cpp_source_rewards_item);
+            target.rewards.push_back(cpp_source_rewards_item);
+        }
 	}
 };

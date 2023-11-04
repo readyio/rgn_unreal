@@ -52,20 +52,20 @@ namespace RGN { namespace Modules { namespace Messaging {
          * in case the application is in background
          */
         static void SendMessageByUserId(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& appId,
             const string& userId,
             const string& payload,
             const string& title,
-            const string& text,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& text) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::SendMessageByUserId(
                     appId,
                     userId,
                     payload,
                     title,
                     text,
-                    complete,
+                    success,
                     fail);
             };
     };

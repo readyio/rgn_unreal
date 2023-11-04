@@ -19,14 +19,14 @@ struct READYGAMESNETWORK_API FBP_LinkWithProviderRequestData : public FBP_BaseRe
     FString idToken;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::LinkWithProviderRequestData& source, FBP_LinkWithProviderRequestData& target) {
-		target.useMaster = source.useMaster;
-		target.idToken = FString(source.idToken.c_str());
+        target.useMaster = source.useMaster;
+        target.idToken = FString(source.idToken.c_str());
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_LinkWithProviderRequestData& source, RGN::Model::Request::LinkWithProviderRequestData& target) {
-		target.useMaster = source.useMaster;
-		target.idToken = string(TCHAR_TO_UTF8(*source.idToken));
+        target.useMaster = source.useMaster;
+        target.idToken = string(TCHAR_TO_UTF8(*source.idToken));
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

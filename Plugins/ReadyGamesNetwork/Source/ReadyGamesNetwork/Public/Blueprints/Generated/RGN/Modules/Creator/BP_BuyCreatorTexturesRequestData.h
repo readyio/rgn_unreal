@@ -17,20 +17,20 @@ struct READYGAMESNETWORK_API FBP_BuyCreatorTexturesRequestData : public FBP_Base
     TArray<FString> textureIds;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::BuyCreatorTexturesRequestData& source, FBP_BuyCreatorTexturesRequestData& target) {
-		for (const auto& source_textureIds_item : source.textureIds) {
-			FString b_source_textureIds_item;
-			b_source_textureIds_item = FString(source_textureIds_item.c_str());
-			target.textureIds.Add(b_source_textureIds_item);
-		}
+        for (const auto& source_textureIds_item : source.textureIds) {
+            FString b_source_textureIds_item;
+            b_source_textureIds_item = FString(source_textureIds_item.c_str());
+            target.textureIds.Add(b_source_textureIds_item);
+        }
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_BuyCreatorTexturesRequestData& source, RGN::Modules::Creator::BuyCreatorTexturesRequestData& target) {
-		for (const auto& source_textureIds_item : source.textureIds) {
-			string cpp_source_textureIds_item;
-			cpp_source_textureIds_item = string(TCHAR_TO_UTF8(*source_textureIds_item));
-			target.textureIds.push_back(cpp_source_textureIds_item);
-		}
+        for (const auto& source_textureIds_item : source.textureIds) {
+            string cpp_source_textureIds_item;
+            cpp_source_textureIds_item = string(TCHAR_TO_UTF8(*source_textureIds_item));
+            target.textureIds.push_back(cpp_source_textureIds_item);
+        }
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

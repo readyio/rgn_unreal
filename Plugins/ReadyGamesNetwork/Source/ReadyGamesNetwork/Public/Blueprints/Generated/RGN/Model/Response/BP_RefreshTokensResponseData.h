@@ -19,14 +19,14 @@ struct READYGAMESNETWORK_API FBP_RefreshTokensResponseData {
     FString refreshToken;
 
 	static void ConvertToUnrealModel(const RGN::Model::Response::RefreshTokensResponseData& source, FBP_RefreshTokensResponseData& target) {
-		target.userId = FString(source.userId.c_str());
-		target.idToken = FString(source.idToken.c_str());
-		target.refreshToken = FString(source.refreshToken.c_str());
+        target.userId = FString(source.userId.c_str());
+        target.idToken = FString(source.idToken.c_str());
+        target.refreshToken = FString(source.refreshToken.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_RefreshTokensResponseData& source, RGN::Model::Response::RefreshTokensResponseData& target) {
-		target.userId = string(TCHAR_TO_UTF8(*source.userId));
-		target.idToken = string(TCHAR_TO_UTF8(*source.idToken));
-		target.refreshToken = string(TCHAR_TO_UTF8(*source.refreshToken));
+        target.userId = string(TCHAR_TO_UTF8(*source.userId));
+        target.idToken = string(TCHAR_TO_UTF8(*source.idToken));
+        target.refreshToken = string(TCHAR_TO_UTF8(*source.refreshToken));
 	}
 };

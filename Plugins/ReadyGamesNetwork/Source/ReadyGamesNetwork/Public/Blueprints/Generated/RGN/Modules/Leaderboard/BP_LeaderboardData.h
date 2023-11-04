@@ -117,44 +117,44 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
     FString updatedBy;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {
-		target.id = FString(source.id.c_str());
-		target.requestName = FString(source.requestName.c_str());
-		target.name = FString(source.name.c_str());
-		target.description = FString(source.description.c_str());
-		target.setBy = FString(source.setBy.c_str());
-		target.invertSortOrder = source.invertSortOrder;
-		target.decimalOffset = source.decimalOffset;
-		target.type = FString(source.type.c_str());
-		target.resetEveryTimeAtCron = FString(source.resetEveryTimeAtCron.c_str());
-		for (const auto& source_rewardsAtReset_item : source.rewardsAtReset) {
-			FBP_LeaderboardReward b_source_rewardsAtReset_item;
-			FBP_LeaderboardReward::ConvertToUnrealModel(source_rewardsAtReset_item, b_source_rewardsAtReset_item);
-			target.rewardsAtReset.Add(b_source_rewardsAtReset_item);
-		}
-		target.createdAt = source.createdAt;
-		target.updatedAt = source.updatedAt;
-		target.createdBy = FString(source.createdBy.c_str());
-		target.updatedBy = FString(source.updatedBy.c_str());
+        target.id = FString(source.id.c_str());
+        target.requestName = FString(source.requestName.c_str());
+        target.name = FString(source.name.c_str());
+        target.description = FString(source.description.c_str());
+        target.setBy = FString(source.setBy.c_str());
+        target.invertSortOrder = source.invertSortOrder;
+        target.decimalOffset = source.decimalOffset;
+        target.type = FString(source.type.c_str());
+        target.resetEveryTimeAtCron = FString(source.resetEveryTimeAtCron.c_str());
+        for (const auto& source_rewardsAtReset_item : source.rewardsAtReset) {
+            FBP_LeaderboardReward b_source_rewardsAtReset_item;
+            FBP_LeaderboardReward::ConvertToUnrealModel(source_rewardsAtReset_item, b_source_rewardsAtReset_item);
+            target.rewardsAtReset.Add(b_source_rewardsAtReset_item);
+        }
+        target.createdAt = source.createdAt;
+        target.updatedAt = source.updatedAt;
+        target.createdBy = FString(source.createdBy.c_str());
+        target.updatedBy = FString(source.updatedBy.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardData& source, RGN::Modules::Leaderboard::LeaderboardData& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
-		target.requestName = string(TCHAR_TO_UTF8(*source.requestName));
-		target.name = string(TCHAR_TO_UTF8(*source.name));
-		target.description = string(TCHAR_TO_UTF8(*source.description));
-		target.setBy = string(TCHAR_TO_UTF8(*source.setBy));
-		target.invertSortOrder = source.invertSortOrder;
-		target.decimalOffset = source.decimalOffset;
-		target.type = string(TCHAR_TO_UTF8(*source.type));
-		target.resetEveryTimeAtCron = string(TCHAR_TO_UTF8(*source.resetEveryTimeAtCron));
-		for (const auto& source_rewardsAtReset_item : source.rewardsAtReset) {
-			RGN::Modules::Leaderboard::LeaderboardReward cpp_source_rewardsAtReset_item;
-			FBP_LeaderboardReward::ConvertToCoreModel(source_rewardsAtReset_item, cpp_source_rewardsAtReset_item);
-			target.rewardsAtReset.push_back(cpp_source_rewardsAtReset_item);
-		}
-		target.createdAt = source.createdAt;
-		target.updatedAt = source.updatedAt;
-		target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
-		target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
+        target.id = string(TCHAR_TO_UTF8(*source.id));
+        target.requestName = string(TCHAR_TO_UTF8(*source.requestName));
+        target.name = string(TCHAR_TO_UTF8(*source.name));
+        target.description = string(TCHAR_TO_UTF8(*source.description));
+        target.setBy = string(TCHAR_TO_UTF8(*source.setBy));
+        target.invertSortOrder = source.invertSortOrder;
+        target.decimalOffset = source.decimalOffset;
+        target.type = string(TCHAR_TO_UTF8(*source.type));
+        target.resetEveryTimeAtCron = string(TCHAR_TO_UTF8(*source.resetEveryTimeAtCron));
+        for (const auto& source_rewardsAtReset_item : source.rewardsAtReset) {
+            RGN::Modules::Leaderboard::LeaderboardReward cpp_source_rewardsAtReset_item;
+            FBP_LeaderboardReward::ConvertToCoreModel(source_rewardsAtReset_item, cpp_source_rewardsAtReset_item);
+            target.rewardsAtReset.push_back(cpp_source_rewardsAtReset_item);
+        }
+        target.createdAt = source.createdAt;
+        target.updatedAt = source.updatedAt;
+        target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
+        target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
 	}
 };

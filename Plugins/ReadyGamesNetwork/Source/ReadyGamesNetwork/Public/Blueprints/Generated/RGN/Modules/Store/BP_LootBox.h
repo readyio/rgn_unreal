@@ -79,38 +79,38 @@ struct READYGAMESNETWORK_API FBP_LootBox {
     TArray<FBP_PriceInfo> prices;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::LootBox& source, FBP_LootBox& target) {
-		target.id = FString(source.id.c_str());
-		target.name = FString(source.name.c_str());
-		target.appId = FString(source.appId.c_str());
-		target.totalQuantity = source.totalQuantity;
-		target.purchasedQuantity = source.purchasedQuantity;
-		target.availableQuantity = source.availableQuantity;
-		target.createdAt = source.createdAt;
-		target.updatedAt = source.updatedAt;
-		target.createdBy = FString(source.createdBy.c_str());
-		target.updatedBy = FString(source.updatedBy.c_str());
-		for (const auto& source_prices_item : source.prices) {
-			FBP_PriceInfo b_source_prices_item;
-			FBP_PriceInfo::ConvertToUnrealModel(source_prices_item, b_source_prices_item);
-			target.prices.Add(b_source_prices_item);
-		}
+        target.id = FString(source.id.c_str());
+        target.name = FString(source.name.c_str());
+        target.appId = FString(source.appId.c_str());
+        target.totalQuantity = source.totalQuantity;
+        target.purchasedQuantity = source.purchasedQuantity;
+        target.availableQuantity = source.availableQuantity;
+        target.createdAt = source.createdAt;
+        target.updatedAt = source.updatedAt;
+        target.createdBy = FString(source.createdBy.c_str());
+        target.updatedBy = FString(source.updatedBy.c_str());
+        for (const auto& source_prices_item : source.prices) {
+            FBP_PriceInfo b_source_prices_item;
+            FBP_PriceInfo::ConvertToUnrealModel(source_prices_item, b_source_prices_item);
+            target.prices.Add(b_source_prices_item);
+        }
 	}
 
 	static void ConvertToCoreModel(const FBP_LootBox& source, RGN::Modules::Store::LootBox& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
-		target.name = string(TCHAR_TO_UTF8(*source.name));
-		target.appId = string(TCHAR_TO_UTF8(*source.appId));
-		target.totalQuantity = source.totalQuantity;
-		target.purchasedQuantity = source.purchasedQuantity;
-		target.availableQuantity = source.availableQuantity;
-		target.createdAt = source.createdAt;
-		target.updatedAt = source.updatedAt;
-		target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
-		target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
-		for (const auto& source_prices_item : source.prices) {
-			RGN::Modules::VirtualItems::PriceInfo cpp_source_prices_item;
-			FBP_PriceInfo::ConvertToCoreModel(source_prices_item, cpp_source_prices_item);
-			target.prices.push_back(cpp_source_prices_item);
-		}
+        target.id = string(TCHAR_TO_UTF8(*source.id));
+        target.name = string(TCHAR_TO_UTF8(*source.name));
+        target.appId = string(TCHAR_TO_UTF8(*source.appId));
+        target.totalQuantity = source.totalQuantity;
+        target.purchasedQuantity = source.purchasedQuantity;
+        target.availableQuantity = source.availableQuantity;
+        target.createdAt = source.createdAt;
+        target.updatedAt = source.updatedAt;
+        target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
+        target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
+        for (const auto& source_prices_item : source.prices) {
+            RGN::Modules::VirtualItems::PriceInfo cpp_source_prices_item;
+            FBP_PriceInfo::ConvertToCoreModel(source_prices_item, cpp_source_prices_item);
+            target.prices.push_back(cpp_source_prices_item);
+        }
 	}
 };

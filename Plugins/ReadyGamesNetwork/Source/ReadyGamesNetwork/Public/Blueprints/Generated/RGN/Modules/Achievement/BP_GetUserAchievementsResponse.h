@@ -17,18 +17,18 @@ struct READYGAMESNETWORK_API FBP_GetUserAchievementsResponse {
     TArray<FBP_UserAchievement> userAchievements;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::GetUserAchievementsResponse& source, FBP_GetUserAchievementsResponse& target) {
-		for (const auto& source_userAchievements_item : source.userAchievements) {
-			FBP_UserAchievement b_source_userAchievements_item;
-			FBP_UserAchievement::ConvertToUnrealModel(source_userAchievements_item, b_source_userAchievements_item);
-			target.userAchievements.Add(b_source_userAchievements_item);
-		}
+        for (const auto& source_userAchievements_item : source.userAchievements) {
+            FBP_UserAchievement b_source_userAchievements_item;
+            FBP_UserAchievement::ConvertToUnrealModel(source_userAchievements_item, b_source_userAchievements_item);
+            target.userAchievements.Add(b_source_userAchievements_item);
+        }
 	}
 
 	static void ConvertToCoreModel(const FBP_GetUserAchievementsResponse& source, RGN::Modules::Achievement::GetUserAchievementsResponse& target) {
-		for (const auto& source_userAchievements_item : source.userAchievements) {
-			RGN::Modules::Achievement::UserAchievement cpp_source_userAchievements_item;
-			FBP_UserAchievement::ConvertToCoreModel(source_userAchievements_item, cpp_source_userAchievements_item);
-			target.userAchievements.push_back(cpp_source_userAchievements_item);
-		}
+        for (const auto& source_userAchievements_item : source.userAchievements) {
+            RGN::Modules::Achievement::UserAchievement cpp_source_userAchievements_item;
+            FBP_UserAchievement::ConvertToCoreModel(source_userAchievements_item, cpp_source_userAchievements_item);
+            target.userAchievements.push_back(cpp_source_userAchievements_item);
+        }
 	}
 };

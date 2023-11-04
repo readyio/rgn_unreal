@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_BaseResponseData {
     FString message;
 
 	static void ConvertToUnrealModel(const RGN::Model::Response::BaseResponseData& source, FBP_BaseResponseData& target) {
-		target.status = source.status;
-		target.message = FString(source.message.c_str());
+        target.status = source.status;
+        target.message = FString(source.message.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_BaseResponseData& source, RGN::Model::Response::BaseResponseData& target) {
-		target.status = source.status;
-		target.message = string(TCHAR_TO_UTF8(*source.message));
+        target.status = source.status;
+        target.message = string(TCHAR_TO_UTF8(*source.message));
 	}
 };

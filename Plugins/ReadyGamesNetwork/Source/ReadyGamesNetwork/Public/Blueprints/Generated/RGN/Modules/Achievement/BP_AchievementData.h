@@ -151,72 +151,72 @@ struct READYGAMESNETWORK_API FBP_AchievementData : public FBP_BaseRequestData {
     FString updatedBy;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::AchievementData& source, FBP_AchievementData& target) {
-		target.id = FString(source.id.c_str());
-		for (const auto& source_appIds_item : source.appIds) {
-			FString b_source_appIds_item;
-			b_source_appIds_item = FString(source_appIds_item.c_str());
-			target.appIds.Add(b_source_appIds_item);
-		}
-		target.requestName = FString(source.requestName.c_str());
-		target.name = FString(source.name.c_str());
-		target.description = FString(source.description.c_str());
-		target.setBy = FString(source.setBy.c_str());
-		target.isClaimable = source.isClaimable;
-		target.valueToReach = source.valueToReach;
-		for (const auto& source_completedAchievementsToUnlock_item : source.completedAchievementsToUnlock) {
-			FString b_source_completedAchievementsToUnlock_item;
-			b_source_completedAchievementsToUnlock_item = FString(source_completedAchievementsToUnlock_item.c_str());
-			target.completedAchievementsToUnlock.Add(b_source_completedAchievementsToUnlock_item);
-		}
-		target.repeatable = source.repeatable;
-		target.repeatNoMoreOftenThanCron = FString(source.repeatNoMoreOftenThanCron.c_str());
-		target.startTime = source.startTime;
-		target.endTime = source.endTime;
-		target.resetTimeLimitEvery = FString(source.resetTimeLimitEvery.c_str());
-		for (const auto& source_rewards_item : source.rewards) {
-			FBP_AchievementReward b_source_rewards_item;
-			FBP_AchievementReward::ConvertToUnrealModel(source_rewards_item, b_source_rewards_item);
-			target.rewards.Add(b_source_rewards_item);
-		}
-		target.createdAt = source.createdAt;
-		target.updatedAt = source.updatedAt;
-		target.createdBy = FString(source.createdBy.c_str());
-		target.updatedBy = FString(source.updatedBy.c_str());
+        target.id = FString(source.id.c_str());
+        for (const auto& source_appIds_item : source.appIds) {
+            FString b_source_appIds_item;
+            b_source_appIds_item = FString(source_appIds_item.c_str());
+            target.appIds.Add(b_source_appIds_item);
+        }
+        target.requestName = FString(source.requestName.c_str());
+        target.name = FString(source.name.c_str());
+        target.description = FString(source.description.c_str());
+        target.setBy = FString(source.setBy.c_str());
+        target.isClaimable = source.isClaimable;
+        target.valueToReach = source.valueToReach;
+        for (const auto& source_completedAchievementsToUnlock_item : source.completedAchievementsToUnlock) {
+            FString b_source_completedAchievementsToUnlock_item;
+            b_source_completedAchievementsToUnlock_item = FString(source_completedAchievementsToUnlock_item.c_str());
+            target.completedAchievementsToUnlock.Add(b_source_completedAchievementsToUnlock_item);
+        }
+        target.repeatable = source.repeatable;
+        target.repeatNoMoreOftenThanCron = FString(source.repeatNoMoreOftenThanCron.c_str());
+        target.startTime = source.startTime;
+        target.endTime = source.endTime;
+        target.resetTimeLimitEvery = FString(source.resetTimeLimitEvery.c_str());
+        for (const auto& source_rewards_item : source.rewards) {
+            FBP_AchievementReward b_source_rewards_item;
+            FBP_AchievementReward::ConvertToUnrealModel(source_rewards_item, b_source_rewards_item);
+            target.rewards.Add(b_source_rewards_item);
+        }
+        target.createdAt = source.createdAt;
+        target.updatedAt = source.updatedAt;
+        target.createdBy = FString(source.createdBy.c_str());
+        target.updatedBy = FString(source.updatedBy.c_str());
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_AchievementData& source, RGN::Modules::Achievement::AchievementData& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
-		for (const auto& source_appIds_item : source.appIds) {
-			string cpp_source_appIds_item;
-			cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
-			target.appIds.push_back(cpp_source_appIds_item);
-		}
-		target.requestName = string(TCHAR_TO_UTF8(*source.requestName));
-		target.name = string(TCHAR_TO_UTF8(*source.name));
-		target.description = string(TCHAR_TO_UTF8(*source.description));
-		target.setBy = string(TCHAR_TO_UTF8(*source.setBy));
-		target.isClaimable = source.isClaimable;
-		target.valueToReach = source.valueToReach;
-		for (const auto& source_completedAchievementsToUnlock_item : source.completedAchievementsToUnlock) {
-			string cpp_source_completedAchievementsToUnlock_item;
-			cpp_source_completedAchievementsToUnlock_item = string(TCHAR_TO_UTF8(*source_completedAchievementsToUnlock_item));
-			target.completedAchievementsToUnlock.push_back(cpp_source_completedAchievementsToUnlock_item);
-		}
-		target.repeatable = source.repeatable;
-		target.repeatNoMoreOftenThanCron = string(TCHAR_TO_UTF8(*source.repeatNoMoreOftenThanCron));
-		target.startTime = source.startTime;
-		target.endTime = source.endTime;
-		target.resetTimeLimitEvery = string(TCHAR_TO_UTF8(*source.resetTimeLimitEvery));
-		for (const auto& source_rewards_item : source.rewards) {
-			RGN::Modules::Achievement::AchievementReward cpp_source_rewards_item;
-			FBP_AchievementReward::ConvertToCoreModel(source_rewards_item, cpp_source_rewards_item);
-			target.rewards.push_back(cpp_source_rewards_item);
-		}
-		target.createdAt = source.createdAt;
-		target.updatedAt = source.updatedAt;
-		target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
-		target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
+        target.id = string(TCHAR_TO_UTF8(*source.id));
+        for (const auto& source_appIds_item : source.appIds) {
+            string cpp_source_appIds_item;
+            cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
+            target.appIds.push_back(cpp_source_appIds_item);
+        }
+        target.requestName = string(TCHAR_TO_UTF8(*source.requestName));
+        target.name = string(TCHAR_TO_UTF8(*source.name));
+        target.description = string(TCHAR_TO_UTF8(*source.description));
+        target.setBy = string(TCHAR_TO_UTF8(*source.setBy));
+        target.isClaimable = source.isClaimable;
+        target.valueToReach = source.valueToReach;
+        for (const auto& source_completedAchievementsToUnlock_item : source.completedAchievementsToUnlock) {
+            string cpp_source_completedAchievementsToUnlock_item;
+            cpp_source_completedAchievementsToUnlock_item = string(TCHAR_TO_UTF8(*source_completedAchievementsToUnlock_item));
+            target.completedAchievementsToUnlock.push_back(cpp_source_completedAchievementsToUnlock_item);
+        }
+        target.repeatable = source.repeatable;
+        target.repeatNoMoreOftenThanCron = string(TCHAR_TO_UTF8(*source.repeatNoMoreOftenThanCron));
+        target.startTime = source.startTime;
+        target.endTime = source.endTime;
+        target.resetTimeLimitEvery = string(TCHAR_TO_UTF8(*source.resetTimeLimitEvery));
+        for (const auto& source_rewards_item : source.rewards) {
+            RGN::Modules::Achievement::AchievementReward cpp_source_rewards_item;
+            FBP_AchievementReward::ConvertToCoreModel(source_rewards_item, cpp_source_rewards_item);
+            target.rewards.push_back(cpp_source_rewards_item);
+        }
+        target.createdAt = source.createdAt;
+        target.updatedAt = source.updatedAt;
+        target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
+        target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

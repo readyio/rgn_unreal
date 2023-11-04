@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_PurchaseCurrencyProductRequestData : public FBP
     FString productId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::PurchaseCurrencyProductRequestData& source, FBP_PurchaseCurrencyProductRequestData& target) {
-		target.productId = FString(source.productId.c_str());
+        target.productId = FString(source.productId.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_PurchaseCurrencyProductRequestData& source, RGN::Modules::Currency::PurchaseCurrencyProductRequestData& target) {
-		target.productId = string(TCHAR_TO_UTF8(*source.productId));
+        target.productId = string(TCHAR_TO_UTF8(*source.productId));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

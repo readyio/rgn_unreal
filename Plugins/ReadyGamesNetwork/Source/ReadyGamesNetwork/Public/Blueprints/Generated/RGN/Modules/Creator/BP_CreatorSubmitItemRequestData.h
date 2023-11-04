@@ -19,12 +19,12 @@ struct READYGAMESNETWORK_API FBP_CreatorSubmitItemRequestData : public FBP_BaseM
     FBP_VirtualItem customizedItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSubmitItemRequestData& source, FBP_CreatorSubmitItemRequestData& target) {
-		FBP_VirtualItem::ConvertToUnrealModel(source.customizedItem, target.customizedItem);
+        FBP_VirtualItem::ConvertToUnrealModel(source.customizedItem, target.customizedItem);
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_CreatorSubmitItemRequestData& source, RGN::Modules::Creator::CreatorSubmitItemRequestData& target) {
-		FBP_VirtualItem::ConvertToCoreModel(source.customizedItem, target.customizedItem);
+        FBP_VirtualItem::ConvertToCoreModel(source.customizedItem, target.customizedItem);
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

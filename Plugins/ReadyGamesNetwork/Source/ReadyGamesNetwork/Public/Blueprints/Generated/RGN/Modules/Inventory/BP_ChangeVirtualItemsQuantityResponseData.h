@@ -19,20 +19,20 @@ struct READYGAMESNETWORK_API FBP_ChangeVirtualItemsQuantityResponseData : public
     TArray<FBP_VirtualItem> updatedItems;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::ChangeVirtualItemsQuantityResponseData& source, FBP_ChangeVirtualItemsQuantityResponseData& target) {
-		for (const auto& source_updatedItems_item : source.updatedItems) {
-			FBP_VirtualItem b_source_updatedItems_item;
-			FBP_VirtualItem::ConvertToUnrealModel(source_updatedItems_item, b_source_updatedItems_item);
-			target.updatedItems.Add(b_source_updatedItems_item);
-		}
+        for (const auto& source_updatedItems_item : source.updatedItems) {
+            FBP_VirtualItem b_source_updatedItems_item;
+            FBP_VirtualItem::ConvertToUnrealModel(source_updatedItems_item, b_source_updatedItems_item);
+            target.updatedItems.Add(b_source_updatedItems_item);
+        }
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_ChangeVirtualItemsQuantityResponseData& source, RGN::Modules::Inventory::ChangeVirtualItemsQuantityResponseData& target) {
-		for (const auto& source_updatedItems_item : source.updatedItems) {
-			RGN::Modules::VirtualItems::VirtualItem cpp_source_updatedItems_item;
-			FBP_VirtualItem::ConvertToCoreModel(source_updatedItems_item, cpp_source_updatedItems_item);
-			target.updatedItems.push_back(cpp_source_updatedItems_item);
-		}
+        for (const auto& source_updatedItems_item : source.updatedItems) {
+            RGN::Modules::VirtualItems::VirtualItem cpp_source_updatedItems_item;
+            FBP_VirtualItem::ConvertToCoreModel(source_updatedItems_item, cpp_source_updatedItems_item);
+            target.updatedItems.push_back(cpp_source_updatedItems_item);
+        }
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

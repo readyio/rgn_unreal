@@ -17,18 +17,18 @@ struct READYGAMESNETWORK_API FBP_GetLootBoxesResponse {
     TArray<FBP_LootBox> lootBoxes;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::GetLootBoxesResponse& source, FBP_GetLootBoxesResponse& target) {
-		for (const auto& source_lootBoxes_item : source.lootBoxes) {
-			FBP_LootBox b_source_lootBoxes_item;
-			FBP_LootBox::ConvertToUnrealModel(source_lootBoxes_item, b_source_lootBoxes_item);
-			target.lootBoxes.Add(b_source_lootBoxes_item);
-		}
+        for (const auto& source_lootBoxes_item : source.lootBoxes) {
+            FBP_LootBox b_source_lootBoxes_item;
+            FBP_LootBox::ConvertToUnrealModel(source_lootBoxes_item, b_source_lootBoxes_item);
+            target.lootBoxes.Add(b_source_lootBoxes_item);
+        }
 	}
 
 	static void ConvertToCoreModel(const FBP_GetLootBoxesResponse& source, RGN::Modules::Store::GetLootBoxesResponse& target) {
-		for (const auto& source_lootBoxes_item : source.lootBoxes) {
-			RGN::Modules::Store::LootBox cpp_source_lootBoxes_item;
-			FBP_LootBox::ConvertToCoreModel(source_lootBoxes_item, cpp_source_lootBoxes_item);
-			target.lootBoxes.push_back(cpp_source_lootBoxes_item);
-		}
+        for (const auto& source_lootBoxes_item : source.lootBoxes) {
+            RGN::Modules::Store::LootBox cpp_source_lootBoxes_item;
+            FBP_LootBox::ConvertToCoreModel(source_lootBoxes_item, cpp_source_lootBoxes_item);
+            target.lootBoxes.push_back(cpp_source_lootBoxes_item);
+        }
 	}
 };

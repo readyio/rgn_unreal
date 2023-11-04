@@ -22,12 +22,12 @@ struct READYGAMESNETWORK_API FBP_AchievementWithUserData : public FBP_Achievemen
     FBP_UserAchievement _userAchievement;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::AchievementWithUserData& source, FBP_AchievementWithUserData& target) {
-		FBP_UserAchievement::ConvertToUnrealModel(source._userAchievement, target._userAchievement);
+        FBP_UserAchievement::ConvertToUnrealModel(source._userAchievement, target._userAchievement);
 		FBP_AchievementData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_AchievementWithUserData& source, RGN::Modules::Achievement::AchievementWithUserData& target) {
-		FBP_UserAchievement::ConvertToCoreModel(source._userAchievement, target._userAchievement);
+        FBP_UserAchievement::ConvertToCoreModel(source._userAchievement, target._userAchievement);
 		FBP_AchievementData::ConvertToCoreModel(source, target);
 	}
 };

@@ -17,10 +17,10 @@ struct READYGAMESNETWORK_API FBP_CreatorSubmitItemResponseData {
     FBP_VirtualItem addedItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSubmitItemResponseData& source, FBP_CreatorSubmitItemResponseData& target) {
-		FBP_VirtualItem::ConvertToUnrealModel(source.addedItem, target.addedItem);
+        FBP_VirtualItem::ConvertToUnrealModel(source.addedItem, target.addedItem);
 	}
 
 	static void ConvertToCoreModel(const FBP_CreatorSubmitItemResponseData& source, RGN::Modules::Creator::CreatorSubmitItemResponseData& target) {
-		FBP_VirtualItem::ConvertToCoreModel(source.addedItem, target.addedItem);
+        FBP_VirtualItem::ConvertToCoreModel(source.addedItem, target.addedItem);
 	}
 };

@@ -17,10 +17,10 @@ struct READYGAMESNETWORK_API FBP_GetMatchResponseData {
     FBP_MatchmakingData match;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::GetMatchResponseData& source, FBP_GetMatchResponseData& target) {
-		FBP_MatchmakingData::ConvertToUnrealModel(source.match, target.match);
+        FBP_MatchmakingData::ConvertToUnrealModel(source.match, target.match);
 	}
 
 	static void ConvertToCoreModel(const FBP_GetMatchResponseData& source, RGN::Modules::Matchmaking::GetMatchResponseData& target) {
-		FBP_MatchmakingData::ConvertToCoreModel(source.match, target.match);
+        FBP_MatchmakingData::ConvertToCoreModel(source.match, target.match);
 	}
 };

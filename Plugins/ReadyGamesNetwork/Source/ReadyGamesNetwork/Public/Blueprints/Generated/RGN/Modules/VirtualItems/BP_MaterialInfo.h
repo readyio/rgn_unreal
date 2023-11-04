@@ -19,14 +19,14 @@ struct READYGAMESNETWORK_API FBP_MaterialInfo {
     FString baseTextureId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::MaterialInfo& source, FBP_MaterialInfo& target) {
-		target.materialToReplace = FString(source.materialToReplace.c_str());
-		target.baseColor = FString(source.baseColor.c_str());
-		target.baseTextureId = FString(source.baseTextureId.c_str());
+        target.materialToReplace = FString(source.materialToReplace.c_str());
+        target.baseColor = FString(source.baseColor.c_str());
+        target.baseTextureId = FString(source.baseTextureId.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_MaterialInfo& source, RGN::Modules::VirtualItems::MaterialInfo& target) {
-		target.materialToReplace = string(TCHAR_TO_UTF8(*source.materialToReplace));
-		target.baseColor = string(TCHAR_TO_UTF8(*source.baseColor));
-		target.baseTextureId = string(TCHAR_TO_UTF8(*source.baseTextureId));
+        target.materialToReplace = string(TCHAR_TO_UTF8(*source.materialToReplace));
+        target.baseColor = string(TCHAR_TO_UTF8(*source.baseColor));
+        target.baseTextureId = string(TCHAR_TO_UTF8(*source.baseTextureId));
 	}
 };

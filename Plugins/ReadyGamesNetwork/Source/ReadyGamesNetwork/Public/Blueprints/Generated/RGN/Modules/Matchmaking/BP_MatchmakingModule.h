@@ -49,33 +49,33 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetJoinOpenMatchesAsync(
+        FMatchmakingModuleGetJoinOpenMatchesAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         int32 limit,
         const FString& startAfter,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleGetJoinOpenMatchesAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             int32_t cpp_limit;
             string cpp_startAfter;
             CancellationToken cpp_cancellationToken;
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::GetJoinOpenMatchesAsync(
-                cpp_limit,
-                cpp_startAfter,
-                cpp_cancellationToken,
                 [onSuccess](vector<RGN::Modules::Matchmaking::MatchmakingData> response) {
                     TArray<FBP_MatchmakingData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_MatchmakingData b_response_item;
-						FBP_MatchmakingData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_MatchmakingData b_response_item;
+                        FBP_MatchmakingData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_limit,
+                cpp_startAfter,
+                cpp_cancellationToken);
     }
     /**
      * Asynchronously gets a list of open matches that the user can vote. Some matches can have voting enabled.
@@ -89,33 +89,33 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetVoteOpenMatchesAsync(
+        FMatchmakingModuleGetVoteOpenMatchesAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         int32 limit,
         const FString& startAfter,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleGetVoteOpenMatchesAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             int32_t cpp_limit;
             string cpp_startAfter;
             CancellationToken cpp_cancellationToken;
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::GetVoteOpenMatchesAsync(
-                cpp_limit,
-                cpp_startAfter,
-                cpp_cancellationToken,
                 [onSuccess](vector<RGN::Modules::Matchmaking::MatchmakingData> response) {
                     TArray<FBP_MatchmakingData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_MatchmakingData b_response_item;
-						FBP_MatchmakingData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_MatchmakingData b_response_item;
+                        FBP_MatchmakingData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_limit,
+                cpp_startAfter,
+                cpp_cancellationToken);
     }
     /**
      * Asynchronously gets a list of finished matches
@@ -128,33 +128,33 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetFinishedMatchesAsync(
+        FMatchmakingModuleGetFinishedMatchesAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         int32 limit,
         const FString& startAfter,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleGetFinishedMatchesAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             int32_t cpp_limit;
             string cpp_startAfter;
             CancellationToken cpp_cancellationToken;
-			cpp_limit = limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::GetFinishedMatchesAsync(
-                cpp_limit,
-                cpp_startAfter,
-                cpp_cancellationToken,
                 [onSuccess](vector<RGN::Modules::Matchmaking::MatchmakingData> response) {
                     TArray<FBP_MatchmakingData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_MatchmakingData b_response_item;
-						FBP_MatchmakingData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_MatchmakingData b_response_item;
+                        FBP_MatchmakingData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_limit,
+                cpp_startAfter,
+                cpp_cancellationToken);
     }
     /**
      * Asynchronously finished match by provided id. In case the match does not exist, or is from
@@ -166,93 +166,93 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void GetFinishedMatchByIdAsync(
+        FMatchmakingModuleGetFinishedMatchByIdAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         const FString& matchId,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleGetFinishedMatchByIdAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_matchId;
             CancellationToken cpp_cancellationToken;
-			cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::GetFinishedMatchByIdAsync(
-                cpp_matchId,
-                cpp_cancellationToken,
                 [onSuccess](RGN::Modules::Matchmaking::MatchmakingData response) {
                     FBP_MatchmakingData bpResponse;
-					FBP_MatchmakingData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_MatchmakingData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_matchId,
+                cpp_cancellationToken);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void CreateMatchAsync(
+        FMatchmakingModuleCreateMatchAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         const FBP_MatchmakingData& matchConfig,
         bool participateInOnCreate,
         const TMap<FString, FString>& participatePayload,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleCreateMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             RGN::Modules::Matchmaking::MatchmakingData cpp_matchConfig;
             bool cpp_participateInOnCreate;
             std::unordered_map<string, string> cpp_participatePayload;
             CancellationToken cpp_cancellationToken;
-			FBP_MatchmakingData::ConvertToCoreModel(matchConfig, cpp_matchConfig);
-			cpp_participateInOnCreate = participateInOnCreate;
-			for (const auto& [participatePayload_key, participatePayload_value] : participatePayload) {
-				string cpp_participatePayload_key;
-				cpp_participatePayload_key = string(TCHAR_TO_UTF8(*participatePayload_key));
-				string cpp_participatePayload_value;
-				cpp_participatePayload_value = string(TCHAR_TO_UTF8(*participatePayload_value));
-				cpp_participatePayload.insert({cpp_participatePayload_key, cpp_participatePayload_value});
-			}
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            FBP_MatchmakingData::ConvertToCoreModel(matchConfig, cpp_matchConfig);
+            cpp_participateInOnCreate = participateInOnCreate;
+            for (const auto& [participatePayload_key, participatePayload_value] : participatePayload) {
+                string cpp_participatePayload_key;
+                cpp_participatePayload_key = string(TCHAR_TO_UTF8(*participatePayload_key));
+                string cpp_participatePayload_value;
+                cpp_participatePayload_value = string(TCHAR_TO_UTF8(*participatePayload_value));
+                cpp_participatePayload.insert({cpp_participatePayload_key, cpp_participatePayload_value});
+            }
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::CreateMatchAsync(
+                [onSuccess](RGN::Modules::Matchmaking::MatchmakingData response) {
+                    FBP_MatchmakingData bpResponse;
+                    FBP_MatchmakingData::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
                 cpp_matchConfig,
                 cpp_participateInOnCreate,
                 cpp_participatePayload,
-                cpp_cancellationToken,
-                [onSuccess](RGN::Modules::Matchmaking::MatchmakingData response) {
-                    FBP_MatchmakingData bpResponse;
-					FBP_MatchmakingData::ConvertToUnrealModel(response, bpResponse);
-                    onSuccess.ExecuteIfBound(bpResponse);
-                },
-                [onFail](int code, std::string message) {
-                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                cpp_cancellationToken);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void ParticipateInMatchAsync(
+        FMatchmakingModuleParticipateInMatchAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         const FString& matchId,
         const TMap<FString, FString>& participantPayload,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleParticipateInMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_matchId;
             std::unordered_map<string, string> cpp_participantPayload;
             CancellationToken cpp_cancellationToken;
-			cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
-			for (const auto& [participantPayload_key, participantPayload_value] : participantPayload) {
-				string cpp_participantPayload_key;
-				cpp_participantPayload_key = string(TCHAR_TO_UTF8(*participantPayload_key));
-				string cpp_participantPayload_value;
-				cpp_participantPayload_value = string(TCHAR_TO_UTF8(*participantPayload_value));
-				cpp_participantPayload.insert({cpp_participantPayload_key, cpp_participantPayload_value});
-			}
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
+            for (const auto& [participantPayload_key, participantPayload_value] : participantPayload) {
+                string cpp_participantPayload_key;
+                cpp_participantPayload_key = string(TCHAR_TO_UTF8(*participantPayload_key));
+                string cpp_participantPayload_value;
+                cpp_participantPayload_value = string(TCHAR_TO_UTF8(*participantPayload_value));
+                cpp_participantPayload.insert({cpp_participantPayload_key, cpp_participantPayload_value});
+            }
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::ParticipateInMatchAsync(
-                cpp_matchId,
-                cpp_participantPayload,
-                cpp_cancellationToken,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_matchId,
+                cpp_participantPayload,
+                cpp_cancellationToken);
     }
     /**
      * Asynchronously starts a matchmaking match identified by the provided match ID.
@@ -265,25 +265,25 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void StartMatchAsync(
+        FMatchmakingModuleStartMatchAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         const FString& matchId,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleStartMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_matchId;
             CancellationToken cpp_cancellationToken;
-			cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::StartMatchAsync(
-                cpp_matchId,
-                cpp_cancellationToken,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_matchId,
+                cpp_cancellationToken);
     }
     /**
      * Asynchronously votes for a matchmaking match identified by the provided match ID and participant ID.
@@ -297,29 +297,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void VoteForMatchAsync(
+        FMatchmakingModuleVoteForMatchAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         const FString& matchId,
         const FString& participantId,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleVoteForMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_matchId;
             string cpp_participantId;
             CancellationToken cpp_cancellationToken;
-			cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
-			cpp_participantId = string(TCHAR_TO_UTF8(*participantId));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
+            cpp_participantId = string(TCHAR_TO_UTF8(*participantId));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::VoteForMatchAsync(
-                cpp_matchId,
-                cpp_participantId,
-                cpp_cancellationToken,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_matchId,
+                cpp_participantId,
+                cpp_cancellationToken);
     }
     /**
      * Asynchronously submits the score for a matchmaking match identified by the provided match ID.
@@ -333,29 +333,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void SubmitMatchScoreAsync(
+        FMatchmakingModuleSubmitMatchScoreAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         const FString& matchId,
         int64 score,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleSubmitMatchScoreAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_matchId;
             int64_t cpp_score;
             CancellationToken cpp_cancellationToken;
-			cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
-			cpp_score = score;
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
+            cpp_score = score;
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::SubmitMatchScoreAsync(
-                cpp_matchId,
-                cpp_score,
-                cpp_cancellationToken,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_matchId,
+                cpp_score,
+                cpp_cancellationToken);
     }
     /**
      * Asynchronously finishes a matchmaking match identified by the provided match ID.
@@ -368,24 +368,24 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void FinishMatchAsync(
+        FMatchmakingModuleFinishMatchAsyncResponse onSuccess,
+        FMatchmakingModuleFailResponse onFail,
         const FString& matchId,
-        const FBP_CancellationToken& cancellationToken,
-        FMatchmakingModuleFinishMatchAsyncResponse onSuccess, FMatchmakingModuleFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_matchId;
             CancellationToken cpp_cancellationToken;
-			cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::FinishMatchAsync(
-                cpp_matchId,
-                cpp_cancellationToken,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_matchId,
+                cpp_cancellationToken);
     }
 };

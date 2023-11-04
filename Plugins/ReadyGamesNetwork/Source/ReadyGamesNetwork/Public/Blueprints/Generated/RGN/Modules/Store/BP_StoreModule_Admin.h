@@ -25,70 +25,70 @@ class READYGAMESNETWORK_API UBP_StoreModule_Admin : public UBlueprintFunctionLib
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void CreateLootBoxAsync(
+        FStoreModuleAdminCreateLootBoxAsyncResponse onSuccess,
+        FStoreModule_AdminFailResponse onFail,
         const FString& lootBoxName,
         const TArray<FString>& virtualItemTags,
-        const TArray<FBP_PriceInfo>& prices,
-        FStoreModuleAdminCreateLootBoxAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
+        const TArray<FBP_PriceInfo>& prices) {
             string cpp_lootBoxName;
             vector<string> cpp_virtualItemTags;
             vector<RGN::Modules::VirtualItems::PriceInfo> cpp_prices;
-			cpp_lootBoxName = string(TCHAR_TO_UTF8(*lootBoxName));
-			for (const auto& virtualItemTags_item : virtualItemTags) {
-				string cpp_virtualItemTags_item;
-				cpp_virtualItemTags_item = string(TCHAR_TO_UTF8(*virtualItemTags_item));
-				cpp_virtualItemTags.push_back(cpp_virtualItemTags_item);
-			}
-			for (const auto& prices_item : prices) {
-				RGN::Modules::VirtualItems::PriceInfo cpp_prices_item;
-				FBP_PriceInfo::ConvertToCoreModel(prices_item, cpp_prices_item);
-				cpp_prices.push_back(cpp_prices_item);
-			}
+            cpp_lootBoxName = string(TCHAR_TO_UTF8(*lootBoxName));
+            for (const auto& virtualItemTags_item : virtualItemTags) {
+                string cpp_virtualItemTags_item;
+                cpp_virtualItemTags_item = string(TCHAR_TO_UTF8(*virtualItemTags_item));
+                cpp_virtualItemTags.push_back(cpp_virtualItemTags_item);
+            }
+            for (const auto& prices_item : prices) {
+                RGN::Modules::VirtualItems::PriceInfo cpp_prices_item;
+                FBP_PriceInfo::ConvertToCoreModel(prices_item, cpp_prices_item);
+                cpp_prices.push_back(cpp_prices_item);
+            }
             RGN::Modules::Store::StoreModule_Admin::CreateLootBoxAsync(
-                cpp_lootBoxName,
-                cpp_virtualItemTags,
-                cpp_prices,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_lootBoxName,
+                cpp_virtualItemTags,
+                cpp_prices);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void DeleteLootBoxAsync(
-        const FString& lootBoxId,
-        FStoreModuleAdminDeleteLootBoxAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
+        FStoreModuleAdminDeleteLootBoxAsyncResponse onSuccess,
+        FStoreModule_AdminFailResponse onFail,
+        const FString& lootBoxId) {
             string cpp_lootBoxId;
-			cpp_lootBoxId = string(TCHAR_TO_UTF8(*lootBoxId));
+            cpp_lootBoxId = string(TCHAR_TO_UTF8(*lootBoxId));
             RGN::Modules::Store::StoreModule_Admin::DeleteLootBoxAsync(
-                cpp_lootBoxId,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_lootBoxId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
     static void DeleteStoreOfferAsync(
-        const FString& offerId,
-        FStoreModuleAdminDeleteStoreOfferAsyncResponse onSuccess, FStoreModule_AdminFailResponse onFail) {
+        FStoreModuleAdminDeleteStoreOfferAsyncResponse onSuccess,
+        FStoreModule_AdminFailResponse onFail,
+        const FString& offerId) {
             string cpp_offerId;
-			cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
+            cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
             RGN::Modules::Store::StoreModule_Admin::DeleteStoreOfferAsync(
-                cpp_offerId,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_offerId);
     }
 };

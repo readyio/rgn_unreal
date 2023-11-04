@@ -13,50 +13,50 @@ namespace RGN { namespace Modules { namespace VirtualItems {
     class VirtualItemsModule_Admin {
     public:
         static void DeleteVirtualItemsByIdsAsync(
-            const vector<string>& virtualItemIds,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const vector<string>& virtualItemIds) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemIds"] = virtualItemIds;
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-deleteVirtualItemsByIds",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void DeleteVirtualItemsByNameAsync(
-            const string& itemName,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& itemName) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["itemName"] = itemName;
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-deleteVirtualItemsByName",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void DeleteVirtualItemByAppIdAsync(
-            const string& appId,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& appId) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-deleteVirtualItemByAppId",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void AddFromCSVWithBlockchainStubAsync(
+            const function<void(const vector<string>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemName,
             const string& csvContent,
             const string& csvDelimiter = ",",
-            const CancellationToken& cancellationToken = CancellationToken(),
-            const function<void(const vector<string>& result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const CancellationToken& cancellationToken = CancellationToken()) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemName"] = virtualItemName;
@@ -66,8 +66,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-addFromCSV",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["newVirtualItemIds"].template get<vector<string>>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["newVirtualItemIds"].template get<vector<string>>());
                     },
                     fail);
             };

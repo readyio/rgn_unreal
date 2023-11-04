@@ -15,10 +15,10 @@ struct READYGAMESNETWORK_API FBP_StartMatchResponseData {
     FString matchId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::StartMatchResponseData& source, FBP_StartMatchResponseData& target) {
-		target.matchId = FString(source.matchId.c_str());
+        target.matchId = FString(source.matchId.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_StartMatchResponseData& source, RGN::Modules::Matchmaking::StartMatchResponseData& target) {
-		target.matchId = string(TCHAR_TO_UTF8(*source.matchId));
+        target.matchId = string(TCHAR_TO_UTF8(*source.matchId));
 	}
 };

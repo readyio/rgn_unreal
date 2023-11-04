@@ -26,88 +26,88 @@ class READYGAMESNETWORK_API UBP_VirtualItemsModule_Admin : public UBlueprintFunc
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void DeleteVirtualItemsByIdsAsync(
-        const TArray<FString>& virtualItemIds,
-        FVirtualItemsModuleAdminDeleteVirtualItemsByIdsAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+        FVirtualItemsModuleAdminDeleteVirtualItemsByIdsAsyncResponse onSuccess,
+        FVirtualItemsModule_AdminFailResponse onFail,
+        const TArray<FString>& virtualItemIds) {
             vector<string> cpp_virtualItemIds;
-			for (const auto& virtualItemIds_item : virtualItemIds) {
-				string cpp_virtualItemIds_item;
-				cpp_virtualItemIds_item = string(TCHAR_TO_UTF8(*virtualItemIds_item));
-				cpp_virtualItemIds.push_back(cpp_virtualItemIds_item);
-			}
+            for (const auto& virtualItemIds_item : virtualItemIds) {
+                string cpp_virtualItemIds_item;
+                cpp_virtualItemIds_item = string(TCHAR_TO_UTF8(*virtualItemIds_item));
+                cpp_virtualItemIds.push_back(cpp_virtualItemIds_item);
+            }
             RGN::Modules::VirtualItems::VirtualItemsModule_Admin::DeleteVirtualItemsByIdsAsync(
-                cpp_virtualItemIds,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_virtualItemIds);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void DeleteVirtualItemsByNameAsync(
-        const FString& itemName,
-        FVirtualItemsModuleAdminDeleteVirtualItemsByNameAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+        FVirtualItemsModuleAdminDeleteVirtualItemsByNameAsyncResponse onSuccess,
+        FVirtualItemsModule_AdminFailResponse onFail,
+        const FString& itemName) {
             string cpp_itemName;
-			cpp_itemName = string(TCHAR_TO_UTF8(*itemName));
+            cpp_itemName = string(TCHAR_TO_UTF8(*itemName));
             RGN::Modules::VirtualItems::VirtualItemsModule_Admin::DeleteVirtualItemsByNameAsync(
-                cpp_itemName,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_itemName);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void DeleteVirtualItemByAppIdAsync(
-        const FString& appId,
-        FVirtualItemsModuleAdminDeleteVirtualItemByAppIdAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+        FVirtualItemsModuleAdminDeleteVirtualItemByAppIdAsyncResponse onSuccess,
+        FVirtualItemsModule_AdminFailResponse onFail,
+        const FString& appId) {
             string cpp_appId;
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
             RGN::Modules::VirtualItems::VirtualItemsModule_Admin::DeleteVirtualItemByAppIdAsync(
-                cpp_appId,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
     static void AddFromCSVWithBlockchainStubAsync(
+        FVirtualItemsModuleAdminAddFromCSVWithBlockchainStubAsyncResponse onSuccess,
+        FVirtualItemsModule_AdminFailResponse onFail,
         const FString& virtualItemName,
         const FString& csvContent,
         const FString& csvDelimiter,
-        const FBP_CancellationToken& cancellationToken,
-        FVirtualItemsModuleAdminAddFromCSVWithBlockchainStubAsyncResponse onSuccess, FVirtualItemsModule_AdminFailResponse onFail) {
+        const FBP_CancellationToken& cancellationToken) {
             string cpp_virtualItemName;
             string cpp_csvContent;
             string cpp_csvDelimiter;
             CancellationToken cpp_cancellationToken;
-			cpp_virtualItemName = string(TCHAR_TO_UTF8(*virtualItemName));
-			cpp_csvContent = string(TCHAR_TO_UTF8(*csvContent));
-			cpp_csvDelimiter = string(TCHAR_TO_UTF8(*csvDelimiter));
-			FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+            cpp_virtualItemName = string(TCHAR_TO_UTF8(*virtualItemName));
+            cpp_csvContent = string(TCHAR_TO_UTF8(*csvContent));
+            cpp_csvDelimiter = string(TCHAR_TO_UTF8(*csvDelimiter));
+            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::VirtualItems::VirtualItemsModule_Admin::AddFromCSVWithBlockchainStubAsync(
-                cpp_virtualItemName,
-                cpp_csvContent,
-                cpp_csvDelimiter,
-                cpp_cancellationToken,
                 [onSuccess](vector<string> response) {
                     TArray<FString> bpResponse;
-					for (const auto& response_item : response) {
-						FString b_response_item;
-						b_response_item = FString(response_item.c_str());
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FString b_response_item;
+                        b_response_item = FString(response_item.c_str());
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_virtualItemName,
+                cpp_csvContent,
+                cpp_csvDelimiter,
+                cpp_cancellationToken);
     }
 };

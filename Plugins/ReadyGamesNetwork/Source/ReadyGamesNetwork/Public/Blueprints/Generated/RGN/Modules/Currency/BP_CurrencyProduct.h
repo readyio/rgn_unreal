@@ -25,20 +25,20 @@ struct READYGAMESNETWORK_API FBP_CurrencyProduct {
     FString promotionalSticker;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::CurrencyProduct& source, FBP_CurrencyProduct& target) {
-		target.id = FString(source.id.c_str());
-		target.currencyName = FString(source.currencyName.c_str());
-		target.price = source.price;
-		target.quantity = source.quantity;
-		target.type = FString(source.type.c_str());
-		target.promotionalSticker = FString(source.promotionalSticker.c_str());
+        target.id = FString(source.id.c_str());
+        target.currencyName = FString(source.currencyName.c_str());
+        target.price = source.price;
+        target.quantity = source.quantity;
+        target.type = FString(source.type.c_str());
+        target.promotionalSticker = FString(source.promotionalSticker.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_CurrencyProduct& source, RGN::Modules::Currency::CurrencyProduct& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
-		target.currencyName = string(TCHAR_TO_UTF8(*source.currencyName));
-		target.price = source.price;
-		target.quantity = source.quantity;
-		target.type = string(TCHAR_TO_UTF8(*source.type));
-		target.promotionalSticker = string(TCHAR_TO_UTF8(*source.promotionalSticker));
+        target.id = string(TCHAR_TO_UTF8(*source.id));
+        target.currencyName = string(TCHAR_TO_UTF8(*source.currencyName));
+        target.price = source.price;
+        target.quantity = source.quantity;
+        target.type = string(TCHAR_TO_UTF8(*source.type));
+        target.promotionalSticker = string(TCHAR_TO_UTF8(*source.promotionalSticker));
 	}
 };

@@ -15,10 +15,10 @@ struct READYGAMESNETWORK_API FBP_SetScoreResponseData {
     int32 place;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::SetScoreResponseData& source, FBP_SetScoreResponseData& target) {
-		target.place = source.place;
+        target.place = source.place;
 	}
 
 	static void ConvertToCoreModel(const FBP_SetScoreResponseData& source, RGN::Modules::Leaderboard::SetScoreResponseData& target) {
-		target.place = source.place;
+        target.place = source.place;
 	}
 };

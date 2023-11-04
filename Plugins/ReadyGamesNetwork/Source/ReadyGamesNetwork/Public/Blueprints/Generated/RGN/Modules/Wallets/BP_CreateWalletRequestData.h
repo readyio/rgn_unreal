@@ -19,14 +19,14 @@ struct READYGAMESNETWORK_API FBP_CreateWalletRequestData : public FBP_BaseMigrat
     FString password;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::CreateWalletRequestData& source, FBP_CreateWalletRequestData& target) {
-		target.token = FString(source.token.c_str());
-		target.password = FString(source.password.c_str());
+        target.token = FString(source.token.c_str());
+        target.password = FString(source.password.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_CreateWalletRequestData& source, RGN::Modules::Wallets::CreateWalletRequestData& target) {
-		target.token = string(TCHAR_TO_UTF8(*source.token));
-		target.password = string(TCHAR_TO_UTF8(*source.password));
+        target.token = string(TCHAR_TO_UTF8(*source.token));
+        target.password = string(TCHAR_TO_UTF8(*source.password));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

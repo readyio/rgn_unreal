@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_LoginRequestData : public FBP_BaseMigrationRequ
     FString bio;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::LoginRequestData& source, FBP_LoginRequestData& target) {
-		target.bio = FString(source.bio.c_str());
+        target.bio = FString(source.bio.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_LoginRequestData& source, RGN::Model::Request::LoginRequestData& target) {
-		target.bio = string(TCHAR_TO_UTF8(*source.bio));
+        target.bio = string(TCHAR_TO_UTF8(*source.bio));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

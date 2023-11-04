@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_UpdateInventoryQuantityResponseData {
     int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::UpdateInventoryQuantityResponseData& source, FBP_UpdateInventoryQuantityResponseData& target) {
-		target.id = FString(source.id.c_str());
-		target.quantity = source.quantity;
+        target.id = FString(source.id.c_str());
+        target.quantity = source.quantity;
 	}
 
 	static void ConvertToCoreModel(const FBP_UpdateInventoryQuantityResponseData& source, RGN::Modules::Inventory::UpdateInventoryQuantityResponseData& target) {
-		target.id = string(TCHAR_TO_UTF8(*source.id));
-		target.quantity = source.quantity;
+        target.id = string(TCHAR_TO_UTF8(*source.id));
+        target.quantity = source.quantity;
 	}
 };

@@ -21,24 +21,24 @@ struct READYGAMESNETWORK_API FBP_GetAllVirtualItemsByAppIdsRequestData : public 
     FString startAfter;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData& source, FBP_GetAllVirtualItemsByAppIdsRequestData& target) {
-		for (const auto& source_appIds_item : source.appIds) {
-			FString b_source_appIds_item;
-			b_source_appIds_item = FString(source_appIds_item.c_str());
-			target.appIds.Add(b_source_appIds_item);
-		}
-		target.limit = source.limit;
-		target.startAfter = FString(source.startAfter.c_str());
+        for (const auto& source_appIds_item : source.appIds) {
+            FString b_source_appIds_item;
+            b_source_appIds_item = FString(source_appIds_item.c_str());
+            target.appIds.Add(b_source_appIds_item);
+        }
+        target.limit = source.limit;
+        target.startAfter = FString(source.startAfter.c_str());
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_GetAllVirtualItemsByAppIdsRequestData& source, RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData& target) {
-		for (const auto& source_appIds_item : source.appIds) {
-			string cpp_source_appIds_item;
-			cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
-			target.appIds.push_back(cpp_source_appIds_item);
-		}
-		target.limit = source.limit;
-		target.startAfter = string(TCHAR_TO_UTF8(*source.startAfter));
+        for (const auto& source_appIds_item : source.appIds) {
+            string cpp_source_appIds_item;
+            cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
+            target.appIds.push_back(cpp_source_appIds_item);
+        }
+        target.limit = source.limit;
+        target.startAfter = string(TCHAR_TO_UTF8(*source.startAfter));
 		FBP_BaseMigrationRequestData::ConvertToCoreModel(source, target);
 	}
 };

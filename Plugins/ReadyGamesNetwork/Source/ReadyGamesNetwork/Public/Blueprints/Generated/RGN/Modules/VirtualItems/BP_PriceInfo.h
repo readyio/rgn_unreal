@@ -49,28 +49,28 @@ struct READYGAMESNETWORK_API FBP_PriceInfo {
     FString group;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::PriceInfo& source, FBP_PriceInfo& target) {
-		for (const auto& source_appIds_item : source.appIds) {
-			FString b_source_appIds_item;
-			b_source_appIds_item = FString(source_appIds_item.c_str());
-			target.appIds.Add(b_source_appIds_item);
-		}
-		target.itemId = FString(source.itemId.c_str());
-		target.name = FString(source.name.c_str());
-		target.quantity = source.quantity;
-		target.quantityWithoutDiscount = source.quantityWithoutDiscount;
-		target.group = FString(source.group.c_str());
+        for (const auto& source_appIds_item : source.appIds) {
+            FString b_source_appIds_item;
+            b_source_appIds_item = FString(source_appIds_item.c_str());
+            target.appIds.Add(b_source_appIds_item);
+        }
+        target.itemId = FString(source.itemId.c_str());
+        target.name = FString(source.name.c_str());
+        target.quantity = source.quantity;
+        target.quantityWithoutDiscount = source.quantityWithoutDiscount;
+        target.group = FString(source.group.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_PriceInfo& source, RGN::Modules::VirtualItems::PriceInfo& target) {
-		for (const auto& source_appIds_item : source.appIds) {
-			string cpp_source_appIds_item;
-			cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
-			target.appIds.push_back(cpp_source_appIds_item);
-		}
-		target.itemId = string(TCHAR_TO_UTF8(*source.itemId));
-		target.name = string(TCHAR_TO_UTF8(*source.name));
-		target.quantity = source.quantity;
-		target.quantityWithoutDiscount = source.quantityWithoutDiscount;
-		target.group = string(TCHAR_TO_UTF8(*source.group));
+        for (const auto& source_appIds_item : source.appIds) {
+            string cpp_source_appIds_item;
+            cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
+            target.appIds.push_back(cpp_source_appIds_item);
+        }
+        target.itemId = string(TCHAR_TO_UTF8(*source.itemId));
+        target.name = string(TCHAR_TO_UTF8(*source.name));
+        target.quantity = source.quantity;
+        target.quantityWithoutDiscount = source.quantityWithoutDiscount;
+        target.group = string(TCHAR_TO_UTF8(*source.group));
 	}
 };

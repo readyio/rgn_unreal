@@ -27,16 +27,16 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * Add a virtual item
          */
         static void AddVirtualItemAsync(
-            const RGN::Modules::VirtualItems::VirtualItem& virtualItem,
-            const function<void(const RGN::Modules::VirtualItems::VirtualItem& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const RGN::Modules::VirtualItems::VirtualItem& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const RGN::Modules::VirtualItems::VirtualItem& virtualItem) {
                 RGN::Modules::VirtualItems::AddToVirtualItemsRequestData requestData;
                 requestData.virtualItem = virtualItem;
                 RGNCore::CallAPI<RGN::Modules::VirtualItems::AddToVirtualItemsRequestData, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
                     "virtualItemsV2-add",
                     requestData,
-                    [complete] (const RGN::Modules::VirtualItems::AddVirtualItemResponseData& result) {
-                        complete(result.virtualItem);
+                    [success] (const RGN::Modules::VirtualItems::AddVirtualItemResponseData& result) {
+                        success(result.virtualItem);
                     },
                     fail);
             };
@@ -50,12 +50,12 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @throw: Thrown when 'virtualItemName', 'csvContent', or 'csvDelimiter' is null or empty.
          */
         static void AddFromCSVAsync(
+            const function<void(const vector<string>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemName,
             const string& csvContent,
             const string& csvDelimiter = ",",
-            const CancellationToken& cancellationToken = CancellationToken(),
-            const function<void(const vector<string>& result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const CancellationToken& cancellationToken = CancellationToken()) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemName"] = virtualItemName;
@@ -64,8 +64,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-addFromCSV",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["newVirtualItemIds"].template get<vector<string>>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["newVirtualItemIds"].template get<vector<string>>());
                     },
                     fail);
             };
@@ -76,18 +76,18 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @return A Task representing the asynchronous operation. The result of the Task is the updated VirtualItem.
          */
         static void UpdateVirtualItemAsync(
+            const function<void(const RGN::Modules::VirtualItems::VirtualItem& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& itemId,
-            const RGN::Modules::VirtualItems::VirtualItem& virtualItem,
-            const function<void(const RGN::Modules::VirtualItems::VirtualItem& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const RGN::Modules::VirtualItems::VirtualItem& virtualItem) {
                 RGN::Modules::VirtualItems::UpdateVirtualItemsRequestData requestData;
                 requestData.itemId = itemId;
                 requestData.virtualItem = virtualItem;
                 RGNCore::CallAPI<RGN::Modules::VirtualItems::UpdateVirtualItemsRequestData, RGN::Modules::VirtualItems::AddVirtualItemResponseData>(
                     "virtualItemsV2-update",
                     requestData,
-                    [complete] (const RGN::Modules::VirtualItems::AddVirtualItemResponseData& result) {
-                        complete(result.virtualItem);
+                    [success] (const RGN::Modules::VirtualItems::AddVirtualItemResponseData& result) {
+                        success(result.virtualItem);
                     },
                     fail);
             };
@@ -98,27 +98,27 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @throw: Thrown when 'itemId' is null or empty.
          */
         static void DeleteVirtualItemAsync(
-            const string& itemId,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& itemId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["itemId"] = itemId;
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-deleteVirtualItem",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void GetVirtualItemsAsync(
-            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete,
+            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseMigrationRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseMigrationRequestData, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByAppId",
                     requestData,
-                    [complete] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
-                        complete(result.virtualItems);
+                    [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
+                        success(result.virtualItems);
                     },
                     fail);
             };
@@ -128,10 +128,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @param startAfter - The item id to start after
          */
         static void GetVirtualItemsAsync(
+            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const int32_t limit,
-            const string& startAfter = "",
-            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const string& startAfter = "") {
                 RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData requestData;
                 requestData.appIds = vector<string>{ RGNCore::GetAppId() };
                 requestData.limit = limit;
@@ -139,30 +139,30 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByAppIds",
                     requestData,
-                    [complete] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
-                        complete(result.virtualItems);
+                    [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
+                        success(result.virtualItems);
                     },
                     fail);
             };
         static void GetVirtualItemsByIdsAsync(
-            const vector<string>& virtualItemsIds,
-            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const vector<string>& virtualItemsIds) {
                 RGN::Modules::VirtualItems::GetVirtualItemsByIdsRequestData requestData;
                 requestData.ids = virtualItemsIds;
                 RGNCore::CallAPI<RGN::Modules::VirtualItems::GetVirtualItemsByIdsRequestData, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByIds",
                     requestData,
-                    [complete] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
-                        complete(result.virtualItems);
+                    [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
+                        success(result.virtualItems);
                     },
                     fail);
             };
         static void GetByTagsAsync(
+            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const vector<string>& tags,
-            const string& appId = "",
-            const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const string& appId = "") {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["tags"] = tags;
@@ -170,8 +170,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::VirtualItemsResponseData>(
                     "virtualItemsV2-getByTags",
                     requestData,
-                    [complete] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
-                        complete(result.virtualItems);
+                    [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
+                        success(result.virtualItems);
                     },
                     fail);
             };
@@ -179,9 +179,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * Returns all tags for specific virtual item
          */
         static void GetTagsAsync(
-            const string& virtualItemId,
-            const function<void(const vector<string>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const vector<string>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& virtualItemId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
@@ -189,17 +189,17 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::VirtualItems::GetVirtualItemTagsResponse>(
                     "virtualItemsV2-getTags",
                     requestData,
-                    [complete] (const RGN::Modules::VirtualItems::GetVirtualItemTagsResponse& result) {
-                        complete(result.tags);
+                    [success] (const RGN::Modules::VirtualItems::GetVirtualItemTagsResponse& result) {
+                        success(result.tags);
                     },
                     fail);
             };
         static void SetTagsAsync(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemId,
             const vector<string>& tags,
-            const string& appId = "",
-            const function<void(void)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const string& appId = "") {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
@@ -208,17 +208,17 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-setTags",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         /**
          * Sets the name for a specific virtual item
          */
         static void SetNameAsync(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemId,
-            const string& name,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& name) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
@@ -226,17 +226,17 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-setName",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         /**
          * Sets the description for a specific virtual item
          */
         static void SetDescriptionAsync(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemId,
-            const string& description,
-            const function<void(void)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& description) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
@@ -244,7 +244,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-setDescription",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         /**
@@ -252,9 +252,9 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @return Returns json as string
          */
         static void GetPropertiesAsync(
-            const string& virtualItemId,
-            const function<void(const string& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const string& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& virtualItemId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
@@ -262,8 +262,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-getProperties",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["properties"].template get<string>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["properties"].template get<string>());
                     },
                     fail);
             };
@@ -272,10 +272,10 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @return Returns json as string
          */
         static void SetPropertiesAsync(
+            const function<void(const string& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemId,
-            const string& json,
-            const function<void(const string& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const string& json) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["virtualItemId"] = virtualItemId;
@@ -284,8 +284,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
                     "virtualItemsV2-setProperties",
                     requestData,
-                    [complete] (const nlohmann::json& result) {
-                        complete(result["properties"].template get<string>());
+                    [success] (const nlohmann::json& result) {
+                        success(result["properties"].template get<string>());
                     },
                     fail);
             };
@@ -297,16 +297,16 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @return A boolean indicating whether the upload was successful.
          */
         static void UploadImageAsync(
+            const function<void(const bool result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemId,
             const vector<uint8_t>& thumbnailTextureBytes,
-            const CancellationToken& cancellationToken = CancellationToken(),
-            const function<void(const bool result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::UploadImageAsync(
                     virtualItemId,
                     thumbnailTextureBytes,
                     cancellationToken,
-                    complete,
+                    success,
                     fail);
             };
         /**
@@ -317,16 +317,16 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * @return A byte array containing the image data.
          */
         static void DownloadImageAsync(
+            const function<void(const vector<uint8_t>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& virtualItemId,
             const RGN::Model::ImageSize& size,
-            const CancellationToken& cancellationToken = CancellationToken(),
-            const function<void(const vector<uint8_t>& result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::DownloadImageAsync(
                     virtualItemId,
                     size,
                     cancellationToken,
-                    complete,
+                    success,
                     fail);
             };
     };

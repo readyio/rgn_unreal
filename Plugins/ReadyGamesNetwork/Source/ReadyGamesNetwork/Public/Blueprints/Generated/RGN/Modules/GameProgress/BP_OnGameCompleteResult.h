@@ -21,12 +21,12 @@ struct READYGAMESNETWORK_API FBP_OnGameCompleteResult {
     FBP_UserCurrencyData userCurrencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::OnGameCompleteResult& source, FBP_OnGameCompleteResult& target) {
-		FBP_GameProgress::ConvertToUnrealModel(source.gameProgress, target.gameProgress);
-		FBP_UserCurrencyData::ConvertToUnrealModel(source.userCurrencies, target.userCurrencies);
+        FBP_GameProgress::ConvertToUnrealModel(source.gameProgress, target.gameProgress);
+        FBP_UserCurrencyData::ConvertToUnrealModel(source.userCurrencies, target.userCurrencies);
 	}
 
 	static void ConvertToCoreModel(const FBP_OnGameCompleteResult& source, RGN::Modules::GameProgress::OnGameCompleteResult& target) {
-		FBP_GameProgress::ConvertToCoreModel(source.gameProgress, target.gameProgress);
-		FBP_UserCurrencyData::ConvertToCoreModel(source.userCurrencies, target.userCurrencies);
+        FBP_GameProgress::ConvertToCoreModel(source.gameProgress, target.gameProgress);
+        FBP_UserCurrencyData::ConvertToCoreModel(source.userCurrencies, target.userCurrencies);
 	}
 };

@@ -21,18 +21,18 @@ class READYGAMESNETWORK_API UBP_MatchmakingModule_Admin : public UBlueprintFunct
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
     static void DeleteMatchesByAppIdAsync(
-        const FString& appIdToRemoveTheMatchesFor,
-        FMatchmakingModuleAdminDeleteMatchesByAppIdAsyncResponse onSuccess, FMatchmakingModule_AdminFailResponse onFail) {
+        FMatchmakingModuleAdminDeleteMatchesByAppIdAsyncResponse onSuccess,
+        FMatchmakingModule_AdminFailResponse onFail,
+        const FString& appIdToRemoveTheMatchesFor) {
             string cpp_appIdToRemoveTheMatchesFor;
-			cpp_appIdToRemoveTheMatchesFor = string(TCHAR_TO_UTF8(*appIdToRemoveTheMatchesFor));
+            cpp_appIdToRemoveTheMatchesFor = string(TCHAR_TO_UTF8(*appIdToRemoveTheMatchesFor));
             RGN::Modules::Matchmaking::MatchmakingModule_Admin::DeleteMatchesByAppIdAsync(
-                cpp_appIdToRemoveTheMatchesFor,
                 [onSuccess]() {
                     onSuccess.ExecuteIfBound();
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appIdToRemoveTheMatchesFor);
     }
 };

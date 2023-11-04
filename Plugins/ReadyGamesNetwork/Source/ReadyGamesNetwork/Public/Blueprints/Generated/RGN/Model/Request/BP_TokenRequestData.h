@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_TokenRequestData : public FBP_BaseRequestData {
     FString idToken;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::TokenRequestData& source, FBP_TokenRequestData& target) {
-		target.idToken = FString(source.idToken.c_str());
+        target.idToken = FString(source.idToken.c_str());
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_TokenRequestData& source, RGN::Model::Request::TokenRequestData& target) {
-		target.idToken = string(TCHAR_TO_UTF8(*source.idToken));
+        target.idToken = string(TCHAR_TO_UTF8(*source.idToken));
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_LootboxIsAvailableResponse {
     int64 count;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::LootboxIsAvailableResponse& source, FBP_LootboxIsAvailableResponse& target) {
-		target.isAvailable = source.isAvailable;
-		target.count = source.count;
+        target.isAvailable = source.isAvailable;
+        target.count = source.count;
 	}
 
 	static void ConvertToCoreModel(const FBP_LootboxIsAvailableResponse& source, RGN::Modules::Store::LootboxIsAvailableResponse& target) {
-		target.isAvailable = source.isAvailable;
-		target.count = source.count;
+        target.isAvailable = source.isAvailable;
+        target.count = source.count;
 	}
 };

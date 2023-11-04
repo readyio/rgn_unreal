@@ -22,16 +22,16 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * Resulting Data contains leaderboard description fields like id, name, type, etc.
          */
         static void GetLeaderboardByIdAsync(
-            const string& id,
-            const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& id) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = id;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::LeaderboardData>(
                     "leaderboardV2-getById",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         /**
@@ -39,43 +39,43 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * Resulting Data contains leaderboard description fields like id, name, type, etc.
          */
         static void GetLeaderboardByRequestNameAsync(
-            const string& requestName,
-            const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const RGN::Modules::Leaderboard::LeaderboardData& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& requestName) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestName"] = requestName;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::LeaderboardData>(
                     "leaderboardV2-getByRequestName",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         static void GetLeaderboardByRequestNamesAsync(
-            const vector<string>& requestNames,
-            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const vector<string>& requestNames) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["requestNames"] = requestNames;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardsResponse>(
                     "leaderboardV2-getByRequestNames",
                     requestData,
-                    [complete] (const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
-                        complete(result.Leaderboards);
+                    [success] (const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
+                        success(result.Leaderboards);
                     },
                     fail);
             };
         static void GetLeaderboardIdsAsync(
-            const function<void(const vector<string>& result)>& complete,
+            const function<void(const vector<string>& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData>(
                     "leaderboardV2-getIds",
                     requestData,
-                    [complete] (const RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData& result) {
-                        complete(result.ids);
+                    [success] (const RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData& result) {
+                        success(result.ids);
                     },
                     fail);
             };
@@ -87,11 +87,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
          */
         static void SetScoreAsync(
+            const function<void(const int32_t result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& leaderboardId,
             const int32_t score,
-            const string& extraData = "",
-            const function<void(const int32_t result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const string& extraData = "") {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
@@ -100,8 +100,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::SetScoreResponseData>(
                     "leaderboardV2-setScore",
                     requestData,
-                    [complete] (const RGN::Modules::Leaderboard::SetScoreResponseData& result) {
-                        complete(result.place);
+                    [success] (const RGN::Modules::Leaderboard::SetScoreResponseData& result) {
+                        success(result.place);
                     },
                     fail);
             };
@@ -113,11 +113,11 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
          */
         static void AddScoreAsync(
+            const function<void(const int32_t result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& leaderboardId,
             const int32_t score,
-            const string& extraData = "",
-            const function<void(const int32_t result)>& complete = {},
-            const function<void(const int httpCode, const string& error)>& fail = {}) {
+            const string& extraData = "") {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
@@ -126,8 +126,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::SetScoreResponseData>(
                     "leaderboardV2-addScore",
                     requestData,
-                    [complete] (const RGN::Modules::Leaderboard::SetScoreResponseData& result) {
-                        complete(result.place);
+                    [success] (const RGN::Modules::Leaderboard::SetScoreResponseData& result) {
+                        success(result.place);
                     },
                     fail);
             };
@@ -137,16 +137,16 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * @return A task that represents the asynchronous operation. The task result contains the player's entry data on the leaderboard.
          */
         static void GetUserEntryAsync(
-            const string& leaderboardId,
-            const function<void(const RGN::Modules::Leaderboard::LeaderboardEntry& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const function<void(const RGN::Modules::Leaderboard::LeaderboardEntry& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& leaderboardId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::LeaderboardEntry>(
                     "leaderboardV2-getUserEntry",
                     requestData,
-                    complete,
+                    success,
                     fail);
             };
         /**
@@ -158,12 +158,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * @return A task that represents the asynchronous operation. The task result contains a list of the retrieved leaderboard entries.
          */
         static void GetEntriesAsync(
+            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardEntry>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
             const string& leaderboardId,
             const int32_t quantityTop,
             const bool includeUser,
-            const int32_t quantityAroundUser,
-            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardEntry>& result)>& complete,
-            const function<void(const int httpCode, const string& error)>& fail) {
+            const int32_t quantityAroundUser) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["leaderboardId"] = leaderboardId;
@@ -173,8 +173,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData>(
                     "leaderboardV2-getEntries",
                     requestData,
-                    [complete] (const RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData& result) {
-                        complete(result.entries);
+                    [success] (const RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData& result) {
+                        success(result.entries);
                     },
                     fail);
             };

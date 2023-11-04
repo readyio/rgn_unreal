@@ -68,29 +68,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void AddToInventoryAsync_VirtualItemId_Quantity_Properties(
+        FInventoryModuleAddToInventoryAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& virtualItemId,
         int32 quantity,
-        const FBP_Properties& properties,
-        FInventoryModuleAddToInventoryAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        const FBP_Properties& properties) {
             string cpp_virtualItemId;
             int32_t cpp_quantity;
             RGN::Modules::VirtualItems::Properties cpp_properties;
-			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
-			cpp_quantity = quantity;
-			FBP_Properties::ConvertToCoreModel(properties, cpp_properties);
+            cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
+            cpp_quantity = quantity;
+            FBP_Properties::ConvertToCoreModel(properties, cpp_properties);
             RGN::Modules::Inventory::InventoryModule::AddToInventoryAsync(
-                cpp_virtualItemId,
-                cpp_quantity,
-                cpp_properties,
                 [onSuccess](RGN::Modules::Inventory::AddToInventoryResponseData response) {
                     FBP_AddToInventoryResponseData bpResponse;
-					FBP_AddToInventoryResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_AddToInventoryResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_virtualItemId,
+                cpp_quantity,
+                cpp_properties);
     }
     /**
      * Asynchronously adds a specified quantity of a virtual item to the inventory for a specified user.
@@ -104,33 +104,33 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void AddToInventoryAsync_UserId_VirtualItemId_Quantity_Properties(
+        FInventoryModuleAddToInventoryAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& userId,
         const FString& virtualItemId,
         int32 quantity,
-        const FBP_Properties& properties,
-        FInventoryModuleAddToInventoryAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        const FBP_Properties& properties) {
             string cpp_userId;
             string cpp_virtualItemId;
             int32_t cpp_quantity;
             RGN::Modules::VirtualItems::Properties cpp_properties;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
-			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
-			cpp_quantity = quantity;
-			FBP_Properties::ConvertToCoreModel(properties, cpp_properties);
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
+            cpp_quantity = quantity;
+            FBP_Properties::ConvertToCoreModel(properties, cpp_properties);
             RGN::Modules::Inventory::InventoryModule::AddToInventoryAsync(
-                cpp_userId,
-                cpp_virtualItemId,
-                cpp_quantity,
-                cpp_properties,
                 [onSuccess](RGN::Modules::Inventory::AddToInventoryResponseData response) {
                     FBP_AddToInventoryResponseData bpResponse;
-					FBP_AddToInventoryResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_AddToInventoryResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId,
+                cpp_virtualItemId,
+                cpp_quantity,
+                cpp_properties);
     }
     /**
      * Asynchronously adds a specified inventory item to the inventory for a specified user.
@@ -142,25 +142,25 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void AddToInventoryAsync_UserId_InventoryData(
+        FInventoryModuleAddToInventoryAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& userId,
-        const FBP_InventoryItemData& inventoryData,
-        FInventoryModuleAddToInventoryAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        const FBP_InventoryItemData& inventoryData) {
             string cpp_userId;
             RGN::Modules::Inventory::InventoryItemData cpp_inventoryData;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
-			FBP_InventoryItemData::ConvertToCoreModel(inventoryData, cpp_inventoryData);
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            FBP_InventoryItemData::ConvertToCoreModel(inventoryData, cpp_inventoryData);
             RGN::Modules::Inventory::InventoryModule::AddToInventoryAsync(
-                cpp_userId,
-                cpp_inventoryData,
                 [onSuccess](RGN::Modules::Inventory::AddToInventoryResponseData response) {
                     FBP_AddToInventoryResponseData bpResponse;
-					FBP_AddToInventoryResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_AddToInventoryResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId,
+                cpp_inventoryData);
     }
     /**
      * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its unique identifier.
@@ -173,29 +173,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void RemoveByVirtualItemIdAsync(
+        FInventoryModuleRemoveByVirtualItemIdAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& userId,
         const FString& virtualItemId,
-        int32 quantity,
-        FInventoryModuleRemoveByVirtualItemIdAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        int32 quantity) {
             string cpp_userId;
             string cpp_virtualItemId;
             int32_t cpp_quantity;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
-			cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
-			cpp_quantity = quantity;
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
+            cpp_quantity = quantity;
             RGN::Modules::Inventory::InventoryModule::RemoveByVirtualItemIdAsync(
-                cpp_userId,
-                cpp_virtualItemId,
-                cpp_quantity,
                 [onSuccess](RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData response) {
                     FBP_RemoveByVirtualItemIdResponseData bpResponse;
-					FBP_RemoveByVirtualItemIdResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_RemoveByVirtualItemIdResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId,
+                cpp_virtualItemId,
+                cpp_quantity);
     }
     /**
      * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its owned item identifier.
@@ -208,29 +208,29 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void RemoveByInventoryItemIdAsync(
+        FInventoryModuleRemoveByInventoryItemIdAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& userId,
         const FString& ownedItemId,
-        int32 quantity,
-        FInventoryModuleRemoveByInventoryItemIdAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        int32 quantity) {
             string cpp_userId;
             string cpp_ownedItemId;
             int32_t cpp_quantity;
-			cpp_userId = string(TCHAR_TO_UTF8(*userId));
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
-			cpp_quantity = quantity;
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            cpp_quantity = quantity;
             RGN::Modules::Inventory::InventoryModule::RemoveByInventoryItemIdAsync(
-                cpp_userId,
-                cpp_ownedItemId,
-                cpp_quantity,
                 [onSuccess](RGN::Modules::Inventory::RemoveByOwnedIdResponseData response) {
                     FBP_RemoveByOwnedIdResponseData bpResponse;
-					FBP_RemoveByOwnedIdResponseData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_RemoveByOwnedIdResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_userId,
+                cpp_ownedItemId,
+                cpp_quantity);
     }
     /**
      * Returns json string or throws an exception if there are no json for virtual item
@@ -238,21 +238,21 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetPropertiesAsync(
-        const FString& ownedItemId,
-        FInventoryModuleGetPropertiesAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetPropertiesAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const FString& ownedItemId) {
             string cpp_ownedItemId;
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
             RGN::Modules::Inventory::InventoryModule::GetPropertiesAsync(
-                cpp_ownedItemId,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemId);
     }
     /**
      * Set json on a given ownedItemId.
@@ -260,25 +260,25 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void SetPropertiesAsync(
+        FInventoryModuleSetPropertiesAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& ownedItemId,
-        const FString& json,
-        FInventoryModuleSetPropertiesAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        const FString& json) {
             string cpp_ownedItemId;
             string cpp_json;
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
-			cpp_json = string(TCHAR_TO_UTF8(*json));
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            cpp_json = string(TCHAR_TO_UTF8(*json));
             RGN::Modules::Inventory::InventoryModule::SetPropertiesAsync(
-                cpp_ownedItemId,
-                cpp_json,
                 [onSuccess](string response) {
                     FString bpResponse;
-					bpResponse = FString(response.c_str());
+                    bpResponse = FString(response.c_str());
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemId,
+                cpp_json);
     }
     /**
      * Get user owned item upgrades, returns all upgrades for all owned items for virtual item ownedItemId
@@ -286,63 +286,63 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetUpgradesAsync(
-        const FString& ownedItemId,
-        FInventoryModuleGetUpgradesAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetUpgradesAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const FString& ownedItemId) {
             string cpp_ownedItemId;
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
             RGN::Modules::Inventory::InventoryModule::GetUpgradesAsync(
-                cpp_ownedItemId,
                 [onSuccess](vector<RGN::Modules::Inventory::UpgradesResponseData> response) {
                     TArray<FBP_UpgradesResponseData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_UpgradesResponseData b_response_item;
-						FBP_UpgradesResponseData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_UpgradesResponseData b_response_item;
+                        FBP_UpgradesResponseData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void UpgradeAsync(
+        FInventoryModuleUpgradeAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& ownedItemId,
         int32 newUpgradeLevel,
         const FString& upgradeId,
-        const TArray<FBP_Currency>& upgradePrice,
-        FInventoryModuleUpgradeAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        const TArray<FBP_Currency>& upgradePrice) {
             string cpp_ownedItemId;
             int32_t cpp_newUpgradeLevel;
             string cpp_upgradeId;
             vector<RGN::Modules::Currency::Currency> cpp_upgradePrice;
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
-			cpp_newUpgradeLevel = newUpgradeLevel;
-			cpp_upgradeId = string(TCHAR_TO_UTF8(*upgradeId));
-			for (const auto& upgradePrice_item : upgradePrice) {
-				RGN::Modules::Currency::Currency cpp_upgradePrice_item;
-				FBP_Currency::ConvertToCoreModel(upgradePrice_item, cpp_upgradePrice_item);
-				cpp_upgradePrice.push_back(cpp_upgradePrice_item);
-			}
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            cpp_newUpgradeLevel = newUpgradeLevel;
+            cpp_upgradeId = string(TCHAR_TO_UTF8(*upgradeId));
+            for (const auto& upgradePrice_item : upgradePrice) {
+                RGN::Modules::Currency::Currency cpp_upgradePrice_item;
+                FBP_Currency::ConvertToCoreModel(upgradePrice_item, cpp_upgradePrice_item);
+                cpp_upgradePrice.push_back(cpp_upgradePrice_item);
+            }
             RGN::Modules::Inventory::InventoryModule::UpgradeAsync(
-                cpp_ownedItemId,
-                cpp_newUpgradeLevel,
-                cpp_upgradeId,
-                cpp_upgradePrice,
                 [onSuccess](vector<RGN::Modules::Inventory::VirtualItemUpgrade> response) {
                     TArray<FBP_VirtualItemUpgrade> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_VirtualItemUpgrade b_response_item;
-						FBP_VirtualItemUpgrade::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_VirtualItemUpgrade b_response_item;
+                        FBP_VirtualItemUpgrade::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemId,
+                cpp_newUpgradeLevel,
+                cpp_upgradeId,
+                cpp_upgradePrice);
     }
     /**
      * Get single owned virtual item inventory data by ownedItemId
@@ -350,180 +350,180 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetByIdAsync(
-        const FString& ownedItemId,
-        FInventoryModuleGetByIdAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetByIdAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const FString& ownedItemId) {
             string cpp_ownedItemId;
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
             RGN::Modules::Inventory::InventoryModule::GetByIdAsync(
-                cpp_ownedItemId,
                 [onSuccess](RGN::Modules::Inventory::InventoryItemData response) {
                     FBP_InventoryItemData bpResponse;
-					FBP_InventoryItemData::ConvertToUnrealModel(response, bpResponse);
+                    FBP_InventoryItemData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetByIdsAsync(
-        const TArray<FString>& ownedItemIds,
-        FInventoryModuleGetByIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetByIdsAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const TArray<FString>& ownedItemIds) {
             vector<string> cpp_ownedItemIds;
-			for (const auto& ownedItemIds_item : ownedItemIds) {
-				string cpp_ownedItemIds_item;
-				cpp_ownedItemIds_item = string(TCHAR_TO_UTF8(*ownedItemIds_item));
-				cpp_ownedItemIds.push_back(cpp_ownedItemIds_item);
-			}
+            for (const auto& ownedItemIds_item : ownedItemIds) {
+                string cpp_ownedItemIds_item;
+                cpp_ownedItemIds_item = string(TCHAR_TO_UTF8(*ownedItemIds_item));
+                cpp_ownedItemIds.push_back(cpp_ownedItemIds_item);
+            }
             RGN::Modules::Inventory::InventoryModule::GetByIdsAsync(
-                cpp_ownedItemIds,
                 [onSuccess](vector<RGN::Modules::Inventory::InventoryItemData> response) {
                     TArray<FBP_InventoryItemData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_InventoryItemData b_response_item;
-						FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_InventoryItemData b_response_item;
+                        FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemIds);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetByVirtualItemIdsAsync(
-        const TArray<FString>& virtualItemIds,
-        FInventoryModuleGetByVirtualItemIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetByVirtualItemIdsAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const TArray<FString>& virtualItemIds) {
             vector<string> cpp_virtualItemIds;
-			for (const auto& virtualItemIds_item : virtualItemIds) {
-				string cpp_virtualItemIds_item;
-				cpp_virtualItemIds_item = string(TCHAR_TO_UTF8(*virtualItemIds_item));
-				cpp_virtualItemIds.push_back(cpp_virtualItemIds_item);
-			}
+            for (const auto& virtualItemIds_item : virtualItemIds) {
+                string cpp_virtualItemIds_item;
+                cpp_virtualItemIds_item = string(TCHAR_TO_UTF8(*virtualItemIds_item));
+                cpp_virtualItemIds.push_back(cpp_virtualItemIds_item);
+            }
             RGN::Modules::Inventory::InventoryModule::GetByVirtualItemIdsAsync(
-                cpp_virtualItemIds,
                 [onSuccess](vector<RGN::Modules::Inventory::InventoryItemData> response) {
                     TArray<FBP_InventoryItemData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_InventoryItemData b_response_item;
-						FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_InventoryItemData b_response_item;
+                        FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_virtualItemIds);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetAllForCurrentAppAsync(
-        FInventoryModuleGetAllForCurrentAppAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetAllForCurrentAppAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail) {
             RGN::Modules::Inventory::InventoryModule::GetAllForCurrentAppAsync(
                 [onSuccess](vector<RGN::Modules::Inventory::InventoryItemData> response) {
                     TArray<FBP_InventoryItemData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_InventoryItemData b_response_item;
-						FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_InventoryItemData b_response_item;
+                        FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                });
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetByAppIdsAsync(
-        const TArray<FString>& appIds,
-        FInventoryModuleGetByAppIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetByAppIdsAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const TArray<FString>& appIds) {
             vector<string> cpp_appIds;
-			for (const auto& appIds_item : appIds) {
-				string cpp_appIds_item;
-				cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
-				cpp_appIds.push_back(cpp_appIds_item);
-			}
+            for (const auto& appIds_item : appIds) {
+                string cpp_appIds_item;
+                cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+                cpp_appIds.push_back(cpp_appIds_item);
+            }
             RGN::Modules::Inventory::InventoryModule::GetByAppIdsAsync(
-                cpp_appIds,
                 [onSuccess](vector<RGN::Modules::Inventory::InventoryItemData> response) {
                     TArray<FBP_InventoryItemData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_InventoryItemData b_response_item;
-						FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_InventoryItemData b_response_item;
+                        FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appIds);
     }
     /**
      * Get multiple owned virtual items inventory data for current app with the Virtual Item data included
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetWithVirtualItemsDataForCurrentAppAsync(
+        FInventoryModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& startAfter,
-        int32 limit,
-        FInventoryModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        int32 limit) {
             string cpp_startAfter;
             int32_t cpp_limit;
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_limit = limit;
             RGN::Modules::Inventory::InventoryModule::GetWithVirtualItemsDataForCurrentAppAsync(
-                cpp_startAfter,
-                cpp_limit,
                 [onSuccess](vector<RGN::Modules::Inventory::InventoryItemData> response) {
                     TArray<FBP_InventoryItemData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_InventoryItemData b_response_item;
-						FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_InventoryItemData b_response_item;
+                        FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_startAfter,
+                cpp_limit);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetWithVirtualItemsDataByAppIdsAsync(
+        FInventoryModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const TArray<FString>& appIds,
         const FString& startAfter,
-        int32 limit,
-        FInventoryModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        int32 limit) {
             vector<string> cpp_appIds;
             string cpp_startAfter;
             int32_t cpp_limit;
-			for (const auto& appIds_item : appIds) {
-				string cpp_appIds_item;
-				cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
-				cpp_appIds.push_back(cpp_appIds_item);
-			}
-			cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
-			cpp_limit = limit;
+            for (const auto& appIds_item : appIds) {
+                string cpp_appIds_item;
+                cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+                cpp_appIds.push_back(cpp_appIds_item);
+            }
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_limit = limit;
             RGN::Modules::Inventory::InventoryModule::GetWithVirtualItemsDataByAppIdsAsync(
-                cpp_appIds,
-                cpp_startAfter,
-                cpp_limit,
                 [onSuccess](vector<RGN::Modules::Inventory::InventoryItemData> response) {
                     TArray<FBP_InventoryItemData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_InventoryItemData b_response_item;
-						FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_InventoryItemData b_response_item;
+                        FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_appIds,
+                cpp_startAfter,
+                cpp_limit);
     }
     /**
      * Parses a JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.
@@ -534,13 +534,13 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void ParseInventoryItemData(
-        const FString& json,
-        FInventoryModuleParseInventoryItemDataResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleParseInventoryItemDataResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const FString& json) {
             string cpp_json;
-			cpp_json = string(TCHAR_TO_UTF8(*json));
+            cpp_json = string(TCHAR_TO_UTF8(*json));
             RGN::Modules::Inventory::InventoryModule::ParseInventoryItemData(
-                cpp_json
-            );
+                cpp_json);
     }
     /**
      * Parses a JSON string representation of a list of T:RGN.Modules.Inventory.InventoryItemData objects.
@@ -551,43 +551,43 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void ParseInventoryItemsData(
-        const FString& json,
-        FInventoryModuleParseInventoryItemsDataResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleParseInventoryItemsDataResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const FString& json) {
             string cpp_json;
-			cpp_json = string(TCHAR_TO_UTF8(*json));
+            cpp_json = string(TCHAR_TO_UTF8(*json));
             RGN::Modules::Inventory::InventoryModule::ParseInventoryItemsData(
-                cpp_json
-            );
+                cpp_json);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetByTagsAsync(
+        FInventoryModuleGetByTagsAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const TArray<FString>& tags,
-        const FString& appId,
-        FInventoryModuleGetByTagsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        const FString& appId) {
             vector<string> cpp_tags;
             string cpp_appId;
-			for (const auto& tags_item : tags) {
-				string cpp_tags_item;
-				cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
-				cpp_tags.push_back(cpp_tags_item);
-			}
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
             RGN::Modules::Inventory::InventoryModule::GetByTagsAsync(
-                cpp_tags,
-                cpp_appId,
                 [onSuccess](vector<RGN::Modules::Inventory::InventoryItemData> response) {
                     TArray<FBP_InventoryItemData> bpResponse;
-					for (const auto& response_item : response) {
-						FBP_InventoryItemData b_response_item;
-						FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FBP_InventoryItemData b_response_item;
+                        FBP_InventoryItemData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_tags,
+                cpp_appId);
     }
     /**
      * Asynchronously retrieves the tags of an owned item in the inventory by its identifier for current logged in user
@@ -598,58 +598,58 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void GetTagsAsync(
-        const FString& ownedItemId,
-        FInventoryModuleGetTagsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        FInventoryModuleGetTagsAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
+        const FString& ownedItemId) {
             string cpp_ownedItemId;
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
             RGN::Modules::Inventory::InventoryModule::GetTagsAsync(
-                cpp_ownedItemId,
                 [onSuccess](vector<string> response) {
                     TArray<FString> bpResponse;
-					for (const auto& response_item : response) {
-						FString b_response_item;
-						b_response_item = FString(response_item.c_str());
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FString b_response_item;
+                        b_response_item = FString(response_item.c_str());
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemId);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
     static void SetTagsAsync(
+        FInventoryModuleSetTagsAsyncResponse onSuccess,
+        FInventoryModuleFailResponse onFail,
         const FString& ownedItemId,
         const TArray<FString>& tags,
-        const FString& appId,
-        FInventoryModuleSetTagsAsyncResponse onSuccess, FInventoryModuleFailResponse onFail) {
+        const FString& appId) {
             string cpp_ownedItemId;
             vector<string> cpp_tags;
             string cpp_appId;
-			cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
-			for (const auto& tags_item : tags) {
-				string cpp_tags_item;
-				cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
-				cpp_tags.push_back(cpp_tags_item);
-			}
-			cpp_appId = string(TCHAR_TO_UTF8(*appId));
+            cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_appId = string(TCHAR_TO_UTF8(*appId));
             RGN::Modules::Inventory::InventoryModule::SetTagsAsync(
-                cpp_ownedItemId,
-                cpp_tags,
-                cpp_appId,
                 [onSuccess](vector<string> response) {
                     TArray<FString> bpResponse;
-					for (const auto& response_item : response) {
-						FString b_response_item;
-						b_response_item = FString(response_item.c_str());
-						bpResponse.Add(b_response_item);
-					}
+                    for (const auto& response_item : response) {
+                        FString b_response_item;
+                        b_response_item = FString(response_item.c_str());
+                        bpResponse.Add(b_response_item);
+                    }
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                }
-            );
+                },
+                cpp_ownedItemId,
+                cpp_tags,
+                cpp_appId);
     }
 };

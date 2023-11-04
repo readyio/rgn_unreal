@@ -17,12 +17,12 @@ struct READYGAMESNETWORK_API FBP_SetInvisibleStatusRequestData : public FBP_Base
     bool invisibleStatus;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::SetInvisibleStatusRequestData& source, FBP_SetInvisibleStatusRequestData& target) {
-		target.invisibleStatus = source.invisibleStatus;
+        target.invisibleStatus = source.invisibleStatus;
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_SetInvisibleStatusRequestData& source, RGN::Modules::UserProfile::SetInvisibleStatusRequestData& target) {
-		target.invisibleStatus = source.invisibleStatus;
+        target.invisibleStatus = source.invisibleStatus;
 		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };
