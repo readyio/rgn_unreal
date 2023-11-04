@@ -29,11 +29,11 @@ namespace RGN { namespace Modules { namespace Analytics {
             const string& eventParameters = string(),
             const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::Analytics::AnalyticsModuleCustomImpl::LogEventAsync(
+                    success,
+                    fail,
                     eventName,
                     eventParameters,
-                    cancellationToken,
-                    success,
-                    fail);
+                    cancellationToken);
             };
     };
 }}}

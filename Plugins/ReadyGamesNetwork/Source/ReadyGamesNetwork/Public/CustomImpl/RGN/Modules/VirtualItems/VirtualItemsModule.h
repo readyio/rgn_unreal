@@ -17,13 +17,13 @@
 namespace RGN { namespace Modules { namespace VirtualItems {
     class VirtualItemsModuleCustomImpl {
     public:
-        
+
         static void UploadImageAsync(
+            const std::function<void(bool result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::string virtualItemId,
             std::vector<uint8_t> thumbnailTextureBytes,
-            CancellationToken cancellationToken,
-            const std::function<void(bool result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            CancellationToken cancellationToken) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["virtualItemId"] = virtualItemId;
@@ -33,11 +33,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 }, fail, cancellationToken);
             };
         static void DownloadImageAsync(
+            const std::function<void(std::vector<uint8_t> result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::string virtualItemId,
             RGN::Model::ImageSize size,
-            CancellationToken cancellationToken,
-            const std::function<void(std::vector<uint8_t> result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            CancellationToken cancellationToken) {
                 RGN::Modules::VirtualItems::GetVirtualItemsByIdsRequestData requestData;
                 requestData.ids = { virtualItemId };
                 RGNCore::CallAPI<RGN::Modules::VirtualItems::GetVirtualItemsByIdsRequestData, RGN::Modules::VirtualItems::VirtualItemsResponseData>(

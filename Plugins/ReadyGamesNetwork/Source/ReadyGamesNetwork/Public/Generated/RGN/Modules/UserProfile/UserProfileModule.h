@@ -64,9 +64,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(const int httpCode, const string& error)>& fail,
             const string& userId) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetFullUserProfileAsync(
-                    userId,
                     success,
-                    fail);
+                    fail,
+                    userId);
             };
         /**
          * Searches for users by their nickname.
@@ -184,10 +184,10 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const vector<uint8_t>& bytes,
             const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::UploadAvatarImageAsync(
-                    bytes,
-                    cancellationToken,
                     success,
-                    fail);
+                    fail,
+                    bytes,
+                    cancellationToken);
             };
         /**
          * Downloads the avatar image of a user as a byte array from Firebase storage.
@@ -203,11 +203,11 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const RGN::Model::ImageSize& size,
             const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::DownloadAvatarImageAsync(
+                    success,
+                    fail,
                     userId,
                     size,
-                    cancellationToken,
-                    success,
-                    fail);
+                    cancellationToken);
             };
         /**
          * Changes the admin status and access level of a user by their email.
@@ -223,11 +223,11 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const bool isAdmin,
             const int32_t accessLevel) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::ChangeAdminStatusByEmailAsync(
+                    success,
+                    fail,
                     email,
                     isAdmin,
-                    accessLevel,
-                    success,
-                    fail);
+                    accessLevel);
             };
         /**
          * Changes the admin status and access level of a user by their user ID.
@@ -243,11 +243,11 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const bool isAdmin,
             const int32_t accessLevel) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::ChangeAdminStatusByUserIdAsync(
+                    success,
+                    fail,
                     userId,
                     isAdmin,
-                    accessLevel,
-                    success,
-                    fail);
+                    accessLevel);
             };
         /**
          * Gets the custom claims for a user by their user ID.
@@ -259,9 +259,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(const int httpCode, const string& error)>& fail,
             const string& userId) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetUserCustomClaimsByUserIdAsync(
-                    userId,
                     success,
-                    fail);
+                    fail,
+                    userId);
             };
         /**
          * Gets the custom claims for a user by their email.
@@ -273,9 +273,9 @@ namespace RGN { namespace Modules { namespace UserProfile {
             const function<void(const int httpCode, const string& error)>& fail,
             const string& email) {
                 RGN::Modules::UserProfile::UserProfileModuleCustomImpl::GetUserCustomClaimsByEmailAsync(
-                    email,
                     success,
-                    fail);
+                    fail,
+                    email);
             };
         /**
          * Sets the invisible status for the current user.

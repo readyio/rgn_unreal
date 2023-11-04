@@ -10,11 +10,11 @@ namespace RGN { namespace Modules { namespace Analytics {
 	class AnalyticsModuleCustomImpl {
 	public:
         static void LogEventAsync(
+            const std::function<void(void)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::string eventName,
             std::string eventParameters,
-            CancellationToken cancellationToken,
-            const std::function<void(void)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            CancellationToken cancellationToken) {
                 nlohmann::json bodyJson;
                 bodyJson["eventName"] = eventName;
                 bodyJson["projectId"] = RGNCore::GetAppId();

@@ -12,10 +12,10 @@ namespace RGN { namespace Modules { namespace Achievement {
     class AchievementsModuleCustomImpl {
     public:
         static void GetForCurrentAppAsync(
-            int32_t limit,
-            std::string startAfter,
             const std::function<void(std::vector<RGN::Modules::Achievement::AchievementData> result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            const std::function<void(int httpCode, std::string error)>& fail,
+            int32_t limit,
+            std::string startAfter) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["appIds"] = { RGNCore::GetAppId() };
@@ -32,12 +32,12 @@ namespace RGN { namespace Modules { namespace Achievement {
             };
 
         static void GetByAppIdsWithUserDataAsync(
+            const std::function<void(std::vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::vector<string> appIds,
             int32_t limit,
             std::string startAfter,
-            bool withHistory,
-            const std::function<void(std::vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            bool withHistory) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["appIds"] = appIds;
@@ -60,19 +60,19 @@ namespace RGN { namespace Modules { namespace Achievement {
             };
 
         static void GetForCurrentAppWithUserDataAsync(
-            int32_t limit,
-            std::string startAfter,
             const std::function<void(std::vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
-                GetByAppIdsWithUserDataAsync({ RGNCore::GetAppId() }, limit, startAfter, false, success, fail);
+            const std::function<void(int httpCode, std::string error)>& fail,
+            int32_t limit,
+            std::string startAfter) {
+                GetByAppIdsWithUserDataAsync(success, fail, { RGNCore::GetAppId() }, limit, startAfter, false);
             };
 
         static void GetUserAchievementsAsync(
+            const std::function<void(std::vector<RGN::Modules::Achievement::UserAchievement> result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::string userId,
             int64_t startAfter,
-            int32_t limit,
-            const std::function<void(std::vector<RGN::Modules::Achievement::UserAchievement> result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            int32_t limit) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["userId"] = userId;

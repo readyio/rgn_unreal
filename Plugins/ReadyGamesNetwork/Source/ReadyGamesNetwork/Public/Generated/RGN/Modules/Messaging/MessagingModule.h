@@ -60,13 +60,13 @@ namespace RGN { namespace Modules { namespace Messaging {
             const string& title,
             const string& text) {
                 RGN::Modules::Messaging::MessagingModuleCustomImpl::SendMessageByUserId(
+                    success,
+                    fail,
                     appId,
                     userId,
                     payload,
                     title,
-                    text,
-                    success,
-                    fail);
+                    text);
             };
     };
 }}}

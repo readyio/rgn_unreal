@@ -37,11 +37,11 @@ namespace RGN { namespace Modules { namespace Store {
             const vector<string>& currencies = vector<string>(),
             const string& offerId = "") {
                 RGN::Modules::Store::StoreModuleCustomImpl::BuyVirtualItemsAsync(
+                    success,
+                    fail,
                     itemIds,
                     currencies,
-                    offerId,
-                    success,
-                    fail);
+                    offerId);
             };
         static void BuyStoreOfferAsync(
             const function<void(const RGN::Modules::Store::PurchaseResult& result)>& success,
@@ -49,10 +49,10 @@ namespace RGN { namespace Modules { namespace Store {
             const string& offerId,
             const vector<string>& currencies = vector<string>()) {
                 RGN::Modules::Store::StoreModuleCustomImpl::BuyStoreOfferAsync(
-                    offerId,
-                    currencies,
                     success,
-                    fail);
+                    fail,
+                    offerId,
+                    currencies);
             };
         static void GetLootBoxesByIdsAsync(
             const function<void(const vector<RGN::Modules::Store::LootBox>& result)>& success,
@@ -115,10 +115,10 @@ namespace RGN { namespace Modules { namespace Store {
             const int32_t limit,
             const string& startAfter = "") {
                 RGN::Modules::Store::StoreModuleCustomImpl::GetLootBoxesForCurrentAppAsync(
-                    limit,
-                    startAfter,
                     success,
-                    fail);
+                    fail,
+                    limit,
+                    startAfter);
             };
         /**
          * Asynchronously checks if a lootbox associated with the specified name is
@@ -186,9 +186,9 @@ namespace RGN { namespace Modules { namespace Store {
             const function<void(const int httpCode, const string& error)>& fail,
             const string& name) {
                 RGN::Modules::Store::StoreModuleCustomImpl::OpenLootboxAsync(
-                    name,
                     success,
-                    fail);
+                    fail,
+                    name);
             };
         static void AddVirtualItemsStoreOfferAsync(
             const function<void(const RGN::Modules::Store::StoreOffer& result)>& success,
@@ -325,11 +325,11 @@ namespace RGN { namespace Modules { namespace Store {
             const string& startAfter = "",
             const bool ignoreTimestamp = false) {
                 RGN::Modules::Store::StoreModuleCustomImpl::GetForCurrentAppAsync(
+                    success,
+                    fail,
                     limit,
                     startAfter,
-                    ignoreTimestamp,
-                    success,
-                    fail);
+                    ignoreTimestamp);
             };
         /**
          * Asynchronously retrieves a list of store offers with their associated virtual items data for the current application
@@ -351,11 +351,11 @@ namespace RGN { namespace Modules { namespace Store {
             const string& startAfter = "",
             const bool ignoreTimestamp = false) {
                 RGN::Modules::Store::StoreModuleCustomImpl::GetWithVirtualItemsDataForCurrentAppAsync(
+                    success,
+                    fail,
                     limit,
                     startAfter,
-                    ignoreTimestamp,
-                    success,
-                    fail);
+                    ignoreTimestamp);
             };
         static void GetWithVirtualItemsDataByAppIdsAsync(
             const function<void(const vector<RGN::Modules::Store::StoreOffer>& result)>& success,
@@ -365,12 +365,12 @@ namespace RGN { namespace Modules { namespace Store {
             const string& startAfter = "",
             const bool ignoreTimestamp = false) {
                 RGN::Modules::Store::StoreModuleCustomImpl::GetWithVirtualItemsDataByAppIdsAsync(
+                    success,
+                    fail,
                     appIds,
                     limit,
                     startAfter,
-                    ignoreTimestamp,
-                    success,
-                    fail);
+                    ignoreTimestamp);
             };
         static void GetByIdsAsync(
             const function<void(const vector<RGN::Modules::Store::StoreOffer>& result)>& success,

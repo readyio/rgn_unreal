@@ -12,38 +12,37 @@ namespace RGN { namespace Modules { namespace Inventory {
 	class InventoryModuleCustomImpl {
 	public:
         static void AddToInventoryAsync(
+            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::string virtualItemId,
             int32_t quantity,
-            RGN::Modules::VirtualItems::Properties properties,
-            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
-                AddToInventoryAsync(RGNCore::GetUserId(), virtualItemId, quantity, properties, success, fail);
+            RGN::Modules::VirtualItems::Properties properties) {
+                AddToInventoryAsync(success, fail, RGNCore::GetUserId(), virtualItemId, quantity, properties);
             };
 
         static void AddToInventoryAsync(
+            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::string userId,
             std::string virtualItemId,
             int32_t quantity,
-            RGN::Modules::VirtualItems::Properties properties,
-            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            RGN::Modules::VirtualItems::Properties properties) {
                 RGN::Modules::Inventory::InventoryItemData inventoryItemData;
                 inventoryItemData.virtualItemId = virtualItemId;
                 inventoryItemData.appIds = { RGNCore::GetAppId() };
                 inventoryItemData.quantity = quantity;
                 inventoryItemData.properties = { properties };
                 AddToInventoryAsync(
-                    userId,
-                    inventoryItemData,
                     success,
-                    fail
-                );
+                    fail,
+                    userId,
+                    inventoryItemData);
             };
         static void AddToInventoryAsync(
-            string userId,
-            RGN::Modules::Inventory::InventoryItemData inventoryData,
             const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
-            const function<void(int httpCode, string error)>& fail) {
+            const function<void(int httpCode, string error)>& fail,
+            string userId,
+            RGN::Modules::Inventory::InventoryItemData inventoryData) {
                 RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData requestData;
                 requestData.userId = userId;
                 requestData.virtualItemInventoryData = inventoryData;
@@ -51,23 +50,22 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-addToInventory",
                     requestData,
                     success,
-                    fail
-                );
+                    fail);
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
-            std::string startAfter,
-            int32_t limit,
             const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
-                GetWithVirtualItemsDataByAppIdsAsync({RGNCore::GetAppId()}, startAfter, limit, success, fail);
+            const std::function<void(int httpCode, std::string error)>& fail,
+            std::string startAfter,
+            int32_t limit) {
+                GetWithVirtualItemsDataByAppIdsAsync(success, fail, {RGNCore::GetAppId()}, startAfter, limit);
             };
 
         static void GetWithVirtualItemsDataByAppIdsAsync(
+            const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::vector<string> appIds,
             std::string startAfter,
-            int32_t limit,
-            const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            int32_t limit) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["startAfter"] = startAfter;

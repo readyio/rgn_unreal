@@ -19,13 +19,13 @@ namespace RGN { namespace Modules { namespace Messaging {
                 // Not implemented
             };
         static void SendMessageByUserId(
+            const std::function<void(void)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
             std::string appId,
             std::string userId,
             std::string payload,
             std::string title,
-            std::string text,
-            const std::function<void(void)>& success,
-            const std::function<void(int httpCode, std::string error)>& fail) {
+            std::string text) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
                 requestData["userId"] = userId;

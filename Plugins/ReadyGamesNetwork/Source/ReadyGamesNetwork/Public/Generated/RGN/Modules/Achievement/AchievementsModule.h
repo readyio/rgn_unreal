@@ -73,10 +73,10 @@ namespace RGN { namespace Modules { namespace Achievement {
             const int32_t limit,
             const string& startAfter = "") {
                 RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetForCurrentAppAsync(
-                    limit,
-                    startAfter,
                     success,
-                    fail);
+                    fail,
+                    limit,
+                    startAfter);
             };
         static void GetByAppIdsWithUserDataAsync(
             const function<void(const vector<RGN::Modules::Achievement::AchievementWithUserData>& result)>& success,
@@ -86,12 +86,12 @@ namespace RGN { namespace Modules { namespace Achievement {
             const string& startAfter = "",
             const bool withHistory = false) {
                 RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetByAppIdsWithUserDataAsync(
+                    success,
+                    fail,
                     appIds,
                     limit,
                     startAfter,
-                    withHistory,
-                    success,
-                    fail);
+                    withHistory);
             };
         /**
          * Asynchronously retrieves a list of achievements for the current application from the Ready Games Network (RGN).
@@ -110,10 +110,10 @@ namespace RGN { namespace Modules { namespace Achievement {
             const int32_t limit,
             const string& startAfter = "") {
                 RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetForCurrentAppWithUserDataAsync(
-                    limit,
-                    startAfter,
                     success,
-                    fail);
+                    fail,
+                    limit,
+                    startAfter);
             };
         /**
          * Asynchronously retrieves a achievement from the Ready Games Network (RGN)
@@ -243,11 +243,11 @@ namespace RGN { namespace Modules { namespace Achievement {
             const int64_t startAfter = INT64_MAX,
             const int32_t limit = INT32_MAX) {
                 RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetUserAchievementsAsync(
+                    success,
+                    fail,
                     userId,
                     startAfter,
-                    limit,
-                    success,
-                    fail);
+                    limit);
             };
     };
 }}}

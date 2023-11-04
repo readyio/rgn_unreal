@@ -39,11 +39,11 @@ namespace RGN { namespace Modules { namespace Inventory {
             const int32_t quantity = 1,
             const RGN::Modules::VirtualItems::Properties& properties = RGN::Modules::VirtualItems::Properties()) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::AddToInventoryAsync(
+                    success,
+                    fail,
                     virtualItemId,
                     quantity,
-                    properties,
-                    success,
-                    fail);
+                    properties);
             };
         /**
          * Asynchronously adds a specified quantity of a virtual item to the inventory for a specified user.
@@ -63,12 +63,12 @@ namespace RGN { namespace Modules { namespace Inventory {
             const int32_t quantity = 1,
             const RGN::Modules::VirtualItems::Properties& properties = RGN::Modules::VirtualItems::Properties()) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::AddToInventoryAsync(
+                    success,
+                    fail,
                     userId,
                     virtualItemId,
                     quantity,
-                    properties,
-                    success,
-                    fail);
+                    properties);
             };
         /**
          * Asynchronously adds a specified inventory item to the inventory for a specified user.
@@ -317,10 +317,10 @@ namespace RGN { namespace Modules { namespace Inventory {
             const string& startAfter = "",
             const int32_t limit = 100) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::GetWithVirtualItemsDataForCurrentAppAsync(
-                    startAfter,
-                    limit,
                     success,
-                    fail);
+                    fail,
+                    startAfter,
+                    limit);
             };
         static void GetWithVirtualItemsDataByAppIdsAsync(
             const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& success,
@@ -329,11 +329,11 @@ namespace RGN { namespace Modules { namespace Inventory {
             const string& startAfter = "",
             const int32_t limit = 100) {
                 RGN::Modules::Inventory::InventoryModuleCustomImpl::GetWithVirtualItemsDataByAppIdsAsync(
+                    success,
+                    fail,
                     appIds,
                     startAfter,
-                    limit,
-                    success,
-                    fail);
+                    limit);
             };
         /**
          * Parses a JSON string representation of an T:RGN.Modules.Inventory.InventoryItemData object.

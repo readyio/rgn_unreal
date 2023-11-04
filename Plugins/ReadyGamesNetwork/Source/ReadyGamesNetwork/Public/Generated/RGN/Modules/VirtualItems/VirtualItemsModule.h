@@ -303,11 +303,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const vector<uint8_t>& thumbnailTextureBytes,
             const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::UploadImageAsync(
+                    success,
+                    fail,
                     virtualItemId,
                     thumbnailTextureBytes,
-                    cancellationToken,
-                    success,
-                    fail);
+                    cancellationToken);
             };
         /**
          * Downloads an image asynchronously from a specified virtual item ID.
@@ -323,11 +323,11 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const RGN::Model::ImageSize& size,
             const CancellationToken& cancellationToken = CancellationToken()) {
                 RGN::Modules::VirtualItems::VirtualItemsModuleCustomImpl::DownloadImageAsync(
+                    success,
+                    fail,
                     virtualItemId,
                     size,
-                    cancellationToken,
-                    success,
-                    fail);
+                    cancellationToken);
             };
     };
 }}}
