@@ -76,7 +76,7 @@ public:
                 },
                 cpp_appId);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems", meta=(AutoCreateRefTerm="csvDelimiter, cancellationToken"))
     static void AddFromCSVWithBlockchainStubAsync(
         FVirtualItemsModuleAdminAddFromCSVWithBlockchainStubAsyncResponse onSuccess,
         FVirtualItemsModule_AdminFailResponse onFail,

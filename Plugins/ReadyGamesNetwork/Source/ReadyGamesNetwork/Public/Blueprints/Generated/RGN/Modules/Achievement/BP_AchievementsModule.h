@@ -78,7 +78,7 @@ public:
                 },
                 cpp_ids);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="startAfter"))
     static void GetByAppIdsAsync(
         FAchievementsModuleGetByAppIdsAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
@@ -122,7 +122,7 @@ public:
      * limit and other optional parameters.
      * @throw: Thrown when the provided limit value is zero.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="startAfter"))
     static void GetForCurrentAppAsync(
         FAchievementsModuleGetForCurrentAppAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
@@ -148,7 +148,7 @@ public:
                 cpp_limit,
                 cpp_startAfter);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="startAfter, withHistory"))
     static void GetByAppIdsWithUserDataAsync(
         FAchievementsModuleGetByAppIdsWithUserDataAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
@@ -197,7 +197,7 @@ public:
      * limit and other optional parameters.
      * @throw: Thrown when the provided limit value is zero.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="startAfter"))
     static void GetForCurrentAppWithUserDataAsync(
         FAchievementsModuleGetForCurrentAppWithUserDataAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
@@ -281,7 +281,7 @@ public:
      * @param progress - The achievement trigger progress delta
      * @return Trigger and Claim response data
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="progress"))
     static void TriggerByIdAsync(
         FAchievementsModuleTriggerByIdAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
@@ -309,7 +309,7 @@ public:
      * @param progress - The achievement trigger progress delta
      * @return Trigger and Claim response data
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="progress"))
     static void TriggerByRequestNameAsync(
         FAchievementsModuleTriggerByRequestNameAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
@@ -388,7 +388,7 @@ public:
      * @param limit - Maximal number of documents to return
      * @return Requested amount of completed achievements
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="userId, startAfter, limit"))
     static void GetUserAchievementsAsync(
         FAchievementsModuleGetUserAchievementsAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,

@@ -133,7 +133,7 @@ public:
      * @param extraData - (Optional) Extra data associated with the score. Defaults to an empty string if not provided.
      * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="extraData"))
     static void SetScoreAsync(
         FLeaderboardModuleSetScoreAsyncResponse onSuccess,
         FLeaderboardModuleFailResponse onFail,
@@ -166,7 +166,7 @@ public:
      * @param extraData - (Optional) Extra data associated with the score. Defaults to an empty string if not provided.
      * @return A task that represents the asynchronous operation. The task result contains the player's place after setting the score.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="extraData"))
     static void AddScoreAsync(
         FLeaderboardModuleAddScoreAsyncResponse onSuccess,
         FLeaderboardModuleFailResponse onFail,

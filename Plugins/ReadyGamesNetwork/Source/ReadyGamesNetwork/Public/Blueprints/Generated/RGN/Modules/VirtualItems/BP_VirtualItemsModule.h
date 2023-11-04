@@ -85,7 +85,7 @@ public:
      * @return A Task that represents the asynchronous operation. The Task result contains a list of strings, which are the item IDs of the added virtual items.
      * @throw: Thrown when 'virtualItemName', 'csvContent', or 'csvDelimiter' is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems", meta=(AutoCreateRefTerm="csvDelimiter, cancellationToken"))
     static void AddFromCSVAsync(
         FVirtualItemsModuleAddFromCSVAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
@@ -192,7 +192,7 @@ public:
      * @param limit - Maximal count of items to return
      * @param startAfter - The item id to start after
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems", meta=(AutoCreateRefTerm="startAfter"))
     static void GetVirtualItemsAsync_Limit_StartAfter(
         FVirtualItemsModuleGetVirtualItemsAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
@@ -244,7 +244,7 @@ public:
                 },
                 cpp_virtualItemsIds);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems", meta=(AutoCreateRefTerm="appId"))
     static void GetByTagsAsync(
         FVirtualItemsModuleGetByTagsAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
@@ -299,7 +299,7 @@ public:
                 },
                 cpp_virtualItemId);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems", meta=(AutoCreateRefTerm="appId"))
     static void SetTagsAsync(
         FVirtualItemsModuleSetTagsAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
@@ -428,7 +428,7 @@ public:
      * @param cancellationToken - The cancellation token.
      * @return A boolean indicating whether the upload was successful.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems", meta=(AutoCreateRefTerm="cancellationToken"))
     static void UploadImageAsync(
         FVirtualItemsModuleUploadImageAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
@@ -465,7 +465,7 @@ public:
      * @param cancellationToken - A cancellation token that can be used to cancel the asynchronous operation.
      * @return A byte array containing the image data.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | VirtualItems", meta=(AutoCreateRefTerm="cancellationToken"))
     static void DownloadImageAsync(
         FVirtualItemsModuleDownloadImageAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,

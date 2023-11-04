@@ -23,7 +23,7 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_StoreModule_Admin : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="prices"))
     static void CreateLootBoxAsync(
         FStoreModuleAdminCreateLootBoxAsyncResponse onSuccess,
         FStoreModule_AdminFailResponse onFail,

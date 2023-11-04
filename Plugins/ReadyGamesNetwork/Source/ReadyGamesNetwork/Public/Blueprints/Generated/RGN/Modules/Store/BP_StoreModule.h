@@ -80,7 +80,7 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_StoreModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="currencies, offerId"))
     static void BuyVirtualItemsAsync(
         FStoreModuleBuyVirtualItemsAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -114,7 +114,7 @@ public:
                 cpp_currencies,
                 cpp_offerId);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="currencies"))
     static void BuyStoreOfferAsync(
         FStoreModuleBuyStoreOfferAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -178,7 +178,7 @@ public:
      * limit and other optional parameters.
      * @throw: Thrown when the provided appId list is empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="startAfter"))
     static void GetLootBoxesByAppIdAsync(
         FStoreModuleGetLootBoxesByAppIdAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -218,7 +218,7 @@ public:
      * limit and other optional parameters.
      * @throw: Thrown when the provided limit value is zero.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="startAfter"))
     static void GetLootBoxesForCurrentAppAsync(
         FStoreModuleGetLootBoxesForCurrentAppAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -329,7 +329,7 @@ public:
                 },
                 cpp_name);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="name, description, tags, quantity"))
     static void AddVirtualItemsStoreOfferAsync(
         FStoreModuleAddVirtualItemsStoreOfferAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -389,7 +389,7 @@ public:
      * a list of T:RGN.Modules.Store.StoreOffer objects representing the successfully imported store offers.
      * @throw: Thrown when the provided content string is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="cancellationToken"))
     static void ImportStoreOffersFromCSVAsync(
         FStoreModuleImportStoreOffersFromCSVAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -419,7 +419,7 @@ public:
                 cpp_delimiter,
                 cpp_cancellationToken);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="appId, ignoreTimestamp"))
     static void GetByTagsAsync(
         FStoreModuleGetByTagsAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -487,7 +487,7 @@ public:
                 cpp_appId,
                 cpp_timestamp);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="startAfter, ignoreTimestamp"))
     static void GetByAppIdsAsync(
         FStoreModuleGetByAppIdsAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -537,7 +537,7 @@ public:
      * limit and other optional parameters.
      * @throw: Thrown when the provided limit value is zero.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="startAfter, ignoreTimestamp"))
     static void GetForCurrentAppAsync(
         FStoreModuleGetForCurrentAppAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -580,7 +580,7 @@ public:
      * limit and other optional parameters.
      * @throw: Thrown when the provided limit value is zero.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="startAfter, ignoreTimestamp"))
     static void GetWithVirtualItemsDataForCurrentAppAsync(
         FStoreModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -610,7 +610,7 @@ public:
                 cpp_startAfter,
                 cpp_ignoreTimestamp);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="startAfter, ignoreTimestamp"))
     static void GetWithVirtualItemsDataByAppIdsAsync(
         FStoreModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
@@ -703,7 +703,7 @@ public:
                 },
                 cpp_offerId);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="appId"))
     static void SetTagsAsync(
         FStoreModuleSetTagsAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,

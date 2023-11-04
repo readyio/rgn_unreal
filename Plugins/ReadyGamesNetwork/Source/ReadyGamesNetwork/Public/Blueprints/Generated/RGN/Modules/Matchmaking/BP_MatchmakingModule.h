@@ -47,7 +47,7 @@ public:
      * @return A Task that represents the asynchronous operation.
      * The Task result contains a list of objects, which are the open to join matches.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="startAfter, cancellationToken"))
     static void GetJoinOpenMatchesAsync(
         FMatchmakingModuleGetJoinOpenMatchesAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -87,7 +87,7 @@ public:
      * @return A Task that represents the asynchronous operation.
      * The Task result contains a list of objects, which are the open to vote matches.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="startAfter, cancellationToken"))
     static void GetVoteOpenMatchesAsync(
         FMatchmakingModuleGetVoteOpenMatchesAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -126,7 +126,7 @@ public:
      * @return A Task that represents the asynchronous operation.
      * The Task result contains a list of objects, which are the finished matches for current app.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="startAfter, cancellationToken"))
     static void GetFinishedMatchesAsync(
         FMatchmakingModuleGetFinishedMatchesAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -164,7 +164,7 @@ public:
      * @return A Task that represents the asynchronous operation.
      * The Task result contains the finished match data
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="cancellationToken"))
     static void GetFinishedMatchByIdAsync(
         FMatchmakingModuleGetFinishedMatchByIdAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -186,7 +186,7 @@ public:
                 cpp_matchId,
                 cpp_cancellationToken);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="participateInOnCreate, participatePayload, cancellationToken"))
     static void CreateMatchAsync(
         FMatchmakingModuleCreateMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -222,7 +222,7 @@ public:
                 cpp_participatePayload,
                 cpp_cancellationToken);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="participantPayload, cancellationToken"))
     static void ParticipateInMatchAsync(
         FMatchmakingModuleParticipateInMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -263,7 +263,7 @@ public:
      * The task result is the ID of the match that has been started.
      * @throw: Thrown when matchId is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="cancellationToken"))
     static void StartMatchAsync(
         FMatchmakingModuleStartMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -295,7 +295,7 @@ public:
      * The task result is the ID of the match for which the vote has been cast.
      * @throw: Thrown when matchId or participantId is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="cancellationToken"))
     static void VoteForMatchAsync(
         FMatchmakingModuleVoteForMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -331,7 +331,7 @@ public:
      * The task result is the ID of the match for which the score has been submitted.
      * @throw: Thrown when matchId is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="cancellationToken"))
     static void SubmitMatchScoreAsync(
         FMatchmakingModuleSubmitMatchScoreAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
@@ -366,7 +366,7 @@ public:
      * The task result is the ID of the match that has been finished.
      * @throw: Thrown when matchId is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Matchmaking", meta=(AutoCreateRefTerm="cancellationToken"))
     static void FinishMatchAsync(
         FMatchmakingModuleFinishMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,

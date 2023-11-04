@@ -30,7 +30,7 @@ public:
      * Default value is an unset CancellationToken.
      * @throw: Thrown when eventName is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Analytics")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Analytics", meta=(AutoCreateRefTerm="eventParameters, cancellationToken"))
     static void LogEventAsync(
         FAnalyticsModuleLogEventAsyncResponse onSuccess,
         FAnalyticsModuleFailResponse onFail,

@@ -66,7 +66,7 @@ public:
      * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
      * @throw: Thrown when the user is not logged in.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="quantity, properties"))
     static void AddToInventoryAsync_VirtualItemId_Quantity_Properties(
         FInventoryModuleAddToInventoryAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
@@ -102,7 +102,7 @@ public:
      * The task result contains an T:RGN.Modules.Inventory.AddToInventoryResponseData object which holds the response data of the operation.
      * @throw: Thrown when the ownedItemId is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="quantity, properties"))
     static void AddToInventoryAsync_UserId_VirtualItemId_Quantity_Properties(
         FInventoryModuleAddToInventoryAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
@@ -206,7 +206,7 @@ public:
      * The task result contains a T:RGN.Modules.Inventory.RemoveByOwnedIdResponseData object which holds the server's response data.
      * @throw: Thrown when ownedItemId is null or empty.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="quantity"))
     static void RemoveByInventoryItemIdAsync(
         FInventoryModuleRemoveByInventoryItemIdAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
@@ -306,7 +306,7 @@ public:
                 },
                 cpp_ownedItemId);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="upgradeId, upgradePrice"))
     static void UpgradeAsync(
         FInventoryModuleUpgradeAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
@@ -465,7 +465,7 @@ public:
     /**
      * Get multiple owned virtual items inventory data for current app with the Virtual Item data included
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="startAfter, limit"))
     static void GetWithVirtualItemsDataForCurrentAppAsync(
         FInventoryModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
@@ -491,7 +491,7 @@ public:
                 cpp_startAfter,
                 cpp_limit);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="startAfter, limit"))
     static void GetWithVirtualItemsDataByAppIdsAsync(
         FInventoryModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
@@ -559,7 +559,7 @@ public:
             RGN::Modules::Inventory::InventoryModule::ParseInventoryItemsData(
                 cpp_json);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="appId"))
     static void GetByTagsAsync(
         FInventoryModuleGetByTagsAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
@@ -618,7 +618,7 @@ public:
                 },
                 cpp_ownedItemId);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="appId"))
     static void SetTagsAsync(
         FInventoryModuleSetTagsAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,

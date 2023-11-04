@@ -253,7 +253,7 @@ public:
      * @param bio - The new bio of the user.
      * @return A Task containing the new display name of the user.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile", meta=(AutoCreateRefTerm="bio"))
     static void SetDisplayNameAndBioAsync(
         FUserProfileModuleSetDisplayNameAndBioAsyncResponse onSuccess,
         FUserProfileModuleFailResponse onFail,
@@ -281,7 +281,7 @@ public:
      * @param cancellationToken - The cancellation token.
      * @return A boolean indicating whether the upload was successful.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile", meta=(AutoCreateRefTerm="cancellationToken"))
     static void UploadAvatarImageAsync(
         FUserProfileModuleUploadAvatarImageAsyncResponse onSuccess,
         FUserProfileModuleFailResponse onFail,
@@ -314,7 +314,7 @@ public:
      * @param cancellationToken - A cancellation token that can be used to cancel the download operation.
      * @return A byte array containing the avatar image, or null if the download fails.
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile", meta=(AutoCreateRefTerm="cancellationToken"))
     static void DownloadAvatarImageAsync(
         FUserProfileModuleDownloadAvatarImageAsyncResponse onSuccess,
         FUserProfileModuleFailResponse onFail,
