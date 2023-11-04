@@ -19,7 +19,7 @@ namespace RGN { namespace Modules { namespace Store {
         static void GetLootBoxesForCurrentAppAsync(
             int32_t limit,
             string startAfter,
-            const function<void(vector<RGN::Modules::Store::LootBox> result)>& complete,
+            const function<void(vector<RGN::Modules::Store::LootBox> result)>& success,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -28,15 +28,15 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
                     "storeV2-getLootBoxesByAppId",
                     requestData,
-                    [complete](RGN::Modules::Store::GetLootBoxesResponse result) {
-                        complete(result.lootBoxes);
+                    [success](RGN::Modules::Store::GetLootBoxesResponse result) {
+                        success(result.lootBoxes);
                     },
                     fail
                 );
             };
         static void OpenLootboxAsync(
             string name,
-            const function<void(RGN::Modules::Inventory::InventoryItemData result)>& complete,
+            const function<void(RGN::Modules::Inventory::InventoryItemData result)>& success,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -44,7 +44,7 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::PurchaseItem>(
                     "storeV2-openLootBox",
                     requestData,
-                    [complete](RGN::Modules::Store::PurchaseItem result) {
+                    [success](RGN::Modules::Store::PurchaseItem result) {
                         RGN::Modules::Inventory::InventoryItemData inventoryItemData;
                         inventoryItemData.id = result.inventoryItem.id;
                         inventoryItemData.virtualItemId = result.virtualItem.id;
@@ -55,7 +55,7 @@ namespace RGN { namespace Modules { namespace Store {
                         inventoryItemData.itemUpgrades = result.inventoryItem.itemUpgrades;
                         inventoryItemData.properties = result.inventoryItem.properties;
                         inventoryItemData.virtualItem = result.virtualItem;
-                        complete(inventoryItemData);
+                        success(inventoryItemData);
                     },
                 fail);
             };
@@ -63,7 +63,7 @@ namespace RGN { namespace Modules { namespace Store {
             int32_t limit,
             string startAfter,
             bool ignoreTimestamp,
-            const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
+            const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& success,
             const function<void(int httpCode, string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
@@ -74,8 +74,8 @@ namespace RGN { namespace Modules { namespace Store {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByAppIds",
                     requestData,
-                    [complete](RGN::Modules::Store::GetStoreOffersResponse result) {
-                        complete(result.offers);
+                    [success](RGN::Modules::Store::GetStoreOffersResponse result) {
+                        success(result.offers);
                     },
                     fail
                 );
@@ -84,14 +84,14 @@ namespace RGN { namespace Modules { namespace Store {
             int32_t limit,
             string startAfter,
             bool ignoreTimestamp,
-            const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& complete,
+            const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& success,
             const function<void(int httpCode, string error)>& fail) {
                 GetWithVirtualItemsDataByAppIdsAsync(
                     { RGNCore::GetAppId() },
                     limit,
                     startAfter,
                     ignoreTimestamp,
-                    complete,
+                    success,
                     fail
                 );
             };
@@ -100,7 +100,7 @@ namespace RGN { namespace Modules { namespace Store {
             int32_t limit,
             std::string startAfter,
             bool ignoreTimestamp,
-            const std::function<void(std::vector<RGN::Modules::Store::StoreOffer> result)>& complete,
+            const std::function<void(std::vector<RGN::Modules::Store::StoreOffer> result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
@@ -110,7 +110,7 @@ namespace RGN { namespace Modules { namespace Store {
                 bodyJson["ignoreTimestamp"] = ignoreTimestamp;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse>
                 ("storeV2-getWithVirtualItemsDataByAppIds", bodyJson,
-                    [complete](RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse response) {
+                    [success](RGN::Modules::Store::GetStoreOffersWithVirtualItemsDataResponse response) {
                         std::vector<RGN::Modules::Store::StoreOffer> queriedOffers = response.offers;
                         std::vector<RGN::Modules::VirtualItems::VirtualItem> virtualItems = response.virtualItems;
                         for (StoreOffer& storeOffer : queriedOffers) {
@@ -125,7 +125,7 @@ namespace RGN { namespace Modules { namespace Store {
                             }
                             storeOffer.virtualItems = items;
                         }
-                        complete(queriedOffers);
+                        success(queriedOffers);
                     },
                     fail
                 );
@@ -134,7 +134,7 @@ namespace RGN { namespace Modules { namespace Store {
             std::vector<string> itemIds,
             std::vector<string> currencies,
             std::string offerId,
-            const std::function<void(RGN::Modules::Store::PurchaseResult result)>& complete,
+            const std::function<void(RGN::Modules::Store::PurchaseResult result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
@@ -144,7 +144,7 @@ namespace RGN { namespace Modules { namespace Store {
                 bodyJson["version"] = 2;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyVirtualItemsResponse>
                     ("storeV2-buyVirtualItems", bodyJson,
-                    [offerId, complete](RGN::Modules::Store::BuyVirtualItemsResponse response) {
+                    [offerId, success](RGN::Modules::Store::BuyVirtualItemsResponse response) {
                         std::vector<RGN::Modules::Inventory::InventoryItemData> inventoryItems;
                         for (RGN::Modules::Store::PurchaseItem& purchaseItem : response.purchasedItems) {
                             RGN::Modules::Inventory::InventoryItemData inventoryItem;
@@ -163,14 +163,14 @@ namespace RGN { namespace Modules { namespace Store {
                         purchaseResult.offerId = offerId;
                         purchaseResult.items = inventoryItems;
                         purchaseResult.updatedCurrencies = response.updatedCurrencies;
-                        complete(purchaseResult);
+                        success(purchaseResult);
                     },
                 fail);
             };
         static void BuyStoreOfferAsync(
             std::string offerId,
             std::vector<std::string> currencies,
-            const std::function<void(RGN::Modules::Store::PurchaseResult result)>& complete,
+            const std::function<void(RGN::Modules::Store::PurchaseResult result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
@@ -179,7 +179,7 @@ namespace RGN { namespace Modules { namespace Store {
                 bodyJson["version"] = 2;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::BuyStoreOfferResponse>
                     ("storeV2-buyStoreOffer", bodyJson,
-                    [offerId, complete](RGN::Modules::Store::BuyStoreOfferResponse response) {
+                    [offerId, success](RGN::Modules::Store::BuyStoreOfferResponse response) {
                         std::vector<RGN::Modules::Inventory::InventoryItemData> inventoryItems;
                         for (RGN::Modules::Store::PurchaseItem& purchaseItem : response.purchasedItems) {
                             RGN::Modules::Inventory::InventoryItemData inventoryItem;
@@ -198,7 +198,7 @@ namespace RGN { namespace Modules { namespace Store {
                         purchaseResult.offerId = offerId;
                         purchaseResult.items = inventoryItems;
                         purchaseResult.updatedCurrencies = response.updatedCurrencies;
-                        complete(purchaseResult);
+                        success(purchaseResult);
                     },
                 fail);
             };

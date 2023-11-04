@@ -24,7 +24,7 @@ namespace RGN { namespace Modules { namespace Messaging {
             std::string payload,
             std::string title,
             std::string text,
-            const std::function<void(void)>& complete,
+            const std::function<void(void)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json requestData;
                 requestData["appId"] = appId;
@@ -32,7 +32,7 @@ namespace RGN { namespace Modules { namespace Messaging {
                 requestData["payload"] = payload;
                 requestData["title"] = title;
                 requestData["text"] = text;
-                RGNCore::CallAPI<nlohmann::json>("messaging-sendMessageByUserId", requestData, complete, fail);
+                RGNCore::CallAPI<nlohmann::json>("messaging-sendMessageByUserId", requestData, success, fail);
             };
 	};
 }}}

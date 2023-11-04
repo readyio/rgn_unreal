@@ -15,9 +15,9 @@ namespace RGN { namespace Modules { namespace Inventory {
             std::string virtualItemId,
             int32_t quantity,
             RGN::Modules::VirtualItems::Properties properties,
-            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
-                AddToInventoryAsync(RGNCore::GetUserId(), virtualItemId, quantity, properties, complete, fail);
+                AddToInventoryAsync(RGNCore::GetUserId(), virtualItemId, quantity, properties, success, fail);
             };
 
         static void AddToInventoryAsync(
@@ -25,7 +25,7 @@ namespace RGN { namespace Modules { namespace Inventory {
             std::string virtualItemId,
             int32_t quantity,
             RGN::Modules::VirtualItems::Properties properties,
-            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const std::function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
                 RGN::Modules::Inventory::InventoryItemData inventoryItemData;
                 inventoryItemData.virtualItemId = virtualItemId;
@@ -35,14 +35,14 @@ namespace RGN { namespace Modules { namespace Inventory {
                 AddToInventoryAsync(
                     userId,
                     inventoryItemData,
-                    complete,
+                    success,
                     fail
                 );
             };
         static void AddToInventoryAsync(
             string userId,
             RGN::Modules::Inventory::InventoryItemData inventoryData,
-            const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& complete,
+            const function<void(RGN::Modules::Inventory::AddToInventoryResponseData result)>& success,
             const function<void(int httpCode, string error)>& fail) {
                 RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData requestData;
                 requestData.userId = userId;
@@ -50,23 +50,23 @@ namespace RGN { namespace Modules { namespace Inventory {
                 RGNCore::CallAPI<RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData, RGN::Modules::Inventory::AddToInventoryResponseData>(
                     "inventoryV2-addToInventory",
                     requestData,
-                    complete,
+                    success,
                     fail
                 );
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             std::string startAfter,
             int32_t limit,
-            const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
-                GetWithVirtualItemsDataByAppIdsAsync({RGNCore::GetAppId()}, startAfter, limit, complete, fail);
+                GetWithVirtualItemsDataByAppIdsAsync({RGNCore::GetAppId()}, startAfter, limit, success, fail);
             };
 
         static void GetWithVirtualItemsDataByAppIdsAsync(
             std::vector<string> appIds,
             std::string startAfter,
             int32_t limit,
-            const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& complete,
+            const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
@@ -74,7 +74,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 bodyJson["limit"] = limit;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData>
                     ("inventoryV2-getWithVirtualItemsDataByAppIds", bodyJson,
-                    [complete](RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData response) {
+                    [success](RGN::Modules::Inventory::InventoryItemsWithVirtualItemsData response) {
                         for (RGN::Modules::Inventory::InventoryItemData& item : response.items) {
                             for (RGN::Modules::VirtualItems::VirtualItem& virtualItem : response.virtualItems) {
                                 if (item.id == virtualItem.id) {
@@ -83,7 +83,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                                 }
                             }
                         }
-                        complete(response.items);
+                        success(response.items);
                     },
                 fail);
             };

@@ -13,7 +13,7 @@ namespace RGN { namespace Modules { namespace Analytics {
             std::string eventName,
             std::string eventParameters,
             CancellationToken cancellationToken,
-            const std::function<void(void)>& complete,
+            const std::function<void(void)>& success,
             const std::function<void(int httpCode, std::string error)>& fail) {
                 nlohmann::json bodyJson;
                 bodyJson["eventName"] = eventName;
@@ -22,7 +22,7 @@ namespace RGN { namespace Modules { namespace Analytics {
                 bodyJson["userPseudoId"] = RGNAnalytics::GetAnalyticsId();
                 bodyJson["sessionId"] = RGNAnalytics::GetSessionId();
                 bodyJson["eventParameters"] = eventParameters;
-                RGNCore::CallAPI<nlohmann::json>("analytics-logEvent", bodyJson, complete, fail);
+                RGNCore::CallAPI<nlohmann::json>("analytics-logEvent", bodyJson, success, fail);
             };
 	};
 }}}
