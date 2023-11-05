@@ -195,9 +195,9 @@ namespace RGN { namespace Modules { namespace Store {
             const function<void(const int httpCode, const string& error)>& fail,
             const vector<string>& appIds,
             const vector<string>& itemIds,
+            const vector<string>& tags = vector<string>(),
             const string& name = "",
             const string& description = "",
-            const vector<string>& tags = vector<string>(),
             const int32_t quantity = 1) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();

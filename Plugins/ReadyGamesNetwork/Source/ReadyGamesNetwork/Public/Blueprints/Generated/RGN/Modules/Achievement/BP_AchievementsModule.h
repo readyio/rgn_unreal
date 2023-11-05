@@ -84,7 +84,7 @@ public:
         FAchievementsModuleFailResponse onFail,
         const TArray<FString>& appIds,
         int32 limit,
-        const FString& startAfter) {
+        const FString& startAfter = "") {
             vector<string> cpp_appIds;
             int32_t cpp_limit;
             string cpp_startAfter;
@@ -127,7 +127,7 @@ public:
         FAchievementsModuleGetForCurrentAppAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
         int32 limit,
-        const FString& startAfter) {
+        const FString& startAfter = "") {
             int32_t cpp_limit;
             string cpp_startAfter;
             cpp_limit = limit;
@@ -154,8 +154,8 @@ public:
         FAchievementsModuleFailResponse onFail,
         const TArray<FString>& appIds,
         int32 limit,
-        const FString& startAfter,
-        bool withHistory) {
+        const FString& startAfter = "",
+        bool withHistory = false) {
             vector<string> cpp_appIds;
             int32_t cpp_limit;
             string cpp_startAfter;
@@ -202,7 +202,7 @@ public:
         FAchievementsModuleGetForCurrentAppWithUserDataAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
         int32 limit,
-        const FString& startAfter) {
+        const FString& startAfter = "") {
             int32_t cpp_limit;
             string cpp_startAfter;
             cpp_limit = limit;
@@ -286,7 +286,7 @@ public:
         FAchievementsModuleTriggerByIdAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
         const FString& id,
-        int32 progress) {
+        int32 progress = 1) {
             string cpp_id;
             int32_t cpp_progress;
             cpp_id = string(TCHAR_TO_UTF8(*id));
@@ -314,7 +314,7 @@ public:
         FAchievementsModuleTriggerByRequestNameAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
         const FString& requestName,
-        int32 progress) {
+        int32 progress = 1) {
             string cpp_requestName;
             int32_t cpp_progress;
             cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
@@ -392,9 +392,9 @@ public:
     static void GetUserAchievementsAsync(
         FAchievementsModuleGetUserAchievementsAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
-        const FString& userId,
-        int64 startAfter,
-        int32 limit) {
+        const FString& userId = "",
+        int64 startAfter = 9223372036854775807,
+        int32 limit = 2147483647) {
             string cpp_userId;
             int64_t cpp_startAfter;
             int32_t cpp_limit;

@@ -139,7 +139,7 @@ public:
         FLeaderboardModuleFailResponse onFail,
         const FString& leaderboardId,
         int32 score,
-        const FString& extraData) {
+        const FString& extraData = "") {
             string cpp_leaderboardId;
             int32_t cpp_score;
             string cpp_extraData;
@@ -172,7 +172,7 @@ public:
         FLeaderboardModuleFailResponse onFail,
         const FString& leaderboardId,
         int32 score,
-        const FString& extraData) {
+        const FString& extraData = "") {
             string cpp_leaderboardId;
             int32_t cpp_score;
             string cpp_extraData;

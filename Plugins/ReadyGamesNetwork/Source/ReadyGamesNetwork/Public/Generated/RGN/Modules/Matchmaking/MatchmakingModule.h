@@ -126,8 +126,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             const function<void(const RGN::Modules::Matchmaking::MatchmakingData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail,
             const RGN::Modules::Matchmaking::MatchmakingData& matchConfig,
-            const bool participateInOnCreate = true,
             const std::unordered_map<string, string>& participatePayload = std::unordered_map<string, string>(),
+            const bool participateInOnCreate = true,
             const CancellationToken& cancellationToken = CancellationToken()) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();

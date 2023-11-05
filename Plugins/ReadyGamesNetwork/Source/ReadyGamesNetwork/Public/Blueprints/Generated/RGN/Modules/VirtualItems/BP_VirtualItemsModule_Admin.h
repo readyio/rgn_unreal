@@ -82,8 +82,8 @@ public:
         FVirtualItemsModule_AdminFailResponse onFail,
         const FString& virtualItemName,
         const FString& csvContent,
-        const FString& csvDelimiter,
-        const FBP_CancellationToken& cancellationToken) {
+        const FString& csvDelimiter = ",",
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_virtualItemName;
             string cpp_csvContent;
             string cpp_csvDelimiter;

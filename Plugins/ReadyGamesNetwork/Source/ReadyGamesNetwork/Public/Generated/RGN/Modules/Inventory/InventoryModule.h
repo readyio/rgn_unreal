@@ -211,8 +211,8 @@ namespace RGN { namespace Modules { namespace Inventory {
             const function<void(const int httpCode, const string& error)>& fail,
             const string& ownedItemId,
             const int32_t newUpgradeLevel,
-            const string& upgradeId = string(),
-            const vector<RGN::Modules::Currency::Currency>& upgradePrice = vector<RGN::Modules::Currency::Currency>()) {
+            const vector<RGN::Modules::Currency::Currency>& upgradePrice = vector<RGN::Modules::Currency::Currency>(),
+            const string& upgradeId = string()) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["ownedItemId"] = ownedItemId;

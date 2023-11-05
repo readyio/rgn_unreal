@@ -71,8 +71,8 @@ public:
         FInventoryModuleAddToInventoryAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
         const FString& virtualItemId,
-        int32 quantity,
-        const FBP_Properties& properties) {
+        int32 quantity = 1,
+        const FBP_Properties& properties = FBP_Properties()) {
             string cpp_virtualItemId;
             int32_t cpp_quantity;
             RGN::Modules::VirtualItems::Properties cpp_properties;
@@ -108,8 +108,8 @@ public:
         FInventoryModuleFailResponse onFail,
         const FString& userId,
         const FString& virtualItemId,
-        int32 quantity,
-        const FBP_Properties& properties) {
+        int32 quantity = 1,
+        const FBP_Properties& properties = FBP_Properties()) {
             string cpp_userId;
             string cpp_virtualItemId;
             int32_t cpp_quantity;
@@ -212,7 +212,7 @@ public:
         FInventoryModuleFailResponse onFail,
         const FString& userId,
         const FString& ownedItemId,
-        int32 quantity) {
+        int32 quantity = 1) {
             string cpp_userId;
             string cpp_ownedItemId;
             int32_t cpp_quantity;
@@ -306,26 +306,26 @@ public:
                 },
                 cpp_ownedItemId);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="upgradeId, upgradePrice"))
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Inventory", meta=(AutoCreateRefTerm="upgradePrice, upgradeId"))
     static void UpgradeAsync(
         FInventoryModuleUpgradeAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
         const FString& ownedItemId,
         int32 newUpgradeLevel,
-        const FString& upgradeId,
-        const TArray<FBP_Currency>& upgradePrice) {
+        const TArray<FBP_Currency>& upgradePrice,
+        const FString& upgradeId = "") {
             string cpp_ownedItemId;
             int32_t cpp_newUpgradeLevel;
-            string cpp_upgradeId;
             vector<RGN::Modules::Currency::Currency> cpp_upgradePrice;
+            string cpp_upgradeId;
             cpp_ownedItemId = string(TCHAR_TO_UTF8(*ownedItemId));
             cpp_newUpgradeLevel = newUpgradeLevel;
-            cpp_upgradeId = string(TCHAR_TO_UTF8(*upgradeId));
             for (const auto& upgradePrice_item : upgradePrice) {
                 RGN::Modules::Currency::Currency cpp_upgradePrice_item;
                 FBP_Currency::ConvertToCoreModel(upgradePrice_item, cpp_upgradePrice_item);
                 cpp_upgradePrice.push_back(cpp_upgradePrice_item);
             }
+            cpp_upgradeId = string(TCHAR_TO_UTF8(*upgradeId));
             RGN::Modules::Inventory::InventoryModule::UpgradeAsync(
                 [onSuccess](vector<RGN::Modules::Inventory::VirtualItemUpgrade> response) {
                     TArray<FBP_VirtualItemUpgrade> bpResponse;
@@ -341,8 +341,8 @@ public:
                 },
                 cpp_ownedItemId,
                 cpp_newUpgradeLevel,
-                cpp_upgradeId,
-                cpp_upgradePrice);
+                cpp_upgradePrice,
+                cpp_upgradeId);
     }
     /**
      * Get single owned virtual item inventory data by ownedItemId
@@ -469,8 +469,8 @@ public:
     static void GetWithVirtualItemsDataForCurrentAppAsync(
         FInventoryModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
-        const FString& startAfter,
-        int32 limit) {
+        const FString& startAfter = "",
+        int32 limit = 100) {
             string cpp_startAfter;
             int32_t cpp_limit;
             cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
@@ -496,8 +496,8 @@ public:
         FInventoryModuleGetWithVirtualItemsDataByAppIdsAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
         const TArray<FString>& appIds,
-        const FString& startAfter,
-        int32 limit) {
+        const FString& startAfter = "",
+        int32 limit = 100) {
             vector<string> cpp_appIds;
             string cpp_startAfter;
             int32_t cpp_limit;
@@ -564,7 +564,7 @@ public:
         FInventoryModuleGetByTagsAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
         const TArray<FString>& tags,
-        const FString& appId) {
+        const FString& appId = "") {
             vector<string> cpp_tags;
             string cpp_appId;
             for (const auto& tags_item : tags) {
@@ -624,7 +624,7 @@ public:
         FInventoryModuleFailResponse onFail,
         const FString& ownedItemId,
         const TArray<FString>& tags,
-        const FString& appId) {
+        const FString& appId = "") {
             string cpp_ownedItemId;
             vector<string> cpp_tags;
             string cpp_appId;

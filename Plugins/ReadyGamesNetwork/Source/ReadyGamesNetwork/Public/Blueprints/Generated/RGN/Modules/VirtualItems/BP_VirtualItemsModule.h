@@ -91,8 +91,8 @@ public:
         FVirtualItemsModuleFailResponse onFail,
         const FString& virtualItemName,
         const FString& csvContent,
-        const FString& csvDelimiter,
-        const FBP_CancellationToken& cancellationToken) {
+        const FString& csvDelimiter = ",",
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_virtualItemName;
             string cpp_csvContent;
             string cpp_csvDelimiter;
@@ -197,7 +197,7 @@ public:
         FVirtualItemsModuleGetVirtualItemsAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
         int32 limit,
-        const FString& startAfter) {
+        const FString& startAfter = "") {
             int32_t cpp_limit;
             string cpp_startAfter;
             cpp_limit = limit;
@@ -249,7 +249,7 @@ public:
         FVirtualItemsModuleGetByTagsAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
         const TArray<FString>& tags,
-        const FString& appId) {
+        const FString& appId = "") {
             vector<string> cpp_tags;
             string cpp_appId;
             for (const auto& tags_item : tags) {
@@ -305,7 +305,7 @@ public:
         FVirtualItemsModuleFailResponse onFail,
         const FString& virtualItemId,
         const TArray<FString>& tags,
-        const FString& appId) {
+        const FString& appId = "") {
             string cpp_virtualItemId;
             vector<string> cpp_tags;
             string cpp_appId;
@@ -434,7 +434,7 @@ public:
         FVirtualItemsModuleFailResponse onFail,
         const FString& virtualItemId,
         const TArray<uint8>& thumbnailTextureBytes,
-        const FBP_CancellationToken& cancellationToken) {
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_virtualItemId;
             vector<uint8_t> cpp_thumbnailTextureBytes;
             CancellationToken cpp_cancellationToken;
@@ -471,7 +471,7 @@ public:
         FVirtualItemsModuleFailResponse onFail,
         const FString& virtualItemId,
         const EBP_ImageSize& size,
-        const FBP_CancellationToken& cancellationToken) {
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_virtualItemId;
             RGN::Model::ImageSize cpp_size;
             CancellationToken cpp_cancellationToken;

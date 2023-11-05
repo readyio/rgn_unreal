@@ -86,7 +86,7 @@ public:
         FStoreModuleFailResponse onFail,
         const TArray<FString>& itemIds,
         const TArray<FString>& currencies,
-        const FString& offerId) {
+        const FString& offerId = "") {
             vector<string> cpp_itemIds;
             vector<string> cpp_currencies;
             string cpp_offerId;
@@ -184,7 +184,7 @@ public:
         FStoreModuleFailResponse onFail,
         const FString& appId,
         int32 limit,
-        const FString& startAfter) {
+        const FString& startAfter = "") {
             string cpp_appId;
             int32_t cpp_limit;
             string cpp_startAfter;
@@ -223,7 +223,7 @@ public:
         FStoreModuleGetLootBoxesForCurrentAppAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
         int32 limit,
-        const FString& startAfter) {
+        const FString& startAfter = "") {
             int32_t cpp_limit;
             string cpp_startAfter;
             cpp_limit = limit;
@@ -329,21 +329,21 @@ public:
                 },
                 cpp_name);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="name, description, tags, quantity"))
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="tags, name, description, quantity"))
     static void AddVirtualItemsStoreOfferAsync(
         FStoreModuleAddVirtualItemsStoreOfferAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
         const TArray<FString>& appIds,
         const TArray<FString>& itemIds,
-        const FString& name,
-        const FString& description,
         const TArray<FString>& tags,
-        int32 quantity) {
+        const FString& name = "",
+        const FString& description = "",
+        int32 quantity = 1) {
             vector<string> cpp_appIds;
             vector<string> cpp_itemIds;
+            vector<string> cpp_tags;
             string cpp_name;
             string cpp_description;
-            vector<string> cpp_tags;
             int32_t cpp_quantity;
             for (const auto& appIds_item : appIds) {
                 string cpp_appIds_item;
@@ -355,13 +355,13 @@ public:
                 cpp_itemIds_item = string(TCHAR_TO_UTF8(*itemIds_item));
                 cpp_itemIds.push_back(cpp_itemIds_item);
             }
-            cpp_name = string(TCHAR_TO_UTF8(*name));
-            cpp_description = string(TCHAR_TO_UTF8(*description));
             for (const auto& tags_item : tags) {
                 string cpp_tags_item;
                 cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
                 cpp_tags.push_back(cpp_tags_item);
             }
+            cpp_name = string(TCHAR_TO_UTF8(*name));
+            cpp_description = string(TCHAR_TO_UTF8(*description));
             cpp_quantity = quantity;
             RGN::Modules::Store::StoreModule::AddVirtualItemsStoreOfferAsync(
                 [onSuccess](RGN::Modules::Store::StoreOffer response) {
@@ -374,9 +374,9 @@ public:
                 },
                 cpp_appIds,
                 cpp_itemIds,
+                cpp_tags,
                 cpp_name,
                 cpp_description,
-                cpp_tags,
                 cpp_quantity);
     }
     /**
@@ -395,7 +395,7 @@ public:
         FStoreModuleFailResponse onFail,
         const FString& content,
         const FString& delimiter,
-        const FBP_CancellationToken& cancellationToken) {
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_content;
             string cpp_delimiter;
             CancellationToken cpp_cancellationToken;
@@ -424,8 +424,8 @@ public:
         FStoreModuleGetByTagsAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
         const TArray<FString>& tags,
-        const FString& appId,
-        bool ignoreTimestamp) {
+        const FString& appId = "",
+        bool ignoreTimestamp = false) {
             vector<string> cpp_tags;
             string cpp_appId;
             bool cpp_ignoreTimestamp;
@@ -493,8 +493,8 @@ public:
         FStoreModuleFailResponse onFail,
         const TArray<FString>& appIds,
         int32 limit,
-        const FString& startAfter,
-        bool ignoreTimestamp) {
+        const FString& startAfter = "",
+        bool ignoreTimestamp = false) {
             vector<string> cpp_appIds;
             int32_t cpp_limit;
             string cpp_startAfter;
@@ -542,8 +542,8 @@ public:
         FStoreModuleGetForCurrentAppAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
         int32 limit,
-        const FString& startAfter,
-        bool ignoreTimestamp) {
+        const FString& startAfter = "",
+        bool ignoreTimestamp = false) {
             int32_t cpp_limit;
             string cpp_startAfter;
             bool cpp_ignoreTimestamp;
@@ -585,8 +585,8 @@ public:
         FStoreModuleGetWithVirtualItemsDataForCurrentAppAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
         int32 limit,
-        const FString& startAfter,
-        bool ignoreTimestamp) {
+        const FString& startAfter = "",
+        bool ignoreTimestamp = false) {
             int32_t cpp_limit;
             string cpp_startAfter;
             bool cpp_ignoreTimestamp;
@@ -616,8 +616,8 @@ public:
         FStoreModuleFailResponse onFail,
         const TArray<FString>& appIds,
         int32 limit,
-        const FString& startAfter,
-        bool ignoreTimestamp) {
+        const FString& startAfter = "",
+        bool ignoreTimestamp = false) {
             vector<string> cpp_appIds;
             int32_t cpp_limit;
             string cpp_startAfter;
@@ -709,7 +709,7 @@ public:
         FStoreModuleFailResponse onFail,
         const FString& offerId,
         const TArray<FString>& tags,
-        const FString& appId) {
+        const FString& appId = "") {
             string cpp_offerId;
             vector<string> cpp_tags;
             string cpp_appId;

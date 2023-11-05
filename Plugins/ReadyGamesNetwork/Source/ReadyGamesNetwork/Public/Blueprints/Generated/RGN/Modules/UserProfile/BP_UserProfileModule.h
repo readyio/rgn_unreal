@@ -258,7 +258,7 @@ public:
         FUserProfileModuleSetDisplayNameAndBioAsyncResponse onSuccess,
         FUserProfileModuleFailResponse onFail,
         const FString& displayName,
-        const FString& bio) {
+        const FString& bio = "") {
             string cpp_displayName;
             string cpp_bio;
             cpp_displayName = string(TCHAR_TO_UTF8(*displayName));
@@ -286,7 +286,7 @@ public:
         FUserProfileModuleUploadAvatarImageAsyncResponse onSuccess,
         FUserProfileModuleFailResponse onFail,
         const TArray<uint8>& bytes,
-        const FBP_CancellationToken& cancellationToken) {
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             vector<uint8_t> cpp_bytes;
             CancellationToken cpp_cancellationToken;
             for (const auto& bytes_item : bytes) {
@@ -320,7 +320,7 @@ public:
         FUserProfileModuleFailResponse onFail,
         const FString& userId,
         const EBP_ImageSize& size,
-        const FBP_CancellationToken& cancellationToken) {
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_userId;
             RGN::Model::ImageSize cpp_size;
             CancellationToken cpp_cancellationToken;

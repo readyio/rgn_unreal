@@ -35,8 +35,8 @@ public:
         FAnalyticsModuleLogEventAsyncResponse onSuccess,
         FAnalyticsModuleFailResponse onFail,
         const FString& eventName,
-        const FString& eventParameters,
-        const FBP_CancellationToken& cancellationToken) {
+        const FString& eventParameters = "",
+        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_eventName;
             string cpp_eventParameters;
             CancellationToken cpp_cancellationToken;
