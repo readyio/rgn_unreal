@@ -2,9 +2,11 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../CustomImpl/RGN/Modules/Leaderboard/LeaderboardModule.h"
 #include "LeaderboardData.h"
 #include "GetLeaderboardsResponse.h"
 #include "GetLeaderboardIdsResponseData.h"
+#include "IsLeaderboardAvailableResponseData.h"
 #include "SetScoreResponseData.h"
 #include "LeaderboardEntry.h"
 #include "GetLeaderboardEntriesResponseData.h"
@@ -62,20 +64,92 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     "leaderboardV2-getByRequestNames",
                     requestData,
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
-                        success(result.Leaderboards);
+                        success(result.leaderboards);
                     },
                     fail);
             };
-        static void GetLeaderboardIdsAsync(
-            const function<void(const vector<string>& result)>& success,
-            const function<void(const int httpCode, const string& error)>& fail) {
+        static void GetLeaderboardByAppIdsAsync(
+            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const vector<string>& appIds,
+            const int32_t limit,
+            const string& startAfter = "",
+            const bool ignoreTimestamp = false) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
+                requestData["appIds"] = appIds;
+                requestData["limit"] = limit;
+                requestData["startAfter"] = startAfter;
+                requestData["ignoreTimestamp"] = ignoreTimestamp;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardsResponse>(
+                    "leaderboardV2-getByAppIds",
+                    requestData,
+                    [success] (const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
+                        success(result.leaderboards);
+                    },
+                    fail);
+            };
+        /**
+         * Asynchronously retrieves a list of leaderboards for the current application from the Ready Games Network (RGN).
+         * @param limit - An integer indicating the maximum number of leaderboards to retrieve.
+         * @param startAfter - An optional parameter representing an leaderboard id after which to
+         * start retrieving the leaderboards. The default is an empty string.
+         * @param ignoreTimestamp - An optional parameter that indicates whether to ignore the timestamp in the leaderboard
+         * retrieval process. The default is false.
+         * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+         * of T:RGN.Modules.Leaderboard.LeaderboardData objects representing the leaderboards that match the current application identifier,
+         * limit and other optional parameters.
+         * @throw: Thrown when the provided limit value is zero.
+         */
+        static void GetLeaderboardForCurrentAppAsync(
+            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const int32_t limit,
+            const string& startAfter = "",
+            const bool ignoreTimestamp = false) {
+                RGN::Modules::Leaderboard::LeaderboardModuleCustomImpl::GetLeaderboardForCurrentAppAsync(
+                    success,
+                    fail,
+                    limit,
+                    startAfter,
+                    ignoreTimestamp);
+            };
+        /**
+         * Method to retrieve leaderboard ids defined for current project
+         * @param ignoreTimestamp - An optional parameter that indicates whether to ignore the timestamp in the leaderboard
+         * retrieval process. The default is false.
+         */
+        static void GetLeaderboardIdsAsync(
+            const function<void(const vector<string>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const bool ignoreTimestamp = false) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["ignoreTimestamp"] = ignoreTimestamp;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData>(
                     "leaderboardV2-getIds",
                     requestData,
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData& result) {
                         success(result.ids);
+                    },
+                    fail);
+            };
+        /**
+         * Method to retrieve available status of leaderboard
+         * @param leaderboardId - The ID of the leaderboard which status will be checked.
+         */
+        static void IsLeaderboardAvailableAsync(
+            const function<void(const bool result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& leaderboardId) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["leaderboardId"] = leaderboardId;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData>(
+                    "leaderboardV2-isAvailable",
+                    requestData,
+                    [success] (const RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData& result) {
+                        success(result.isAvailable);
                     },
                     fail);
             };

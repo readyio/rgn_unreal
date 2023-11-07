@@ -1,7 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
-#include "TimeInfo.h"
+#include "../../Model/TimeInfo.h"
 #include "../VirtualItems/Properties.h"
 #include "../VirtualItems/PriceInfo.h"
 #include "../VirtualItems/VirtualItem.h"
@@ -70,7 +70,7 @@ namespace RGN { namespace Modules { namespace Store {
          * The time when the store offer is available
          * This is used for limited time offers (LTO)
          */
-        RGN::Modules::Store::TimeInfo time;
+        RGN::Model::TimeInfo time;
         /**
          * List of store offer custom json. It is used to store
          * game specific json in json format.

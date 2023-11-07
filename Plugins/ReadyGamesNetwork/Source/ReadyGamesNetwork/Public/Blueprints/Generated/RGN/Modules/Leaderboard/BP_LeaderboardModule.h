@@ -9,6 +9,8 @@
 #include "BP_GetLeaderboardsResponse.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/GetLeaderboardIdsResponseData.h"
 #include "BP_GetLeaderboardIdsResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/IsLeaderboardAvailableResponseData.h"
+#include "BP_IsLeaderboardAvailableResponseData.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/SetScoreResponseData.h"
 #include "BP_SetScoreResponseData.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardEntry.h"
@@ -28,7 +30,10 @@ DECLARE_DYNAMIC_DELEGATE_TwoParams(FLeaderboardModuleFailResponse, int32, code, 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByIdAsyncResponse, const FBP_LeaderboardData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByRequestNameAsyncResponse, const FBP_LeaderboardData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByRequestNamesAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByAppIdsAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardForCurrentAppAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardIdsAsyncResponse, const TArray<FString>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleIsLeaderboardAvailableAsyncResponse, bool, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleSetScoreAsyncResponse, int32, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleAddScoreAsyncResponse, int32, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetUserEntryAsyncResponse, const FBP_LeaderboardEntry&, response);
@@ -108,10 +113,98 @@ public:
                 },
                 cpp_requestNames);
     }
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="startAfter, ignoreTimestamp"))
+    static void GetLeaderboardByAppIdsAsync(
+        FLeaderboardModuleGetLeaderboardByAppIdsAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        const TArray<FString>& appIds,
+        int32 limit,
+        const FString& startAfter = "",
+        bool ignoreTimestamp = false) {
+            vector<string> cpp_appIds;
+            int32_t cpp_limit;
+            string cpp_startAfter;
+            bool cpp_ignoreTimestamp;
+            for (const auto& appIds_item : appIds) {
+                string cpp_appIds_item;
+                cpp_appIds_item = string(TCHAR_TO_UTF8(*appIds_item));
+                cpp_appIds.push_back(cpp_appIds_item);
+            }
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_ignoreTimestamp = ignoreTimestamp;
+            RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardByAppIdsAsync(
+                [onSuccess](vector<RGN::Modules::Leaderboard::LeaderboardData> response) {
+                    TArray<FBP_LeaderboardData> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_LeaderboardData b_response_item;
+                        FBP_LeaderboardData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_appIds,
+                cpp_limit,
+                cpp_startAfter,
+                cpp_ignoreTimestamp);
+    }
+    /**
+     * Asynchronously retrieves a list of leaderboards for the current application from the Ready Games Network (RGN).
+     * @param limit - An integer indicating the maximum number of leaderboards to retrieve.
+     * @param startAfter - An optional parameter representing an leaderboard id after which to
+     * start retrieving the leaderboards. The default is an empty string.
+     * @param ignoreTimestamp - An optional parameter that indicates whether to ignore the timestamp in the leaderboard
+     * retrieval process. The default is false.
+     * @return A Task representing the asynchronous operation. The Result property of the Task returns a list
+     * of T:RGN.Modules.Leaderboard.LeaderboardData objects representing the leaderboards that match the current application identifier,
+     * limit and other optional parameters.
+     * @throw: Thrown when the provided limit value is zero.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="startAfter, ignoreTimestamp"))
+    static void GetLeaderboardForCurrentAppAsync(
+        FLeaderboardModuleGetLeaderboardForCurrentAppAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        int32 limit,
+        const FString& startAfter = "",
+        bool ignoreTimestamp = false) {
+            int32_t cpp_limit;
+            string cpp_startAfter;
+            bool cpp_ignoreTimestamp;
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_ignoreTimestamp = ignoreTimestamp;
+            RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardForCurrentAppAsync(
+                [onSuccess](vector<RGN::Modules::Leaderboard::LeaderboardData> response) {
+                    TArray<FBP_LeaderboardData> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_LeaderboardData b_response_item;
+                        FBP_LeaderboardData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_limit,
+                cpp_startAfter,
+                cpp_ignoreTimestamp);
+    }
+    /**
+     * Method to retrieve leaderboard ids defined for current project
+     * @param ignoreTimestamp - An optional parameter that indicates whether to ignore the timestamp in the leaderboard
+     * retrieval process. The default is false.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="ignoreTimestamp"))
     static void GetLeaderboardIdsAsync(
         FLeaderboardModuleGetLeaderboardIdsAsyncResponse onSuccess,
-        FLeaderboardModuleFailResponse onFail) {
+        FLeaderboardModuleFailResponse onFail,
+        bool ignoreTimestamp = false) {
+            bool cpp_ignoreTimestamp;
+            cpp_ignoreTimestamp = ignoreTimestamp;
             RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardIdsAsync(
                 [onSuccess](vector<string> response) {
                     TArray<FString> bpResponse;
@@ -124,7 +217,30 @@ public:
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                });
+                },
+                cpp_ignoreTimestamp);
+    }
+    /**
+     * Method to retrieve available status of leaderboard
+     * @param leaderboardId - The ID of the leaderboard which status will be checked.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void IsLeaderboardAvailableAsync(
+        FLeaderboardModuleIsLeaderboardAvailableAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        const FString& leaderboardId) {
+            string cpp_leaderboardId;
+            cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
+            RGN::Modules::Leaderboard::LeaderboardModule::IsLeaderboardAvailableAsync(
+                [onSuccess](bool response) {
+                    bool bpResponse;
+                    bpResponse = response;
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_leaderboardId);
     }
     /**
      * Asynchronously sets the player's score on the specified leaderboard.

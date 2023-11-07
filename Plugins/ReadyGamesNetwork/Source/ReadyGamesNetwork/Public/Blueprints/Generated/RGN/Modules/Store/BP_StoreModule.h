@@ -35,8 +35,8 @@
 #include "../VirtualItems/BP_PriceInfo.h"
 #include "../../../../../Generated/RGN/Modules/Store/SetPricesRequestData.h"
 #include "BP_SetPricesRequestData.h"
-#include "../../../../../Generated/RGN/Modules/Store/TimeInfo.h"
-#include "BP_TimeInfo.h"
+#include "../../../../../Generated/RGN/Model/TimeInfo.h"
+#include "../../Model/BP_TimeInfo.h"
 #include "../../../../../Generated/RGN/Modules/Store/SetTimeRequestData.h"
 #include "BP_SetTimeRequestData.h"
 #include <vector>
@@ -824,7 +824,7 @@ public:
         const FString& offerId,
         const FBP_TimeInfo& time) {
             string cpp_offerId;
-            RGN::Modules::Store::TimeInfo cpp_time;
+            RGN::Model::TimeInfo cpp_time;
             cpp_offerId = string(TCHAR_TO_UTF8(*offerId));
             FBP_TimeInfo::ConvertToCoreModel(time, cpp_time);
             RGN::Modules::Store::StoreModule::SetTimeAsync(

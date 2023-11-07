@@ -4,6 +4,10 @@
 #include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardData.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardReward.h"
 #include "BP_LeaderboardReward.h"
+#include "../../../../../Generated/RGN/Model/TimeInfo.h"
+#include "../../Model/BP_TimeInfo.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/JoinRequirement.h"
+#include "BP_JoinRequirement.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -21,6 +25,11 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString id;
+    /**
+     * List of application ids where this leaderboard is used
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    TArray<FString> appIds;
     /**
      * Leaderboard request name. This value can be used to query leaderboards
      */
@@ -115,9 +124,26 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString updatedBy;
+    /**
+     * The time when the leaderboard is available
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    FBP_TimeInfo time;
+    /**
+     * Specifies if the user need to have a gamepass or virtual item to join the leaderboard
+     * Join the leaderboard means to submit scores to the leaderboard
+     * In case the user does not have the required item, the score change is ignored
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    TArray<FBP_JoinRequirement> requiredToJoin;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {
         target.id = FString(source.id.c_str());
+        for (const auto& source_appIds_item : source.appIds) {
+            FString b_source_appIds_item;
+            b_source_appIds_item = FString(source_appIds_item.c_str());
+            target.appIds.Add(b_source_appIds_item);
+        }
         target.requestName = FString(source.requestName.c_str());
         target.name = FString(source.name.c_str());
         target.description = FString(source.description.c_str());
@@ -135,10 +161,21 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
         target.updatedAt = source.updatedAt;
         target.createdBy = FString(source.createdBy.c_str());
         target.updatedBy = FString(source.updatedBy.c_str());
+        FBP_TimeInfo::ConvertToUnrealModel(source.time, target.time);
+        for (const auto& source_requiredToJoin_item : source.requiredToJoin) {
+            FBP_JoinRequirement b_source_requiredToJoin_item;
+            FBP_JoinRequirement::ConvertToUnrealModel(source_requiredToJoin_item, b_source_requiredToJoin_item);
+            target.requiredToJoin.Add(b_source_requiredToJoin_item);
+        }
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardData& source, RGN::Modules::Leaderboard::LeaderboardData& target) {
         target.id = string(TCHAR_TO_UTF8(*source.id));
+        for (const auto& source_appIds_item : source.appIds) {
+            string cpp_source_appIds_item;
+            cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
+            target.appIds.push_back(cpp_source_appIds_item);
+        }
         target.requestName = string(TCHAR_TO_UTF8(*source.requestName));
         target.name = string(TCHAR_TO_UTF8(*source.name));
         target.description = string(TCHAR_TO_UTF8(*source.description));
@@ -156,5 +193,11 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
         target.updatedAt = source.updatedAt;
         target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
         target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
+        FBP_TimeInfo::ConvertToCoreModel(source.time, target.time);
+        for (const auto& source_requiredToJoin_item : source.requiredToJoin) {
+            RGN::Modules::Leaderboard::JoinRequirement cpp_source_requiredToJoin_item;
+            FBP_JoinRequirement::ConvertToCoreModel(source_requiredToJoin_item, cpp_source_requiredToJoin_item);
+            target.requiredToJoin.push_back(cpp_source_requiredToJoin_item);
+        }
 	}
 };

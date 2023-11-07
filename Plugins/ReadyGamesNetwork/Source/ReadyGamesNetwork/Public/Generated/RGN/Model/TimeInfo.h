@@ -1,15 +1,15 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
-#include "../../../../json.hpp"
+#include "../../../json.hpp"
 #include <string>
 #include <vector>
 #include <unordered_map>
 using namespace std;
 
-namespace RGN { namespace Modules { namespace Store {
+namespace RGN { namespace Model {
     /**
-     * Represents the time information related to an offer in the store.
-     * This information can be used for time-limited offers.
+     * Represents the time information.
+     * This information can be used for time-limited entities.
      */
     struct TimeInfo {
         /**
@@ -17,7 +17,7 @@ namespace RGN { namespace Modules { namespace Store {
          */
         bool hasStart = false;
         /**
-         * The start time. This field is relevant only if F:RGN.Modules.Store.TimeInfo.hasStart is true.
+         * The start time. This field is relevant only if F:RGN.Model.TimeInfo.hasStart is true.
          */
         int64_t start = 0;
         /**
@@ -25,7 +25,7 @@ namespace RGN { namespace Modules { namespace Store {
          */
         bool hasEnd = false;
         /**
-         * The end time. This field is relevant only if F:RGN.Modules.Store.TimeInfo.hasEnd is true.
+         * The end time. This field is relevant only if F:RGN.Model.TimeInfo.hasEnd is true.
          */
         int64_t end = 0;
         /**
@@ -33,11 +33,11 @@ namespace RGN { namespace Modules { namespace Store {
          */
         bool hasInterval = false;
         /**
-         * The interval duration. This field is relevant only if F:RGN.Modules.Store.TimeInfo.hasInterval is true.
+         * The interval duration. This field is relevant only if F:RGN.Model.TimeInfo.hasInterval is true.
          */
         int64_t intervalDuration = 0;
         /**
-         * The interval delay. This field is relevant only if F:RGN.Modules.Store.TimeInfo.hasInterval is true.
+         * The interval delay. This field is relevant only if F:RGN.Model.TimeInfo.hasInterval is true.
          */
         int64_t intervalDelay = 0;
 
@@ -96,4 +96,4 @@ namespace RGN { namespace Modules { namespace Store {
             }
         }
     };
-}}}
+}}

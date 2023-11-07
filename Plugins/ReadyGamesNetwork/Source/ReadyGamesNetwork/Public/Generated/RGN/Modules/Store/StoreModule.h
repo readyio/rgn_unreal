@@ -19,7 +19,7 @@
 #include "GetStoreOfferTagsResponse.h"
 #include "../VirtualItems/PriceInfo.h"
 #include "SetPricesRequestData.h"
-#include "TimeInfo.h"
+#include "../../Model/TimeInfo.h"
 #include "SetTimeRequestData.h"
 #include <vector>
 #include <unordered_map>
@@ -496,7 +496,7 @@ namespace RGN { namespace Modules { namespace Store {
             const function<void(void)>& success,
             const function<void(const int httpCode, const string& error)>& fail,
             const string& offerId,
-            const RGN::Modules::Store::TimeInfo& time) {
+            const RGN::Model::TimeInfo& time) {
                 RGN::Modules::Store::SetTimeRequestData requestData;
                 requestData.offerId = offerId;
                 requestData.time = time;

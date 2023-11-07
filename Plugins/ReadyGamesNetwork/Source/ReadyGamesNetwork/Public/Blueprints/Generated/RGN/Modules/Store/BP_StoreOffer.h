@@ -2,8 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "../../../../../Generated/RGN/Modules/Store/StoreOffer.h"
-#include "../../../../../Generated/RGN/Modules/Store/TimeInfo.h"
-#include "BP_TimeInfo.h"
+#include "../../../../../Generated/RGN/Model/TimeInfo.h"
+#include "../../Model/BP_TimeInfo.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/Properties.h"
 #include "../VirtualItems/BP_Properties.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/PriceInfo.h"

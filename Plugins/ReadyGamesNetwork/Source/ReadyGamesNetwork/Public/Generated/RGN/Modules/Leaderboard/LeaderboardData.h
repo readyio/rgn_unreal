@@ -2,6 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "LeaderboardReward.h"
+#include "../../Model/TimeInfo.h"
+#include "JoinRequirement.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -16,6 +18,10 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * Unique id of the leaderboard
          */
         string id;
+        /**
+         * List of application ids where this leaderboard is used
+         */
+        vector<string> appIds;
         /**
          * Leaderboard request name. This value can be used to query leaderboards
          */
@@ -97,9 +103,20 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * This field is automatically populated by the backend
          */
         string updatedBy;
+        /**
+         * The time when the leaderboard is available
+         */
+        RGN::Model::TimeInfo time;
+        /**
+         * Specifies if the user need to have a gamepass or virtual item to join the leaderboard
+         * Join the leaderboard means to submit scores to the leaderboard
+         * In case the user does not have the required item, the score change is ignored
+         */
+        vector<RGN::Modules::Leaderboard::JoinRequirement> requiredToJoin;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const LeaderboardData& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
+            nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
             nlohmann_json_j["requestName"] = nlohmann_json_t.requestName;
             nlohmann_json_j["name"] = nlohmann_json_t.name;
             nlohmann_json_j["description"] = nlohmann_json_t.description;
@@ -113,6 +130,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
             nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
             nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
+            nlohmann_json_j["time"] = nlohmann_json_t.time;
+            nlohmann_json_j["requiredToJoin"] = nlohmann_json_t.requiredToJoin;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardData& nlohmann_json_t) {
@@ -120,6 +139,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 auto json_id = nlohmann_json_j.at("id");
                 if (!json_id.is_null() && json_id.is_string()) {
                     json_id.get_to(nlohmann_json_t.id);
+                }
+            }
+            if (nlohmann_json_j.contains("appIds")) {
+                auto json_appIds = nlohmann_json_j.at("appIds");
+                if (!json_appIds.is_null() && json_appIds.is_array()) {
+                    json_appIds.get_to(nlohmann_json_t.appIds);
                 }
             }
             if (nlohmann_json_j.contains("requestName")) {
@@ -198,6 +223,18 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 auto json_updatedBy = nlohmann_json_j.at("updatedBy");
                 if (!json_updatedBy.is_null() && json_updatedBy.is_string()) {
                     json_updatedBy.get_to(nlohmann_json_t.updatedBy);
+                }
+            }
+            if (nlohmann_json_j.contains("time")) {
+                auto json_time = nlohmann_json_j.at("time");
+                if (!json_time.is_null()) {
+                    json_time.get_to(nlohmann_json_t.time);
+                }
+            }
+            if (nlohmann_json_j.contains("requiredToJoin")) {
+                auto json_requiredToJoin = nlohmann_json_j.at("requiredToJoin");
+                if (!json_requiredToJoin.is_null() && json_requiredToJoin.is_array()) {
+                    json_requiredToJoin.get_to(nlohmann_json_t.requiredToJoin);
                 }
             }
         }
