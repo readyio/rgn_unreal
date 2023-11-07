@@ -240,7 +240,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::ImportStoreOffersFromCSVResponse& result) {
                         success(result.offers);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         static void GetByTagsAsync(
             const function<void(const vector<RGN::Modules::Store::StoreOffer>& result)>& success,

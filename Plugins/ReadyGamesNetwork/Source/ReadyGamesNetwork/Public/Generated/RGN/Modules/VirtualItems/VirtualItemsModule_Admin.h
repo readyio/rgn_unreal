@@ -69,7 +69,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const nlohmann::json& result) {
                         success(result["newVirtualItemIds"].template get<vector<string>>());
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
     };
 }}}

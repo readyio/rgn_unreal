@@ -41,7 +41,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::GetMatchesResponseData& result) {
                         success(result.matches);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         /**
          * Asynchronously gets a list of open matches that the user can vote. Some matches can have voting enabled.
@@ -69,7 +70,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::GetMatchesResponseData& result) {
                         success(result.matches);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         /**
          * Asynchronously gets a list of finished matches
@@ -96,7 +98,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::GetMatchesResponseData& result) {
                         success(result.matches);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         /**
          * Asynchronously finished match by provided id. In case the match does not exist, or is from
@@ -120,7 +123,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::GetMatchResponseData& result) {
                         success(result.match);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         static void CreateMatchAsync(
             const function<void(const RGN::Modules::Matchmaking::MatchmakingData& result)>& success,
@@ -140,7 +144,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::GetMatchResponseData& result) {
                         success(result.match);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         static void ParticipateInMatchAsync(
             const function<void(const string& result)>& success,
@@ -158,7 +163,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::StartMatchResponseData& result) {
                         success(result.matchId);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         /**
          * Asynchronously starts a matchmaking match identified by the provided match ID.
@@ -183,7 +189,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::StartMatchResponseData& result) {
                         success(result.matchId);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         /**
          * Asynchronously votes for a matchmaking match identified by the provided match ID and participant ID.
@@ -211,7 +218,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::StartMatchResponseData& result) {
                         success(result.matchId);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         /**
          * Asynchronously submits the score for a matchmaking match identified by the provided match ID.
@@ -239,7 +247,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::StartMatchResponseData& result) {
                         success(result.matchId);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
         /**
          * Asynchronously finishes a matchmaking match identified by the provided match ID.
@@ -264,7 +273,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     [success] (const RGN::Modules::Matchmaking::StartMatchResponseData& result) {
                         success(result.matchId);
                     },
-                    fail);
+                    fail,
+                    cancellationToken);
             };
     };
 }}}

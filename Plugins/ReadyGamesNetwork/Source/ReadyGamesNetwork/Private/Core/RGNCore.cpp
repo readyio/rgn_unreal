@@ -215,6 +215,9 @@ void RGNCore::InternalCallAPI(const string& name, const string& body,
     string url = GetApiUrl() + name;
     Http::Request(url, HttpMethod::POST, headers, body, [name, body, complete, fail, cancellationToken](HttpResponse httpResponse) {
         if (cancellationToken.isCancellationRequested()) {
+            if (fail) {
+                fail(400, "The request was cancelled");
+            }
             return;
         }
 
@@ -222,12 +225,17 @@ void RGNCore::InternalCallAPI(const string& name, const string& body,
         string httpResponseBody = httpResponse.getResponseBody();
 
         if (httpResponseCode == 200) {
-            complete(httpResponseBody);
+            if (complete) {
+                complete(httpResponseBody);
+            }
         }
         else if (httpResponseCode == 401) {
             if (_refreshToken != "") {
                 RefreshTokens([name, body, complete, fail, cancellationToken, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
                     if (cancellationToken.isCancellationRequested()) {
+                        if (fail) {
+                            fail(400, "The request was cancelled");
+                        }
                         return;
                     }
 
@@ -267,7 +275,9 @@ void RGNCore::NonAuthInternalCallAPI(const string& name, const string& body,
         string httpResponseBody = httpResponse.getResponseBody();
 
         if (httpResponseCode == 200) {
-            complete(httpResponseBody);
+            if (complete) {
+                complete(httpResponseBody);
+            }
         }
         else {
             if (fail) {
