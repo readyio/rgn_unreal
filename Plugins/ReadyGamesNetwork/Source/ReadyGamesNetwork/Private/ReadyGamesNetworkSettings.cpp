@@ -6,7 +6,7 @@ UReadyGamesNetworkSettings::UReadyGamesNetworkSettings(const FObjectInitializer&
 	, ApiKey(TEXT(""))
 	, EnvironmentTarget(EBP_RGNEnvironmentTarget::Staging)
 	, bUseFunctionsEmulator(false)
-	, EmulatorHost(TEXT(""))
-	, EmulatorPort(TEXT(""))
+	, EmulatorHost(TEXT("127.0.0.1"))
+	, EmulatorPort(TEXT("5001"))
 {
 }
