@@ -1,0 +1,21 @@
+#include "Misc/AutomationTest.h"
+#include "../Public/Blueprints/Core/BP_RGNCore.h"
+#include "../Public/Blueprints/Generated/RGN/Modules/GameProgress/BP_GameProgressModule.h"
+#include "FRGNAutomationTestBase.h"
+#include "UTestHelper.h"
+
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FAddUserProgressAsyncTest, FRGNAutomationTestBase, "ReadyGamesNetwork.Tests.GameProgress.AddUserProgressAsync", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FAddUserProgressAsyncTest::RunTest(const FString& Parameters)
+{
+    FRGNAutomationTestBase::RunTest(Parameters);
+
+    FGameProgressModuleAddUserProgressAsyncResponse onSuccess;
+    onSuccess.BindUFunction(TestHelper, FName("HandleSuccess"));
+    FGameProgressModuleFailResponse onFail;
+    onFail.BindUFunction(TestHelper, FName("HandleFailure"));
+
+    FString userProgressJson = TEXT("{\"progress\": 50}");
+    UBP_GameProgressModule::AddUserProgressAsync(onSuccess, onFail, userProgressJson);
+
+    return true;
+}
