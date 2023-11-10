@@ -7,8 +7,18 @@
 using namespace std;
 
 namespace RGN { namespace Model { namespace Response {
+    /**
+     * Represents the base class for response data received from a server.
+     * It contains common properties that are expected in all responses.
+     */
     struct BaseResponseData {
+        /**
+         * The status code of the response, typically indicating success or failure of the request.
+         */
         int32_t status = 0;
+        /**
+         * A message providing additional information about the response, such as an error message or a status update.
+         */
         string message;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const BaseResponseData& nlohmann_json_t) {

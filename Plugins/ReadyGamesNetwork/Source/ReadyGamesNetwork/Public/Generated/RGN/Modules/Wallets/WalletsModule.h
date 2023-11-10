@@ -1,6 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
+#include "../../../../Core/RGNCore.h"
 #include "IsUserHavePrimaryWalletResponseData.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "GetUserWalletsResponseData.h"

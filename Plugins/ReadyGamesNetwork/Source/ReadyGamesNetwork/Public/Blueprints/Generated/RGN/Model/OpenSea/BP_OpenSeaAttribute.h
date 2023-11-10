@@ -7,22 +7,26 @@
 #include <unordered_map>
 #include "BP_OpenSeaAttribute.generated.h"
 
+/**
+ * Represents an attribute for an item on OpenSea, typically a trait associated with a collectible or NFT.
+ */
 USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_OpenSeaAttribute {
     GENERATED_BODY()
 
     /**
-     * Name of the trait
+     * The name of the trait that this attribute represents.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString trait_type;
     /**
-     * Value of the trait
+     * The value of the trait. This can be a string, number, or any other type of object.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString value;
     /**
-     * Indicating how you would like it to be displayed
+     * A string specifying how the trait should be displayed. 
+     * Could be used to indicate whether the trait is a date, a percentage, etc.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | OpenSea")
     FString display_type;

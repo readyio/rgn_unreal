@@ -7,12 +7,22 @@
 #include <unordered_map>
 #include "BP_BaseResponseData.generated.h"
 
+/**
+ * Represents the base class for response data received from a server.
+ * It contains common properties that are expected in all responses.
+ */
 USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_BaseResponseData {
     GENERATED_BODY()
 
+    /**
+     * The status code of the response, typically indicating success or failure of the request.
+     */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Response")
     int32 status;
+    /**
+     * A message providing additional information about the response, such as an error message or a status update.
+     */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Response")
     FString message;
 

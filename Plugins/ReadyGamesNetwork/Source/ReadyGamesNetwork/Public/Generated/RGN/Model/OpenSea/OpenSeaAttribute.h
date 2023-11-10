@@ -7,17 +7,21 @@
 using namespace std;
 
 namespace RGN { namespace Model { namespace OpenSea {
+    /**
+     * Represents an attribute for an item on OpenSea, typically a trait associated with a collectible or NFT.
+     */
     struct OpenSeaAttribute {
         /**
-         * Name of the trait
+         * The name of the trait that this attribute represents.
          */
         string trait_type;
         /**
-         * Value of the trait
+         * The value of the trait. This can be a string, number, or any other type of object.
          */
         string value = nullptr;
         /**
-         * Indicating how you would like it to be displayed
+         * A string specifying how the trait should be displayed. 
+         * Could be used to indicate whether the trait is a date, a percentage, etc.
          */
         string display_type;
 

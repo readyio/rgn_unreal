@@ -7,10 +7,26 @@
 using namespace std;
 
 namespace RGN { namespace Model {
+    /**
+     * Represents a mapping of image URLs to their respective size identifiers.
+     * Inherits from a dictionary with string keys and string values.
+     */
     struct ImageUrl {
+        /**
+         * Gets the source size image URL if available; otherwise, gets a placeholder URL.
+         */
         string source;
+        /**
+         * Gets the large size image URL if available; otherwise, gets a placeholder URL.
+         */
         string large;
+        /**
+         * Gets the medium size image URL if available; otherwise, gets a placeholder URL.
+         */
         string medium;
+        /**
+         * Gets the small size image URL if available; otherwise, gets a placeholder URL.
+         */
         string small;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const ImageUrl& nlohmann_json_t) {

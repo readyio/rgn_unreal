@@ -85,21 +85,15 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     success,
                     fail);
             };
-        /**
-         * Gets a list of the currencies owned by the current user.
-         * @return A Task containing a List of Currency objects representing the user's currencies.
-         */
         static void GetUserCurrenciesAsync(
             const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& success,
-            const function<void(const int httpCode, const string& error)>& fail,
-            const CancellationToken& cancellationToken = CancellationToken()) {
+            const function<void(const int httpCode, const string& error)>& fail) {
                 RGN::Model::Request::BaseRequestData requestData;
                 RGNCore::CallAPI<RGN::Model::Request::BaseRequestData, vector<RGN::Modules::Currency::Currency>>(
                     "user-getUserCurrenciesV2",
                     requestData,
                     success,
-                    fail,
-                    cancellationToken);
+                    fail);
             };
         /**
          * Gets the user ID associated with a short UID.

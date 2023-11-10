@@ -7,6 +7,9 @@
 #include <unordered_map>
 #include "BP_ImageSize.generated.h"
 
+/**
+ * Defines the available image sizes that can be requested or manipulated within the system.
+ */
 UENUM(BlueprintType)
 enum class EBP_ImageSize
 {

@@ -8,7 +8,14 @@
 using namespace std;
 
 namespace RGN { namespace Model { namespace Request {
+    /**
+     * Base class for request data that is sent to a server.
+     * It includes common data that is required for all requests.
+     */
     struct BaseRequestData {
+        /**
+         * The package name of the app making the request. This is typically used for identification purposes.
+         */
         string appPackageName = RGNCore::GetAppId();
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const BaseRequestData& nlohmann_json_t) {

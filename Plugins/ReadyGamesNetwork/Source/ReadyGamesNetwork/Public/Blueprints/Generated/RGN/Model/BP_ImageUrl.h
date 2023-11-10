@@ -7,16 +7,32 @@
 #include <unordered_map>
 #include "BP_ImageUrl.generated.h"
 
+/**
+ * Represents a mapping of image URLs to their respective size identifiers.
+ * Inherits from a dictionary with string keys and string values.
+ */
 USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_ImageUrl {
     GENERATED_BODY()
 
+    /**
+     * Gets the source size image URL if available; otherwise, gets a placeholder URL.
+     */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString source;
+    /**
+     * Gets the large size image URL if available; otherwise, gets a placeholder URL.
+     */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString large;
+    /**
+     * Gets the medium size image URL if available; otherwise, gets a placeholder URL.
+     */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString medium;
+    /**
+     * Gets the small size image URL if available; otherwise, gets a placeholder URL.
+     */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | ImageUrl")
     FString small;
 

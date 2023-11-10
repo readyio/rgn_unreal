@@ -7,6 +7,9 @@
 using namespace std;
 
 namespace RGN { namespace Model {
+    /**
+     * Defines the available image sizes that can be requested or manipulated within the system.
+     */
     enum ImageSize
     {
         Source = 0,

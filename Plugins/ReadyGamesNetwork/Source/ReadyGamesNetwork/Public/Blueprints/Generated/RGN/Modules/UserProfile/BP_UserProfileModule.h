@@ -160,17 +160,10 @@ public:
                 },
                 cpp_nicknameQuery);
     }
-    /**
-     * Gets a list of the currencies owned by the current user.
-     * @return A Task containing a List of Currency objects representing the user's currencies.
-     */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile", meta=(AutoCreateRefTerm="cancellationToken"))
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
     static void GetUserCurrenciesAsync(
         FUserProfileModuleGetUserCurrenciesAsyncResponse onSuccess,
-        FUserProfileModuleFailResponse onFail,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
-            CancellationToken cpp_cancellationToken;
-            FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
+        FUserProfileModuleFailResponse onFail) {
             RGN::Modules::UserProfile::UserProfileModule::GetUserCurrenciesAsync(
                 [onSuccess](vector<RGN::Modules::Currency::Currency> response) {
                     TArray<FBP_Currency> bpResponse;
@@ -183,8 +176,7 @@ public:
                 },
                 [onFail](int code, std::string message) {
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
-                },
-                cpp_cancellationToken);
+                });
     }
     /**
      * Gets the user ID associated with a short UID.
