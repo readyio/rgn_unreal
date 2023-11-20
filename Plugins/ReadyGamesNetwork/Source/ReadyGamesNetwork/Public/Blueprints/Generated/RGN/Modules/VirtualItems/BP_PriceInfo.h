@@ -47,6 +47,14 @@ struct READYGAMESNETWORK_API FBP_PriceInfo {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FString group;
+    /**
+     * Date and time when the price will be updated
+     * in milliseconds since midnight, January 1, 1970 UTC.
+     * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
+     * This field is automatically populated by the backend when you schedule price changes
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
+    int64 nextPriceChangeAt;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::PriceInfo& source, FBP_PriceInfo& target) {
         for (const auto& source_appIds_item : source.appIds) {
@@ -59,6 +67,7 @@ struct READYGAMESNETWORK_API FBP_PriceInfo {
         target.quantity = source.quantity;
         target.quantityWithoutDiscount = source.quantityWithoutDiscount;
         target.group = FString(source.group.c_str());
+        target.nextPriceChangeAt = source.nextPriceChangeAt;
 	}
 
 	static void ConvertToCoreModel(const FBP_PriceInfo& source, RGN::Modules::VirtualItems::PriceInfo& target) {
@@ -72,5 +81,6 @@ struct READYGAMESNETWORK_API FBP_PriceInfo {
         target.quantity = source.quantity;
         target.quantityWithoutDiscount = source.quantityWithoutDiscount;
         target.group = string(TCHAR_TO_UTF8(*source.group));
+        target.nextPriceChangeAt = source.nextPriceChangeAt;
 	}
 };

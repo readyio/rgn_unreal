@@ -38,6 +38,13 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * This field works like a tag. Two prices with the same group name are combined together
          */
         string group;
+        /**
+         * Date and time when the price will be updated
+         * in milliseconds since midnight, January 1, 1970 UTC.
+         * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
+         * This field is automatically populated by the backend when you schedule price changes
+         */
+        int64_t nextPriceChangeAt = 0;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const PriceInfo& nlohmann_json_t) {
             nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
@@ -46,6 +53,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             nlohmann_json_j["quantity"] = nlohmann_json_t.quantity;
             nlohmann_json_j["quantityWithoutDiscount"] = nlohmann_json_t.quantityWithoutDiscount;
             nlohmann_json_j["group"] = nlohmann_json_t.group;
+            nlohmann_json_j["nextPriceChangeAt"] = nlohmann_json_t.nextPriceChangeAt;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, PriceInfo& nlohmann_json_t) {
@@ -83,6 +91,12 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 auto json_group = nlohmann_json_j.at("group");
                 if (!json_group.is_null() && json_group.is_string()) {
                     json_group.get_to(nlohmann_json_t.group);
+                }
+            }
+            if (nlohmann_json_j.contains("nextPriceChangeAt")) {
+                auto json_nextPriceChangeAt = nlohmann_json_j.at("nextPriceChangeAt");
+                if (!json_nextPriceChangeAt.is_null() && json_nextPriceChangeAt.is_number()) {
+                    json_nextPriceChangeAt.get_to(nlohmann_json_t.nextPriceChangeAt);
                 }
             }
         }

@@ -2,6 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "../../../../../Generated/RGN/Modules/GamePass/GamePassData.h"
+#include "../../../../../Generated/RGN/Model/Request/BaseRequestData.h"
+#include "../../Model/Request/BP_BaseRequestData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -11,7 +13,7 @@
  * Represents a Game Pass in the Ready Games Network (RGN) with its associated properties.
  */
 USTRUCT(BlueprintType)
-struct READYGAMESNETWORK_API FBP_GamePassData {
+struct READYGAMESNETWORK_API FBP_GamePassData : public FBP_BaseRequestData {
     GENERATED_BODY()
 
     /**
@@ -80,6 +82,7 @@ struct READYGAMESNETWORK_API FBP_GamePassData {
         target.updatedAt = source.updatedAt;
         target.createdBy = FString(source.createdBy.c_str());
         target.updatedBy = FString(source.updatedBy.c_str());
+		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 
 	static void ConvertToCoreModel(const FBP_GamePassData& source, RGN::Modules::GamePass::GamePassData& target) {
@@ -96,5 +99,6 @@ struct READYGAMESNETWORK_API FBP_GamePassData {
         target.updatedAt = source.updatedAt;
         target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
         target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
+		FBP_BaseRequestData::ConvertToCoreModel(source, target);
 	}
 };

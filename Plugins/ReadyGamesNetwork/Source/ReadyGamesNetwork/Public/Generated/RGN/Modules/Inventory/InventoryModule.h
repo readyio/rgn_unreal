@@ -365,7 +365,8 @@ const string& json) {
             const vector<string>& tags,
             const string& appId = "") {
                 nlohmann::json requestData;
-                requestData["appId"] = appId;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["optionalAppId"] = appId;
                 requestData["tags"] = tags;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;
                 RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
@@ -406,7 +407,8 @@ const string& json) {
             const vector<string>& tags,
             const string& appId = "") {
                 nlohmann::json requestData;
-                requestData["appId"] = appId;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["optionalAppId"] = appId;
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["tags"] = tags;
                 requestData["version"] = RGN::Model::Request::BaseMigrationRequestData().version;

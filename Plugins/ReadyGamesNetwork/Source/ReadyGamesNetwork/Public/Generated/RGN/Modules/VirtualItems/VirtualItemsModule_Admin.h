@@ -43,7 +43,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             const function<void(const int httpCode, const string& error)>& fail,
             const string& appId) {
                 nlohmann::json requestData;
-                requestData["appId"] = appId;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["requestedAppId"] = appId;
                 RGNCore::CallAPI<nlohmann::json>(
                     "virtualItemsV2-deleteVirtualItemByAppId",
                     requestData,

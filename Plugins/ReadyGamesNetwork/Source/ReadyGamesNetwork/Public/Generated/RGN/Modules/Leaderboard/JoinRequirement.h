@@ -13,13 +13,14 @@ namespace RGN { namespace Modules { namespace Leaderboard {
     struct JoinRequirement {
         /**
          * Specifies the type of the join requirement
-         * Right now two types are implemented: "gamepass" and "inventory"
+         * Right now 3 types are implemented: "gamepass", "item_by_id" and "item_by_tag"
          */
         string type;
         /**
          * The id of the entity to check if it exists in user data
          * In case the type is "gamepass" the id is the gamepass id to check if the user has it.
-         * In case the type is "invenotory", then it is the id of the virtual item the user needs to buy
+         * In case the type is "item_by_id", then it is the id of the virtual item the user needs to buy
+         * In case the type is "item_by_tag", then it is the tag of the virtual item the user needs to buy
          */
         string id;
 

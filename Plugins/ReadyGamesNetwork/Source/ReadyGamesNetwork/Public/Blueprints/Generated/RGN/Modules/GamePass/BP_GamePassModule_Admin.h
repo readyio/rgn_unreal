@@ -7,6 +7,8 @@
 #include "BP_GamePassData.h"
 #include "../../../../../Generated/RGN/Modules/GamePass/GamePassUserData.h"
 #include "BP_GamePassUserData.h"
+#include "../../../../../Generated/RGN/Modules/GamePass/GetGamePassUserDataResponseData.h"
+#include "BP_GetGamePassUserDataResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -20,7 +22,7 @@ DECLARE_DYNAMIC_DELEGATE_TwoParams(FGamePassModule_AdminFailResponse, int32, cod
 DECLARE_DYNAMIC_DELEGATE_OneParam(FGamePassModuleAdminAddAsyncResponse, const FBP_GamePassData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FGamePassModuleAdminDeleteAsyncResponse, const FBP_GamePassData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FGamePassModuleAdminAddToUserAsyncResponse, const FBP_GamePassUserData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FGamePassModuleAdminDeleteFromUserAsyncResponse, const TArray<FBP_GamePassData>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FGamePassModuleAdminDeleteFromUserAsyncResponse, const TArray<FBP_GamePassUserData>&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_GamePassModule_Admin : public UBlueprintFunctionLibrary {
@@ -106,11 +108,11 @@ public:
             cpp_requestName = string(TCHAR_TO_UTF8(*requestName));
             cpp_userId = string(TCHAR_TO_UTF8(*userId));
             RGN::Modules::GamePass::GamePassModule_Admin::DeleteFromUserAsync(
-                [onSuccess](vector<RGN::Modules::GamePass::GamePassData> response) {
-                    TArray<FBP_GamePassData> bpResponse;
+                [onSuccess](vector<RGN::Modules::GamePass::GamePassUserData> response) {
+                    TArray<FBP_GamePassUserData> bpResponse;
                     for (const auto& response_item : response) {
-                        FBP_GamePassData b_response_item;
-                        FBP_GamePassData::ConvertToUnrealModel(response_item, b_response_item);
+                        FBP_GamePassUserData b_response_item;
+                        FBP_GamePassUserData::ConvertToUnrealModel(response_item, b_response_item);
                         bpResponse.Add(b_response_item);
                     }
                     onSuccess.ExecuteIfBound(bpResponse);

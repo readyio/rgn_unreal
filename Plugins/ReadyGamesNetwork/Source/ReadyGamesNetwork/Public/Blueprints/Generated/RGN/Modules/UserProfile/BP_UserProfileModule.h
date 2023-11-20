@@ -57,6 +57,7 @@ DECLARE_DYNAMIC_DELEGATE(FUserProfileModuleSetInvisibleStatusAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FUserProfileModulePingAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FUserProfileModuleSuspendAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FUserProfileModuleGetUserStateAsyncResponse, const FBP_GetUserStatusResponseData&, response);
+DECLARE_DYNAMIC_DELEGATE(FUserProfileModuleDeleteUserResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_UserProfileModule : public UBlueprintFunctionLibrary {
@@ -522,5 +523,17 @@ public:
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
                 },
                 cpp_userId);
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | UserProfile")
+    static void DeleteUser(
+        FUserProfileModuleDeleteUserResponse onSuccess,
+        FUserProfileModuleFailResponse onFail) {
+            RGN::Modules::UserProfile::UserProfileModule::DeleteUser(
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                });
     }
 };

@@ -4,6 +4,7 @@
 #include "../../../../Core/RGNCore.h"
 #include "GamePassData.h"
 #include "GamePassUserData.h"
+#include "GetGamePassUserDataResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -55,7 +56,7 @@ namespace RGN { namespace Modules { namespace GamePass {
                     fail);
             };
         static void DeleteFromUserAsync(
-            const function<void(const vector<RGN::Modules::GamePass::GamePassData>& result)>& success,
+            const function<void(const vector<RGN::Modules::GamePass::GamePassUserData>& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail,
             const string& id = "",
             const string& requestName = "",
@@ -64,10 +65,12 @@ namespace RGN { namespace Modules { namespace GamePass {
                 requestData["id"] = id;
                 requestData["requestName"] = requestName;
                 requestData["userId"] = userId;
-                RGNCore::CallAPI<nlohmann::json, vector<RGN::Modules::GamePass::GamePassData>>(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::GamePass::GetGamePassUserDataResponseData>(
                     "gamePass-deleteFromUser",
                     requestData,
-                    success,
+                    [success] (const RGN::Modules::GamePass::GetGamePassUserDataResponseData& result) {
+                        success(result.gamePasses);
+                    },
                     fail);
             };
     };

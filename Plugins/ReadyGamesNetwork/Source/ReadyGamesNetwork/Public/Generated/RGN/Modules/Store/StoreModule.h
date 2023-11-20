@@ -88,7 +88,8 @@ namespace RGN { namespace Modules { namespace Store {
             const int32_t limit,
             const string& startAfter = "") {
                 nlohmann::json requestData;
-                requestData["appId"] = appId;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["requestedAppId"] = appId;
                 requestData["limit"] = limit;
                 requestData["startAfter"] = startAfter;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetLootBoxesResponse>(
@@ -276,7 +277,8 @@ namespace RGN { namespace Modules { namespace Store {
             const string& appId,
             const int64_t timestamp) {
                 nlohmann::json requestData;
-                requestData["appId"] = appId;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["requestedAppId"] = appId;
                 requestData["timestamp"] = timestamp;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::GetStoreOffersResponse>(
                     "storeV2-getByTimestamp",

@@ -1,6 +1,7 @@
 #pragma once
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
+#include "../../Model/Request/BaseRequestData.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -10,7 +11,7 @@ namespace RGN { namespace Modules { namespace GamePass {
     /**
      * Represents a Game Pass in the Ready Games Network (RGN) with its associated properties.
      */
-    struct GamePassData {
+    struct GamePassData : public RGN::Model::Request::BaseRequestData {
         /**
          * Unique identifier for the Game Pass.
          */
@@ -55,6 +56,7 @@ namespace RGN { namespace Modules { namespace GamePass {
         string updatedBy;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const GamePassData& nlohmann_json_t) {
+            nlohmann_json_j["appPackageName"] = nlohmann_json_t.appPackageName;
             nlohmann_json_j["id"] = nlohmann_json_t.id;
             nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
             nlohmann_json_j["requestName"] = nlohmann_json_t.requestName;
@@ -67,6 +69,12 @@ namespace RGN { namespace Modules { namespace GamePass {
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, GamePassData& nlohmann_json_t) {
+            if (nlohmann_json_j.contains("appPackageName")) {
+                auto json_appPackageName = nlohmann_json_j.at("appPackageName");
+                if (!json_appPackageName.is_null() && json_appPackageName.is_string()) {
+                    json_appPackageName.get_to(nlohmann_json_t.appPackageName);
+                }
+            }
             if (nlohmann_json_j.contains("id")) {
                 auto json_id = nlohmann_json_j.at("id");
                 if (!json_id.is_null() && json_id.is_string()) {

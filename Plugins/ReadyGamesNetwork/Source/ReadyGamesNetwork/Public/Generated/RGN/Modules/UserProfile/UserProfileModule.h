@@ -327,5 +327,15 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     success,
                     fail);
             };
+        static void DeleteUser(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail) {
+                RGN::Model::Request::BaseRequestData requestData;
+                RGNCore::CallAPI<RGN::Model::Request::BaseRequestData>(
+                    "user-deleteUser",
+                    requestData,
+                    success,
+                    fail);
+            };
     };
 }}}
