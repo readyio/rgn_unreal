@@ -18,16 +18,21 @@ public:
 
     bool virtual RunTest(const FString& Parameters)
     {
-        UBP_RGNCore::Initialize();
+        static bool rgnInitialized = false;
+        if (!rgnInitialized)
+        {
+            UBP_RGNCore::Initialize();
+            rgnInitialized = true;
+        }
         TestHelper = NewObject<UTestHelper>();
         bIsTestComplete = false;
         TestHelper->OnSuccess = [this](const FString& Response)
             {
-                if (!Response.IsEmpty()) {
-                    TestTrue("Received non-empty response", true);
+                if (Response.IsEmpty()) {
+                    TestFalse("Received empty response", false);
                 }
                 else {
-                    TestFalse("Received empty response", false);
+                    TestTrue("Received non-empty response", true);
                 }
                 bIsTestComplete = true; // Mark the test as complete
             };

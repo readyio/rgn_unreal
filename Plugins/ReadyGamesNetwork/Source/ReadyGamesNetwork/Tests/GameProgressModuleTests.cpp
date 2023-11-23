@@ -19,3 +19,18 @@ bool FAddUserProgressAsyncTest::RunTest(const FString& Parameters)
 
     return true;
 }
+
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FOnGameCompleteAsyncTest, FRGNAutomationTestBase, "ReadyGamesNetwork.Tests.GameProgress.OnGameCompleteAsync", EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FOnGameCompleteAsyncTest::RunTest(const FString& Parameters)
+{
+    FRGNAutomationTestBase::RunTest(Parameters);
+
+    FGameProgressModuleOnGameCompleteAsyncResponse onSuccess;
+    onSuccess.BindUFunction(TestHelper, FName("HandleSuccess"));
+    FGameProgressModuleFailResponse onFail;
+    onFail.BindUFunction(TestHelper, FName("HandleFailure"));
+
+    UBP_GameProgressModule::OnGameCompleteAsync(onSuccess, onFail, {});
+
+    return true;
+}
