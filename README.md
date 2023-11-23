@@ -53,7 +53,3 @@ This repository hosts the Unreal Plugin for Ready Games Network (RGN), enabling 
 ## Support and Issues
 - For any issues encountered, refer to the `Issues` section of this repository.
 - You can also contact RGN developers directly.
-
----
-
-Please replace the [Screenshot Placeholder] tags with actual screenshots from the Unreal editor and RGN functionality as they become available.
