@@ -25,7 +25,11 @@ This repository hosts the Unreal Plugin for Ready Games Network (RGN), enabling 
 - **General:**
   - Open `rgn_unreal.uproject` to start working with the project in Unreal Editor.
 
-## Screenshots (Placeholders)
+## Important paths
+- **Plugin Source Path:** `Plugins/ReadyGamesNetwork`
+- **RGN Settings file:** `Config/DefaultGame.ini`
+
+## Screenshots
 - **In-Editor App Running:**
   ![image](https://github.com/readyio/rgn_unreal/assets/109844845/a2056ef6-bca6-46b2-9f3d-cfbe3082ab29)
 
