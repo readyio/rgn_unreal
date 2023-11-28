@@ -7,6 +7,7 @@ public class ReadyGamesNetwork : ModuleRules
 {
 	public ReadyGamesNetwork(ReadOnlyTargetRules Target) : base(Target)
 	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		OptimizeCode = CodeOptimization.Never;
 
 		PublicIncludePaths.AddRange(
