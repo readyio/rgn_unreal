@@ -33,7 +33,8 @@ namespace RGN { namespace Modules { namespace Creator {
                     "creator-signup",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void SubmitItemAsync(
             const function<void(const RGN::Modules::Creator::CreatorSubmitItemResponseData& result)>& success,
@@ -45,7 +46,8 @@ namespace RGN { namespace Modules { namespace Creator {
                     "creator-addItem",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetCreatorDataAsync(
             const function<void(const RGN::Modules::Creator::CreatorData& result)>& success,
@@ -55,7 +57,8 @@ namespace RGN { namespace Modules { namespace Creator {
                     "creator-getCreatorData",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void ClaimCurrenciesAsync(
             const function<void(const RGN::Modules::Currency::ClaimCurrencyResponseData& result)>& success,
@@ -65,7 +68,8 @@ namespace RGN { namespace Modules { namespace Creator {
                     "creator-claimCurrency",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

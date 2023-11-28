@@ -21,7 +21,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-getProfile",
                     requestData,
                     success,
-                    fail
+                    fail,
+                    false
                 );
             };
         static void GetFullUserProfileAsync(
@@ -41,7 +42,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     [success](string result) {
                         success(result);
                     },
-                    fail
+                    fail,
+                    false
                 );
             };
         static void UploadAvatarImageAsync(
@@ -58,7 +60,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     [success]() {
                         success(true);
                     },
-                    fail
+                    fail,
+                    false
                 );
             };
         static void DownloadAvatarImageAsync(
@@ -123,7 +126,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                         userCustomClaims.claims = response.template get<std::unordered_map<std::string, std::string>>();
                         success(userCustomClaims);
                     },
-                    fail
+                    fail, false
                 );
             };
         static void ChangeAdminStatusByUserIdAsync(
@@ -143,7 +146,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                         userCustomClaims.claims = response.template get<std::unordered_map<std::string, std::string>>();
                         success(userCustomClaims);
                     },
-                    fail
+                    fail, false
                 );
             };
         static void GetUserCustomClaimsByUserIdAsync(
@@ -159,7 +162,7 @@ namespace RGN { namespace Modules { namespace UserProfile {
                         userCustomClaims.claims = response.template get<std::unordered_map<std::string, std::string>>();
                         success(userCustomClaims);
                     },
-                    fail
+                    fail, false
                 );
             };
         static void GetUserCustomClaimsByEmailAsync(
@@ -175,13 +178,13 @@ namespace RGN { namespace Modules { namespace UserProfile {
                         userCustomClaims.claims = response.template get<std::unordered_map<std::string, std::string>>();
                         success(userCustomClaims);
                     },
-                    fail
+                    fail, false
                 );
             };
         static void SuspendAsync(
             const function<void(void)>& success,
             const function<void(int httpCode, string error)>& fail) {
-                RGNCore::CallAPI("userStatuses-suspend", success, fail);
+                RGNCore::CallAPI("userStatuses-suspend", success, fail, false);
             };
 	};
 }}}

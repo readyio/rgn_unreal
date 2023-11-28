@@ -30,7 +30,8 @@ namespace RGN { namespace Modules { namespace GameProgress {
                     "game-onGameComplete",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetGameProgressAsync(
             const function<void(const RGN::Modules::GameProgress::GameProgress& result)>& success,
@@ -40,7 +41,8 @@ namespace RGN { namespace Modules { namespace GameProgress {
                     "game-getGameProgress",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddUserProgressAsync(
             const function<void(const string& result)>& success,
@@ -52,7 +54,8 @@ namespace RGN { namespace Modules { namespace GameProgress {
                     "game-addPlayerProgress",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void UpdateUserProgressAsync(
             const function<void(const string& result)>& success,
@@ -66,7 +69,8 @@ namespace RGN { namespace Modules { namespace GameProgress {
                     "game-updatePlayerProgress",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetUserProgressAsync(
             const function<void(const string& result)>& success,
@@ -76,7 +80,8 @@ namespace RGN { namespace Modules { namespace GameProgress {
                     "game-getPlayerProgress",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

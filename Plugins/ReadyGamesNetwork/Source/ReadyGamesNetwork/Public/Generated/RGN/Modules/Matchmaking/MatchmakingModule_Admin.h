@@ -22,7 +22,8 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                     "matchmaking-deleteAllMatchesForApp",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

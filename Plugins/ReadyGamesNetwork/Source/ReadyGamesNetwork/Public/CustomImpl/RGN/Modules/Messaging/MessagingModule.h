@@ -32,7 +32,7 @@ namespace RGN { namespace Modules { namespace Messaging {
                 requestData["payload"] = payload;
                 requestData["title"] = title;
                 requestData["text"] = text;
-                RGNCore::CallAPI<nlohmann::json>("messaging-sendMessageByUserId", requestData, success, fail);
+                RGNCore::CallAPI<nlohmann::json>("messaging-sendMessageByUserId", requestData, success, fail, false);
             };
 	};
 }}}

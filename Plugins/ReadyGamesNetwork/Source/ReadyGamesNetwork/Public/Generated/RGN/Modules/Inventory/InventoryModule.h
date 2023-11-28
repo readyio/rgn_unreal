@@ -90,7 +90,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-addToInventory",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its unique identifier.
@@ -116,7 +117,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-removeByVirtualItemId",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously removes a specified quantity of a virtual item from a user's inventory by its owned item identifier.
@@ -142,7 +144,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-removeByInventoryItemId",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Returns json string or throws an exception if there are no json for virtual item
@@ -162,7 +165,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["properties"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Set json on a given ownedItemId.
@@ -184,7 +188,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["properties"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Get user owned item upgrades, returns all upgrades for all owned items for virtual item ownedItemId
@@ -204,7 +209,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["upgrades"].template get<vector<RGN::Modules::Inventory::UpgradesResponseData>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void UpgradeAsync(
             const function<void(const vector<RGN::Modules::Inventory::VirtualItemUpgrade>& result)>& success,
@@ -226,7 +232,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["upgrades"].template get<vector<RGN::Modules::Inventory::VirtualItemUpgrade>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Get single owned virtual item inventory data by ownedItemId
@@ -246,7 +253,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["inventoryItem"].template get<RGN::Modules::Inventory::InventoryItemData>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetByIdsAsync(
             const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& success,
@@ -262,7 +270,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetByVirtualItemIdsAsync(
             const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& success,
@@ -277,7 +286,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetAllForCurrentAppAsync(
             const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& success,
@@ -291,7 +301,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetByAppIdsAsync(
             const function<void(const vector<RGN::Modules::Inventory::InventoryItemData>& result)>& success,
@@ -306,7 +317,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     [success] (const nlohmann::json& result) {
                         success(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Get multiple owned virtual items inventory data for current app with the Virtual Item data included
@@ -375,7 +387,8 @@ const string& json) {
                     [success] (const nlohmann::json& result) {
                         success(result["inventoryItems"].template get<vector<RGN::Modules::Inventory::InventoryItemData>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves the tags of an owned item in the inventory by its identifier for current logged in user
@@ -398,7 +411,8 @@ const string& json) {
                     [success] (const nlohmann::json& result) {
                         success(result["tags"].template get<vector<string>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void SetTagsAsync(
             const function<void(const vector<string>& result)>& success,
@@ -418,7 +432,8 @@ const string& json) {
                     [success] (const nlohmann::json& result) {
                         success(result["tags"].template get<vector<string>>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

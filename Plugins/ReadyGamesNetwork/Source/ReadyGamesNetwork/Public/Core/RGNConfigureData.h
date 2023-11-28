@@ -7,6 +7,7 @@ using namespace std;
 
 struct RGNConfigureData {
     string appId;
+    string apiKey;
     RGNEnvironmentTarget environmentTarget;
     bool useFunctionsEmulator;
     string emulatorHost;

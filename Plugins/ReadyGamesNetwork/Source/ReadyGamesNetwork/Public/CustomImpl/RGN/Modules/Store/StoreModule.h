@@ -31,7 +31,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success](RGN::Modules::Store::GetLootBoxesResponse result) {
                         success(result.lootBoxes);
                     },
-                    fail
+                    fail,
+                    false
                 );
             };
         static void OpenLootboxAsync(
@@ -57,7 +58,8 @@ namespace RGN { namespace Modules { namespace Store {
                         inventoryItemData.virtualItem = result.virtualItem;
                         success(inventoryItemData);
                     },
-                fail);
+                fail,
+                false);
             };
         static void GetForCurrentAppAsync(
             const function<void(vector<RGN::Modules::Store::StoreOffer> result)>& success,
@@ -77,7 +79,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success](RGN::Modules::Store::GetStoreOffersResponse result) {
                         success(result.offers);
                     },
-                    fail
+                    fail,
+                    false
                 );
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
@@ -127,7 +130,8 @@ namespace RGN { namespace Modules { namespace Store {
                         }
                         success(queriedOffers);
                     },
-                    fail
+                    fail,
+                    false
                 );
             };
         static void BuyVirtualItemsAsync(
@@ -165,7 +169,8 @@ namespace RGN { namespace Modules { namespace Store {
                         purchaseResult.updatedCurrencies = response.updatedCurrencies;
                         success(purchaseResult);
                     },
-                fail);
+                fail,
+                false);
             };
         static void BuyStoreOfferAsync(
             const std::function<void(RGN::Modules::Store::PurchaseResult result)>& success,
@@ -200,7 +205,8 @@ namespace RGN { namespace Modules { namespace Store {
                         purchaseResult.updatedCurrencies = response.updatedCurrencies;
                         success(purchaseResult);
                     },
-                fail);
+                fail,
+                false);
             };
 	};
 }}}

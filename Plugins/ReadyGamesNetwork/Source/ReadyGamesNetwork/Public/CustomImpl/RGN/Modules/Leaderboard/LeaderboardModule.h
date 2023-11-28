@@ -27,7 +27,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 [success](const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
                     success(result.leaderboards);
                 },
-                fail);
+                fail,
+                false);
             }
 	};
 }}}

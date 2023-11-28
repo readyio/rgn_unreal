@@ -36,7 +36,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     [success] (const RGN::Modules::Achievement::GetAchievementsResponse& result) {
                         success(result.achievements);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetByAppIdsAsync(
             const function<void(const vector<RGN::Modules::Achievement::AchievementData>& result)>& success,
@@ -55,7 +56,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     [success] (const RGN::Modules::Achievement::GetAchievementsResponse& result) {
                         success(result.achievements);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a list of achievements for the current application from the Ready Games Network (RGN).
@@ -134,7 +136,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-getByRequestName",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetByRequestNamesAsync(
             const function<void(const vector<RGN::Modules::Achievement::AchievementData>& result)>& success,
@@ -149,7 +152,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     [success] (const RGN::Modules::Achievement::GetAchievementsResponse& result) {
                         success(result.achievements);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Triggers the achievement by id to make achievement progress
@@ -169,7 +173,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-triggerById",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Triggers the achievement by request name to make achievement progress
@@ -189,7 +194,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-triggerByRequestName",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Claim the achievement to give rewards to the user
@@ -207,7 +213,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-claimById",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Claim the achievement to give rewards to the user
@@ -225,7 +232,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-claimByRequestName",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Gets current user competed achievements

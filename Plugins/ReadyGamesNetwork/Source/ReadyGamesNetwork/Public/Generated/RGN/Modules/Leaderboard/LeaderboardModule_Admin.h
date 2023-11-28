@@ -25,7 +25,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const nlohmann::json& result) {
                         success(result["result"]["leaderboardId"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void UpdateLeaderboardAsync(
             const function<void(const string& result)>& success,
@@ -40,7 +41,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const nlohmann::json& result) {
                         success(result["result"]["leaderboardId"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteLeaderboardAsync(
             const function<void(void)>& success,
@@ -53,7 +55,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     "leaderboardV2-delete",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

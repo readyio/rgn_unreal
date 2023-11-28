@@ -34,7 +34,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     "leaderboardV2-getById",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronous method that retrieves leaderboard data.
@@ -51,7 +52,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     "leaderboardV2-getByRequestName",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetLeaderboardByRequestNamesAsync(
             const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& success,
@@ -66,7 +68,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
                         success(result.leaderboards);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetLeaderboardByAppIdsAsync(
             const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& success,
@@ -87,7 +90,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
                         success(result.leaderboards);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a list of leaderboards for the current application from the Ready Games Network (RGN).
@@ -132,7 +136,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardIdsResponseData& result) {
                         success(result.ids);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Method to retrieve available status of leaderboard
@@ -151,7 +156,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData& result) {
                         success(result.isAvailable);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously sets the player's score on the specified leaderboard.
@@ -177,7 +183,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::SetScoreResponseData& result) {
                         success(result.place);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously adds the player's score on the specified leaderboard.
@@ -203,7 +210,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::SetScoreResponseData& result) {
                         success(result.place);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves the player's entry on the specified leaderboard.
@@ -221,7 +229,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     "leaderboardV2-getUserEntry",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a specified number of top entries and entries around the user from the specified leaderboard.
@@ -250,7 +259,8 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData& result) {
                         success(result.entries);
                     },
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

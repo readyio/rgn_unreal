@@ -24,7 +24,8 @@ namespace RGN { namespace Modules { namespace Wallets {
                     "wallets-isUserHavePrimaryWallet",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetUserWalletsAsync(
             const function<void(const RGN::Modules::Wallets::GetUserWalletsResponseData& result)>& success,
@@ -34,7 +35,8 @@ namespace RGN { namespace Modules { namespace Wallets {
                     "wallets-getUserWallets",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Creates user wallet. Right now it is possible to create just one wallet per user
@@ -51,7 +53,8 @@ namespace RGN { namespace Modules { namespace Wallets {
                     "wallets-createWallet",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

@@ -23,7 +23,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-deleteVirtualItemsByIds",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteVirtualItemsByNameAsync(
             const function<void(void)>& success,
@@ -36,7 +37,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-deleteVirtualItemsByName",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteVirtualItemByAppIdAsync(
             const function<void(void)>& success,
@@ -49,7 +51,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-deleteVirtualItemByAppId",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddFromCSVWithBlockchainStubAsync(
             const function<void(const vector<string>& result)>& success,
@@ -71,6 +74,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                         success(result["newVirtualItemIds"].template get<vector<string>>());
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
     };

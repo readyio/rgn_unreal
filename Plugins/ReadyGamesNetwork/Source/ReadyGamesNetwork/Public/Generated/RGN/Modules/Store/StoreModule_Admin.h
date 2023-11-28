@@ -29,7 +29,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const nlohmann::json& result) {
                         success(result["lootBoxId"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteLootBoxAsync(
             const function<void(const string& result)>& success,
@@ -44,7 +45,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const nlohmann::json& result) {
                         success(result["lootBoxId"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteStoreOfferAsync(
             const function<void(void)>& success,
@@ -57,7 +59,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-deleteStoreOffer",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

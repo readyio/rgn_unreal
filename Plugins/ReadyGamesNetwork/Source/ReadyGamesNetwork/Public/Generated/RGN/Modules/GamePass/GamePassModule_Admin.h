@@ -23,7 +23,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     "gamePass-add",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteAsync(
             const function<void(const RGN::Modules::GamePass::GamePassData& result)>& success,
@@ -37,7 +38,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     "gamePass-delete",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddToUserAsync(
             const function<void(const RGN::Modules::GamePass::GamePassUserData& result)>& success,
@@ -53,7 +55,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     "gamePass-addToUser",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteFromUserAsync(
             const function<void(const vector<RGN::Modules::GamePass::GamePassUserData>& result)>& success,
@@ -71,7 +74,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     [success] (const RGN::Modules::GamePass::GetGamePassUserDataResponseData& result) {
                         success(result.gamePasses);
                     },
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

@@ -25,7 +25,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     [success] (const nlohmann::json& result) {
                         success(result["result"]["id"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void UpdateAchievementAsync(
             const function<void(const string& result)>& success,
@@ -40,7 +41,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     [success] (const nlohmann::json& result) {
                         success(result["result"]["id"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteAchievementAsync(
             const function<void(void)>& success,
@@ -53,7 +55,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-delete",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddLoginDaysInRowAchievementAsync(
             const function<void(void)>& success,
@@ -67,7 +70,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-addLoginDaysInRowAchievement",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddLoginDaysInRowAchievementAsync(
             const function<void(void)>& success,
@@ -81,7 +85,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-addLoginDaysInRowAchievement",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteLoginDaysInRowGameConstRecordAsync(
             const function<void(void)>& success,
@@ -95,7 +100,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-deleteLoginDaysInRowGameConstRecord",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddPlayerProgressAchievementAsync(
             const function<void(void)>& success,
@@ -112,7 +118,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-addPlayerProgressAchievement",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddPlayerProgressAchievementAsync(
             const function<void(void)>& success,
@@ -129,7 +136,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-addPlayerProgressAchievement",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void DeletePlayerProgressAchievementAsync(
             const function<void(void)>& success,
@@ -146,7 +154,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     "achievements-deletePlayerProgressGameConstRecord",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

@@ -30,7 +30,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 bodyJson["byteArray"] = thumbnailTextureBytes;
                 RGNCore::CallAPI<nlohmann::json>("virtualItemsV2-uploadThumbnail", bodyJson, [success]() {
                     success(true);
-                }, fail, cancellationToken);
+                }, fail, false, cancellationToken);
             };
         static void DownloadImageAsync(
             const std::function<void(std::vector<uint8_t> result)>& success,
@@ -82,7 +82,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                             success(byteVector);
                         });
                     },
-                    fail
+                    fail, false
                 );
             };
     };

@@ -34,7 +34,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     "gamePass-get",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetForCurrentAppAsync(
             const function<void(const vector<RGN::Modules::GamePass::GamePassData>& result)>& success,
@@ -46,7 +47,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     [success] (const RGN::Modules::GamePass::GetForCurrentAppResponseData& result) {
                         success(result.gamePasses);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Retrieves a list of GamePassUserData instances for a user based on the provided identifier or request name.
@@ -71,7 +73,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     [success] (const RGN::Modules::GamePass::GetGamePassUserDataResponseData& result) {
                         success(result.gamePasses);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Retrieves all GamePassUserData instances for a specified user asynchronously.
@@ -90,7 +93,8 @@ namespace RGN { namespace Modules { namespace GamePass {
                     [success] (const RGN::Modules::GamePass::GetGamePassUserDataResponseData& result) {
                         success(result.gamePasses);
                     },
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

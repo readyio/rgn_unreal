@@ -38,7 +38,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const RGN::Modules::VirtualItems::AddVirtualItemResponseData& result) {
                         success(result.virtualItem);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously adds a list of virtual items from a CSV content string to the Ready Games Network.
@@ -68,6 +69,7 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                         success(result["newVirtualItemIds"].template get<vector<string>>());
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -90,7 +92,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const RGN::Modules::VirtualItems::AddVirtualItemResponseData& result) {
                         success(result.virtualItem);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously deletes a specific virtual item from the Ready Games Network.
@@ -109,7 +112,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-deleteVirtualItem",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetVirtualItemsAsync(
             const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& success,
@@ -121,7 +125,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
                         success(result.virtualItems);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Returns a limited list of virtual items for your game.
@@ -143,7 +148,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
                         success(result.virtualItems);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetVirtualItemsByIdsAsync(
             const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& success,
@@ -157,7 +163,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
                         success(result.virtualItems);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetByTagsAsync(
             const function<void(const vector<RGN::Modules::VirtualItems::VirtualItem>& result)>& success,
@@ -174,7 +181,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const RGN::Modules::VirtualItems::VirtualItemsResponseData& result) {
                         success(result.virtualItems);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Returns all tags for specific virtual item
@@ -193,7 +201,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const RGN::Modules::VirtualItems::GetVirtualItemTagsResponse& result) {
                         success(result.tags);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void SetTagsAsync(
             const function<void(void)>& success,
@@ -210,7 +219,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-setTags",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Sets the name for a specific virtual item
@@ -228,7 +238,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-setName",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Sets the description for a specific virtual item
@@ -246,7 +257,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     "virtualItemsV2-setDescription",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Returns json string or throws an exception if there are no json for virtual item
@@ -266,7 +278,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const nlohmann::json& result) {
                         success(result["properties"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Set json on a given virtualItemId.
@@ -288,7 +301,8 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     [success] (const nlohmann::json& result) {
                         success(result["properties"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Uploads an image thumbnail for a virtual item to the RGNCore backend.

@@ -18,6 +18,7 @@ class RGNCore {
 private:
     static vector<RGNAuthCallback*> _authCallbacks;
     static string _appId;
+    static string _apiKey;
     static RGNEnvironmentTarget _environmentTarget;
     static bool _useFunctionsEmulator;
     static string _emulatorHostAndPort;
@@ -29,9 +30,11 @@ private:
     static string GetApiProjectId();
     static string GetApiUrl();
     static string GetOAuthUrl();
+    static string GetApiKey();
 
     static void InternalCallAPI(const string& name, const string& body,
-        const function<void(const string&)>& complete, const function<void(const int, const string&)>& fail, CancellationToken cancellationToken);
+        const function<void(const string&)>& complete, const function<void(const int, const string&)>& fail,
+        bool computeHmac, CancellationToken cancellationToken);
     static void NonAuthInternalCallAPI(const string& name, const string& body,
         const function<void(const string&)>& complete, const function<void(const int, const string&)>& fail);
     static void LoadAuthSession();
@@ -62,56 +65,60 @@ public:
     **/
     static void CallAPI(const string& name,
         const function<void(void)>& complete,
-        const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
+        const function<void(const int, const string&)>& fail,
+        bool computeHmac, CancellationToken cancellationToken) {
         InternalCallAPI(name, "", [complete](string response) {
             complete();
-        }, fail, cancellationToken);
+        }, fail, computeHmac, cancellationToken);
     }
     static void CallAPI(const string& name,
         const function<void(void)>& complete,
-        const function<void(const int, const string&)>& fail) {
-        CallAPI(name, complete, fail, CancellationToken());
+        const function<void(const int, const string&)>& fail, bool computeHmac = false) {
+        CallAPI(name, complete, fail, computeHmac, CancellationToken());
     }
     /***
     * CallAPI<string,string>
     **/
     static void CallAPI(const string& name, const string& body,
         const function<void(const string&)>& complete,
-        const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
-        InternalCallAPI(name, body, complete, fail, cancellationToken);
+        const function<void(const int, const string&)>& fail,
+        bool computeHmac, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body, complete, fail, computeHmac, cancellationToken);
     }
     static void CallAPI(string name, string body,
         const function<void(const string&)>& complete,
-        const function<void(const int, const string&)>& fail) {
-        CallAPI(name, body, complete, fail, CancellationToken());
+        const function<void(const int, const string&)>& fail, bool computeHmac = false) {
+        CallAPI(name, body, complete, fail, computeHmac, CancellationToken());
     }
     /***
     * CallAPI<json,string>
     **/
     static void CallAPI(const string& name, const json& body,
         const function<void(const string&)>& complete,
-        const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
-        InternalCallAPI(name, body.dump(), complete, fail, cancellationToken);
+        const function<void(const int, const string&)>& fail,
+        bool computeHmac, CancellationToken cancellationToken) {
+        InternalCallAPI(name, body.dump(), complete, fail, computeHmac, cancellationToken);
     }
     static void CallAPI(const string& name, const json& body,
         const function<void(const string&)>& complete,
-        const function<void(const int, const string&)>& fail) {
-        CallAPI(name, body, complete, fail, CancellationToken());
+        const function<void(const int, const string&)>& fail, bool computeHmac = false) {
+        CallAPI(name, body, complete, fail, computeHmac, CancellationToken());
     }
     /***
     * CallAPI<string,void>
     **/
     static void CallAPI(const string& name, const string& body,
         const function<void(void)>& complete,
-        const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
+        const function<void(const int, const string&)>& fail,
+        bool computeHmac, CancellationToken cancellationToken) {
         InternalCallAPI(name, body, [complete](string response) {
             complete();
-        }, fail, cancellationToken);
+        }, fail, computeHmac, cancellationToken);
     }
     static void CallAPI(const string& name, const string& body,
         const function<void(void)>& complete,
-        const function<void(const int, const string&)>& fail) {
-        CallAPI(name, body, complete, fail, CancellationToken());
+        const function<void(const int, const string&)>& fail, bool computeHmac = false) {
+        CallAPI(name, body, complete, fail, computeHmac, CancellationToken());
     }
     /***
     * CallAPI<CustomModel,CustomModel>
@@ -119,18 +126,19 @@ public:
     template<class TRequestBody, class TResponse>
     static void CallAPI(const string& name, const TRequestBody& body,
         const function<void(const TResponse&)>& complete,
-        const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
+        const function<void(const int, const string&)>& fail,
+        bool computeHmac, CancellationToken cancellationToken) {
         json bodyJson = body;
         InternalCallAPI(name, bodyJson.dump(), [complete](string response) {
             json responseJson = json::parse(response);
             complete(responseJson.template get<TResponse>());
-        }, fail, cancellationToken);
+        }, fail, computeHmac, cancellationToken);
     }
     template<class TRequestBody, class TResponse>
     static void CallAPI(const string& name, const TRequestBody& body,
         const function<void(const TResponse&)>& complete,
-        const function<void(const int, const string&)>& fail) {
-        CallAPI<TRequestBody, TResponse>(name, body, complete, fail, CancellationToken());
+        const function<void(const int, const string&)>& fail, bool computeHmac = false) {
+        CallAPI<TRequestBody, TResponse>(name, body, complete, fail, computeHmac, CancellationToken());
     }
     /***
     * CallAPI<CustomModel,string>
@@ -138,17 +146,18 @@ public:
     template<class TRequestBody>
     static void CallAPI(const string& name, const TRequestBody& body,
         const function<void(const string&)>& complete,
-        const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
+        const function<void(const int, const string&)>& fail,
+        bool computeHmac, CancellationToken cancellationToken) {
         json bodyJson = body;
         InternalCallAPI(name, bodyJson.dump(), [complete](string response) {
             complete(response);
-            }, fail, cancellationToken);
+            }, fail, computeHmac, cancellationToken);
     }
     template<class TRequestBody>
     static void CallAPI(const string& name, const TRequestBody& body,
         const function<void(const string&)>& complete,
-        const function<void(const int, const string&)>& fail) {
-        CallAPI<TRequestBody>(name, body, complete, fail, CancellationToken());
+        const function<void(const int, const string&)>& fail, bool computeHmac = false) {
+        CallAPI<TRequestBody>(name, body, complete, fail, computeHmac, CancellationToken());
     }
     /***
     * CallAPI<CustomModel,void>
@@ -156,16 +165,16 @@ public:
     template<class TRequestBody>
     static void CallAPI(const string& name, const TRequestBody& body,
         const function<void(void)>& complete,
-        const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
+        const function<void(const int, const string&)>& fail, bool computeHmac, CancellationToken cancellationToken) {
         json bodyJson = body;
         InternalCallAPI(name, bodyJson.dump(), [complete](string response) {
             complete();
-            }, fail, cancellationToken);
+            }, fail, computeHmac, cancellationToken);
     }
     template<class TRequestBody>
     static void CallAPI(const string& name, const TRequestBody& body,
         const function<void(void)>& complete,
-        const function<void(const int, const string&)>& fail) {
-        CallAPI<TRequestBody>(name, body, complete, fail, CancellationToken());
+        const function<void(const int, const string&)>& fail, bool computeHmac = false) {
+        CallAPI<TRequestBody>(name, body, complete, fail, false, CancellationToken());
     }
 };

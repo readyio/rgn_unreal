@@ -27,7 +27,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     [success](RGN::Modules::Achievement::GetAchievementsResponse result) {
                         success(result.achievements);
                     },
-                    fail
+                    fail,
+                    false
                 );
             };
 
@@ -56,7 +57,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                             }
                         }
                     }, 
-                fail);
+                fail,
+                false);
             };
 
         static void GetForCurrentAppWithUserDataAsync(
@@ -83,7 +85,8 @@ namespace RGN { namespace Modules { namespace Achievement {
                     [success](RGN::Modules::Achievement::GetUserAchievementsResponse response) {
                         success(response.userAchievements);
                     },
-                fail);
+                fail,
+                false);
             };
     };
 }}}

@@ -11,6 +11,7 @@ void UBP_RGNCore::Initialize() {
 
     RGNConfigureData coreConfigureData;
     coreConfigureData.appId = std::string(TCHAR_TO_UTF8(*Settings->ProjectId));
+    coreConfigureData.apiKey = std::string(TCHAR_TO_UTF8(*Settings->ApiKey));
     coreConfigureData.environmentTarget = static_cast<RGNEnvironmentTarget>(Settings->EnvironmentTarget.GetValue());
     coreConfigureData.useFunctionsEmulator = Settings->bUseFunctionsEmulator;
     coreConfigureData.emulatorHost = std::string(TCHAR_TO_UTF8(*Settings->EmulatorHost));

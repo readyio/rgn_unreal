@@ -2,6 +2,8 @@
 #include "Core/RGNAnalytics.h"
 #include "Os/Os.h"
 #include "SharedPrefs/SharedPrefs.h"
+#include "Crypto/hmac.h"
+#include "Crypto/sha256.h"
 #include "Generated/RGN/Model/Request/RefreshTokensRequestData.h"
 #include "Generated/RGN/Model/Response/RefreshTokensResponseData.h"
 
@@ -11,6 +13,7 @@ using RefreshTokensResponseData = RGN::Model::Response::RefreshTokensResponseDat
 
 vector<RGNAuthCallback*> RGNCore::_authCallbacks = vector<RGNAuthCallback*>();
 string RGNCore::_appId = "";
+string RGNCore::_apiKey = "";
 RGNEnvironmentTarget RGNCore::_environmentTarget = RGNEnvironmentTarget::NONE;
 bool RGNCore::_useFunctionsEmulator = false;
 string RGNCore::_emulatorHostAndPort = "";
@@ -20,6 +23,7 @@ string RGNCore::_refreshToken = "";
 
 void RGNCore::Initialize(RGNConfigureData configureData) {
     _appId = configureData.appId;
+    _apiKey = configureData.apiKey;
     _environmentTarget = configureData.environmentTarget;
     _useFunctionsEmulator = configureData.useFunctionsEmulator;
     _emulatorHostAndPort = configureData.emulatorHost + ":" + configureData.emulatorPort;
@@ -157,6 +161,10 @@ string RGNCore::GetAppId() {
     return _appId; 
 }
 
+string RGNCore::GetApiKey() {
+    return _apiKey;
+}
+
 string RGNCore::GetStorageBucket() {
     switch (_environmentTarget) {
     case RGNEnvironmentTarget::DEVELOPMENT:
@@ -206,14 +214,18 @@ string RGNCore::GetOAuthUrl() {
 
 void RGNCore::InternalCallAPI(const string& name, const string& body,
     const function<void(const string&)>& complete,
-    const function<void(const int, const string&)>& fail, CancellationToken cancellationToken) {
+    const function<void(const int, const string&)>& fail,
+    bool computeHmac, CancellationToken cancellationToken) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
     if (!_idToken.empty()) {
         headers.add("Authorization", "Bearer " + _idToken);
     }
+    if (computeHmac) {
+        headers.add("HMAC", hmac<SHA256>(body, GetApiKey()));
+    }
     string url = GetApiUrl() + name;
-    Http::Request(url, HttpMethod::POST, headers, body, [name, body, complete, fail, cancellationToken](HttpResponse httpResponse) {
+    Http::Request(url, HttpMethod::POST, headers, body, [name, body, complete, fail, computeHmac, cancellationToken](HttpResponse httpResponse) {
         if (cancellationToken.isCancellationRequested()) {
             if (fail) {
                 fail(400, "The request was cancelled");
@@ -231,7 +243,7 @@ void RGNCore::InternalCallAPI(const string& name, const string& body,
         }
         else if (httpResponseCode == 401) {
             if (_refreshToken != "") {
-                RefreshTokens([name, body, complete, fail, cancellationToken, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
+                RefreshTokens([name, body, complete, fail, computeHmac, cancellationToken, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
                     if (cancellationToken.isCancellationRequested()) {
                         if (fail) {
                             fail(400, "The request was cancelled");
@@ -240,7 +252,7 @@ void RGNCore::InternalCallAPI(const string& name, const string& body,
                     }
 
                     if (successRefreshTokens) {
-                        InternalCallAPI(name, body, complete, fail, cancellationToken);
+                        InternalCallAPI(name, body, complete, fail, computeHmac, cancellationToken);
                     }
                     else {
                         SignOut();

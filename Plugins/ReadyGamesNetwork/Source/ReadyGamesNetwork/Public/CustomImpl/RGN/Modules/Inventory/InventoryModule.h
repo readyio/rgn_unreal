@@ -50,7 +50,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                     "inventoryV2-addToInventory",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetWithVirtualItemsDataForCurrentAppAsync(
             const std::function<void(std::vector<RGN::Modules::Inventory::InventoryItemData> result)>& success,
@@ -83,7 +84,8 @@ namespace RGN { namespace Modules { namespace Inventory {
                         }
                         success(response.items);
                     },
-                fail);
+                fail,
+                false);
             };
 
         static RGN::Modules::Inventory::InventoryItemData ParseInventoryItemData(string json) {

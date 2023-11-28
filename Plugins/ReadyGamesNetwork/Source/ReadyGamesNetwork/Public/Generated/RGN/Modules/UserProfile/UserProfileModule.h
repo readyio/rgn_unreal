@@ -50,7 +50,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-getProfile",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetFullUserProfileAsync(
             const function<void(const string& result)>& success,
@@ -83,7 +84,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-searchUsers",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void GetUserCurrenciesAsync(
             const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& success,
@@ -93,7 +95,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-getUserCurrenciesV2",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Gets the user ID associated with a short UID.
@@ -110,7 +113,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-getUserIdByShortUID",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Sets the display name of the user.
@@ -130,7 +134,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     [success] (const nlohmann::json& result) {
                         success(result["displayName"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Sets the bio of the user.
@@ -150,7 +155,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     [success] (const nlohmann::json& result) {
                         success(result["bio"].template get<string>());
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Sets the display name and bio of the user.
@@ -170,7 +176,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-updateProfile",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Uploads a user's avatar image to the RGNCore backend.
@@ -291,7 +298,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "userStatuses-setInvisibleStatus",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void PingAsync(
             const function<void(void)>& success,
@@ -301,7 +309,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "userStatuses-ping",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void SuspendAsync(
             const function<void(void)>& success,
@@ -325,7 +334,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "userStatuses-getUserState",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void DeleteUser(
             const function<void(void)>& success,
@@ -335,7 +345,8 @@ namespace RGN { namespace Modules { namespace UserProfile {
                     "user-deleteUser",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

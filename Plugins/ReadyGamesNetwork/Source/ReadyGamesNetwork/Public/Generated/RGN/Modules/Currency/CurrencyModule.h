@@ -28,7 +28,8 @@ namespace RGN { namespace Modules { namespace Currency {
                     "currency-getRGNCoinEconomy",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Adds the rgn-coin currency to the user in
@@ -58,7 +59,8 @@ namespace RGN { namespace Modules { namespace Currency {
                     [success] (const nlohmann::json& result) {
                         success(result["userCurrencies"].template get<vector<RGN::Modules::Currency::Currency>>());
                     },
-                    fail);
+                    fail,
+                    true);
             };
         static void GetInAppPurchaseCurrencyDataAsync(
             const function<void(const RGN::Modules::Currency::CurrencyProductsData& result)>& success,
@@ -68,7 +70,8 @@ namespace RGN { namespace Modules { namespace Currency {
                     "currency-getProducts",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Adds any project specific currency to the users profile.
@@ -84,7 +87,8 @@ namespace RGN { namespace Modules { namespace Currency {
                     "currency-purchaseProduct",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void AddUserCurrenciesAsync(
             const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& success,
@@ -100,7 +104,8 @@ namespace RGN { namespace Modules { namespace Currency {
                     [success] (const RGN::Modules::Currency::AddUserCurrenciesResponseData& result) {
                         success(result.userCurrencies);
                     },
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}

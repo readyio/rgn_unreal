@@ -42,6 +42,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matches);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -71,6 +72,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matches);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -99,6 +101,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matches);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -124,6 +127,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.match);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         static void CreateMatchAsync(
@@ -145,6 +149,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.match);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         static void ParticipateInMatchAsync(
@@ -164,6 +169,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matchId);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -190,6 +196,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matchId);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -219,6 +226,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matchId);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -248,6 +256,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matchId);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         /**
@@ -274,6 +283,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                         success(result.matchId);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
     };

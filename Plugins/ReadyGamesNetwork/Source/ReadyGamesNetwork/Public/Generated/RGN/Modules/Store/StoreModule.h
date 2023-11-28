@@ -67,7 +67,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::GetLootBoxesResponse& result) {
                         success(result.lootBoxes);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a list of lootBoxes from the Ready Games Network (RGN) store based on
@@ -98,7 +99,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::GetLootBoxesResponse& result) {
                         success(result.lootBoxes);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a list of lootBoxes for the current application from the Ready Games Network (RGN) store.
@@ -144,7 +146,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::LootboxIsAvailableResponse& result) {
                         success(result.isAvailable);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously gets the number of virtual items available for a lootbox
@@ -168,7 +171,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::LootboxIsAvailableResponse& result) {
                         success(result.count);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously opens a lootbox associated with the specified name in the Ready Games Network (RGN) store.
@@ -212,7 +216,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-addVirtualItemsStoreOffer",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously imports a list of store offers from a CSV formatted string to the Ready Games Network (RGN) store.
@@ -242,6 +247,7 @@ namespace RGN { namespace Modules { namespace Store {
                         success(result.offers);
                     },
                     fail,
+                    false,
                     cancellationToken);
             };
         static void GetByTagsAsync(
@@ -261,7 +267,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::GetStoreOffersResponse& result) {
                         success(result.offers);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a list of store offers from the Ready Games Network (RGN) store based on a provided timestamp.
@@ -286,7 +293,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::GetStoreOffersResponse& result) {
                         success(result.offers);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void GetByAppIdsAsync(
             const function<void(const vector<RGN::Modules::Store::StoreOffer>& result)>& success,
@@ -307,7 +315,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::GetStoreOffersResponse& result) {
                         success(result.offers);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a list of store offers for the current application from the Ready Games Network (RGN) store.
@@ -388,7 +397,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::GetStoreOffersResponse& result) {
                         success(result.offers);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves a list of tags associated with a specific store offer from the Ready Games Network (RGN) store.
@@ -410,7 +420,8 @@ namespace RGN { namespace Modules { namespace Store {
                     [success] (const RGN::Modules::Store::GetStoreOfferTagsResponse& result) {
                         success(result.tags);
                     },
-                    fail);
+                    fail,
+                    false);
             };
         static void SetTagsAsync(
             const function<void(void)>& success,
@@ -427,7 +438,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-setTags",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously sets the name for a specific store offer in the Ready Games Network (RGN) store.
@@ -449,7 +461,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-setName",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously sets the description for a specific store offer in the Ready Games Network (RGN) store.
@@ -471,7 +484,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-setDescription",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         static void SetPricesAsync(
             const function<void(void)>& success,
@@ -485,7 +499,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-setPrices",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously sets the time information for a specific store offer in the Ready Games Network (RGN) store.
@@ -507,7 +522,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-setTime",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously sets the image URL for a specific store offer in the Ready Games Network (RGN) store.
@@ -529,7 +545,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-setImageUrl",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously retrieves the properties of a specific store offer in the Ready Games Network (RGN) store.
@@ -548,7 +565,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-getProperties",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
         /**
          * Asynchronously sets the properties of a specific store offer in the Ready Games Network (RGN) store.
@@ -570,7 +588,8 @@ namespace RGN { namespace Modules { namespace Store {
                     "storeV2-setProperties",
                     requestData,
                     success,
-                    fail);
+                    fail,
+                    false);
             };
     };
 }}}
