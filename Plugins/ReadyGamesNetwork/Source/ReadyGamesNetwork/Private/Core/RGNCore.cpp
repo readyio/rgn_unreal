@@ -222,7 +222,7 @@ void RGNCore::InternalCallAPI(const string& name, const string& body,
         headers.add("Authorization", "Bearer " + _idToken);
     }
     if (computeHmac) {
-        headers.add("HMAC", hmac<SHA256>(body, GetApiKey()));
+        headers.add("hmac", hmac<SHA256>(body, GetApiKey()));
     }
     string url = GetApiUrl() + name;
     Http::Request(url, HttpMethod::POST, headers, body, [name, body, complete, fail, computeHmac, cancellationToken](HttpResponse httpResponse) {

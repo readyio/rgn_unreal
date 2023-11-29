@@ -175,6 +175,6 @@ public:
     static void CallAPI(const string& name, const TRequestBody& body,
         const function<void(void)>& complete,
         const function<void(const int, const string&)>& fail, bool computeHmac = false) {
-        CallAPI<TRequestBody>(name, body, complete, fail, false, CancellationToken());
+        CallAPI<TRequestBody>(name, body, complete, fail, computeHmac, CancellationToken());
     }
 };
