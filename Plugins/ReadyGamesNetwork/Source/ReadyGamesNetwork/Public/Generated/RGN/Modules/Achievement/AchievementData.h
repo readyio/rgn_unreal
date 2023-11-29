@@ -57,15 +57,17 @@ namespace RGN { namespace Modules { namespace Achievement {
         /**
          * If this is provided, the the trigger for this achievement will work no more
          * often that the specified cron string.
+         * 
          * *    *    *    *    *    *
          * ┬    ┬    ┬    ┬    ┬    ┬
-         * │    │    │    │    │    |
+         * │    │    │    │    │    │
          * │    │    │    │    │    └ day of week(0 - 7, 1L - 7L) (0 or 7 is Sun)
          * │    │    │    │    └───── month(1 - 12)
          * │    │    │    └────────── day of month(1 - 31, L)
          * │    │    └─────────────── hour(0 - 23)
          * │    └──────────────────── minute(0 - 59)
          * └───────────────────────── second(0 - 59, optional)
+         * 
          * You can use the https://crontab.guru/ to create cron settings
          */
         string repeatNoMoreOftenThanCron;
@@ -84,15 +86,17 @@ namespace RGN { namespace Modules { namespace Achievement {
         /**
          * Define cron value when the achievement should reset. This parameter is used
          * to update the F:RGN.Modules.Achievement.AchievementData.startTime and F:RGN.Modules.Achievement.AchievementData.endTime values.
+         * 
          * *    *    *    *    *    *
          * ┬    ┬    ┬    ┬    ┬    ┬
-         * │    │    │    │    │    |
+         * │    │    │    │    │    │
          * │    │    │    │    │    └ day of week(0 - 7, 1L - 7L) (0 or 7 is Sun)
          * │    │    │    │    └───── month(1 - 12)
          * │    │    │    └────────── day of month(1 - 31, L)
          * │    │    └─────────────── hour(0 - 23)
          * │    └──────────────────── minute(0 - 59)
          * └───────────────────────── second(0 - 59, optional)
+         * 
          * You can use the https://crontab.guru/ to create cron settings
          */
         string resetTimeLimitEvery;

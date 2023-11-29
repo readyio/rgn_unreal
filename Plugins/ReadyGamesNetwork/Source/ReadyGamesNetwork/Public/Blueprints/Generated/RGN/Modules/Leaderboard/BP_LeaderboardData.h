@@ -76,17 +76,19 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString type;
     /**
-     * If it is provided, then it specifies reset period for the leaderboard
+     * If it is provided, then it specifies reset period for the leaderboard.
      * How often the leaderboard will reset specified by the cron string.
+     * 
      * *    *    *    *    *    *
      * ┬    ┬    ┬    ┬    ┬    ┬
-     * │    │    │    │    │    |
+     * │    │    │    │    │    │
      * │    │    │    │    │    └ day of week(0 - 7, 1L - 7L) (0 or 7 is Sun)
      * │    │    │    │    └───── month(1 - 12)
      * │    │    │    └────────── day of month(1 - 31, L)
      * │    │    └─────────────── hour(0 - 23)
      * │    └──────────────────── minute(0 - 59)
      * └───────────────────────── second(0 - 59, optional)
+     * 
      * You can use the https://crontab.guru/ to create cron settings
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
@@ -136,6 +138,13 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     TArray<FBP_JoinRequirement> requiredToJoin;
+    /**
+     * The grace period in milliseconds for the leaderboard.
+     * This is the time after the leaderboard end time when the leaderboard is
+     * still available for reviwing the results.
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    int64 gracePeriod;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {
         target.id = FString(source.id.c_str());
@@ -167,6 +176,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             FBP_JoinRequirement::ConvertToUnrealModel(source_requiredToJoin_item, b_source_requiredToJoin_item);
             target.requiredToJoin.Add(b_source_requiredToJoin_item);
         }
+        target.gracePeriod = source.gracePeriod;
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardData& source, RGN::Modules::Leaderboard::LeaderboardData& target) {
@@ -199,5 +209,6 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             FBP_JoinRequirement::ConvertToCoreModel(source_requiredToJoin_item, cpp_source_requiredToJoin_item);
             target.requiredToJoin.push_back(cpp_source_requiredToJoin_item);
         }
+        target.gracePeriod = source.gracePeriod;
 	}
 };

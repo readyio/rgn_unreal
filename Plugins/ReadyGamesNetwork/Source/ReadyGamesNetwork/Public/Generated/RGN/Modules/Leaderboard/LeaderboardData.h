@@ -61,17 +61,19 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          */
         string type;
         /**
-         * If it is provided, then it specifies reset period for the leaderboard
+         * If it is provided, then it specifies reset period for the leaderboard.
          * How often the leaderboard will reset specified by the cron string.
+         * 
          * *    *    *    *    *    *
          * ┬    ┬    ┬    ┬    ┬    ┬
-         * │    │    │    │    │    |
+         * │    │    │    │    │    │
          * │    │    │    │    │    └ day of week(0 - 7, 1L - 7L) (0 or 7 is Sun)
          * │    │    │    │    └───── month(1 - 12)
          * │    │    │    └────────── day of month(1 - 31, L)
          * │    │    └─────────────── hour(0 - 23)
          * │    └──────────────────── minute(0 - 59)
          * └───────────────────────── second(0 - 59, optional)
+         * 
          * You can use the https://crontab.guru/ to create cron settings
          */
         string resetEveryTimeAtCron;
@@ -113,6 +115,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * In case the user does not have the required item, the score change is ignored
          */
         vector<RGN::Modules::Leaderboard::JoinRequirement> requiredToJoin;
+        /**
+         * The grace period in milliseconds for the leaderboard.
+         * This is the time after the leaderboard end time when the leaderboard is
+         * still available for reviwing the results.
+         */
+        int64_t gracePeriod = 0;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const LeaderboardData& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
@@ -132,6 +140,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
             nlohmann_json_j["time"] = nlohmann_json_t.time;
             nlohmann_json_j["requiredToJoin"] = nlohmann_json_t.requiredToJoin;
+            nlohmann_json_j["gracePeriod"] = nlohmann_json_t.gracePeriod;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardData& nlohmann_json_t) {
@@ -235,6 +244,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 auto json_requiredToJoin = nlohmann_json_j.at("requiredToJoin");
                 if (!json_requiredToJoin.is_null() && json_requiredToJoin.is_array()) {
                     json_requiredToJoin.get_to(nlohmann_json_t.requiredToJoin);
+                }
+            }
+            if (nlohmann_json_j.contains("gracePeriod")) {
+                auto json_gracePeriod = nlohmann_json_j.at("gracePeriod");
+                if (!json_gracePeriod.is_null() && json_gracePeriod.is_number()) {
+                    json_gracePeriod.get_to(nlohmann_json_t.gracePeriod);
                 }
             }
         }

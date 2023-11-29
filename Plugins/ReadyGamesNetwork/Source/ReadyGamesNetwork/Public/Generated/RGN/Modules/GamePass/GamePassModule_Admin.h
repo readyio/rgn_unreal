@@ -32,6 +32,7 @@ namespace RGN { namespace Modules { namespace GamePass {
             const string& id = "",
             const string& requestName = "") {
                 nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = id;
                 requestData["requestName"] = requestName;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::GamePass::GamePassData>(
@@ -48,6 +49,7 @@ namespace RGN { namespace Modules { namespace GamePass {
             const string& requestName = "",
             const string& userId = "") {
                 nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = id;
                 requestData["requestName"] = requestName;
                 requestData["userId"] = userId;
@@ -65,6 +67,7 @@ namespace RGN { namespace Modules { namespace GamePass {
             const string& requestName = "",
             const string& userId = "") {
                 nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
                 requestData["id"] = id;
                 requestData["requestName"] = requestName;
                 requestData["userId"] = userId;

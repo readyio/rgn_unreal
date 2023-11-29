@@ -11,6 +11,8 @@
 #include "BP_GetLeaderboardIdsResponseData.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/IsLeaderboardAvailableResponseData.h"
 #include "BP_IsLeaderboardAvailableResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/IsInGracePeriodResponseData.h"
+#include "BP_IsInGracePeriodResponseData.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/SetScoreResponseData.h"
 #include "BP_SetScoreResponseData.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardEntry.h"
@@ -34,6 +36,7 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByAppIdsAsyncR
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardForCurrentAppAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardIdsAsyncResponse, const TArray<FString>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleIsLeaderboardAvailableAsyncResponse, bool, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleIsInGracePeriodAsyncResponse, const FBP_IsInGracePeriodResponseData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleSetScoreAsyncResponse, int32, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleAddScoreAsyncResponse, int32, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetUserEntryAsyncResponse, const FBP_LeaderboardEntry&, response);
@@ -235,6 +238,28 @@ public:
                 [onSuccess](bool response) {
                     bool bpResponse;
                     bpResponse = response;
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_leaderboardId);
+    }
+    /**
+     * Method to retrieve available status of leaderboard
+     * @param leaderboardId - The ID of the leaderboard which status will be checked.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void IsInGracePeriodAsync(
+        FLeaderboardModuleIsInGracePeriodAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        const FString& leaderboardId) {
+            string cpp_leaderboardId;
+            cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
+            RGN::Modules::Leaderboard::LeaderboardModule::IsInGracePeriodAsync(
+                [onSuccess](RGN::Modules::Leaderboard::IsInGracePeriodResponseData response) {
+                    FBP_IsInGracePeriodResponseData bpResponse;
+                    FBP_IsInGracePeriodResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {

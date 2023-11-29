@@ -7,6 +7,7 @@
 #include "GetLeaderboardsResponse.h"
 #include "GetLeaderboardIdsResponseData.h"
 #include "IsLeaderboardAvailableResponseData.h"
+#include "IsInGracePeriodResponseData.h"
 #include "SetScoreResponseData.h"
 #include "LeaderboardEntry.h"
 #include "GetLeaderboardEntriesResponseData.h"
@@ -156,6 +157,24 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData& result) {
                         success(result.isAvailable);
                     },
+                    fail,
+                    false);
+            };
+        /**
+         * Method to retrieve available status of leaderboard
+         * @param leaderboardId - The ID of the leaderboard which status will be checked.
+         */
+        static void IsInGracePeriodAsync(
+            const function<void(const RGN::Modules::Leaderboard::IsInGracePeriodResponseData& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& leaderboardId) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["leaderboardId"] = leaderboardId;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::IsInGracePeriodResponseData>(
+                    "leaderboardV2-isInGracePeriod",
+                    requestData,
+                    success,
                     fail,
                     false);
             };
