@@ -218,11 +218,14 @@ void RGNCore::InternalCallAPI(const string& name, const string& body,
     bool computeHmac, CancellationToken cancellationToken) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
+    if (!_appId.empty()) {
+        headers.add("app-id", _appId);
+    }
     if (!_idToken.empty()) {
         headers.add("Authorization", "Bearer " + _idToken);
     }
     if (computeHmac) {
-        headers.add("hmac", hmac<SHA256>(body, GetApiKey()));
+        headers.add("hmac", hmac<SHA256>(body, _apiKey));
     }
     string url = GetApiUrl() + name;
     Http::Request(url, HttpMethod::POST, headers, body, [name, body, complete, fail, computeHmac, cancellationToken](HttpResponse httpResponse) {
