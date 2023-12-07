@@ -6,8 +6,8 @@
 #include "BP_LeaderboardReward.h"
 #include "../../../../../Generated/RGN/Model/TimeInfo.h"
 #include "../../Model/BP_TimeInfo.h"
-#include "../../../../../Generated/RGN/Modules/Leaderboard/JoinRequirement.h"
-#include "BP_JoinRequirement.h"
+#include "../../../../../Generated/RGN/Model/Requirement.h"
+#include "../../Model/BP_Requirement.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -76,24 +76,6 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString type;
     /**
-     * If it is provided, then it specifies reset period for the leaderboard.
-     * How often the leaderboard will reset specified by the cron string.
-     * 
-     * *    *    *    *    *    *
-     * ┬    ┬    ┬    ┬    ┬    ┬
-     * │    │    │    │    │    │
-     * │    │    │    │    │    └ day of week(0 - 7, 1L - 7L) (0 or 7 is Sun)
-     * │    │    │    │    └───── month(1 - 12)
-     * │    │    │    └────────── day of month(1 - 31, L)
-     * │    │    └─────────────── hour(0 - 23)
-     * │    └──────────────────── minute(0 - 59)
-     * └───────────────────────── second(0 - 59, optional)
-     * 
-     * You can use the https://crontab.guru/ to create cron settings
-     */
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
-    FString resetEveryTimeAtCron;
-    /**
      * Rewards which will be earned at reset period
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
@@ -135,16 +117,11 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      * Specifies if the user need to have a gamepass or virtual item to join the leaderboard
      * Join the leaderboard means to submit scores to the leaderboard
      * In case the user does not have the required item, the score change is ignored
+     * If you specify more than one requirement, then at least one of them
+     * must be met.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
-    TArray<FBP_JoinRequirement> requiredToJoin;
-    /**
-     * The grace period in milliseconds for the leaderboard.
-     * This is the time after the leaderboard end time when the leaderboard is
-     * still available for reviwing the results.
-     */
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
-    int64 gracePeriod;
+    TArray<FBP_Requirement> requiredToJoin;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {
         target.id = FString(source.id.c_str());
@@ -160,7 +137,6 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
         target.invertSortOrder = source.invertSortOrder;
         target.decimalOffset = source.decimalOffset;
         target.type = FString(source.type.c_str());
-        target.resetEveryTimeAtCron = FString(source.resetEveryTimeAtCron.c_str());
         for (const auto& source_rewardsAtReset_item : source.rewardsAtReset) {
             FBP_LeaderboardReward b_source_rewardsAtReset_item;
             FBP_LeaderboardReward::ConvertToUnrealModel(source_rewardsAtReset_item, b_source_rewardsAtReset_item);
@@ -172,11 +148,10 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
         target.updatedBy = FString(source.updatedBy.c_str());
         FBP_TimeInfo::ConvertToUnrealModel(source.time, target.time);
         for (const auto& source_requiredToJoin_item : source.requiredToJoin) {
-            FBP_JoinRequirement b_source_requiredToJoin_item;
-            FBP_JoinRequirement::ConvertToUnrealModel(source_requiredToJoin_item, b_source_requiredToJoin_item);
+            FBP_Requirement b_source_requiredToJoin_item;
+            FBP_Requirement::ConvertToUnrealModel(source_requiredToJoin_item, b_source_requiredToJoin_item);
             target.requiredToJoin.Add(b_source_requiredToJoin_item);
         }
-        target.gracePeriod = source.gracePeriod;
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardData& source, RGN::Modules::Leaderboard::LeaderboardData& target) {
@@ -193,7 +168,6 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
         target.invertSortOrder = source.invertSortOrder;
         target.decimalOffset = source.decimalOffset;
         target.type = string(TCHAR_TO_UTF8(*source.type));
-        target.resetEveryTimeAtCron = string(TCHAR_TO_UTF8(*source.resetEveryTimeAtCron));
         for (const auto& source_rewardsAtReset_item : source.rewardsAtReset) {
             RGN::Modules::Leaderboard::LeaderboardReward cpp_source_rewardsAtReset_item;
             FBP_LeaderboardReward::ConvertToCoreModel(source_rewardsAtReset_item, cpp_source_rewardsAtReset_item);
@@ -205,10 +179,9 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
         target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
         FBP_TimeInfo::ConvertToCoreModel(source.time, target.time);
         for (const auto& source_requiredToJoin_item : source.requiredToJoin) {
-            RGN::Modules::Leaderboard::JoinRequirement cpp_source_requiredToJoin_item;
-            FBP_JoinRequirement::ConvertToCoreModel(source_requiredToJoin_item, cpp_source_requiredToJoin_item);
+            RGN::Model::Requirement cpp_source_requiredToJoin_item;
+            FBP_Requirement::ConvertToCoreModel(source_requiredToJoin_item, cpp_source_requiredToJoin_item);
             target.requiredToJoin.push_back(cpp_source_requiredToJoin_item);
         }
-        target.gracePeriod = source.gracePeriod;
 	}
 };

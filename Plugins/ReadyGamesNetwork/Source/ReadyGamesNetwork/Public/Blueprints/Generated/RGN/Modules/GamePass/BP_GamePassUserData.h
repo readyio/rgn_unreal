@@ -15,12 +15,12 @@ struct READYGAMESNETWORK_API FBP_GamePassUserData {
     GENERATED_BODY()
 
     /**
-     * Unique identifier for the Game Pass user id.
+     * Unique identifier of the Game Pass user id.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
     FString id;
     /**
-     * Unique identifier for the Game Pass.
+     * Unique identifier of the Game Pass.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
     FString gamePassId;
@@ -41,12 +41,12 @@ struct READYGAMESNETWORK_API FBP_GamePassUserData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
     int64 updatedAt;
     /**
-     * Identifier for the user who created the Game Pass.
+     * Identifier of the user who created the Game Pass. User Id. Populated by the backend.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
     FString createdBy;
     /**
-     * Identifier for the user who last updated the Game Pass.
+     * Identifier of the user who last updated the Game Pass. User Id. Populated by the backend.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
     FString updatedBy;

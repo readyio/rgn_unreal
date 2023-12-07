@@ -549,6 +549,30 @@ namespace RGN { namespace Modules { namespace Store {
                     false);
             };
         /**
+         * Asynchronously checks if the store offer meets all requirements to be available for the user.
+         * The check is performed for the store offer specified F:RGN.Modules.Store.StoreOffer.time and
+         * F:RGN.Modules.Store.StoreOffer.requiredToPurchase
+         * @param storeOfferId - The identifier of the store offer.
+         * @return A Task representing the asynchronous operation. The Task result contains a bool value to indicate if the store offer is available
+         * @throw: Thrown when the provided storeOfferId is null or empty.
+         */
+        static void IsAvailableAsync(
+            const function<void(const bool result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& storeOfferId) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["offerId"] = storeOfferId;
+                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
+                    "storeV2-isAvailable",
+                    requestData,
+                    [success] (const nlohmann::json& result) {
+                        success((bool)result["isAvailable"].template get<bool>());
+                    },
+                    fail,
+                    false);
+            };
+        /**
          * Asynchronously retrieves the properties of a specific store offer in the Ready Games Network (RGN) store.
          * @param storeOfferId - The identifier of the store offer whose properties are to be retrieved.
          * @return A Task representing the asynchronous operation. The Task result contains a string that represents the JSON-formatted properties of the store offer.

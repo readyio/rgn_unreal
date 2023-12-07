@@ -12,11 +12,11 @@ namespace RGN { namespace Modules { namespace GamePass {
      */
     struct GamePassUserData {
         /**
-         * Unique identifier for the Game Pass user id.
+         * Unique identifier of the Game Pass user id.
          */
         string id;
         /**
-         * Unique identifier for the Game Pass.
+         * Unique identifier of the Game Pass.
          */
         string gamePassId;
         /**
@@ -34,11 +34,11 @@ namespace RGN { namespace Modules { namespace GamePass {
          */
         int64_t updatedAt = 0;
         /**
-         * Identifier for the user who created the Game Pass.
+         * Identifier of the user who created the Game Pass. User Id. Populated by the backend.
          */
         string createdBy;
         /**
-         * Identifier for the user who last updated the Game Pass.
+         * Identifier of the user who last updated the Game Pass. User Id. Populated by the backend.
          */
         string updatedBy;
 

@@ -25,11 +25,6 @@ struct READYGAMESNETWORK_API FBP_BlockchainInfo {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     int64 totalQuantity;
     /**
-     * The Id of the NFT liked to this virtual item
-     */
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
-    int64 tokenId;
-    /**
      * The address of the original minter of the NFT
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
@@ -38,14 +33,12 @@ struct READYGAMESNETWORK_API FBP_BlockchainInfo {
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::BlockchainInfo& source, FBP_BlockchainInfo& target) {
         target.purchasedQuantity = source.purchasedQuantity;
         target.totalQuantity = source.totalQuantity;
-        target.tokenId = source.tokenId;
         target.walletAddress = FString(source.walletAddress.c_str());
 	}
 
 	static void ConvertToCoreModel(const FBP_BlockchainInfo& source, RGN::Modules::VirtualItems::BlockchainInfo& target) {
         target.purchasedQuantity = source.purchasedQuantity;
         target.totalQuantity = source.totalQuantity;
-        target.tokenId = source.tokenId;
         target.walletAddress = string(TCHAR_TO_UTF8(*source.walletAddress));
 	}
 };

@@ -20,10 +20,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          */
         int64_t totalQuantity = 0;
         /**
-         * The Id of the NFT liked to this virtual item
-         */
-        int64_t tokenId = 0;
-        /**
          * The address of the original minter of the NFT
          */
         string walletAddress;
@@ -31,7 +27,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
         friend void to_json(nlohmann::json& nlohmann_json_j, const BlockchainInfo& nlohmann_json_t) {
             nlohmann_json_j["purchasedQuantity"] = nlohmann_json_t.purchasedQuantity;
             nlohmann_json_j["totalQuantity"] = nlohmann_json_t.totalQuantity;
-            nlohmann_json_j["tokenId"] = nlohmann_json_t.tokenId;
             nlohmann_json_j["walletAddress"] = nlohmann_json_t.walletAddress;
         }
 
@@ -46,12 +41,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 auto json_totalQuantity = nlohmann_json_j.at("totalQuantity");
                 if (!json_totalQuantity.is_null() && json_totalQuantity.is_number()) {
                     json_totalQuantity.get_to(nlohmann_json_t.totalQuantity);
-                }
-            }
-            if (nlohmann_json_j.contains("tokenId")) {
-                auto json_tokenId = nlohmann_json_j.at("tokenId");
-                if (!json_tokenId.is_null() && json_tokenId.is_number()) {
-                    json_tokenId.get_to(nlohmann_json_t.tokenId);
                 }
             }
             if (nlohmann_json_j.contains("walletAddress")) {

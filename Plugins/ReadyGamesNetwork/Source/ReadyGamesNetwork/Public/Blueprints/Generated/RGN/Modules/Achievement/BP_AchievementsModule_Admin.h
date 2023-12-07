@@ -22,6 +22,8 @@ DECLARE_DYNAMIC_DELEGATE(FAchievementsModuleAdminAddLoginDaysInRowAchievementAsy
 DECLARE_DYNAMIC_DELEGATE(FAchievementsModuleAdminDeleteLoginDaysInRowGameConstRecordAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FAchievementsModuleAdminAddPlayerProgressAchievementAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FAchievementsModuleAdminDeletePlayerProgressAchievementAsyncResponse);
+DECLARE_DYNAMIC_DELEGATE(FAchievementsModuleAdminAddPurchaseAchievementAsyncResponse);
+DECLARE_DYNAMIC_DELEGATE(FAchievementsModuleAdminDeletePurchaseGameConstRecordAsyncResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_AchievementsModule_Admin : public UBlueprintFunctionLibrary {
@@ -210,5 +212,45 @@ public:
                 cpp_achievementId,
                 cpp_playerProgressFieldName,
                 cpp_playerProgressFieldValueToReach);
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void AddPurchaseAchievementAsync(
+        FAchievementsModuleAdminAddPurchaseAchievementAsyncResponse onSuccess,
+        FAchievementsModule_AdminFailResponse onFail,
+        const FBP_AchievementData& achievementData,
+        const FString& virtualItemTag) {
+            RGN::Modules::Achievement::AchievementData cpp_achievementData;
+            string cpp_virtualItemTag;
+            FBP_AchievementData::ConvertToCoreModel(achievementData, cpp_achievementData);
+            cpp_virtualItemTag = string(TCHAR_TO_UTF8(*virtualItemTag));
+            RGN::Modules::Achievement::AchievementsModule_Admin::AddPurchaseAchievementAsync(
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_achievementData,
+                cpp_virtualItemTag);
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void DeletePurchaseGameConstRecordAsync(
+        FAchievementsModuleAdminDeletePurchaseGameConstRecordAsyncResponse onSuccess,
+        FAchievementsModule_AdminFailResponse onFail,
+        const FString& achievementId,
+        const FString& virtualItemTag) {
+            string cpp_achievementId;
+            string cpp_virtualItemTag;
+            cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
+            cpp_virtualItemTag = string(TCHAR_TO_UTF8(*virtualItemTag));
+            RGN::Modules::Achievement::AchievementsModule_Admin::DeletePurchaseGameConstRecordAsync(
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_achievementId,
+                cpp_virtualItemTag);
     }
 };

@@ -3,6 +3,8 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "../../../../../Generated/RGN/Modules/Wallets/WalletsModule.h"
+#include "../../../../../Generated/RGN/Modules/Wallets/IsUserHasBlockchainRequirementResponseData.h"
+#include "BP_IsUserHasBlockchainRequirementResponseData.h"
 #include "../../../../../Generated/RGN/Modules/Wallets/IsUserHavePrimaryWalletResponseData.h"
 #include "BP_IsUserHavePrimaryWalletResponseData.h"
 #include "../../../../../Generated/RGN/Model/Request/BaseMigrationRequestData.h"
@@ -23,6 +25,7 @@ using namespace std;
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FWalletsModuleFailResponse, int32, code, const FString&, message);
 
+DECLARE_DYNAMIC_DELEGATE_OneParam(FWalletsModuleIsUserHasBlockchainRequirementAsyncResponse, bool, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FWalletsModuleIsUserHavePrimaryWalletAsyncResponse, const FBP_IsUserHavePrimaryWalletResponseData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FWalletsModuleGetUserWalletsAsyncResponse, const FBP_GetUserWalletsResponseData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FWalletsModuleCreateWalletAsyncResponse, const FBP_CreateWalletResponseData&, response);
@@ -31,6 +34,20 @@ UCLASS()
 class READYGAMESNETWORK_API UBP_WalletsModule : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
+    static void IsUserHasBlockchainRequirementAsync(
+        FWalletsModuleIsUserHasBlockchainRequirementAsyncResponse onSuccess,
+        FWalletsModuleFailResponse onFail) {
+            RGN::Modules::Wallets::WalletsModule::IsUserHasBlockchainRequirementAsync(
+                [onSuccess](bool response) {
+                    bool bpResponse;
+                    bpResponse = response;
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                });
+    }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Wallets")
     static void IsUserHavePrimaryWalletAsync(
         FWalletsModuleIsUserHavePrimaryWalletAsyncResponse onSuccess,

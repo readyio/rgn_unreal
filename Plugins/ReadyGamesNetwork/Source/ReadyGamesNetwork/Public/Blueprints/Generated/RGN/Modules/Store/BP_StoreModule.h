@@ -73,6 +73,7 @@ DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetDescriptionAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetPricesAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetTimeAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetImageUrlAsyncResponse);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleIsAvailableAsyncResponse, bool, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleGetPropertiesAsyncResponse, const FString&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleSetPropertiesAsyncResponse, const FString&, response);
 
@@ -863,6 +864,32 @@ public:
                 },
                 cpp_offerId,
                 cpp_imageUrl);
+    }
+    /**
+     * Asynchronously checks if the store offer meets all requirements to be available for the user.
+     * The check is performed for the store offer specified F:RGN.Modules.Store.StoreOffer.time and
+     * F:RGN.Modules.Store.StoreOffer.requiredToPurchase
+     * @param storeOfferId - The identifier of the store offer.
+     * @return A Task representing the asynchronous operation. The Task result contains a bool value to indicate if the store offer is available
+     * @throw: Thrown when the provided storeOfferId is null or empty.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
+    static void IsAvailableAsync(
+        FStoreModuleIsAvailableAsyncResponse onSuccess,
+        FStoreModuleFailResponse onFail,
+        const FString& storeOfferId) {
+            string cpp_storeOfferId;
+            cpp_storeOfferId = string(TCHAR_TO_UTF8(*storeOfferId));
+            RGN::Modules::Store::StoreModule::IsAvailableAsync(
+                [onSuccess](bool response) {
+                    bool bpResponse;
+                    bpResponse = response;
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_storeOfferId);
     }
     /**
      * Asynchronously retrieves the properties of a specific store offer in the Ready Games Network (RGN) store.

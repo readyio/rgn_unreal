@@ -3,7 +3,7 @@
 #include "../../../../json.hpp"
 #include "LeaderboardReward.h"
 #include "../../Model/TimeInfo.h"
-#include "JoinRequirement.h"
+#include "../../Model/Requirement.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -61,23 +61,6 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          */
         string type;
         /**
-         * If it is provided, then it specifies reset period for the leaderboard.
-         * How often the leaderboard will reset specified by the cron string.
-         * 
-         * *    *    *    *    *    *
-         * ┬    ┬    ┬    ┬    ┬    ┬
-         * │    │    │    │    │    │
-         * │    │    │    │    │    └ day of week(0 - 7, 1L - 7L) (0 or 7 is Sun)
-         * │    │    │    │    └───── month(1 - 12)
-         * │    │    │    └────────── day of month(1 - 31, L)
-         * │    │    └─────────────── hour(0 - 23)
-         * │    └──────────────────── minute(0 - 59)
-         * └───────────────────────── second(0 - 59, optional)
-         * 
-         * You can use the https://crontab.guru/ to create cron settings
-         */
-        string resetEveryTimeAtCron;
-        /**
          * Rewards which will be earned at reset period
          */
         vector<RGN::Modules::Leaderboard::LeaderboardReward> rewardsAtReset;
@@ -113,14 +96,10 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * Specifies if the user need to have a gamepass or virtual item to join the leaderboard
          * Join the leaderboard means to submit scores to the leaderboard
          * In case the user does not have the required item, the score change is ignored
+         * If you specify more than one requirement, then at least one of them
+         * must be met.
          */
-        vector<RGN::Modules::Leaderboard::JoinRequirement> requiredToJoin;
-        /**
-         * The grace period in milliseconds for the leaderboard.
-         * This is the time after the leaderboard end time when the leaderboard is
-         * still available for reviwing the results.
-         */
-        int64_t gracePeriod = 0;
+        vector<RGN::Model::Requirement> requiredToJoin;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const LeaderboardData& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
@@ -132,7 +111,6 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             nlohmann_json_j["invertSortOrder"] = nlohmann_json_t.invertSortOrder;
             nlohmann_json_j["decimalOffset"] = nlohmann_json_t.decimalOffset;
             nlohmann_json_j["type"] = nlohmann_json_t.type;
-            nlohmann_json_j["resetEveryTimeAtCron"] = nlohmann_json_t.resetEveryTimeAtCron;
             nlohmann_json_j["rewardsAtReset"] = nlohmann_json_t.rewardsAtReset;
             nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
             nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
@@ -140,7 +118,6 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
             nlohmann_json_j["time"] = nlohmann_json_t.time;
             nlohmann_json_j["requiredToJoin"] = nlohmann_json_t.requiredToJoin;
-            nlohmann_json_j["gracePeriod"] = nlohmann_json_t.gracePeriod;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardData& nlohmann_json_t) {
@@ -198,12 +175,6 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     json_type.get_to(nlohmann_json_t.type);
                 }
             }
-            if (nlohmann_json_j.contains("resetEveryTimeAtCron")) {
-                auto json_resetEveryTimeAtCron = nlohmann_json_j.at("resetEveryTimeAtCron");
-                if (!json_resetEveryTimeAtCron.is_null() && json_resetEveryTimeAtCron.is_string()) {
-                    json_resetEveryTimeAtCron.get_to(nlohmann_json_t.resetEveryTimeAtCron);
-                }
-            }
             if (nlohmann_json_j.contains("rewardsAtReset")) {
                 auto json_rewardsAtReset = nlohmann_json_j.at("rewardsAtReset");
                 if (!json_rewardsAtReset.is_null() && json_rewardsAtReset.is_array()) {
@@ -244,12 +215,6 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 auto json_requiredToJoin = nlohmann_json_j.at("requiredToJoin");
                 if (!json_requiredToJoin.is_null() && json_requiredToJoin.is_array()) {
                     json_requiredToJoin.get_to(nlohmann_json_t.requiredToJoin);
-                }
-            }
-            if (nlohmann_json_j.contains("gracePeriod")) {
-                auto json_gracePeriod = nlohmann_json_j.at("gracePeriod");
-                if (!json_gracePeriod.is_null() && json_gracePeriod.is_number()) {
-                    json_gracePeriod.get_to(nlohmann_json_t.gracePeriod);
                 }
             }
         }

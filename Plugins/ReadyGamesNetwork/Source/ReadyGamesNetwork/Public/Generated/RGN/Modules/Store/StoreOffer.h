@@ -4,6 +4,7 @@
 #include "../../Model/TimeInfo.h"
 #include "../VirtualItems/Properties.h"
 #include "../VirtualItems/PriceInfo.h"
+#include "../../Model/Requirement.h"
 #include "../VirtualItems/VirtualItem.h"
 #include <string>
 #include <vector>
@@ -91,6 +92,15 @@ namespace RGN { namespace Modules { namespace Store {
          * by using the group field. To "group" currencies and prices together.
          */
         vector<RGN::Modules::VirtualItems::PriceInfo> prices;
+        /**
+         * Specifies if the user need to have a gamepass or virtual item or complete an
+         * achivement to purchase the store offer.
+         * List of requirements to met before the store offer can be purchased.
+         * If you specify more than one requirement, then at least one of them
+         * must be met.
+         * In case the user does not meet the requirements, the purchase will fail.
+         */
+        vector<RGN::Model::Requirement> requiredToPurchase;
         vector<RGN::Modules::VirtualItems::VirtualItem> virtualItems;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const StoreOffer& nlohmann_json_t) {
@@ -108,6 +118,7 @@ namespace RGN { namespace Modules { namespace Store {
             nlohmann_json_j["properties"] = nlohmann_json_t.properties;
             nlohmann_json_j["itemIds"] = nlohmann_json_t.itemIds;
             nlohmann_json_j["prices"] = nlohmann_json_t.prices;
+            nlohmann_json_j["requiredToPurchase"] = nlohmann_json_t.requiredToPurchase;
             nlohmann_json_j["virtualItems"] = nlohmann_json_t.virtualItems;
         }
 
@@ -194,6 +205,12 @@ namespace RGN { namespace Modules { namespace Store {
                 auto json_prices = nlohmann_json_j.at("prices");
                 if (!json_prices.is_null() && json_prices.is_array()) {
                     json_prices.get_to(nlohmann_json_t.prices);
+                }
+            }
+            if (nlohmann_json_j.contains("requiredToPurchase")) {
+                auto json_requiredToPurchase = nlohmann_json_j.at("requiredToPurchase");
+                if (!json_requiredToPurchase.is_null() && json_requiredToPurchase.is_array()) {
+                    json_requiredToPurchase.get_to(nlohmann_json_t.requiredToPurchase);
                 }
             }
             if (nlohmann_json_j.contains("virtualItems")) {

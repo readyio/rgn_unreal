@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "IsUserHasBlockchainRequirementResponseData.h"
 #include "IsUserHavePrimaryWalletResponseData.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "GetUserWalletsResponseData.h"
@@ -16,6 +17,20 @@ using namespace std;
 namespace RGN { namespace Modules { namespace Wallets {
     class WalletsModule {
     public:
+        static void IsUserHasBlockchainRequirementAsync(
+            const function<void(const bool result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Wallets::IsUserHasBlockchainRequirementResponseData>(
+                    "wallets-isUserHasBlockchainRequirement",
+                    requestData,
+                    [success] (const RGN::Modules::Wallets::IsUserHasBlockchainRequirementResponseData& result) {
+                        success(result.hasBlockchainRequirement);
+                    },
+                    fail,
+                    false);
+            };
         static void IsUserHavePrimaryWalletAsync(
             const function<void(const RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail) {

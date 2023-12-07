@@ -157,5 +157,37 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail,
                     false);
             };
+        static void AddPurchaseAchievementAsync(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const RGN::Modules::Achievement::AchievementData& achievementData,
+            const string& virtualItemTag) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["achievementData"] = achievementData;
+                requestData["virtualItemTag"] = virtualItemTag;
+                RGNCore::CallAPI<nlohmann::json>(
+                    "achievements-addPurchaseAchievement",
+                    requestData,
+                    success,
+                    fail,
+                    false);
+            };
+        static void DeletePurchaseGameConstRecordAsync(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& achievementId,
+            const string& virtualItemTag) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["achievementId"] = achievementId;
+                requestData["virtualItemTag"] = virtualItemTag;
+                RGNCore::CallAPI<nlohmann::json>(
+                    "achievements-deletePurchaseGameConstRecord",
+                    requestData,
+                    success,
+                    fail,
+                    false);
+            };
     };
 }}}
