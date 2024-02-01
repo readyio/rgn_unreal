@@ -1,13 +1,13 @@
-# Unreal Plugin for Ready Games Network (RGN)
+# Unreal Plugin for READYgg
 
 ## Overview
-This repository hosts the Unreal Plugin for Ready Games Network (RGN), enabling developers to integrate RGN functionalities into their Unreal Engine projects. The plugin is compatible with Unreal Engine versions 4 and 5 and supports development for Android and iOS platforms.
+This repository hosts the Unreal Plugin for READYgg, enabling developers to integrate READYgg functionalities into their Unreal Engine projects. The plugin is compatible with Unreal Engine versions 4 and 5 and supports development for Android and iOS platforms.
 
 ## Getting Started
-### Setting Up Your RGN Project
-1. Visit the [RGN Developer Console](https://dev.ready.gg/) to create a new RGN project. 
+### Setting Up Your READYgg Project
+1. Visit the [READYgg Developer Console](https://dev.ready.gg/) to create a new project. 
 2. Once your project is created, navigate to the projects page and copy the Project ID from the browser address field.
-3. The project is created for both RGN environments: `Staging` and `Production`
+3. The project is created for both environments: `Staging` and `Production`
 
 ### Configuring the Unreal Plugin
 1. Check out the repository and compile the project
@@ -27,7 +27,7 @@ This repository hosts the Unreal Plugin for Ready Games Network (RGN), enabling 
 
 ## Important paths
 - **Plugin Source Path:** `Plugins/ReadyGamesNetwork`
-- **RGN Settings file:** `Config/DefaultGame.ini`
+- **READYgg Settings file:** `Config/DefaultGame.ini`
 
 ## Screenshots
 - **In-Editor App Running:**
