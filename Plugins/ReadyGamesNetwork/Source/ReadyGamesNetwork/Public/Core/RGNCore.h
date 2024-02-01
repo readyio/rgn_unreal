@@ -40,7 +40,8 @@ private:
     static void LoadAuthSession();
     static void SaveAuthSession();
     static void NotifyAuthChange();
-    static void OnDeepLink(const string& payload, const function<void(bool)>& onSignIn);
+    static void OnSignInDeepLink(const string& payload, const function<void(bool)>& onSignIn);
+    static void OnCreateWalletDeepLink(const string& payload, const function<void()>& onCreateWallet);
 
 public:
     static void Initialize(RGNConfigureData configureData);
@@ -52,6 +53,7 @@ public:
     static void SignIn(const function<void(bool)>& onSignIn);
     static void SignInAnonymously(const function<void(bool)>& onSignIn);
     static void SignOut();
+    static void CreateWallet(const function<void()>& onCreateWallet);
     static void RefreshTokens(const function<void(bool)>& callback);
 
     static bool IsLoggedIn();

@@ -80,7 +80,7 @@ void RGNCore::SignIn(const function<void(bool)>& onSignIn) {
     string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&returnRefreshToken=true&appId=" + _appId;
     Os::OpenURL(url);
     DeepLink::Listen([onSignIn](string payload) {
-        OnDeepLink(payload, onSignIn);
+        OnSignInDeepLink(payload, onSignIn);
     });
 }
 
@@ -109,6 +109,15 @@ void RGNCore::SignInAnonymously(const function<void(bool)>& onSignIn) {
             }
         }
     );
+}
+
+void RGNCore::CreateWallet(const function<void()>& onCreateWallet) {
+    string redirectUrl = _appId + "://";
+    string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&idToken=" + _idToken + "&view=createwallet";
+    Os::OpenURL(url);
+    DeepLink::Listen([onCreateWallet](string payload) {
+        OnCreateWalletDeepLink(payload, onCreateWallet);
+    });
 }
 
 void RGNCore::SignOut() {
@@ -333,11 +342,17 @@ void RGNCore::NotifyAuthChange() {
     }
 }
 
-void RGNCore::OnDeepLink(const string& payload, const function<void(bool)>& onSignIn) {
+void RGNCore::OnSignInDeepLink(const string& payload, const function<void(bool)>& onSignIn) {
     unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
     if (tokenExists) {
         _refreshToken = payloadArgs.at("token");
         RefreshTokens(onSignIn);
+    }
+}
+
+void RGNCore::OnCreateWalletDeepLink(const string& payload, const function<void()>& onCreateWallet) {
+    if (onCreateWallet) {
+        onCreateWallet();
     }
 }

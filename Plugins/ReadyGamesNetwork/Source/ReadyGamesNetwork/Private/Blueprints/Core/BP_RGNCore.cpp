@@ -64,6 +64,12 @@ void UBP_RGNCore::SignOut() {
     RGNCore::SignOut();
 }
 
+void UBP_RGNCore::CreateWallet(FRGNCreateWalletCallback onCreateWallet) {
+    RGNCore::CreateWallet([onCreateWallet]() {
+        onCreateWallet.ExecuteIfBound();
+    });
+}
+
 bool UBP_RGNCore::IsLoggedIn() {
     return RGNCore::IsLoggedIn();
 }
