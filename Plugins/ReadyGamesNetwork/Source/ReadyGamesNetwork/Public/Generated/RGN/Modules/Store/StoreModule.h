@@ -21,6 +21,7 @@
 #include "SetPricesRequestData.h"
 #include "../../Model/TimeInfo.h"
 #include "SetTimeRequestData.h"
+#include "../Leaderboard/IsStoreOfferAvailableResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -195,7 +196,7 @@ namespace RGN { namespace Modules { namespace Store {
                     fail,
                     name);
             };
-        static void AddVirtualItemsStoreOfferAsync(
+        static void AddAsync(
             const function<void(const RGN::Modules::Store::StoreOffer& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail,
             const vector<string>& appIds,
@@ -213,7 +214,7 @@ namespace RGN { namespace Modules { namespace Store {
                 requestData["tags"] = tags;
                 requestData["quantity"] = quantity;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Store::StoreOffer>(
-                    "storeV2-addVirtualItemsStoreOffer",
+                    "storeV2-add",
                     requestData,
                     success,
                     fail,
@@ -553,22 +554,21 @@ namespace RGN { namespace Modules { namespace Store {
          * The check is performed for the store offer specified F:RGN.Modules.Store.StoreOffer.time and
          * F:RGN.Modules.Store.StoreOffer.requiredToPurchase
          * @param storeOfferId - The identifier of the store offer.
-         * @return A Task representing the asynchronous operation. The Task result contains a bool value to indicate if the store offer is available
+         * @return A Task representing the asynchronous operation. The Task result contains a T:RGN.Modules.Leaderboard.IsStoreOfferAvailableResponseData
+         * value to indicate if the store offer is available
          * @throw: Thrown when the provided storeOfferId is null or empty.
          */
         static void IsAvailableAsync(
-            const function<void(const bool result)>& success,
+            const function<void(const RGN::Modules::Leaderboard::IsStoreOfferAvailableResponseData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail,
             const string& storeOfferId) {
                 nlohmann::json requestData;
                 requestData["appId"] = RGNCore::GetAppId();
                 requestData["offerId"] = storeOfferId;
-                RGNCore::CallAPI<nlohmann::json, nlohmann::json>(
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::IsStoreOfferAvailableResponseData>(
                     "storeV2-isAvailable",
                     requestData,
-                    [success] (const nlohmann::json& result) {
-                        success((bool)result["isAvailable"].template get<bool>());
-                    },
+                    success,
                     fail,
                     false);
             };

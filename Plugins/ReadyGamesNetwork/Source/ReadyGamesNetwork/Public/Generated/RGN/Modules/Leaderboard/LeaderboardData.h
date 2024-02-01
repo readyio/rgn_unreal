@@ -3,7 +3,8 @@
 #include "../../../../json.hpp"
 #include "LeaderboardReward.h"
 #include "../../Model/TimeInfo.h"
-#include "../../Model/Requirement.h"
+#include "../../Model/RequirementData.h"
+#include "../../Model/ParticipationFee.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -27,6 +28,10 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          */
         string requestName;
         /**
+         * Leaderboard tags list. It is used to filter the leaderboards.
+         */
+        vector<string> tags;
+        /**
          * Leaderboard name
          * Is used also to store localization key for the name
          */
@@ -37,7 +42,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          */
         string description;
         /**
-         * Define who can set/add score to the leaderboard
+         * Define who can set/add score to the leaderboard. 'server' or 'client'
          */
         string setBy;
         /**
@@ -64,6 +69,16 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * Rewards which will be earned at reset period
          */
         vector<RGN::Modules::Leaderboard::LeaderboardReward> rewardsAtReset;
+        /**
+         * The leaderboard rewards draw type that determines how the leaderboard should draw rewards. Possible values:
+         * placeBased — Rewards will be drawn accordingly users places.
+         * scoreBased — Rewards will be drawn randomly, but users with higher score will have more chance to win.
+         * scoreBasedOnePerUser - Same as the scoreBased, but with limitation for one reward at whole leaderboard per one user
+         * scoreBasedOnePerUserAndReward - Same as the scoreBased, but with limitation for one unique reward per one user
+         * but different rewards could be added to same user
+         * Default value is placeBased
+         */
+        string rewardsDrawType;
         /**
          * Date and time when the leaderboard was created
          * in milliseconds since midnight, January 1, 1970 UTC.
@@ -96,15 +111,24 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * Specifies if the user need to have a gamepass or virtual item to join the leaderboard
          * Join the leaderboard means to submit scores to the leaderboard
          * In case the user does not have the required item, the score change is ignored
-         * If you specify more than one requirement, then at least one of them
-         * must be met.
          */
-        vector<RGN::Model::Requirement> requiredToJoin;
+        RGN::Model::RequirementData requiredToJoin;
+        /**
+         * Indicates whether the leaderboard rewards are automatically claimed by the user. If false, the rewards must
+         * be claimed manually.The time.end is required and optionally time.grace to be set if autoClaim is true.
+         */
+        bool autoClaim = false;
+        /**
+         * List of participation fees for the leaderboard.
+         * The fees are deducted when the user sets or adds a score to the leaderboard for the first time.
+         */
+        vector<RGN::Model::ParticipationFee> participationFees;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const LeaderboardData& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
             nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
             nlohmann_json_j["requestName"] = nlohmann_json_t.requestName;
+            nlohmann_json_j["tags"] = nlohmann_json_t.tags;
             nlohmann_json_j["name"] = nlohmann_json_t.name;
             nlohmann_json_j["description"] = nlohmann_json_t.description;
             nlohmann_json_j["setBy"] = nlohmann_json_t.setBy;
@@ -112,12 +136,15 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             nlohmann_json_j["decimalOffset"] = nlohmann_json_t.decimalOffset;
             nlohmann_json_j["type"] = nlohmann_json_t.type;
             nlohmann_json_j["rewardsAtReset"] = nlohmann_json_t.rewardsAtReset;
+            nlohmann_json_j["rewardsDrawType"] = nlohmann_json_t.rewardsDrawType;
             nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
             nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
             nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
             nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
             nlohmann_json_j["time"] = nlohmann_json_t.time;
             nlohmann_json_j["requiredToJoin"] = nlohmann_json_t.requiredToJoin;
+            nlohmann_json_j["autoClaim"] = nlohmann_json_t.autoClaim;
+            nlohmann_json_j["participationFees"] = nlohmann_json_t.participationFees;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardData& nlohmann_json_t) {
@@ -137,6 +164,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 auto json_requestName = nlohmann_json_j.at("requestName");
                 if (!json_requestName.is_null() && json_requestName.is_string()) {
                     json_requestName.get_to(nlohmann_json_t.requestName);
+                }
+            }
+            if (nlohmann_json_j.contains("tags")) {
+                auto json_tags = nlohmann_json_j.at("tags");
+                if (!json_tags.is_null() && json_tags.is_array()) {
+                    json_tags.get_to(nlohmann_json_t.tags);
                 }
             }
             if (nlohmann_json_j.contains("name")) {
@@ -181,6 +214,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     json_rewardsAtReset.get_to(nlohmann_json_t.rewardsAtReset);
                 }
             }
+            if (nlohmann_json_j.contains("rewardsDrawType")) {
+                auto json_rewardsDrawType = nlohmann_json_j.at("rewardsDrawType");
+                if (!json_rewardsDrawType.is_null() && json_rewardsDrawType.is_string()) {
+                    json_rewardsDrawType.get_to(nlohmann_json_t.rewardsDrawType);
+                }
+            }
             if (nlohmann_json_j.contains("createdAt")) {
                 auto json_createdAt = nlohmann_json_j.at("createdAt");
                 if (!json_createdAt.is_null() && json_createdAt.is_number()) {
@@ -213,8 +252,20 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             }
             if (nlohmann_json_j.contains("requiredToJoin")) {
                 auto json_requiredToJoin = nlohmann_json_j.at("requiredToJoin");
-                if (!json_requiredToJoin.is_null() && json_requiredToJoin.is_array()) {
+                if (!json_requiredToJoin.is_null()) {
                     json_requiredToJoin.get_to(nlohmann_json_t.requiredToJoin);
+                }
+            }
+            if (nlohmann_json_j.contains("autoClaim")) {
+                auto json_autoClaim = nlohmann_json_j.at("autoClaim");
+                if (!json_autoClaim.is_null() && json_autoClaim.is_boolean()) {
+                    json_autoClaim.get_to(nlohmann_json_t.autoClaim);
+                }
+            }
+            if (nlohmann_json_j.contains("participationFees")) {
+                auto json_participationFees = nlohmann_json_j.at("participationFees");
+                if (!json_participationFees.is_null() && json_participationFees.is_array()) {
+                    json_participationFees.get_to(nlohmann_json_t.participationFees);
                 }
             }
         }

@@ -34,7 +34,7 @@ namespace RGN { namespace Modules { namespace Achievement {
          */
         string description;
         /**
-         * Define who can trigger/claim the achievement
+         * Define who can trigger/claim the achievement. 'server' or 'client'
          */
         string setBy;
         /**

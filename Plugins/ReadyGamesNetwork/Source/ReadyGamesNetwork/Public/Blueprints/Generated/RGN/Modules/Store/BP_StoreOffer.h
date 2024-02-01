@@ -8,8 +8,8 @@
 #include "../VirtualItems/BP_Properties.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/PriceInfo.h"
 #include "../VirtualItems/BP_PriceInfo.h"
-#include "../../../../../Generated/RGN/Model/Requirement.h"
-#include "../../Model/BP_Requirement.h"
+#include "../../../../../Generated/RGN/Model/RequirementData.h"
+#include "../../Model/BP_RequirementData.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
 #include "../VirtualItems/BP_VirtualItem.h"
 #include <string>
@@ -118,12 +118,10 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
      * Specifies if the user need to have a gamepass or virtual item or complete an
      * achivement to purchase the store offer.
      * List of requirements to met before the store offer can be purchased.
-     * If you specify more than one requirement, then at least one of them
-     * must be met.
      * In case the user does not meet the requirements, the purchase will fail.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
-    TArray<FBP_Requirement> requiredToPurchase;
+    FBP_RequirementData requiredToPurchase;
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Store")
     TArray<FBP_VirtualItem> virtualItems;
 
@@ -162,11 +160,7 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
             FBP_PriceInfo::ConvertToUnrealModel(source_prices_item, b_source_prices_item);
             target.prices.Add(b_source_prices_item);
         }
-        for (const auto& source_requiredToPurchase_item : source.requiredToPurchase) {
-            FBP_Requirement b_source_requiredToPurchase_item;
-            FBP_Requirement::ConvertToUnrealModel(source_requiredToPurchase_item, b_source_requiredToPurchase_item);
-            target.requiredToPurchase.Add(b_source_requiredToPurchase_item);
-        }
+        FBP_RequirementData::ConvertToUnrealModel(source.requiredToPurchase, target.requiredToPurchase);
         for (const auto& source_virtualItems_item : source.virtualItems) {
             FBP_VirtualItem b_source_virtualItems_item;
             FBP_VirtualItem::ConvertToUnrealModel(source_virtualItems_item, b_source_virtualItems_item);
@@ -209,11 +203,7 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
             FBP_PriceInfo::ConvertToCoreModel(source_prices_item, cpp_source_prices_item);
             target.prices.push_back(cpp_source_prices_item);
         }
-        for (const auto& source_requiredToPurchase_item : source.requiredToPurchase) {
-            RGN::Model::Requirement cpp_source_requiredToPurchase_item;
-            FBP_Requirement::ConvertToCoreModel(source_requiredToPurchase_item, cpp_source_requiredToPurchase_item);
-            target.requiredToPurchase.push_back(cpp_source_requiredToPurchase_item);
-        }
+        FBP_RequirementData::ConvertToCoreModel(source.requiredToPurchase, target.requiredToPurchase);
         for (const auto& source_virtualItems_item : source.virtualItems) {
             RGN::Modules::VirtualItems::VirtualItem cpp_source_virtualItems_item;
             FBP_VirtualItem::ConvertToCoreModel(source_virtualItems_item, cpp_source_virtualItems_item);

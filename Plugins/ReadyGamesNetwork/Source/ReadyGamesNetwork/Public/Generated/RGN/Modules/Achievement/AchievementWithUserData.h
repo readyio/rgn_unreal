@@ -13,6 +13,9 @@ namespace RGN { namespace Modules { namespace Achievement {
      * Represents achievement data from the backend
      */
     struct AchievementWithUserData : public RGN::Modules::Achievement::AchievementData {
+        /**
+         * The user achievement data. Please use the M:RGN.Modules.Achievement.AchievementWithUserData.GetUserAchievement method instead.
+         */
         RGN::Modules::Achievement::UserAchievement _userAchievement;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const AchievementWithUserData& nlohmann_json_t) {

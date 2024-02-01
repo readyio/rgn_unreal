@@ -21,6 +21,8 @@
 #include "BP_ClaimByIdRequestData.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/ClaimByRequestNameRequestData.h"
 #include "BP_ClaimByRequestNameRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Achievement/GetProjectAchievementsResponse.h"
+#include "BP_GetProjectAchievementsResponse.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/GetUserAchievementsResponse.h"
 #include "BP_GetUserAchievementsResponse.h"
 #include "../../../../../Generated/RGN/Modules/Achievement/UserAchievement.h"
@@ -37,8 +39,10 @@ DECLARE_DYNAMIC_DELEGATE_TwoParams(FAchievementsModuleFailResponse, int32, code,
 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetByIdsAsyncResponse, const TArray<FBP_AchievementData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetByAppIdsAsyncResponse, const TArray<FBP_AchievementData>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetByTagsAsyncResponse, const TArray<FBP_AchievementData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetForCurrentAppAsyncResponse, const TArray<FBP_AchievementData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetByAppIdsWithUserDataAsyncResponse, const TArray<FBP_AchievementWithUserData>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetByTagsWithUserDataAsyncResponse, const TArray<FBP_AchievementWithUserData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetForCurrentAppWithUserDataAsyncResponse, const TArray<FBP_AchievementWithUserData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetByRequestNameAsyncResponse, const FBP_AchievementData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetByRequestNamesAsyncResponse, const TArray<FBP_AchievementData>&, response);
@@ -46,7 +50,9 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleTriggerByIdAsyncResponse, c
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleTriggerByRequestNameAsyncResponse, const FBP_TriggerAndClaimResponse&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleClaimByIdAsyncResponse, const FBP_TriggerAndClaimResponse&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleClaimByRequestNameAsyncResponse, const FBP_TriggerAndClaimResponse&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetProjectAchievementsAsyncResponse, const FBP_GetProjectAchievementsResponse&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetUserAchievementsAsyncResponse, const TArray<FBP_UserAchievement>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FAchievementsModuleGetUserAchievementByIdAsyncResponse, const FBP_UserAchievement&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_AchievementsModule : public UBlueprintFunctionLibrary {
@@ -109,6 +115,40 @@ public:
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
                 },
                 cpp_appIds,
+                cpp_limit,
+                cpp_startAfter);
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="startAfter"))
+    static void GetByTagsAsync(
+        FAchievementsModuleGetByTagsAsyncResponse onSuccess,
+        FAchievementsModuleFailResponse onFail,
+        const TArray<FString>& tags,
+        int32 limit,
+        const FString& startAfter = "") {
+            vector<string> cpp_tags;
+            int32_t cpp_limit;
+            string cpp_startAfter;
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            RGN::Modules::Achievement::AchievementsModule::GetByTagsAsync(
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementData> response) {
+                    TArray<FBP_AchievementData> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_AchievementData b_response_item;
+                        FBP_AchievementData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_tags,
                 cpp_limit,
                 cpp_startAfter);
     }
@@ -182,6 +222,44 @@ public:
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
                 },
                 cpp_appIds,
+                cpp_limit,
+                cpp_startAfter,
+                cpp_withHistory);
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="startAfter, withHistory"))
+    static void GetByTagsWithUserDataAsync(
+        FAchievementsModuleGetByTagsWithUserDataAsyncResponse onSuccess,
+        FAchievementsModuleFailResponse onFail,
+        const TArray<FString>& tags,
+        int32 limit,
+        const FString& startAfter = "",
+        bool withHistory = false) {
+            vector<string> cpp_tags;
+            int32_t cpp_limit;
+            string cpp_startAfter;
+            bool cpp_withHistory;
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_withHistory = withHistory;
+            RGN::Modules::Achievement::AchievementsModule::GetByTagsWithUserDataAsync(
+                [onSuccess](vector<RGN::Modules::Achievement::AchievementWithUserData> response) {
+                    TArray<FBP_AchievementWithUserData> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_AchievementWithUserData b_response_item;
+                        FBP_AchievementWithUserData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_tags,
                 cpp_limit,
                 cpp_startAfter,
                 cpp_withHistory);
@@ -379,26 +457,44 @@ public:
                 },
                 cpp_requestName);
     }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement")
+    static void GetProjectAchievementsAsync(
+        FAchievementsModuleGetProjectAchievementsAsyncResponse onSuccess,
+        FAchievementsModuleFailResponse onFail) {
+            RGN::Modules::Achievement::AchievementsModule::GetProjectAchievementsAsync(
+                [onSuccess](RGN::Modules::Achievement::GetProjectAchievementsResponse response) {
+                    FBP_GetProjectAchievementsResponse bpResponse;
+                    FBP_GetProjectAchievementsResponse::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                });
+    }
     /**
-     * Gets current user competed achievements
-     * If the userId is provided, then it returns the comleted achievements for provided userId
+     * Gets in progress or completed user achievements
+     * If the userId is provided, then it returns the completed achievements for provided userId
      * Supports pagination queries in case the startAfter and limit are provided
-     * @param userId - User id to return the completed achievements
+     * @param userId - User id to return the achievements
+     * @param withHistory - Should populate returned achievements by completion history
      * @param startAfter - The time stamp to start the query after F:RGN.Modules.Achievement.UserAchievement.lastCompleteTime
      * @param limit - Maximal number of documents to return
-     * @return Requested amount of completed achievements
+     * @return Requested amount of achievements
      */
-    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="userId, startAfter, limit"))
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="userId, withHistory, startAfter, limit"))
     static void GetUserAchievementsAsync(
         FAchievementsModuleGetUserAchievementsAsyncResponse onSuccess,
         FAchievementsModuleFailResponse onFail,
         const FString& userId = "",
+        bool withHistory = false,
         int64 startAfter = 9223372036854775807,
         int32 limit = 2147483647) {
             string cpp_userId;
+            bool cpp_withHistory;
             int64_t cpp_startAfter;
             int32_t cpp_limit;
             cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_withHistory = withHistory;
             cpp_startAfter = startAfter;
             cpp_limit = limit;
             RGN::Modules::Achievement::AchievementsModule::GetUserAchievementsAsync(
@@ -415,7 +511,42 @@ public:
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
                 },
                 cpp_userId,
+                cpp_withHistory,
                 cpp_startAfter,
                 cpp_limit);
+    }
+    /**
+     * Gets in progress or completed user achievement by id
+     * If the userId is provided, then it returns the completed achievement for provided userId
+     * @param achievementId - Achievement id to return
+     * @param userId - User id to return the achievement
+     * @param withHistory - Should populate returned achievement by completion history
+     * @return Requested user achievement
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Achievement", meta=(AutoCreateRefTerm="userId, withHistory"))
+    static void GetUserAchievementByIdAsync(
+        FAchievementsModuleGetUserAchievementByIdAsyncResponse onSuccess,
+        FAchievementsModuleFailResponse onFail,
+        const FString& achievementId,
+        const FString& userId = "",
+        bool withHistory = false) {
+            string cpp_achievementId;
+            string cpp_userId;
+            bool cpp_withHistory;
+            cpp_achievementId = string(TCHAR_TO_UTF8(*achievementId));
+            cpp_userId = string(TCHAR_TO_UTF8(*userId));
+            cpp_withHistory = withHistory;
+            RGN::Modules::Achievement::AchievementsModule::GetUserAchievementByIdAsync(
+                [onSuccess](RGN::Modules::Achievement::UserAchievement response) {
+                    FBP_UserAchievement bpResponse;
+                    FBP_UserAchievement::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_achievementId,
+                cpp_userId,
+                cpp_withHistory);
     }
 };

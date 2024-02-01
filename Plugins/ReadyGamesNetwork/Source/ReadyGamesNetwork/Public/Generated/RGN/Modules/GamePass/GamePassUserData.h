@@ -20,6 +20,10 @@ namespace RGN { namespace Modules { namespace GamePass {
          */
         string gamePassId;
         /**
+         * How many game passes the user have in inventory
+         */
+        int32_t quantity = 0;
+        /**
          * The UNIX timestamp representing when the Game Pass was created.
          * in milliseconds since midnight, January 1, 1970 UTC.
          * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
@@ -45,6 +49,7 @@ namespace RGN { namespace Modules { namespace GamePass {
         friend void to_json(nlohmann::json& nlohmann_json_j, const GamePassUserData& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
             nlohmann_json_j["gamePassId"] = nlohmann_json_t.gamePassId;
+            nlohmann_json_j["quantity"] = nlohmann_json_t.quantity;
             nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
             nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
             nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
@@ -62,6 +67,12 @@ namespace RGN { namespace Modules { namespace GamePass {
                 auto json_gamePassId = nlohmann_json_j.at("gamePassId");
                 if (!json_gamePassId.is_null() && json_gamePassId.is_string()) {
                     json_gamePassId.get_to(nlohmann_json_t.gamePassId);
+                }
+            }
+            if (nlohmann_json_j.contains("quantity")) {
+                auto json_quantity = nlohmann_json_j.at("quantity");
+                if (!json_quantity.is_null() && json_quantity.is_number()) {
+                    json_quantity.get_to(nlohmann_json_t.quantity);
                 }
             }
             if (nlohmann_json_j.contains("createdAt")) {

@@ -10,22 +10,22 @@ namespace RGN { namespace Modules { namespace Leaderboard {
     /**
      * Availability information
      */
-    struct IsLeaderboardAvailableResponseData {
+    struct IsStoreOfferAvailableResponseData {
         /**
-         * Indicates whether the leaderboard is available or not.
+         * Indicates if the store offer is available.
          */
         bool isAvailable = false;
         /**
-         * The reason why the leaderboard is not available.
+         * The reason why the store offer is not available.
          */
         string reason;
 
-        friend void to_json(nlohmann::json& nlohmann_json_j, const IsLeaderboardAvailableResponseData& nlohmann_json_t) {
+        friend void to_json(nlohmann::json& nlohmann_json_j, const IsStoreOfferAvailableResponseData& nlohmann_json_t) {
             nlohmann_json_j["isAvailable"] = nlohmann_json_t.isAvailable;
             nlohmann_json_j["reason"] = nlohmann_json_t.reason;
         }
 
-        friend void from_json(const nlohmann::json& nlohmann_json_j, IsLeaderboardAvailableResponseData& nlohmann_json_t) {
+        friend void from_json(const nlohmann::json& nlohmann_json_j, IsStoreOfferAvailableResponseData& nlohmann_json_t) {
             if (nlohmann_json_j.contains("isAvailable")) {
                 auto json_isAvailable = nlohmann_json_j.at("isAvailable");
                 if (!json_isAvailable.is_null() && json_isAvailable.is_boolean()) {

@@ -33,6 +33,16 @@ namespace RGN { namespace Modules { namespace GamePass {
          */
         string description;
         /**
+         * Defines who can add/remove the Game Pass to/from the user:
+         * - `client` - the client and the server can add/remove the Game Pass to/from the user.
+         * - `server` - only the server can add/remove the Game Pass to/from the user.
+         */
+        string setBy;
+        /**
+         * List of virtual item identifiers that are providing this game pass when purchased.
+         */
+        vector<string> linkedVirtualItems;
+        /**
          * The UNIX timestamp representing when the Game Pass was created.
          * in milliseconds since midnight, January 1, 1970 UTC.
          * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
@@ -62,6 +72,8 @@ namespace RGN { namespace Modules { namespace GamePass {
             nlohmann_json_j["requestName"] = nlohmann_json_t.requestName;
             nlohmann_json_j["name"] = nlohmann_json_t.name;
             nlohmann_json_j["description"] = nlohmann_json_t.description;
+            nlohmann_json_j["setBy"] = nlohmann_json_t.setBy;
+            nlohmann_json_j["linkedVirtualItems"] = nlohmann_json_t.linkedVirtualItems;
             nlohmann_json_j["createdAt"] = nlohmann_json_t.createdAt;
             nlohmann_json_j["updatedAt"] = nlohmann_json_t.updatedAt;
             nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
@@ -103,6 +115,18 @@ namespace RGN { namespace Modules { namespace GamePass {
                 auto json_description = nlohmann_json_j.at("description");
                 if (!json_description.is_null() && json_description.is_string()) {
                     json_description.get_to(nlohmann_json_t.description);
+                }
+            }
+            if (nlohmann_json_j.contains("setBy")) {
+                auto json_setBy = nlohmann_json_j.at("setBy");
+                if (!json_setBy.is_null() && json_setBy.is_string()) {
+                    json_setBy.get_to(nlohmann_json_t.setBy);
+                }
+            }
+            if (nlohmann_json_j.contains("linkedVirtualItems")) {
+                auto json_linkedVirtualItems = nlohmann_json_j.at("linkedVirtualItems");
+                if (!json_linkedVirtualItems.is_null() && json_linkedVirtualItems.is_array()) {
+                    json_linkedVirtualItems.get_to(nlohmann_json_t.linkedVirtualItems);
                 }
             }
             if (nlohmann_json_j.contains("createdAt")) {

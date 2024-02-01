@@ -25,6 +25,11 @@ struct READYGAMESNETWORK_API FBP_GamePassUserData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
     FString gamePassId;
     /**
+     * How many game passes the user have in inventory
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
+    int32 quantity;
+    /**
      * The UNIX timestamp representing when the Game Pass was created.
      * in milliseconds since midnight, January 1, 1970 UTC.
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
@@ -54,6 +59,7 @@ struct READYGAMESNETWORK_API FBP_GamePassUserData {
 	static void ConvertToUnrealModel(const RGN::Modules::GamePass::GamePassUserData& source, FBP_GamePassUserData& target) {
         target.id = FString(source.id.c_str());
         target.gamePassId = FString(source.gamePassId.c_str());
+        target.quantity = source.quantity;
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         target.createdBy = FString(source.createdBy.c_str());
@@ -63,6 +69,7 @@ struct READYGAMESNETWORK_API FBP_GamePassUserData {
 	static void ConvertToCoreModel(const FBP_GamePassUserData& source, RGN::Modules::GamePass::GamePassUserData& target) {
         target.id = string(TCHAR_TO_UTF8(*source.id));
         target.gamePassId = string(TCHAR_TO_UTF8(*source.gamePassId));
+        target.quantity = source.quantity;
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));

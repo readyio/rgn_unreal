@@ -4,6 +4,8 @@
 #include "../../../../../Generated/RGN/Modules/Matchmaking/MatchmakingData.h"
 #include "../../../../../Generated/RGN/Modules/Matchmaking/Vote.h"
 #include "BP_Vote.h"
+#include "../../../../../Generated/RGN/Model/ParticipationFee.h"
+#include "../../Model/BP_ParticipationFee.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -115,6 +117,12 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
     TMap<FString, FString> participantsPayload;
+    /**
+     * A list of participation fees for the matchmaking process.
+     * The fees are deducted when the user joins the match(ParticipateInMatch).
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Matchmaking")
+    TArray<FBP_ParticipationFee> participationFees;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::MatchmakingData& source, FBP_MatchmakingData& target) {
         target.id = FString(source.id.c_str());
@@ -153,6 +161,11 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
             FString b_source_participantsPayload_value;
             b_source_participantsPayload_value = FString(source_participantsPayload_value.c_str());
             target.participantsPayload.Add(b_source_participantsPayload_key, b_source_participantsPayload_value);
+        }
+        for (const auto& source_participationFees_item : source.participationFees) {
+            FBP_ParticipationFee b_source_participationFees_item;
+            FBP_ParticipationFee::ConvertToUnrealModel(source_participationFees_item, b_source_participationFees_item);
+            target.participationFees.Add(b_source_participationFees_item);
         }
 	}
 
@@ -193,6 +206,11 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
             string cpp_source_participantsPayload_value;
             cpp_source_participantsPayload_value = string(TCHAR_TO_UTF8(*source_participantsPayload_value));
             target.participantsPayload.insert({cpp_source_participantsPayload_key, cpp_source_participantsPayload_value});
+        }
+        for (const auto& source_participationFees_item : source.participationFees) {
+            RGN::Model::ParticipationFee cpp_source_participationFees_item;
+            FBP_ParticipationFee::ConvertToCoreModel(source_participationFees_item, cpp_source_participationFees_item);
+            target.participationFees.push_back(cpp_source_participationFees_item);
         }
 	}
 };

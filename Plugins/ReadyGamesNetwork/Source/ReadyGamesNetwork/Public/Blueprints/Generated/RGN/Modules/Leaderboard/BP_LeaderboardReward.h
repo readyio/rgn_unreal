@@ -29,16 +29,23 @@ struct READYGAMESNETWORK_API FBP_LeaderboardReward {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString achievementId;
+    /**
+     * Specifies how amount times to trigger an achievement
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardReward& source, FBP_LeaderboardReward& target) {
         target.placeFrom = source.placeFrom;
         target.placeTo = source.placeTo;
         target.achievementId = FString(source.achievementId.c_str());
+        target.quantity = source.quantity;
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardReward& source, RGN::Modules::Leaderboard::LeaderboardReward& target) {
         target.placeFrom = source.placeFrom;
         target.placeTo = source.placeTo;
         target.achievementId = string(TCHAR_TO_UTF8(*source.achievementId));
+        target.quantity = source.quantity;
 	}
 };

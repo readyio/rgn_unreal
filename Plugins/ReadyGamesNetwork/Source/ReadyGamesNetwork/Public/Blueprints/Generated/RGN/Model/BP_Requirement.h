@@ -15,19 +15,25 @@ struct READYGAMESNETWORK_API FBP_Requirement {
     GENERATED_BODY()
 
     /**
-     * Specifies the type of the join requirement
-     * Right now 5 types are implemented:
-     * - `gamepass` - the user needs to have a gamepass with a specific id to join the leaderboard.
-     * - `item_by_id` - the user needs to have a virtual item with a specific id to join the leaderboard.
-     * - `item_by_tag` - the user needs to have a virtual item with a specific tag to join the leaderboard.
-     * - `achievement_by_id` - the user needs to complete an achievement to join the leaderboard.
-     * - `achievement_by_requestName` - the user needs to complete an achievement with a specific request name to
-     * join the leaderboard.
+     * Specifies the type of the requirement.
+     * Available types are:
+     * - `gamepass_by_id` - the user needs to have a gamepass with a specific id to join a leaderboard or purchase a
+     * store offer.
+     * - `gamepass_by_request_name` - the user needs to have a gamepass with a specific request name to join a
+     * leaderboard or purchase a store offer.
+     * - `item_by_id` - the user needs to have a virtual item with a specific id to join a leaderboard or purchase a
+     * store offer.
+     * - `item_by_tag` - the user needs to have a virtual item with a specific tag to join a leaderboard or
+     * purchase a store offer.
+     * - `achievement_by_id` - the user needs to complete an achievement to join a leaderboard or purchase a store
+     * offer.
+     * - `achievement_by_request_name` - the user needs to complete an achievement with a specific request name to
+     * join a leaderboard or purchase a store offer.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Requirement")
     FString type;
     /**
-     * The id of the entity to check in user data. For example, if the type is `gamepass`, the id is the id of the
+     * The id of the entity to check in user data. For example, if the type is `gamepass_by_id`, the id is the id of the
      * gamepass.If the type is `item_by_tag`, the id is the tag of the virtual item.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Requirement")

@@ -39,6 +39,8 @@
 #include "../../Model/BP_TimeInfo.h"
 #include "../../../../../Generated/RGN/Modules/Store/SetTimeRequestData.h"
 #include "BP_SetTimeRequestData.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/IsStoreOfferAvailableResponseData.h"
+#include "../Leaderboard/BP_IsStoreOfferAvailableResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -57,7 +59,7 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleGetLootBoxesForCurrentAppAsyncResp
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleLootboxIsAvailableAsyncResponse, bool, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleGetAvailableLootBoxItemsCountAsyncResponse, int64, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleOpenLootboxAsyncResponse, const FBP_InventoryItemData&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleAddVirtualItemsStoreOfferAsyncResponse, const FBP_StoreOffer&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleAddAsyncResponse, const FBP_StoreOffer&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleImportStoreOffersFromCSVAsyncResponse, const TArray<FBP_StoreOffer>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleGetByTagsAsyncResponse, const TArray<FBP_StoreOffer>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleGetByTimestampAsyncResponse, const TArray<FBP_StoreOffer>&, response);
@@ -73,7 +75,7 @@ DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetDescriptionAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetPricesAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetTimeAsyncResponse);
 DECLARE_DYNAMIC_DELEGATE(FStoreModuleSetImageUrlAsyncResponse);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleIsAvailableAsyncResponse, bool, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleIsAvailableAsyncResponse, const FBP_IsStoreOfferAvailableResponseData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleGetPropertiesAsyncResponse, const FString&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FStoreModuleSetPropertiesAsyncResponse, const FString&, response);
 
@@ -331,8 +333,8 @@ public:
                 cpp_name);
     }
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store", meta=(AutoCreateRefTerm="tags, name, description, quantity"))
-    static void AddVirtualItemsStoreOfferAsync(
-        FStoreModuleAddVirtualItemsStoreOfferAsyncResponse onSuccess,
+    static void AddAsync(
+        FStoreModuleAddAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
         const TArray<FString>& appIds,
         const TArray<FString>& itemIds,
@@ -364,7 +366,7 @@ public:
             cpp_name = string(TCHAR_TO_UTF8(*name));
             cpp_description = string(TCHAR_TO_UTF8(*description));
             cpp_quantity = quantity;
-            RGN::Modules::Store::StoreModule::AddVirtualItemsStoreOfferAsync(
+            RGN::Modules::Store::StoreModule::AddAsync(
                 [onSuccess](RGN::Modules::Store::StoreOffer response) {
                     FBP_StoreOffer bpResponse;
                     FBP_StoreOffer::ConvertToUnrealModel(response, bpResponse);
@@ -870,7 +872,8 @@ public:
      * The check is performed for the store offer specified F:RGN.Modules.Store.StoreOffer.time and
      * F:RGN.Modules.Store.StoreOffer.requiredToPurchase
      * @param storeOfferId - The identifier of the store offer.
-     * @return A Task representing the asynchronous operation. The Task result contains a bool value to indicate if the store offer is available
+     * @return A Task representing the asynchronous operation. The Task result contains a T:RGN.Modules.Leaderboard.IsStoreOfferAvailableResponseData
+     * value to indicate if the store offer is available
      * @throw: Thrown when the provided storeOfferId is null or empty.
      */
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Store")
@@ -881,9 +884,9 @@ public:
             string cpp_storeOfferId;
             cpp_storeOfferId = string(TCHAR_TO_UTF8(*storeOfferId));
             RGN::Modules::Store::StoreModule::IsAvailableAsync(
-                [onSuccess](bool response) {
-                    bool bpResponse;
-                    bpResponse = response;
+                [onSuccess](RGN::Modules::Leaderboard::IsStoreOfferAvailableResponseData response) {
+                    FBP_IsStoreOfferAvailableResponseData bpResponse;
+                    FBP_IsStoreOfferAvailableResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {

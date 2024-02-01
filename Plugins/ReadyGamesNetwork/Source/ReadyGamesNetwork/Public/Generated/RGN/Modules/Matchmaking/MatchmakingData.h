@@ -2,6 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "Vote.h"
+#include "../../Model/ParticipationFee.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -94,6 +95,11 @@ namespace RGN { namespace Modules { namespace Matchmaking {
          * A dictionary mapping the participant identifiers to their respective optional payload data in the matchmaking process.
          */
         std::unordered_map<string, string> participantsPayload;
+        /**
+         * A list of participation fees for the matchmaking process.
+         * The fees are deducted when the user joins the match(ParticipateInMatch).
+         */
+        vector<RGN::Model::ParticipationFee> participationFees;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const MatchmakingData& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
@@ -113,6 +119,7 @@ namespace RGN { namespace Modules { namespace Matchmaking {
             nlohmann_json_j["votes"] = nlohmann_json_t.votes;
             nlohmann_json_j["participantsScore"] = nlohmann_json_t.participantsScore;
             nlohmann_json_j["participantsPayload"] = nlohmann_json_t.participantsPayload;
+            nlohmann_json_j["participationFees"] = nlohmann_json_t.participationFees;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, MatchmakingData& nlohmann_json_t) {
@@ -216,6 +223,12 @@ namespace RGN { namespace Modules { namespace Matchmaking {
                 auto json_participantsPayload = nlohmann_json_j.at("participantsPayload");
                 if (!json_participantsPayload.is_null()) {
                     json_participantsPayload.get_to(nlohmann_json_t.participantsPayload);
+                }
+            }
+            if (nlohmann_json_j.contains("participationFees")) {
+                auto json_participationFees = nlohmann_json_j.at("participationFees");
+                if (!json_participationFees.is_null() && json_participationFees.is_array()) {
+                    json_participationFees.get_to(nlohmann_json_t.participationFees);
                 }
             }
         }

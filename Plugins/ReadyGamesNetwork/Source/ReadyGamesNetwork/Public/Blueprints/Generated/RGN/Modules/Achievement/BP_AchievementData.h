@@ -44,7 +44,7 @@ struct READYGAMESNETWORK_API FBP_AchievementData : public FBP_BaseRequestData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     FString description;
     /**
-     * Define who can trigger/claim the achievement
+     * Define who can trigger/claim the achievement. 'server' or 'client'
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     FString setBy;

@@ -56,7 +56,38 @@ namespace RGN { namespace Modules { namespace Achievement {
                                 }
                             }
                         }
+                        success(response.achievements);
                     }, 
+                fail,
+                false);
+            };
+
+        static void GetByTagsWithUserDataAsync(
+            const std::function<void(std::vector<RGN::Modules::Achievement::AchievementWithUserData> result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
+            std::vector<std::string> tags,
+            int32_t limit,
+            std::string startAfter,
+            bool withHistory) {
+                nlohmann::json bodyJson;
+                bodyJson["appId"] = RGNCore::GetAppId();
+                bodyJson["tags"] = tags;
+                bodyJson["limit"] = limit;
+                bodyJson["startAfter"] = startAfter;
+                bodyJson["withHistory"] = withHistory;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsWithUserDataResponse>
+                    ("achievements-getByTagsWithUserData", bodyJson,
+                    [success](RGN::Modules::Achievement::GetAchievementsWithUserDataResponse response) {
+                        for (RGN::Modules::Achievement::AchievementWithUserData& achievement : response.achievements) {
+                            for (RGN::Modules::Achievement::UserAchievement& userAchievement : response.userAchievements) {
+                                if (achievement.id == userAchievement.id) {
+                                    achievement._userAchievement = userAchievement;
+                                    break;
+                                }
+                            }
+                        }
+                        success(response.achievements);
+                    },
                 fail,
                 false);
             };
@@ -73,17 +104,39 @@ namespace RGN { namespace Modules { namespace Achievement {
             const std::function<void(std::vector<RGN::Modules::Achievement::UserAchievement> result)>& success,
             const std::function<void(int httpCode, std::string error)>& fail,
             std::string userId,
+            bool withHistory,
             int64_t startAfter,
             int32_t limit) {
                 nlohmann::json bodyJson;
                 bodyJson["appId"] = RGNCore::GetAppId();
                 bodyJson["userId"] = userId;
+                bodyJson["withHistory"] = withHistory;
                 bodyJson["startAfter"] = startAfter;
                 bodyJson["limit"] = limit;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetUserAchievementsResponse>
                     ("achievements-getUserAchievements", bodyJson,
                     [success](RGN::Modules::Achievement::GetUserAchievementsResponse response) {
                         success(response.userAchievements);
+                    },
+                fail,
+                false);
+            };
+
+        static void GetUserAchievementByIdAsync(
+            const std::function<void(RGN::Modules::Achievement::UserAchievement result)>& success,
+            const std::function<void(int httpCode, std::string error)>& fail,
+            std::string achievementId,
+            std::string userId,
+            bool withHistory) {
+                nlohmann::json bodyJson;
+                bodyJson["appId"] = RGNCore::GetAppId();
+                bodyJson["achievementId"] = achievementId;
+                bodyJson["userId"] = userId;
+                bodyJson["withHistory"] = withHistory;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::UserAchievement>
+                    ("achievements-getUserAchievementById", bodyJson,
+                    [success](RGN::Modules::Achievement::UserAchievement response) {
+                        success(response);
                     },
                 fail,
                 false);

@@ -42,6 +42,18 @@ struct READYGAMESNETWORK_API FBP_GamePassData : public FBP_BaseRequestData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
     FString description;
     /**
+     * Defines who can add/remove the Game Pass to/from the user:
+     * - `client` - the client and the server can add/remove the Game Pass to/from the user.
+     * - `server` - only the server can add/remove the Game Pass to/from the user.
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
+    FString setBy;
+    /**
+     * List of virtual item identifiers that are providing this game pass when purchased.
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | GamePass")
+    TArray<FString> linkedVirtualItems;
+    /**
      * The UNIX timestamp representing when the Game Pass was created.
      * in milliseconds since midnight, January 1, 1970 UTC.
      * Refer to T:RGN.Utility.DateTimeUtility for helper methods.
@@ -78,6 +90,12 @@ struct READYGAMESNETWORK_API FBP_GamePassData : public FBP_BaseRequestData {
         target.requestName = FString(source.requestName.c_str());
         target.name = FString(source.name.c_str());
         target.description = FString(source.description.c_str());
+        target.setBy = FString(source.setBy.c_str());
+        for (const auto& source_linkedVirtualItems_item : source.linkedVirtualItems) {
+            FString b_source_linkedVirtualItems_item;
+            b_source_linkedVirtualItems_item = FString(source_linkedVirtualItems_item.c_str());
+            target.linkedVirtualItems.Add(b_source_linkedVirtualItems_item);
+        }
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         target.createdBy = FString(source.createdBy.c_str());
@@ -95,6 +113,12 @@ struct READYGAMESNETWORK_API FBP_GamePassData : public FBP_BaseRequestData {
         target.requestName = string(TCHAR_TO_UTF8(*source.requestName));
         target.name = string(TCHAR_TO_UTF8(*source.name));
         target.description = string(TCHAR_TO_UTF8(*source.description));
+        target.setBy = string(TCHAR_TO_UTF8(*source.setBy));
+        for (const auto& source_linkedVirtualItems_item : source.linkedVirtualItems) {
+            string cpp_source_linkedVirtualItems_item;
+            cpp_source_linkedVirtualItems_item = string(TCHAR_TO_UTF8(*source_linkedVirtualItems_item));
+            target.linkedVirtualItems.push_back(cpp_source_linkedVirtualItems_item);
+        }
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));

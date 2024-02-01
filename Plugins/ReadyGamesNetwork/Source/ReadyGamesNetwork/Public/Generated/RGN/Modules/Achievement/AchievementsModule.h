@@ -12,6 +12,7 @@
 #include "TriggerByRequestNameRequestData.h"
 #include "ClaimByIdRequestData.h"
 #include "ClaimByRequestNameRequestData.h"
+#include "GetProjectAchievementsResponse.h"
 #include "GetUserAchievementsResponse.h"
 #include "UserAchievement.h"
 #include <vector>
@@ -59,6 +60,26 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail,
                     false);
             };
+        static void GetByTagsAsync(
+            const function<void(const vector<RGN::Modules::Achievement::AchievementData>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const vector<string>& tags,
+            const int32_t limit,
+            const string& startAfter = "") {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["tags"] = tags;
+                requestData["limit"] = limit;
+                requestData["startAfter"] = startAfter;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Achievement::GetAchievementsResponse>(
+                    "achievements-getByTags",
+                    requestData,
+                    [success] (const RGN::Modules::Achievement::GetAchievementsResponse& result) {
+                        success(result.achievements);
+                    },
+                    fail,
+                    false);
+            };
         /**
          * Asynchronously retrieves a list of achievements for the current application from the Ready Games Network (RGN).
          * @param limit - An integer indicating the maximum number of achievements to retrieve.
@@ -91,6 +112,21 @@ namespace RGN { namespace Modules { namespace Achievement {
                     success,
                     fail,
                     appIds,
+                    limit,
+                    startAfter,
+                    withHistory);
+            };
+        static void GetByTagsWithUserDataAsync(
+            const function<void(const vector<RGN::Modules::Achievement::AchievementWithUserData>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const vector<string>& tags,
+            const int32_t limit,
+            const string& startAfter = "",
+            const bool withHistory = false) {
+                RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetByTagsWithUserDataAsync(
+                    success,
+                    fail,
+                    tags,
                     limit,
                     startAfter,
                     withHistory);
@@ -235,27 +271,56 @@ namespace RGN { namespace Modules { namespace Achievement {
                     fail,
                     false);
             };
+        static void GetProjectAchievementsAsync(
+            const function<void(const RGN::Modules::Achievement::GetProjectAchievementsResponse& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail) {
+                // Request parameters are null
+            };
         /**
-         * Gets current user competed achievements
-         * If the userId is provided, then it returns the comleted achievements for provided userId
+         * Gets in progress or completed user achievements
+         * If the userId is provided, then it returns the completed achievements for provided userId
          * Supports pagination queries in case the startAfter and limit are provided
-         * @param userId - User id to return the completed achievements
+         * @param userId - User id to return the achievements
+         * @param withHistory - Should populate returned achievements by completion history
          * @param startAfter - The time stamp to start the query after F:RGN.Modules.Achievement.UserAchievement.lastCompleteTime
          * @param limit - Maximal number of documents to return
-         * @return Requested amount of completed achievements
+         * @return Requested amount of achievements
          */
         static void GetUserAchievementsAsync(
             const function<void(const vector<RGN::Modules::Achievement::UserAchievement>& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail,
             const string& userId = string(),
+            const bool withHistory = false,
             const int64_t startAfter = INT64_MAX,
             const int32_t limit = INT32_MAX) {
                 RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetUserAchievementsAsync(
                     success,
                     fail,
                     userId,
+                    withHistory,
                     startAfter,
                     limit);
+            };
+        /**
+         * Gets in progress or completed user achievement by id
+         * If the userId is provided, then it returns the completed achievement for provided userId
+         * @param achievementId - Achievement id to return
+         * @param userId - User id to return the achievement
+         * @param withHistory - Should populate returned achievement by completion history
+         * @return Requested user achievement
+         */
+        static void GetUserAchievementByIdAsync(
+            const function<void(const RGN::Modules::Achievement::UserAchievement& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& achievementId,
+            const string& userId = string(),
+            const bool withHistory = false) {
+                RGN::Modules::Achievement::AchievementsModuleCustomImpl::GetUserAchievementByIdAsync(
+                    success,
+                    fail,
+                    achievementId,
+                    userId,
+                    withHistory);
             };
     };
 }}}

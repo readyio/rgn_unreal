@@ -35,15 +35,17 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByIdAsyncRespo
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByRequestNameAsyncResponse, const FBP_LeaderboardData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByRequestNamesAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByAppIdsAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardByTagsAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardForCurrentAppAsyncResponse, const TArray<FBP_LeaderboardData>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetLeaderboardIdsAsyncResponse, const TArray<FString>&, response);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleIsLeaderboardAvailableAsyncResponse, bool, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleIsLeaderboardAvailableAsyncResponse, const FBP_IsLeaderboardAvailableResponseData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleIsInPromoPeriodAsyncResponse, const FBP_IsInPromoPeriodResponseData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleIsInGracePeriodAsyncResponse, const FBP_IsInGracePeriodResponseData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleSetScoreAsyncResponse, int32, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleAddScoreAsyncResponse, int32, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetUserEntryAsyncResponse, const FBP_LeaderboardEntry&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetEntriesAsyncResponse, const TArray<FBP_LeaderboardEntry>&, response);
+DECLARE_DYNAMIC_DELEGATE(FLeaderboardModuleResetLeaderboardAsyncResponse);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_LeaderboardModule : public UBlueprintFunctionLibrary {
@@ -157,6 +159,44 @@ public:
                 cpp_startAfter,
                 cpp_ignoreTimestamp);
     }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="startAfter, ignoreTimestamp"))
+    static void GetLeaderboardByTagsAsync(
+        FLeaderboardModuleGetLeaderboardByTagsAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        const TArray<FString>& tags,
+        int32 limit,
+        const FString& startAfter = "",
+        bool ignoreTimestamp = false) {
+            vector<string> cpp_tags;
+            int32_t cpp_limit;
+            string cpp_startAfter;
+            bool cpp_ignoreTimestamp;
+            for (const auto& tags_item : tags) {
+                string cpp_tags_item;
+                cpp_tags_item = string(TCHAR_TO_UTF8(*tags_item));
+                cpp_tags.push_back(cpp_tags_item);
+            }
+            cpp_limit = limit;
+            cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
+            cpp_ignoreTimestamp = ignoreTimestamp;
+            RGN::Modules::Leaderboard::LeaderboardModule::GetLeaderboardByTagsAsync(
+                [onSuccess](vector<RGN::Modules::Leaderboard::LeaderboardData> response) {
+                    TArray<FBP_LeaderboardData> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_LeaderboardData b_response_item;
+                        FBP_LeaderboardData::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_tags,
+                cpp_limit,
+                cpp_startAfter,
+                cpp_ignoreTimestamp);
+    }
     /**
      * Asynchronously retrieves a list of leaderboards for the current application from the Ready Games Network (RGN).
      * @param limit - An integer indicating the maximum number of leaderboards to retrieve.
@@ -238,9 +278,9 @@ public:
             string cpp_leaderboardId;
             cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
             RGN::Modules::Leaderboard::LeaderboardModule::IsLeaderboardAvailableAsync(
-                [onSuccess](bool response) {
-                    bool bpResponse;
-                    bpResponse = response;
+                [onSuccess](RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData response) {
+                    FBP_IsLeaderboardAvailableResponseData bpResponse;
+                    FBP_IsLeaderboardAvailableResponseData::ConvertToUnrealModel(response, bpResponse);
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -422,5 +462,26 @@ public:
                 cpp_quantityTop,
                 cpp_includeUser,
                 cpp_quantityAroundUser);
+    }
+    /**
+     * Reset leaderboard. Gives the rewards to the users and resets the leaderboard.
+     * Requires project admin access.
+     * @param leaderboardId - The ID of the leaderboard to reset.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard")
+    static void ResetLeaderboardAsync(
+        FLeaderboardModuleResetLeaderboardAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        const FString& leaderboardId) {
+            string cpp_leaderboardId;
+            cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
+            RGN::Modules::Leaderboard::LeaderboardModule::ResetLeaderboardAsync(
+                [onSuccess]() {
+                    onSuccess.ExecuteIfBound();
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_leaderboardId);
     }
 };

@@ -95,6 +95,28 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     fail,
                     false);
             };
+        static void GetLeaderboardByTagsAsync(
+            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardData>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const vector<string>& tags,
+            const int32_t limit,
+            const string& startAfter = "",
+            const bool ignoreTimestamp = false) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["tags"] = tags;
+                requestData["limit"] = limit;
+                requestData["startAfter"] = startAfter;
+                requestData["ignoreTimestamp"] = ignoreTimestamp;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardsResponse>(
+                    "leaderboardV2-getByTags",
+                    requestData,
+                    [success] (const RGN::Modules::Leaderboard::GetLeaderboardsResponse& result) {
+                        success(result.leaderboards);
+                    },
+                    fail,
+                    false);
+            };
         /**
          * Asynchronously retrieves a list of leaderboards for the current application from the Ready Games Network (RGN).
          * @param limit - An integer indicating the maximum number of leaderboards to retrieve.
@@ -146,7 +168,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * @param leaderboardId - The ID of the leaderboard which status will be checked.
          */
         static void IsLeaderboardAvailableAsync(
-            const function<void(const bool result)>& success,
+            const function<void(const RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData& result)>& success,
             const function<void(const int httpCode, const string& error)>& fail,
             const string& leaderboardId) {
                 nlohmann::json requestData;
@@ -155,9 +177,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData>(
                     "leaderboardV2-isAvailable",
                     requestData,
-                    [success] (const RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData& result) {
-                        success(result.isAvailable);
-                    },
+                    success,
                     fail,
                     false);
             };
@@ -297,6 +317,25 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData& result) {
                         success(result.entries);
                     },
+                    fail,
+                    false);
+            };
+        /**
+         * Reset leaderboard. Gives the rewards to the users and resets the leaderboard.
+         * Requires project admin access.
+         * @param leaderboardId - The ID of the leaderboard to reset.
+         */
+        static void ResetLeaderboardAsync(
+            const function<void(void)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& leaderboardId) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["id"] = leaderboardId;
+                RGNCore::CallAPI<nlohmann::json>(
+                    "leaderboardV2-resetLeaderboard",
+                    requestData,
+                    success,
                     fail,
                     false);
             };

@@ -14,9 +14,18 @@ namespace RGN { namespace Modules { namespace Achievement {
      */
     struct AchievementReward {
         /**
-         * The type of reward this achievement offers. 
-         * This could be "virtualItem", "currency", "progression", "setLeaderboardScore" or "addLeaderboardScore"
-         * to match the different types of reward systems available.
+         * The type of reward this achievement offers.
+         * Supported reward types are:
+         * - `currency` - the reward is a quantity of currency coins.The `name` field is the name of the currency.
+         * - `item_by_id` - the reward is a quantity of a virtual items.The `name` field is the id of the virtual item.
+         * - `progression` - the reward is a quantity of progression.The `name` field is the id/name of the progression.
+         * - `setLeaderboardScore` - the reward is a quantity of leaderboard score to set.The `name` field is the id of the
+         * leaderboard.
+         * - `addLeaderboardScore` - the reward is a quantity of leaderboard score to add.The `name` field is the id of the
+         * leaderboard.
+         * - `gamepass_by_id` - the reward is a quantity of game passes to add.The `name` field is the id of the game pass.
+         * - `gamepass_by_request_name` - the reward is a quantity of game passes to add.The `name` field is the request name
+         * of the game pass.
          */
         string type;
         /**
@@ -31,7 +40,7 @@ namespace RGN { namespace Modules { namespace Achievement {
         string name;
         /**
          * The quantity of the reward that will be given to the user upon completing the achievement.
-         * For "virtualItem" and "currency", it represents the number of items or coins rewarded.
+         * For "item_by_id" and "currency", it represents the number of items or coins rewarded.
          * For "progression", it represents the increment value for the user's progression.
          * For "setLeaderboardScore", it represents the score that will be set for the current user to the leaderboard
          * For "addLeaderboardScore", it represents the score that will be added for the current user to the leaderboard

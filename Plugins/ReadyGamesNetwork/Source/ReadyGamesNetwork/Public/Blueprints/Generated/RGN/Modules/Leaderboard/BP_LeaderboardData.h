@@ -6,8 +6,10 @@
 #include "BP_LeaderboardReward.h"
 #include "../../../../../Generated/RGN/Model/TimeInfo.h"
 #include "../../Model/BP_TimeInfo.h"
-#include "../../../../../Generated/RGN/Model/Requirement.h"
-#include "../../Model/BP_Requirement.h"
+#include "../../../../../Generated/RGN/Model/RequirementData.h"
+#include "../../Model/BP_RequirementData.h"
+#include "../../../../../Generated/RGN/Model/ParticipationFee.h"
+#include "../../Model/BP_ParticipationFee.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -36,6 +38,11 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString requestName;
     /**
+     * Leaderboard tags list. It is used to filter the leaderboards.
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    TArray<FString> tags;
+    /**
      * Leaderboard name
      * Is used also to store localization key for the name
      */
@@ -48,7 +55,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString description;
     /**
-     * Define who can set/add score to the leaderboard
+     * Define who can set/add score to the leaderboard. 'server' or 'client'
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     FString setBy;
@@ -80,6 +87,17 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     TArray<FBP_LeaderboardReward> rewardsAtReset;
+    /**
+     * The leaderboard rewards draw type that determines how the leaderboard should draw rewards. Possible values:
+     * placeBased — Rewards will be drawn accordingly users places.
+     * scoreBased — Rewards will be drawn randomly, but users with higher score will have more chance to win.
+     * scoreBasedOnePerUser - Same as the scoreBased, but with limitation for one reward at whole leaderboard per one user
+     * scoreBasedOnePerUserAndReward - Same as the scoreBased, but with limitation for one unique reward per one user
+     * but different rewards could be added to same user
+     * Default value is placeBased
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    FString rewardsDrawType;
     /**
      * Date and time when the leaderboard was created
      * in milliseconds since midnight, January 1, 1970 UTC.
@@ -117,11 +135,21 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      * Specifies if the user need to have a gamepass or virtual item to join the leaderboard
      * Join the leaderboard means to submit scores to the leaderboard
      * In case the user does not have the required item, the score change is ignored
-     * If you specify more than one requirement, then at least one of them
-     * must be met.
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
-    TArray<FBP_Requirement> requiredToJoin;
+    FBP_RequirementData requiredToJoin;
+    /**
+     * Indicates whether the leaderboard rewards are automatically claimed by the user. If false, the rewards must
+     * be claimed manually.The time.end is required and optionally time.grace to be set if autoClaim is true.
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    bool autoClaim;
+    /**
+     * List of participation fees for the leaderboard.
+     * The fees are deducted when the user sets or adds a score to the leaderboard for the first time.
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    TArray<FBP_ParticipationFee> participationFees;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {
         target.id = FString(source.id.c_str());
@@ -131,6 +159,11 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             target.appIds.Add(b_source_appIds_item);
         }
         target.requestName = FString(source.requestName.c_str());
+        for (const auto& source_tags_item : source.tags) {
+            FString b_source_tags_item;
+            b_source_tags_item = FString(source_tags_item.c_str());
+            target.tags.Add(b_source_tags_item);
+        }
         target.name = FString(source.name.c_str());
         target.description = FString(source.description.c_str());
         target.setBy = FString(source.setBy.c_str());
@@ -142,15 +175,18 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             FBP_LeaderboardReward::ConvertToUnrealModel(source_rewardsAtReset_item, b_source_rewardsAtReset_item);
             target.rewardsAtReset.Add(b_source_rewardsAtReset_item);
         }
+        target.rewardsDrawType = FString(source.rewardsDrawType.c_str());
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         target.createdBy = FString(source.createdBy.c_str());
         target.updatedBy = FString(source.updatedBy.c_str());
         FBP_TimeInfo::ConvertToUnrealModel(source.time, target.time);
-        for (const auto& source_requiredToJoin_item : source.requiredToJoin) {
-            FBP_Requirement b_source_requiredToJoin_item;
-            FBP_Requirement::ConvertToUnrealModel(source_requiredToJoin_item, b_source_requiredToJoin_item);
-            target.requiredToJoin.Add(b_source_requiredToJoin_item);
+        FBP_RequirementData::ConvertToUnrealModel(source.requiredToJoin, target.requiredToJoin);
+        target.autoClaim = source.autoClaim;
+        for (const auto& source_participationFees_item : source.participationFees) {
+            FBP_ParticipationFee b_source_participationFees_item;
+            FBP_ParticipationFee::ConvertToUnrealModel(source_participationFees_item, b_source_participationFees_item);
+            target.participationFees.Add(b_source_participationFees_item);
         }
 	}
 
@@ -162,6 +198,11 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             target.appIds.push_back(cpp_source_appIds_item);
         }
         target.requestName = string(TCHAR_TO_UTF8(*source.requestName));
+        for (const auto& source_tags_item : source.tags) {
+            string cpp_source_tags_item;
+            cpp_source_tags_item = string(TCHAR_TO_UTF8(*source_tags_item));
+            target.tags.push_back(cpp_source_tags_item);
+        }
         target.name = string(TCHAR_TO_UTF8(*source.name));
         target.description = string(TCHAR_TO_UTF8(*source.description));
         target.setBy = string(TCHAR_TO_UTF8(*source.setBy));
@@ -173,15 +214,18 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             FBP_LeaderboardReward::ConvertToCoreModel(source_rewardsAtReset_item, cpp_source_rewardsAtReset_item);
             target.rewardsAtReset.push_back(cpp_source_rewardsAtReset_item);
         }
+        target.rewardsDrawType = string(TCHAR_TO_UTF8(*source.rewardsDrawType));
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
         target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
         FBP_TimeInfo::ConvertToCoreModel(source.time, target.time);
-        for (const auto& source_requiredToJoin_item : source.requiredToJoin) {
-            RGN::Model::Requirement cpp_source_requiredToJoin_item;
-            FBP_Requirement::ConvertToCoreModel(source_requiredToJoin_item, cpp_source_requiredToJoin_item);
-            target.requiredToJoin.push_back(cpp_source_requiredToJoin_item);
+        FBP_RequirementData::ConvertToCoreModel(source.requiredToJoin, target.requiredToJoin);
+        target.autoClaim = source.autoClaim;
+        for (const auto& source_participationFees_item : source.participationFees) {
+            RGN::Model::ParticipationFee cpp_source_participationFees_item;
+            FBP_ParticipationFee::ConvertToCoreModel(source_participationFees_item, cpp_source_participationFees_item);
+            target.participationFees.push_back(cpp_source_participationFees_item);
         }
 	}
 };

@@ -23,11 +23,16 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * Specifies reward, achievement contains virtual items reward, currency reward, etc
          */
         string achievementId;
+        /**
+         * Specifies how amount times to trigger an achievement
+         */
+        int32_t quantity = 0;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const LeaderboardReward& nlohmann_json_t) {
             nlohmann_json_j["placeFrom"] = nlohmann_json_t.placeFrom;
             nlohmann_json_j["placeTo"] = nlohmann_json_t.placeTo;
             nlohmann_json_j["achievementId"] = nlohmann_json_t.achievementId;
+            nlohmann_json_j["quantity"] = nlohmann_json_t.quantity;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardReward& nlohmann_json_t) {
@@ -47,6 +52,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 auto json_achievementId = nlohmann_json_j.at("achievementId");
                 if (!json_achievementId.is_null() && json_achievementId.is_string()) {
                     json_achievementId.get_to(nlohmann_json_t.achievementId);
+                }
+            }
+            if (nlohmann_json_j.contains("quantity")) {
+                auto json_quantity = nlohmann_json_j.at("quantity");
+                if (!json_quantity.is_null() && json_quantity.is_number()) {
+                    json_quantity.get_to(nlohmann_json_t.quantity);
                 }
             }
         }

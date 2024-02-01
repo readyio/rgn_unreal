@@ -18,6 +18,9 @@ USTRUCT(BlueprintType)
 struct READYGAMESNETWORK_API FBP_AchievementWithUserData : public FBP_AchievementData {
     GENERATED_BODY()
 
+    /**
+     * The user achievement data. Please use the M:RGN.Modules.Achievement.AchievementWithUserData.GetUserAchievement method instead.
+     */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Achievement")
     FBP_UserAchievement _userAchievement;
 
