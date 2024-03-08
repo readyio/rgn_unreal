@@ -4,12 +4,8 @@
 #include "SharedPrefs/SharedPrefs.h"
 #include "Crypto/hmac.h"
 #include "Crypto/sha256.h"
-#include "Generated/RGN/Model/Request/RefreshTokensRequestData.h"
-#include "Generated/RGN/Model/Response/RefreshTokensResponseData.h"
 
 using json = nlohmann::json;
-using RefreshTokensRequestData = RGN::Model::Request::RefreshTokensRequestData;
-using RefreshTokensResponseData = RGN::Model::Response::RefreshTokensResponseData;
 
 vector<RGNAuthCallback*> RGNCore::_authCallbacks = vector<RGNAuthCallback*>();
 string RGNCore::_appId = "";
