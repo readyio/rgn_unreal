@@ -113,6 +113,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["userId"] = userId;
                 requestData["virtualItemId"] = virtualItemId;
                 requestData["quantity"] = quantity;
+                requestData["version"] = 2;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData>(
                     "inventoryV2-removeByVirtualItemId",
                     requestData,
@@ -140,6 +141,7 @@ namespace RGN { namespace Modules { namespace Inventory {
                 requestData["userId"] = userId;
                 requestData["ownedItemId"] = ownedItemId;
                 requestData["quantity"] = quantity;
+                requestData["version"] = 2;
                 RGNCore::CallAPI<nlohmann::json, RGN::Modules::Inventory::RemoveByOwnedIdResponseData>(
                     "inventoryV2-removeByInventoryItemId",
                     requestData,

@@ -123,6 +123,10 @@ namespace RGN { namespace Modules { namespace Leaderboard {
          * The fees are deducted when the user sets or adds a score to the leaderboard for the first time.
          */
         vector<RGN::Model::ParticipationFee> participationFees;
+        /**
+         * Number of entries in the leaderboard
+         */
+        int32_t totalEntriesNumber = 0;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const LeaderboardData& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
@@ -145,6 +149,7 @@ namespace RGN { namespace Modules { namespace Leaderboard {
             nlohmann_json_j["requiredToJoin"] = nlohmann_json_t.requiredToJoin;
             nlohmann_json_j["autoClaim"] = nlohmann_json_t.autoClaim;
             nlohmann_json_j["participationFees"] = nlohmann_json_t.participationFees;
+            nlohmann_json_j["totalEntriesNumber"] = nlohmann_json_t.totalEntriesNumber;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, LeaderboardData& nlohmann_json_t) {
@@ -266,6 +271,12 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                 auto json_participationFees = nlohmann_json_j.at("participationFees");
                 if (!json_participationFees.is_null() && json_participationFees.is_array()) {
                     json_participationFees.get_to(nlohmann_json_t.participationFees);
+                }
+            }
+            if (nlohmann_json_j.contains("totalEntriesNumber")) {
+                auto json_totalEntriesNumber = nlohmann_json_j.at("totalEntriesNumber");
+                if (!json_totalEntriesNumber.is_null() && json_totalEntriesNumber.is_number()) {
+                    json_totalEntriesNumber.get_to(nlohmann_json_t.totalEntriesNumber);
                 }
             }
         }

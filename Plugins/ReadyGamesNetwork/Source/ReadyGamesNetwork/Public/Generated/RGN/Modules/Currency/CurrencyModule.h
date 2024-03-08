@@ -11,6 +11,7 @@
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "PurchaseCurrencyProductRequestData.h"
 #include "AddUserCurrenciesResponseData.h"
+#include "GetUserCurrenciesResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -102,6 +103,20 @@ namespace RGN { namespace Modules { namespace Currency {
                     "currency-addUserCurrencies",
                     requestData,
                     [success] (const RGN::Modules::Currency::AddUserCurrenciesResponseData& result) {
+                        success(result.userCurrencies);
+                    },
+                    fail,
+                    false);
+            };
+        static void GetUserCurrenciesAsync(
+            const function<void(const vector<RGN::Modules::Currency::Currency>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail) {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Currency::GetUserCurrenciesResponseData>(
+                    "currency-getUserCurrencies",
+                    requestData,
+                    [success] (const RGN::Modules::Currency::GetUserCurrenciesResponseData& result) {
                         success(result.userCurrencies);
                     },
                     fail,

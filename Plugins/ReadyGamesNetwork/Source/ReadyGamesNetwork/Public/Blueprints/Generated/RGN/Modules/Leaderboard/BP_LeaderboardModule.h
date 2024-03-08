@@ -21,6 +21,12 @@
 #include "BP_LeaderboardEntry.h"
 #include "../../../../../Generated/RGN/Modules/Leaderboard/GetLeaderboardEntriesResponseData.h"
 #include "BP_GetLeaderboardEntriesResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/GetLeaderboardResetsResponseData.h"
+#include "BP_GetLeaderboardResetsResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/LeaderboardReset.h"
+#include "BP_LeaderboardReset.h"
+#include "../../../../../Generated/RGN/Modules/Leaderboard/GetLeaderboardResetResponseData.h"
+#include "BP_GetLeaderboardResetResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -45,6 +51,8 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleSetScoreAsyncResponse, int32
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleAddScoreAsyncResponse, int32, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetUserEntryAsyncResponse, const FBP_LeaderboardEntry&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetEntriesAsyncResponse, const TArray<FBP_LeaderboardEntry>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetResetsAsyncResponse, const TArray<FBP_LeaderboardReset>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FLeaderboardModuleGetResetAsyncResponse, const FBP_LeaderboardReset&, response);
 DECLARE_DYNAMIC_DELEGATE(FLeaderboardModuleResetLeaderboardAsyncResponse);
 
 UCLASS()
@@ -462,6 +470,97 @@ public:
                 cpp_quantityTop,
                 cpp_includeUser,
                 cpp_quantityAroundUser);
+    }
+    /**
+     * Asynchronously retrieves leaderboard resets. Every time the leaderboard resets the results are stored in the history.
+     * This method allows to retreive the history of the leaderboard resets.
+     * @param leaderboardId - The ID of the leaderboard from which the entries will be retrieved.
+     * @param withEntries - Flag to include user entries in the response.
+     * @param startAfter - The start time in milliseconds since midnight, January 1, 1970 UTC, based on 'resetAt'.
+     * @param limit - The maximum number of resets to retrieve.
+     * @param orderDirection - The order direction for the resets. Accepted values 'asc' or 'desc'.
+     * @return A task that represents the asynchronous operation. The task result contains a list of the retrieved leaderboard resets.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="startAfter, limit, orderDirection"))
+    static void GetResetsAsync(
+        FLeaderboardModuleGetResetsAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        const FString& leaderboardId,
+        bool withEntries,
+        int64 startAfter = -1,
+        int32 limit = -1,
+        const FString& orderDirection = "asc") {
+            string cpp_leaderboardId;
+            bool cpp_withEntries;
+            int64_t cpp_startAfter;
+            int32_t cpp_limit;
+            string cpp_orderDirection;
+            cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
+            cpp_withEntries = withEntries;
+            cpp_startAfter = startAfter;
+            cpp_limit = limit;
+            cpp_orderDirection = string(TCHAR_TO_UTF8(*orderDirection));
+            RGN::Modules::Leaderboard::LeaderboardModule::GetResetsAsync(
+                [onSuccess](vector<RGN::Modules::Leaderboard::LeaderboardReset> response) {
+                    TArray<FBP_LeaderboardReset> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_LeaderboardReset b_response_item;
+                        FBP_LeaderboardReset::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_leaderboardId,
+                cpp_withEntries,
+                cpp_startAfter,
+                cpp_limit,
+                cpp_orderDirection);
+    }
+    /**
+     * Asynchronously retrieves leaderboard reset by leaderboard and reset IDs. The result includes the user entries.
+     * @param leaderboardId - The ID of the leaderboard from which the reset user entries will be retrieved.
+     * @param resetId - The unique reset ID of the leaderboard
+     * @param startAfter - The start after based on 'place'.
+     * @param limit - The maximum number of user entries to retrieve.
+     * @param orderDirection - The order direction for the user entries. Accepted values 'asc' or 'desc'.
+     * @return A task that represents the asynchronous operation. The task result contains the retrieved leaderboard reset with user entries.
+     */
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Leaderboard", meta=(AutoCreateRefTerm="startAfter, limit, orderDirection"))
+    static void GetResetAsync(
+        FLeaderboardModuleGetResetAsyncResponse onSuccess,
+        FLeaderboardModuleFailResponse onFail,
+        const FString& leaderboardId,
+        const FString& resetId,
+        int64 startAfter = 0,
+        int32 limit = 0,
+        const FString& orderDirection = "asc") {
+            string cpp_leaderboardId;
+            string cpp_resetId;
+            int64_t cpp_startAfter;
+            int32_t cpp_limit;
+            string cpp_orderDirection;
+            cpp_leaderboardId = string(TCHAR_TO_UTF8(*leaderboardId));
+            cpp_resetId = string(TCHAR_TO_UTF8(*resetId));
+            cpp_startAfter = startAfter;
+            cpp_limit = limit;
+            cpp_orderDirection = string(TCHAR_TO_UTF8(*orderDirection));
+            RGN::Modules::Leaderboard::LeaderboardModule::GetResetAsync(
+                [onSuccess](RGN::Modules::Leaderboard::LeaderboardReset response) {
+                    FBP_LeaderboardReset bpResponse;
+                    FBP_LeaderboardReset::ConvertToUnrealModel(response, bpResponse);
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                },
+                cpp_leaderboardId,
+                cpp_resetId,
+                cpp_startAfter,
+                cpp_limit,
+                cpp_orderDirection);
     }
     /**
      * Reset leaderboard. Gives the rewards to the users and resets the leaderboard.

@@ -150,6 +150,11 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
     TArray<FBP_ParticipationFee> participationFees;
+    /**
+     * Number of entries in the leaderboard
+     */
+    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Leaderboard")
+    int32 totalEntriesNumber;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {
         target.id = FString(source.id.c_str());
@@ -188,6 +193,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             FBP_ParticipationFee::ConvertToUnrealModel(source_participationFees_item, b_source_participationFees_item);
             target.participationFees.Add(b_source_participationFees_item);
         }
+        target.totalEntriesNumber = source.totalEntriesNumber;
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardData& source, RGN::Modules::Leaderboard::LeaderboardData& target) {
@@ -227,5 +233,6 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
             FBP_ParticipationFee::ConvertToCoreModel(source_participationFees_item, cpp_source_participationFees_item);
             target.participationFees.push_back(cpp_source_participationFees_item);
         }
+        target.totalEntriesNumber = source.totalEntriesNumber;
 	}
 };

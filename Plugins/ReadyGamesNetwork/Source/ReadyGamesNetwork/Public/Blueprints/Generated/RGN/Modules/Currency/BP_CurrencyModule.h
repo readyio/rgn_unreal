@@ -19,6 +19,8 @@
 #include "BP_PurchaseCurrencyProductRequestData.h"
 #include "../../../../../Generated/RGN/Modules/Currency/AddUserCurrenciesResponseData.h"
 #include "BP_AddUserCurrenciesResponseData.h"
+#include "../../../../../Generated/RGN/Modules/Currency/GetUserCurrenciesResponseData.h"
+#include "BP_GetUserCurrenciesResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -34,6 +36,7 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FCurrencyModulePurchaseRGNCoinAsyncResponse, c
 DECLARE_DYNAMIC_DELEGATE_OneParam(FCurrencyModuleGetInAppPurchaseCurrencyDataAsyncResponse, const FBP_CurrencyProductsData&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FCurrencyModulePurchaseCurrencyProductAsyncResponse, const TArray<FBP_Currency>&, response);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FCurrencyModuleAddUserCurrenciesAsyncResponse, const TArray<FBP_Currency>&, response);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FCurrencyModuleGetUserCurrenciesAsyncResponse, const TArray<FBP_Currency>&, response);
 
 UCLASS()
 class READYGAMESNETWORK_API UBP_CurrencyModule : public UBlueprintFunctionLibrary {
@@ -159,5 +162,23 @@ public:
                      onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
                 },
                 cpp_currencies);
+    }
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Currency")
+    static void GetUserCurrenciesAsync(
+        FCurrencyModuleGetUserCurrenciesAsyncResponse onSuccess,
+        FCurrencyModuleFailResponse onFail) {
+            RGN::Modules::Currency::CurrencyModule::GetUserCurrenciesAsync(
+                [onSuccess](vector<RGN::Modules::Currency::Currency> response) {
+                    TArray<FBP_Currency> bpResponse;
+                    for (const auto& response_item : response) {
+                        FBP_Currency b_response_item;
+                        FBP_Currency::ConvertToUnrealModel(response_item, b_response_item);
+                        bpResponse.Add(b_response_item);
+                    }
+                    onSuccess.ExecuteIfBound(bpResponse);
+                },
+                [onFail](int code, std::string message) {
+                     onFail.ExecuteIfBound(static_cast<int32>(code), FString(message.c_str()));
+                });
     }
 };

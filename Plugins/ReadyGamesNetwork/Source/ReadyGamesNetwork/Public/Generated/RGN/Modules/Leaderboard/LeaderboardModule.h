@@ -12,6 +12,9 @@
 #include "SetScoreResponseData.h"
 #include "LeaderboardEntry.h"
 #include "GetLeaderboardEntriesResponseData.h"
+#include "GetLeaderboardResetsResponseData.h"
+#include "LeaderboardReset.h"
+#include "GetLeaderboardResetResponseData.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -316,6 +319,67 @@ namespace RGN { namespace Modules { namespace Leaderboard {
                     requestData,
                     [success] (const RGN::Modules::Leaderboard::GetLeaderboardEntriesResponseData& result) {
                         success(result.entries);
+                    },
+                    fail,
+                    false);
+            };
+        /**
+         * Asynchronously retrieves leaderboard resets. Every time the leaderboard resets the results are stored in the history.
+         * This method allows to retreive the history of the leaderboard resets.
+         * @param leaderboardId - The ID of the leaderboard from which the entries will be retrieved.
+         * @param withEntries - Flag to include user entries in the response.
+         * @param startAfter - The start time in milliseconds since midnight, January 1, 1970 UTC, based on 'resetAt'.
+         * @param limit - The maximum number of resets to retrieve.
+         * @param orderDirection - The order direction for the resets. Accepted values 'asc' or 'desc'.
+         * @return A task that represents the asynchronous operation. The task result contains a list of the retrieved leaderboard resets.
+         */
+        static void GetResetsAsync(
+            const function<void(const vector<RGN::Modules::Leaderboard::LeaderboardReset>& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& leaderboardId,
+            const bool withEntries,
+            const int64_t startAfter = -1,
+            const int32_t limit = -1,
+            const string& orderDirection = "asc") {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["leaderboardId"] = leaderboardId;
+                requestData["withEntries"] = withEntries;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardResetsResponseData>(
+                    "leaderboardV2-getResets",
+                    requestData,
+                    [success] (const RGN::Modules::Leaderboard::GetLeaderboardResetsResponseData& result) {
+                        success(result.resets);
+                    },
+                    fail,
+                    false);
+            };
+        /**
+         * Asynchronously retrieves leaderboard reset by leaderboard and reset IDs. The result includes the user entries.
+         * @param leaderboardId - The ID of the leaderboard from which the reset user entries will be retrieved.
+         * @param resetId - The unique reset ID of the leaderboard
+         * @param startAfter - The start after based on 'place'.
+         * @param limit - The maximum number of user entries to retrieve.
+         * @param orderDirection - The order direction for the user entries. Accepted values 'asc' or 'desc'.
+         * @return A task that represents the asynchronous operation. The task result contains the retrieved leaderboard reset with user entries.
+         */
+        static void GetResetAsync(
+            const function<void(const RGN::Modules::Leaderboard::LeaderboardReset& result)>& success,
+            const function<void(const int httpCode, const string& error)>& fail,
+            const string& leaderboardId,
+            const string& resetId,
+            const int64_t startAfter = 0,
+            const int32_t limit = 0,
+            const string& orderDirection = "asc") {
+                nlohmann::json requestData;
+                requestData["appId"] = RGNCore::GetAppId();
+                requestData["leaderboardId"] = leaderboardId;
+                requestData["resetId"] = resetId;
+                RGNCore::CallAPI<nlohmann::json, RGN::Modules::Leaderboard::GetLeaderboardResetResponseData>(
+                    "leaderboardV2-getReset",
+                    requestData,
+                    [success] (const RGN::Modules::Leaderboard::GetLeaderboardResetResponseData& result) {
+                        success(result.reset);
                     },
                     fail,
                     false);
