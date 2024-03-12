@@ -117,6 +117,7 @@ void RGNCore::CreateWallet(const function<void()>& onCreateWallet) {
 }
 
 void RGNCore::SignOut() {
+    _userId = "";
     _idToken = "";
     _refreshToken = "";
     SaveAuthSession();
