@@ -46,7 +46,6 @@ void RGNCore::DevSignIn(const string& email, const string& password, const funct
     json requestBody;
     requestBody["email"] = email;
     requestBody["password"] = password;
-    requestBody["appId"] = _appId;
     requestBody["returnSecureToken"] = true;
 
     RGNCore::NonAuthInternalCallAPI("user-signInWithEmailPassword", requestBody.dump(),
@@ -82,7 +81,6 @@ void RGNCore::SignIn(const function<void(bool)>& onSignIn) {
 
 void RGNCore::SignInAnonymously(const function<void(bool)>& onSignIn) {
     json requestBody;
-    requestBody["appId"] = _appId;
     requestBody["returnSecureToken"] = true;
 
     RGNCore::NonAuthInternalCallAPI("user-signUpAnonymously", requestBody.dump(),
@@ -126,7 +124,6 @@ void RGNCore::SignOut() {
 
 void RGNCore::RefreshTokens(const function<void(bool)>& callback) {
     json requestBody;
-    requestBody["appPackageName"] = _appId;
     requestBody["refreshToken"] = _refreshToken;
 
     RGNCore::NonAuthInternalCallAPI("user-refreshTokens", requestBody.dump(),
@@ -290,6 +287,9 @@ void RGNCore::NonAuthInternalCallAPI(const string& name, const string& body,
     const function<void(const string&)>& complete, const function<void(const int, const string&)>& fail) {
     HttpHeaders headers;
     headers.add("Content-type", "application/json");
+    if (!_appId.empty()) {
+        headers.add("app-id", _appId);
+    }
     string url = GetApiUrl() + name;
     Http::Request(url, HttpMethod::POST, headers, body, [complete, fail](HttpResponse httpResponse) {
         int httpResponseCode = httpResponse.getResponseCode();
