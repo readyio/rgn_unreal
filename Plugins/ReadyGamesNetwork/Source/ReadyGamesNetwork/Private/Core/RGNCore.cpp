@@ -24,6 +24,10 @@ void RGNCore::Initialize(RGNConfigureData configureData) {
     _useFunctionsEmulator = configureData.useFunctionsEmulator;
     _emulatorHostAndPort = configureData.emulatorHost + ":" + configureData.emulatorPort;
 
+    _userId = "";
+    _idToken = "";
+    _refreshToken = "";
+
     DeepLink::Initialize();
     DeepLink::Start();
     RGNAnalytics::Initialize();
@@ -309,27 +313,27 @@ void RGNCore::NonAuthInternalCallAPI(const string& name, const string& body,
 }
 
 void RGNCore::LoadAuthSession() {
+    string saveFileName = "AuthSession" + GetEnvironmentTargetName(_environmentTarget);
     bool wasNotLoggedIn = !IsLoggedIn();
-
     string authDataString;
-    if (SharedPrefs::Load("AuthSession", authDataString)) {
+    if (SharedPrefs::Load(saveFileName, authDataString)) {
         json authDataJson = json::parse(authDataString);
         _userId = authDataJson.contains("userId") ? authDataJson["userId"].get<string>() : "";
         _idToken = authDataJson.contains("idToken") ? authDataJson["idToken"].get<string>() : "";
         _refreshToken = authDataJson.contains("refreshToken") ? authDataJson["refreshToken"].get<string>() : "";
     }
-
     if (wasNotLoggedIn && IsLoggedIn()) {
         NotifyAuthChange();
     }
 }
 
 void RGNCore::SaveAuthSession() {
+    string saveFileName = "AuthSession" + GetEnvironmentTargetName(_environmentTarget);
     json authDataJson;
     authDataJson["userId"] = _userId;
     authDataJson["idToken"] = _idToken;
     authDataJson["refreshToken"] = _refreshToken;
-    SharedPrefs::Save("AuthSession", authDataJson.dump());
+    SharedPrefs::Save(saveFileName, authDataJson.dump());
 }
 
 void RGNCore::NotifyAuthChange() {
