@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <init>
-    <setStringFromProperty result="ProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectId" default=""/>
+    <setStringFromProperty result="sProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectId" default=""/>
+    <setStringAdd result="sUrlScheme" arg1="rgn" arg2="$S(sProjectId)"/>
     <log text="ReadyGamesNetwork SDK iOS Initialization"/>
   </init>
 
@@ -36,13 +37,13 @@
             <string>Editor</string>
             <key>CFBundleURLName</key>
           </addElements>
-          <setElement result="NameEntry" value="string" text="$S(ProjectId)"/>
+          <setElement result="NameEntry" value="string" text="$S(sUrlScheme)"/>
           <addElement tag="$" name="NameEntry"/>
           <addElements tag="$">
             <key>CFBundleURLSchemes</key>
           </addElements>
           <setElement result="ArrayEntry" value="array"/>
-          <setElement result="URLEntry" value="string" text="$S(ProjectId)"/>
+          <setElement result="URLEntry" value="string" text="$S(sUrlScheme)"/>
           <addElement tag="$ArrayEntry" name="URLEntry"/>
           <addElement tag="$" name="ArrayEntry"/>
         </true>

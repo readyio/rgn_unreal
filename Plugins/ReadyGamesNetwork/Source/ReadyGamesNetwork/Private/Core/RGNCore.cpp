@@ -75,8 +75,8 @@ void RGNCore::DevSignIn(const string& email, const string& password, const funct
 }
 
 void RGNCore::SignIn(const function<void(bool)>& onSignIn) {
-    string redirectUrl = _appId + "://";
-    string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&returnRefreshToken=true&appId=" + _appId;
+    string redirectUrl = "rgn" + _appId;
+    string url = GetOAuthUrl() + redirectUrl + "&returnSecureToken=true&returnRefreshToken=true&appId=" + _appId;
     Os::OpenURL(url);
     DeepLink::Listen([onSignIn](string payload) {
         OnSignInDeepLink(payload, onSignIn);
@@ -110,8 +110,8 @@ void RGNCore::SignInAnonymously(const function<void(bool)>& onSignIn) {
 }
 
 void RGNCore::CreateWallet(const function<void()>& onCreateWallet) {
-    string redirectUrl = _appId + "://";
-    string url = GetOAuthUrl() + redirectUrl + "%2F&returnSecureToken=true&idToken=" + _idToken + "&view=createwallet";
+    string redirectUrl = "rgn" + _appId;
+    string url = GetOAuthUrl() + redirectUrl + "&returnSecureToken=true&idToken=" + _idToken + "&view=createwallet";
     Os::OpenURL(url);
     DeepLink::Listen([onCreateWallet](string payload) {
         OnCreateWalletDeepLink(payload, onCreateWallet);

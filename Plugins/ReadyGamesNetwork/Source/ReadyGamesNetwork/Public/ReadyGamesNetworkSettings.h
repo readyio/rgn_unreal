@@ -26,4 +26,10 @@ class READYGAMESNETWORK_API UReadyGamesNetworkSettings : public UObject
 
 	UPROPERTY(EditAnywhere, config, Category = Connection, Meta = (EditCondition = "bUseFunctionsEmulator"))
 	FString EmulatorPort;
+
+#if WITH_EDITOR
+	void PostInitProperties();
+	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent);
+	void ValidateAndModifyProjectId();
+#endif
 };

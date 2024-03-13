@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns:android="http://schemas.android.com/apk/res/android">
 	<init>
-    <setStringFromProperty result="ProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectId" default=""/>
-		<log text="ReadyGamesNetwork SDK Android Initialization"/>
+    <setStringFromProperty result="sProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectId" default=""/>
+    <setStringAdd result="sUrlScheme" arg1="rgn" arg2="$S(sProjectId)"/>
+    <log text="ReadyGamesNetwork SDK Android Initialization"/>
 	</init>
 
 	<androidManifestUpdates>
-    
-		<loopElements tag="activity">
+
+    <loopElements tag="activity">
 			<setStringFromAttribute result="activityName" tag="$" name="android:name"/>
       <setBoolIsEqual result="bGameActivityUE4" arg1="$S(activityName)" arg2="com.epicgames.ue4.GameActivity"/>
       <setBoolIsEqual result="bGameActivityUE5" arg1="$S(activityName)" arg2="com.epicgames.unreal.GameActivity"/>
@@ -44,7 +45,7 @@
             <category android:name="android.intent.category.BROWSABLE"/>
           </addElements>
           <setElement result="SchemeEntry" xml="&lt;data /&gt;"/>
-          <addAttribute tag="$SchemeEntry" name="android:scheme" value="$S(ProjectId)"/>
+          <addAttribute tag="$SchemeEntry" name="android:scheme" value="$S(sUrlScheme)"/>
           <addElement tag="$" name="SchemeEntry"/>
         </true>
       </if>
