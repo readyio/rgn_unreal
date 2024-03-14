@@ -29,9 +29,18 @@ void UReadyGamesNetworkSettings::PostEditChangeProperty(FPropertyChangedEvent& P
 
 void UReadyGamesNetworkSettings::ValidateAndModifyProjectId()
 {
-	if (ProjectId.Len() > 0 && FChar::IsUpper(ProjectId[0]))
+	bool containsUpperChar = false;
+	for (int32_t i = 0; i < ProjectId.Len(); i++)
 	{
-		FString oldProjectId = FString(ProjectId);
+		if (FChar::IsUpper(ProjectId[i]))
+		{
+			containsUpperChar = true;
+			break;
+		}
+	}
+	if (containsUpperChar)
+	{
+		FString OldProjectId = FString(ProjectId);
 		ProjectId = ProjectId.ToLower();
 
 		FString IniFilePath = FPaths::ProjectConfigDir() / TEXT("DefaultGame.ini");
@@ -39,7 +48,7 @@ void UReadyGamesNetworkSettings::ValidateAndModifyProjectId()
 
 		if (FFileHelper::LoadFileToString(FileContent, *IniFilePath))
 		{
-			FileContent.ReplaceInline(*oldProjectId, *ProjectId);
+			FileContent.ReplaceInline(*OldProjectId, *ProjectId);
 			FFileHelper::SaveStringToFile(FileContent, *IniFilePath);
 		}
 	}
