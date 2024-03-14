@@ -8,49 +8,58 @@
 
 	<androidManifestUpdates>
 
+    <setBool result="bIsThereRGNActivity" value="false"/>
+
     <loopElements tag="activity">
 			<setStringFromAttribute result="activityName" tag="$" name="android:name"/>
-      <setBoolIsEqual result="bGameActivityUE4" arg1="$S(activityName)" arg2="com.epicgames.ue4.GameActivity"/>
-      <setBoolIsEqual result="bGameActivityUE5" arg1="$S(activityName)" arg2="com.epicgames.unreal.GameActivity"/>
-      <setBoolOr result="bGameActivity" arg1="$B(bGameActivityUE4)" arg2="$B(bGameActivityUE5)"/>
-			<if condition="bGameActivity">
-				<true>
-				<addElements tag="$">
-          <intent-filter>
-            <url_scheme_placeholder/>
-          </intent-filter>
-				</addElements>
-				</true>
-			</if>
+      <setBoolIsEqual result="bIsThereRGNActivity" arg1="$S(activityName)" arg2="io.getready.deeplink.RGNActivity"/>
 		</loopElements>
-    
-    <loopElements tag="intent-filter">
-      <setBool result="bReqKey" value="false"/>
-      
-      <loopElements tag="$">
-        <setStringFromTag result="TagName" tag="$"/>
-        <setBoolIsEqual result="bReqKey" arg1="$S(TagName)" arg2="url_scheme_placeholder"/>
-        <if condition="bReqKey">
-          <true>
-            <removeElement tag="url_scheme_placeholder"/>
-          </true>
-        </if>
-      </loopElements>
 
-      <if condition="bReqKey">
-        <true>
-          <addElements tag="$">
-            <action android:name="android.intent.action.VIEW"/>
-            <category android:name="android.intent.category.DEFAULT"/>
-            <category android:name="android.intent.category.BROWSABLE"/>
-          </addElements>
-          <setElement result="SchemeEntry" xml="&lt;data /&gt;"/>
-          <addAttribute tag="$SchemeEntry" name="android:scheme" value="$S(sUrlScheme)"/>
-          <addElement tag="$" name="SchemeEntry"/>
-        </true>
-      </if>
-    </loopElements>
-    
+    <if condition="bIsThereRGNActivity">
+      <false>
+
+        <addElements tag="application">
+          <activity android:name="io.getready.deeplink.RGNActivity"
+                    android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                    android:launchMode="singleTop"
+                    android:exported="true"
+                    android:configChanges="keyboardHidden|orientation|screenSize">
+            <intent-filter>
+              <url_scheme_placeholder/>
+            </intent-filter>
+          </activity>
+        </addElements>
+
+        <loopElements tag="intent-filter">
+          <setBool result="bReqKey" value="false"/>
+      
+          <loopElements tag="$">
+            <setStringFromTag result="TagName" tag="$"/>
+            <setBoolIsEqual result="bReqKey" arg1="$S(TagName)" arg2="url_scheme_placeholder"/>
+            <if condition="bReqKey">
+              <true>
+                <removeElement tag="url_scheme_placeholder"/>
+              </true>
+            </if>
+          </loopElements>
+
+          <if condition="bReqKey">
+            <true>
+              <addElements tag="$">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+              </addElements>
+              <setElement result="SchemeEntry" xml="&lt;data /&gt;"/>
+              <addAttribute tag="$SchemeEntry" name="android:scheme" value="$S(sUrlScheme)"/>
+              <addElement tag="$" name="SchemeEntry"/>
+            </true>
+          </if>
+        </loopElements>
+
+      </false>
+    </if>
+
 	</androidManifestUpdates>
 
   <gradleCopies>
@@ -66,26 +75,5 @@
       -keep interface io.getready.deeplink.** { *; }
     </insert>
   </proguardAdditions>
-
-  <gameActivityImportAdditions>
-    <insert>
-      import io.getready.deeplink.DeepLink;
-    </insert>
-  </gameActivityImportAdditions>
-
-  <gameActivityOnResumeAdditions>
-    <insert>
-      Intent intent = getIntent();
-      String action = intent.getAction();
-
-      // handle invocation
-      if (Intent.ACTION_VIEW.equals(action)) {
-        Uri data = intent.getData();
-        if(data != null) {
-          DeepLink.OnDeepLinkInvocation(data.toString());
-        }
-      }
-    </insert>
-  </gameActivityOnResumeAdditions>
 
 </root>

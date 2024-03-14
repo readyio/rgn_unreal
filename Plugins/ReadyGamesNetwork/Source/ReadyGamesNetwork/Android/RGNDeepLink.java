@@ -3,7 +3,7 @@ package io.getready.deeplink;
 import java.util.ArrayDeque;
 import android.util.Log;
 
-public class DeepLink {
+public class RGNDeepLink {
     public static native void OnDeepLinkInvocationJNI(String payload);
 
     private static Boolean initialized = false;
@@ -35,8 +35,6 @@ public class DeepLink {
         }
 
         while (invocations.peek() != null) {
-            Log.v("ReadyGamesNetwork", "ReleaseDeepLinkInvocation");
-
             String deepLink = invocations.pop();
             OnDeepLinkInvocationJNI(deepLink);
         }

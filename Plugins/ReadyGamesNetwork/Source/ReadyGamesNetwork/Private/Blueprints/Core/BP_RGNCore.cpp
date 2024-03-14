@@ -42,8 +42,8 @@ void UBP_RGNCore::DevSignIn(const FString& email, const FString& password, FRGNS
     RGNCore::DevSignIn(
         std::string(TCHAR_TO_UTF8(*email)),
         std::string(TCHAR_TO_UTF8(*password)),
-        [onSignIn](bool isLoggedIn) {
-            onSignIn.ExecuteIfBound(isLoggedIn);
+        [onSignIn](bool success) {
+            onSignIn.ExecuteIfBound(success);
         }
     );
 }
@@ -65,8 +65,8 @@ void UBP_RGNCore::SignOut() {
 }
 
 void UBP_RGNCore::CreateWallet(FRGNCreateWalletCallback onCreateWallet) {
-    RGNCore::CreateWallet([onCreateWallet]() {
-        onCreateWallet.ExecuteIfBound();
+    RGNCore::CreateWallet([onCreateWallet](bool canceled) {
+        onCreateWallet.ExecuteIfBound(canceled);
     });
 }
 

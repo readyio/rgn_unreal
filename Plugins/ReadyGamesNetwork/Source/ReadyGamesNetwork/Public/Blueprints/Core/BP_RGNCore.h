@@ -6,8 +6,8 @@
 #include "BP_RGNCore.generated.h"
 
 // Delegate for signIn event
-DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNSignInCallback, bool, isLoggedIn);
-DECLARE_DYNAMIC_DELEGATE(FRGNCreateWalletCallback);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNSignInCallback, bool, success);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNCreateWalletCallback, bool, success);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNAuthChangeCallback, bool, isLoggedIn);
 
 UCLASS()

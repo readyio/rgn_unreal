@@ -78,8 +78,8 @@ void RGNCore::SignIn(const function<void(bool)>& onSignIn) {
     string redirectUrl = "rgn" + _appId;
     string url = GetOAuthUrl() + redirectUrl + "&returnSecureToken=true&returnRefreshToken=true&appId=" + _appId;
     Os::OpenURL(url);
-    DeepLink::Listen([onSignIn](string payload) {
-        OnSignInDeepLink(payload, onSignIn);
+    DeepLink::Listen([onSignIn](bool canceled, string payload) {
+        OnSignInDeepLink(canceled, payload, onSignIn);
     });
 }
 
@@ -109,12 +109,12 @@ void RGNCore::SignInAnonymously(const function<void(bool)>& onSignIn) {
     );
 }
 
-void RGNCore::CreateWallet(const function<void()>& onCreateWallet) {
+void RGNCore::CreateWallet(const function<void(bool)>& onCreateWallet) {
     string redirectUrl = "rgn" + _appId;
     string url = GetOAuthUrl() + redirectUrl + "&returnSecureToken=true&idToken=" + _idToken + "&view=createwallet";
     Os::OpenURL(url);
-    DeepLink::Listen([onCreateWallet](string payload) {
-        OnCreateWalletDeepLink(payload, onCreateWallet);
+    DeepLink::Listen([onCreateWallet](bool canceled, string payload) {
+        OnCreateWalletDeepLink(canceled, payload, onCreateWallet);
     });
 }
 
@@ -343,17 +343,35 @@ void RGNCore::NotifyAuthChange() {
     }
 }
 
-void RGNCore::OnSignInDeepLink(const string& payload, const function<void(bool)>& onSignIn) {
+void RGNCore::OnSignInDeepLink(const bool canceled, const string& payload, const function<void(bool)>& onSignIn) {
+    if (canceled) {
+        if (onSignIn) {
+            onSignIn(false);
+        }
+        return;
+    }
     unordered_map<string, string> payloadArgs = HttpUtility::ParseURL(payload);
     bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
-    if (tokenExists) {
-        _refreshToken = payloadArgs.at("token");
-        RefreshTokens(onSignIn);
+    if (!tokenExists) {
+        if (onSignIn) {
+            onSignIn(false);
+        }
+        return;
     }
+    _refreshToken = payloadArgs.at("token");
+    RefreshTokens(onSignIn);
 }
 
-void RGNCore::OnCreateWalletDeepLink(const string& payload, const function<void()>& onCreateWallet) {
-    if (onCreateWallet) {
-        onCreateWallet();
+void RGNCore::OnCreateWalletDeepLink(const bool canceled, const string& payload, const function<void(bool)>& onCreateWallet) {
+    if (canceled) {
+        if (onCreateWallet) {
+            onCreateWallet(false);
+        }
+        return;
     }
+    RGNCore::OnSignInDeepLink(canceled, payload, [onCreateWallet, canceled](bool _) {
+        if (onCreateWallet) {
+            onCreateWallet(!canceled);
+        }
+    });
 }
