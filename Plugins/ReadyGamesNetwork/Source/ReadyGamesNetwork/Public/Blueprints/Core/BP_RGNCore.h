@@ -19,9 +19,11 @@ public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void Initialize();
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void SubscribeToAuthCallback(FRGNAuthChangeCallback onAuthChange);
+    static void Update();
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void UnsubscribeFromAuthCallback(FRGNAuthChangeCallback onAuthChange);
+    static void BindAuthChangeCallback(FRGNAuthChangeCallback onAuthChange);
+    UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
+    static void UnbindAuthChangeCallback(FRGNAuthChangeCallback onAuthChange);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void DevSignIn(const FString& email, const FString& password, FRGNSignInCallback onSignIn);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
@@ -37,7 +39,7 @@ public:
     UFUNCTION(BlueprintPure, Category = "ReadyGamesNetwork | Core")
     static FString GetUserId();
     UFUNCTION(BlueprintPure, Category = "ReadyGamesNetwork | Core")
-    static FString GetUserToken();
+    static FString GetIdToken();
 
 private:
     static std::vector<FRGNAuthChangeCallback> _authCallbacks;

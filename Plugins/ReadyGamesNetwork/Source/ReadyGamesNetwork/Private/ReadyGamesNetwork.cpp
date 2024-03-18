@@ -2,13 +2,8 @@
 
 #include "ReadyGamesNetwork.h"
 
-void FReadyGamesNetworkModule::StartupModule()
-{
-}
-
-void FReadyGamesNetworkModule::ShutdownModule()
-{
-}
+void FReadyGamesNetworkModule::StartupModule() {}
+void FReadyGamesNetworkModule::ShutdownModule() {}
 
 #undef LOCTEXT_NAMESPACE
 	

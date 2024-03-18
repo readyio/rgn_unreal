@@ -12,6 +12,9 @@ class READYGAMESNETWORK_API UReadyGamesNetworkSettings : public UObject
 	UPROPERTY(EditAnywhere, config, Category = Connection)
 	FString ProjectId;
 
+	UPROPERTY(VisibleAnywhere, config, Category = Connection)
+	FString ProjectIdLowerCase;
+
 	UPROPERTY(EditAnywhere, config, Category = Connection)
 	FString ApiKey;
 
@@ -30,6 +33,6 @@ class READYGAMESNETWORK_API UReadyGamesNetworkSettings : public UObject
 #if WITH_EDITOR
 	void PostInitProperties();
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent);
-	void ValidateAndModifyProjectId();
+	void PrepareProjectIdLowerCase();
 #endif
 };

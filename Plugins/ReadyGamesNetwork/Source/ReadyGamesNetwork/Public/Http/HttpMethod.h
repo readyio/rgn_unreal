@@ -1,6 +1,8 @@
 #pragma once
 
-enum HttpMethod {
-	GET,
-	POST
-};
+namespace RGN {
+	enum HttpMethod {
+		GET,
+		POST
+	};
+}

@@ -5,11 +5,13 @@
 
 using namespace std;
 
-struct RGNConfigureData {
-    string appId;
-    string apiKey;
-    RGNEnvironmentTarget environmentTarget;
-    bool useFunctionsEmulator;
-    string emulatorHost;
-    string emulatorPort;
-};
+namespace RGN {
+    struct RGNConfigureData {
+        string appId;
+        string apiKey;
+        RGNEnvironmentTarget environmentTarget;
+        bool useFunctionsEmulator;
+        string emulatorHost;
+        string emulatorPort;
+    };
+}

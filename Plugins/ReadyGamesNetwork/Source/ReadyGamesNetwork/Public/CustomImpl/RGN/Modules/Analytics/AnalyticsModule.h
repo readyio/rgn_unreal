@@ -2,7 +2,7 @@
 
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
-#include "../../../../Core/RGNAnalytics.h"
+#include "../../../../Analytics/Analytics.h"
 #include "../../../../Generated/RGN/Modules/Analytics/AnalyticsModule.h"
 #include <string>
 
@@ -19,8 +19,8 @@ namespace RGN { namespace Modules { namespace Analytics {
                 bodyJson["eventName"] = eventName;
                 bodyJson["projectId"] = RGNCore::GetAppId();
                 bodyJson["userId"] = RGNCore::GetUserId();
-                bodyJson["userPseudoId"] = RGNAnalytics::GetAnalyticsId();
-                bodyJson["sessionId"] = RGNAnalytics::GetSessionId();
+                bodyJson["userPseudoId"] = RGN::Analytics::GetAnalyticsId();
+                bodyJson["sessionId"] = RGN::Analytics::GetSessionId();
                 bodyJson["eventParameters"] = eventParameters;
                 RGNCore::CallAPI<nlohmann::json>("analytics-logEvent", bodyJson, success, fail, false);
             };

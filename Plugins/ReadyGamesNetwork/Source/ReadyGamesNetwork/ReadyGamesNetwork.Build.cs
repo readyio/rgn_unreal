@@ -28,12 +28,16 @@ public class ReadyGamesNetwork : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
+				"ApplicationCore",
 				"CoreUObject",
 				"Engine",
 				"Slate",
 				"SlateCore",
 				"Json",
-				"JsonUtilities"
+				"JsonUtilities",
+				"HTTPServer",
+				"Sockets",
+				"Networking",
 			}
 			);
 		

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <init>
-    <setStringFromProperty result="sProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectId" default=""/>
+    <setStringFromProperty result="sProjectId" ini="Game" section="/Script/ReadyGamesNetwork.ReadyGamesNetworkSettings" property="ProjectIdLowerCase" default=""/>
     <setStringAdd result="sUrlScheme" arg1="rgn" arg2="$S(sProjectId)"/>
     <log text="ReadyGamesNetwork SDK iOS Initialization"/>
   </init>

@@ -3,6 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../base64.hpp"
 #include "../../../../Core/RGNCore.h"
+#include "../../../../Http/Http.h"
 #include "../../../../Generated/RGN/Modules/UserProfile/GetUserProfileRequestData.h"
 #include "../../../../Generated/RGN/Modules/UserProfile/UserData.h"
 #include "../../../../Generated/RGN/Modules/UserProfile/UserProfilePicture.h"

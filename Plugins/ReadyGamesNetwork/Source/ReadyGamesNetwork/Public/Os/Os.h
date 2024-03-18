@@ -2,7 +2,9 @@
 
 #include <string>
 
-class Os {
-public:
-	static void OpenURL(std::string url);
-};
+namespace RGN {
+	class Os {
+	public:
+		static void OpenURL(std::string url);
+	};
+}
