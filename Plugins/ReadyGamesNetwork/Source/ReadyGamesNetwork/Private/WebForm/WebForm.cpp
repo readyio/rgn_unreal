@@ -17,9 +17,9 @@ namespace RGN {
     int32_t _editorCurrBoundedPort = 0;
     bool _lastTimeAppWasForeground = true;
 
-    void OnEnterForeground() {
+    void CancelRedirectWaitDelay() {
         FSimpleDelegateGraphTask::CreateAndDispatchWhenReady(FSimpleDelegateGraphTask::FDelegate::CreateLambda([=]() {
-            FPlatformProcess::Sleep(1.0f);
+            FPlatformProcess::Sleep(2.5f);
             AsyncTask(ENamedThreads::GameThread, []() {
                 WebForm::OnWebFormRedirect(true, "");
             });
@@ -82,15 +82,19 @@ namespace RGN {
 
     void WebForm::Initialize() {
 #if !(WITH_EDITOR || PLATFORM_WINDOWS || PLATFORM_MAC)
-        FCoreDelegates::ApplicationHasEnteredForegroundDelegate.AddStatic(&OnEnterForeground);
+        FCoreDelegates::ApplicationHasEnteredForegroundDelegate.AddLambda([]() {
+            if (_redirectEvent.hasBindings()) {
+                CancelRedirectWaitDelay();
+            }
+        });
 #endif
     }
 
     void WebForm::Update() {
 #if WITH_EDITOR || PLATFORM_WINDOWS || PLATFORM_MAC
         bool isForeground = FPlatformApplicationMisc::IsThisApplicationForeground();
-        if (isForeground && !_lastTimeAppWasForeground) {
-            OnEnterForeground();
+        if (isForeground && !_lastTimeAppWasForeground && _redirectEvent.hasBindings()) {
+            CancelRedirectWaitDelay();
         }
         _lastTimeAppWasForeground = isForeground;
 #endif
