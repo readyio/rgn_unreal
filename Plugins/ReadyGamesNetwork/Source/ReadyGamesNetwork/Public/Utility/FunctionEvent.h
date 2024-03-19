@@ -40,6 +40,10 @@ namespace RGN { namespace Utility {
         std::map<int, FunctionDelegate> callbacks;
 
     public:
+        bool hasBindings() const {
+            return !callbacks.empty();
+        }
+
         Ref bind(std::function<ReturnType(Args...)> callback) {
             callbacks[id_counter] = callback;
             return Ref(id_counter++);
