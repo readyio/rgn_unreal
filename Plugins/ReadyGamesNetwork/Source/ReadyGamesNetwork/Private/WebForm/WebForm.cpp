@@ -21,7 +21,6 @@ namespace RGN {
         FSimpleDelegateGraphTask::CreateAndDispatchWhenReady(FSimpleDelegateGraphTask::FDelegate::CreateLambda([=]() {
             FPlatformProcess::Sleep(1.0f);
             AsyncTask(ENamedThreads::GameThread, []() {
-                UE_LOG(LogTemp, Warning, TEXT("OnEnterForeground"));
                 WebForm::OnWebFormRedirect(true, "");
             });
         }), TStatId(), nullptr, ENamedThreads::AnyThread);
@@ -46,7 +45,6 @@ namespace RGN {
     #else
         redirectUrl = "rgn" + RGNCore::GetAppId();
         DeepLink::Listen([](bool canceled, std::string url) {
-            UE_LOG(LogTemp, Warning, TEXT("DeepLink::Listen, url: %s"), UTF8_TO_TCHAR(url.c_str()));
             OnWebFormRedirect(canceled, url);
         });
     #endif
