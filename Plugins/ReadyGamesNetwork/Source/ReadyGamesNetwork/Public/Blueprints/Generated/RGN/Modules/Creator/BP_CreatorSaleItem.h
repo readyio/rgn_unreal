@@ -23,8 +23,8 @@ struct READYGAMESNETWORK_API FBP_CreatorSaleItem {
     TArray<FBP_Currency> totalCurrencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSaleItem& source, FBP_CreatorSaleItem& target) {
-        target.id = FString(source.id.c_str());
-        target.name = FString(source.name.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
         target.totalUnit = source.totalUnit;
         for (const auto& source_totalCurrencies_item : source.totalCurrencies) {
             FBP_Currency b_source_totalCurrencies_item;

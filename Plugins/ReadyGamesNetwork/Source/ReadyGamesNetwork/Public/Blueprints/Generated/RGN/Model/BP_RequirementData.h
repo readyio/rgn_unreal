@@ -31,7 +31,7 @@ struct READYGAMESNETWORK_API FBP_RequirementData {
     TArray<FBP_Requirement> requirements;
 
 	static void ConvertToUnrealModel(const RGN::Model::RequirementData& source, FBP_RequirementData& target) {
-        target.operation = FString(source.operation.c_str());
+        target.operation = FString(UTF8_TO_TCHAR(source.operation.c_str()));
         for (const auto& source_requirements_item : source.requirements) {
             FBP_Requirement b_source_requirements_item;
             FBP_Requirement::ConvertToUnrealModel(source_requirements_item, b_source_requirements_item);

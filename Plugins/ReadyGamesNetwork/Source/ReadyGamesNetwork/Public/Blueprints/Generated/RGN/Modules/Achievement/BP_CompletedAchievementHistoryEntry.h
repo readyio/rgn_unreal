@@ -44,7 +44,7 @@ struct READYGAMESNETWORK_API FBP_CompletedAchievementHistoryEntry {
     int64 completeTime;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::CompletedAchievementHistoryEntry& source, FBP_CompletedAchievementHistoryEntry& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         target.valueToReach = source.valueToReach;
         for (const auto& source_rewards_item : source.rewards) {
             FBP_AchievementReward b_source_rewards_item;

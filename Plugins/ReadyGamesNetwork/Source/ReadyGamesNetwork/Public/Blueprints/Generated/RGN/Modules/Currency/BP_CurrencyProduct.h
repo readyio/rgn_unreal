@@ -25,12 +25,12 @@ struct READYGAMESNETWORK_API FBP_CurrencyProduct {
     FString promotionalSticker;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::CurrencyProduct& source, FBP_CurrencyProduct& target) {
-        target.id = FString(source.id.c_str());
-        target.currencyName = FString(source.currencyName.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.currencyName = FString(UTF8_TO_TCHAR(source.currencyName.c_str()));
         target.price = source.price;
         target.quantity = source.quantity;
-        target.type = FString(source.type.c_str());
-        target.promotionalSticker = FString(source.promotionalSticker.c_str());
+        target.type = FString(UTF8_TO_TCHAR(source.type.c_str()));
+        target.promotionalSticker = FString(UTF8_TO_TCHAR(source.promotionalSticker.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_CurrencyProduct& source, RGN::Modules::Currency::CurrencyProduct& target) {

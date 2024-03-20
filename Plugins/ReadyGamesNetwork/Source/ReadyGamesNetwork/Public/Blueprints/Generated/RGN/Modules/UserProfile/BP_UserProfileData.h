@@ -23,7 +23,7 @@ struct READYGAMESNETWORK_API FBP_UserProfileData : public FBP_UserData {
     TArray<FBP_Currency> currencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UserProfileData& source, FBP_UserProfileData& target) {
-        target.lastAppPackageName = FString(source.lastAppPackageName.c_str());
+        target.lastAppPackageName = FString(UTF8_TO_TCHAR(source.lastAppPackageName.c_str()));
         target.invisibleStatus = source.invisibleStatus;
         for (const auto& source_currencies_item : source.currencies) {
             FBP_Currency b_source_currencies_item;

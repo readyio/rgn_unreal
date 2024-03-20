@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_CreatorSignupResponseData {
     bool success;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSignupResponseData& source, FBP_CreatorSignupResponseData& target) {
-        target.message = FString(source.message.c_str());
+        target.message = FString(UTF8_TO_TCHAR(source.message.c_str()));
         target.success = source.success;
 	}
 

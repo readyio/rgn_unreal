@@ -55,13 +55,13 @@ struct READYGAMESNETWORK_API FBP_AchievementReward {
     int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::AchievementReward& source, FBP_AchievementReward& target) {
-        target.type = FString(source.type.c_str());
+        target.type = FString(UTF8_TO_TCHAR(source.type.c_str()));
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
-        target.name = FString(source.name.c_str());
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
         target.quantity = source.quantity;
 	}
 

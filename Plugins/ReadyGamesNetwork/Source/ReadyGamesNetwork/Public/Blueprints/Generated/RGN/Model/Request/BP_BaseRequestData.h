@@ -22,7 +22,7 @@ struct READYGAMESNETWORK_API FBP_BaseRequestData {
     FString appPackageName;
 
 	static void ConvertToUnrealModel(const RGN::Model::Request::BaseRequestData& source, FBP_BaseRequestData& target) {
-        target.appPackageName = FString(source.appPackageName.c_str());
+        target.appPackageName = FString(UTF8_TO_TCHAR(source.appPackageName.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_BaseRequestData& source, RGN::Model::Request::BaseRequestData& target) {

@@ -99,20 +99,20 @@ struct READYGAMESNETWORK_API FBP_InventoryItemData {
     FBP_VirtualItem virtualItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::InventoryItemData& source, FBP_InventoryItemData& target) {
-        target.id = FString(source.id.c_str());
-        target.virtualItemId = FString(source.virtualItemId.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.virtualItemId = FString(UTF8_TO_TCHAR(source.virtualItemId.c_str()));
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
         for (const auto& source_tags_item : source.tags) {
             FString b_source_tags_item;
-            b_source_tags_item = FString(source_tags_item.c_str());
+            b_source_tags_item = FString(UTF8_TO_TCHAR(source_tags_item.c_str()));
             target.tags.Add(b_source_tags_item);
         }
         target.quantity = source.quantity;
-        target.status = FString(source.status.c_str());
+        target.status = FString(UTF8_TO_TCHAR(source.status.c_str()));
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         for (const auto& source_itemUpgrades_item : source.itemUpgrades) {

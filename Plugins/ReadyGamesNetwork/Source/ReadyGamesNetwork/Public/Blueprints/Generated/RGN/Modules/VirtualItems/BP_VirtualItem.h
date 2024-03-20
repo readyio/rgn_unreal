@@ -145,29 +145,29 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
     TArray<FBP_MaterialInfo> materialInfos;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::VirtualItem& source, FBP_VirtualItem& target) {
-        target.id = FString(source.id.c_str());
-        target.name = FString(source.name.c_str());
-        target.description = FString(source.description.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
+        target.description = FString(UTF8_TO_TCHAR(source.description.c_str()));
         FBP_VirtualItemImage::ConvertToUnrealModel(source.image, target.image);
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
         target.isStackable = source.isStackable;
         target.isNFT = source.isNFT;
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
         for (const auto& source_tags_item : source.tags) {
             FString b_source_tags_item;
-            b_source_tags_item = FString(source_tags_item.c_str());
+            b_source_tags_item = FString(UTF8_TO_TCHAR(source_tags_item.c_str()));
             target.tags.Add(b_source_tags_item);
         }
         for (const auto& source_childs_item : source.childs) {
             FString b_source_childs_item;
-            b_source_childs_item = FString(source_childs_item.c_str());
+            b_source_childs_item = FString(UTF8_TO_TCHAR(source_childs_item.c_str()));
             target.childs.Add(b_source_childs_item);
         }
         for (const auto& source_addressableIds_item : source.addressableIds) {
@@ -189,7 +189,7 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
         FBP_BlockchainInfo::ConvertToUnrealModel(source.blockchain, target.blockchain);
         for (const auto& source_compatibleItemIds_item : source.compatibleItemIds) {
             FString b_source_compatibleItemIds_item;
-            b_source_compatibleItemIds_item = FString(source_compatibleItemIds_item.c_str());
+            b_source_compatibleItemIds_item = FString(UTF8_TO_TCHAR(source_compatibleItemIds_item.c_str()));
             target.compatibleItemIds.Add(b_source_compatibleItemIds_item);
         }
         for (const auto& source_materialInfos_item : source.materialInfos) {

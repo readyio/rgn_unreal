@@ -23,10 +23,10 @@ struct READYGAMESNETWORK_API FBP_PurchaseRGNCoinRequestData : public FBP_BaseReq
     FString iapReceipt;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::PurchaseRGNCoinRequestData& source, FBP_PurchaseRGNCoinRequestData& target) {
-        target.iapUUID = FString(source.iapUUID.c_str());
-        target.requestId = FString(source.requestId.c_str());
-        target.iapTransactionId = FString(source.iapTransactionId.c_str());
-        target.iapReceipt = FString(source.iapReceipt.c_str());
+        target.iapUUID = FString(UTF8_TO_TCHAR(source.iapUUID.c_str()));
+        target.requestId = FString(UTF8_TO_TCHAR(source.requestId.c_str()));
+        target.iapTransactionId = FString(UTF8_TO_TCHAR(source.iapTransactionId.c_str()));
+        target.iapReceipt = FString(UTF8_TO_TCHAR(source.iapReceipt.c_str()));
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 

@@ -21,7 +21,7 @@ struct READYGAMESNETWORK_API FBP_SetTimeRequestData : public FBP_BaseRequestData
     FBP_TimeInfo time;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::SetTimeRequestData& source, FBP_SetTimeRequestData& target) {
-        target.offerId = FString(source.offerId.c_str());
+        target.offerId = FString(UTF8_TO_TCHAR(source.offerId.c_str()));
         FBP_TimeInfo::ConvertToUnrealModel(source.time, target.time);
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}

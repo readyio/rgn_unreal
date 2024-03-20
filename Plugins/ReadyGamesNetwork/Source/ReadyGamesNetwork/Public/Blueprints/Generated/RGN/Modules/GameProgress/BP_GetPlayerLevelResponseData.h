@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_GetPlayerLevelResponseData : public FBP_BaseRes
     FString playerProgress;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::GetPlayerLevelResponseData& source, FBP_GetPlayerLevelResponseData& target) {
-        target.playerProgress = FString(source.playerProgress.c_str());
+        target.playerProgress = FString(UTF8_TO_TCHAR(source.playerProgress.c_str()));
 		FBP_BaseResponseData::ConvertToUnrealModel(source, target);
 	}
 

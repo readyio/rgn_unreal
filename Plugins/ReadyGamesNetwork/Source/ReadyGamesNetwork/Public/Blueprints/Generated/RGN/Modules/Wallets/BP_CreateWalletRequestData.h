@@ -19,8 +19,8 @@ struct READYGAMESNETWORK_API FBP_CreateWalletRequestData : public FBP_BaseMigrat
     FString password;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::CreateWalletRequestData& source, FBP_CreateWalletRequestData& target) {
-        target.token = FString(source.token.c_str());
-        target.password = FString(source.password.c_str());
+        target.token = FString(UTF8_TO_TCHAR(source.token.c_str()));
+        target.password = FString(UTF8_TO_TCHAR(source.password.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

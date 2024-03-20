@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_RemoveByVirtualItemIdResponseData {
     int32 newQuantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::RemoveByVirtualItemIdResponseData& source, FBP_RemoveByVirtualItemIdResponseData& target) {
-        target.virtualItemId = FString(source.virtualItemId.c_str());
+        target.virtualItemId = FString(UTF8_TO_TCHAR(source.virtualItemId.c_str()));
         target.newQuantity = source.newQuantity;
 	}
 

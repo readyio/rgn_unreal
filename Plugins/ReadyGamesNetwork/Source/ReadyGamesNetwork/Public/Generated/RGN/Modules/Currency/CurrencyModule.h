@@ -36,9 +36,10 @@ namespace RGN { namespace Modules { namespace Currency {
          * Adds the rgn-coin currency to the user in
          * in-app purchase plugin callback after verifying the reciept locally
          * 1. Start in-app purchase process
-         * 2. Wait for user purchase
-         * 3. Verify the reciept after successful purchase
-         * 4. Cann this method with the appropriate in-app item id (M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync)
+         * 2. Wait for the user to make the in-app purchase transaction
+         * 3. Verify locally on device the reciept after successful purchase
+         * 4. Call this method with the appropriate in-app item id (M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync)
+         * Note: this method requires valid ApiKey in your RGN credentials.
          * @param iapUUID - Unique id of the rgn-coin pack that was returned by the M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync method
          * @param iapTransactionId - The transaction id of the in-app purchase
          * @param iapReceipt - The receipt of the in-app purchase

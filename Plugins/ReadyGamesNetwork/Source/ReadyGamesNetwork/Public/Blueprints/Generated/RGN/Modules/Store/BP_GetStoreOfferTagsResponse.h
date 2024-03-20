@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_GetStoreOfferTagsResponse {
 	static void ConvertToUnrealModel(const RGN::Modules::Store::GetStoreOfferTagsResponse& source, FBP_GetStoreOfferTagsResponse& target) {
         for (const auto& source_tags_item : source.tags) {
             FString b_source_tags_item;
-            b_source_tags_item = FString(source_tags_item.c_str());
+            b_source_tags_item = FString(UTF8_TO_TCHAR(source_tags_item.c_str()));
             target.tags.Add(b_source_tags_item);
         }
 	}

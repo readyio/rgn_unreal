@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_SearchUsersRequestData : public FBP_BaseMigrati
     FString nicknameQuery;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::SearchUsersRequestData& source, FBP_SearchUsersRequestData& target) {
-        target.nicknameQuery = FString(source.nicknameQuery.c_str());
+        target.nicknameQuery = FString(UTF8_TO_TCHAR(source.nicknameQuery.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

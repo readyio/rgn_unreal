@@ -21,7 +21,7 @@ struct READYGAMESNETWORK_API FBP_UpdateVirtualItemsRequestData : public FBP_Base
     FBP_VirtualItem virtualItem;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::UpdateVirtualItemsRequestData& source, FBP_UpdateVirtualItemsRequestData& target) {
-        target.itemId = FString(source.itemId.c_str());
+        target.itemId = FString(UTF8_TO_TCHAR(source.itemId.c_str()));
         FBP_VirtualItem::ConvertToUnrealModel(source.virtualItem, target.virtualItem);
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}

@@ -157,34 +157,34 @@ struct READYGAMESNETWORK_API FBP_LeaderboardData {
     int32 totalEntriesNumber;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardData& source, FBP_LeaderboardData& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
-        target.requestName = FString(source.requestName.c_str());
+        target.requestName = FString(UTF8_TO_TCHAR(source.requestName.c_str()));
         for (const auto& source_tags_item : source.tags) {
             FString b_source_tags_item;
-            b_source_tags_item = FString(source_tags_item.c_str());
+            b_source_tags_item = FString(UTF8_TO_TCHAR(source_tags_item.c_str()));
             target.tags.Add(b_source_tags_item);
         }
-        target.name = FString(source.name.c_str());
-        target.description = FString(source.description.c_str());
-        target.setBy = FString(source.setBy.c_str());
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
+        target.description = FString(UTF8_TO_TCHAR(source.description.c_str()));
+        target.setBy = FString(UTF8_TO_TCHAR(source.setBy.c_str()));
         target.invertSortOrder = source.invertSortOrder;
         target.decimalOffset = source.decimalOffset;
-        target.type = FString(source.type.c_str());
+        target.type = FString(UTF8_TO_TCHAR(source.type.c_str()));
         for (const auto& source_rewardsAtReset_item : source.rewardsAtReset) {
             FBP_LeaderboardReward b_source_rewardsAtReset_item;
             FBP_LeaderboardReward::ConvertToUnrealModel(source_rewardsAtReset_item, b_source_rewardsAtReset_item);
             target.rewardsAtReset.Add(b_source_rewardsAtReset_item);
         }
-        target.rewardsDrawType = FString(source.rewardsDrawType.c_str());
+        target.rewardsDrawType = FString(UTF8_TO_TCHAR(source.rewardsDrawType.c_str()));
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
         FBP_TimeInfo::ConvertToUnrealModel(source.time, target.time);
         FBP_RequirementData::ConvertToUnrealModel(source.requiredToJoin, target.requiredToJoin);
         target.autoClaim = source.autoClaim;

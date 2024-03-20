@@ -24,7 +24,7 @@ struct READYGAMESNETWORK_API FBP_GetUserStatusResponseData : public FBP_BaseResp
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::GetUserStatusResponseData& source, FBP_GetUserStatusResponseData& target) {
         target.userStatus = static_cast<EBP_UserStatus>(source.userStatus);
-        target.lastAppPackageName = FString(source.lastAppPackageName.c_str());
+        target.lastAppPackageName = FString(UTF8_TO_TCHAR(source.lastAppPackageName.c_str()));
         target.lastActivityTS = source.lastActivityTS;
 		FBP_BaseResponseData::ConvertToUnrealModel(source, target);
 	}

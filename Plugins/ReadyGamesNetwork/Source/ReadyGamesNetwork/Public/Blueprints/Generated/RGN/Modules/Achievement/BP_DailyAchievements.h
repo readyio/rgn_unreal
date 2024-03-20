@@ -28,7 +28,7 @@ struct READYGAMESNETWORK_API FBP_DailyAchievements {
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::DailyAchievements& source, FBP_DailyAchievements& target) {
         target.daysInRow = source.daysInRow;
-        target.achievementId = FString(source.achievementId.c_str());
+        target.achievementId = FString(UTF8_TO_TCHAR(source.achievementId.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_DailyAchievements& source, RGN::Modules::Achievement::DailyAchievements& target) {

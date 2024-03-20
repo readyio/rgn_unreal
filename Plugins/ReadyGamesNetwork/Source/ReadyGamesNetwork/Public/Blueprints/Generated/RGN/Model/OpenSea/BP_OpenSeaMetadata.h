@@ -76,14 +76,14 @@ struct READYGAMESNETWORK_API FBP_OpenSeaMetadata {
     TArray<FBP_OpenSeaAttribute> attributes;
 
 	static void ConvertToUnrealModel(const RGN::Model::OpenSea::OpenSeaMetadata& source, FBP_OpenSeaMetadata& target) {
-        target.name = FString(source.name.c_str());
-        target.description = FString(source.description.c_str());
-        target.external_url = FString(source.external_url.c_str());
-        target.background_color = FString(source.background_color.c_str());
-        target.animation_url = FString(source.animation_url.c_str());
-        target.youtube_url = FString(source.youtube_url.c_str());
-        target.image = FString(source.image.c_str());
-        target.image_data = FString(source.image_data.c_str());
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
+        target.description = FString(UTF8_TO_TCHAR(source.description.c_str()));
+        target.external_url = FString(UTF8_TO_TCHAR(source.external_url.c_str()));
+        target.background_color = FString(UTF8_TO_TCHAR(source.background_color.c_str()));
+        target.animation_url = FString(UTF8_TO_TCHAR(source.animation_url.c_str()));
+        target.youtube_url = FString(UTF8_TO_TCHAR(source.youtube_url.c_str()));
+        target.image = FString(UTF8_TO_TCHAR(source.image.c_str()));
+        target.image_data = FString(UTF8_TO_TCHAR(source.image_data.c_str()));
         for (const auto& source_attributes_item : source.attributes) {
             FBP_OpenSeaAttribute b_source_attributes_item;
             FBP_OpenSeaAttribute::ConvertToUnrealModel(source_attributes_item, b_source_attributes_item);

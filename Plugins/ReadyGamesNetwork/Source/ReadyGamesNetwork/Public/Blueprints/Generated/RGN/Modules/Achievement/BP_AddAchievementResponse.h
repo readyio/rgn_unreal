@@ -15,7 +15,7 @@ struct READYGAMESNETWORK_API FBP_AddAchievementResponse {
     FString id;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::AddAchievementResponse& source, FBP_AddAchievementResponse& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_AddAchievementResponse& source, RGN::Modules::Achievement::AddAchievementResponse& target) {

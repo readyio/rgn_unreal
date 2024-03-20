@@ -81,25 +81,25 @@ struct READYGAMESNETWORK_API FBP_GamePassData : public FBP_BaseRequestData {
     FString updatedBy;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GamePass::GamePassData& source, FBP_GamePassData& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
-        target.requestName = FString(source.requestName.c_str());
-        target.name = FString(source.name.c_str());
-        target.description = FString(source.description.c_str());
-        target.setBy = FString(source.setBy.c_str());
+        target.requestName = FString(UTF8_TO_TCHAR(source.requestName.c_str()));
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
+        target.description = FString(UTF8_TO_TCHAR(source.description.c_str()));
+        target.setBy = FString(UTF8_TO_TCHAR(source.setBy.c_str()));
         for (const auto& source_linkedVirtualItems_item : source.linkedVirtualItems) {
             FString b_source_linkedVirtualItems_item;
-            b_source_linkedVirtualItems_item = FString(source_linkedVirtualItems_item.c_str());
+            b_source_linkedVirtualItems_item = FString(UTF8_TO_TCHAR(source_linkedVirtualItems_item.c_str()));
             target.linkedVirtualItems.Add(b_source_linkedVirtualItems_item);
         }
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 

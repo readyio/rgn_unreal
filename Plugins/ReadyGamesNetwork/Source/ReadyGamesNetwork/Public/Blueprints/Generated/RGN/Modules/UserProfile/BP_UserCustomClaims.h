@@ -17,9 +17,9 @@ struct READYGAMESNETWORK_API FBP_UserCustomClaims {
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UserCustomClaims& source, FBP_UserCustomClaims& target) {
         for (const auto& [source_claims_key, source_claims_value] : source.claims) {
             FString b_source_claims_key;
-            b_source_claims_key = FString(source_claims_key.c_str());
+            b_source_claims_key = FString(UTF8_TO_TCHAR(source_claims_key.c_str()));
             FString b_source_claims_value;
-            b_source_claims_value = FString(source_claims_value.c_str());
+            b_source_claims_value = FString(UTF8_TO_TCHAR(source_claims_value.c_str()));
             target.claims.Add(b_source_claims_key, b_source_claims_value);
         }
 	}

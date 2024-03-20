@@ -32,9 +32,9 @@ struct READYGAMESNETWORK_API FBP_OpenSeaAttribute {
     FString display_type;
 
 	static void ConvertToUnrealModel(const RGN::Model::OpenSea::OpenSeaAttribute& source, FBP_OpenSeaAttribute& target) {
-        target.trait_type = FString(source.trait_type.c_str());
-        target.value = FString(source.value.c_str());
-        target.display_type = FString(source.display_type.c_str());
+        target.trait_type = FString(UTF8_TO_TCHAR(source.trait_type.c_str()));
+        target.value = FString(UTF8_TO_TCHAR(source.value.c_str()));
+        target.display_type = FString(UTF8_TO_TCHAR(source.display_type.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_OpenSeaAttribute& source, RGN::Model::OpenSea::OpenSeaAttribute& target) {

@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_GetUserProfileRequestData : public FBP_BaseMigr
     FString userId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::GetUserProfileRequestData& source, FBP_GetUserProfileRequestData& target) {
-        target.userId = FString(source.userId.c_str());
+        target.userId = FString(UTF8_TO_TCHAR(source.userId.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

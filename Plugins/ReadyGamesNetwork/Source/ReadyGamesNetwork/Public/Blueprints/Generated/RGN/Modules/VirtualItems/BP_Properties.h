@@ -28,10 +28,10 @@ struct READYGAMESNETWORK_API FBP_Properties {
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::Properties& source, FBP_Properties& target) {
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
-        target.json = FString(source.json.c_str());
+        target.json = FString(UTF8_TO_TCHAR(source.json.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_Properties& source, RGN::Modules::VirtualItems::Properties& target) {

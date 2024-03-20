@@ -24,7 +24,7 @@ struct READYGAMESNETWORK_API FBP_AddVirtualItemToUserInventoryRequestData : publ
     FBP_InventoryItemData virtualItemInventoryData;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::AddVirtualItemToUserInventoryRequestData& source, FBP_AddVirtualItemToUserInventoryRequestData& target) {
-        target.userId = FString(source.userId.c_str());
+        target.userId = FString(UTF8_TO_TCHAR(source.userId.c_str()));
         FBP_InventoryItemData::ConvertToUnrealModel(source.virtualItemInventoryData, target.virtualItemInventoryData);
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}

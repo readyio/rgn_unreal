@@ -23,11 +23,11 @@ struct READYGAMESNETWORK_API FBP_CurrencyOffer {
     FString promotionalMessage;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::CurrencyOffer& source, FBP_CurrencyOffer& target) {
-        target.productId = FString(source.productId.c_str());
-        target.offeredProductId = FString(source.offeredProductId.c_str());
+        target.productId = FString(UTF8_TO_TCHAR(source.productId.c_str()));
+        target.offeredProductId = FString(UTF8_TO_TCHAR(source.offeredProductId.c_str()));
         target.remainingTime = source.remainingTime;
         target.offeringPrice = source.offeringPrice;
-        target.promotionalMessage = FString(source.promotionalMessage.c_str());
+        target.promotionalMessage = FString(UTF8_TO_TCHAR(source.promotionalMessage.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_CurrencyOffer& source, RGN::Modules::Currency::CurrencyOffer& target) {

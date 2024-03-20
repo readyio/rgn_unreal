@@ -33,7 +33,7 @@ struct READYGAMESNETWORK_API FBP_BlockchainInfo {
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::BlockchainInfo& source, FBP_BlockchainInfo& target) {
         target.purchasedQuantity = source.purchasedQuantity;
         target.totalQuantity = source.totalQuantity;
-        target.walletAddress = FString(source.walletAddress.c_str());
+        target.walletAddress = FString(UTF8_TO_TCHAR(source.walletAddress.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_BlockchainInfo& source, RGN::Modules::VirtualItems::BlockchainInfo& target) {

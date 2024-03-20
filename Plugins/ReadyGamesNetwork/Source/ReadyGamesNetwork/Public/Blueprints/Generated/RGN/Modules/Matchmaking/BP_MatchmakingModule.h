@@ -244,7 +244,7 @@ public:
             RGN::Modules::Matchmaking::MatchmakingModule::ParticipateInMatchAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -276,7 +276,7 @@ public:
             RGN::Modules::Matchmaking::MatchmakingModule::StartMatchAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -311,7 +311,7 @@ public:
             RGN::Modules::Matchmaking::MatchmakingModule::VoteForMatchAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -347,7 +347,7 @@ public:
             RGN::Modules::Matchmaking::MatchmakingModule::SubmitMatchScoreAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -379,7 +379,7 @@ public:
             RGN::Modules::Matchmaking::MatchmakingModule::FinishMatchAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {

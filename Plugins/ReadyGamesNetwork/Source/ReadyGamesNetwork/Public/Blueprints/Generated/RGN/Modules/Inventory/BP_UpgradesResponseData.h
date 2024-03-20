@@ -21,8 +21,8 @@ struct READYGAMESNETWORK_API FBP_UpgradesResponseData {
     TArray<FBP_VirtualItemUpgrade> itemUpgrades;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::UpgradesResponseData& source, FBP_UpgradesResponseData& target) {
-        target.ownedItemId = FString(source.ownedItemId.c_str());
-        target.virtualItemId = FString(source.virtualItemId.c_str());
+        target.ownedItemId = FString(UTF8_TO_TCHAR(source.ownedItemId.c_str()));
+        target.virtualItemId = FString(UTF8_TO_TCHAR(source.virtualItemId.c_str()));
         for (const auto& source_itemUpgrades_item : source.itemUpgrades) {
             FBP_VirtualItemUpgrade b_source_itemUpgrades_item;
             FBP_VirtualItemUpgrade::ConvertToUnrealModel(source_itemUpgrades_item, b_source_itemUpgrades_item);

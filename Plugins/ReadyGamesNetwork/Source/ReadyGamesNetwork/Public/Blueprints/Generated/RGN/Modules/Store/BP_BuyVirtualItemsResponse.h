@@ -23,7 +23,7 @@ struct READYGAMESNETWORK_API FBP_BuyVirtualItemsResponse {
     TArray<FBP_Currency> updatedCurrencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::BuyVirtualItemsResponse& source, FBP_BuyVirtualItemsResponse& target) {
-        target.offerId = FString(source.offerId.c_str());
+        target.offerId = FString(UTF8_TO_TCHAR(source.offerId.c_str()));
         for (const auto& source_purchasedItems_item : source.purchasedItems) {
             FBP_PurchaseItem b_source_purchasedItems_item;
             FBP_PurchaseItem::ConvertToUnrealModel(source_purchasedItems_item, b_source_purchasedItems_item);

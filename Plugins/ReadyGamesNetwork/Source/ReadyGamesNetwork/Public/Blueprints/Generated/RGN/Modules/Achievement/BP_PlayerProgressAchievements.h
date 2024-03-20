@@ -32,9 +32,9 @@ struct READYGAMESNETWORK_API FBP_PlayerProgressAchievements {
     FString achievementId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::PlayerProgressAchievements& source, FBP_PlayerProgressAchievements& target) {
-        target.playerProgressFieldName = FString(source.playerProgressFieldName.c_str());
+        target.playerProgressFieldName = FString(UTF8_TO_TCHAR(source.playerProgressFieldName.c_str()));
         target.playerProgressFieldValueToReach = source.playerProgressFieldValueToReach;
-        target.achievementId = FString(source.achievementId.c_str());
+        target.achievementId = FString(UTF8_TO_TCHAR(source.achievementId.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_PlayerProgressAchievements& source, RGN::Modules::Achievement::PlayerProgressAchievements& target) {

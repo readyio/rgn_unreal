@@ -27,8 +27,8 @@ struct READYGAMESNETWORK_API FBP_PurchaseAchievements {
     FString achievementId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::PurchaseAchievements& source, FBP_PurchaseAchievements& target) {
-        target.virtualItemTag = FString(source.virtualItemTag.c_str());
-        target.achievementId = FString(source.achievementId.c_str());
+        target.virtualItemTag = FString(UTF8_TO_TCHAR(source.virtualItemTag.c_str()));
+        target.achievementId = FString(UTF8_TO_TCHAR(source.achievementId.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_PurchaseAchievements& source, RGN::Modules::Achievement::PurchaseAchievements& target) {

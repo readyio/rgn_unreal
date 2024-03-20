@@ -47,7 +47,7 @@ public:
             RGN::Modules::Store::StoreModule_Admin::CreateLootBoxAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -67,7 +67,7 @@ public:
             RGN::Modules::Store::StoreModule_Admin::DeleteLootBoxAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {

@@ -19,7 +19,7 @@ struct READYGAMESNETWORK_API FBP_TriggerByRequestNameRequestData : public FBP_Ba
     int32 progress;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::TriggerByRequestNameRequestData& source, FBP_TriggerByRequestNameRequestData& target) {
-        target.requestName = FString(source.requestName.c_str());
+        target.requestName = FString(UTF8_TO_TCHAR(source.requestName.c_str()));
         target.progress = source.progress;
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}

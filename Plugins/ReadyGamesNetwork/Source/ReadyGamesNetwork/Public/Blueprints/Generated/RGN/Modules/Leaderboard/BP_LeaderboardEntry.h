@@ -54,13 +54,13 @@ struct READYGAMESNETWORK_API FBP_LeaderboardEntry {
     FString extraData;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardEntry& source, FBP_LeaderboardEntry& target) {
-        target.userId = FString(source.userId.c_str());
-        target.displayName = FString(source.displayName.c_str());
+        target.userId = FString(UTF8_TO_TCHAR(source.userId.c_str()));
+        target.displayName = FString(UTF8_TO_TCHAR(source.displayName.c_str()));
         FBP_UserProfilePicture::ConvertToUnrealModel(source.profilePicture, target.profilePicture);
         target.score = source.score;
-        target.formattedScore = FString(source.formattedScore.c_str());
+        target.formattedScore = FString(UTF8_TO_TCHAR(source.formattedScore.c_str()));
         target.place = source.place;
-        target.extraData = FString(source.extraData.c_str());
+        target.extraData = FString(UTF8_TO_TCHAR(source.extraData.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_LeaderboardEntry& source, RGN::Modules::Leaderboard::LeaderboardEntry& target) {

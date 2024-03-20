@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_ClaimByRequestNameRequestData : public FBP_Base
     FString requestName;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::ClaimByRequestNameRequestData& source, FBP_ClaimByRequestNameRequestData& target) {
-        target.requestName = FString(source.requestName.c_str());
+        target.requestName = FString(UTF8_TO_TCHAR(source.requestName.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

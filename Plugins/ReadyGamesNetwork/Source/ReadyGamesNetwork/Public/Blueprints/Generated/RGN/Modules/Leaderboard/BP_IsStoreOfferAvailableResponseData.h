@@ -27,7 +27,7 @@ struct READYGAMESNETWORK_API FBP_IsStoreOfferAvailableResponseData {
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::IsStoreOfferAvailableResponseData& source, FBP_IsStoreOfferAvailableResponseData& target) {
         target.isAvailable = source.isAvailable;
-        target.reason = FString(source.reason.c_str());
+        target.reason = FString(UTF8_TO_TCHAR(source.reason.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_IsStoreOfferAvailableResponseData& source, RGN::Modules::Leaderboard::IsStoreOfferAvailableResponseData& target) {

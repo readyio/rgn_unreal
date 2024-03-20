@@ -38,7 +38,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardReward {
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardReward& source, FBP_LeaderboardReward& target) {
         target.placeFrom = source.placeFrom;
         target.placeTo = source.placeTo;
-        target.achievementId = FString(source.achievementId.c_str());
+        target.achievementId = FString(UTF8_TO_TCHAR(source.achievementId.c_str()));
         target.quantity = source.quantity;
 	}
 

@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_CreatorSignupRequestData : public FBP_BaseMigra
     FString brandName;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::CreatorSignupRequestData& source, FBP_CreatorSignupRequestData& target) {
-        target.brandName = FString(source.brandName.c_str());
+        target.brandName = FString(UTF8_TO_TCHAR(source.brandName.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

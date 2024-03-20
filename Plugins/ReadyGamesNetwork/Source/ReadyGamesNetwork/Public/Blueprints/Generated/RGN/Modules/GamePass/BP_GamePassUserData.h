@@ -57,13 +57,13 @@ struct READYGAMESNETWORK_API FBP_GamePassUserData {
     FString updatedBy;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GamePass::GamePassUserData& source, FBP_GamePassUserData& target) {
-        target.id = FString(source.id.c_str());
-        target.gamePassId = FString(source.gamePassId.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.gamePassId = FString(UTF8_TO_TCHAR(source.gamePassId.c_str()));
         target.quantity = source.quantity;
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_GamePassUserData& source, RGN::Modules::GamePass::GamePassUserData& target) {

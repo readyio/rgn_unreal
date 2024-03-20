@@ -126,24 +126,24 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
     TArray<FBP_VirtualItem> virtualItems;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::StoreOffer& source, FBP_StoreOffer& target) {
-        target.id = FString(source.id.c_str());
-        target.name = FString(source.name.c_str());
-        target.description = FString(source.description.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
+        target.description = FString(UTF8_TO_TCHAR(source.description.c_str()));
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
         for (const auto& source_tags_item : source.tags) {
             FString b_source_tags_item;
-            b_source_tags_item = FString(source_tags_item.c_str());
+            b_source_tags_item = FString(UTF8_TO_TCHAR(source_tags_item.c_str()));
             target.tags.Add(b_source_tags_item);
         }
-        target.imageUrl = FString(source.imageUrl.c_str());
+        target.imageUrl = FString(UTF8_TO_TCHAR(source.imageUrl.c_str()));
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
         FBP_TimeInfo::ConvertToUnrealModel(source.time, target.time);
         for (const auto& source_properties_item : source.properties) {
             FBP_Properties b_source_properties_item;
@@ -152,7 +152,7 @@ struct READYGAMESNETWORK_API FBP_StoreOffer {
         }
         for (const auto& source_itemIds_item : source.itemIds) {
             FString b_source_itemIds_item;
-            b_source_itemIds_item = FString(source_itemIds_item.c_str());
+            b_source_itemIds_item = FString(UTF8_TO_TCHAR(source_itemIds_item.c_str()));
             target.itemIds.Add(b_source_itemIds_item);
         }
         for (const auto& source_prices_item : source.prices) {

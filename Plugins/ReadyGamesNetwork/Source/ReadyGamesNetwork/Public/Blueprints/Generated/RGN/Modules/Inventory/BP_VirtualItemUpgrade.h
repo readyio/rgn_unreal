@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_VirtualItemUpgrade {
     int32 upgradeLevel;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::VirtualItemUpgrade& source, FBP_VirtualItemUpgrade& target) {
-        target.upgradeId = FString(source.upgradeId.c_str());
+        target.upgradeId = FString(UTF8_TO_TCHAR(source.upgradeId.c_str()));
         target.upgradeLevel = source.upgradeLevel;
 	}
 

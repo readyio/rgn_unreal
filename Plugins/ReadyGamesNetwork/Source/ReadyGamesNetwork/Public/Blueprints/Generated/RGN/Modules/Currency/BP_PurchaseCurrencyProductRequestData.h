@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_PurchaseCurrencyProductRequestData : public FBP
     FString productId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::PurchaseCurrencyProductRequestData& source, FBP_PurchaseCurrencyProductRequestData& target) {
-        target.productId = FString(source.productId.c_str());
+        target.productId = FString(UTF8_TO_TCHAR(source.productId.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

@@ -33,7 +33,7 @@ public:
             RGN::Modules::Leaderboard::LeaderboardModule_Admin::AddLeaderboardAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -51,7 +51,7 @@ public:
             RGN::Modules::Leaderboard::LeaderboardModule_Admin::UpdateLeaderboardAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {

@@ -19,7 +19,7 @@ struct READYGAMESNETWORK_API FBP_RGNCoinEconomyProduct {
     int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Currency::RGNCoinEconomyProduct& source, FBP_RGNCoinEconomyProduct& target) {
-        target.uid = FString(source.uid.c_str());
+        target.uid = FString(UTF8_TO_TCHAR(source.uid.c_str()));
         target.priceInUSD = source.priceInUSD;
         target.quantity = source.quantity;
 	}

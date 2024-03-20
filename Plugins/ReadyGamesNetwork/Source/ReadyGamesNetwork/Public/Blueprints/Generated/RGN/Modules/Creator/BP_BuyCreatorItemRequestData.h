@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_BuyCreatorItemRequestData : public FBP_BaseRequ
     FString itemId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Creator::BuyCreatorItemRequestData& source, FBP_BuyCreatorItemRequestData& target) {
-        target.itemId = FString(source.itemId.c_str());
+        target.itemId = FString(UTF8_TO_TCHAR(source.itemId.c_str()));
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 

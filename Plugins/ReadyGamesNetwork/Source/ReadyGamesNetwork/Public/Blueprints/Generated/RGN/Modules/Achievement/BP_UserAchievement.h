@@ -61,7 +61,7 @@ struct READYGAMESNETWORK_API FBP_UserAchievement {
     TArray<FBP_CompletedAchievementHistoryEntry> history;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::UserAchievement& source, FBP_UserAchievement& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         target.value = source.value;
         target.valueToReach = source.valueToReach;
         target.isCompleted = source.isCompleted;

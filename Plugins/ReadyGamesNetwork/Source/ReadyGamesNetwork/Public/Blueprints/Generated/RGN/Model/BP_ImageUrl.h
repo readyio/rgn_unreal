@@ -37,10 +37,10 @@ struct READYGAMESNETWORK_API FBP_ImageUrl {
     FString small;
 
 	static void ConvertToUnrealModel(const RGN::Model::ImageUrl& source, FBP_ImageUrl& target) {
-        target.source = FString(source.source.c_str());
-        target.large = FString(source.large.c_str());
-        target.medium = FString(source.medium.c_str());
-        target.small = FString(source.small.c_str());
+        target.source = FString(UTF8_TO_TCHAR(source.source.c_str()));
+        target.large = FString(UTF8_TO_TCHAR(source.large.c_str()));
+        target.medium = FString(UTF8_TO_TCHAR(source.medium.c_str()));
+        target.small = FString(UTF8_TO_TCHAR(source.small.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_ImageUrl& source, RGN::Model::ImageUrl& target) {

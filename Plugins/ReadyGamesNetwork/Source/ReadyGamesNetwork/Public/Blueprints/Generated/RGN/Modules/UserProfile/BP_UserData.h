@@ -25,11 +25,11 @@ struct READYGAMESNETWORK_API FBP_UserData {
     FString bio;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UserData& source, FBP_UserData& target) {
-        target.userId = FString(source.userId.c_str());
-        target.email = FString(source.email.c_str());
-        target.displayName = FString(source.displayName.c_str());
+        target.userId = FString(UTF8_TO_TCHAR(source.userId.c_str()));
+        target.email = FString(UTF8_TO_TCHAR(source.email.c_str()));
+        target.displayName = FString(UTF8_TO_TCHAR(source.displayName.c_str()));
         FBP_UserProfilePicture::ConvertToUnrealModel(source.profilePicture, target.profilePicture);
-        target.bio = FString(source.bio.c_str());
+        target.bio = FString(UTF8_TO_TCHAR(source.bio.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_UserData& source, RGN::Modules::UserProfile::UserData& target) {

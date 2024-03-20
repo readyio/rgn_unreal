@@ -15,7 +15,7 @@ struct READYGAMESNETWORK_API FBP_StartMatchResponseData {
     FString matchId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::StartMatchResponseData& source, FBP_StartMatchResponseData& target) {
-        target.matchId = FString(source.matchId.c_str());
+        target.matchId = FString(UTF8_TO_TCHAR(source.matchId.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_StartMatchResponseData& source, RGN::Modules::Matchmaking::StartMatchResponseData& target) {

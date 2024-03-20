@@ -155,28 +155,28 @@ struct READYGAMESNETWORK_API FBP_AchievementData : public FBP_BaseRequestData {
     FString updatedBy;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Achievement::AchievementData& source, FBP_AchievementData& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
-        target.requestName = FString(source.requestName.c_str());
-        target.name = FString(source.name.c_str());
-        target.description = FString(source.description.c_str());
-        target.setBy = FString(source.setBy.c_str());
+        target.requestName = FString(UTF8_TO_TCHAR(source.requestName.c_str()));
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
+        target.description = FString(UTF8_TO_TCHAR(source.description.c_str()));
+        target.setBy = FString(UTF8_TO_TCHAR(source.setBy.c_str()));
         target.isClaimable = source.isClaimable;
         target.valueToReach = source.valueToReach;
         for (const auto& source_completedAchievementsToUnlock_item : source.completedAchievementsToUnlock) {
             FString b_source_completedAchievementsToUnlock_item;
-            b_source_completedAchievementsToUnlock_item = FString(source_completedAchievementsToUnlock_item.c_str());
+            b_source_completedAchievementsToUnlock_item = FString(UTF8_TO_TCHAR(source_completedAchievementsToUnlock_item.c_str()));
             target.completedAchievementsToUnlock.Add(b_source_completedAchievementsToUnlock_item);
         }
         target.repeatable = source.repeatable;
-        target.repeatNoMoreOftenThanCron = FString(source.repeatNoMoreOftenThanCron.c_str());
+        target.repeatNoMoreOftenThanCron = FString(UTF8_TO_TCHAR(source.repeatNoMoreOftenThanCron.c_str()));
         target.startTime = source.startTime;
         target.endTime = source.endTime;
-        target.resetTimeLimitEvery = FString(source.resetTimeLimitEvery.c_str());
+        target.resetTimeLimitEvery = FString(UTF8_TO_TCHAR(source.resetTimeLimitEvery.c_str()));
         for (const auto& source_rewards_item : source.rewards) {
             FBP_AchievementReward b_source_rewards_item;
             FBP_AchievementReward::ConvertToUnrealModel(source_rewards_item, b_source_rewards_item);
@@ -184,8 +184,8 @@ struct READYGAMESNETWORK_API FBP_AchievementData : public FBP_BaseRequestData {
         }
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
 		FBP_BaseRequestData::ConvertToUnrealModel(source, target);
 	}
 

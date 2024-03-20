@@ -3,7 +3,7 @@
 
 namespace RGN {
 	void Os::OpenURL(std::string url) {
-		FString urlFString(url.c_str());
+		FString urlFString(UTF8_TO_TCHAR(url.c_str()));
 		FPlatformProcess::LaunchURL(*urlFString, nullptr, nullptr);
 	}
 }

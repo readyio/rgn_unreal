@@ -23,11 +23,11 @@ struct READYGAMESNETWORK_API FBP_GetAllVirtualItemsByAppIdsRequestData : public 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::GetAllVirtualItemsByAppIdsRequestData& source, FBP_GetAllVirtualItemsByAppIdsRequestData& target) {
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
         target.limit = source.limit;
-        target.startAfter = FString(source.startAfter.c_str());
+        target.startAfter = FString(UTF8_TO_TCHAR(source.startAfter.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

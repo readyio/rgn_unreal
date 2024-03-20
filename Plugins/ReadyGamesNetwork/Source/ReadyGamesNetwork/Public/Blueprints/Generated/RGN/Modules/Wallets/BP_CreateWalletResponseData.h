@@ -21,10 +21,10 @@ struct READYGAMESNETWORK_API FBP_CreateWalletResponseData {
     FString error;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::CreateWalletResponseData& source, FBP_CreateWalletResponseData& target) {
-        target.address = FString(source.address.c_str());
+        target.address = FString(UTF8_TO_TCHAR(source.address.c_str()));
         target.wallet_created = source.wallet_created;
         target.success = source.success;
-        target.error = FString(source.error.c_str());
+        target.error = FString(UTF8_TO_TCHAR(source.error.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_CreateWalletResponseData& source, RGN::Modules::Wallets::CreateWalletResponseData& target) {

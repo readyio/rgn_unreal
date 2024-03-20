@@ -39,7 +39,7 @@ public:
             RGN::Modules::Achievement::AchievementsModule_Admin::AddAchievementAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -57,7 +57,7 @@ public:
             RGN::Modules::Achievement::AchievementsModule_Admin::UpdateAchievementAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {

@@ -19,8 +19,8 @@ struct READYGAMESNETWORK_API FBP_UpdateUserProfileRequestData : public FBP_BaseM
     FString bio;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::UpdateUserProfileRequestData& source, FBP_UpdateUserProfileRequestData& target) {
-        target.displayName = FString(source.displayName.c_str());
-        target.bio = FString(source.bio.c_str());
+        target.displayName = FString(UTF8_TO_TCHAR(source.displayName.c_str()));
+        target.bio = FString(UTF8_TO_TCHAR(source.bio.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

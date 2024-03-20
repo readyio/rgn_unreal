@@ -26,8 +26,8 @@ struct READYGAMESNETWORK_API FBP_Vote {
     FString participantId;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::Vote& source, FBP_Vote& target) {
-        target.voterId = FString(source.voterId.c_str());
-        target.participantId = FString(source.participantId.c_str());
+        target.voterId = FString(UTF8_TO_TCHAR(source.voterId.c_str()));
+        target.participantId = FString(UTF8_TO_TCHAR(source.participantId.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_Vote& source, RGN::Modules::Matchmaking::Vote& target) {

@@ -79,16 +79,16 @@ struct READYGAMESNETWORK_API FBP_LootBox {
     TArray<FBP_PriceInfo> prices;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::LootBox& source, FBP_LootBox& target) {
-        target.id = FString(source.id.c_str());
-        target.name = FString(source.name.c_str());
-        target.appId = FString(source.appId.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.name = FString(UTF8_TO_TCHAR(source.name.c_str()));
+        target.appId = FString(UTF8_TO_TCHAR(source.appId.c_str()));
         target.totalQuantity = source.totalQuantity;
         target.purchasedQuantity = source.purchasedQuantity;
         target.availableQuantity = source.availableQuantity;
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
         for (const auto& source_prices_item : source.prices) {
             FBP_PriceInfo b_source_prices_item;
             FBP_PriceInfo::ConvertToUnrealModel(source_prices_item, b_source_prices_item);

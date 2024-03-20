@@ -246,7 +246,7 @@ public:
             RGN::Modules::Inventory::InventoryModule::GetPropertiesAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -271,7 +271,7 @@ public:
             RGN::Modules::Inventory::InventoryModule::SetPropertiesAsync(
                 [onSuccess](string response) {
                     FString bpResponse;
-                    bpResponse = FString(response.c_str());
+                    bpResponse = FString(UTF8_TO_TCHAR(response.c_str()));
                     onSuccess.ExecuteIfBound(bpResponse);
                 },
                 [onFail](int code, std::string message) {
@@ -608,7 +608,7 @@ public:
                     TArray<FString> bpResponse;
                     for (const auto& response_item : response) {
                         FString b_response_item;
-                        b_response_item = FString(response_item.c_str());
+                        b_response_item = FString(UTF8_TO_TCHAR(response_item.c_str()));
                         bpResponse.Add(b_response_item);
                     }
                     onSuccess.ExecuteIfBound(bpResponse);
@@ -640,7 +640,7 @@ public:
                     TArray<FString> bpResponse;
                     for (const auto& response_item : response) {
                         FString b_response_item;
-                        b_response_item = FString(response_item.c_str());
+                        b_response_item = FString(UTF8_TO_TCHAR(response_item.c_str()));
                         bpResponse.Add(b_response_item);
                     }
                     onSuccess.ExecuteIfBound(bpResponse);

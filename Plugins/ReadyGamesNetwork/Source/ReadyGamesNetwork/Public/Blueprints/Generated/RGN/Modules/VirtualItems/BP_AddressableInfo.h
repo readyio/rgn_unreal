@@ -19,10 +19,10 @@ struct READYGAMESNETWORK_API FBP_AddressableInfo {
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::AddressableInfo& source, FBP_AddressableInfo& target) {
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
-            b_source_appIds_item = FString(source_appIds_item.c_str());
+            b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
             target.appIds.Add(b_source_appIds_item);
         }
-        target.addressableId = FString(source.addressableId.c_str());
+        target.addressableId = FString(UTF8_TO_TCHAR(source.addressableId.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_AddressableInfo& source, RGN::Modules::VirtualItems::AddressableInfo& target) {

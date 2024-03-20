@@ -42,7 +42,7 @@ struct READYGAMESNETWORK_API FBP_LeaderboardReset {
     TArray<FBP_LeaderboardEntryWithRewards> entries;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::LeaderboardReset& source, FBP_LeaderboardReset& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         target.resetAt = source.resetAt;
         target.rewardsGivenAt = source.rewardsGivenAt;
         target.totalGivenRewardsCount = source.totalGivenRewardsCount;

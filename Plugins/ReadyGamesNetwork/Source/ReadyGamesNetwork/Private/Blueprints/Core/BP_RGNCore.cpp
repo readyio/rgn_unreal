@@ -78,9 +78,9 @@ bool UBP_RGNCore::IsLoggedIn() {
 }
 
 FString UBP_RGNCore::GetUserId() {
-    return FString(RGNAuth::GetUserId().c_str());
+    return FString(UTF8_TO_TCHAR(RGNAuth::GetUserId().c_str()));
 }
 
 FString UBP_RGNCore::GetIdToken() {
-    return FString(RGNAuth::GetIdToken().c_str());
+    return FString(UTF8_TO_TCHAR(RGNAuth::GetIdToken().c_str()));
 }

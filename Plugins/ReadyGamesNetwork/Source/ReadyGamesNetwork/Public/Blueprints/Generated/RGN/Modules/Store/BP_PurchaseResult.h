@@ -23,7 +23,7 @@ struct READYGAMESNETWORK_API FBP_PurchaseResult {
     TArray<FBP_Currency> updatedCurrencies;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::PurchaseResult& source, FBP_PurchaseResult& target) {
-        target.offerId = FString(source.offerId.c_str());
+        target.offerId = FString(UTF8_TO_TCHAR(source.offerId.c_str()));
         for (const auto& source_items_item : source.items) {
             FBP_InventoryItemData b_source_items_item;
             FBP_InventoryItemData::ConvertToUnrealModel(source_items_item, b_source_items_item);

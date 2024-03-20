@@ -27,7 +27,7 @@ struct READYGAMESNETWORK_API FBP_IsLeaderboardAvailableResponseData {
 
 	static void ConvertToUnrealModel(const RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData& source, FBP_IsLeaderboardAvailableResponseData& target) {
         target.isAvailable = source.isAvailable;
-        target.reason = FString(source.reason.c_str());
+        target.reason = FString(UTF8_TO_TCHAR(source.reason.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_IsLeaderboardAvailableResponseData& source, RGN::Modules::Leaderboard::IsLeaderboardAvailableResponseData& target) {

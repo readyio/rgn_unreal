@@ -21,7 +21,7 @@ struct READYGAMESNETWORK_API FBP_UpdateUserLevelRequestData : public FBP_BaseMig
     TArray<FBP_Currency> reward;
 
 	static void ConvertToUnrealModel(const RGN::Modules::GameProgress::UpdateUserLevelRequestData& source, FBP_UpdateUserLevelRequestData& target) {
-        target.playerProgress = FString(source.playerProgress.c_str());
+        target.playerProgress = FString(UTF8_TO_TCHAR(source.playerProgress.c_str()));
         for (const auto& source_reward_item : source.reward) {
             FBP_Currency b_source_reward_item;
             FBP_Currency::ConvertToUnrealModel(source_reward_item, b_source_reward_item);

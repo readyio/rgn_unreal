@@ -15,7 +15,7 @@ struct READYGAMESNETWORK_API FBP_RGNWallet {
     FString address;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::RGNWallet& source, FBP_RGNWallet& target) {
-        target.address = FString(source.address.c_str());
+        target.address = FString(UTF8_TO_TCHAR(source.address.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_RGNWallet& source, RGN::Modules::Wallets::RGNWallet& target) {

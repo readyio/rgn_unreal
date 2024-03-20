@@ -40,8 +40,8 @@ struct READYGAMESNETWORK_API FBP_Requirement {
     FString id;
 
 	static void ConvertToUnrealModel(const RGN::Model::Requirement& source, FBP_Requirement& target) {
-        target.type = FString(source.type.c_str());
-        target.id = FString(source.id.c_str());
+        target.type = FString(UTF8_TO_TCHAR(source.type.c_str()));
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_Requirement& source, RGN::Model::Requirement& target) {

@@ -264,7 +264,7 @@ public:
                     TArray<FString> bpResponse;
                     for (const auto& response_item : response) {
                         FString b_response_item;
-                        b_response_item = FString(response_item.c_str());
+                        b_response_item = FString(UTF8_TO_TCHAR(response_item.c_str()));
                         bpResponse.Add(b_response_item);
                     }
                     onSuccess.ExecuteIfBound(bpResponse);

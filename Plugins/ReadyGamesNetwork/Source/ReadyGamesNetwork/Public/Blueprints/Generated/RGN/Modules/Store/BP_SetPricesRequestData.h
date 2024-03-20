@@ -21,7 +21,7 @@ struct READYGAMESNETWORK_API FBP_SetPricesRequestData : public FBP_BaseRequestDa
     TArray<FBP_PriceInfo> prices;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Store::SetPricesRequestData& source, FBP_SetPricesRequestData& target) {
-        target.offerId = FString(source.offerId.c_str());
+        target.offerId = FString(UTF8_TO_TCHAR(source.offerId.c_str()));
         for (const auto& source_prices_item : source.prices) {
             FBP_PriceInfo b_source_prices_item;
             FBP_PriceInfo::ConvertToUnrealModel(source_prices_item, b_source_prices_item);

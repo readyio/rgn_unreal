@@ -28,7 +28,7 @@ struct READYGAMESNETWORK_API FBP_BaseResponseData {
 
 	static void ConvertToUnrealModel(const RGN::Model::Response::BaseResponseData& source, FBP_BaseResponseData& target) {
         target.status = source.status;
-        target.message = FString(source.message.c_str());
+        target.message = FString(UTF8_TO_TCHAR(source.message.c_str()));
 	}
 
 	static void ConvertToCoreModel(const FBP_BaseResponseData& source, RGN::Model::Response::BaseResponseData& target) {

@@ -40,8 +40,8 @@ struct READYGAMESNETWORK_API FBP_ParticipationFee {
     int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Model::ParticipationFee& source, FBP_ParticipationFee& target) {
-        target.type = FString(source.type.c_str());
-        target.id = FString(source.id.c_str());
+        target.type = FString(UTF8_TO_TCHAR(source.type.c_str()));
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         target.quantity = source.quantity;
 	}
 

@@ -17,7 +17,7 @@ struct READYGAMESNETWORK_API FBP_GetUserIdByShortUIDRequestData : public FBP_Bas
     FString shortUID;
 
 	static void ConvertToUnrealModel(const RGN::Modules::UserProfile::GetUserIdByShortUIDRequestData& source, FBP_GetUserIdByShortUIDRequestData& target) {
-        target.shortUID = FString(source.shortUID.c_str());
+        target.shortUID = FString(UTF8_TO_TCHAR(source.shortUID.c_str()));
 		FBP_BaseMigrationRequestData::ConvertToUnrealModel(source, target);
 	}
 

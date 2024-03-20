@@ -20,7 +20,7 @@ struct READYGAMESNETWORK_API FBP_IsUserHavePrimaryWalletResponseData : public FB
 
 	static void ConvertToUnrealModel(const RGN::Modules::Wallets::IsUserHavePrimaryWalletResponseData& source, FBP_IsUserHavePrimaryWalletResponseData& target) {
         target.isUserHavePrimaryWallet = source.isUserHavePrimaryWallet;
-        target.address = FString(source.address.c_str());
+        target.address = FString(UTF8_TO_TCHAR(source.address.c_str()));
 		FBP_BaseResponseData::ConvertToUnrealModel(source, target);
 	}
 

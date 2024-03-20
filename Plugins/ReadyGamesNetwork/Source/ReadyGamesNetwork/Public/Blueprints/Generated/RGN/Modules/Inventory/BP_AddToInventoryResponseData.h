@@ -20,7 +20,7 @@ struct READYGAMESNETWORK_API FBP_AddToInventoryResponseData {
     int32 quantity;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Inventory::AddToInventoryResponseData& source, FBP_AddToInventoryResponseData& target) {
-        target.id = FString(source.id.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
         target.quantity = source.quantity;
 	}
 

@@ -125,22 +125,22 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
     TArray<FBP_ParticipationFee> participationFees;
 
 	static void ConvertToUnrealModel(const RGN::Modules::Matchmaking::MatchmakingData& source, FBP_MatchmakingData& target) {
-        target.id = FString(source.id.c_str());
-        target.appId = FString(source.appId.c_str());
-        target.type = FString(source.type.c_str());
-        target.finishType = FString(source.finishType.c_str());
-        target.startType = FString(source.startType.c_str());
+        target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
+        target.appId = FString(UTF8_TO_TCHAR(source.appId.c_str()));
+        target.type = FString(UTF8_TO_TCHAR(source.type.c_str()));
+        target.finishType = FString(UTF8_TO_TCHAR(source.finishType.c_str()));
+        target.startType = FString(UTF8_TO_TCHAR(source.startType.c_str()));
         target.maxUsers = source.maxUsers;
         target.isStarted = source.isStarted;
         target.votingEnabled = source.votingEnabled;
         target.oncePerUserVoting = source.oncePerUserVoting;
-        target.createdBy = FString(source.createdBy.c_str());
-        target.updatedBy = FString(source.updatedBy.c_str());
+        target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
+        target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
         target.createdAt = source.createdAt;
         target.updatedAt = source.updatedAt;
         for (const auto& source_participants_item : source.participants) {
             FString b_source_participants_item;
-            b_source_participants_item = FString(source_participants_item.c_str());
+            b_source_participants_item = FString(UTF8_TO_TCHAR(source_participants_item.c_str()));
             target.participants.Add(b_source_participants_item);
         }
         for (const auto& source_votes_item : source.votes) {
@@ -150,16 +150,16 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
         }
         for (const auto& [source_participantsScore_key, source_participantsScore_value] : source.participantsScore) {
             FString b_source_participantsScore_key;
-            b_source_participantsScore_key = FString(source_participantsScore_key.c_str());
+            b_source_participantsScore_key = FString(UTF8_TO_TCHAR(source_participantsScore_key.c_str()));
             int64 b_source_participantsScore_value;
             b_source_participantsScore_value = source_participantsScore_value;
             target.participantsScore.Add(b_source_participantsScore_key, b_source_participantsScore_value);
         }
         for (const auto& [source_participantsPayload_key, source_participantsPayload_value] : source.participantsPayload) {
             FString b_source_participantsPayload_key;
-            b_source_participantsPayload_key = FString(source_participantsPayload_key.c_str());
+            b_source_participantsPayload_key = FString(UTF8_TO_TCHAR(source_participantsPayload_key.c_str()));
             FString b_source_participantsPayload_value;
-            b_source_participantsPayload_value = FString(source_participantsPayload_value.c_str());
+            b_source_participantsPayload_value = FString(UTF8_TO_TCHAR(source_participantsPayload_value.c_str()));
             target.participantsPayload.Add(b_source_participantsPayload_key, b_source_participantsPayload_value);
         }
         for (const auto& source_participationFees_item : source.participationFees) {

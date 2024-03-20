@@ -44,13 +44,13 @@ namespace RGN {
 				}
 			}
 		);
-		Request->SetURL(FString(url.c_str()));
+		Request->SetURL(FString(UTF8_TO_TCHAR(url.c_str())));
 		Request->SetVerb(getMethodString(method));
-		Request->SetContentAsString((body.c_str()));
+		Request->SetContentAsString(UTF8_TO_TCHAR(body.c_str()));
 		std::vector<std::string> headerKeys = headers.keys();
 		for (const auto& headerKey : headerKeys) {
 			std::string headerValue = headers.get(headerKey);
-			Request->SetHeader(FString(headerKey.c_str()), FString(headerValue.c_str()));
+			Request->SetHeader(FString(UTF8_TO_TCHAR(headerKey.c_str())), FString(UTF8_TO_TCHAR(headerValue.c_str())));
 		}
 		Request->ProcessRequest();
 	}
