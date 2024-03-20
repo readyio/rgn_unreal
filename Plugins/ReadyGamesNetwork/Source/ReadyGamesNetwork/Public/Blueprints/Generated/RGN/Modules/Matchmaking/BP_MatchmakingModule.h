@@ -2,8 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../../../../Core/BP_CancellationToken.h"
-#include "../../../../../Core/CancellationToken.h"
+#include "../../../../Utility/BP_CancellationToken.h"
+#include "../../../../../Utility/CancellationToken.h"
 #include "../../../../../Generated/RGN/Modules/Matchmaking/MatchmakingModule.h"
 #include "../../../../../Generated/RGN/Modules/Matchmaking/GetMatchesResponseData.h"
 #include "BP_GetMatchesResponseData.h"
@@ -56,7 +56,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             int32_t cpp_limit;
             string cpp_startAfter;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_limit = limit;
             cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
@@ -96,7 +96,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             int32_t cpp_limit;
             string cpp_startAfter;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_limit = limit;
             cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
@@ -135,7 +135,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             int32_t cpp_limit;
             string cpp_startAfter;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_limit = limit;
             cpp_startAfter = string(TCHAR_TO_UTF8(*startAfter));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
@@ -171,7 +171,7 @@ public:
         const FString& matchId,
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_matchId;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::GetFinishedMatchByIdAsync(
@@ -197,7 +197,7 @@ public:
             RGN::Modules::Matchmaking::MatchmakingData cpp_matchConfig;
             std::unordered_map<string, string> cpp_participatePayload;
             bool cpp_participateInOnCreate;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             FBP_MatchmakingData::ConvertToCoreModel(matchConfig, cpp_matchConfig);
             for (const auto& [participatePayload_key, participatePayload_value] : participatePayload) {
                 string cpp_participatePayload_key;
@@ -231,7 +231,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_matchId;
             std::unordered_map<string, string> cpp_participantPayload;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
             for (const auto& [participantPayload_key, participantPayload_value] : participantPayload) {
                 string cpp_participantPayload_key;
@@ -270,7 +270,7 @@ public:
         const FString& matchId,
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_matchId;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::StartMatchAsync(
@@ -304,7 +304,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_matchId;
             string cpp_participantId;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
             cpp_participantId = string(TCHAR_TO_UTF8(*participantId));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
@@ -340,7 +340,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_matchId;
             int64_t cpp_score;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
             cpp_score = score;
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
@@ -373,7 +373,7 @@ public:
         const FString& matchId,
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_matchId;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
             RGN::Modules::Matchmaking::MatchmakingModule::FinishMatchAsync(

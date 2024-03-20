@@ -2,8 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../../../../Core/BP_CancellationToken.h"
-#include "../../../../../Core/CancellationToken.h"
+#include "../../../../Utility/BP_CancellationToken.h"
+#include "../../../../../Utility/CancellationToken.h"
 #include "../../../../../Generated/RGN/Modules/UserProfile/UserProfileModule.h"
 #include "../../../../../Generated/RGN/Modules/UserProfile/UserData.h"
 #include "BP_UserData.h"
@@ -289,7 +289,7 @@ public:
         const TArray<uint8>& bytes,
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             vector<uint8_t> cpp_bytes;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             for (const auto& bytes_item : bytes) {
                 uint8_t cpp_bytes_item;
                 cpp_bytes_item = bytes_item;
@@ -324,7 +324,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_userId;
             RGN::Model::ImageSize cpp_size;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_userId = string(TCHAR_TO_UTF8(*userId));
             cpp_size = static_cast<RGN::Model::ImageSize>(size);
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);

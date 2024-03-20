@@ -3,7 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../../../../CustomImpl/RGN/Modules/Store/StoreModule.h"
-#include "../../../../Core/CancellationToken.h"
+#include "../../../../Utility/CancellationToken.h"
 #include "BuyVirtualItemsResponse.h"
 #include "PurchaseResult.h"
 #include "BuyStoreOfferResponse.h"

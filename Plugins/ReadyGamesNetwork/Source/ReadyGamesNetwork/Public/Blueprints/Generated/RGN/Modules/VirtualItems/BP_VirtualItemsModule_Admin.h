@@ -2,8 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../../../../Core/BP_CancellationToken.h"
-#include "../../../../../Core/CancellationToken.h"
+#include "../../../../Utility/BP_CancellationToken.h"
+#include "../../../../../Utility/CancellationToken.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItemsModule_Admin.h"
 #include <vector>
 #include <unordered_map>
@@ -87,7 +87,7 @@ public:
             string cpp_virtualItemName;
             string cpp_csvContent;
             string cpp_csvDelimiter;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_virtualItemName = string(TCHAR_TO_UTF8(*virtualItemName));
             cpp_csvContent = string(TCHAR_TO_UTF8(*csvContent));
             cpp_csvDelimiter = string(TCHAR_TO_UTF8(*csvDelimiter));

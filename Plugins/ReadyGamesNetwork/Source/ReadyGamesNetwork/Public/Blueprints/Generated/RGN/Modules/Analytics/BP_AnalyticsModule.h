@@ -2,8 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../../../../Core/BP_CancellationToken.h"
-#include "../../../../../Core/CancellationToken.h"
+#include "../../../../Utility/BP_CancellationToken.h"
+#include "../../../../../Utility/CancellationToken.h"
 #include "../../../../../Generated/RGN/Modules/Analytics/AnalyticsModule.h"
 #include <vector>
 #include <unordered_map>
@@ -39,7 +39,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_eventName;
             string cpp_eventParameters;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_eventName = string(TCHAR_TO_UTF8(*eventName));
             cpp_eventParameters = string(TCHAR_TO_UTF8(*eventParameters));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);

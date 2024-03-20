@@ -3,7 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../../../../CustomImpl/RGN/Modules/Analytics/AnalyticsModule.h"
-#include "../../../../Core/CancellationToken.h"
+#include "../../../../Utility/CancellationToken.h"
 #include <vector>
 #include <unordered_map>
 #include <string>

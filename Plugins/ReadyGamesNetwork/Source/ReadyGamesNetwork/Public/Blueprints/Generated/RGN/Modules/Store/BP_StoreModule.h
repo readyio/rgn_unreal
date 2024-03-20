@@ -2,8 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../../../../Core/BP_CancellationToken.h"
-#include "../../../../../Core/CancellationToken.h"
+#include "../../../../Utility/BP_CancellationToken.h"
+#include "../../../../../Utility/CancellationToken.h"
 #include "../../../../../Generated/RGN/Modules/Store/StoreModule.h"
 #include "../../../../../Generated/RGN/Modules/Store/BuyVirtualItemsResponse.h"
 #include "BP_BuyVirtualItemsResponse.h"
@@ -401,7 +401,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_content;
             string cpp_delimiter;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_content = string(TCHAR_TO_UTF8(*content));
             cpp_delimiter = string(TCHAR_TO_UTF8(*delimiter));
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);

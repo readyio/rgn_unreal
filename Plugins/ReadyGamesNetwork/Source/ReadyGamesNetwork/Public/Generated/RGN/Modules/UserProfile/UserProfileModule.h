@@ -3,7 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../../../../CustomImpl/RGN/Modules/UserProfile/UserProfileModule.h"
-#include "../../../../Core/CancellationToken.h"
+#include "../../../../Utility/CancellationToken.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "UserData.h"
 #include "GetUserProfileRequestData.h"

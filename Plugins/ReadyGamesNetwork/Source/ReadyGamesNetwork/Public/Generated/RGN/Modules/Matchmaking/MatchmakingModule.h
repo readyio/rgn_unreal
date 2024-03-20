@@ -2,7 +2,7 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
-#include "../../../../Core/CancellationToken.h"
+#include "../../../../Utility/CancellationToken.h"
 #include "GetMatchesResponseData.h"
 #include "MatchmakingData.h"
 #include "GetMatchResponseData.h"

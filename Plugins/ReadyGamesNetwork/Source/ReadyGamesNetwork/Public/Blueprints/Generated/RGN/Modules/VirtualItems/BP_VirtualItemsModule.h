@@ -2,8 +2,8 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "../../../../Core/BP_CancellationToken.h"
-#include "../../../../../Core/CancellationToken.h"
+#include "../../../../Utility/BP_CancellationToken.h"
+#include "../../../../../Utility/CancellationToken.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItemsModule.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
 #include "BP_VirtualItem.h"
@@ -96,7 +96,7 @@ public:
             string cpp_virtualItemName;
             string cpp_csvContent;
             string cpp_csvDelimiter;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_virtualItemName = string(TCHAR_TO_UTF8(*virtualItemName));
             cpp_csvContent = string(TCHAR_TO_UTF8(*csvContent));
             cpp_csvDelimiter = string(TCHAR_TO_UTF8(*csvDelimiter));
@@ -437,7 +437,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_virtualItemId;
             vector<uint8_t> cpp_thumbnailTextureBytes;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
             for (const auto& thumbnailTextureBytes_item : thumbnailTextureBytes) {
                 uint8_t cpp_thumbnailTextureBytes_item;
@@ -474,7 +474,7 @@ public:
         const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
             string cpp_virtualItemId;
             RGN::Model::ImageSize cpp_size;
-            CancellationToken cpp_cancellationToken;
+            RGN::CancellationToken cpp_cancellationToken;
             cpp_virtualItemId = string(TCHAR_TO_UTF8(*virtualItemId));
             cpp_size = static_cast<RGN::Model::ImageSize>(size);
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);

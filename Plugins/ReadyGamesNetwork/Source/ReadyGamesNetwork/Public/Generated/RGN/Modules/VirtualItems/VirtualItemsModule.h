@@ -3,7 +3,7 @@
 #include "../../../../json.hpp"
 #include "../../../../Core/RGNCore.h"
 #include "../../../../CustomImpl/RGN/Modules/VirtualItems/VirtualItemsModule.h"
-#include "../../../../Core/CancellationToken.h"
+#include "../../../../Utility/CancellationToken.h"
 #include "../../Model/Request/BaseMigrationRequestData.h"
 #include "VirtualItem.h"
 #include "AddVirtualItemResponseData.h"

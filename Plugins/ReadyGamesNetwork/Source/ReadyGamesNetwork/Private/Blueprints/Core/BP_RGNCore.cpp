@@ -10,16 +10,16 @@ std::vector<FRGNAuthChangeCallback> UBP_RGNCore::_authCallbacks = std::vector<FR
 void UBP_RGNCore::Initialize() {
     UReadyGamesNetworkSettings* Settings = GetMutableDefault<UReadyGamesNetworkSettings>();
 
-    RGNConfigureData coreConfigureData;
+    RGN::RGNConfigureData coreConfigureData;
     coreConfigureData.appId = std::string(TCHAR_TO_UTF8(*Settings->ProjectId));
     coreConfigureData.apiKey = std::string(TCHAR_TO_UTF8(*Settings->ApiKey));
-    coreConfigureData.environmentTarget = static_cast<RGNEnvironmentTarget>(Settings->EnvironmentTarget.GetValue());
+    coreConfigureData.environmentTarget = static_cast<RGN::RGNEnvironmentTarget>(Settings->EnvironmentTarget.GetValue());
     coreConfigureData.useFunctionsEmulator = Settings->bUseFunctionsEmulator;
     coreConfigureData.emulatorHost = std::string(TCHAR_TO_UTF8(*Settings->EmulatorHost));
     coreConfigureData.emulatorPort = std::string(TCHAR_TO_UTF8(*Settings->EmulatorPort));
 
-    RGNCore::Initialize(coreConfigureData);
-    RGNAuth::BindAuthChangeCallback([&](bool isLoggedIn) {
+    RGN::RGNCore::Initialize(coreConfigureData);
+    RGN::RGNAuth::BindAuthChangeCallback([&](bool isLoggedIn) {
         for (auto callback : _authCallbacks) {
             callback.ExecuteIfBound(isLoggedIn);
         }
@@ -27,7 +27,7 @@ void UBP_RGNCore::Initialize() {
 }
 
 void UBP_RGNCore::Update() {
-    RGNCore::Update();
+    RGN::RGNCore::Update();
 }
 
 void UBP_RGNCore::BindAuthChangeCallback(FRGNAuthChangeCallback onAuthChange) {
@@ -42,7 +42,7 @@ void UBP_RGNCore::UnbindAuthChangeCallback(FRGNAuthChangeCallback onAuthChange) 
 }
 
 void UBP_RGNCore::DevSignIn(const FString& email, const FString& password, FRGNSignInCallback onSignIn) {
-    RGNAuth::DevSignIn(
+    RGN::RGNAuth::DevSignIn(
         std::string(TCHAR_TO_UTF8(*email)),
         std::string(TCHAR_TO_UTF8(*password)),
         [onSignIn](bool success) {
@@ -52,35 +52,35 @@ void UBP_RGNCore::DevSignIn(const FString& email, const FString& password, FRGNS
 }
 
 void UBP_RGNCore::SignIn(FRGNSignInCallback onSignIn) {
-    RGNAuth::SignIn([onSignIn](bool isLoggedIn) {
+    RGN::RGNAuth::SignIn([onSignIn](bool isLoggedIn) {
         onSignIn.ExecuteIfBound(isLoggedIn);
     });
 }
 
 void UBP_RGNCore::SignInAnonymously(FRGNSignInCallback onSignIn) {
-    RGNAuth::SignInAnonymously([onSignIn](bool isLoggedIn) {
+    RGN::RGNAuth::SignInAnonymously([onSignIn](bool isLoggedIn) {
         onSignIn.ExecuteIfBound(isLoggedIn);
     });
 }
 
 void UBP_RGNCore::SignOut() {
-    RGNAuth::SignOut();
+    RGN::RGNAuth::SignOut();
 }
 
 void UBP_RGNCore::CreateWallet(FRGNCreateWalletCallback onCreateWallet) {
-    RGNAuth::CreateWallet([onCreateWallet](bool canceled) {
+    RGN::RGNAuth::CreateWallet([onCreateWallet](bool canceled) {
         onCreateWallet.ExecuteIfBound(canceled);
     });
 }
 
 bool UBP_RGNCore::IsLoggedIn() {
-    return RGNAuth::IsLoggedIn();
+    return RGN::RGNAuth::IsLoggedIn();
 }
 
 FString UBP_RGNCore::GetUserId() {
-    return FString(UTF8_TO_TCHAR(RGNAuth::GetUserId().c_str()));
+    return FString(UTF8_TO_TCHAR(RGN::RGNAuth::GetUserId().c_str()));
 }
 
 FString UBP_RGNCore::GetIdToken() {
-    return FString(UTF8_TO_TCHAR(RGNAuth::GetIdToken().c_str()));
+    return FString(UTF8_TO_TCHAR(RGN::RGNAuth::GetIdToken().c_str()));
 }
