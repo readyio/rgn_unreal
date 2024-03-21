@@ -119,7 +119,7 @@ namespace RGN {
     }
 
     void RGNAuth::RefreshTokens(std::function<void(bool)> callback) {
-        RefreshTokens(_idToken, _refreshToken, callback);
+        RefreshTokens("", _refreshToken, callback);
     }
 
     void RGNAuth::RefreshTokens(std::string idToken, std::string refreshToken, std::function<void(bool)> callback) {

@@ -68,8 +68,7 @@ namespace RGN {
                 if (complete) {
                     complete(httpResponseBody);
                 }
-            }
-            else if (httpResponseCode == 401) {
+            } else if (httpResponseCode == 401) {
                 if (!RGNAuth::GetRefreshToken().empty()) {
                     RGNAuth::RefreshTokens([name, body, complete, fail, computeHmac, cancellationToken, httpResponseCode, httpResponseBody](bool successRefreshTokens) {
                         if (cancellationToken.isCancellationRequested()) {
@@ -80,23 +79,20 @@ namespace RGN {
                         }
                         if (successRefreshTokens) {
                             InternalCallAPI(name, body, complete, fail, computeHmac, cancellationToken);
-                        }
-                        else {
+                        } else {
                             RGNAuth::SignOut();
                             if (fail) {
                                 fail(httpResponseCode, httpResponseBody);
                             }
                         }
                         });
-                }
-                else {
+                } else {
                     RGNAuth::SignOut();
                     if (fail) {
                         fail(httpResponseCode, httpResponseBody);
                     }
                 }
-            }
-            else {
+            } else {
                 if (fail) {
                     fail(httpResponseCode, httpResponseBody);
                 }
