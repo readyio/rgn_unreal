@@ -4,13 +4,14 @@
 #include "DeepLink/DeepLink.h"
 #include "Os/Os.h"
 #include "Http/Http.h"
-#include <vector>
 #include "CoreMinimal.h"
 #if WITH_EDITOR || PLATFORM_WINDOWS || PLATFORM_MAC
 #include "Runtime/ApplicationCore/Public/HAL/PlatformApplicationMisc.h"
 #else
 #include "Misc/CoreDelegates.h"
 #endif
+#include <vector>
+#include <unordered_map>
 
 namespace RGN {
     Utility::FunctionEvent<void(bool, std::string)> WebForm::_redirectEvent;
@@ -70,7 +71,7 @@ namespace RGN {
             _redirectEvent.raise_and_unbind(canceled, "");
             return;
         }
-        unordered_map<string, string> payloadArgs = HttpUtility::ParseUrl(url);
+        std::unordered_map<std::string, std::string> payloadArgs = HttpUtility::ParseUrl(url);
         bool tokenExists = payloadArgs.find("token") != payloadArgs.end();
         if (!tokenExists) {
             _redirectEvent.raise_and_unbind(false, "");
