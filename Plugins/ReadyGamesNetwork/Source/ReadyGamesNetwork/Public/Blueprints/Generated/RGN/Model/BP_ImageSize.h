@@ -11,7 +11,7 @@
  * Defines the available image sizes that can be requested or manipulated within the system.
  */
 UENUM(BlueprintType)
-enum class EBP_ImageSize
+enum class EBP_ImageSize : uint8
 {
     Source = 0,
     Small = 1,

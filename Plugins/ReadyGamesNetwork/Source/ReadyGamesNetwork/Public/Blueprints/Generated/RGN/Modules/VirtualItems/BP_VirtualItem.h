@@ -4,16 +4,12 @@
 #include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItem.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/VirtualItemImage.h"
 #include "BP_VirtualItemImage.h"
-#include "../../../../../Generated/RGN/Modules/VirtualItems/AddressableInfo.h"
-#include "BP_AddressableInfo.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/Properties.h"
 #include "BP_Properties.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/PriceInfo.h"
 #include "BP_PriceInfo.h"
 #include "../../../../../Generated/RGN/Modules/VirtualItems/BlockchainInfo.h"
 #include "BP_BlockchainInfo.h"
-#include "../../../../../Generated/RGN/Modules/VirtualItems/MaterialInfo.h"
-#include "BP_MaterialInfo.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -84,14 +80,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     bool isStackable;
     /**
-     * Indicates if the virtual item is a NFT.
-     * Please use IsNFT() method to check if item is a NFT.
-     * The NFT virtual items require primary user wallet
-     * For more information see the API in WalletsModule
-     */
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
-    bool isNFT;
-    /**
      * List of application ids where this item is used
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
@@ -103,17 +91,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     TArray<FString> tags;
-    /**
-     * List of childs of the current virtual item. Virtual items ids list.
-     * It is used to build tree structure hierarchies.
-     */
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
-    TArray<FString> childs;
-    /**
-     * List of addressable ids for the virtual item binary data
-     */
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
-    TArray<FBP_AddressableInfo> addressableIds;
     /**
      * List of virtual item custom json. It is used to store game specific
      * json in json format.
@@ -139,10 +116,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
      */
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
     FBP_BlockchainInfo blockchain;
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
-    TArray<FString> compatibleItemIds;
-    UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | VirtualItems")
-    TArray<FBP_MaterialInfo> materialInfos;
 
 	static void ConvertToUnrealModel(const RGN::Modules::VirtualItems::VirtualItem& source, FBP_VirtualItem& target) {
         target.id = FString(UTF8_TO_TCHAR(source.id.c_str()));
@@ -154,7 +127,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
         target.createdBy = FString(UTF8_TO_TCHAR(source.createdBy.c_str()));
         target.updatedBy = FString(UTF8_TO_TCHAR(source.updatedBy.c_str()));
         target.isStackable = source.isStackable;
-        target.isNFT = source.isNFT;
         for (const auto& source_appIds_item : source.appIds) {
             FString b_source_appIds_item;
             b_source_appIds_item = FString(UTF8_TO_TCHAR(source_appIds_item.c_str()));
@@ -164,16 +136,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
             FString b_source_tags_item;
             b_source_tags_item = FString(UTF8_TO_TCHAR(source_tags_item.c_str()));
             target.tags.Add(b_source_tags_item);
-        }
-        for (const auto& source_childs_item : source.childs) {
-            FString b_source_childs_item;
-            b_source_childs_item = FString(UTF8_TO_TCHAR(source_childs_item.c_str()));
-            target.childs.Add(b_source_childs_item);
-        }
-        for (const auto& source_addressableIds_item : source.addressableIds) {
-            FBP_AddressableInfo b_source_addressableIds_item;
-            FBP_AddressableInfo::ConvertToUnrealModel(source_addressableIds_item, b_source_addressableIds_item);
-            target.addressableIds.Add(b_source_addressableIds_item);
         }
         for (const auto& source_properties_item : source.properties) {
             FBP_Properties b_source_properties_item;
@@ -187,16 +149,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
         }
         target.totalQuantity = source.totalQuantity;
         FBP_BlockchainInfo::ConvertToUnrealModel(source.blockchain, target.blockchain);
-        for (const auto& source_compatibleItemIds_item : source.compatibleItemIds) {
-            FString b_source_compatibleItemIds_item;
-            b_source_compatibleItemIds_item = FString(UTF8_TO_TCHAR(source_compatibleItemIds_item.c_str()));
-            target.compatibleItemIds.Add(b_source_compatibleItemIds_item);
-        }
-        for (const auto& source_materialInfos_item : source.materialInfos) {
-            FBP_MaterialInfo b_source_materialInfos_item;
-            FBP_MaterialInfo::ConvertToUnrealModel(source_materialInfos_item, b_source_materialInfos_item);
-            target.materialInfos.Add(b_source_materialInfos_item);
-        }
 	}
 
 	static void ConvertToCoreModel(const FBP_VirtualItem& source, RGN::Modules::VirtualItems::VirtualItem& target) {
@@ -209,7 +161,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
         target.createdBy = string(TCHAR_TO_UTF8(*source.createdBy));
         target.updatedBy = string(TCHAR_TO_UTF8(*source.updatedBy));
         target.isStackable = source.isStackable;
-        target.isNFT = source.isNFT;
         for (const auto& source_appIds_item : source.appIds) {
             string cpp_source_appIds_item;
             cpp_source_appIds_item = string(TCHAR_TO_UTF8(*source_appIds_item));
@@ -219,16 +170,6 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
             string cpp_source_tags_item;
             cpp_source_tags_item = string(TCHAR_TO_UTF8(*source_tags_item));
             target.tags.push_back(cpp_source_tags_item);
-        }
-        for (const auto& source_childs_item : source.childs) {
-            string cpp_source_childs_item;
-            cpp_source_childs_item = string(TCHAR_TO_UTF8(*source_childs_item));
-            target.childs.push_back(cpp_source_childs_item);
-        }
-        for (const auto& source_addressableIds_item : source.addressableIds) {
-            RGN::Modules::VirtualItems::AddressableInfo cpp_source_addressableIds_item;
-            FBP_AddressableInfo::ConvertToCoreModel(source_addressableIds_item, cpp_source_addressableIds_item);
-            target.addressableIds.push_back(cpp_source_addressableIds_item);
         }
         for (const auto& source_properties_item : source.properties) {
             RGN::Modules::VirtualItems::Properties cpp_source_properties_item;
@@ -242,15 +183,5 @@ struct READYGAMESNETWORK_API FBP_VirtualItem {
         }
         target.totalQuantity = source.totalQuantity;
         FBP_BlockchainInfo::ConvertToCoreModel(source.blockchain, target.blockchain);
-        for (const auto& source_compatibleItemIds_item : source.compatibleItemIds) {
-            string cpp_source_compatibleItemIds_item;
-            cpp_source_compatibleItemIds_item = string(TCHAR_TO_UTF8(*source_compatibleItemIds_item));
-            target.compatibleItemIds.push_back(cpp_source_compatibleItemIds_item);
-        }
-        for (const auto& source_materialInfos_item : source.materialInfos) {
-            RGN::Modules::VirtualItems::MaterialInfo cpp_source_materialInfos_item;
-            FBP_MaterialInfo::ConvertToCoreModel(source_materialInfos_item, cpp_source_materialInfos_item);
-            target.materialInfos.push_back(cpp_source_materialInfos_item);
-        }
 	}
 };

@@ -8,7 +8,7 @@
 #include "BP_UserStatus.generated.h"
 
 UENUM(BlueprintType)
-enum class EBP_UserStatus
+enum class EBP_UserStatus : uint8
 {
     None = 0,
     Online = 1,

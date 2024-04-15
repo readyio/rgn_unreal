@@ -2,11 +2,9 @@
 // This file is generated: please don't modify. Go to Unity code generator if you need changes.
 #include "../../../../json.hpp"
 #include "VirtualItemImage.h"
-#include "AddressableInfo.h"
 #include "Properties.h"
 #include "PriceInfo.h"
 #include "BlockchainInfo.h"
-#include "MaterialInfo.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -66,13 +64,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          */
         bool isStackable = false;
         /**
-         * Indicates if the virtual item is a NFT.
-         * Please use IsNFT() method to check if item is a NFT.
-         * The NFT virtual items require primary user wallet
-         * For more information see the API in WalletsModule
-         */
-        bool isNFT = false;
-        /**
          * List of application ids where this item is used
          */
         vector<string> appIds;
@@ -82,15 +73,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * For example in a shooter game: "guns", "rifles"
          */
         vector<string> tags;
-        /**
-         * List of childs of the current virtual item. Virtual items ids list.
-         * It is used to build tree structure hierarchies.
-         */
-        vector<string> childs;
-        /**
-         * List of addressable ids for the virtual item binary data
-         */
-        vector<RGN::Modules::VirtualItems::AddressableInfo> addressableIds;
         /**
          * List of virtual item custom json. It is used to store game specific
          * json in json format.
@@ -112,8 +94,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
          * In case the virtual item is minted, the blockchain information is here
          */
         RGN::Modules::VirtualItems::BlockchainInfo blockchain;
-        vector<string> compatibleItemIds;
-        vector<RGN::Modules::VirtualItems::MaterialInfo> materialInfos;
 
         friend void to_json(nlohmann::json& nlohmann_json_j, const VirtualItem& nlohmann_json_t) {
             nlohmann_json_j["id"] = nlohmann_json_t.id;
@@ -125,17 +105,12 @@ namespace RGN { namespace Modules { namespace VirtualItems {
             nlohmann_json_j["createdBy"] = nlohmann_json_t.createdBy;
             nlohmann_json_j["updatedBy"] = nlohmann_json_t.updatedBy;
             nlohmann_json_j["isStackable"] = nlohmann_json_t.isStackable;
-            nlohmann_json_j["isNFT"] = nlohmann_json_t.isNFT;
             nlohmann_json_j["appIds"] = nlohmann_json_t.appIds;
             nlohmann_json_j["tags"] = nlohmann_json_t.tags;
-            nlohmann_json_j["childs"] = nlohmann_json_t.childs;
-            nlohmann_json_j["addressableIds"] = nlohmann_json_t.addressableIds;
             nlohmann_json_j["properties"] = nlohmann_json_t.properties;
             nlohmann_json_j["prices"] = nlohmann_json_t.prices;
             nlohmann_json_j["totalQuantity"] = nlohmann_json_t.totalQuantity;
             nlohmann_json_j["blockchain"] = nlohmann_json_t.blockchain;
-            nlohmann_json_j["compatibleItemIds"] = nlohmann_json_t.compatibleItemIds;
-            nlohmann_json_j["materialInfos"] = nlohmann_json_t.materialInfos;
         }
 
         friend void from_json(const nlohmann::json& nlohmann_json_j, VirtualItem& nlohmann_json_t) {
@@ -193,12 +168,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                     json_isStackable.get_to(nlohmann_json_t.isStackable);
                 }
             }
-            if (nlohmann_json_j.contains("isNFT")) {
-                auto json_isNFT = nlohmann_json_j.at("isNFT");
-                if (!json_isNFT.is_null() && json_isNFT.is_boolean()) {
-                    json_isNFT.get_to(nlohmann_json_t.isNFT);
-                }
-            }
             if (nlohmann_json_j.contains("appIds")) {
                 auto json_appIds = nlohmann_json_j.at("appIds");
                 if (!json_appIds.is_null() && json_appIds.is_array()) {
@@ -209,18 +178,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 auto json_tags = nlohmann_json_j.at("tags");
                 if (!json_tags.is_null() && json_tags.is_array()) {
                     json_tags.get_to(nlohmann_json_t.tags);
-                }
-            }
-            if (nlohmann_json_j.contains("childs")) {
-                auto json_childs = nlohmann_json_j.at("childs");
-                if (!json_childs.is_null() && json_childs.is_array()) {
-                    json_childs.get_to(nlohmann_json_t.childs);
-                }
-            }
-            if (nlohmann_json_j.contains("addressableIds")) {
-                auto json_addressableIds = nlohmann_json_j.at("addressableIds");
-                if (!json_addressableIds.is_null() && json_addressableIds.is_array()) {
-                    json_addressableIds.get_to(nlohmann_json_t.addressableIds);
                 }
             }
             if (nlohmann_json_j.contains("properties")) {
@@ -245,18 +202,6 @@ namespace RGN { namespace Modules { namespace VirtualItems {
                 auto json_blockchain = nlohmann_json_j.at("blockchain");
                 if (!json_blockchain.is_null()) {
                     json_blockchain.get_to(nlohmann_json_t.blockchain);
-                }
-            }
-            if (nlohmann_json_j.contains("compatibleItemIds")) {
-                auto json_compatibleItemIds = nlohmann_json_j.at("compatibleItemIds");
-                if (!json_compatibleItemIds.is_null() && json_compatibleItemIds.is_array()) {
-                    json_compatibleItemIds.get_to(nlohmann_json_t.compatibleItemIds);
-                }
-            }
-            if (nlohmann_json_j.contains("materialInfos")) {
-                auto json_materialInfos = nlohmann_json_j.at("materialInfos");
-                if (!json_materialInfos.is_null() && json_materialInfos.is_array()) {
-                    json_materialInfos.get_to(nlohmann_json_t.materialInfos);
                 }
             }
         }
