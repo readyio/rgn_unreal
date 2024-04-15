@@ -1,4 +1,4 @@
-#include "Blueprints/Core/BP_RGNCore.h"
+#include "Impl/Core/BP_RGNCore.h"
 #include "Core/RGNCore.h"
 #include "Core/RGNConfigureData.h"
 #include "Core/RGNAuth.h"

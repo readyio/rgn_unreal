@@ -1,6 +1,5 @@
 #include "Http/HttpUtility.h"
 #include <iostream>
-#include <vector>
 #include <sstream>
 
 namespace RGN {
@@ -48,5 +47,18 @@ namespace RGN {
             return "";
         }
         return url;
+    }
+
+    std::string HttpUtility::GetUrlHost(const std::string& url) {
+        size_t host_start = url.find("://");
+        if (url.find("://") == std::string::npos) {
+            return "";
+        }
+        host_start += 3;
+        size_t host_end = url.find_first_of("/?", host_start);
+        if (host_end == std::string::npos) {
+            return url.substr(0);
+        }
+        return url.substr(0, host_end);
     }
 }

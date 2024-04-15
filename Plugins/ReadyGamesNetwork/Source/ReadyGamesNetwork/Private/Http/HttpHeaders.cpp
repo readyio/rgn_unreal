@@ -1,4 +1,5 @@
 #include "Http/HttpHeaders.h"
+#include <algorithm>
 
 namespace RGN {
     void HttpHeaders::add(const std::string key, const std::string value) {

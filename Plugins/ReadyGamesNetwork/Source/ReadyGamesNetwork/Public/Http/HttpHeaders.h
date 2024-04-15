@@ -3,7 +3,6 @@
 #include <string>
 #include <map>
 #include <vector>
-#include <stdexcept>
 
 namespace RGN {
     class HttpHeaders {

@@ -1,6 +1,6 @@
 #include "Misc/AutomationTest.h"
-#include "../Public/Blueprints/Core/BP_RGNCore.h"
-#include "../Public/Blueprints/Generated/RGN/Modules/GameProgress/BP_GameProgressModule.h"
+#include "../Public/Impl/Core/BP_RGNCore.h"
+#include "../Public/Impl/Generated/RGN/Modules/GameProgress/BP_GameProgressModule.h"
 #include "FRGNAutomationTestBase.h"
 #include "UTestHelper.h"
 

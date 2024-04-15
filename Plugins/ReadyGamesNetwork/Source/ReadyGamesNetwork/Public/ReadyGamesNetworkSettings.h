@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprints/Core/BP_RGNEnvironmentTarget.h"
+#include "Impl/Core/BP_RGNEnvironmentTarget.h"
 #include "ReadyGamesNetworkSettings.generated.h"
 
 UCLASS(Config = Game, DefaultConfig)
