@@ -1,0 +1,39 @@
+name: Publish new release
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Install zip utility
+      run: sudo apt-get install zip
+    - name: Zip plugin folder
+      run: zip -r READYggSDK.zip Plugins/ReadyGamesNetwork/
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release 0.10.0-dev.${{ github.run_number }}
+        draft: false
+        prerelease: false
+    - name: Upload zip
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./READYggSDK.zip
+        asset_name: READYggSDK.zip
+        asset_content_type: application/zip
