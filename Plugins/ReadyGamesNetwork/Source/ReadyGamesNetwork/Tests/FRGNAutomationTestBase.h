@@ -21,7 +21,7 @@ public:
         static bool rgnInitialized = false;
         if (!rgnInitialized)
         {
-            UBP_RGNCore::Initialize();
+            UBP_RGNCore::Initialize(FRGNInitializeCallback());
             rgnInitialized = true;
         }
         TestHelper = NewObject<UTestHelper>();

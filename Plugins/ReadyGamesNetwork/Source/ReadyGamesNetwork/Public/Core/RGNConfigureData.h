@@ -10,6 +10,7 @@ namespace RGN {
         string appId;
         string apiKey;
         RGNEnvironmentTarget environmentTarget;
+        bool autoGuestLogin;
         bool useFunctionsEmulator;
         string emulatorHost;
         string emulatorPort;

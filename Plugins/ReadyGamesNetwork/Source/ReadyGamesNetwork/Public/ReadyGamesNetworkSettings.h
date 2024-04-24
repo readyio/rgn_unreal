@@ -21,6 +21,9 @@ class READYGAMESNETWORK_API UReadyGamesNetworkSettings : public UObject
 	UPROPERTY(EditAnywhere, config, Category = Connection)
 	TEnumAsByte<EBP_RGNEnvironmentTarget> EnvironmentTarget;
 
+	UPROPERTY(EditAnywhere, config, Category = Connection, Meta = (DisplayName = "Auto Guest Login"))
+	bool bAutoGuestLogin;
+
 	UPROPERTY(EditAnywhere, config, Category = Connection, Meta = (DisplayName = "Use Functions Emulator"))
 	bool bUseFunctionsEmulator;
 

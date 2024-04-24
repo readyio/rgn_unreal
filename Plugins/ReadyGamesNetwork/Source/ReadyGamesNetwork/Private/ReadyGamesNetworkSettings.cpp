@@ -9,6 +9,7 @@ UReadyGamesNetworkSettings::UReadyGamesNetworkSettings(const FObjectInitializer&
 	, ProjectIdLowerCase(TEXT(""))
 	, ApiKey(TEXT(""))
 	, EnvironmentTarget(EBP_RGNEnvironmentTarget::Staging)
+	, bAutoGuestLogin(true)
 	, bUseFunctionsEmulator(false)
 	, EmulatorHost(TEXT("127.0.0.1"))
 	, EmulatorPort(TEXT("5001")) {

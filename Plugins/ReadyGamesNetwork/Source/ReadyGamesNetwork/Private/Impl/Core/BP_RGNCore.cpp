@@ -7,13 +7,14 @@
 
 std::vector<FRGNAuthChangeCallback> UBP_RGNCore::_authCallbacks = std::vector<FRGNAuthChangeCallback>();
 
-void UBP_RGNCore::Initialize() {
+void UBP_RGNCore::Initialize(FRGNInitializeCallback onInitialize) {
     UReadyGamesNetworkSettings* Settings = GetMutableDefault<UReadyGamesNetworkSettings>();
 
     RGN::RGNConfigureData coreConfigureData;
     coreConfigureData.appId = std::string(TCHAR_TO_UTF8(*Settings->ProjectId));
     coreConfigureData.apiKey = std::string(TCHAR_TO_UTF8(*Settings->ApiKey));
     coreConfigureData.environmentTarget = static_cast<RGN::RGNEnvironmentTarget>(Settings->EnvironmentTarget.GetValue());
+    coreConfigureData.autoGuestLogin = Settings->bAutoGuestLogin;
     coreConfigureData.useFunctionsEmulator = Settings->bUseFunctionsEmulator;
     coreConfigureData.emulatorHost = std::string(TCHAR_TO_UTF8(*Settings->EmulatorHost));
     coreConfigureData.emulatorPort = std::string(TCHAR_TO_UTF8(*Settings->EmulatorPort));
@@ -24,6 +25,14 @@ void UBP_RGNCore::Initialize() {
             callback.ExecuteIfBound(isLoggedIn);
         }
     });
+
+    if (coreConfigureData.autoGuestLogin && !IsLoggedIn()) {
+        RGN::RGNAuth::SignInAnonymously([onInitialize](bool isLoggedIn) {
+            onInitialize.ExecuteIfBound();
+        });
+    } else {
+        onInitialize.ExecuteIfBound();
+    }
 }
 
 void UBP_RGNCore::Update() {

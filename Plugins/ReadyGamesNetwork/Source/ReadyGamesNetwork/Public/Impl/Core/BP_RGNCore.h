@@ -6,6 +6,7 @@
 #include "BP_RGNCore.generated.h"
 
 // Delegate for signIn event
+DECLARE_DYNAMIC_DELEGATE(FRGNInitializeCallback);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNSignInCallback, bool, success);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNCreateWalletCallback, bool, success);
 DECLARE_DYNAMIC_DELEGATE_OneParam(FRGNAuthChangeCallback, bool, isLoggedIn);
@@ -17,7 +18,7 @@ class READYGAMESNETWORK_API UBP_RGNCore : public UBlueprintFunctionLibrary
 
 public:
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
-    static void Initialize();
+    static void Initialize(FRGNInitializeCallback onInitialize);
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
     static void Update();
     UFUNCTION(BlueprintCallable, Category = "ReadyGamesNetwork | Core")
