@@ -19,7 +19,7 @@ class READYGAMESNETWORK_API UReadyGamesNetworkSettings : public UObject
 	FString ApiKey;
 
 	UPROPERTY(EditAnywhere, config, Category = Connection)
-	TEnumAsByte<EBP_RGNEnvironmentTarget> EnvironmentTarget;
+	EBP_RGNEnvironmentTarget EnvironmentTarget;
 
 	UPROPERTY(EditAnywhere, config, Category = Connection, Meta = (DisplayName = "Auto Guest Login"))
 	bool bAutoGuestLogin;

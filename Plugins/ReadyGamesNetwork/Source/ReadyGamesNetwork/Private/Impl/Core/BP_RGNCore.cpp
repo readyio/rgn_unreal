@@ -13,7 +13,7 @@ void UBP_RGNCore::Initialize(FRGNInitializeCallback onInitialize) {
     RGN::RGNConfigureData coreConfigureData;
     coreConfigureData.appId = std::string(TCHAR_TO_UTF8(*Settings->ProjectId));
     coreConfigureData.apiKey = std::string(TCHAR_TO_UTF8(*Settings->ApiKey));
-    coreConfigureData.environmentTarget = static_cast<RGN::RGNEnvironmentTarget>(Settings->EnvironmentTarget.GetValue());
+    coreConfigureData.environmentTarget = static_cast<RGN::RGNEnvironmentTarget>(Settings->EnvironmentTarget);
     coreConfigureData.autoGuestLogin = Settings->bAutoGuestLogin;
     coreConfigureData.useFunctionsEmulator = Settings->bUseFunctionsEmulator;
     coreConfigureData.emulatorHost = std::string(TCHAR_TO_UTF8(*Settings->EmulatorHost));
