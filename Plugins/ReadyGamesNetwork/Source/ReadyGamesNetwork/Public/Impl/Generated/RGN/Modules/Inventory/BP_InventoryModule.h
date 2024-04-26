@@ -70,9 +70,9 @@ public:
     static void AddToInventoryAsync_VirtualItemId_Quantity_Properties(
         FInventoryModuleAddToInventoryAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
+        const FBP_Properties& properties,
         const FString& virtualItemId,
-        int32 quantity = 1,
-        const FBP_Properties& properties = FBP_Properties()) {
+        int32 quantity = 1) {
             string cpp_virtualItemId;
             int32_t cpp_quantity;
             RGN::Modules::VirtualItems::Properties cpp_properties;
@@ -106,10 +106,10 @@ public:
     static void AddToInventoryAsync_UserId_VirtualItemId_Quantity_Properties(
         FInventoryModuleAddToInventoryAsyncResponse onSuccess,
         FInventoryModuleFailResponse onFail,
+        const FBP_Properties& properties,
         const FString& userId,
         const FString& virtualItemId,
-        int32 quantity = 1,
-        const FBP_Properties& properties = FBP_Properties()) {
+        int32 quantity = 1) {
             string cpp_userId;
             string cpp_virtualItemId;
             int32_t cpp_quantity;

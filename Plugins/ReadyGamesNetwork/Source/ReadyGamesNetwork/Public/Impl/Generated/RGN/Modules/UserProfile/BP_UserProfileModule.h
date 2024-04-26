@@ -286,8 +286,8 @@ public:
     static void UploadAvatarImageAsync(
         FUserProfileModuleUploadAvatarImageAsyncResponse onSuccess,
         FUserProfileModuleFailResponse onFail,
-        const TArray<uint8>& bytes,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FBP_CancellationToken& cancellationToken,
+        const TArray<uint8>& bytes) {
             vector<uint8_t> cpp_bytes;
             RGN::CancellationToken cpp_cancellationToken;
             for (const auto& bytes_item : bytes) {
@@ -319,9 +319,9 @@ public:
     static void DownloadAvatarImageAsync(
         FUserProfileModuleDownloadAvatarImageAsyncResponse onSuccess,
         FUserProfileModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& userId,
-        const EBP_ImageSize& size,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const EBP_ImageSize& size) {
             string cpp_userId;
             RGN::Model::ImageSize cpp_size;
             RGN::CancellationToken cpp_cancellationToken;

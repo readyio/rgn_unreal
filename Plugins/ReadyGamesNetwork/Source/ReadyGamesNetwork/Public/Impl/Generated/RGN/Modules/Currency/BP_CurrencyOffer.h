@@ -16,7 +16,7 @@ struct READYGAMESNETWORK_API FBP_CurrencyOffer {
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     FString offeredProductId;
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
-    double remainingTime;
+    int64 remainingTime;
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")
     float offeringPrice;
     UPROPERTY(BlueprintReadWrite, Category = "ReadyGamesNetwork | Currency")

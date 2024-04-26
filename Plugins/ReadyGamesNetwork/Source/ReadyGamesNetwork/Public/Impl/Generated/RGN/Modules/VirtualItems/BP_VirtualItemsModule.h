@@ -89,10 +89,10 @@ public:
     static void AddFromCSVAsync(
         FVirtualItemsModuleAddFromCSVAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& virtualItemName,
         const FString& csvContent,
-        const FString& csvDelimiter = ",",
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& csvDelimiter = ",") {
             string cpp_virtualItemName;
             string cpp_csvContent;
             string cpp_csvDelimiter;
@@ -432,9 +432,9 @@ public:
     static void UploadImageAsync(
         FVirtualItemsModuleUploadImageAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& virtualItemId,
-        const TArray<uint8>& thumbnailTextureBytes,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const TArray<uint8>& thumbnailTextureBytes) {
             string cpp_virtualItemId;
             vector<uint8_t> cpp_thumbnailTextureBytes;
             RGN::CancellationToken cpp_cancellationToken;
@@ -469,9 +469,9 @@ public:
     static void DownloadImageAsync(
         FVirtualItemsModuleDownloadImageAsyncResponse onSuccess,
         FVirtualItemsModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& virtualItemId,
-        const EBP_ImageSize& size,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const EBP_ImageSize& size) {
             string cpp_virtualItemId;
             RGN::Model::ImageSize cpp_size;
             RGN::CancellationToken cpp_cancellationToken;

@@ -51,9 +51,9 @@ public:
     static void GetJoinOpenMatchesAsync(
         FMatchmakingModuleGetJoinOpenMatchesAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         int32 limit,
-        const FString& startAfter = "",
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& startAfter = "") {
             int32_t cpp_limit;
             string cpp_startAfter;
             RGN::CancellationToken cpp_cancellationToken;
@@ -91,9 +91,9 @@ public:
     static void GetVoteOpenMatchesAsync(
         FMatchmakingModuleGetVoteOpenMatchesAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         int32 limit,
-        const FString& startAfter = "",
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& startAfter = "") {
             int32_t cpp_limit;
             string cpp_startAfter;
             RGN::CancellationToken cpp_cancellationToken;
@@ -130,9 +130,9 @@ public:
     static void GetFinishedMatchesAsync(
         FMatchmakingModuleGetFinishedMatchesAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         int32 limit,
-        const FString& startAfter = "",
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& startAfter = "") {
             int32_t cpp_limit;
             string cpp_startAfter;
             RGN::CancellationToken cpp_cancellationToken;
@@ -168,8 +168,8 @@ public:
     static void GetFinishedMatchByIdAsync(
         FMatchmakingModuleGetFinishedMatchByIdAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
-        const FString& matchId,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FBP_CancellationToken& cancellationToken,
+        const FString& matchId) {
             string cpp_matchId;
             RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
@@ -190,20 +190,20 @@ public:
     static void CreateMatchAsync(
         FMatchmakingModuleCreateMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FBP_MatchmakingData& matchConfig,
         const TMap<FString, FString>& participatePayload,
-        bool participateInOnCreate = true,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        bool participateInOnCreate = true) {
             RGN::Modules::Matchmaking::MatchmakingData cpp_matchConfig;
             std::unordered_map<string, string> cpp_participatePayload;
             bool cpp_participateInOnCreate;
             RGN::CancellationToken cpp_cancellationToken;
             FBP_MatchmakingData::ConvertToCoreModel(matchConfig, cpp_matchConfig);
-            for (const auto& [participatePayload_key, participatePayload_value] : participatePayload) {
+            for (const auto& participatePayload_kv : participatePayload) {
                 string cpp_participatePayload_key;
-                cpp_participatePayload_key = string(TCHAR_TO_UTF8(*participatePayload_key));
+                cpp_participatePayload_key = string(TCHAR_TO_UTF8(*participatePayload_kv.Key));
                 string cpp_participatePayload_value;
-                cpp_participatePayload_value = string(TCHAR_TO_UTF8(*participatePayload_value));
+                cpp_participatePayload_value = string(TCHAR_TO_UTF8(*participatePayload_kv.Value));
                 cpp_participatePayload.insert({cpp_participatePayload_key, cpp_participatePayload_value});
             }
             cpp_participateInOnCreate = participateInOnCreate;
@@ -226,18 +226,18 @@ public:
     static void ParticipateInMatchAsync(
         FMatchmakingModuleParticipateInMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& matchId,
-        const TMap<FString, FString>& participantPayload,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const TMap<FString, FString>& participantPayload) {
             string cpp_matchId;
             std::unordered_map<string, string> cpp_participantPayload;
             RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
-            for (const auto& [participantPayload_key, participantPayload_value] : participantPayload) {
+            for (const auto& participantPayload_kv : participantPayload) {
                 string cpp_participantPayload_key;
-                cpp_participantPayload_key = string(TCHAR_TO_UTF8(*participantPayload_key));
+                cpp_participantPayload_key = string(TCHAR_TO_UTF8(*participantPayload_kv.Key));
                 string cpp_participantPayload_value;
-                cpp_participantPayload_value = string(TCHAR_TO_UTF8(*participantPayload_value));
+                cpp_participantPayload_value = string(TCHAR_TO_UTF8(*participantPayload_kv.Value));
                 cpp_participantPayload.insert({cpp_participantPayload_key, cpp_participantPayload_value});
             }
             FBP_CancellationToken::ConvertToCoreModel(cancellationToken, cpp_cancellationToken);
@@ -267,8 +267,8 @@ public:
     static void StartMatchAsync(
         FMatchmakingModuleStartMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
-        const FString& matchId,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FBP_CancellationToken& cancellationToken,
+        const FString& matchId) {
             string cpp_matchId;
             RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));
@@ -299,9 +299,9 @@ public:
     static void VoteForMatchAsync(
         FMatchmakingModuleVoteForMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& matchId,
-        const FString& participantId,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& participantId) {
             string cpp_matchId;
             string cpp_participantId;
             RGN::CancellationToken cpp_cancellationToken;
@@ -335,9 +335,9 @@ public:
     static void SubmitMatchScoreAsync(
         FMatchmakingModuleSubmitMatchScoreAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& matchId,
-        int64 score,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        int64 score) {
             string cpp_matchId;
             int64_t cpp_score;
             RGN::CancellationToken cpp_cancellationToken;
@@ -370,8 +370,8 @@ public:
     static void FinishMatchAsync(
         FMatchmakingModuleFinishMatchAsyncResponse onSuccess,
         FMatchmakingModuleFailResponse onFail,
-        const FString& matchId,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FBP_CancellationToken& cancellationToken,
+        const FString& matchId) {
             string cpp_matchId;
             RGN::CancellationToken cpp_cancellationToken;
             cpp_matchId = string(TCHAR_TO_UTF8(*matchId));

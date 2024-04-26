@@ -396,9 +396,9 @@ public:
     static void ImportStoreOffersFromCSVAsync(
         FStoreModuleImportStoreOffersFromCSVAsyncResponse onSuccess,
         FStoreModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& content,
-        const FString& delimiter,
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& delimiter) {
             string cpp_content;
             string cpp_delimiter;
             RGN::CancellationToken cpp_cancellationToken;

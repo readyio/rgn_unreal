@@ -34,9 +34,9 @@ public:
     static void LogEventAsync(
         FAnalyticsModuleLogEventAsyncResponse onSuccess,
         FAnalyticsModuleFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& eventName,
-        const FString& eventParameters = "",
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& eventParameters = "") {
             string cpp_eventName;
             string cpp_eventParameters;
             RGN::CancellationToken cpp_cancellationToken;

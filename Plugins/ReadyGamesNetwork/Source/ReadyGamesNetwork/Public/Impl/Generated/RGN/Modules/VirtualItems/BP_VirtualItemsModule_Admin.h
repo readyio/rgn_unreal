@@ -80,10 +80,10 @@ public:
     static void AddFromCSVWithBlockchainStubAsync(
         FVirtualItemsModuleAdminAddFromCSVWithBlockchainStubAsyncResponse onSuccess,
         FVirtualItemsModule_AdminFailResponse onFail,
+        const FBP_CancellationToken& cancellationToken,
         const FString& virtualItemName,
         const FString& csvContent,
-        const FString& csvDelimiter = ",",
-        const FBP_CancellationToken& cancellationToken = FBP_CancellationToken()) {
+        const FString& csvDelimiter = ",") {
             string cpp_virtualItemName;
             string cpp_csvContent;
             string cpp_csvDelimiter;

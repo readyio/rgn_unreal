@@ -148,18 +148,18 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
             FBP_Vote::ConvertToUnrealModel(source_votes_item, b_source_votes_item);
             target.votes.Add(b_source_votes_item);
         }
-        for (const auto& [source_participantsScore_key, source_participantsScore_value] : source.participantsScore) {
+        for (const auto& source_participantsScore_kv : source.participantsScore) {
             FString b_source_participantsScore_key;
-            b_source_participantsScore_key = FString(UTF8_TO_TCHAR(source_participantsScore_key.c_str()));
+            b_source_participantsScore_key = FString(UTF8_TO_TCHAR(source_participantsScore_kv.first.c_str()));
             int64 b_source_participantsScore_value;
-            b_source_participantsScore_value = source_participantsScore_value;
+            b_source_participantsScore_value = source_participantsScore_kv.second;
             target.participantsScore.Add(b_source_participantsScore_key, b_source_participantsScore_value);
         }
-        for (const auto& [source_participantsPayload_key, source_participantsPayload_value] : source.participantsPayload) {
+        for (const auto& source_participantsPayload_kv : source.participantsPayload) {
             FString b_source_participantsPayload_key;
-            b_source_participantsPayload_key = FString(UTF8_TO_TCHAR(source_participantsPayload_key.c_str()));
+            b_source_participantsPayload_key = FString(UTF8_TO_TCHAR(source_participantsPayload_kv.first.c_str()));
             FString b_source_participantsPayload_value;
-            b_source_participantsPayload_value = FString(UTF8_TO_TCHAR(source_participantsPayload_value.c_str()));
+            b_source_participantsPayload_value = FString(UTF8_TO_TCHAR(source_participantsPayload_kv.second.c_str()));
             target.participantsPayload.Add(b_source_participantsPayload_key, b_source_participantsPayload_value);
         }
         for (const auto& source_participationFees_item : source.participationFees) {
@@ -193,18 +193,18 @@ struct READYGAMESNETWORK_API FBP_MatchmakingData {
             FBP_Vote::ConvertToCoreModel(source_votes_item, cpp_source_votes_item);
             target.votes.push_back(cpp_source_votes_item);
         }
-        for (const auto& [source_participantsScore_key, source_participantsScore_value] : source.participantsScore) {
+        for (const auto& source_participantsScore_kv : source.participantsScore) {
             string cpp_source_participantsScore_key;
-            cpp_source_participantsScore_key = string(TCHAR_TO_UTF8(*source_participantsScore_key));
+            cpp_source_participantsScore_key = string(TCHAR_TO_UTF8(*source_participantsScore_kv.Key));
             int64_t cpp_source_participantsScore_value;
-            cpp_source_participantsScore_value = source_participantsScore_value;
+            cpp_source_participantsScore_value = source_participantsScore_kv.Value;
             target.participantsScore.insert({cpp_source_participantsScore_key, cpp_source_participantsScore_value});
         }
-        for (const auto& [source_participantsPayload_key, source_participantsPayload_value] : source.participantsPayload) {
+        for (const auto& source_participantsPayload_kv : source.participantsPayload) {
             string cpp_source_participantsPayload_key;
-            cpp_source_participantsPayload_key = string(TCHAR_TO_UTF8(*source_participantsPayload_key));
+            cpp_source_participantsPayload_key = string(TCHAR_TO_UTF8(*source_participantsPayload_kv.Key));
             string cpp_source_participantsPayload_value;
-            cpp_source_participantsPayload_value = string(TCHAR_TO_UTF8(*source_participantsPayload_value));
+            cpp_source_participantsPayload_value = string(TCHAR_TO_UTF8(*source_participantsPayload_kv.Value));
             target.participantsPayload.insert({cpp_source_participantsPayload_key, cpp_source_participantsPayload_value});
         }
         for (const auto& source_participationFees_item : source.participationFees) {
