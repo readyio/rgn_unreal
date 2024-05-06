@@ -14,20 +14,27 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
+
     - name: Install zip utility
       run: sudo apt-get install zip
+
     - name: Zip plugin folder
       run: zip -r READYggSDK.zip Plugins/ReadyGamesNetwork/
+
+    - name: Set tag name
+      run: echo "TAG_NAME=0.10.0.${{ github.run_number }}" >> $GITHUB_ENV
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GIT_GETREADY_PERSONAL_ACCESS_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release 0.10.0.${{ github.run_number }}
+        tag_name: ${{ env.TAG_NAME }}
+        release_name: Release ${{ env.TAG_NAME }}
         draft: false
         prerelease: false
+
     - name: Upload zip
       uses: actions/upload-release-asset@v1
       env:
