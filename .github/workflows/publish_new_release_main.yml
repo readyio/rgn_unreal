@@ -22,16 +22,16 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GIT_GETREADY_PERSONAL_ACCESS_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release 0.10.0-dev.${{ github.run_number }}
+        release_name: Release 0.10.0.${{ github.run_number }}
         draft: false
         prerelease: false
     - name: Upload zip
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GIT_GETREADY_PERSONAL_ACCESS_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./READYggSDK.zip
