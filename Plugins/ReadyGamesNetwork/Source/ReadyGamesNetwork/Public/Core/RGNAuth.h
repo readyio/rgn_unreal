@@ -8,16 +8,17 @@ namespace RGN {
     class RGNAuth {
     private:
         static Utility::FunctionEvent<void(bool)> _authChangeEvent;
+        static bool _autoGuestLogin;
         static std::string _userId;
         static std::string _idToken;
         static std::string _refreshToken;
 
         static void LoadAuthSession();
         static void SaveAuthSession();
-        static void NotifyAboutAuthChange();
+        static void OnAuthChange();
 
     public:
-        static void Initialize();
+        static void Initialize(bool autoGuestLogin);
 
         static Utility::FunctionEvent<void(bool)>::Ref BindAuthChangeCallback(std::function<void(bool)> callback);
         static void UnbindAuthChangeCallback(Utility::FunctionEvent<void(bool)>::Ref ref);

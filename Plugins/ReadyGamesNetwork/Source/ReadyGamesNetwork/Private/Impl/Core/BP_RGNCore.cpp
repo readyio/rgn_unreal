@@ -19,20 +19,14 @@ void UBP_RGNCore::Initialize(FRGNInitializeCallback onInitialize) {
     coreConfigureData.emulatorHost = std::string(TCHAR_TO_UTF8(*Settings->EmulatorHost));
     coreConfigureData.emulatorPort = std::string(TCHAR_TO_UTF8(*Settings->EmulatorPort));
 
-    RGN::RGNCore::Initialize(coreConfigureData);
     RGN::RGNAuth::BindAuthChangeCallback([&](bool isLoggedIn) {
         for (auto callback : _authCallbacks) {
             callback.ExecuteIfBound(isLoggedIn);
         }
     });
-
-    if (coreConfigureData.autoGuestLogin && !IsLoggedIn()) {
-        RGN::RGNAuth::SignInAnonymously([onInitialize](bool isLoggedIn) {
-            onInitialize.ExecuteIfBound();
-        });
-    } else {
+    RGN::RGNCore::Initialize(coreConfigureData,[onInitialize]() {
         onInitialize.ExecuteIfBound();
-    }
+    });
 }
 
 void UBP_RGNCore::Update() {

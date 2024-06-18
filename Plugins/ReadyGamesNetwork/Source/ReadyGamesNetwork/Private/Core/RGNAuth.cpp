@@ -12,11 +12,13 @@
 
 namespace RGN {
     Utility::FunctionEvent<void(bool)> RGNAuth::_authChangeEvent;
+    bool RGNAuth::_autoGuestLogin;
     std::string RGNAuth::_userId;
     std::string RGNAuth::_idToken;
     std::string RGNAuth::_refreshToken;
 
-    void RGNAuth::Initialize() {
+    void RGNAuth::Initialize(bool autoGuestLogin) {
+        _autoGuestLogin = autoGuestLogin;
         _userId = "";
         _idToken = "";
         _refreshToken = "";
@@ -45,7 +47,7 @@ namespace RGN {
                 _refreshToken = jsonResponse.at("refreshToken");
 
                 SaveAuthSession();
-                NotifyAboutAuthChange();
+                OnAuthChange();
 
                 if (callback) {
                     callback(true);
@@ -71,7 +73,7 @@ namespace RGN {
                 _refreshToken = jsonResponse.at("refreshToken");
 
                 SaveAuthSession();
-                NotifyAboutAuthChange();
+                OnAuthChange();
 
                 if (callback) {
                     callback(true);
@@ -115,7 +117,7 @@ namespace RGN {
         _idToken = "";
         _refreshToken = "";
         SaveAuthSession();
-        NotifyAboutAuthChange();
+        OnAuthChange();
     }
 
     void RGNAuth::RefreshTokens(std::function<void(bool)> callback) {
@@ -135,7 +137,7 @@ namespace RGN {
                 _refreshToken = jsonResponse.at("refreshToken");
 
                 SaveAuthSession();
-                NotifyAboutAuthChange();
+                OnAuthChange();
 
                 if (callback) {
                     callback(true);
@@ -176,7 +178,7 @@ namespace RGN {
             _refreshToken = authDataJson.contains("refreshToken") ? authDataJson["refreshToken"].get<std::string>() : "";
         }
         if (wasNotLoggedIn && IsLoggedIn()) {
-            NotifyAboutAuthChange();
+            OnAuthChange();
         }
     }
 
@@ -189,7 +191,11 @@ namespace RGN {
         SharedPrefs::Save(saveFileName, authDataJson.dump());
     }
 
-    void RGNAuth::NotifyAboutAuthChange() {
+    void RGNAuth::OnAuthChange() {
         _authChangeEvent.raise(IsLoggedIn());
+
+        if (_autoGuestLogin && !IsLoggedIn()) {
+            SignInAnonymously(nullptr);
+        }
     }
 }
