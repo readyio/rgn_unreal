@@ -3,11 +3,13 @@
 #include "Analytics/Analytics.h"
 #include "DeepLink/DeepLink.h"
 #include "WebForm/WebForm.h"
-#include "Os/Os.h"
+#include "Environment/Environment.h"
 #include "SharedPrefs/SharedPrefs.h"
 #include "Http/Http.h"
 #include "Crypto/hmac.h"
 #include "Crypto/sha256.h"
+#include "Utility/Logger.h"
+#include "json.hpp"
 
 namespace RGN {
     std::string RGNCore::_appId;
@@ -27,6 +29,7 @@ namespace RGN {
         DeepLink::Initialize();
         DeepLink::Start();
         WebForm::Initialize();
+        Analytics::Initialize();
 
         if (configureData.autoGuestLogin && !RGNAuth::IsLoggedIn()) {
             RGN::RGNAuth::SignInAnonymously([onInitialize](bool isLoggedIn) {
@@ -40,6 +43,29 @@ namespace RGN {
                 onInitialize();
             }
         }
+
+        LogSdkInitializeEvent();
+    }
+
+    void RGNCore::LogSdkInitializeEvent() {
+        std::string sdkInitializeEventFlag;
+        if (SharedPrefs::Load("sdk_initialize_event_flag", sdkInitializeEventFlag) && !sdkInitializeEventFlag.empty()) {
+            return;
+        }
+        nlohmann::json info;
+        info["ProcessorType"] = Environment::GetProcessorType();
+        info["ProcessorCount"] = Environment::GetProcessorCount();
+        info["SystemMemorySize"] = Environment::GetSystemMemorySize();
+        info["GraphicsDeviceName"] = Environment::GetGraphicsDeviceName();
+        info["GraphicsMemorySize"] = Environment::GetGraphicsMemorySize();
+        info["OperatingSystem"] = Environment::GetOperatingSystem();
+        info["OperatingSystemFamily"] = Environment::GetOperatingSystemFamily();
+        info[Environment::GetEngineName() + "Version"] = Environment::GetEngineVersion();
+        info["RGNSDKVersion"] = GetSdkVersion();
+        info["AppIdentifier"] = Environment::GetAppIdentifier();
+        info["AppInstallerName"] = Environment::GetAppInstallerName();
+        Analytics::LogEvent("rgn_core_build_once_per_install", info.dump());
+        SharedPrefs::Save("sdk_initialize_event_flag", "true");
     }
 
     void RGNCore::SetEmulator(bool useEmulator, std::string endpoint) {
@@ -198,5 +224,9 @@ namespace RGN {
 
     std::string RGNCore::GetUserId() {
         return RGNAuth::GetUserId();
+    }
+
+    std::string RGNCore::GetSdkVersion() {
+        return "0.10.0";
     }
 }

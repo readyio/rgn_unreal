@@ -65,7 +65,7 @@
   <gradleCopies>
     <copyDir
 			src="$S(PluginDir)/Android/"
-			dst="$S(BuildDir)/gradle/app/src/main/java/io/getready/deeplink/" />
+			dst="$S(BuildDir)/gradle/app/src/main/java/io/getready/" />
   </gradleCopies>
 
   <proguardAdditions>
@@ -73,6 +73,9 @@
       -dontwarn io.getready.deeplink.**
       -keep class io.getready.deeplink.** { *; }
       -keep interface io.getready.deeplink.** { *; }
+      -dontwarn io.getready.appinfo.**
+      -keep class io.getready.appinfo.** { *; }
+      -keep interface io.getready.appinfo.** { *; }
     </insert>
   </proguardAdditions>
 

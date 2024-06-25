@@ -2,7 +2,7 @@
 #include "Core/RGNCore.h"
 #include "Core/RGNAuth.h"
 #include "DeepLink/DeepLink.h"
-#include "Os/Os.h"
+#include "Environment/Environment.h"
 #include "Http/Http.h"
 #include "CoreMinimal.h"
 #if WITH_EDITOR || PLATFORM_WINDOWS || PLATFORM_MAC
@@ -59,7 +59,7 @@ namespace RGN {
         if (!view.empty()) {
             url = url + "&view=" + view;
         }
-        Os::OpenURL(url);
+        Environment::OpenURL(url);
     }
 
     void WebForm::OnWebFormRedirect(bool canceled, std::string url) {

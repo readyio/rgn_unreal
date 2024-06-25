@@ -4,6 +4,8 @@
 #include "RGNEnvironmentTarget.h"
 #include "../Utility/CancellationToken.h"
 #include "../json.hpp"
+#include <string>
+#include <unordered_map>
 
 namespace RGN {
     class RGNCore {
@@ -13,6 +15,7 @@ namespace RGN {
         static RGNEnvironmentTarget _environmentTarget;
         static bool _useFunctionsEmulator;
         static std::string _emulatorHostAndPort;
+        static void LogSdkInitializeEvent();
 
     public:
         static void Initialize(RGNConfigureData configureData, std::function<void()> onInitialize);
@@ -32,6 +35,7 @@ namespace RGN {
         static std::string GetApiKey();
         static RGNEnvironmentTarget GetEnvironmentTarget();
         static std::string GetUserId();
+        static std::string GetSdkVersion();
         /***
          * CallAPI<void,void>
          **/
