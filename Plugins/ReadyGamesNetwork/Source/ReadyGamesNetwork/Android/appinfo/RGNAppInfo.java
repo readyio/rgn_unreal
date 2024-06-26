@@ -23,6 +23,17 @@ public class RGNAppInfo {
             String installerPackageName = packageManager.getInstallerPackageName(packageName);
             storePackageName = installerPackageName != null ? installerPackageName : "";
         }
-        return storePackageName;
+        switch (storePackageName)
+        {
+            case "com.android.vending": return "Google Play Store";
+            case "com.sec.android.app.samsungapps": return "Samsung Galaxy Store";
+            case "com.amazon.venezia": return "Amazon Appstore";
+            case "com.huawei.appmarket": return "Huawei AppGallery";
+            case "com.xiaomi.market": return "Xiaomi GetApps";
+            case "com.oppo.market": return "Oppo App Market";
+            case "com.bbk.appstore": return "Vivo App Store";
+            case "com.oneplus.store": return "OnePlus Store";
+        }
+        return "";
     }
 }
